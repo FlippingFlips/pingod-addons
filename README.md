@@ -4,7 +4,7 @@ Godot addons for creating a PinGod game. The addons directory in this repository
 
 ## Read the docs
 
-Online documentation built from this repository [pingod-addons](https://horseyhorsey.github.io/pingod-addons)
+Online documentation built from this repository [pingod-addons](https://FlippingFlips.github.io/pingod-addons)
 
 ## Building docs locally
 
