@@ -79,7 +79,7 @@ enableMissingTranslationPlaceholders = false
 
     [[menu.main]]
         name = "Controller"
-        url = "https://github.com/horseyhorsey/PinGod.VP/releases"
+        url = "https://github.com/FlippingFlips/pingod-controller-com/releases"
         weight = 2
         identifier = 'twitter'
         # pre = "<b>pre!</b> "

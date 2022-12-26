@@ -1,8 +1,8 @@
 ---
 title: "Getting Started"
-date: 2017-10-17T15:26:15Z
-lastmod: 2018-12-08T15:26:15Z
-publishdate: 2018-11-23T15:26:15Z
+date: 2022-12-26T15:26:15Z
+lastmod: 2022-12-08T15:26:15Z
+publishdate: 2022-11-23T15:26:15Z
 draft: false
 weight: 9
 
@@ -11,17 +11,15 @@ images:
 - images/pexels-photo-196666.jpeg
 ---
 
-The following guides aim to have you up and running the `BasicGameGodot` window.
+The following guides aim to have you up and running the `BasicGameGodot` window from the [pingod-basicgame](https://github.com/FlippingFlips/pingod-basicgame).
 
-## [Installation](./installation)
+[Install, setup Godot](./installation)
 
-Install, setup Godot
+[Configure Godot](./configuration)
 
-## [Configuration](./configuration)
+[Basic Game Setup](./basicgame-setup/)
 
-Configure Godot
+[Basic Game Visual Pinball](./basicgame-game-vp)
 
-## [Loading Projects](./launching)
 
-How to load PinGod Godot projects
 

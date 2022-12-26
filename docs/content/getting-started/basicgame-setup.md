@@ -1,7 +1,7 @@
 ---
 title: "BasicGame - Setup / AddOns"
-date: 2017-10-17T15:26:15Z
-lastmod: 2019-10-26T15:26:15Z
+date: 2022-12-26T15:26:15Z
+lastmod: 2022-10-26T15:26:15Z
 draft: false
 weight: 23
 ---
@@ -11,7 +11,7 @@ weight: 23
 
 Clone the repository into same directory the `pingod-addons` is:
 
- `git clone https://github.com/horseyhorsey/pingod-basicgame`
+ `git clone https://github.com/FlippingFlips/pingod-basicgame`
 
 You will have two directories `/pingod/pingod-basicgame`, `/pingod/pingod-addons`, this is so the basicgame only has to go up one directory to link the `addons`
 

@@ -1,12 +1,20 @@
 # pingod-addons
 
-Godot addons for creating a PinGod game. The addons directory in this repository is to be copied to a game or symbolicly linked into a games directory.
+Godot addons for creating a PinGod game. The addons directory in this repository is to be copied to a game or symbolically linked into a games directory.
 
 ## Read the docs
 
-Online documentation built from this repository [pingod-addons](https://FlippingFlips.github.io/pingod-addons)
+🌎 [pingod getting started](https://flippingflips.github.io/pingod-addons/getting-started/) - Online documentation built from this repository 
 
-## Building docs locally
+🌎 [pingod-addons](https://FlippingFlips.github.io/pingod-addons) - Online documentation built from this repository 
+
+🌎 [pingod-addons class list](https://flippingflips.github.io/pingod-addons/html/annotated.html) - Online documentation built from this repository with DoxyGen
+
+---
+
+---
+
+## Building docs offline
 
 The site requires [Hugo](https://gohugo.io/) to build or run. The Doxygen file configuation is built to the `docs/public/html` directory
 
