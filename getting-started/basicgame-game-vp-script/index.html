@@ -1,0 +1,303 @@
+<!doctype html><html lang=en-us>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>BasicGame - Visual Pinball Script - PinGod AddOns</title>
+<meta name=description content="Source">
+<meta name=generator content="Hugo 0.91.2">
+<link href=https://FlippingFlips.github.io/pingod-addons/index.xml rel=alternate type=application/rss+xml>
+<link rel=canonical href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-vp-script/>
+<link rel=stylesheet href=https://FlippingFlips.github.io/pingod-addons/css/theme.min.css>
+<link rel=stylesheet href=https://FlippingFlips.github.io/pingod-addons/css/chroma.min.css>
+<script defer src=https://FlippingFlips.github.io/pingod-addons/js/fontawesome6/all.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin=anonymous></script>
+<script src=https://FlippingFlips.github.io/pingod-addons/js/bundle.js></script><style>:root{--custom-font-color:#FFFFFF;--custom-background-color:#003300}</style>
+<meta property="og:title" content="BasicGame - Visual Pinball Script">
+<meta property="og:description" content="BasicGame-PinGod.vbs A script with the same name is included with the table. This will be used with the visual pinball script editor.
+This can make it easier to edit outside of table, keep track of changes etc. At the top of this image it shows MODIFYING EXTERNAL.
+PinGod.VP.Controller The first section marked in red is the PinGod.VP.Controller initialization.
+Game Project Location  When debugging, if the games Godot project is relative to the table (the same as this repo), then you won&rsquo;t have to adjust the script for the GameDirectory.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-vp-script/"><meta property="og:image" content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png"><meta property="article:section" content="getting-started">
+<meta property="article:published_time" content="2017-10-17T15:26:15+00:00">
+<meta property="article:modified_time" content="2019-10-26T15:26:15+00:00"><meta property="og:site_name" content="Hugo Techdoc Theme">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
+<meta name=twitter:title content="BasicGame - Visual Pinball Script">
+<meta name=twitter:description content="BasicGame-PinGod.vbs A script with the same name is included with the table. This will be used with the visual pinball script editor.
+This can make it easier to edit outside of table, keep track of changes etc. At the top of this image it shows MODIFYING EXTERNAL.
+PinGod.VP.Controller The first section marked in red is the PinGod.VP.Controller initialization.
+Game Project Location  When debugging, if the games Godot project is relative to the table (the same as this repo), then you won&rsquo;t have to adjust the script for the GameDirectory.">
+<meta itemprop=name content="BasicGame - Visual Pinball Script">
+<meta itemprop=description content="BasicGame-PinGod.vbs A script with the same name is included with the table. This will be used with the visual pinball script editor.
+This can make it easier to edit outside of table, keep track of changes etc. At the top of this image it shows MODIFYING EXTERNAL.
+PinGod.VP.Controller The first section marked in red is the PinGod.VP.Controller initialization.
+Game Project Location  When debugging, if the games Godot project is relative to the table (the same as this repo), then you won&rsquo;t have to adjust the script for the GameDirectory."><meta itemprop=datePublished content="2017-10-17T15:26:15+00:00">
+<meta itemprop=dateModified content="2019-10-26T15:26:15+00:00">
+<meta itemprop=wordCount content="565"><meta itemprop=image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
+<meta itemprop=keywords content></head>
+<body><div class=container><header>
+<h1>PinGod AddOns</h1><span class=version>Version 4.3.0</span><a href=https://github.com/FlippingFlips/pingod-addons class=github><i class="fab fa-github"></i></a>
+<p class=description>Source</p>
+</header>
+<div class=global-menu>
+<nav>
+<ul>
+<li id=home><a href=/pingod-addons/><i class="fa fa-house"></i>&nbsp;Home</a></li>
+<li id=twitter class=twitter-menu-item><a href=https://github.com/horseyhorsey/PinGod.VP/releases>Controller <b>download</b></a></li>
+<li><a href=/pingod-addons/about/>About PinGod</a></li><li class=parent><a href>Menu TODO<i class="fas fa-angle-right"></i></a>
+<ul class=sub-menu>
+<li class=child><a href=/pingod-addons/post/creating-a-new-theme/>Menu Title</a></li>
+</ul>
+</li></ul>
+</nav>
+</div>
+<div class=content-container>
+<main><h1>BasicGame - Visual Pinball Script</h1>
+<h4 id=basicgame-pingodvbs>BasicGame-PinGod.vbs</h4>
+<p>A script with the same name is included with the table. This will be used with the visual pinball script editor.</p>
+<p>This can make it easier to edit outside of table, keep track of changes etc. At the top of this image it shows MODIFYING EXTERNAL.</p>
+<h3 id=pingodvpcontroller>PinGod.VP.Controller</h3>
+<p>The first section marked in red is the <code>PinGod.VP.Controller</code> initialization.</p>
+<p><img src=../../images/basicgame-vp-script-a.jpg alt=image></p>
+<h3 id=game-project-location>Game Project Location</h3>
+<hr>
+<p>When debugging, if the games Godot project is relative to the table (the same as this repo), then you won&rsquo;t have to adjust the script for the <code>GameDirectory</code>.</p>
+<p>But if you need to, you can change the default <code>Const GameDirectory = "..\BasicGameGodot"</code> to:</p>
+<p><code>Const GameDirectory = "C:\Yourfilepath\BasicGameGodot"</code></p>
+<p><img src=../../images/basicgame-vp-script-b.jpg alt=image></p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>does what?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IsDebug</td>
+<td>Set controller in debug launch project directories</td>
+</tr>
+<tr>
+<td>GameDirectory</td>
+<td>Game Project to launch, see above</td>
+</tr>
+<tr>
+<td>UseSolenoids</td>
+<td>Set controller to check for states</td>
+</tr>
+<tr>
+<td>UsePdbLeds</td>
+<td>PROC led states. This project is set to leds for the ball save light</td>
+</tr>
+<tr>
+<td>UseLamps</td>
+<td>Use lamps or leds, or both</td>
+</tr>
+</tbody>
+</table>
+<p>Variables declared for table objects. <code>Dim bsTrough, bsSaucer</code></p>
+<h3 id=table-events>Table Events</h3>
+<p>Getting the controller to act on some table events. Stopping the game window and pause / resume</p>
+<p><img src=../../images/basicgame-vp-script-c.jpg alt=image></p>
+<h3 id=table-init>Table Init</h3>
+<hr>
+<p>Visual pinball <code>Table1_Init</code> is a little different here. This is where the controller is <code>Run</code>, how it is run depends on the <code>IsDebug</code> flag set.</p>
+<p>A timer interval is added to the <code>LeftFlipper</code> which checks to see if the <code>Controller.GameRunning</code> is enabled. When it is enabled then <code>InitGame</code> is invoked.</p>
+<p><img src=../../images/basicgame-vp-script-d.jpg alt=image></p>
+<p>You can set more on the Controller like these <a href=#display-settings>display settings</a></p>
+<h3 id=init-game>Init game</h3>
+<hr>
+<p>This sub routine is much like a PinMame game setup and we use <code>core_c_sharp.vbs</code> which is pretty much the <code>core.vbs</code>.</p>
+<ul>
+<li><code>vpmMapLights AllLamps</code> This runs updated lamps from this collection. The lamp number is in the VP Light objects <code>TimerInterval</code></li>
+<li><code>vpmCreateEvents AllSwitches</code> This runs updated switches from this collection. The switch number is set inside the VP Triggers <code>TimerInterval</code> variable</li>
+<li>PinMame timers enabled</li>
+<li>Create Ball Trough set to <code>bsTrough</code></li>
+<li>Create Auto Plunger set to <code>plungerIM</code></li>
+<li>Create Kicker set to <code>bsSaucer</code></li>
+<li>Set vpm nudging</li>
+</ul>
+<p><img src=../../images/basicgame-vp-script-e.jpg alt=image></p>
+<h3 id=keyboard>Keyboard</h3>
+<hr>
+<p>Both <code>Table1_Key</code> routines use a check <code>if Controller.GameRunning = 0 then Exit Sub 'exit because no display is available</code></p>
+<h3 id=solenoids-callbacks>Solenoids Callbacks</h3>
+<hr>
+<table>
+<thead>
+<tr>
+<th>Callback</th>
+<th>does what?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PinGodAlive</td>
+<td>if you need to know if the pingod window is alive</td>
+</tr>
+<tr>
+<td>bsTrough.solOut</td>
+<td>Event for the trough we created. Kick the ball</td>
+</tr>
+<tr>
+<td>bsSaucer.solOut</td>
+<td>Event for the kicker on the table</td>
+</tr>
+<tr>
+<td>FlippersEnabled</td>
+<td>enable/disble flippers</td>
+</tr>
+<tr>
+<td>AutoPlunger</td>
+<td>Invokes PlungerIM.AutoFire</td>
+</tr>
+<tr>
+<td>Lampshow1</td>
+<td>Runs a light sequence</td>
+</tr>
+<tr>
+<td>DisableLampShows</td>
+<td>StopPlay light sequence</td>
+</tr>
+</tbody>
+</table>
+<p><img src=../../images/basicgame-vp-script-f.jpg alt=image></p>
+<h4 id=display-settings>Display settings</h4>
+<hr>
+<p>Display can be adjusted by using <code>F2</code> on the window, move and resize and save the position.</p>
+<pre tabindex=0><code>.DisplayX = 1920 - 512
+.DisplayY = 10
+.DisplayWidth = 512 ' 1024 FS
+.DisplayHeight = 300 ' 600  FS
+.DisplayAlwaysOnTop = True
+.DisplayFullScreen = False 'Providing the position is on another display it should fullscreen to window
+.DisplayLowDpi 	= False
+.DisplayNoWindow = False
+</code></pre><h3 id=default-machine-switches>Default Machine Switches</h3>
+<hr>
+<p>These are used by Visual Pinball common switches which are mapped to keyboard. From <code>PinGod.VP/scripts/PinGod.vbs</code></p>
+<pre tabindex=0><code>Cabinet switches
+Const swCoin1  = 0
+Const swCoin2  = 1
+Const swCoin3  = 2
+Const swCoin4  = 3
+Const swCancel = 4
+Const swDown   = 5
+Const swUp     = 6
+Const swEnter  = 7
+Const swCoinDoor  = 8
+Const swLLFlip = 9
+Const swLRFlip = 11
+Const swULFlip = 13
+Const swURFlip = 15
+Const swSlamTilt = 16
+Const swTilt = 17
+Const swStartButton = 19
+</code></pre><h3 id=script-notes--guide>Script Notes / Guide</h3>
+<hr>
+<ul>
+<li>Switch events can be sent with <code>Controller.Switch 20, 1</code>. Usually this is <code>Controller.Switch(20) = 1</code>.</li>
+</ul>
+<div class=edit-meta>
+Last updated on 26 Oct 2019
+<br>
+Published on 17 Oct 2017
+<br><a href=https://github.com/FlippingFlips/pingod-addons/edit/main/docs/content/getting-started/basicgame-game-vp-script.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-vp/ title="BasicGame - Visual Pinball"><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - BasicGame - Visual Pinball</a>
+<a class="nav nav-next" href=https://FlippingFlips.github.io/pingod-addons/machine/ title=Machine>Next - Machine <i class="fas fa-arrow-right" aria-hidden=true></i></a>
+</nav><footer><p class=powered>Powered by <a href=https://gohugo.io>Hugo</a>. Theme by <a href=https://themes.gohugo.io/hugo-theme-techdoc/>TechDoc</a>. Designed by <a href=https://github.com/thingsym/hugo-theme-techdoc>Thingsym</a>.</p>
+</footer>
+</main>
+<div class=sidebar>
+<nav class=slide-menu>
+<ul>
+<li><a href=https://FlippingFlips.github.io/pingod-addons>Home</a></li>
+<li class="parent has-sub-menu"><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/>Getting Started<span class="mark opened">-</span></a>
+<ul class=sub-menu>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/installation/>Installation</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/configuration/>Godot Environment Configuration</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-setup/>BasicGame - Setup / AddOns</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-project/>BasicGame - Project.Godot</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-godot/>BasicGame - Godot Loaded</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-window/>BasicGame - Window</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game/>BasicGame - Game</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-vp/>BasicGame - Visual Pinball</a></li>
+<li class=active><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-vp-script/>BasicGame - Visual Pinball Script</a></li>
+</ul>
+</li>
+<li class=has-sub-menu><a href=https://FlippingFlips.github.io/pingod-addons/machine/>Machine<span class="mark closed">+</span></a>
+<ul class=sub-menu>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/machine/switchesactions/>Switches to Actions</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/machine/usingswitches/>Using Switches (Godot)</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/machine/usingswitchescontroller/>Using Switches (Controller)</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/machine/usingcoils/>Using Coils (Godot)</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/machine/usingcoilscontroller/>Using Coils (Controller)</a></li>
+</ul>
+</li>
+<li class=has-sub-menu><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/>PinGodGame (AutoLoaded)<span class="mark closed">+</span></a>
+<ul class=sub-menu>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/items/>MachineConfig (Items)</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/trough/>Ball Trough (Scene)</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/audiomanager/>AudioManager</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/devoverlays/>Overlays (Developing)</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/pingodgame.tscn/>PinGodGame.tscn - Scene</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/pingodgame.cs/>PinGodGame.cs - Script</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/logging/>Logging Games</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/recordings-playback/>Recording / Playback</a></li>
+</ul>
+</li>
+<li class=has-sub-menu><a href=https://FlippingFlips.github.io/pingod-addons/base-scenes/>Scenes Used<span class="mark closed">+</span></a>
+<ul class=sub-menu>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/base-scenes/mainscene/>Main Scene</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/base-scenes/attractscene/>Attract Scene</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/base-scenes/gamescene/>Game Scene</a></li>
+</ul>
+</li>
+<li class=has-sub-menu><a href=https://FlippingFlips.github.io/pingod-addons/modes/>Base Game Modes (Scenes)<span class="mark closed">+</span></a>
+<ul class=sub-menu>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/modes/score-mode/>ScoreMode - Scene</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/modes/bonus-mode/>Bonus</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/modes/score-entry-mode/>Score Entry</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/modes/tilt-mode/>Tilt Mode Scene</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/modes/base-mode/>BaseMode (BasicGame)</a></li>
+</ul>
+</li>
+<li class=has-sub-menu><a href=https://FlippingFlips.github.io/pingod-addons/tools/>Tools / Controls<span class="mark closed">+</span></a>
+<ul class=sub-menu>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/tools/ballstackpinball/>BallStackPinball (Timer)</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/tools/blinkinglabel/>BlinkingLabel (Label)</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/tools/pinballlanesnode/>PinballLanesNode (PinGodGameMode:Node)</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/tools/pinballtargetsbank/>PinballTargetsBank (Node)</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/tools/videoplayerpinball/>VideoPlayerPinball (VideoPlayer)</a></li>
+</ul>
+</li>
+<li class=has-sub-menu><a href=https://FlippingFlips.github.io/pingod-addons/game-assets/>Game Assets<span class="mark closed">+</span></a>
+<ul class=sub-menu>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/game-assets/audiomanager/>Assets - Audio Manager</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/game-assets/video/>Assets - Video</a></li>
+</ul>
+</li>
+<li class=has-sub-menu><a href=https://FlippingFlips.github.io/pingod-addons/languages/>Languages<span class="mark closed">+</span></a>
+<ul class=sub-menu>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/languages/attractscene/>Language files</a></li>
+</ul>
+</li>
+<li class=has-sub-menu><a href=https://FlippingFlips.github.io/pingod-addons/exporting/>Exporting / Publishing<span class="mark closed">+</span></a>
+<ul class=sub-menu>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/exports/>Exporting</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+<div class=sidebar-footer></div>
+</div>
+</div><a href=# id=backtothetop-fixed class=backtothetop data-backtothetop-duration=600 data-backtothetop-easing=easeOutQuart data-backtothetop-fixed-fadein=1000 data-backtothetop-fixed-fadeout=1000 data-backtothetop-fixed-bottom=10 data-backtothetop-fixed-right=20>
+<span class="fa-layers fa-fw">
+<i class="fas fa-circle"></i>
+<i class="fas fa-arrow-circle-up"></i>
+</span></a>
+</div>
+</body>
+</html>
