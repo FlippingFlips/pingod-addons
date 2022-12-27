@@ -179,6 +179,9 @@ public abstract class PinGodGame : PinGodBase
         }
     }
 
+    /// <summary>
+    /// Sets up window from settings. Sets position. Sets on top (the project should have this off in the Godot UI for this to work). Sets full screen
+    /// </summary>
     private void SetupWindow()
     {
         if(GameSettings?.Display != null)
@@ -186,12 +189,10 @@ public abstract class PinGodGame : PinGodBase
             OS.WindowPosition = new Vector2(GameSettings.Display.X, GameSettings.Display.Y);
         }        
 
+        //set window on top
         var ontop = (bool)ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.ALWAYS_ON_TOP);
-        OS.SetWindowAlwaysOnTop(false);
-        if (ontop)
-        {            
-            OS.SetWindowAlwaysOnTop(true);
-        }
+        LogDebug("windows on top project settings?" + " " + ontop);
+        OS.SetWindowAlwaysOnTop(ontop);
 
         if (GameSettings?.Display != null)
         {
@@ -697,7 +698,7 @@ public abstract class PinGodGame : PinGodBase
 
         LogInfo("saved game");
 
-        GetTree().Paused = GetTree().Paused ? false : true;
+        if (GetTree().Paused) { GetTree().Paused = false; }
 
 		//send game ended, dead
 		SolenoidOn("alive", 0);
