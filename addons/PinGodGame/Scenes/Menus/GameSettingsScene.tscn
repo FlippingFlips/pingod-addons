@@ -53,6 +53,5 @@ max_value = 5.0
 value = 2.0
 prefix = "SETT_XB_MAX"
 
-[connection signal="changed" from="VBoxContainer/BallsPerGameSpinBox" to="." method="_on_BallsPerGameSpinBox_changed"]
 [connection signal="changed" from="VBoxContainer/BallSaveTimeSpinBox" to="." method="_on_BallSaveTimeSpinBox_changed"]
 [connection signal="changed" from="VBoxContainer/ExtraBallsSpinBox" to="." method="_on_ExtraBallsSpinBox_changed"]

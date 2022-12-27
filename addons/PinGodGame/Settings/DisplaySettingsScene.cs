@@ -26,17 +26,21 @@ public class DisplaySettingsScene : MarginContainer
     {
         base._Ready();
 
-        GetNode<Label>("VBoxContainer/HBoxContainer/DefaultWindowSizeLabel").Text = $"ORIGINAL RESOLUTION: {_displaySettings.WidthDefault} X {_displaySettings.HeightDefault}";
+        GetNode<Label>("VBoxContainer/HBoxContainer/DefaultWindowSizeLabel").Text = 
+            $"ORIGINAL RESOLUTION: {_displaySettings.WidthDefault} X {_displaySettings.HeightDefault}";
 
-        GetNode<CheckButton>("VBoxContainer/CheckButtonFullScreen").SetPressedNoSignal(pinGod.GameSettings.Display.FullScreen);
-        GetNode<CheckButton>("VBoxContainer/CheckButtonVsync").SetPressedNoSignal((bool)ProjectSettings.GetSetting("display/window/vsync/use_vsync"));
-        GetNode<CheckButton>("VBoxContainer/CheckButtonVsyncComp").SetPressedNoSignal((bool)ProjectSettings.GetSetting("display/window/vsync/vsync_via_compositor"));
+        GetNode<CheckButton>("VBoxContainer/CheckButtonFullScreen")
+            .SetPressedNoSignal(pinGod.GameSettings.Display.FullScreen);
+        GetNode<CheckButton>("VBoxContainer/CheckButtonVsync")
+            .SetPressedNoSignal((bool)ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.USE_VSYNC));
+        GetNode<CheckButton>("VBoxContainer/CheckButtonVsyncComp")
+            .SetPressedNoSignal((bool)ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.USE_VSYNC_COMPOSITOR));
 
-        var top = (bool)ProjectSettings.GetSetting("display/window/size/always_on_top");
+        var top = (bool)ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.ALWAYS_ON_TOP);
         GetNode<CheckButton>("VBoxContainer/CheckButtonAlwaysOnTop").SetPressedNoSignal(top);
 
         //force fps debug?
-        var fpsStr = ProjectSettings.GetSetting("debug/settings/fps/force_fps").ToString();
+        var fpsStr = ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.FORCE_FPS).ToString();
         int.TryParse(fpsStr, out var fps);
         GetNode<SpinBox>("VBoxContainer/SpinBoxFPS").Value = fps;        
 
@@ -45,16 +49,17 @@ public class DisplaySettingsScene : MarginContainer
         {
             stretchOption.AddItem(item.ToString(), (int)item);
         }
-        var val = ProjectSettings.GetSetting("display/window/stretch/aspect").ToString();
+        var val = ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.ASPECT).ToString();
         PinGodStretchAspect aspect = (PinGodStretchAspect)Enum.Parse(typeof(PinGodStretchAspect), val);
         stretchOption.Selected = (int)aspect;        
+
     }
 
     void _on_CheckButtonAlwaysOnTop_toggled(bool pressed)
     {
         Logger.LogInfo("on top pressed " + pressed);
         OS.SetWindowAlwaysOnTop(pressed);
-        ProjectSettings.SetSetting("display/window/size/always_on_top", pressed);
+        ProjectSettings.SetSetting(SettingPaths.DisplaySetPaths.ALWAYS_ON_TOP, pressed);
     }
 
     void _on_CheckButtonFullScreen_toggled(bool pressed)
@@ -65,19 +70,20 @@ public class DisplaySettingsScene : MarginContainer
     void _on_CheckButtonVsync_toggled(bool pressed)
     {
         OS.VsyncEnabled = pressed;
-        ProjectSettings.SetSetting("display/window/vsync/use_vsync", pressed);
+        ProjectSettings.SetSetting(SettingPaths.DisplaySetPaths.USE_VSYNC, pressed);
     }
 
     void _on_CheckButtonVsyncComp_toggled(bool pressed)
     {
         OS.VsyncViaCompositor = pressed;
-        ProjectSettings.SetSetting("display/window/vsync/vsync_via_compositor", pressed);        
+        ProjectSettings.SetSetting(SettingPaths.DisplaySetPaths.USE_VSYNC_COMPOSITOR, pressed);        
     }
 
     void _on_SpinBoxFPS_value_changed(float value)
     {
+        Logger.LogDebug("fps changed");
         Engine.TargetFps = (int)value;
-        ProjectSettings.SetSetting("debug/settings/fps/force_fps", Engine.TargetFps);
+        ProjectSettings.SetSetting(SettingPaths.DisplaySetPaths.FORCE_FPS, Engine.TargetFps);
     }
 
     void _on_ResetDefaultButton_button_up()
@@ -91,7 +97,7 @@ public class DisplaySettingsScene : MarginContainer
 
     void _on_StretchAspectOptionButton_item_selected(int index)
     {         
-        ProjectSettings.SetSetting("display/window/stretch/aspect", ((PinGodStretchAspect)index).ToString());
+        ProjectSettings.SetSetting(SettingPaths.DisplaySetPaths.ASPECT, ((PinGodStretchAspect)index).ToString());
         pinGod.SetMainSceneAspectRatio();
     }
 

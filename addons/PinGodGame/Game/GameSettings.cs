@@ -158,13 +158,7 @@ public class GameSettings
     /// <summary>
     /// Saves generic <see cref="GameSettings"/>
     /// </summary>
-    public static void Save<T>(T settings) where T : GameSettings
-    {
-        var saveGame = new File();
-        saveGame.Open(GAME_SETTINGS_FILE, File.ModeFlags.Write);
-        saveGame.StoreLine(JsonConvert.SerializeObject(settings));
-        saveGame.Close();
-    }
+    public static void Save<T>(T settings) where T : GameSettings => Save((GameSettings)settings);
 
     /// <summary>
     /// Saves <see cref="GameSettings"/>

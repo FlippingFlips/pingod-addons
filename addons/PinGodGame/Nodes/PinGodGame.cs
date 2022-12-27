@@ -186,7 +186,7 @@ public abstract class PinGodGame : PinGodBase
             OS.WindowPosition = new Vector2(GameSettings.Display.X, GameSettings.Display.Y);
         }        
 
-        var ontop = (bool)ProjectSettings.GetSetting("display/window/size/always_on_top");
+        var ontop = (bool)ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.ALWAYS_ON_TOP);
         OS.SetWindowAlwaysOnTop(false);
         if (ontop)
         {            
@@ -683,27 +683,25 @@ public abstract class PinGodGame : PinGodBase
         {            
             SaveWindow();
 
-            //save override.cfg when not running editor
-            if (!OS.HasFeature("editor"))
-            {
-                ProjectSettings.SaveCustom(Resources.WorkingDirectory + "/override.cfg");
-            }            
-
+            //save override.cfg when not running editor. TODO: why not? can't remember
+            if (!OS.HasFeature("editor")) { }
+            
+            //save an override.cfg in project
+            var path = "res://override.cfg";
+            LogDebug("no working directory, saving override.cfg settings", path);
+            ProjectSettings.SaveCustom(path);
+                     
             SaveGameData();
             SaveGameSettings();
         }
 
         LogInfo("saved game");
 
-        if (GetTree().Paused)
-        {
-			GetTree().Paused = false;
-		}
+        GetTree().Paused = GetTree().Paused ? false : true;
 
-		//send game ended, died
+		//send game ended, dead
 		SolenoidOn("alive", 0);
-        LogInfo("sent game ended coil");
-
+        LogInfo("sent game ended coil: alive 0");
         memMapping?.Dispose(); //dispose invokes stop as well		
 	}
 
@@ -753,8 +751,8 @@ public abstract class PinGodGame : PinGodBase
     {
         GameSettings.Display.X = OS.WindowPosition.x;
         GameSettings.Display.Y = OS.WindowPosition.y;
-        ProjectSettings.SetSetting("display/window/size/test_width", OS.WindowSize.x);
-        ProjectSettings.SetSetting("display/window/size/test_height", OS.WindowSize.y);
+        ProjectSettings.SetSetting(SettingPaths.DisplaySetPaths.TEST_WIDTH, OS.WindowSize.x);
+        ProjectSettings.SetSetting(SettingPaths.DisplaySetPaths.TEST_HEIGHT, OS.WindowSize.y);
     }
 
     /// <summary>
@@ -862,10 +860,10 @@ public abstract class PinGodGame : PinGodBase
     /// </summary>
     public void SetMainSceneAspectRatio()
     {
-        var minW = (int)ProjectSettings.GetSetting("display/window/size/width");
-        var minH = (int)ProjectSettings.GetSetting("display/window/size/height");
+        var minW = (int)ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.WIDTH);
+        var minH = (int)ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.HEIGHT);
 
-        var asp = Enum.Parse(typeof(PinGodStretchAspect),ProjectSettings.GetSetting("display/window/stretch/aspect").ToString());
+        var asp = Enum.Parse(typeof(PinGodStretchAspect),ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.ASPECT).ToString());
 
         GetNodeOrNull<MainScene>("/root/MainScene")?
             .GetTree().SetScreenStretch(SceneTree.StretchMode.Mode2d, (SceneTree.StretchAspect)(int)asp, 
