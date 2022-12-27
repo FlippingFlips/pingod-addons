@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['displaysettings_462',['DisplaySettings',['../classDisplaySettings.html',1,'']]],
-  ['displaysettingsscene_463',['DisplaySettingsScene',['../classDisplaySettingsScene.html',1,'']]]
+  ['displaysettings_463',['DisplaySettings',['../classDisplaySettings.html',1,'']]],
+  ['displaysettingsscene_464',['DisplaySettingsScene',['../classDisplaySettingsScene.html',1,'']]]
 ];

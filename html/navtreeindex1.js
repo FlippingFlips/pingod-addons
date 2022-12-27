@@ -1,5 +1,6 @@
 var NAVTREEINDEX1 =
 {
+"classLampMatrix.html#a5e0fe55da73c27e92b8b8b514010d339":[0,0,22,1],
 "classLampMatrix.html#a71b3455547b39712078d3a356e978cee":[0,0,22,0],
 "classLampMatrix.html#adff66e9ad1a145edaf17e8803e37a14b":[0,0,22,2],
 "classLamps.html":[0,0,23],
@@ -248,6 +249,5 @@ var NAVTREEINDEX1 =
 "classScoreMode.html#afb4961a40f56379f216748fe14c73110":[0,0,43,2],
 "classServiceMenu.html":[0,0,44],
 "classServiceMenu.html#a0d13117b952ef4942c7864c0e366ceda":[0,0,44,8],
-"classServiceMenu.html#a12227c9187930ab6854ebdeb6ed7e98a":[0,0,44,1],
-"classServiceMenu.html#a35bcb50ce04836aa2dc848864ba3aa63":[0,0,44,7]
+"classServiceMenu.html#a12227c9187930ab6854ebdeb6ed7e98a":[0,0,44,1]
 };

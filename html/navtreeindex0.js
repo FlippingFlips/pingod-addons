@@ -87,7 +87,8 @@ var NAVTREEINDEX0 =
 "ScoreEntry_8cs.html":[1,0,0,1,6,5],
 "ScoreMode_8cs.html":[1,0,0,1,6,6],
 "ServiceMenu_8cs.html":[1,0,0,1,6,7],
-"SwitchOverlay_8cs.html":[1,0,0,1,11,3],
+"SettingPaths_8cs.html":[1,0,0,1,11,3],
+"SwitchOverlay_8cs.html":[1,0,0,1,11,4],
 "Switch_8cs.html":[1,0,0,1,3,10],
 "Tilt_8cs.html":[1,0,0,1,6,8],
 "TroughOptions_8cs.html":[1,0,0,1,5,2],
@@ -248,6 +249,5 @@ var NAVTREEINDEX0 =
 "classLamp.html":[0,0,21],
 "classLamp.html#a3b8df0cfe35955998451ef371ba4b070":[0,0,21,1],
 "classLamp.html#af6ef594c33226896877e1c8daef9e62d":[0,0,21,0],
-"classLampMatrix.html":[0,0,22],
-"classLampMatrix.html#a5e0fe55da73c27e92b8b8b514010d339":[0,0,22,1]
+"classLampMatrix.html":[0,0,22]
 };

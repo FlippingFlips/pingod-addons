@@ -9,6 +9,7 @@ var dir_b95797072305268d406302564733a392 =
     [ "PingodSettingsScene.cs", "PingodSettingsScene_8cs.html", [
       [ "PingodSettingsScene", "classPingodSettingsScene.html", "classPingodSettingsScene" ]
     ] ],
+    [ "SettingPaths.cs", "SettingPaths_8cs.html", null ],
     [ "SwitchOverlay.cs", "SwitchOverlay_8cs.html", [
       [ "SwitchOverlay", "classSwitchOverlay.html", "classSwitchOverlay" ]
     ] ]
