@@ -39,7 +39,7 @@
   &nbsp;Tip Use the _vp_edit.bat or _vp_play.bat to open the table easier
   Provided you have the controller setup and have built the godot project this will play."><meta itemprop=datePublished content="2022-12-26T15:26:15+00:00">
 <meta itemprop=dateModified content="2022-10-26T15:26:15+00:00">
-<meta itemprop=wordCount content="127"><meta itemprop=image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
+<meta itemprop=wordCount content="242"><meta itemprop=image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
 <meta itemprop=keywords content></head>
 <body><div class=container><header>
 <h1>PinGod AddOns</h1><span class=version>Version 4.3.0</span><a href=https://github.com/FlippingFlips/pingod-addons class=github><i class="fab fa-github"></i></a>
@@ -50,11 +50,7 @@
 <ul>
 <li id=home><a href=/pingod-addons/><i class="fa fa-house"></i>&nbsp;Home</a></li>
 <li id=twitter class=twitter-menu-item><a href=https://github.com/FlippingFlips/pingod-controller-com/releases>Controller <b>download</b></a></li>
-<li><a href=/pingod-addons/about/>About PinGod</a></li><li class=parent><a href>Menu TODO<i class="fas fa-angle-right"></i></a>
-<ul class=sub-menu>
-<li class=child><a href=/pingod-addons/post/creating-a-new-theme/>Menu Title</a></li>
-</ul>
-</li></ul>
+<li><a href=/pingod-addons/about/>About PinGod</a></li></ul>
 </nav>
 </div>
 <div class=content-container>
@@ -74,11 +70,48 @@
 <p>Use the <code>_vp_edit.bat</code> or <code>_vp_play.bat</code> to open the table easier</p>
 </div>
 </div>
-<p><img src=../../images/basicgame-vploaded.jpg alt=image></p>
 <p>Provided you have the controller setup and have built the godot project this will play.</p>
-<h3 id=debugging>Debugging</h3>
+<p><img src=../../images/basicgame-vploaded.jpg alt=image></p>
+<h3 id=com-controller-setup>COM Controller setup</h3>
 <hr>
-<p>When debugging you can load the game direct from the <code>BasicGameGodot</code> directory as you would in the previous section but with the controller.</p>
+<p>We need to register the COM object before it can be used by other applications such as a simulator.</p>
+<h4 id=register-controller>Register controller</h4>
+<hr>
+<ol>
+<li>Download the latest at <a href=https://github.com/FlippingFlips/pingod-controller-com/releases>pingod-controller-com/releases</a></li>
+<li>Extract the download anywhere on your system (if following this guide it may pay to create a new folder <code>pingod-controller-vp</code> inside <code>pingod</code>)</li>
+<li>Run the <code>PinGod.VP.Setup.exe</code> to unregister / register the COM object</li>
+<li>If you move these files then you would have to register it again.</li>
+</ol>
+<h4 id=simulator-scripts>Simulator Scripts</h4>
+<hr>
+<ol>
+<li>Copy the scripts directory to your visual pinball directory. This would be something like <code>C:\Visual Pinball\Scripts</code></li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Script</th>
+<th>What For?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>core_c_sharp.vbs</td>
+<td>a copy of core.vbs but with slightly different ways to invoke methods in C#</td>
+</tr>
+<tr>
+<td>PinGod.vbs</td>
+<td>a machine definition file</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<hr>
+<hr>
+<h2 id=debugging>Debugging</h2>
+<hr>
+<p>When debugging you can load the game direct from the <code>BasicGameGodot</code> directory as you would in the previous section only with the controller.</p>
 <p>This table script is set to <code>Debug = True</code> and to look for <code>..\BasicGameGodot</code>, which is a level up in this repository.</p>
 <p>These settings will run the game debug with the Godot editor, show display and also a console window.</p>
 <div class=edit-meta>
