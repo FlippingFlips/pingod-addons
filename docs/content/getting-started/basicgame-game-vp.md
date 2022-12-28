@@ -16,14 +16,42 @@ Now that the game is building and running it can be launched with Visual Pinball
 Use the `_vp_edit.bat` or `_vp_play.bat` to open the table easier
 {{% /panel %}}
 
-![image](../../images/basicgame-vploaded.jpg)
-
 Provided you have the controller setup and have built the godot project this will play.
 
-### Debugging
+![image](../../images/basicgame-vploaded.jpg)
+
+
+### COM Controller setup
 ---
 
-When debugging you can load the game direct from the `BasicGameGodot` directory as you would in the previous section but with the controller.
+We need to register the COM object before it can be used by other applications such as a simulator.
+
+#### Register controller
+---
+
+1. Download the latest at [pingod-controller-com/releases](https://github.com/FlippingFlips/pingod-controller-com/releases)
+2. Extract the download anywhere on your system (if following this guide it may pay to create a new folder `pingod-controller-vp` inside `pingod`)
+3. Run the `PinGod.VP.Setup.exe` to unregister / register the COM object
+4. If you move these files then you would have to register it again.
+
+#### Simulator Scripts
+---
+
+1. Copy the scripts directory to your visual pinball directory. This would be something like `C:\Visual Pinball\Scripts`
+
+|Script|What For?|
+|---|---|
+|core_c_sharp.vbs|a copy of core.vbs but with slightly different ways to invoke methods in C#|
+|PinGod.vbs|a machine definition file|
+
+---
+---
+---
+
+## Debugging
+---
+
+When debugging you can load the game direct from the `BasicGameGodot` directory as you would in the previous section only with the controller.
 
 This table script is set to `Debug = True` and to look for `..\BasicGameGodot`, which is a level up in this repository.
 

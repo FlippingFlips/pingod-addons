@@ -8,7 +8,9 @@ weight: 40
 
 You can export the game to be used without the Godot editor. The Build folder will be used to export to.
 
+---
 ## Godot Export
+---
 
 | file  | does? |
 | ------------- | ------------- |
@@ -21,7 +23,9 @@ The output directory (`../Build`) for these exports and other settings are in th
 
 Shrink the executable 40 > 10mb with the `_build_upx_shrink_executable.bat` in the Build folder. You will need [UPX Ultimate Packer for eXecutables](https://upx.github.io/).
 
+---
 ## Simulator Export
+---
 
 Preparing a table is straight forward enough by changing the `IsDebug` in the script and specifying the executable name in the `GameDirectory`.
 

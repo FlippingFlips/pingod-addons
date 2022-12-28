@@ -19,6 +19,8 @@ Open the windows command prompt (or Git Bash).
 
 Type `git version` to verify Git was installed.
 
+---
+
 ### Clone - Option 1
 ---
 
@@ -38,6 +40,7 @@ Type `git version` to verify Git was installed.
 
 You could also use your own fork and clone that.
 
+---
 ### Downloading zipped repo - Option 2
 ---
 

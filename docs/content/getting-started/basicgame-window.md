@@ -16,24 +16,32 @@ weight: 25
 
 ### Settings
 
+---
 #### Audio
+---
 
 ![image](../../images/basicgame-settings-audio.jpg)
 
+---
 #### Display
+---
 
 - Fullscreen
 - FPS
 
 ![image](../../images/basicgame-settings-display.jpg)
 
+---
 #### Game
+---
 
 - Some basic game settings
 
 ![image](../../images/basicgame-settings-game.jpg)
 
+---
 #### PinGod
+---
 
 - Read/Write states can be disabled when not running with a simulator.
 

@@ -9,7 +9,7 @@ images:
 - images/pexels-photo-196666.jpeg
 ---
 
-# PinGod Home
+{{< figure src="images/pingod-logo.png" title="" >}}
 
 ## What is it?
 ---
@@ -30,11 +30,11 @@ We know who the penguin is and PinGodot doesn't ring well. This isn't a holy fra
 ## Is it difficult to learn and use?
 ---
 
-Not really, it's far more difficult to write this documentation...
+Not really. Godot doesn't have a steep learning curve and you don't need to know everything to be able to finish a game or make scenes.
 
-Godot doesn't have a steep learning curve and you don't need to know everything to be able to finish a game or make scenes.
+There are full examples in the `src` with `basic to advanced` scripted games which will give you an idea of C# sripting tasks and how things were done.
 
-There are full examples in the `src` with `basic to advanced` scripted games which will give you an idea of sripting tasks and how things were done.
+You should be able to lean back on PinGod doing the machine work for you while you compose scenes and do some simple C# scripting.
 
 ## Advantages?
 ---

@@ -15,8 +15,8 @@ weight: 30
 | 1  | Start Game |
 
 ---
-
 ### Simulating with keypress actions
+---
 
 Add credits (5), hold all the trough switches down (QWER) then push start (1).
 
@@ -28,7 +28,9 @@ Add credits (5), hold all the trough switches down (QWER) then push start (1).
 
 - Use `T` plunger lane switch and drain to activate a ball save
 
+---
 ### Dev overlays
+---
 
 In `PinGodGame.tscn` scene unspector switch on overlay enabled.
 
@@ -36,7 +38,9 @@ The following image displays controlling trough switches in green.
 
 ![image](../../images/basicgame-overlays.jpg)
 
+---
 ### Game Logs
+---
 
 `_godot_appdata_dir.bat`
 

@@ -12,12 +12,15 @@ A script with the same name is included with the table. This will be used with t
 
 This can make it easier to edit outside of table, keep track of changes etc. At the top of this image it shows MODIFYING EXTERNAL.
 
+---
 ### PinGod.VP.Controller
+---
 
 The first section marked in red is the `PinGod.VP.Controller` initialization.
 
 ![image](../../images/basicgame-vp-script-a.jpg)
 
+---
 ### Game Project Location
 ---
 
@@ -39,12 +42,15 @@ But if you need to, you can change the default `Const GameDirectory = "..\BasicG
 
 Variables declared for table objects. `Dim bsTrough, bsSaucer`
 
+---
 ### Table Events
+---
 
 Getting the controller to act on some table events. Stopping the game window and pause / resume
 
 ![image](../../images/basicgame-vp-script-c.jpg)
 
+---
 ### Table Init
 ---
 
@@ -56,6 +62,7 @@ A timer interval is added to the `LeftFlipper` which checks to see if the `Contr
 
 You can set more on the Controller like these [display settings](#display-settings)
 
+---
 ### Init game
 ---
 
@@ -71,11 +78,13 @@ This sub routine is much like a PinMame game setup and we use `core_c_sharp.vbs`
 
 ![image](../../images/basicgame-vp-script-e.jpg)
 
+---
 ### Keyboard
 ---
 
 Both `Table1_Key` routines use a check `if Controller.GameRunning = 0 then Exit Sub 'exit because no display is available`
 
+---
 ### Solenoids Callbacks
 ---
 
@@ -91,6 +100,7 @@ Both `Table1_Key` routines use a check `if Controller.GameRunning = 0 then Exit 
 
 ![image](../../images/basicgame-vp-script-f.jpg)
 
+---
 #### Display settings
 ---
 
@@ -106,7 +116,7 @@ Display can be adjusted by using `F2` on the window, move and resize and save th
 .DisplayLowDpi 	= False
 .DisplayNoWindow = False
 ```	
-
+---
 ### Default Machine Switches
 ---
 

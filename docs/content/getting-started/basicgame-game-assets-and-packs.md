@@ -12,9 +12,11 @@ There is an empty folder structure where you can add your assets into, then you 
 
 For in game scripts and scenes your assets will keep the same file structure, so to reach one of your assets the path would be `"res://assets/img/myimage.png`.
 
+---
 ## Add a new asset
+---
 
-1. Duplicate the image from `BasicGamePck\assets\img\pingod-logo-test.png` and rename it to `my-image-asset.png`
+1. Duplicate the image from `BasicGamePck\assets\img\pingod-logo-test.png` and rename it to `my-image-asset.png` or find your own.
 
 ![image](../../images/basicgame-add-asset.jpg)
 
