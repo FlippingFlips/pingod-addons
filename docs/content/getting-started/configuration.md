@@ -27,25 +27,3 @@ After any one of these steps you choose is completed then you can load Godot fro
 4. Add in the godot path in this section, OK out of the windows
 
 ---
-#### Powershell (Option 2)
----
-
-1. Use keypress `Win+X` to bring up menu
-
-2. Select `Windows Powershell Admin`
-
-3. Change the path here and run `setx path "%PATH%;C:\GodotBinaries" /m`
-
-![image](../../images/godot-env-powershell.jpg)
-
----
-#### Windows Command Prompt (Option 3)
----
-
-1. Run a command prompt as an administrator. Windows Key, search "cmd", right click as admin
-
-2. Change the path here and run `setx path "%PATH%;C:\GodotBinaries" /m`
-
-![image](../../images/cmd-admin.jpg)
-
----
