@@ -15,10 +15,8 @@
 <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin=anonymous></script>
 <script src=https://FlippingFlips.github.io/pingod-addons/js/bundle.js></script><style>:root{--custom-font-color:#FFFFFF;--custom-background-color:#003300}</style>
 <link rel=stylesheet href=https://FlippingFlips.github.io/pingod-addons/css/pingod.css><meta property="og:title" content="Godot - Environment Configuration">
-<meta property="og:description" content="Set Environment path to Godot  You should rename the Godot executable to godot and add to Environment paths on your system for access ease and scripts to use.
-After you&rsquo;ve done this you can run godot from the environment, command line.
-This is helpful to load projects with the godot command and using the .bat files provided requires this name.
- How to add to environment (Windows)  After one of these steps you choose is made test you can load Godot from anywhere using godot.">
+<meta property="og:description" content="Set Environment path to Godot   How to add to environment (Windows)  After any one of these steps you choose is completed then you can load Godot from anywhere using godot. Powershell (Option 2) is the simplest.
+ Windows UI - (Option 1)   Push windows key and type path, this will filter to Edit the System Variables Push enter to open the System Properties window, from here select Environment Variables In the Environment Variables - System Variables (bottom window pane) find variable named Path and open this Add in the godot path in this section, OK out of the windows   Powershell (Option 2)    Use keypress Win+X to bring up menu">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://FlippingFlips.github.io/pingod-addons/getting-started/configuration/"><meta property="og:image" content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png"><meta property="article:section" content="getting-started">
 <meta property="article:published_time" content="2022-12-26T15:26:15+00:00">
@@ -26,17 +24,13 @@ This is helpful to load projects with the godot command and using the .bat files
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
 <meta name=twitter:title content="Godot - Environment Configuration">
-<meta name=twitter:description content="Set Environment path to Godot  You should rename the Godot executable to godot and add to Environment paths on your system for access ease and scripts to use.
-After you&rsquo;ve done this you can run godot from the environment, command line.
-This is helpful to load projects with the godot command and using the .bat files provided requires this name.
- How to add to environment (Windows)  After one of these steps you choose is made test you can load Godot from anywhere using godot.">
+<meta name=twitter:description content="Set Environment path to Godot   How to add to environment (Windows)  After any one of these steps you choose is completed then you can load Godot from anywhere using godot. Powershell (Option 2) is the simplest.
+ Windows UI - (Option 1)   Push windows key and type path, this will filter to Edit the System Variables Push enter to open the System Properties window, from here select Environment Variables In the Environment Variables - System Variables (bottom window pane) find variable named Path and open this Add in the godot path in this section, OK out of the windows   Powershell (Option 2)    Use keypress Win+X to bring up menu">
 <meta itemprop=name content="Godot - Environment Configuration">
-<meta itemprop=description content="Set Environment path to Godot  You should rename the Godot executable to godot and add to Environment paths on your system for access ease and scripts to use.
-After you&rsquo;ve done this you can run godot from the environment, command line.
-This is helpful to load projects with the godot command and using the .bat files provided requires this name.
- How to add to environment (Windows)  After one of these steps you choose is made test you can load Godot from anywhere using godot."><meta itemprop=datePublished content="2022-12-26T15:26:15+00:00">
+<meta itemprop=description content="Set Environment path to Godot   How to add to environment (Windows)  After any one of these steps you choose is completed then you can load Godot from anywhere using godot. Powershell (Option 2) is the simplest.
+ Windows UI - (Option 1)   Push windows key and type path, this will filter to Edit the System Variables Push enter to open the System Properties window, from here select Environment Variables In the Environment Variables - System Variables (bottom window pane) find variable named Path and open this Add in the godot path in this section, OK out of the windows   Powershell (Option 2)    Use keypress Win+X to bring up menu"><meta itemprop=datePublished content="2022-12-26T15:26:15+00:00">
 <meta itemprop=dateModified content="2022-10-26T15:26:15+00:00">
-<meta itemprop=wordCount content="206"><meta itemprop=image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
+<meta itemprop=wordCount content="152"><meta itemprop=image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
 <meta itemprop=keywords content></head>
 <body><div class=container><header>
 <h1>PinGod AddOns</h1><span class=version>Version 4.3.0</span><a href=https://github.com/FlippingFlips/pingod-addons class=github><i class="fab fa-github"></i></a>
@@ -54,19 +48,16 @@ This is helpful to load projects with the godot command and using the .bat files
 <main><h1>Godot - Environment Configuration</h1>
 <h3 id=set-environment-path-to-godot>Set Environment path to Godot</h3>
 <hr>
-<p>You should rename the Godot executable to <code>godot</code> and add to Environment paths on your system for access ease and scripts to use.</p>
-<p>After you&rsquo;ve done this you can run <code>godot</code> from the environment, command line.</p>
-<p>This is helpful to load projects with the <code>godot</code> command and using the .bat files provided requires this name.</p>
 <p><img src=../../images/godot_cmd.jpg alt=image></p>
 <hr>
 <h3 id=how-to-add-to-environment-windows>How to add to environment (Windows)</h3>
 <hr>
-<p>After one of these steps you choose is made test you can load Godot from anywhere using <code>godot</code>. Which will load your renamed binary.</p>
+<p>After any one of these steps you choose is completed then you can load Godot from anywhere using <code>godot</code>. Powershell (Option 2) is the simplest.</p>
 <hr>
 <h4 id=windows-ui---option-1>Windows UI - (Option 1)</h4>
 <hr>
 <ol>
-<li>Push windows key and type path, which will filter to <code>Edit the System Variables</code></li>
+<li>Push windows key and type <code>path</code>, this will filter to <code>Edit the System Variables</code></li>
 <li>Push enter to open the <code>System Properties</code> window, from here select <code>Environment Variables</code></li>
 <li>In the <code>Environment Variables</code> - <code>System Variables (bottom window pane)</code> find variable named <code>Path</code> and open this</li>
 <li>Add in the godot path in this section, OK out of the windows</li>
@@ -82,7 +73,7 @@ This is helpful to load projects with the godot command and using the .bat files
 <p>Select <code>Windows Powershell Admin</code></p>
 </li>
 <li>
-<p>Change the path here and run <code>setx path "C:\GodotBinaries;%PATH%" /m</code></p>
+<p>Change the path here and run <code>setx path "%PATH%;C:\GodotBinaries" /m</code></p>
 </li>
 </ol>
 <p><img src=../../images/godot-env-powershell.jpg alt=image></p>
@@ -94,7 +85,7 @@ This is helpful to load projects with the godot command and using the .bat files
 <p>Run a command prompt as an administrator. Windows Key, search &ldquo;cmd&rdquo;, right click as admin</p>
 </li>
 <li>
-<p>Change the path here and run <code>setx path "C:\GodotBinaries;%PATH%" /m</code></p>
+<p>Change the path here and run <code>setx path "%PATH%;C:\GodotBinaries" /m</code></p>
 </li>
 </ol>
 <p><img src=../../images/cmd-admin.jpg alt=image></p>
@@ -117,7 +108,7 @@ Published on 26 Dec 2022
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/installation/>Godot - Installation</a></li>
 <li class=active><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/configuration/>Godot - Environment Configuration</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-setup-git/>BasicGame - Git Clone</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-setup-addons/>BasicGame - Linking AddOns</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-setup-addons/>BasicGame - Linking addons</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-project/>BasicGame - Project.Godot</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-godot/>BasicGame - Godot Loaded</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-window/>BasicGame - Window</a></li>
@@ -129,6 +120,18 @@ Published on 26 Dec 2022
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-resources/>BasicGame - Resources from packs</a></li>
 </ul>
 </li>
+<li class=has-sub-menu><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/>PinGodGame<span class="mark closed">+</span></a>
+<ul class=sub-menu>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/pingodgame.tscn/>PinGodGame.tscn - Scene</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/items/>MachineConfig (Items)</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/trough/>Ball Trough (Scene)</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/audiomanager/>AudioManager</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/devoverlays/>Overlays (Developing)</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/pingodgame.cs/>PinGodGame.cs - Script</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/logging/>Logging Games</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/recordings-playback/>Recording / Playback</a></li>
+</ul>
+</li>
 <li class=has-sub-menu><a href=https://FlippingFlips.github.io/pingod-addons/machine/>Machine<span class="mark closed">+</span></a>
 <ul class=sub-menu>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/machine/switchesactions/>Switches to Actions</a></li>
@@ -136,18 +139,6 @@ Published on 26 Dec 2022
 <li><a href=https://FlippingFlips.github.io/pingod-addons/machine/usingswitchescontroller/>Using Switches (Controller)</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/machine/usingcoils/>Using Coils (Godot)</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/machine/usingcoilscontroller/>Using Coils (Controller)</a></li>
-</ul>
-</li>
-<li class=has-sub-menu><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/>PinGodGame (AutoLoaded)<span class="mark closed">+</span></a>
-<ul class=sub-menu>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/items/>MachineConfig (Items)</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/trough/>Ball Trough (Scene)</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/audiomanager/>AudioManager</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/devoverlays/>Overlays (Developing)</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/pingodgame.tscn/>PinGodGame.tscn - Scene</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/pingodgame.cs/>PinGodGame.cs - Script</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/logging/>Logging Games</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/recordings-playback/>Recording / Playback</a></li>
 </ul>
 </li>
 <li class=has-sub-menu><a href=https://FlippingFlips.github.io/pingod-addons/base-scenes/>Scenes Used<span class="mark closed">+</span></a>
