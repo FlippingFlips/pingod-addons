@@ -187,12 +187,13 @@ public abstract class PinGodGame : PinGodBase
         if(GameSettings?.Display != null)
         {
             OS.WindowPosition = new Vector2(GameSettings.Display.X, GameSettings.Display.Y);
+            OS.WindowSize = new Vector2(GameSettings.Display.Width, GameSettings.Display.Height);
         }        
 
         //set window on top
-        var ontop = (bool)ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.ALWAYS_ON_TOP);
-        LogDebug("windows on top project settings?" + " " + ontop);
-        OS.SetWindowAlwaysOnTop(ontop);
+        //var ontop = (bool)ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.ALWAYS_ON_TOP);
+        //LogDebug("windows on top project settings?" + " " + ontop);
+        OS.SetWindowAlwaysOnTop(GameSettings.Display.AlwaysOnTop);
 
         if (GameSettings?.Display != null)
         {
@@ -753,6 +754,8 @@ public abstract class PinGodGame : PinGodBase
     {
         GameSettings.Display.X = OS.WindowPosition.x;
         GameSettings.Display.Y = OS.WindowPosition.y;
+        GameSettings.Display.Width = OS.WindowSize.x;
+        GameSettings.Display.Height = OS.WindowSize.y;
         ProjectSettings.SetSetting(SettingPaths.DisplaySetPaths.TEST_WIDTH, OS.WindowSize.x);
         ProjectSettings.SetSetting(SettingPaths.DisplaySetPaths.TEST_HEIGHT, OS.WindowSize.y);
     }
