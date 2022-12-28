@@ -18,28 +18,40 @@ This is helpful to load projects with the `godot` command and using the .bat fil
 ![image](../../images/godot_cmd.jpg)
 
 ---
-
 ### How to add to environment (Windows)
 ---
 
-#### Quick Way (Option 1)
----
-
-1. Open a cmd.exe window. `Ctrl + R` for a run box, then type `cmd` enter
-
-2. On command line anywhere run set Path, change the directory from `C:\your\path\here\` to your Godot path: 
-
-`set PATH=%PATH%;C:\your\path\here\`
-
-3. You won't see anything happen here but you should be able to run `godot` in this same command window as it is now in your system paths
+After one of these steps you choose is made test you can load Godot from anywhere using `godot`. Which will load your renamed binary.
 
 ---
-
-
-#### Manual Way (Option 2)
+#### Windows UI - (Option 1)
 ---
 
 1. Push windows key and type path, which will filter to `Edit the System Variables`
 2. Push enter to open the `System Properties` window, from here select `Environment Variables`
 3. In the `Environment Variables` - `System Variables (bottom window pane)` find variable named `Path` and open this
-4. Add in the godot path in this section, OK out of the windows then test the command line can run the renamed file `godot`
+4. Add in the godot path in this section, OK out of the windows
+
+---
+#### Powershell (Option 2)
+---
+
+1. Use keypress `Win+X` to bring up menu
+
+2. Select `Windows Powershell Admin`
+
+3. Change the path here and run `setx path "C:\GodotBinaries;%PATH%" /m`
+
+![image](../../images/godot-env-powershell.jpg)
+
+---
+#### Windows Command Prompt (Option 3)
+---
+
+1. Run a command prompt as an administrator. Windows Key, search "cmd", right click as admin
+
+2. Change the path here and run `setx path "C:\GodotBinaries;%PATH%" /m`
+
+![image](../../images/cmd-admin.jpg)
+
+---
