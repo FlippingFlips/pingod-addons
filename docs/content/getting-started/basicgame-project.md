@@ -6,28 +6,19 @@ draft: false
 weight: 24
 ---
 
-The `project.godot` can be loaded into the Godot editor by using `godot -e`.
-
-![image](../../images/basicgame-project-files-addons.jpg)
-
 {{% panel status="primary" title="Tip" icon="far fa-lightbulb" %}}
 Use `Alt+D` in the project directory, type `godot -e` then enter to load project
 
 {{% /panel %}}
 
+![image](../../images/basicgame-project-files.jpg)
+
 {{% panel status="primary" title="Tip" icon="far fa-lightbulb" %}}
 You can use the `.bat` files in the projects root directory to load a project with . `_godot_editor.bat` 
 {{% /panel %}}
 
-![image](../../images/basicgame-bats.jpg)
-
 | file  | what it does |
 | ------------- | ------------- |
-| _godot_appdata_dir.bat  | Opens the user directory for the game. |
-| _godot_editor.bat  | Opens the user BasicGameGodot project.godot in Godot editor. |
-| _godot_export_full.bat  | Exports to the `Windows Desktop` config BasicGameGodot project |
-| _godot_export_pck.bat  | Exports to the `Windows Desktop Pack` config BasicGameGodot |
-| _link_addons.bat  | Links the addons repository `addons` into BasicGameGodot |
-| _vp_edit.bat  | Loads table file `PinGodVp-BasicGame-VPX10.7.vpx` from `BasicGameVisualPinball` into editor. |
-| _vp_play.bat  | Loads table file `PinGodVp-BasicGame-VPX10.7.vpx` from `BasicGameVisualPinball` and plays |
-| _build_upx_shrink_executable.bat  | Shrinks the export executable |
+| _link_addons.bat  | Links the `pingod-addons` repository `addons` directory into BasicGameGodot |
+| _godot_export_full.bat  | Exports `Windows Desktop` which is executable and main pack |
+| _godot_export_pck.bat  | Exports `Windows Desktop Pack` which updates the main pack. The executable will be the same for all games as it basically is Godot |

@@ -8,12 +8,11 @@ weight: 30
 
 ### Game default controls
 ---
-
-5   = Credits
-
-Q,W,E,R = Trough Switches 1-4
-
-1   = Start Game
+| Keys  | action |
+| ------------- | ------------- |
+| 5  | Credits |
+| Q,W,E,R | Trough Switches 1-4 |
+| 1  | Start Game |
 
 ---
 
@@ -39,6 +38,6 @@ The following image displays controlling trough switches in green.
 
 ### Game Logs
 
-`_open_appdata_dir.bat`
+`_godot_appdata_dir.bat`
 
 Opens the `app_userdata` for the project. Logs go here, `gamedata.save`, `settings.save` and `recordings`

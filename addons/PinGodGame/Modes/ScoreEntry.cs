@@ -163,7 +163,7 @@ public class ScoreEntry : Control
 		selectedName = GetNode("CenterContainer/VBoxContainer/Name") as Label;		
 
         IsPlayerEnteringScore = true;
-        selectedCharLabelStartPos = new Vector2(selectedCharLabel.RectPosition.x, selectedCharLabel.RectPosition.y);
+        selectedCharLabelStartPos = new Vector2(selectedCharLabel?.RectPosition.x ?? 0, selectedCharLabel?.RectPosition.y ?? 0);
     }
 
     /// <summary>

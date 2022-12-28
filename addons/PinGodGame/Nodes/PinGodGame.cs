@@ -502,7 +502,7 @@ public abstract class PinGodGame : PinGodBase
     /// Gets the Resources autoloaded scene at "/root/Resources"
     /// </summary>
     /// <returns></returns>
-    public virtual Resources GetResources() => GetNodeOrNull<Resources>("/root/Resources");
+    public virtual Resources GetResources() => GetNodeOrNull<Resources>("Resources");
 
     /// <summary>
     /// Gets the highest score made from the <see cref="GameData.HighScores"/>
@@ -688,7 +688,7 @@ public abstract class PinGodGame : PinGodBase
             if (!OS.HasFeature("editor")) { }
             
             //save an override.cfg in project
-            var path = "res://override.cfg";
+            var path = "res://override.cfg"; //TODO: make name for game?
             LogDebug("no working directory, saving override.cfg settings", path);
             ProjectSettings.SaveCustom(path);
                      

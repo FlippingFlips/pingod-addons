@@ -44,9 +44,11 @@ public class MainScene : Node2D
         AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionHandler;
         PauseMode = PauseModeEnum.Process;
 
-        //load preloader
-        _resourcePreLoader = GetNode("ResourcePreloader") as ResourcePreloader;
+        //load Resources node from PinGodGame and load service menu
+        _resourcePreLoader = pinGod.GetNode("Resources") as ResourcePreloader;
         PreloadServiceMenu();
+
+        //game events
         pinGod.Connect(nameof(PinGodGame.GameStarted), this,nameof(OnGameStarted));
         pinGod.Connect(nameof(PinGodGame.GameEnded), this, nameof(OnGameEnded));
         pinGod.Connect(nameof(PinGodGame.ServiceMenuExit), this, nameof(OnServiceMenuExit));
@@ -55,7 +57,6 @@ public class MainScene : Node2D
         attractnode = GetNode("Modes/Attract");
         //show a pause menu when pause enabled.
         pauseLayer = GetNode("CanvasLayer/PauseControl") as Control;
-
         settingsDisplay = GetNodeOrNull<Control>("CanvasLayer/SettingsDisplay");
     }
 

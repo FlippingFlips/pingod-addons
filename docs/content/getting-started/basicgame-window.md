@@ -8,12 +8,11 @@ weight: 25
 
 ### Window controls
 ---
-
-F1 = Settings Menu
-
-F2 = Toggle Border
-
-F8 = Quit?
+| key  | action|
+| ------------- | ------------- |
+| F1  | Settings Menu |
+| F2  | Toggle Window Border |
+| F8  | Quit? |
 
 ### Settings
 
