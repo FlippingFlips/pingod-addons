@@ -19,7 +19,7 @@ Open the windows command prompt (or Git Bash).
 
 Type `git version` to verify Git was installed.
 
-### Clone
+### Clone - Option 1
 ---
 
 1. Create a directory on machine where you are developing named `pingod`, this could be anything but we need a directory to clone into.
@@ -28,8 +28,19 @@ Type `git version` to verify Git was installed.
 
 3. Clone the `pingod-addons` with `git clone https://github.com/FlippingFlips/pingod-addons`
 
+![image](../../images/git-clone-addons.jpg)
+
 4. Now clone the `pingod-basicgame` with `git clone https://github.com/FlippingFlips/pingod-basicgame`
+
+![image](../../images/git-clone-basicgame.jpg)
 
 5. You will have two directories `/pingod/pingod-basicgame`, `/pingod/pingod-addons`, this is so the basicgame only has to go up one directory to link the `addons`
 
 You could also use your own fork and clone that.
+
+### Downloading zipped repo - Option 2
+---
+
+[pingod-addons](https://github.com/FlippingFlips/pingod-addons/archive/refs/heads/main.zip)
+
+[pingod-basicgame](https://github.com/FlippingFlips/pingod-basicgame/archive/refs/heads/main.zip)

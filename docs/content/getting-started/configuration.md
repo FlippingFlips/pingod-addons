@@ -16,3 +16,5 @@ You should rename the Godot executable to `godot` and add to Environment paths o
 After you've done this you can run `godot` from the environment, command line. 
 
 This is helpful to load projects with the `godot` command and using the .bat files provided requires this name.
+
+![image](../../images/godot_cmd.jpg)
