@@ -684,14 +684,15 @@ public abstract class PinGodGame : PinGodBase
         {            
             SaveWindow();
 
-            //save override.cfg when not running editor. TODO: why not? can't remember
-            if (!OS.HasFeature("editor")) { }
-            
-            //save an override.cfg in project
-            var path = "res://override.cfg"; //TODO: make name for game?
-            LogDebug("no working directory, saving override.cfg settings", path);
-            ProjectSettings.SaveCustom(path);
-                     
+            //save override.cfg when not running editor. TODO: why not, or why? can't remember
+            //if (!OS.HasFeature("editor")) 
+            //{
+            //    //save an override.cfg in project
+            //    var path = "res://override.cfg"; //TODO: make name for game?
+            //    LogDebug("no working directory, saving override.cfg settings", path);
+            //    ProjectSettings.SaveCustom(path);
+            //}
+                        
             SaveGameData();
             SaveGameSettings();
         }
