@@ -1,0 +1,38 @@
+p,a{
+    font-size: 90%;
+}
+pre{
+    font-size: 12px;
+}
+.sidebar{
+    font-size: 115%;
+}
+h1{
+    font-size: 120%;
+}
+h2{
+    font-size: 100%;
+}
+h3{
+    font-size: 90%;
+}
+h4{
+    font-size: 80%;
+}
+table{
+    font-size: 70%;
+}
+ul{
+    font-size: 80%;
+}
+td{
+padding:0.1em
+}
+.panel{
+padding:0.3em;
+border-color: #ff1616
+}
+
+.ais-Hits-item, .button, .code, .edit-meta, .edit-page, .gist, .highlight, .pagination, .panel, .powered, .stack, .table_of_contents, .twitter-tweet, main *+blockquote, main *+dl, main *+figure, main *+h1, main *+h2, main *+h3, main *+h4, main *+h5, main *+h6, main *+hr, main *+ol, main *+p, main *+pre, main *+table, main *+ul{
+margin-top:0.5em;
+}

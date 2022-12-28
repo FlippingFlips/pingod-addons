@@ -14,10 +14,10 @@
 <script src=https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin=anonymous></script>
 <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin=anonymous></script>
 <script src=https://FlippingFlips.github.io/pingod-addons/js/bundle.js></script><style>:root{--custom-font-color:#FFFFFF;--custom-background-color:#003300}</style>
-<meta property="og:title" content="BasicGame - Git Clone">
+<link rel=stylesheet href=https://FlippingFlips.github.io/pingod-addons/css/pingod.css><meta property="og:title" content="BasicGame - Git Clone">
 <meta property="og:description" content="Git Setup Use Git to pull the repositories from Github, you don&rsquo;t need a Github account just the software to do this.
  Git For Windows - Download  Once the installer has started, follow the instructions as provided in the Git Setup wizard screen until the installation is complete. Open the windows command prompt (or Git Bash). Type git version to verify Git was installed.
-Clone    Create a directory on machine where you are developing named pingod, this could be anything but we need a directory to clone into.">
+Clone - Option 1    Create a directory on machine where you are developing named pingod, this could be anything but we need a directory to clone into.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-setup-git/"><meta property="og:image" content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png"><meta property="article:section" content="getting-started">
 <meta property="article:published_time" content="2022-12-26T15:26:15+00:00">
@@ -27,13 +27,13 @@ Clone    Create a directory on machine where you are developing named pingod, th
 <meta name=twitter:title content="BasicGame - Git Clone">
 <meta name=twitter:description content="Git Setup Use Git to pull the repositories from Github, you don&rsquo;t need a Github account just the software to do this.
  Git For Windows - Download  Once the installer has started, follow the instructions as provided in the Git Setup wizard screen until the installation is complete. Open the windows command prompt (or Git Bash). Type git version to verify Git was installed.
-Clone    Create a directory on machine where you are developing named pingod, this could be anything but we need a directory to clone into.">
+Clone - Option 1    Create a directory on machine where you are developing named pingod, this could be anything but we need a directory to clone into.">
 <meta itemprop=name content="BasicGame - Git Clone">
 <meta itemprop=description content="Git Setup Use Git to pull the repositories from Github, you don&rsquo;t need a Github account just the software to do this.
  Git For Windows - Download  Once the installer has started, follow the instructions as provided in the Git Setup wizard screen until the installation is complete. Open the windows command prompt (or Git Bash). Type git version to verify Git was installed.
-Clone    Create a directory on machine where you are developing named pingod, this could be anything but we need a directory to clone into."><meta itemprop=datePublished content="2022-12-26T15:26:15+00:00">
+Clone - Option 1    Create a directory on machine where you are developing named pingod, this could be anything but we need a directory to clone into."><meta itemprop=datePublished content="2022-12-26T15:26:15+00:00">
 <meta itemprop=dateModified content="2022-10-26T15:26:15+00:00">
-<meta itemprop=wordCount content="160"><meta itemprop=image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
+<meta itemprop=wordCount content="171"><meta itemprop=image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
 <meta itemprop=keywords content></head>
 <body><div class=container><header>
 <h1>PinGod AddOns</h1><span class=version>Version 4.3.0</span><a href=https://github.com/FlippingFlips/pingod-addons class=github><i class="fab fa-github"></i></a>
@@ -61,7 +61,7 @@ Clone    Create a directory on machine where you are developing named pingod, th
 <pre tabindex=0><code>Once the installer has started, follow the instructions as provided in the Git Setup wizard screen until the installation is complete.
 Open the windows command prompt (or Git Bash).
 </code></pre><p>Type <code>git version</code> to verify Git was installed.</p>
-<h3 id=clone>Clone</h3>
+<h3 id=clone---option-1>Clone - Option 1</h3>
 <hr>
 <ol>
 <li>
@@ -73,14 +73,20 @@ Open the windows command prompt (or Git Bash).
 <li>
 <p>Clone the <code>pingod-addons</code> with <code>git clone https://github.com/FlippingFlips/pingod-addons</code></p>
 </li>
-<li>
-<p>Now clone the <code>pingod-basicgame</code> with <code>git clone https://github.com/FlippingFlips/pingod-basicgame</code></p>
-</li>
-<li>
-<p>You will have two directories <code>/pingod/pingod-basicgame</code>, <code>/pingod/pingod-addons</code>, this is so the basicgame only has to go up one directory to link the <code>addons</code></p>
-</li>
+</ol>
+<p><img src=../../images/git-clone-addons.jpg alt=image></p>
+<ol start=4>
+<li>Now clone the <code>pingod-basicgame</code> with <code>git clone https://github.com/FlippingFlips/pingod-basicgame</code></li>
+</ol>
+<p><img src=../../images/git-clone-basicgame.jpg alt=image></p>
+<ol start=5>
+<li>You will have two directories <code>/pingod/pingod-basicgame</code>, <code>/pingod/pingod-addons</code>, this is so the basicgame only has to go up one directory to link the <code>addons</code></li>
 </ol>
 <p>You could also use your own fork and clone that.</p>
+<h3 id=downloading-zipped-repo---option-2>Downloading zipped repo - Option 2</h3>
+<hr>
+<p><a href=https://github.com/FlippingFlips/pingod-addons/archive/refs/heads/main.zip>pingod-addons</a></p>
+<p><a href=https://github.com/FlippingFlips/pingod-basicgame/archive/refs/heads/main.zip>pingod-basicgame</a></p>
 <div class=edit-meta>
 Last updated on 26 Oct 2022
 <br>
