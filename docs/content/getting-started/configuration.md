@@ -15,7 +15,7 @@ weight: 20
 ### How to add to environment (Windows)
 ---
 
-After any one of these steps you choose is completed then you can load Godot from anywhere using `godot`. Powershell (Option 2) is the simplest.
+After any one of these steps you choose is completed then you can load Godot from anywhere using `godot`.
 
 ---
 #### Windows UI - (Option 1)

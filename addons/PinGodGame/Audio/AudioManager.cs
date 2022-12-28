@@ -116,28 +116,6 @@ public class AudioManager : Node
     }
 
     /// <summary>
-    /// Loads a pingod.snd.pck sounds file, Tries res:// first then the working directory
-    /// </summary>
-    //private static void LoadSoundPckResources()
-    //{
-    //    if (!ProjectSettings.LoadResourcePack("res://pingod.snd.pck"))
-    //    {
-    //        if(!ProjectSettings.LoadResourcePack(System.IO.Path.Combine(Resources.WorkingDirectory, "pingod.snd.pck")))
-    //        {
-    //            Logger.LogInfo("no sound resource Pcks found");
-    //        }
-    //        else
-    //        {
-    //            Logger.LogInfo("sound resource pack loaded from " + Resources.WorkingDirectory);
-    //        }
-    //    }
-    //    else
-    //    {
-    //        Logger.LogInfo("sound resource pack loaded local res://");
-    //    }
-    //}
-
-    /// <summary>
     /// Loads and adds a music resource to the <see cref="Music"/> dictionary
     /// </summary>
     /// <param name="resource"></param>
