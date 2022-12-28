@@ -1,19 +1,26 @@
 ---
-title: "PinGodGame (AutoLoaded)"
+title: "PinGodGame"
 date: 2022-12-26T15:26:15Z
 draft: false
-weight: 20
+weight: 12
 ---
 
-[Class Definitions](/pingod-addons/html/classPinGodGame.html)
-
 {{% panel status="primary" title="Note" icon="far fa-lightbulb" %}}
-This scene is autoloaded with a game and you should add this scene as a favorite in Godots favorites scene tree for quicker access.
-
+This scene is autoloaded with a game and you can add this scene as a favorite in Godot by right clicking adding as a favorite.
 {{% /panel %}}
 
-Most modes rely on this being loaded by using `GetNode<PinGodGame>("/root/PinGodGame")` from the tree
-
-Scene inspector uses `[export]`s that are defined in `game\PinGodGame.cs`. You can add your own to your game from inheriting from the PinGodGame
-
 ![image](../images/godot-pingodgame-tscn.jpg)
+
+---
+## Scenes using this
+---
+
+Most modes rely on this being loaded by using `GetNode<PinGodGame>("/root/PinGodGame")` from the script.
+
+## PinGodGame.tscn
+
+## [Scene Guide](./pingodgame.tscn)
+
+## PinGodGame.cs
+
+## [Class Definitions](/pingod-addons/html/classPinGodGame.html)

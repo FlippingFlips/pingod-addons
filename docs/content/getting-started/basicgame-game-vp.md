@@ -21,11 +21,13 @@ Provided you have the controller setup and have built the godot project this wil
 ![image](../../images/basicgame-vploaded.jpg)
 
 
+---
 ### COM Controller setup
 ---
 
 We need to register the COM object before it can be used by other applications such as a simulator.
 
+---
 #### Register controller
 ---
 
@@ -34,6 +36,7 @@ We need to register the COM object before it can be used by other applications s
 3. Run the `PinGod.VP.Setup.exe` to unregister / register the COM object
 4. If you move these files then you would have to register it again.
 
+---
 #### Simulator Scripts
 ---
 

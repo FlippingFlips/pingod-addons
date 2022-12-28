@@ -5,4 +5,20 @@ draft: false
 weight: 48
 ---
 
-How to load and use assets
+# Overview Links
+
+---
+## Basic Game Assets & Packs [BasicGame](../getting-started/basicgame-game-assets-and-packs/)
+---
+
+---
+## Basic Game Resources [BasicGame](../getting-started/basicgame-game-resources/)
+---
+
+---
+## Audio Manager [AudioManager](./audiomanager)
+---
+
+---
+## Videos and format [Videos](./video)
+---

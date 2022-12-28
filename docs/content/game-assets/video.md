@@ -7,8 +7,7 @@ weight: 40
 
 Notes and reminders on some assets and modes.
 
-## Videos
-
+---
 ### Video format
 ---
 

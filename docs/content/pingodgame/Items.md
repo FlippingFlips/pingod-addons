@@ -5,6 +5,7 @@ draft: false
 weight: 10
 ---
 
+---
 In the `game/PinGodGame.tscn` scenes inspector in Godot editor you can edit the machines `Coils, Switches, Lamps, Leds`.
 
 This can be accessed from the `MachineConfig` scene by selecting it.
@@ -13,11 +14,19 @@ This can be accessed from the `MachineConfig` scene by selecting it.
 
 When the game is loaded these items will be added to the machine. 
 
-They can be accessed inside the `Machine.cs` or use the PinGodGame helper methods with the item name.
+When adding from the UI (green box) select `String` and `Int` for the value.
 
-When adding from the UI (green box) select `String` and `Int` for the value but it's probably quicker to edit this file in text and add your items there with name and number.
+---
 
+It's quicker to edit this scene file in a text editor and add your items directly in there with the name and number. The following image displays where where the coils and switches are saved to.
+
+![image](../../images/basicgame-pingodgame-tscn.jpg)
+
+
+
+---
 ### MachineConfig
+---
 
 Select the MachineConfig scene to view the exported variables
 
@@ -41,3 +50,4 @@ Switches are added to the input map on load. You should add like the following w
 
 `Input Map`. `sw34`, `sw55`
 
+They can be accessed from script inside the `Machine.cs` or use the PinGodGame helper methods with the item name.

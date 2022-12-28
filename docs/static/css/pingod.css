@@ -1,5 +1,8 @@
-p,a{
+p{
     font-size: 80%;
+}
+a{
+    font-size: 90%;
 }
 pre{
     font-size: 12px;
@@ -43,5 +46,6 @@ max-width: 50%
 }
 code {
 max-width: 50%;
-padding:0.0em;
+padding:0.1em;
+background-color:#6bc542
 }

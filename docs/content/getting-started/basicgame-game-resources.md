@@ -6,23 +6,31 @@ draft: false
 weight: 41
 ---
 
-In the `PinGodGame.tscn` is a `ResourcePreloader` node. When this is loaded with the scene it looks for the packs you have set in the `Resource Packs`.
+In the `PinGodGame.tscn` is a `ResourcePreloader` node.
 
-This scene was duplicated from `addons\PinGodGame\Scenes\Resources.tscn` and uses the resource script in `addons`.
-
-We need to have this copy in our project otherwise if using the `addons` it will change it for all games.
+When this is loaded with the scene it looks for the packs you have set in the `Resource Packs`.
 
 ![image](../../images/pingodgame-resources-tree.jpg)
 
+This scene was duplicated from `addons\PinGodGame\Scenes\Resources.tscn`.
+
+We need to have this copy in our project, otherwise if we are directly using the `addons` scene, it will change it for all games. 
+
+With our duplicated `Resources.tscn` and reusing the base script `Resources.cs` we can add new packs and assets key / values in our game.
+
+---
 ### Resource Packs
+---
 
 By default the collection includes the export packs in the previous section. `pingod.gfx.pck` and `pingod.snd.pck`
 
-You can add 
+You can add with the scene inspector or directly in the `tscn` file it saves to.
 
 ![image](../../images/pingodgame-resources-inspector.jpg)
 
-### Resources
+---
+### Resources (Key, Path)
+---
 
 Add resources that will be pre loaded in this dictionary by key , path.
 
@@ -30,7 +38,9 @@ Key: `nameForScript` , Value `res://assets/yourasset.ogv`.
 
 Key: `nameForScript2` , Value `res://myotherassets/asset.tscn`.
 
+---
 ### Export Presets
+---
 
 Create export presets by duplicating a section, changing the preset number.
 

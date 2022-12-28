@@ -5,4 +5,6 @@ draft: false
 weight: 130
 ---
 
-Exporting game files
+## [Godot and Simulator Export (BasicGame)](../getting-started/basicgame-game-exporting/#simulator-export)
+
+## [Exporting, Icons](./exports)

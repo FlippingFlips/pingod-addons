@@ -9,6 +9,12 @@ This script is autoloaded from the scene when the display window is launched and
 
 Modes and other scenes can get access to this from the `root` tree.  `GetNode<PinGodGame>("/root/PinGodGame")`.
 
+---
+## Exports
+---
+
+Scene inspector uses `[export]`s that are defined in `game\PinGodGame.cs`. You can add your own to your game from inheriting from the PinGodGame
+
 ## Godot - Overrides
 
 `_EnterTree` = Gets user cmd line args, loads data and settings, creates trough, sets up ball search and audio manager

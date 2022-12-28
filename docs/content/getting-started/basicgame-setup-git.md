@@ -6,7 +6,9 @@ draft: false
 weight: 23
 ---
 
+---
 ### Git Setup
+---
 
 Use Git to pull the repositories from Github, you don't need a Github account just the software to do this.
 
@@ -21,7 +23,7 @@ Type `git version` to verify Git was installed.
 
 ---
 
-### Clone - Option 1
+#### (Option 1) Clone
 ---
 
 1. Create a directory on machine where you are developing named `pingod`, this could be anything but we need a directory to clone into.
@@ -41,7 +43,7 @@ Type `git version` to verify Git was installed.
 You could also use your own fork and clone that.
 
 ---
-### Downloading zipped repo - Option 2
+#### (Option 2) Downloading zipped repo
 ---
 
 [pingod-addons](https://github.com/FlippingFlips/pingod-addons/archive/refs/heads/main.zip)

@@ -5,7 +5,7 @@ draft: false
 weight: 21
 ---
 
-[Trough Class Reference](/pingod-addons/html/classTrough.html)
+The `Trough.tscn` handles the ball trough, ball saving, trough switches, early save switches, shooter lane switch.
 
 Included in the examples `PinGodGame.tscn` tree.
 
@@ -13,6 +13,21 @@ Included in the examples `PinGodGame.tscn` tree.
 
 Most cases you will leave the default settings here, but you can add more switches from this.
 
+---
+#### Trough / Ball Save Options
+---
+
+- Trough switche names
+- Ball save seconds
+- Ball save lamp name
+- Ball save multiball seconds
+- Early Ball Save switches
+- Number of Balls to Save
+- Trough Solenoid(coil)
+- Plunger lane switch name
+- Set what to do on ball started
+
+---
 #### Ball search options
 ---
 
@@ -21,15 +36,4 @@ Most cases you will leave the default settings here, but you can add more switch
 - Search stop switches = Switches that stop the search
 - Search wait time = Time to wait before pulsing coils
 
-#### Trough / Ball Save Options
----
-
-- Ball save seconds
-- Ball save lamp name
-- Ball save multiball seconds
-- Early Ball Save switches
-- Number of Balls to Save
-- Trough Solenoid(coil)
-- Trough switches
-- Plunger lane switch
-- Set what to do on ball started
+### [Trough Class Reference](/pingod-addons/html/classTrough.html)
