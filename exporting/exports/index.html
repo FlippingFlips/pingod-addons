@@ -33,7 +33,7 @@
  Exporting Game  Command line   Use the bat files export for steps. See Godot Export You only need to build the full export once. The executable will always be the same size, but the pack file will be different.   Pack executable size    Shrink the executable 40 > 10mb with the _build_upx_shrink_executable.bat in the Build folder.
   You will need UPX Ultimate Packer for eXecutables"><meta itemprop=datePublished content="2022-12-26T15:26:15+00:00">
 <meta itemprop=dateModified content="2022-12-26T15:26:15+00:00">
-<meta itemprop=wordCount content="267"><meta itemprop=image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
+<meta itemprop=wordCount content="146"><meta itemprop=image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
 <meta itemprop=keywords content></head>
 <body><div class=container><header>
 <h1>PinGod AddOns</h1><span class=version>Version 4.3.0</span><a href=https://github.com/FlippingFlips/pingod-addons class=github><i class="fab fa-github"></i></a>
@@ -75,30 +75,6 @@
 </li>
 </ul>
 <hr>
-<h3 id=export-settings>Export Settings</h3>
-<hr>
-<p>The BasicGame project shows that the first project is runnable and is exporting to <code>..Build/PinGod.BasicGame.exe</code></p>
-<p>This can be found in <code>Project > Export</code>. These settings can also be changed and added to in <code>export_presets.cfg</code></p>
-<p>Export option &ldquo;embed pck&rdquo; does not work on 32-bit x86 <a href=https://github.com/godotengine/godot/issues/35830>GodotIssues</a></p>
-<p><img src=../../images/basicgame-project-export-exe.jpg alt=image> - Feb 2020</p>
-<div class="panel panel-danger"><div class=panel-header>
-<h3><i class="far fa-lightbulb"></i>&nbsp;Godot Naming</h3>
-</div><div class=panel-body>
-<p>The names here have to be consistent which each other. The exe and the pack.</p>
-</div>
-</div>
-<p>The BasicGame project for <code>Windows Desktop Pack</code> shows that it&rsquo;s exporting to <code>..Build/PinGod.BasicGame.pck</code></p>
-<p><img src=../../images/basicgame-project-export-pck.jpg alt=image></p>
-<p>See the <code>export_presets.cfg</code> file for icons, names, exported saves.</p>
-<h3 id=changing-windows-executable-icon>Changing Windows Executable Icon</h3>
-<ul>
-<li>Make icon with all size in one file</li>
-<li>Download <a href=https://github.com/electron/rcedit/releases>RCEdit (Github)</a> and add the path in Godots <code>Editor Settings\RCedit</code></li>
-<li>Change icon in the Godots <code>Project Settings/Application/Config</code></li>
-</ul>
-<p><img src=../../images/exports-icons-rcedit.jpg alt=image></p>
-<p>See <a href=https://docs.godotengine.org/en/3.2/getting_started/workflow/export/changing_application_icon_for_windows.html>https://docs.godotengine.org/en/3.2/getting_started/workflow/export/changing_application_icon_for_windows.html</a></p>
-<hr>
 <h2 id=before-exporting-checklists>Before Exporting Checklists</h2>
 <ul>
 <li>Are the <code>Recordings / Playback / Overlays</code> switched off?</li>
@@ -115,7 +91,7 @@ Last updated on 26 Dec 2022
 <br>
 Published on 26 Dec 2022
 <br><a href=https://github.com/FlippingFlips/pingod-addons/edit/main/docs/content/exporting/exports.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://FlippingFlips.github.io/pingod-addons/exporting/ title="Exporting / Publishing"><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - Exporting / Publishing</a>
-<a class="nav nav-next" href=https://FlippingFlips.github.io/pingod-addons/exporting/csharp-large-exports/ title="C# Pcks Are Large...">Next - C# Pcks Are Large... <i class="fas fa-arrow-right" aria-hidden=true></i></a>
+<a class="nav nav-next" href=https://FlippingFlips.github.io/pingod-addons/exporting/export-settings/ title="Export Settings - Godot">Next - Export Settings - Godot <i class="fas fa-arrow-right" aria-hidden=true></i></a>
 </nav><footer><p class=powered>Powered by <a href=https://gohugo.io>Hugo</a>. Theme by <a href=https://themes.gohugo.io/hugo-theme-techdoc/>TechDoc</a>. Designed by <a href=https://github.com/thingsym/hugo-theme-techdoc>Thingsym</a>.</p>
 </footer>
 </main>
@@ -131,13 +107,16 @@ Published on 26 Dec 2022
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-setup-addons/>BasicGame - Linking addons</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-project/>BasicGame - Project.Godot</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-godot/>BasicGame - Godot Project Loaded Run Game</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-window/>BasicGame - Window</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-window/>BasicGame - Window Settings</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/logging/>Logging Games</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/game-save-data/>User Game setting / data</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game/>BasicGame - Game</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-vp/>BasicGame - Visual Pinball</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-vp-script/>BasicGame - Visual Pinball Script</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-exporting/>BasicGame - Exporting</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-assets-and-packs/>BasicGame - Assets and Packs</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-resources/>BasicGame - Resources from packs</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-resources/>BasicGame - Adding Resources and Resource packs</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-assets-and-packs/>BasicGame - Assets and Pcks</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-create-asset-scene/>BasicGame - Create first asset scene</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-script-editing/>BasicGame - Script Editing Setup</a></li>
 </ul>
 </li>
@@ -149,7 +128,6 @@ Published on 26 Dec 2022
 <li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/audiomanager/>AudioManager</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/devoverlays/>Overlays (Developing)</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/pingodgame.cs/>PinGodGame.cs - Script</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/logging/>Logging Games</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/recordings-playback/>Recording / Playback</a></li>
 </ul>
 </li>
@@ -201,7 +179,11 @@ Published on 26 Dec 2022
 <li class="parent has-sub-menu"><a href=https://FlippingFlips.github.io/pingod-addons/exporting/>Exporting / Publishing<span class="mark opened">-</span></a>
 <ul class=sub-menu>
 <li class=active><a href=https://FlippingFlips.github.io/pingod-addons/exporting/exports/>Exporting</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/export-settings/>Export Settings - Godot</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/export-settings-export-presets.cfg/>Export - export_presets.cfg</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/export-windows-icon/>Export Windows Icons</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/csharp-large-exports/>C# Pcks Are Large...</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/link-separate-assets-project/>Link assets into separate assets project</a></li>
 </ul>
 </li>
 </ul>

@@ -2,7 +2,7 @@
 <head><meta charset=utf-8>
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>BasicGame - Resources from packs - PinGod AddOns</title>
+<title>BasicGame - Adding Resources and Resource packs - PinGod AddOns</title>
 <meta name=description content="Source">
 <meta name=generator content="Hugo 0.91.2">
 <link href=https://FlippingFlips.github.io/pingod-addons/index.xml rel=alternate type=application/rss+xml>
@@ -14,32 +14,32 @@
 <script src=https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin=anonymous></script>
 <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin=anonymous></script>
 <script src=https://FlippingFlips.github.io/pingod-addons/js/bundle.js></script><style>:root{--custom-font-color:#FFFFFF;--custom-background-color:#003300}</style>
-<link rel=stylesheet href=https://FlippingFlips.github.io/pingod-addons/css/pingod.css><meta property="og:title" content="BasicGame - Resources from packs">
+<link rel=stylesheet href=https://FlippingFlips.github.io/pingod-addons/css/pingod.css><meta property="og:title" content="BasicGame - Adding Resources and Resource packs">
 <meta property="og:description" content="In the PinGodGame.tscn is a ResourcePreloader node.
 When this is loaded with the scene it looks for the packs you have set in the Resource Packs.
-This scene was duplicated from addons\PinGodGame\Scenes\Resources.tscn.
-We need to have this copy in our project, otherwise if we are directly using the addons scene, it will change it for all games.
-With our duplicated Resources.tscn and reusing the base script Resources.cs we can add new packs and assets key / values in our game.">
+ Resource Packs  By default the collection includes the export packs in the previous section. pingod.gfx.pck and pingod.snd.pck
+You can add with the scene inspector or directly in the tscn file it saves to.
+ Resources (Key, Path)  Add resources that will be pre loaded in this dictionary by key , path.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-resources/"><meta property="og:image" content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png"><meta property="article:section" content="getting-started">
 <meta property="article:published_time" content="2022-12-26T15:26:15+00:00">
 <meta property="article:modified_time" content="2022-10-26T15:26:15+00:00"><meta property="og:site_name" content="Hugo Techdoc Theme">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
-<meta name=twitter:title content="BasicGame - Resources from packs">
+<meta name=twitter:title content="BasicGame - Adding Resources and Resource packs">
 <meta name=twitter:description content="In the PinGodGame.tscn is a ResourcePreloader node.
 When this is loaded with the scene it looks for the packs you have set in the Resource Packs.
-This scene was duplicated from addons\PinGodGame\Scenes\Resources.tscn.
-We need to have this copy in our project, otherwise if we are directly using the addons scene, it will change it for all games.
-With our duplicated Resources.tscn and reusing the base script Resources.cs we can add new packs and assets key / values in our game.">
-<meta itemprop=name content="BasicGame - Resources from packs">
+ Resource Packs  By default the collection includes the export packs in the previous section. pingod.gfx.pck and pingod.snd.pck
+You can add with the scene inspector or directly in the tscn file it saves to.
+ Resources (Key, Path)  Add resources that will be pre loaded in this dictionary by key , path.">
+<meta itemprop=name content="BasicGame - Adding Resources and Resource packs">
 <meta itemprop=description content="In the PinGodGame.tscn is a ResourcePreloader node.
 When this is loaded with the scene it looks for the packs you have set in the Resource Packs.
-This scene was duplicated from addons\PinGodGame\Scenes\Resources.tscn.
-We need to have this copy in our project, otherwise if we are directly using the addons scene, it will change it for all games.
-With our duplicated Resources.tscn and reusing the base script Resources.cs we can add new packs and assets key / values in our game."><meta itemprop=datePublished content="2022-12-26T15:26:15+00:00">
+ Resource Packs  By default the collection includes the export packs in the previous section. pingod.gfx.pck and pingod.snd.pck
+You can add with the scene inspector or directly in the tscn file it saves to.
+ Resources (Key, Path)  Add resources that will be pre loaded in this dictionary by key , path."><meta itemprop=datePublished content="2022-12-26T15:26:15+00:00">
 <meta itemprop=dateModified content="2022-10-26T15:26:15+00:00">
-<meta itemprop=wordCount content="204"><meta itemprop=image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
+<meta itemprop=wordCount content="86"><meta itemprop=image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
 <meta itemprop=keywords content></head>
 <body><div class=container><header>
 <h1>PinGod AddOns</h1><span class=version>Version 4.3.0</span><a href=https://github.com/FlippingFlips/pingod-addons class=github><i class="fab fa-github"></i></a>
@@ -54,13 +54,10 @@ With our duplicated Resources.tscn and reusing the base script Resources.cs we c
 </nav>
 </div>
 <div class=content-container>
-<main><h1>BasicGame - Resources from packs</h1>
+<main><h1>BasicGame - Adding Resources and Resource packs</h1>
 <p>In the <code>PinGodGame.tscn</code> is a <code>ResourcePreloader</code> node.</p>
 <p>When this is loaded with the scene it looks for the packs you have set in the <code>Resource Packs</code>.</p>
 <p><img src=../../images/pingodgame-resources-tree.jpg alt=image></p>
-<p>This scene was duplicated from <code>addons\PinGodGame\Scenes\Resources.tscn</code>.</p>
-<p>We need to have this copy in our project, otherwise if we are directly using the <code>addons</code> scene, it will change it for all games.</p>
-<p>With our duplicated <code>Resources.tscn</code> and reusing the base script <code>Resources.cs</code> we can add new packs and assets key / values in our game.</p>
 <hr>
 <h3 id=resource-packs>Resource Packs</h3>
 <hr>
@@ -73,58 +70,12 @@ With our duplicated Resources.tscn and reusing the base script Resources.cs we c
 <p>Add resources that will be pre loaded in this dictionary by key , path.</p>
 <p>Key: <code>nameForScript</code> , Value <code>res://assets/yourasset.ogv</code>.</p>
 <p>Key: <code>nameForScript2</code> , Value <code>res://myotherassets/asset.tscn</code>.</p>
-<hr>
-<h3 id=export-presets>Export Presets</h3>
-<hr>
-<p>Create export presets by duplicating a section, changing the preset number.</p>
-<p>Change the pack names, export_paths, folders to exclude or just include</p>
-<pre tabindex=0><code>[preset.0]
-
-name=&quot;GfxPack&quot;
-platform=&quot;Windows Desktop&quot;
-runnable=false
-custom_features=&quot;&quot;
-export_filter=&quot;all_resources&quot;
-include_filter=&quot;&quot;
-exclude_filter=&quot;assets/audio/*&quot;
-export_path=&quot;../Build/pingod.gfx.pck&quot;
-script_export_mode=1
-script_encryption_key=&quot;&quot;
-
-[preset.0.options]
-
-custom_template/debug=&quot;&quot;
-custom_template/release=&quot;&quot;
-binary_format/64_bits=false
-binary_format/embed_pck=false
-texture_format/bptc=false
-texture_format/s3tc=true
-texture_format/etc=false
-texture_format/etc2=false
-texture_format/no_bptc_fallbacks=true
-codesign/enable=false
-codesign/identity_type=0
-codesign/identity=&quot;&quot;
-codesign/password=&quot;&quot;
-codesign/timestamp=true
-codesign/timestamp_server_url=&quot;&quot;
-codesign/digest_algorithm=1
-codesign/description=&quot;&quot;
-codesign/custom_options=PoolStringArray(  )
-application/icon=&quot;&quot;
-application/file_version=&quot;&quot;
-application/product_version=&quot;&quot;
-application/company_name=&quot;&quot;
-application/product_name=&quot;&quot;
-application/file_description=&quot;&quot;
-application/copyright=&quot;&quot;
-application/trademarks=&quot;&quot;
-</code></pre><div class=edit-meta>
+<div class=edit-meta>
 Last updated on 26 Oct 2022
 <br>
 Published on 26 Dec 2022
-<br><a href=https://github.com/FlippingFlips/pingod-addons/edit/main/docs/content/getting-started/basicgame-game-resources.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-assets-and-packs/ title="BasicGame - Assets and Packs"><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - BasicGame - Assets and Packs</a>
-<a class="nav nav-next" href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-script-editing/ title="BasicGame - Script Editing Setup">Next - BasicGame - Script Editing Setup <i class="fas fa-arrow-right" aria-hidden=true></i></a>
+<br><a href=https://github.com/FlippingFlips/pingod-addons/edit/main/docs/content/getting-started/basicgame-game-resources.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-exporting/ title="BasicGame - Exporting"><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - BasicGame - Exporting</a>
+<a class="nav nav-next" href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-assets-and-packs/ title="BasicGame - Assets and Pcks">Next - BasicGame - Assets and Pcks <i class="fas fa-arrow-right" aria-hidden=true></i></a>
 </nav><footer><p class=powered>Powered by <a href=https://gohugo.io>Hugo</a>. Theme by <a href=https://themes.gohugo.io/hugo-theme-techdoc/>TechDoc</a>. Designed by <a href=https://github.com/thingsym/hugo-theme-techdoc>Thingsym</a>.</p>
 </footer>
 </main>
@@ -140,13 +91,16 @@ Published on 26 Dec 2022
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-setup-addons/>BasicGame - Linking addons</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-project/>BasicGame - Project.Godot</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-godot/>BasicGame - Godot Project Loaded Run Game</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-window/>BasicGame - Window</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-window/>BasicGame - Window Settings</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/logging/>Logging Games</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/game-save-data/>User Game setting / data</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game/>BasicGame - Game</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-vp/>BasicGame - Visual Pinball</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-vp-script/>BasicGame - Visual Pinball Script</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-exporting/>BasicGame - Exporting</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-assets-and-packs/>BasicGame - Assets and Packs</a></li>
-<li class=active><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-resources/>BasicGame - Resources from packs</a></li>
+<li class=active><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-resources/>BasicGame - Adding Resources and Resource packs</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-assets-and-packs/>BasicGame - Assets and Pcks</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-create-asset-scene/>BasicGame - Create first asset scene</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-script-editing/>BasicGame - Script Editing Setup</a></li>
 </ul>
 </li>
@@ -158,7 +112,6 @@ Published on 26 Dec 2022
 <li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/audiomanager/>AudioManager</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/devoverlays/>Overlays (Developing)</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/pingodgame.cs/>PinGodGame.cs - Script</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/logging/>Logging Games</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/recordings-playback/>Recording / Playback</a></li>
 </ul>
 </li>
@@ -210,7 +163,11 @@ Published on 26 Dec 2022
 <li class=has-sub-menu><a href=https://FlippingFlips.github.io/pingod-addons/exporting/>Exporting / Publishing<span class="mark closed">+</span></a>
 <ul class=sub-menu>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/exports/>Exporting</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/export-settings/>Export Settings - Godot</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/export-settings-export-presets.cfg/>Export - export_presets.cfg</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/export-windows-icon/>Export Windows Icons</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/csharp-large-exports/>C# Pcks Are Large...</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/link-separate-assets-project/>Link assets into separate assets project</a></li>
 </ul>
 </li>
 </ul>

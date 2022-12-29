@@ -2,11 +2,11 @@
 <head><meta charset=utf-8>
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Logging Games - PinGod AddOns</title>
+<title>Export Settings - Godot - PinGod AddOns</title>
 <meta name=description content="Source">
 <meta name=generator content="Hugo 0.91.2">
 <link href=https://FlippingFlips.github.io/pingod-addons/index.xml rel=alternate type=application/rss+xml>
-<link rel=canonical href=https://FlippingFlips.github.io/pingod-addons/pingodgame/logging/>
+<link rel=canonical href=https://FlippingFlips.github.io/pingod-addons/exporting/export-settings/>
 <link rel=stylesheet href=https://FlippingFlips.github.io/pingod-addons/css/theme.min.css>
 <link rel=stylesheet href=https://FlippingFlips.github.io/pingod-addons/css/chroma.min.css>
 <script defer src=https://FlippingFlips.github.io/pingod-addons/js/fontawesome6/all.min.js></script>
@@ -14,32 +14,35 @@
 <script src=https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin=anonymous></script>
 <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin=anonymous></script>
 <script src=https://FlippingFlips.github.io/pingod-addons/js/bundle.js></script><style>:root{--custom-font-color:#FFFFFF;--custom-background-color:#003300}</style>
-<link rel=stylesheet href=https://FlippingFlips.github.io/pingod-addons/css/pingod.css><meta property="og:title" content="Logging Games">
-<meta property="og:description" content="Game logging
-Class Reference
- void LogDebug(params object[] what); void LogInfo(params object[] what); void LogWarning(string message = null, params object[] what); void LogError(string message = null, params object[] what); PinGodLogLevel LogLevel { get; } For example:
-pinGod.LogInfo(&#34;my message&#34;);
-Log location In the game name appdata directory. Use the open_app_data.bat to open directory instead of looking for it.">
+<link rel=stylesheet href=https://FlippingFlips.github.io/pingod-addons/css/pingod.css><meta property="og:title" content="Export Settings - Godot">
+<meta property="og:description" content="The BasicGame project below shows that the first project is Windows Desktop Runnable and is exporting to ..Build/PinGod.BasicGame.exe
+This window can be found in Godot Project > Export.
+Export option &ldquo;embed pck&rdquo; does not work on 32-bit x86 GodotIssues
+- Feb 2020
+&nbsp;Godot Naming The names here have to be consistent which each other. The exe and the pack.
+  The BasicGame project for Windows Desktop Pack shows that it&rsquo;s exporting to .">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://FlippingFlips.github.io/pingod-addons/pingodgame/logging/"><meta property="og:image" content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png"><meta property="article:section" content="pingodgame">
+<meta property="og:url" content="https://FlippingFlips.github.io/pingod-addons/exporting/export-settings/"><meta property="og:image" content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png"><meta property="article:section" content="exporting">
 <meta property="article:published_time" content="2022-12-26T15:26:15+00:00">
 <meta property="article:modified_time" content="2022-12-26T15:26:15+00:00"><meta property="og:site_name" content="Hugo Techdoc Theme">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
-<meta name=twitter:title content="Logging Games">
-<meta name=twitter:description content="Game logging
-Class Reference
- void LogDebug(params object[] what); void LogInfo(params object[] what); void LogWarning(string message = null, params object[] what); void LogError(string message = null, params object[] what); PinGodLogLevel LogLevel { get; } For example:
-pinGod.LogInfo(&#34;my message&#34;);
-Log location In the game name appdata directory. Use the open_app_data.bat to open directory instead of looking for it.">
-<meta itemprop=name content="Logging Games">
-<meta itemprop=description content="Game logging
-Class Reference
- void LogDebug(params object[] what); void LogInfo(params object[] what); void LogWarning(string message = null, params object[] what); void LogError(string message = null, params object[] what); PinGodLogLevel LogLevel { get; } For example:
-pinGod.LogInfo(&#34;my message&#34;);
-Log location In the game name appdata directory. Use the open_app_data.bat to open directory instead of looking for it."><meta itemprop=datePublished content="2022-12-26T15:26:15+00:00">
+<meta name=twitter:title content="Export Settings - Godot">
+<meta name=twitter:description content="The BasicGame project below shows that the first project is Windows Desktop Runnable and is exporting to ..Build/PinGod.BasicGame.exe
+This window can be found in Godot Project > Export.
+Export option &ldquo;embed pck&rdquo; does not work on 32-bit x86 GodotIssues
+- Feb 2020
+&nbsp;Godot Naming The names here have to be consistent which each other. The exe and the pack.
+  The BasicGame project for Windows Desktop Pack shows that it&rsquo;s exporting to .">
+<meta itemprop=name content="Export Settings - Godot">
+<meta itemprop=description content="The BasicGame project below shows that the first project is Windows Desktop Runnable and is exporting to ..Build/PinGod.BasicGame.exe
+This window can be found in Godot Project > Export.
+Export option &ldquo;embed pck&rdquo; does not work on 32-bit x86 GodotIssues
+- Feb 2020
+&nbsp;Godot Naming The names here have to be consistent which each other. The exe and the pack.
+  The BasicGame project for Windows Desktop Pack shows that it&rsquo;s exporting to ."><meta itemprop=datePublished content="2022-12-26T15:26:15+00:00">
 <meta itemprop=dateModified content="2022-12-26T15:26:15+00:00">
-<meta itemprop=wordCount content="56"><meta itemprop=image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
+<meta itemprop=wordCount content="123"><meta itemprop=image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
 <meta itemprop=keywords content></head>
 <body><div class=container><header>
 <h1>PinGod AddOns</h1><span class=version>Version 4.3.0</span><a href=https://github.com/FlippingFlips/pingod-addons class=github><i class="fab fa-github"></i></a>
@@ -54,29 +57,32 @@ Log location In the game name appdata directory. Use the open_app_data.bat to op
 </nav>
 </div>
 <div class=content-container>
-<main><h1>Logging Games</h1>
-<p>Game logging</p>
-<p><a href=/pingod-addons/html/interfaceIPinballLogger.html>Class Reference</a></p>
-<pre tabindex=0><code>
-void LogDebug(params object[] what);
-
-void LogInfo(params object[] what);
-	
-void LogWarning(string message = null, params object[] what);
-
-void LogError(string message = null, params object[] what);
-
-PinGodLogLevel LogLevel { get; }
-</code></pre><p>For example:</p>
-<p><code>pinGod.LogInfo("my message");</code></p>
-<h2 id=log-location>Log location</h2>
-<p>In the game name appdata directory. Use the <code>open_app_data.bat</code> to open directory instead of looking for it.</p>
+<main><h1>Export Settings - Godot</h1>
+<p>The BasicGame project below shows that the first project is <code>Windows Desktop Runnable</code> and is exporting to <code>..Build/PinGod.BasicGame.exe</code></p>
+<p>This window can be found in Godot <code>Project > Export</code>.</p>
+<p>Export option &ldquo;embed pck&rdquo; does not work on 32-bit x86 <a href=https://github.com/godotengine/godot/issues/35830>GodotIssues</a></p>
+<p><img src=../../images/basicgame-project-export-exe.jpg alt=image> - Feb 2020</p>
+<div class="panel panel-danger"><div class=panel-header>
+<h3><i class="far fa-lightbulb"></i>&nbsp;Godot Naming</h3>
+</div><div class=panel-body>
+<p>The names here have to be consistent which each other. The exe and the pack.</p>
+</div>
+</div>
+<p>The BasicGame project for <code>Windows Desktop Pack</code> shows that it&rsquo;s exporting to <code>..Build/PinGod.BasicGame.pck</code></p>
+<p><img src=../../images/basicgame-project-export-pck.jpg alt=image></p>
+<hr>
+<h2 id=excluding-assets>Excluding Assets</h2>
+<hr>
+<p>Added this exclude filter on the Runnable and the Desktop Pack to not add any files in <code>assets/*</code>.</p>
+<p><img src=../../images/basicgame-project-export-assets.jpg alt=image></p>
+<p>This asset folder is usable in the <code>BasicGameGodot</code> game directly but as the directory is excluded here for exporting from then we can build an asset pack from another project.</p>
+<p>See</p>
 <div class=edit-meta>
 Last updated on 26 Dec 2022
 <br>
 Published on 26 Dec 2022
-<br><a href=https://github.com/FlippingFlips/pingod-addons/edit/main/docs/content/pingodgame/logging.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://FlippingFlips.github.io/pingod-addons/pingodgame/pingodgame.cs/ title="PinGodGame.cs - Script"><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - PinGodGame.cs - Script</a>
-<a class="nav nav-next" href=https://FlippingFlips.github.io/pingod-addons/pingodgame/recordings-playback/ title="Recording / Playback">Next - Recording / Playback <i class="fas fa-arrow-right" aria-hidden=true></i></a>
+<br><a href=https://github.com/FlippingFlips/pingod-addons/edit/main/docs/content/exporting/export-settings.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://FlippingFlips.github.io/pingod-addons/exporting/exports/ title=Exporting><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - Exporting</a>
+<a class="nav nav-next" href=https://FlippingFlips.github.io/pingod-addons/exporting/export-settings-export-presets.cfg/ title="Export - export_presets.cfg">Next - Export - export_presets.cfg <i class="fas fa-arrow-right" aria-hidden=true></i></a>
 </nav><footer><p class=powered>Powered by <a href=https://gohugo.io>Hugo</a>. Theme by <a href=https://themes.gohugo.io/hugo-theme-techdoc/>TechDoc</a>. Designed by <a href=https://github.com/thingsym/hugo-theme-techdoc>Thingsym</a>.</p>
 </footer>
 </main>
@@ -92,17 +98,20 @@ Published on 26 Dec 2022
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-setup-addons/>BasicGame - Linking addons</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-project/>BasicGame - Project.Godot</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-godot/>BasicGame - Godot Project Loaded Run Game</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-window/>BasicGame - Window</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-window/>BasicGame - Window Settings</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/logging/>Logging Games</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/game-save-data/>User Game setting / data</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game/>BasicGame - Game</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-vp/>BasicGame - Visual Pinball</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-vp-script/>BasicGame - Visual Pinball Script</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-exporting/>BasicGame - Exporting</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-assets-and-packs/>BasicGame - Assets and Packs</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-resources/>BasicGame - Resources from packs</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-resources/>BasicGame - Adding Resources and Resource packs</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-assets-and-packs/>BasicGame - Assets and Pcks</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-create-asset-scene/>BasicGame - Create first asset scene</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-script-editing/>BasicGame - Script Editing Setup</a></li>
 </ul>
 </li>
-<li class="parent has-sub-menu"><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/>PinGodGame<span class="mark opened">-</span></a>
+<li class=has-sub-menu><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/>PinGodGame<span class="mark closed">+</span></a>
 <ul class=sub-menu>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/pingodgame.tscn/>PinGodGame.tscn - Scene</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/items/>MachineConfig (Items)</a></li>
@@ -110,7 +119,6 @@ Published on 26 Dec 2022
 <li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/audiomanager/>AudioManager</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/devoverlays/>Overlays (Developing)</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/pingodgame.cs/>PinGodGame.cs - Script</a></li>
-<li class=active><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/logging/>Logging Games</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/recordings-playback/>Recording / Playback</a></li>
 </ul>
 </li>
@@ -159,10 +167,14 @@ Published on 26 Dec 2022
 <li><a href=https://FlippingFlips.github.io/pingod-addons/languages/attractscene/>Language files</a></li>
 </ul>
 </li>
-<li class=has-sub-menu><a href=https://FlippingFlips.github.io/pingod-addons/exporting/>Exporting / Publishing<span class="mark closed">+</span></a>
+<li class="parent has-sub-menu"><a href=https://FlippingFlips.github.io/pingod-addons/exporting/>Exporting / Publishing<span class="mark opened">-</span></a>
 <ul class=sub-menu>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/exports/>Exporting</a></li>
+<li class=active><a href=https://FlippingFlips.github.io/pingod-addons/exporting/export-settings/>Export Settings - Godot</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/export-settings-export-presets.cfg/>Export - export_presets.cfg</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/export-windows-icon/>Export Windows Icons</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/csharp-large-exports/>C# Pcks Are Large...</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/link-separate-assets-project/>Link assets into separate assets project</a></li>
 </ul>
 </li>
 </ul>

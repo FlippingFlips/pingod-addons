@@ -18,7 +18,7 @@
 <meta property="og:description" content="This doesn&rsquo;t apply if you decide to have a single executable and pck, so you can skip this
   When a project uses mono C# it includes mono assembilies which are around 29mb.
 If you try to export the assets only from this project, then you will always have the c# files.
- Link the assets into BasicGamePck  One method is to use the BasicGamePck/project.godot project. This project is empty, no scenes or scripts.">
+One workaround method is to use the BasicGamePck/project.godot project. This project is empty, no scenes or C# scripts.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://FlippingFlips.github.io/pingod-addons/exporting/csharp-large-exports/"><meta property="og:image" content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png"><meta property="article:section" content="exporting">
 <meta property="article:published_time" content="2022-12-26T15:26:15+00:00">
@@ -29,14 +29,14 @@ If you try to export the assets only from this project, then you will always hav
 <meta name=twitter:description content="This doesn&rsquo;t apply if you decide to have a single executable and pck, so you can skip this
   When a project uses mono C# it includes mono assembilies which are around 29mb.
 If you try to export the assets only from this project, then you will always have the c# files.
- Link the assets into BasicGamePck  One method is to use the BasicGamePck/project.godot project. This project is empty, no scenes or scripts.">
+One workaround method is to use the BasicGamePck/project.godot project. This project is empty, no scenes or C# scripts.">
 <meta itemprop=name content="C# Pcks Are Large...">
 <meta itemprop=description content="This doesn&rsquo;t apply if you decide to have a single executable and pck, so you can skip this
   When a project uses mono C# it includes mono assembilies which are around 29mb.
 If you try to export the assets only from this project, then you will always have the c# files.
- Link the assets into BasicGamePck  One method is to use the BasicGamePck/project.godot project. This project is empty, no scenes or scripts."><meta itemprop=datePublished content="2022-12-26T15:26:15+00:00">
+One workaround method is to use the BasicGamePck/project.godot project. This project is empty, no scenes or C# scripts."><meta itemprop=datePublished content="2022-12-26T15:26:15+00:00">
 <meta itemprop=dateModified content="2022-12-26T15:26:15+00:00">
-<meta itemprop=wordCount content="167"><meta itemprop=image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
+<meta itemprop=wordCount content="71"><meta itemprop=image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
 <meta itemprop=keywords content></head>
 <body><div class=container><header>
 <h1>PinGod AddOns</h1><span class=version>Version 4.3.0</span><a href=https://github.com/FlippingFlips/pingod-addons class=github><i class="fab fa-github"></i></a>
@@ -59,34 +59,14 @@ If you try to export the assets only from this project, then you will always hav
 <p>When a project uses mono C# it includes mono assembilies which are around 29mb.</p>
 <p>If you try to export the assets only from this project, then you will always have the c# files.</p>
 <p><img src=../../images/basicgame-exported-pck-test.jpg alt=image></p>
-<hr>
-<h1 id=link-the-assets-into-basicgamepck>Link the assets into BasicGamePck</h1>
-<hr>
-<p>One method is to use the <code>BasicGamePck/project.godot</code> project. This project is empty, no scenes or scripts.</p>
-<p>We can reuse the assets and .imports directories from <code>BasicGameGodot</code> with the <code>BasicGamePck</code> project, by linking again.</p>
-<p>Then use the <code>BasicGamePck</code> project just for exporting assets, scenes, no C#, with very small outputs</p>
-<p>This allows us to use the <code>BasicGameGodot</code> <code>project.godot</code> and skip assets or whatever it is exporting.</p>
-<hr>
-<h2 id=link-directories>Link Directories</h2>
-<hr>
-<p>Remove the assets directory if there is one in <code>BasicGamePck</code></p>
-<ol>
-<li>
-<p>Symbolic link the <code>BasicGameGodot\assets</code> directory into the <code>BasicGamePck</code> directory.</p>
-</li>
-<li>
-<p>Symbolic link the <code>BasicGameGodot\.import</code> directory into the <code>BasicGamePck</code> directory.</p>
-</li>
-<li>
-<p>When we link the <code>.import</code>, <code>.assets</code> here we should be on par with the <code>BasicGameGodot</code> project.</p>
-</li>
-</ol>
+<p>One workaround method is to use the <code>BasicGamePck/project.godot</code> project. This project is empty, no scenes or C# scripts.</p>
+<p><a href=./link-separate-assets-project>Linking assets</a></p>
 <div class=edit-meta>
 Last updated on 26 Dec 2022
 <br>
 Published on 26 Dec 2022
-<br><a href=https://github.com/FlippingFlips/pingod-addons/edit/main/docs/content/exporting/csharp-large-exports.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://FlippingFlips.github.io/pingod-addons/exporting/exports/ title=Exporting><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - Exporting</a>
-<a class="nav nav-next" href=https://FlippingFlips.github.io/pingod-addons/exporting/exports/ title=Exporting>Next - Exporting <i class="fas fa-arrow-right" aria-hidden=true></i></a>
+<br><a href=https://github.com/FlippingFlips/pingod-addons/edit/main/docs/content/exporting/csharp-large-exports.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://FlippingFlips.github.io/pingod-addons/exporting/export-windows-icon/ title="Export Windows Icons"><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - Export Windows Icons</a>
+<a class="nav nav-next" href=https://FlippingFlips.github.io/pingod-addons/exporting/link-separate-assets-project/ title="Link assets into separate assets project">Next - Link assets into separate assets project <i class="fas fa-arrow-right" aria-hidden=true></i></a>
 </nav><footer><p class=powered>Powered by <a href=https://gohugo.io>Hugo</a>. Theme by <a href=https://themes.gohugo.io/hugo-theme-techdoc/>TechDoc</a>. Designed by <a href=https://github.com/thingsym/hugo-theme-techdoc>Thingsym</a>.</p>
 </footer>
 </main>
@@ -102,13 +82,16 @@ Published on 26 Dec 2022
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-setup-addons/>BasicGame - Linking addons</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-project/>BasicGame - Project.Godot</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-godot/>BasicGame - Godot Project Loaded Run Game</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-window/>BasicGame - Window</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-window/>BasicGame - Window Settings</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/logging/>Logging Games</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/game-save-data/>User Game setting / data</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game/>BasicGame - Game</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-vp/>BasicGame - Visual Pinball</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-vp-script/>BasicGame - Visual Pinball Script</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-exporting/>BasicGame - Exporting</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-assets-and-packs/>BasicGame - Assets and Packs</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-resources/>BasicGame - Resources from packs</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-resources/>BasicGame - Adding Resources and Resource packs</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-assets-and-packs/>BasicGame - Assets and Pcks</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-create-asset-scene/>BasicGame - Create first asset scene</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-script-editing/>BasicGame - Script Editing Setup</a></li>
 </ul>
 </li>
@@ -120,7 +103,6 @@ Published on 26 Dec 2022
 <li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/audiomanager/>AudioManager</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/devoverlays/>Overlays (Developing)</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/pingodgame.cs/>PinGodGame.cs - Script</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/logging/>Logging Games</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/recordings-playback/>Recording / Playback</a></li>
 </ul>
 </li>
@@ -172,7 +154,11 @@ Published on 26 Dec 2022
 <li class="parent has-sub-menu"><a href=https://FlippingFlips.github.io/pingod-addons/exporting/>Exporting / Publishing<span class="mark opened">-</span></a>
 <ul class=sub-menu>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/exports/>Exporting</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/export-settings/>Export Settings - Godot</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/export-settings-export-presets.cfg/>Export - export_presets.cfg</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/export-windows-icon/>Export Windows Icons</a></li>
 <li class=active><a href=https://FlippingFlips.github.io/pingod-addons/exporting/csharp-large-exports/>C# Pcks Are Large...</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/link-separate-assets-project/>Link assets into separate assets project</a></li>
 </ul>
 </li>
 </ul>

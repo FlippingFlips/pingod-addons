@@ -2,7 +2,7 @@
 <head><meta charset=utf-8>
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>BasicGame - Assets and Packs - PinGod AddOns</title>
+<title>BasicGame - Assets and Pcks - PinGod AddOns</title>
 <meta name=description content="Source">
 <meta name=generator content="Hugo 0.91.2">
 <link href=https://FlippingFlips.github.io/pingod-addons/index.xml rel=alternate type=application/rss+xml>
@@ -14,20 +14,29 @@
 <script src=https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin=anonymous></script>
 <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin=anonymous></script>
 <script src=https://FlippingFlips.github.io/pingod-addons/js/bundle.js></script><style>:root{--custom-font-color:#FFFFFF;--custom-background-color:#003300}</style>
-<link rel=stylesheet href=https://FlippingFlips.github.io/pingod-addons/css/pingod.css><meta property="og:title" content="BasicGame - Assets and Packs">
-<meta property="og:description" content="The BasicGamePck directory is an extra exporter for asset packs, doing it this way means we can keep assets from the game packs separated. One example is that if the assets never change then you don&rsquo;t need to update those files. You may also want to make a base asset pack to copy and load across multiple games. You are not limited to media, it could be a scene with assets included.">
+<link rel=stylesheet href=https://FlippingFlips.github.io/pingod-addons/css/pingod.css><meta property="og:title" content="BasicGame - Assets and Pcks">
+<meta property="og:description" content="The BasicGamePck directory is an extra project for exporting asset packs. Using this project means we can keep assets from the game separated.
+You may also want to make a base asset pack to copy and load across multiple games.
+You are not limited to media, it could be a scene with assets included.
+ There is an empty folder structure in game which you can add your assets into, then you can run the _build bat files to export a .">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-assets-and-packs/"><meta property="og:image" content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png"><meta property="article:section" content="getting-started">
 <meta property="article:published_time" content="2022-12-26T15:26:15+00:00">
 <meta property="article:modified_time" content="2022-10-26T15:26:15+00:00"><meta property="og:site_name" content="Hugo Techdoc Theme">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
-<meta name=twitter:title content="BasicGame - Assets and Packs">
-<meta name=twitter:description content="The BasicGamePck directory is an extra exporter for asset packs, doing it this way means we can keep assets from the game packs separated. One example is that if the assets never change then you don&rsquo;t need to update those files. You may also want to make a base asset pack to copy and load across multiple games. You are not limited to media, it could be a scene with assets included.">
-<meta itemprop=name content="BasicGame - Assets and Packs">
-<meta itemprop=description content="The BasicGamePck directory is an extra exporter for asset packs, doing it this way means we can keep assets from the game packs separated. One example is that if the assets never change then you don&rsquo;t need to update those files. You may also want to make a base asset pack to copy and load across multiple games. You are not limited to media, it could be a scene with assets included."><meta itemprop=datePublished content="2022-12-26T15:26:15+00:00">
+<meta name=twitter:title content="BasicGame - Assets and Pcks">
+<meta name=twitter:description content="The BasicGamePck directory is an extra project for exporting asset packs. Using this project means we can keep assets from the game separated.
+You may also want to make a base asset pack to copy and load across multiple games.
+You are not limited to media, it could be a scene with assets included.
+ There is an empty folder structure in game which you can add your assets into, then you can run the _build bat files to export a .">
+<meta itemprop=name content="BasicGame - Assets and Pcks">
+<meta itemprop=description content="The BasicGamePck directory is an extra project for exporting asset packs. Using this project means we can keep assets from the game separated.
+You may also want to make a base asset pack to copy and load across multiple games.
+You are not limited to media, it could be a scene with assets included.
+ There is an empty folder structure in game which you can add your assets into, then you can run the _build bat files to export a ."><meta itemprop=datePublished content="2022-12-26T15:26:15+00:00">
 <meta itemprop=dateModified content="2022-10-26T15:26:15+00:00">
-<meta itemprop=wordCount content="170"><meta itemprop=image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
+<meta itemprop=wordCount content="119"><meta itemprop=image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
 <meta itemprop=keywords content></head>
 <body><div class=container><header>
 <h1>PinGod AddOns</h1><span class=version>Version 4.3.0</span><a href=https://github.com/FlippingFlips/pingod-addons class=github><i class="fab fa-github"></i></a>
@@ -42,35 +51,20 @@
 </nav>
 </div>
 <div class=content-container>
-<main><h1>BasicGame - Assets and Packs</h1>
-<p>The <code>BasicGamePck</code> directory is an extra exporter for asset packs, doing it this way means we can keep assets from the game packs separated. One example is that if the assets never change then you don&rsquo;t need to update those files. You may also want to make a base asset pack to copy and load across multiple games. You are not limited to media, it could be a scene with assets included.</p>
-<p>There is an empty folder structure where you can add your assets into, then you can run the <code>_build</code> bat files to export a <code>.pck</code> file for gfx and audio.</p>
-<p>For in game scripts and scenes your assets will keep the same file structure, so to reach one of your assets the path would be <code>"res://assets/img/myimage.png</code>.</p>
+<main><h1>BasicGame - Assets and Pcks</h1>
+<p>The <code>BasicGamePck</code> directory is an extra project for exporting asset packs. Using this project means we can keep assets from the game separated.</p>
+<p>You may also want to make a base asset pack to copy and load across multiple games.</p>
+<p>You are not limited to media, it could be a scene with assets included.</p>
 <hr>
-<h2 id=add-a-new-asset>Add a new asset</h2>
-<hr>
-<ol>
-<li>Duplicate the image from <code>BasicGamePck\assets\img\pingod-logo-test.png</code> and rename it to <code>my-image-asset.png</code> or find your own.</li>
-</ol>
-<p><img src=../../images/basicgame-add-asset.jpg alt=image></p>
-<ol start=2>
-<li>
-<p>In <code>BasicGamePck</code> run the export with <code>_build_gfx.bat</code>.</p>
-</li>
-<li>
-<p>In <code>BasicGamePck</code> run the export with <code>_build_sfx.bat</code>.</p>
-</li>
-<li>
-<p>Check the build folder for your exports. <code>pingod.gfx.pck</code> and <code>pingod.snd.pck</code></p>
-</li>
-</ol>
-<p><img src=../../images/basicgame-add-asset-packs.jpg alt=image></p>
+<p>There is an empty folder structure in game which you can add your assets into, then you can run the <code>_build</code> bat files to export a <code>.pck</code> file for gfx and audio.</p>
+<p>See <a href=../exporting/link-separate-assets-project/>Link separate assets project</a> on how to make from linking.</p>
+<p>Your assets will keep the same file structure, so to reach one of your assets in script the path would be <code>"res://assets/img/myimage.png</code>.</p>
 <div class=edit-meta>
 Last updated on 26 Oct 2022
 <br>
 Published on 26 Dec 2022
-<br><a href=https://github.com/FlippingFlips/pingod-addons/edit/main/docs/content/getting-started/basicgame-game-assets-and-packs.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-exporting/ title="BasicGame - Exporting"><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - BasicGame - Exporting</a>
-<a class="nav nav-next" href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-resources/ title="BasicGame - Resources from packs">Next - BasicGame - Resources from packs <i class="fas fa-arrow-right" aria-hidden=true></i></a>
+<br><a href=https://github.com/FlippingFlips/pingod-addons/edit/main/docs/content/getting-started/basicgame-game-assets-and-packs.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-resources/ title="BasicGame - Adding Resources and Resource packs"><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - BasicGame - Adding Resources and Resource packs</a>
+<a class="nav nav-next" href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-create-asset-scene/ title="BasicGame - Create first asset scene">Next - BasicGame - Create first asset scene <i class="fas fa-arrow-right" aria-hidden=true></i></a>
 </nav><footer><p class=powered>Powered by <a href=https://gohugo.io>Hugo</a>. Theme by <a href=https://themes.gohugo.io/hugo-theme-techdoc/>TechDoc</a>. Designed by <a href=https://github.com/thingsym/hugo-theme-techdoc>Thingsym</a>.</p>
 </footer>
 </main>
@@ -86,13 +80,16 @@ Published on 26 Dec 2022
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-setup-addons/>BasicGame - Linking addons</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-project/>BasicGame - Project.Godot</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-godot/>BasicGame - Godot Project Loaded Run Game</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-window/>BasicGame - Window</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-window/>BasicGame - Window Settings</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/logging/>Logging Games</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/game-save-data/>User Game setting / data</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game/>BasicGame - Game</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-vp/>BasicGame - Visual Pinball</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-vp-script/>BasicGame - Visual Pinball Script</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-exporting/>BasicGame - Exporting</a></li>
-<li class=active><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-assets-and-packs/>BasicGame - Assets and Packs</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-resources/>BasicGame - Resources from packs</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-resources/>BasicGame - Adding Resources and Resource packs</a></li>
+<li class=active><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-assets-and-packs/>BasicGame - Assets and Pcks</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-create-asset-scene/>BasicGame - Create first asset scene</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-script-editing/>BasicGame - Script Editing Setup</a></li>
 </ul>
 </li>
@@ -104,7 +101,6 @@ Published on 26 Dec 2022
 <li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/audiomanager/>AudioManager</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/devoverlays/>Overlays (Developing)</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/pingodgame.cs/>PinGodGame.cs - Script</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/logging/>Logging Games</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/recordings-playback/>Recording / Playback</a></li>
 </ul>
 </li>
@@ -156,7 +152,11 @@ Published on 26 Dec 2022
 <li class=has-sub-menu><a href=https://FlippingFlips.github.io/pingod-addons/exporting/>Exporting / Publishing<span class="mark closed">+</span></a>
 <ul class=sub-menu>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/exports/>Exporting</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/export-settings/>Export Settings - Godot</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/export-settings-export-presets.cfg/>Export - export_presets.cfg</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/export-windows-icon/>Export Windows Icons</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/csharp-large-exports/>C# Pcks Are Large...</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/link-separate-assets-project/>Link assets into separate assets project</a></li>
 </ul>
 </li>
 </ul>
