@@ -29,7 +29,7 @@
         /// <summary>
         /// window height
         /// </summary>
-        public const string HEIGHT = "display/window/size/width";
+        public const string HEIGHT = "display/window/size/height";
 
         public const string TEST_WIDTH = "display/window/size/test_width";
 
