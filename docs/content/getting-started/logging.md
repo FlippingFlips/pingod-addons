@@ -9,10 +9,22 @@ weight: 25
 ## Log location
 ---
 
-In the appdata directory under the game name under logs `.log` are created. Use the `open_app_data.bat` to open directory to open the data directory.
+In the appdata directory under the game name, logs `.log` are created. Use the `open_app_data.bat` to open directory to open the data directory.
+
+![image](../../images/basicgame-userdata-sublime.jpg)
+
+The image has the users game directory open with Sublime Text.
+
+The steps to add this directory and save project:
+
+1. Find the games appdata folder with bat file `_godot_appdata_dir.bat`
+2. Copy the path and use `Open Folder` in Sublime and open the user path
+3. Save this as a project in sublime then reopen it later for a quicker way to view logs, look at your settings etc for this game.
+
+You could do similar with a Visual Studio code workspace or something else, this is just one example of getting back to viewing this directory.
 
 ---
-## Usage
+## Script Usage
 ---
 
 Use from a pinGod reference or the static Logger in script
