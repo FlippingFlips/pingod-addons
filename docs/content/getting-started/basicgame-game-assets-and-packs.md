@@ -1,29 +1,22 @@
 ---
-title: "BasicGame - Assets and Packs"
+title: "BasicGame - Assets and Pcks"
 date: 2022-12-26T15:26:15Z
 lastmod: 2022-10-26T15:26:15Z
 draft: false
 weight: 41
 ---
 
-The `BasicGamePck` directory is an extra exporter for asset packs, doing it this way means we can keep assets from the game packs separated. One example is that if the assets never change then you don't need to update those files. You may also want to make a base asset pack to copy and load across multiple games. You are not limited to media, it could be a scene with assets included.
+The `BasicGamePck` directory is an extra project for exporting asset packs. Using this project means we can keep assets from the game separated. 
 
-There is an empty folder structure where you can add your assets into, then you can run the `_build` bat files to export a `.pck` file for gfx and audio.
+You may also want to make a base asset pack to copy and load across multiple games. 
 
-For in game scripts and scenes your assets will keep the same file structure, so to reach one of your assets the path would be `"res://assets/img/myimage.png`.
+You are not limited to media, it could be a scene with assets included.
 
 ---
-## Add a new asset
----
 
-1. Duplicate the image from `BasicGamePck\assets\img\pingod-logo-test.png` and rename it to `my-image-asset.png` or find your own.
+There is an empty folder structure in game which you can add your assets into, then you can run the `_build` bat files to export a `.pck` file for gfx and audio.
 
-![image](../../images/basicgame-add-asset.jpg)
+See [Link separate assets project](../exporting/link-separate-assets-project/) on how to make from linking.
 
-2. In `BasicGamePck` run the export with `_build_gfx.bat`.
+Your assets will keep the same file structure, so to reach one of your assets in script the path would be `"res://assets/img/myimage.png`.
 
-3. In `BasicGamePck` run the export with `_build_sfx.bat`.
-
-4. Check the build folder for your exports. `pingod.gfx.pck` and `pingod.snd.pck`
-
-![image](../../images/basicgame-add-asset-packs.jpg)

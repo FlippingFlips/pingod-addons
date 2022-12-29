@@ -1,0 +1,66 @@
+---
+title: "Export - export_presets.cfg"
+date: 2022-12-26T15:26:15Z
+draft: false
+weight: 45
+---
+
+The file for the previous Godot Export Settings.
+
+Icons, names, exported saves.
+
+---
+### Export Presets
+---
+
+Create export presets by duplicating a section, changing the preset number.
+
+Add or change the pack names by hand here, export_paths, folders to exclude or just include
+
+---
+
+The following example is from the `BasicGamePck` where we are just creating with all resources apart from the audio folder.
+
+```
+[preset.0]
+
+name="GfxPack"
+platform="Windows Desktop"
+runnable=false
+custom_features=""
+export_filter="all_resources"
+include_filter=""
+exclude_filter="assets/audio/*"
+export_path="../Build/pingod.gfx.pck"
+script_export_mode=1
+script_encryption_key=""
+
+[preset.0.options]
+
+custom_template/debug=""
+custom_template/release=""
+binary_format/64_bits=false
+binary_format/embed_pck=false
+texture_format/bptc=false
+texture_format/s3tc=true
+texture_format/etc=false
+texture_format/etc2=false
+texture_format/no_bptc_fallbacks=true
+codesign/enable=false
+codesign/identity_type=0
+codesign/identity=""
+codesign/password=""
+codesign/timestamp=true
+codesign/timestamp_server_url=""
+codesign/digest_algorithm=1
+codesign/description=""
+codesign/custom_options=PoolStringArray(  )
+application/icon=""
+application/file_version=""
+application/product_version=""
+application/company_name=""
+application/product_name=""
+application/file_description=""
+application/copyright=""
+application/trademarks=""
+```

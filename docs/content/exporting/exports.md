@@ -30,38 +30,6 @@ Also See [BasicGame - Simulator Export](../../getting-started/basicgame-game-exp
 - UPX added to environment path to run the bat file.
 
 ---
-### Export Settings
----
-
-The BasicGame project shows that the first project is runnable and is exporting to `..Build/PinGod.BasicGame.exe`
-
-This can be found in `Project > Export`. These settings can also be changed and added to in `export_presets.cfg`
-
-Export option "embed pck" does not work on 32-bit x86 [GodotIssues](https://github.com/godotengine/godot/issues/35830)
-
-![image](../../images/basicgame-project-export-exe.jpg) - Feb 2020
-
-{{% panel status="danger" title="Godot Naming" icon="far fa-lightbulb" %}}
-The names here have to be consistent which each other. The exe and the pack.
-{{% /panel %}}
-
-The BasicGame project for `Windows Desktop Pack` shows that it's exporting to `..Build/PinGod.BasicGame.pck`
-
-![image](../../images/basicgame-project-export-pck.jpg)
-
-See the `export_presets.cfg` file for icons, names, exported saves.
-
-### Changing Windows Executable Icon
-
-- Make icon with all size in one file
-- Download [RCEdit (Github)](https://github.com/electron/rcedit/releases) and add the path in Godots `Editor Settings\RCedit`
-- Change icon in the Godots `Project Settings/Application/Config`
-
-![image](../../images/exports-icons-rcedit.jpg)
-
-See https://docs.godotengine.org/en/3.2/getting_started/workflow/export/changing_application_icon_for_windows.html
-
----
 
 ## Before Exporting Checklists
 

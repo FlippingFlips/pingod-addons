@@ -17,26 +17,7 @@ If you try to export the assets only from this project, then you will always hav
 
 ![image](../../images/basicgame-exported-pck-test.jpg)
 
----
-# Link the assets into BasicGamePck
----
+One workaround method is to use the `BasicGamePck/project.godot` project. This project is empty, no scenes or C# scripts.
 
-One method is to use the `BasicGamePck/project.godot` project. This project is empty, no scenes or scripts.
+[Linking assets](./link-separate-assets-project)
 
-We can reuse the assets and .imports directories from `BasicGameGodot` with the `BasicGamePck` project, by linking again.
-
-Then use the `BasicGamePck` project just for exporting assets, scenes, no C#, with very small outputs
-
-This allows us to use the `BasicGameGodot` `project.godot` and skip assets or whatever it is exporting.
-
----
-## Link Directories
----
-
-Remove the assets directory if there is one in `BasicGamePck`
-
-1. Symbolic link the `BasicGameGodot\assets` directory into the `BasicGamePck` directory.
-
-2. Symbolic link the `BasicGameGodot\.import` directory into the `BasicGamePck` directory.
-
-3. When we link the `.import`, `.assets` here we should be on par with the `BasicGameGodot` project.

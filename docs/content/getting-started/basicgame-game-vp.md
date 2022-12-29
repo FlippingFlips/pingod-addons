@@ -20,6 +20,10 @@ Provided you have the controller setup and have built the godot project this wil
 
 ![image](../../images/basicgame-vploaded.jpg)
 
+{{% panel status="primary" title="Note" icon="far fa-lightbulb" %}}
+If the trough isn't working, then you touched the window :). You can launch the game make adjustments then quit to VP editor and play
+{{% /panel %}}
+
 
 ---
 ### COM Controller setup
