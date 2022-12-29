@@ -56,7 +56,7 @@ public class DisplaySettingsScene : MarginContainer
 
     void _on_CheckButtonAlwaysOnTop_toggled(bool pressed)
     {
-        Logger.LogInfo("on top pressed " + pressed);
+        Logger.Info(nameof(DisplaySettingsScene), ":on top pressed " + pressed);
         OS.SetWindowAlwaysOnTop(pressed);
         ProjectSettings.SetSetting(SettingPaths.DisplaySetPaths.ALWAYS_ON_TOP, pressed);
         _displaySettings.AlwaysOnTop= pressed;
@@ -82,9 +82,9 @@ public class DisplaySettingsScene : MarginContainer
     }
 
     void _on_SpinBoxFPS_value_changed(float value)
-    {
-        Logger.LogDebug("fps changed");
+    {        
         Engine.TargetFps = (int)value;
+        Logger.Debug(nameof(DisplaySettingsScene), ":fps changed (0 = no limit):", Engine.TargetFps);
         ProjectSettings.SetSetting(SettingPaths.DisplaySetPaths.FORCE_FPS, Engine.TargetFps);
         _displaySettings.FPS = (int)value;
     }

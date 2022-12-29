@@ -91,13 +91,13 @@ public class GameData
 		{
 			gD = DeserializeGameData<T>(dataSave.GetLine());
 			dataSave.Close();
-			GD.Print("GameData loaded from file");
-		}
+            Logger.Info(nameof(GameSettings), ":gamedata.save loaded");
+        }
 		else
 		{
 			Save(gD);
-			GD.Print("new GameData created");
-		}
+            Logger.Info(nameof(GameSettings), ":gamedata.save created");
+        }
 
 		return gD;
 	}

@@ -52,7 +52,7 @@ public class Bonus : Control
     /// </summary>
     public virtual void OnTimedOut()
     {
-        pinGod.LogInfo("bonus: BonusEnded");
+        Logger.Info(nameof(Bonus), ":BonusEnded");
         timer.Stop();
         this.Visible = false;
         pinGod.EmitSignal(nameof(PinGodBase.BonusEnded));
@@ -84,10 +84,10 @@ public class Bonus : Control
         if (visible)
         {
 			label.Text = SetBonusText();
-			pinGod.LogDebug("bonus: set label text to:", label.Text);
+			Logger.Debug(nameof(Bonus), ":set label text to:", label.Text);
 		}
 
-		pinGod.LogInfo("bonus displaying for " + _display_for_seconds);
+		Logger.Info(nameof(Bonus), ":displaying for " + _display_for_seconds);
 		timer.Start(_display_for_seconds);
 		Visible = visible;
 

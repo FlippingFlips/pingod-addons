@@ -53,10 +53,10 @@ public class Resources : ResourcePreloader
     {
         if (ProjectSettings.LoadResourcePack(filePath))
         {
-            Logger.LogInfo("resource pack loaded:", filePath);
+            Logger.Info(nameof(Resources), "resource pack loaded:", filePath);
             return true; 
         }
-        else { Logger.LogWarning("failed to load resource pack: " + filePath); return false; }
+        else { Logger.Warning(nameof(Resources),"failed to load resource pack: " + filePath); return false; }
     }
 
     /// <summary>
@@ -72,7 +72,7 @@ public class Resources : ResourcePreloader
             var packsDir = d.Open(pckDir);
             if (packsDir == Error.Ok)
             {
-                Logger.LogInfo("found packs directory");
+                Logger.Info(nameof(Resources), ":found packs directory");
                 d.ListDirBegin(true);
                 var path = string.Empty;
                 while ((path = d.GetNext()) != string.Empty)
@@ -97,7 +97,7 @@ public class Resources : ResourcePreloader
     /// </summary>
     private void LoadResources()
     {
-        Logger.LogDebug("pre loading resources");
+        Logger.Debug("pre loading resources");
         foreach (var res in _resources)
         {
             var loaded = GD.Load(res.Value);
@@ -105,9 +105,9 @@ public class Resources : ResourcePreloader
         }
 
         if (GetResourceList().Length > 0)
-            Logger.LogDebug(string.Join(",", GetResourceList()));
+            Logger.Debug(string.Join(",", GetResourceList()));
         else
-            Logger.LogDebug("no resources found in Resources.tscn");
+            Logger.Debug("no resources found in Resources.tscn");
     }
 
     /// <summary>
@@ -121,7 +121,7 @@ public class Resources : ResourcePreloader
             return GetResource(name);
         else
         {
-            Logger.LogWarning("resource not found. " + name);
+            Logger.Warning(nameof(Resources), "resource not found. " + name);
             return null;
         }            
     }

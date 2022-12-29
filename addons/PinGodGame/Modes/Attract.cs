@@ -32,8 +32,9 @@ public class Attract : Node
 	/// Sets up timer for cycling scenes in the AttractLayers tree. Stops ball searching
 	/// </summary>
 	public override void _EnterTree()
-	{
-		pinGod = (GetNode("/root/PinGodGame") as PinGodGame);
+	{		
+        Logger.Debug(nameof(Attract), ":", nameof(_EnterTree));
+        pinGod = (GetNode("/root/PinGodGame") as PinGodGame);
 		timer = (GetNode("AttractLayerChangeTimer") as Timer);
 		timer.WaitTime = _scene_change_secs;
 
@@ -56,7 +57,7 @@ public class Attract : Node
 	/// </summary>
 	public override void _Ready()
 	{
-		pinGod.LogInfo("Attract loaded");		
+		Logger.Debug(nameof(Attract),":",nameof(_Ready));		
 	}
 
 	/// <summary>
@@ -86,7 +87,7 @@ public class Attract : Node
         {
             OnGameStartedFromAttract();
         }
-        pinGod.LogInfo("attract: starting game. started?", started);
+        Logger.Debug(nameof(Attract), ":", nameof(StartGame), ":", started);
     }
 
 	/// <summary>
@@ -100,8 +101,8 @@ public class Attract : Node
 	/// </summary>
     public virtual void OnGameStartedFromAttract() 
 	{
-		pinGod.LogInfo("attract: game started");
-		timer.Stop();
+        Logger.Debug(nameof(Attract), ":", nameof(OnGameStartedFromAttract));
+        timer.Stop();
 	}
 
     /// <summary>
@@ -124,7 +125,7 @@ public class Attract : Node
 
 		//check if lower higher than our attract layers
 		_currentScene = reverse ? _currentScene - 1 : _currentScene + 1;
-		pinGod.LogDebug("change layer reverse: ", reverse, " scene", _currentScene);
+		Logger.Debug(nameof(Attract), ":change layer reverse: ", reverse, " scene", _currentScene);
 
 		_currentScene = _currentScene > Scenes?.Count - 1 ? 0 : _currentScene;
 		_currentScene = _currentScene < 0 ? Scenes?.Count - 1 ?? 0 : _currentScene;

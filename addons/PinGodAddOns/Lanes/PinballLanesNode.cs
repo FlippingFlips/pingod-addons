@@ -56,7 +56,7 @@ public class PinballLanesNode : PinGodGameMode
 
             if (_lane_switches == null)
             {
-                pinGod.LogError("no rollover switches defined. removing mode");
+                Logger.Error("no rollover switches defined. removing mode");
                 this.QueueFree();
             }
             else
@@ -147,7 +147,7 @@ public class PinballLanesNode : PinGodGameMode
         if (!_lanesCompleted[i])
         {
             _lanesCompleted[i] = true;
-            pinGod.LogDebug($"lane {i} complete");
+            Logger.Debug(nameof(PinballLanesNode), $":lane {i} complete");
 
             result = true;
         }
@@ -184,7 +184,7 @@ public class PinballLanesNode : PinGodGameMode
         _lanesCompleted[_lanesCompleted.Length - 1] = firstNum;
 
         UpdateLamps();
-        pinGod.LogDebug("lanes: rot left: ", string.Join(",", _lanesCompleted));
+        Logger.Debug(nameof(PinballLanesNode),":rot left: ", string.Join(",", _lanesCompleted));
     }
 
     /// <summary>
@@ -200,7 +200,7 @@ public class PinballLanesNode : PinGodGameMode
         _lanesCompleted[0] = lastNum;
 
         UpdateLamps();
-        pinGod.LogDebug("lanes: rot right: ", string.Join(",", _lanesCompleted));
+        Logger.Debug(nameof(PinballLanesNode), ":rot right: ", string.Join(",", _lanesCompleted));
     }
 
     /// <summary>

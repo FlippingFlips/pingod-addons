@@ -38,7 +38,7 @@ public class MainScene : Node2D
     {
         //save a reference to connect signals
         pinGod = GetNode<PinGodGame>("/root/PinGodGame");
-        pinGod.LogDebug("Splash timer msecs", OS.GetSplashTickMsec());
+        Logger.Debug(nameof(MainScene), ":splash timer msecs", OS.GetSplashTickMsec());
 
         //try to catch anything unhandled here, not when ready
         AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionHandler;
@@ -128,13 +128,13 @@ public class MainScene : Node2D
     }
 
     /// <summary>
-    /// Sets Solenoid enabled under "died"? <para/>
+    /// Sets Solenoid enabled under "alive"? <para/>
     /// pingod.vp controller coil 0, sets GameRunning on the controller
     /// </summary>
     public override void _Ready()
     {
         pauseLayer.Hide();        
-        pinGod.LogInfo("MainScene: sent IsAlive coil on for simulator");
+        Logger.Info(nameof(MainScene), ":sent IsAlive coil on for simulator");
     }
 
     /// <summary>
@@ -161,7 +161,7 @@ public class MainScene : Node2D
     void _loaded(PackedScene packedScene)
     {
         GetNode("Modes").AddChild(packedScene.Instance());
-        pinGod.LogInfo("modes added: ", packedScene.ResourceName);
+        Logger.Debug(nameof(MainScene),":modes added: ", packedScene.ResourceName);
     }
 
     /// <summary>
@@ -179,13 +179,13 @@ public class MainScene : Node2D
                 Resource res = null;
                 if (!_resourcePreLoader.HasResource(name))
                 {
-                    pinGod.LogDebug("loading mode scene resource for ", name);
+                    Logger.Debug(nameof(MainScene), ":loading mode scene resource for ", name);
                     res = Load(resourcePath);
                     _resourcePreLoader.AddResource(name, res);
                 }
                 else
                 {
-                    pinGod.LogWarning("scene resource already exists for ", name);
+                    Logger.Warning(nameof(MainScene), ":scene resource already exists for ", name);
                     res = _resourcePreLoader.GetResource(name);
                 }
                 CallDeferred("_loaded", res);
@@ -208,7 +208,7 @@ public class MainScene : Node2D
             m.Lock();
             var ril = ResourceLoader.LoadInteractive(resourcePath);
             PackedScene res; //the resource to return after finished loading
-            pinGod.LogDebug("loading-" + resourcePath);
+            Logger.Debug(nameof(MainScene), ":loading-" + resourcePath);
             //var total = ril.GetStageCount(); //total resources left to load, can be used progress bar
             while (true)
             {
@@ -233,7 +233,7 @@ public class MainScene : Node2D
 
     private void OnPauseGame()
     {
-        pinGod.LogDebug("pause");
+        Logger.Debug(nameof(MainScene), ":pause");
         pinGod.SetGamePaused();
         pauseLayer.Show();
         GetTree().Paused = true;
@@ -241,7 +241,7 @@ public class MainScene : Node2D
 
     private void OnResumeGame()
     {
-        pinGod.LogDebug("resume");
+        Logger.Debug(nameof(MainScene), ":resume");
         pinGod.SetGameResumed();
         pauseLayer.Hide();
         GetTree().Paused = false;
@@ -279,6 +279,6 @@ public class MainScene : Node2D
     }
 	private void UnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
 	{
-		pinGod.LogError($"Unhandled exception {e.ExceptionObject}");
+		Logger.Error($"Unhandled exception {e.ExceptionObject}");
 	}
 }

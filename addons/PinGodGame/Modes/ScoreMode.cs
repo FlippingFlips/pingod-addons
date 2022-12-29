@@ -56,7 +56,7 @@ public class ScoreMode : Node
         pinGod.Connect("ScoresUpdated", this, "OnScoresUpdated");
         pinGod.Connect("PlayerAdded", this, "OnScoresUpdated");
 
-        if (_scoreLabels?.Count <= 0) pinGod.LogWarning("No _scoreLabels have been defined for the ScoreMode.");
+        if (_scoreLabels?.Count <= 0) Logger.Warning("No _scoreLabels have been defined for the ScoreMode.");
         else ScoreLabels = new Label[_scoreLabels.Count];
     }
 

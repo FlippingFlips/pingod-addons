@@ -16,6 +16,21 @@ public class Switch
     /// <param name="num"></param>
     /// <param name="ballSearch"></param>
     public Switch(byte num, BallSearchSignalOption ballSearch) { this.Num = num; this.BallSearch = ballSearch; }
+
+    /// <summary>
+    /// Initialize with name and number with options for ball searching
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="num"></param>
+    /// <param name="ballSearch"></param>
+    public Switch(string name, byte num, BallSearchSignalOption ballSearch) { this.Name = name; this.Num = num; this.BallSearch = ballSearch; }
+
+    /// <summary>
+    /// Initialize Switch name + num
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="num"></param>
+    public Switch(string name, byte num) { this.Name = name; this.Num = num; }
     /// <summary>
     /// Initialize
     /// </summary>
@@ -24,7 +39,11 @@ public class Switch
         Time = OS.GetSystemTimeMsecs();
     }
     /// <summary>
-    /// NUmber of the switch
+    /// Name of the switch
+    /// </summary>
+    public string Name { get; set; }
+    /// <summary>
+    /// Number of the switch
     /// </summary>
     public byte Num { get; set; }
     /// <summary>
@@ -54,6 +73,7 @@ public class Switch
         if (active)
         {
             Time = OS.GetSystemTimeMsecs();
+            Logger.Debug(nameof(Switch), $":{this.Name}:{this.Num} on");
         }
         return active;
     }
@@ -67,6 +87,7 @@ public class Switch
         if (released)
         {
             Time = OS.GetSystemTimeMsecs();
+            Logger.Debug(nameof(Switch), $":{this.Name}:{this.Num} off");
         }
         return released;
     }
@@ -90,7 +111,7 @@ public class Switch
         return 0;
     }
     /// <summary>
-    /// The action. sw+SwitchNum
+    /// The action. swNum
     /// </summary>
     /// <returns></returns>
     public override string ToString() => "sw" + Num;

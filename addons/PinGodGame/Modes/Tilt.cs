@@ -48,7 +48,7 @@ public class Tilt : Control
 
 		if (pinGod.SwitchOn("tilt", input))
 		{
-			pinGod.LogInfo("tilt active");
+			Logger.Info(nameof(Tilt), ":tilt active");
 			if (!timer.IsStopped()) { timer.Stop(); }
 
 			//add a warning
@@ -60,7 +60,7 @@ public class Tilt : Control
 				pinGod.EnableFlippers(0);
 				trough?.DisableBallSave();				
 				Visible = true;
-				pinGod.LogInfo("Tilt: game tilted");
+				Logger.Info(nameof(Tilt), ":game tilted");
 				ShowTilt();
 			}
 			//show warnings
@@ -74,7 +74,7 @@ public class Tilt : Control
 		if (pinGod.SwitchOn("slam_tilt", input))
 		{
 			timer.Stop();
-            pinGod.LogInfo("Tilt: slam tilt");
+            Logger.Info(nameof(Tilt), ":slam tilt");
             SetText(Tr("SLAMTILT"));
 			pinGod.PlaySfx("tilt");
 			pinGod.IsTilted = true;			

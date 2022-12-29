@@ -27,7 +27,7 @@ public class Multiball : Control
 	/// </summary>
 	public override void _Ready()
 	{
-		pinGod.LogDebug("mball: _ready: secs/balls", _ball_save_time_seconds, _num_of_balls);
+		Logger.Debug(nameof(Multiball), ": _ready: secs/balls", _ball_save_time_seconds, _num_of_balls);
 		pinGod.StartMultiBall(_num_of_balls, _ball_save_time_seconds);
 	}
 

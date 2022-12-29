@@ -121,13 +121,13 @@ public class GameSettings
         {
             gS = DeserializeSettings<T>(settingsSave.GetLine());
             settingsSave.Close();
-            Print("game settings loaded from file");
+            Logger.Info(nameof(GameSettings), ":loaded from file");
         }
         else
         {
 
             Save<T>(gS);
-            Print("new game settings created " + gS.BallsPerGame);
+            Logger.Info(nameof(GameSettings), ":new game settings created");
         }
 
         return gS;
@@ -140,7 +140,7 @@ public class GameSettings
     {
         var settingsSave = new File();
         var err = settingsSave.Open(GAME_SETTINGS_FILE, File.ModeFlags.Read);
-        Print("settings loaded: " + err.ToString());
+        Logger.Info(nameof(GameSettings), ":loaded:", err.ToString());
         GameSettings gS = new GameSettings();
         if (err != Error.FileNotFound)
         {

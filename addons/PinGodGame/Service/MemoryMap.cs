@@ -72,7 +72,7 @@ public class MemoryMap : IDisposable
     {
         if (_writeStatesTask != null)
         {
-            Logger.LogDebug("memory map already initialized!");
+            Logger.Debug("memory map already initialized!");
             return;
         }
 
@@ -80,7 +80,7 @@ public class MemoryMap : IDisposable
         tokenSource = new CancellationTokenSource();
         _writeStatesTask = Task.Run(async () =>
         {
-            Logger.LogDebug("Running Read / Write States...");
+            Logger.Debug("Running Read / Write States...");
             while (!tokenSource.IsCancellationRequested)
             {
                 if (writeStates) WriteStates();
@@ -88,7 +88,7 @@ public class MemoryMap : IDisposable
                 await Task.Delay(writeDelay);
             }
 
-            Logger.LogDebug("write states stopped...");
+            Logger.Debug(nameof(MemoryMap), ":write states stopped...");
         }, tokenSource.Token);
     }
 
@@ -198,12 +198,12 @@ public class MemoryMap : IDisposable
                 mutexCreated = System.Threading.Mutex.TryOpenExisting(MUTEX_NAME, out mutex);
                 if (!mutexCreated)
                 {
-                    Logger.LogDebug("couldn't find mutex:", MUTEX_NAME, " creating new");
+                    Logger.Debug(nameof(MemoryMap), "couldn't find mutex:", MUTEX_NAME, " creating new");
                     mutex = new System.Threading.Mutex(true, MUTEX_NAME, out mutexCreated);
                 }
                 else
                 {
-                    Logger.LogDebug("mutex found:", MAP_NAME);
+                    Logger.Debug("mutex found:", MAP_NAME);
                 }
 
                 mmf = MemoryMappedFile.CreateOrOpen(MAP_NAME, MAP_SIZE);
@@ -213,7 +213,7 @@ public class MemoryMap : IDisposable
             }
             else
             {
-                Logger.LogDebug("mem_map: read/write states disabled");
+                Logger.Debug("mem_map: read/write states disabled");
             }
         }
     }

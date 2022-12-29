@@ -3,7 +3,7 @@
 /// <summary>
 /// Handles a bank of targets, the light states and watches for completion
 /// </summary>
-public class PinballTargetsBank : Node
+public class PinballTargetsBank : PinGodGameNode
 {
     #region Exports
     /// <summary>
@@ -48,10 +48,7 @@ public class PinballTargetsBank : Node
     /// Array of booleans if target is complete same length as <see cref="_target_switches"/>
     /// </summary>
     public bool[] _targetValues;
-    /// <summary>
-    /// pinGodGame Scene
-    /// </summary>
-    protected PinGodGame pinGod;
+    
     /// <summary>
     /// All targets completed?
     /// </summary>
@@ -59,24 +56,21 @@ public class PinballTargetsBank : Node
     #endregion
 
     /// <summary>
-    /// Initializes <see cref="pinGod"/> and removes this node if no <see cref="_target_switches"/> have been set
+    /// Removes this node if no <see cref="_target_switches"/> have been set
     /// </summary>
     public override void _EnterTree()
     {
         if (!Engine.EditorHint)
         {
-            pinGod = GetNode("/root/PinGodGame") as PinGodGame;
-
             if (_target_switches == null)
             {
-                pinGod.LogError("no target switches assigned. removing mode");
+                Logger.Error(nameof(PinballTargetsBank), ":no target switches assigned. removing mode");
                 this.QueueFree();
             }
             else
             {
-                pinGod.LogDebug("setting target values");
                 _targetValues = new bool[_target_switches.Length];
-                pinGod.LogDebug(_targetValues.Length);
+                Logger.Debug(nameof(PinballTargetsBank), ":setting target values ", _targetValues.Length);
             }
         }
     }
@@ -105,7 +99,7 @@ public class PinballTargetsBank : Node
             {
                 if (pinGod.SwitchOn(_target_switches[i], @event))
                 {
-                    pinGod.LogDebug("target: activated: ", _target_switches[i]);
+                    Logger.Debug(nameof(PinballTargetsBank),":activated: ", _target_switches[i]);
 
                     SetTargetComplete(i);                    
 
@@ -201,12 +195,12 @@ public class PinballTargetsBank : Node
 
             if (_reset_when_completed)
             {
-                pinGod.LogDebug("targets complete, resetting");
+                Logger.Debug(nameof(PinballTargetsBank), ":targets complete, resetting");
                 ResetTargets();
             }
             else
             {
-                pinGod.LogDebug("targets complete");
+                Logger.Debug(nameof(PinballTargetsBank), ":targets complete");
             }
         }
     }
