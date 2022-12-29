@@ -124,7 +124,7 @@ public class MemoryMap : IDisposable
 
     /// <summary>
     /// Reads the buffer size <see cref="SWITCH_COUNT"/> switch states from the memory map buffer at position 0. Acts on any new switch events found. <para/>
-    /// Emits a signal on VpCommand found. Switch 0 changed will process game states, switch zero useed with GameSyncState.
+    /// Emits a signal on VpCommand found. Switch 0 changed will process game states, switch zero used with GameSyncState.
     /// </summary>
     private void ReadStates()
     {
@@ -135,6 +135,7 @@ public class MemoryMap : IDisposable
         {
             for (int i = 0; i < buffer.Length; i++)
             {
+                //last state in buffer changed
                 if (buffer[i] != switchBuffer[i])
                 {                   
                     //override sending switch if this is a visual pinball command
@@ -144,6 +145,7 @@ public class MemoryMap : IDisposable
                     }
                     else if (i > 0)
                     {
+                        //Feed switch into Godot
                         bool actionState = (bool)GD.Convert(buffer[i], Variant.Type.Bool);
                         var ev = new InputEventAction() { Action = $"sw{i}", Pressed = actionState };
                         Input.ParseInputEvent(ev);
@@ -151,8 +153,7 @@ public class MemoryMap : IDisposable
                     else // Use Switch 0 for game GameSyncState
                     {                        
                         var syncState = (GameSyncState)buffer[i];
-                        var action = ProcessGameState(syncState);
-                        //GD.Print("zero switched action, ", action);                        
+                        var action = ProcessGameState(syncState);                    
                     }
                 }
             }
@@ -161,6 +162,11 @@ public class MemoryMap : IDisposable
         switchBuffer = buffer;
     }
 
+    /// <summary>
+    /// Process a gameSyncState into input event
+    /// </summary>
+    /// <param name="syncState"></param>
+    /// <returns></returns>
     private string ProcessGameState(GameSyncState syncState)
     {
         var ev = new InputEventAction() { Action = "", Pressed = true };

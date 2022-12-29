@@ -201,8 +201,11 @@ public abstract class PinGodGame : PinGodBase
 
         //set the width, position
         OS.WindowPosition = new Vector2(GameSettings.Display.X, GameSettings.Display.Y);
-        OS.WindowSize = new Vector2(GameSettings.Display.Width, GameSettings.Display.Height);        
+        OS.WindowSize = new Vector2(GameSettings.Display.Width, GameSettings.Display.Height);
+        var w = ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.WIDTH);
+        var h = ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.HEIGHT);
         LogInfo(nameof(PinGodGame), $":window: size:{OS.WindowSize.x}x{OS.WindowSize.y} pos:{OS.WindowPosition.x},{OS.WindowPosition.y}, onTop: {GameSettings.Display.AlwaysOnTop}");
+        LogInfo(nameof(PinGodGame), $":window: project settings size: ", $"{w}x{h}");
         
         //full screen
         if (GameSettings.Display.FullScreen)
@@ -1165,8 +1168,6 @@ public abstract class PinGodGame : PinGodBase
         var result = sw.IsOff(inputEvent);
         if (result)
         {
-            LogDebug(nameof(PinGodGame), ":swOff:" + swName);
-
             if (_recordPlayback == RecordPlaybackOption.Record)
             {
                 var recordLine = $"sw{sw.Num}|{false}|{OS.GetTicksMsec() - gameLoadTimeMsec}";
@@ -1207,7 +1208,6 @@ public abstract class PinGodGame : PinGodBase
         if (!SwitchExists(swName)) return false;
         var sw = Machine.Switches[swName];
         var result = sw.IsOn(inputEvent);
-        //LogDebug(nameof(PinGodGame), $":switchOn:{swName}:{result}");
 
         //do something with ball search if switch needs to
         if (result && BallSearchOptions.IsSearchEnabled && GameInPlay)

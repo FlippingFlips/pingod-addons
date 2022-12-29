@@ -149,18 +149,15 @@ public class Trough : Node
 		if (pinGod.IsTilted) return;
 
 		//when the ball is in the plunger lane stop any ball search running TODO
-		if (pinGod.SwitchOn(TroughOptions.PlungerLaneSw, @event))
+		if (!pinGod.IsTilted && pinGod.SwitchOn(TroughOptions.PlungerLaneSw, @event))
 		{
-			if (!pinGod.IsTilted)
-			{                
-                //auto plunge the ball if in ball save or game is tilted to get the balls back
-                if (pinGod.BallSaveActive || pinGod.IsMultiballRunning)
-                {
-                    pinGod.SolenoidPulse(TroughOptions.AutoPlungerCoil);
-                    Logger.Debug(nameof(Trough), ":auto plunger saved");
-                }
-            }			
-		}
+            //auto plunge the ball if in ball save or game is tilted to get the balls back
+            if (pinGod.BallSaveActive || pinGod.IsMultiballRunning)
+            {
+                pinGod.SolenoidPulse(TroughOptions.AutoPlungerCoil);
+                Logger.Debug(nameof(Trough), ":auto plunger saved");
+            }
+        }
 		//reset the ball search when leaving the switch
 		if (pinGod.SwitchOff(TroughOptions.PlungerLaneSw, @event))
 		{			
