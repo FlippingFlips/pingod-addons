@@ -1,16 +1,34 @@
 # pingod-addons
 
-Godot addons for creating a PinGod game. The addons directory in this repository is to be copied to a game or symbolically linked into a games directory.
+Godot addons for creating a PinGod game. 
 
-## Read the docs
+The addons directory in this repository should be symbolically linked into a games directory or just copied to a game.
 
-🌎 [pingod getting started](https://flippingflips.github.io/pingod-addons/getting-started/) - Online documentation built from this repository 
+BasicGame Example addons linked:
 
-🌎 [pingod-addons](https://FlippingFlips.github.io/pingod-addons) - Online documentation built from this repository 
+![image](https://github.com/FlippingFlips/pingod-addons/blob/main/docs/static/images/basicgame-project-files.jpg)
 
-🌎 [pingod-addons class list](https://flippingflips.github.io/pingod-addons/html/annotated.html) - Online documentation built from this repository with DoxyGen
+## pingod-basicgame
 
----
+🕹 [basicgame repo](https://github.com/FlippingFlips/pingod-basicgame) - Basic Game
+
+🕹 [moonstation repo](https://github.com/FlippingFlips/pingod-moonstation) - Moon Station
+
+In simulator:
+
+![image](https://github.com/FlippingFlips/pingod-addons/blob/main/docs/static/images/pingod-vp.jpg)
+
+Scene Editor
+
+![image](https://github.com/FlippingFlips/pingod-addons/blob/main/docs/static/images/basicgame-initialrun.jpg)
+
+## Docs
+
+🌎 [pingod getting started](https://flippingflips.github.io/pingod-addons/getting-started/) - Getting Started
+
+🌎 [pingod-addons](https://FlippingFlips.github.io/pingod-addons) - Home
+
+🌎 [pingod-addons - class list](https://flippingflips.github.io/pingod-addons/html/annotated.html) - Online documentation built from this repository with DoxyGen
 
 ---
 
@@ -18,7 +36,7 @@ Godot addons for creating a PinGod game. The addons directory in this repository
 
 The site requires [Hugo](https://gohugo.io/) to build or run. The Doxygen file configuation is built to the `docs/public/html` directory
 
-The easiest way to install Hugo is through [Chocolatey](https://chocolatey.org/):
+The quickest way to install Hugo is through [Chocolatey](https://chocolatey.org/):
 
 `choco install hugo-extended`
 
