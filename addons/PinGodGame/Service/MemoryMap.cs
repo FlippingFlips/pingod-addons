@@ -72,7 +72,7 @@ public class MemoryMap : IDisposable
     {
         if (_writeStatesTask != null)
         {
-            Logger.LogDebug("memory map already initialized!");
+            Logger.Debug("memory map already initialized!");
             return;
         }
 
@@ -80,15 +80,17 @@ public class MemoryMap : IDisposable
         tokenSource = new CancellationTokenSource();
         _writeStatesTask = Task.Run(async () =>
         {
-            Logger.LogDebug("Running Read / Write States...");
+            Logger.Debug("Running Read / Write States...");
             while (!tokenSource.IsCancellationRequested)
             {
                 if (writeStates) WriteStates();
                 if (readStates) ReadStates();
                 await Task.Delay(writeDelay);
             }
+            Dispose();
 
-            Logger.LogDebug("write states stopped...");
+            //await Task.Delay(1000);
+            //Logger.Debug(nameof(MemoryMap), ":_readWriteStatesTask stopped...");            
         }, tokenSource.Token);
     }
 
@@ -123,8 +125,11 @@ public class MemoryMap : IDisposable
     }
 
     /// <summary>
-    /// Reads the buffer size <see cref="SWITCH_COUNT"/> switch states from the memory map buffer at position 0. Acts on any new switch events found. <para/>
-    /// Emits a signal on VpCommand found. Switch 0 changed will process game states, switch zero useed with GameSyncState.
+    /// Reads the buffer size <see cref="SWITCH_COUNT"/> switch states from the memory map buffer at position 0. <para/>
+    /// Acts on any new switch events found. <para/>
+    /// The switch state gets converted to a Godot InputEventAction with the name sw{Num} and fed into the game<para/>
+    /// It is overidden if a VpCommand found. <para/>
+    /// Switch 0 changed will process game states, switch zero used with <see cref="GameSyncState"/>.
     /// </summary>
     private void ReadStates()
     {
@@ -135,24 +140,29 @@ public class MemoryMap : IDisposable
         {
             for (int i = 0; i < buffer.Length; i++)
             {
+                //last state in buffer changed
                 if (buffer[i] != switchBuffer[i])
                 {                   
                     //override sending switch if this is a visual pinball command
                     if(pinGodGame?.GameSettings?.VpCommandSwitchId > 0 && pinGodGame?.GameSettings?.VpCommandSwitchId == i)
                     {
-                        pinGodGame?.EmitSignal("VpCommand", buffer[i]);
+                        pinGodGame?.EmitSignal(nameof(PinGodBase.VpCommand), nameof(PinGodBase.VpCommand), buffer[i]);
                     }
                     else if (i > 0)
                     {
-                        bool actionState = (bool)GD.Convert(buffer[i], Variant.Type.Bool);
-                        var ev = new InputEventAction() { Action = $"sw{i}", Pressed = actionState };
-                        Input.ParseInputEvent(ev);
+                        //set switch IsEnabled and send signal
+                        Logger.Verbose(nameof(MemoryMap), $":sw:{i}:{buffer[i]}");
+                        pinGodGame.SetSwitch(i, buffer[i]);
+                        
+                        //Feed switch into Godot action
+                        //bool actionState = (bool)GD.Convert(buffer[i], Variant.Type.Bool);
+                        //var ev = new InputEventAction() { Action = $"sw{i}", Pressed = actionState };
+                        //Input.ParseInputEvent(ev);
                     }
                     else // Use Switch 0 for game GameSyncState
                     {                        
                         var syncState = (GameSyncState)buffer[i];
-                        var action = ProcessGameState(syncState);
-                        //GD.Print("zero switched action, ", action);                        
+                        var action = ProcessGameState(syncState);                    
                     }
                 }
             }
@@ -161,6 +171,11 @@ public class MemoryMap : IDisposable
         switchBuffer = buffer;
     }
 
+    /// <summary>
+    /// Process a gameSyncState into input event
+    /// </summary>
+    /// <param name="syncState"></param>
+    /// <returns></returns>
     private string ProcessGameState(GameSyncState syncState)
     {
         var ev = new InputEventAction() { Action = "", Pressed = true };
@@ -198,12 +213,12 @@ public class MemoryMap : IDisposable
                 mutexCreated = System.Threading.Mutex.TryOpenExisting(MUTEX_NAME, out mutex);
                 if (!mutexCreated)
                 {
-                    Logger.LogDebug("couldn't find mutex:", MUTEX_NAME, " creating new");
+                    Logger.Debug(nameof(MemoryMap), ":couldn't find mutex:", MUTEX_NAME, " creating new");
                     mutex = new System.Threading.Mutex(true, MUTEX_NAME, out mutexCreated);
                 }
                 else
                 {
-                    Logger.LogDebug("mutex found:", MAP_NAME);
+                    Logger.Debug(nameof(MemoryMap),":mutex found:", MAP_NAME);
                 }
 
                 mmf = MemoryMappedFile.CreateOrOpen(MAP_NAME, MAP_SIZE);
@@ -213,7 +228,7 @@ public class MemoryMap : IDisposable
             }
             else
             {
-                Logger.LogDebug("mem_map: read/write states disabled");
+                Logger.Debug("mem_map: read/write states disabled");
             }
         }
     }

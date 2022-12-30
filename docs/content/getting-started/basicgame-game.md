@@ -6,13 +6,18 @@ draft: false
 weight: 30
 ---
 
-### Game default controls
+### Game Window Switches
+
+Switches need to be added to `_gameWindowSwitches` in `PinGodGame.tscn`.
+
 ---
 | Keys  | action |
 | ------------- | ------------- |
 | 5  | Credits |
 | Q,W,E,R | Trough Switches 1-4 |
 | 1  | Start Game |
+| T  | Plunger Lane |
+| Y  | inlane_l |
 
 ---
 ### Simulating with keypress actions
@@ -38,10 +43,3 @@ The following image displays controlling trough switches in green.
 
 ![image](../../images/basicgame-overlays.jpg)
 
----
-### Game Logs
----
-
-`_godot_appdata_dir.bat`
-
-Opens the `app_userdata` for the project. Logs go here, `gamedata.save`, `settings.save` and `recordings`

@@ -1,9 +1,10 @@
 ﻿using Godot;
+using static PinGodBase;
 
 /// <summary>
 /// Handles a bank of targets, the light states and watches for completion
 /// </summary>
-public class PinballTargetsBank : Node
+public class PinballTargetsBank : PinGodGameNode
 {
     #region Exports
     /// <summary>
@@ -48,10 +49,7 @@ public class PinballTargetsBank : Node
     /// Array of booleans if target is complete same length as <see cref="_target_switches"/>
     /// </summary>
     public bool[] _targetValues;
-    /// <summary>
-    /// pinGodGame Scene
-    /// </summary>
-    protected PinGodGame pinGod;
+    
     /// <summary>
     /// All targets completed?
     /// </summary>
@@ -59,66 +57,47 @@ public class PinballTargetsBank : Node
     #endregion
 
     /// <summary>
-    /// Initializes <see cref="pinGod"/> and removes this node if no <see cref="_target_switches"/> have been set
+    /// Removes this node if no <see cref="_target_switches"/> have been set
     /// </summary>
     public override void _EnterTree()
     {
         if (!Engine.EditorHint)
         {
-            pinGod = GetNode("/root/PinGodGame") as PinGodGame;
-
             if (_target_switches == null)
             {
-                pinGod.LogError("no target switches assigned. removing mode");
+                Logger.Error(nameof(PinballTargetsBank), ":no target switches assigned. removing mode");
                 this.QueueFree();
             }
             else
             {
-                pinGod.LogDebug("setting target values");
                 _targetValues = new bool[_target_switches.Length];
-                pinGod.LogDebug(_targetValues.Length);
+                //connect to a switch command. the switches can come from actions or ReadStates
+                pinGod.Connect(nameof(SwitchCommand), this, nameof(OnSwitchCommandHandler));
+                Logger.Debug(nameof(PinballTargetsBank), ":setting target values ", _targetValues.Length);
             }
         }
     }
 
     /// <summary>
-    /// <see cref="ProcessTargetSwitchInputs"/>
+    /// Switch handlers for lanes and slingshots
     /// </summary>
-    /// <param name="event"></param>
-    public override void _Input(InputEvent @event)
+    /// <param name="name"></param>
+    /// <param name="index"></param>
+    /// <param name="value"></param>
+    private void OnSwitchCommandHandler(string name, byte index, byte value)
     {
-        if (!Engine.EditorHint)
+        if (!pinGod.GameInPlay || pinGod.IsTilted) return;
+        
+        for (int i = 0; i < _target_switches.Length; i++)
         {
-            ProcessTargetSwitchInputs(@event);
-        }
-    }
-
-    /// <summary>
-    /// Processes the <see cref="_target_switches"/> 
-    /// </summary>
-    /// <param name="event"></param>
-    public virtual void ProcessTargetSwitchInputs(InputEvent @event)
-    {
-        if (_target_switches?.Length > 0)
-        {
-            for (int i = 0; i < _target_switches.Length; i++)
+            if(name == _target_switches[i])
             {
-                if (pinGod.SwitchOn(_target_switches[i], @event))
-                {
-                    pinGod.LogDebug("target: activated: ", _target_switches[i]);
-
-                    SetTargetComplete(i);                    
-
-                    if (CheckTargetsCompleted(i))
-                    {
-                        TargetsCompleted();
-                    }
-                }
+                Logger.Debug(nameof(PinballTargetsBank), ":active: ", _target_switches[i]);
+                SetTargetComplete(i);
+                if (CheckTargetsCompleted(i))
+                    TargetsCompleted();
+                break;
             }
-        }
-        else
-        {
-            SetProcessInput(false);
         }
     }
 
@@ -201,12 +180,12 @@ public class PinballTargetsBank : Node
 
             if (_reset_when_completed)
             {
-                pinGod.LogDebug("targets complete, resetting");
+                Logger.Debug(nameof(PinballTargetsBank), ":targets complete, resetting");
                 ResetTargets();
             }
             else
             {
-                pinGod.LogDebug("targets complete");
+                Logger.Debug(nameof(PinballTargetsBank), ":targets complete");
             }
         }
     }

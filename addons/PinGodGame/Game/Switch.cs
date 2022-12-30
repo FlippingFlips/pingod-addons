@@ -16,6 +16,21 @@ public class Switch
     /// <param name="num"></param>
     /// <param name="ballSearch"></param>
     public Switch(byte num, BallSearchSignalOption ballSearch) { this.Num = num; this.BallSearch = ballSearch; }
+
+    /// <summary>
+    /// Initialize with name and number with options for ball searching
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="num"></param>
+    /// <param name="ballSearch"></param>
+    public Switch(string name, byte num, BallSearchSignalOption ballSearch) { this.Name = name; this.Num = num; this.BallSearch = ballSearch; }
+
+    /// <summary>
+    /// Initialize Switch name + num
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="num"></param>
+    public Switch(string name, byte num) { this.Name = name; this.Num = num; }
     /// <summary>
     /// Initialize
     /// </summary>
@@ -24,7 +39,11 @@ public class Switch
         Time = OS.GetSystemTimeMsecs();
     }
     /// <summary>
-    /// NUmber of the switch
+    /// Name of the switch
+    /// </summary>
+    public string Name { get; set; }
+    /// <summary>
+    /// Number of the switch
     /// </summary>
     public byte Num { get; set; }
     /// <summary>
@@ -32,28 +51,48 @@ public class Switch
     /// </summary>
     public BallSearchSignalOption BallSearch { get; set; }
     /// <summary>
+    /// Flag set by actions and SetSwitch
+    /// </summary>
+    public bool IsEnabled { get; private set; }
+
+    /// <summary>
     /// Time last active
     /// </summary>
     public ulong Time { get; set; }
 
     /// <summary>
-    /// Sets a switch manually, pushes an InputEventAction to the queue
+    /// Sets a switch manually, pushes a InputEventAction to Input
     /// </summary>
-    /// <param name="Pressed"></param>
+    /// <param name="pressed"></param>
     /// <returns></returns>
-    public void SetSwitch(bool Pressed) => Input.ParseInputEvent(new InputEventAction() { Action = this.ToString(), Pressed = Pressed });
+    public void SetSwitchAction(bool pressed) 
+    {
+        Input.ParseInputEvent(new InputEventAction() { Action = this.ToString(), Pressed = pressed });
+        IsEnabled = pressed;
+    }
+
+    /// <summary>
+    /// Also sets the time of the switch
+    /// </summary>
+    /// <param name="enabled"></param>
+    public void SetSwitch(bool enabled)
+    {
+        IsEnabled = enabled;
+        Time = OS.GetSystemTimeMsecs();
+        Logger.Verbose(nameof(Switch), $":{this.Name}:{this.Num} = {IsEnabled}");
+    }
 
     /// <summary>
     /// Checks the current input event. IsActionPressed(sw+num)
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    public bool IsOn(InputEvent input) 
+    public bool IsActionOn(InputEvent input) 
     { 
         bool active = input.IsActionPressed(ToString());
         if (active)
         {
-            Time = OS.GetSystemTimeMsecs();
+            SetSwitch(true);
         }
         return active;
     }
@@ -62,19 +101,23 @@ public class Switch
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    public bool IsOff(InputEvent input) {
+    public bool IsActionOff(InputEvent input) {
         bool released = input.IsActionReleased(ToString());
         if (released)
         {
-            Time = OS.GetSystemTimeMsecs();
+            SetSwitch(false);
         }
         return released;
     }
     /// <summary>
-    /// Checks if On/Off
+    /// Checks if On/Off - Action pressed sw{num}
     /// </summary>
     /// <returns></returns>
-    public bool IsOn() => Input.IsActionPressed(ToString());
+    public bool IsActionOn()
+    {
+        IsEnabled = Input.IsActionPressed(ToString());
+        return IsEnabled;
+    }
 
     /// <summary>
     /// Time in milliseconds since switch used
@@ -90,7 +133,7 @@ public class Switch
         return 0;
     }
     /// <summary>
-    /// The action. sw+SwitchNum
+    /// The action. swNum
     /// </summary>
     /// <returns></returns>
     public override string ToString() => "sw" + Num;

@@ -12,10 +12,15 @@ public class ModeTimer : Timer
 	[Export] string _ModeName = "ModeName";
 	[Export] string _ModeTitle = "Mode Title";
 
-	/// <summary>
-	/// Sets up the labels
-	/// </summary>
-	public override void _Ready()
+    /// <summary>
+    /// Emitted signal when a mode times out
+    /// </summary>
+    [Signal] public delegate void ModeTimedOut(string title);
+
+    /// <summary>
+    /// Sets up the labels
+    /// </summary>
+    public override void _Ready()
 	{
 		titleLabel = GetNode("VBoxContainer/Title") as Label;
 		titleLabel.Text = _ModeTitle;
@@ -32,7 +37,7 @@ public class ModeTimer : Timer
 		if(_ModeTime <= 0)
 		{
 			this.Stop();
-			EmitSignal("ModeTimedOut", _ModeName);
+			EmitSignal(nameof(ModeTimedOut), _ModeName);
 		}
 	}
 }

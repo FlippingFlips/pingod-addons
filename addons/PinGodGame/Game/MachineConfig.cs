@@ -77,7 +77,7 @@ public class MachineConfig : Node
 			Machine.Coils.Add(coil, new PinStateObject(coils[coil]));
 		}
 		var itemAddResult = string.Join(", ", coils.Keys);
-		Logger.LogDebug($"pingod: added coils {itemAddResult}");
+		Logger.Info(nameof(MachineConfig), $":added coils {itemAddResult}");
 		coils.Clear();
 
 		foreach (var sw in switches.Keys)
@@ -91,11 +91,11 @@ public class MachineConfig : Node
 
 			if (BallSearchOptions.StopSearchSwitches?.Any(x => x == sw) ?? false)
 			{
-				Machine.Switches.Add(sw, new Switch(swVal, BallSearchSignalOption.Off));
+				Machine.Switches.Add(sw, new Switch(sw, swVal, BallSearchSignalOption.Off));
 			}
 			else
 			{
-				Machine.Switches.Add(sw, new Switch(swVal, BallSearchSignalOption.Reset));
+				Machine.Switches.Add(sw, new Switch(sw, swVal, BallSearchSignalOption.Reset));
 			}
 		}
 

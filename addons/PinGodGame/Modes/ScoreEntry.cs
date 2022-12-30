@@ -2,9 +2,10 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static PinGodBase;
 
 /// <summary>
-/// Simple score entry: Sends <see cref="PinGodGame.ScoreEntryEnded"/> TODO entries, placeholder
+/// Simple score entry: Sends <see cref="ScoreEntryEnded"/> TODO entries, placeholder
 /// </summary>
 public class ScoreEntry : Control
 {
@@ -59,108 +60,20 @@ public class ScoreEntry : Control
     public override void _EnterTree()
     {
         selectedCharLabel = _selectedChar == null ? null : GetNode<Label>(_selectedChar);
-        playerMessageLabel = _playerMessage == null ? null : GetNode<Label>(_playerMessage);
-       
+        playerMessageLabel = _playerMessage == null ? null : GetNode<Label>(_playerMessage);       
         _entry = new char[_nameMaxLength];
-    }
 
-    /// <summary>
-    /// Uses flippers and start button actions if visible and <see cref="IsPlayerEnteringScore"/>
-    /// </summary>
-    /// <param name="event"></param>
-    public override void _Input(InputEvent @event)
-    {
-        if (this.Visible && IsPlayerEnteringScore)
-        {
-            if (pinGod.SwitchOn("flipper_l", @event))
-            {
-                //scroll back, move the label to the left
-                selectedIndex--;
-                if (selectedIndex < 0)
-                {
-                    selectedIndex = allowedChars.Length - 1;
-                    
-                    selectedCharLabel.SetPosition(new Vector2(selectedCharLabel.RectPosition.x - (_selectCharMargin * allowedChars.Length - _selectCharMargin), selectedCharLabel.RectPosition.y));
-                }
-                else
-                {
-                    selectedCharLabel.SetPosition(new Vector2(selectedCharLabel.RectPosition.x + _selectCharMargin, selectedCharLabel.RectPosition.y));
-                }
-
-                _entry[currentEntryIndex] = (char)allowedChars[selectedIndex];
-                selectedName.Text = new string(_entry);
-            }
-            if (pinGod.SwitchOn("flipper_r", @event))
-            {
-                //scroll forward, move the label to the right
-                selectedIndex++;
-                if (selectedIndex > allowedChars.Length - 1)
-                {
-                    selectedIndex = 0;
-                    selectedCharLabel.SetPosition(new Vector2(selectedCharLabel.RectPosition.x + (_selectCharMargin * allowedChars.Length - _selectCharMargin), selectedCharLabel.RectPosition.y));
-                    pinGod.LogInfo("set flip r start");
-                }
-                else if (selectedIndex == 0)
-                {                    
-                    selectedCharLabel.SetPosition(selectedCharLabelStartPos);
-                }
-                else { selectedCharLabel.SetPosition(new Vector2(selectedCharLabel.RectPosition.x - _selectCharMargin, selectedCharLabel.RectPosition.y)); }
-
-                _entry[currentEntryIndex] = (char)allowedChars[selectedIndex];
-                selectedName.Text = new string(_entry);
-            }
-            if (pinGod.SwitchOn("start", @event))
-            {
-                //delete char
-                if (allowedChars[selectedIndex] == 60)
-                {
-                    if (_entry.Length > 0)
-                    {
-                        _entry[_entry.Length - 1] = ' ';
-                        currentEntryIndex--;
-                        if (currentEntryIndex < 0)
-                            currentEntryIndex = 0;
-                    }                        
-                }
-                //accept
-                else if (allowedChars[selectedIndex] == 61)
-                {
-                    //add the hi score and order it
-                    OnPlayerFinishedEntry();
-                }
-                else
-                {
-                    if (currentEntryIndex < _nameMaxLength-1)
-                    {
-                        currentEntryIndex++;
-                        selectedName.Text = new string(_entry);
-                    }
-                    else
-                    {
-                        //OnPlayerFinishedEntry();
-                        //todo: move to last char
-                        selectedIndex = allowedChars.Length - 1;
-
-                        selectedCharLabel.SetPosition(new Vector2(selectedCharLabelStartPos.x + (_selectCharMargin * allowedChars.Length-1), selectedCharLabelStartPos.y));
-                        selectedName.Text = new string(_entry);
-                    }
-                }               
-            }            
-        }
+        pinGod = GetNode("/root/PinGodGame") as PinGodGame;
+        pinGod.Connect(nameof(SwitchCommand), this, nameof(OnSwitchCommandHandler));
     }
 
     /// <summary>
     /// Sets <see cref="IsPlayerEnteringScore"/> to true
     /// </summary>
     public override void _Ready()
-    {
-		//test players
-		//GameGlobals.Players.Add(new PlayerBasicGame() { Points = 2430 });
-		//GameGlobals.Players.Add(new PlayerBasicGame() { Points = 2530 });
-
-		pinGod = GetNode("/root/PinGodGame") as PinGodGame;
-		CharSelectionSetup();
-		selectedName = GetNode("CenterContainer/VBoxContainer/Name") as Label;		
+    {        
+        CharSelectionSetup();
+        selectedName = GetNode("CenterContainer/VBoxContainer/Name") as Label;
 
         IsPlayerEnteringScore = true;
         selectedCharLabelStartPos = new Vector2(selectedCharLabel?.RectPosition.x ?? 0, selectedCharLabel?.RectPosition.y ?? 0);
@@ -170,27 +83,57 @@ public class ScoreEntry : Control
     /// Sets <see cref="IsPlayerEnteringScore"/> to true and shows this scene. Moves to each player who has a high score to let them enter their initials
     /// </summary>
 	public virtual void DisplayHighScore()
-	{
-        pinGod.LogInfo("display high score");
+    {
+        Logger.Info(nameof(ScoreEntry), ":display high score");
         IsPlayerEnteringScore = true;
-		this.Visible = true;
-		PlayerCount = pinGod.Players?.Count ?? 0;
-		if (PlayerCount <= 0)
-		{
-			pinGod.LogError("Need players for this mode to cycle through");
-			QuitScoreEntry();
-			return;
-		}
-		MoveNextPlayer();
-	}
+        this.Visible = true;
+        PlayerCount = pinGod.Players?.Count ?? 0;
+        if (PlayerCount <= 0)
+        {
+            Logger.Error("Need players for this mode to cycle through");
+            QuitScoreEntry();
+            return;
+        }
+        MoveNextPlayer();
+    }
 
     /// <summary>
     /// just logs by default, override this method to act on new high scores.
     /// </summary>
-	public virtual void OnNewHighScore() 
-	{
-		pinGod.LogDebug("new high score made");
-	}
+	public virtual void OnNewHighScore()
+    {
+        Logger.Debug(nameof(ScoreEntry), ":new high score made");
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public virtual void OnPlayerFinishedEntry()
+    {
+        if (pinGod.GameData?.HighScores != null)
+        {
+            try
+            {
+                pinGod.GameData?.HighScores?.Add(new HighScore()
+                {
+                    Name = new string(_entry),
+                    Created = DateTime.Now,
+                    Scores = _cPlayer.Points
+                });
+                pinGod.GameData.HighScores = pinGod.GameData.HighScores.OrderByDescending(x => x.Scores)
+                    .Take(pinGod.GameSettings.MaxHiScoresCount)
+                    .ToList();
+                Logger.Info(nameof(ScoreEntry), ":hi score added", entry, _cPlayer.Points);
+            }
+            catch (Exception ex) { Logger.Warning("player finish score adding to hi scores. " + ex.ToString()); }
+        }
+
+        if (!MoveNextPlayer())
+        {
+            QuitScoreEntry();
+            return;
+        }
+    }
 
     /// <summary>
     /// Checks if player made top score
@@ -214,13 +157,13 @@ public class ScoreEntry : Control
         //hi scores has enough room to add new at any points
         if (pinGod.GameData.HighScores.Count < pinGod.GameSettings.MaxHiScoresCount)
         {
-            pinGod.LogDebug("Hi score has space, adding this player");
+            Logger.Debug(nameof(ScoreEntry), ":hi-score has space, adding this player");
             CurrentPlayer++;
         }
         //this hi score isn't as big as the others
         else if (!pinGod.GameData.HighScores.Any(x => x.Scores < _cPlayer.Points))
         {
-            pinGod.LogDebug("hi score not large enough for board");
+            Logger.Debug(nameof(ScoreEntry), ":hi score not large enough for board");
             CurrentPlayer++;
             if (!MoveNextPlayer())
             {
@@ -242,48 +185,123 @@ public class ScoreEntry : Control
         var chars = new List<int>();
         chars.AddRange(Enumerable.Range(65, 26)); //A-Z
 
-        if(_includeZeroToNine)
+        if (_includeZeroToNine)
             chars.AddRange(Enumerable.Range(48, 10)); //0-9
 
         chars.Add(60); //delete
         chars.Add(61); //enter
         allowedChars = chars.ToArray();
     }
-    /// <summary>
-    /// 
-    /// </summary>
-    public virtual void OnPlayerFinishedEntry()
-    {
-        if(pinGod.GameData?.HighScores != null)
-        {
-            try
-            {
-                pinGod.GameData?.HighScores?.Add(new HighScore()
-                {
-                    Name = new string(_entry),
-                    Created = DateTime.Now,
-                    Scores = _cPlayer.Points
-                });
-                pinGod.GameData.HighScores = pinGod.GameData.HighScores.OrderByDescending(x => x.Scores)
-                    .Take(pinGod.GameSettings.MaxHiScoresCount)
-                    .ToList();
-                pinGod.LogInfo("hi score added", entry, _cPlayer.Points);
-            }
-            catch (Exception ex) { pinGod.LogWarning("player finish score adding to hi scores. " + ex.ToString()); }
-        }        
 
-        if (!MoveNextPlayer())
+    private void OnLeftFlipper()
+    {
+        //scroll back, move the label to the left
+        selectedIndex--;
+        if (selectedIndex < 0)
         {
-            QuitScoreEntry();
-            return;
+            selectedIndex = allowedChars.Length - 1;
+
+            selectedCharLabel.SetPosition(new Vector2(selectedCharLabel.RectPosition.x - (_selectCharMargin * allowedChars.Length - _selectCharMargin), selectedCharLabel.RectPosition.y));
+        }
+        else
+        {
+            selectedCharLabel.SetPosition(new Vector2(selectedCharLabel.RectPosition.x + _selectCharMargin, selectedCharLabel.RectPosition.y));
+        }
+
+        _entry[currentEntryIndex] = (char)allowedChars[selectedIndex];
+        selectedName.Text = new string(_entry);
+    }
+
+    private void OnRightFlipper()
+    {
+        //scroll forward, move the label to the right
+        selectedIndex++;
+        if (selectedIndex > allowedChars.Length - 1)
+        {
+            selectedIndex = 0;
+            selectedCharLabel.SetPosition(new Vector2(selectedCharLabel.RectPosition.x + (_selectCharMargin * allowedChars.Length - _selectCharMargin), selectedCharLabel.RectPosition.y));
+            Logger.Info(nameof(ScoreEntry), ":set flip r start");
+        }
+        else if (selectedIndex == 0)
+        {
+            selectedCharLabel.SetPosition(selectedCharLabelStartPos);
+        }
+        else { selectedCharLabel.SetPosition(new Vector2(selectedCharLabel.RectPosition.x - _selectCharMargin, selectedCharLabel.RectPosition.y)); }
+
+        _entry[currentEntryIndex] = (char)allowedChars[selectedIndex];
+        selectedName.Text = new string(_entry);
+    }
+
+    private void OnStartButton()
+    {
+        //delete char
+        if (allowedChars[selectedIndex] == 60)
+        {
+            if (_entry.Length > 0)
+            {
+                _entry[_entry.Length - 1] = ' ';
+                currentEntryIndex--;
+                if (currentEntryIndex < 0)
+                    currentEntryIndex = 0;
+            }
+        }
+        //accept
+        else if (allowedChars[selectedIndex] == 61)
+        {
+            //add the hi score and order it
+            OnPlayerFinishedEntry();
+        }
+        else
+        {
+            if (currentEntryIndex < _nameMaxLength - 1)
+            {
+                currentEntryIndex++;
+                selectedName.Text = new string(_entry);
+            }
+            else
+            {
+                //OnPlayerFinishedEntry();
+                //todo: move to last char
+                selectedIndex = allowedChars.Length - 1;
+
+                selectedCharLabel.SetPosition(new Vector2(selectedCharLabelStartPos.x + (_selectCharMargin * allowedChars.Length - 1), selectedCharLabelStartPos.y));
+                selectedName.Text = new string(_entry);
+            }
         }
     }
 
+    /// <summary>
+    /// Switch handlers for lanes and slingshots
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="index"></param>
+    /// <param name="value"></param>
+    private void OnSwitchCommandHandler(string name, byte index, byte value)
+    {
+        if (value <= 0) return;
+        if (this.Visible && IsPlayerEnteringScore)
+        {
+            switch (name)
+            {
+                case "flipper_l":
+                    OnLeftFlipper();
+                    break;
+                case "flipper_r":
+                    OnRightFlipper();
+                    break;
+                case "start":
+                    OnStartButton();
+                    break;
+                default:
+                    break;
+            }
+        }            
+    }
     private void QuitScoreEntry()
     {
 		IsPlayerEnteringScore = false;
 		this.Visible = false;
-		pinGod.LogInfo("score_entry: quit score entry");
+		Logger.Info(nameof(ScoreEntry), "score_entry: quit score entry");
 		pinGod.EmitSignal("ScoreEntryEnded");
 	}
 }

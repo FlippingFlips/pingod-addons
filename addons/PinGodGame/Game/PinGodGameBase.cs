@@ -88,9 +88,17 @@ public abstract class PinGodBase : Node
     /// </summary>
 	[Signal] public delegate void ServiceMenuExit();
     /// <summary>
-    /// Signal sent from memory map if <see cref="GameSettings.VpCommandSwitchId"/> was found while reading states
+    /// Emitted when a switch comes into the game. From <see cref="MemoryMap.ReadStates"/> then <see cref="PinGodGame.SetSwitch(int, byte)"/>
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="index"></param>
+    /// <param name="value"></param>
+    [Signal] public delegate void SwitchCommand(string name, byte index, byte value);
+    /// <summary>
+    /// Signal sent from memory map if <see cref="GameSettings.VpCommandSwitchId"/> was found while reading switch states
     /// </summary>
     /// <param name="index"></param>
     [Signal] public delegate void VpCommand(byte index);
+    
     #endregion
 }

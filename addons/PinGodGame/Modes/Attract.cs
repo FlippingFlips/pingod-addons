@@ -1,4 +1,5 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 
 /// <summary>
@@ -32,10 +33,13 @@ public class Attract : Node
 	/// Sets up timer for cycling scenes in the AttractLayers tree. Stops ball searching
 	/// </summary>
 	public override void _EnterTree()
-	{
-		pinGod = (GetNode("/root/PinGodGame") as PinGodGame);
+	{		
+        Logger.Debug(nameof(Attract), ":", nameof(_EnterTree));
+        pinGod = (GetNode("/root/PinGodGame") as PinGodGame);
 		timer = (GetNode("AttractLayerChangeTimer") as Timer);
 		timer.WaitTime = _scene_change_secs;
+
+		pinGod.Connect(nameof(PinGodBase.SwitchCommand), this, nameof(SwitchHandler));
 
 		var nodes = GetNode("AttractLayers").GetChildren();
 		//add as canvas items as they are able to Hide / Show
@@ -51,32 +55,39 @@ public class Attract : Node
 		pinGod.SetBallSearchStop();
 	}
 
-	/// <summary>
-	/// Just logs attract loaded
-	/// </summary>
-	public override void _Ready()
-	{
-		pinGod.LogInfo("Attract loaded");		
-	}
+    private void SwitchHandler(string name, byte index, byte value)
+    {        
+        if (value > 0)
+		{
+			switch (index)
+			{
+				case 1:
+                case 2:
+                case 3: //Coin buttons. See PinGod.vbs for Standard switches
+                    pinGod.AudioManager.PlaySfx("credit");
+                    pinGod.AddCredits((byte)(1 * index));
+					break;
+                case 9: //l flipper
+                    CallDeferred("ChangeLayer", true);
+					break;
+                case 11://r flipper
+                    CallDeferred("ChangeLayer", false);
+                    break;
+				case 19://start
+                    CallDeferred(nameof(StartGame));
+					break;
+                default:
+					break;
+			}
+        }        
+    }
 
-	/// <summary>
-	/// Checks for start button presses to Start a game. Players can cycle the scenes with flippers
-	/// </summary>
-	/// <param name="event"></param>
-	public override void _Input(InputEvent @event)
+    /// <summary>
+    /// Just logs attract loaded
+    /// </summary>
+    public override void _Ready()
 	{
-		if (pinGod.SwitchOn("start", @event))
-        {
-			CallDeferred(nameof(StartGame));
-        }
-        if (pinGod.SwitchOn("flipper_l", @event))
-		{
-			CallDeferred("ChangeLayer", true);
-		}
-		if (pinGod.SwitchOn("flipper_r", @event))
-		{
-			CallDeferred("ChangeLayer", false);
-		}
+		Logger.Debug(nameof(Attract),":",nameof(_Ready));		
 	}
 
     private void StartGame()
@@ -86,7 +97,7 @@ public class Attract : Node
         {
             OnGameStartedFromAttract();
         }
-        pinGod.LogInfo("attract: starting game. started?", started);
+        Logger.Debug(nameof(Attract), ":", nameof(StartGame), ":", started);
     }
 
 	/// <summary>
@@ -100,8 +111,8 @@ public class Attract : Node
 	/// </summary>
     public virtual void OnGameStartedFromAttract() 
 	{
-		pinGod.LogInfo("attract: game started");
-		timer.Stop();
+        Logger.Debug(nameof(Attract), ":", nameof(OnGameStartedFromAttract));
+        timer.Stop();
 	}
 
     /// <summary>
@@ -124,7 +135,7 @@ public class Attract : Node
 
 		//check if lower higher than our attract layers
 		_currentScene = reverse ? _currentScene - 1 : _currentScene + 1;
-		pinGod.LogDebug("change layer reverse: ", reverse, " scene", _currentScene);
+		Logger.Debug(nameof(Attract), ":change layer reverse: ", reverse, " scene", _currentScene);
 
 		_currentScene = _currentScene > Scenes?.Count - 1 ? 0 : _currentScene;
 		_currentScene = _currentScene < 0 ? Scenes?.Count - 1 ?? 0 : _currentScene;

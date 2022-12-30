@@ -128,9 +128,9 @@ public class AudioManager : Node
             if (stream != null)
             {
                 Music.Add(key, stream);
-                Logger.LogDebug("music added: ", key, resource);
+                Logger.Debug("music added: ", key, resource);
             }
-            else { Logger.LogError("music add fail: ", key, resource); }
+            else { Logger.Error(nameof(AudioManager), ":music add fail: ", key, resource); }
         }
     }
 
@@ -147,9 +147,9 @@ public class AudioManager : Node
             if (stream != null)
             {
                 Sfx.Add(key, stream);
-                Logger.LogDebug("sfx added: ", key, resource);
+                Logger.Debug(nameof(AudioManager), ":sfx added: ", key, resource);
             }
-            else { Logger.LogWarning($"sfx add fail: {key}", resource); }
+            else { Logger.Warning(nameof(AudioManager), $":sfx add fail: {key}", resource); }
         }
     }
 
@@ -166,9 +166,9 @@ public class AudioManager : Node
             if (stream != null)
             {
                 Voice.Add(key, stream);
-                Logger.LogDebug("Voice added: ", key, resource);
+                Logger.Debug("Voice added: ", key, resource);
             }
-            else { Logger.LogWarning($"Voice add fail: {key}", resource); }
+            else { Logger.Warning($"Voice add fail: {key}", resource); }
         }
     }
 
@@ -177,7 +177,7 @@ public class AudioManager : Node
     /// </summary>
     public void MusicPlayer_finished()
     {
-        Logger.LogDebug($"{MusicPlayer.Stream?.ResourceName} - music player finished");
+        Logger.Debug($"{MusicPlayer.Stream?.ResourceName} - music player finished");
     }
 
     /// <summary>
@@ -195,10 +195,10 @@ public class AudioManager : Node
     {
         if (string.IsNullOrWhiteSpace(name) || !MusicEnabled || Music == null) return;
         if (!Music.ContainsKey(name))
-            Logger.LogWarning($"play music: '{name}' not found");
+            Logger.Warning(nameof(AudioManager), $":play music: '{name}' not found");
         else
         {
-            Logger.LogDebug("playing music:", name);
+            Logger.Debug("playing music:", name);
             CurrentMusic = name;
             MusicPlayer.Stream = Music[name];
             MusicPlayer.Play(pos);
@@ -220,7 +220,7 @@ public class AudioManager : Node
         CurrentMusic = name;
         MusicPlayer.Play(pos);
         MusicPlayer.Playing = true;
-        Logger.LogDebug("playing music stream: ", name);
+        Logger.Debug("playing music stream: ", name);
     }
 
     /// <summary>
@@ -233,7 +233,7 @@ public class AudioManager : Node
         if (!SfxEnabled || string.IsNullOrWhiteSpace(name) || Sfx == null) return;
 
         if (!Sfx.ContainsKey(name))
-            Logger.LogWarning($"play sfx: '{name}' not found");
+            Logger.Warning($"play sfx: '{name}' not found");
         else
         {
             SfxPlayer.Stream = Sfx[name];
@@ -252,7 +252,7 @@ public class AudioManager : Node
         if (!VoiceEnabled || string.IsNullOrWhiteSpace(name) || Voice == null) return;
 
         if (!Voice.ContainsKey(name))
-            Logger.LogWarning($"play voice: '{name}' not found");
+            Logger.Warning(nameof(AudioManager), $":play voice: '{name}' not found");
         else
         {
             PlayVoice(Voice[name], bus);

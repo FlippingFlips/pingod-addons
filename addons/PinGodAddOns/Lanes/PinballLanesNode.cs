@@ -1,4 +1,6 @@
 ﻿using Godot;
+using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>
 /// Set the exports in the scene from Godot or tscn. <see cref="_lane_switches"/> <see cref="_lane_lamps"/> and other options.
@@ -6,6 +8,7 @@
 public class PinballLanesNode : PinGodGameMode
 {
     bool[] _lanesCompleted;
+    private byte[] _laneSwitchNums;
 
     #region Exports
     [Export] bool _flipper_changes_lanes = true;
@@ -56,12 +59,19 @@ public class PinballLanesNode : PinGodGameMode
 
             if (_lane_switches == null)
             {
-                pinGod.LogError("no rollover switches defined. removing mode");
+                Logger.Error("no rollover switches defined. removing mode");
                 this.QueueFree();
             }
             else
             {
                 _lanesCompleted = new bool[_lane_switches.Length];
+                _laneSwitchNums = new byte[_lane_switches.Length];
+                for (int i = 0; i < _lane_switches.Length; i++)
+                {
+                    _laneSwitchNums[i]= Machine.Switches[_lane_switches[i]].Num;
+                }
+                
+                pinGod.Connect(nameof(PinGodBase.SwitchCommand), this, nameof(OnSwitchCommandHandler));
             }
         }
     }
@@ -71,40 +81,46 @@ public class PinballLanesNode : PinGodGameMode
     /// Checks if any of the <see cref="_lane_switches"/> were used and sets <see cref="LaneSwitchActivated(int)"/> <para/>
     /// Checks if lanes completed and updates lamps
     /// </summary>
-    /// <param name="event"></param>
-    public override void _Input(InputEvent @event)
-    {
-        if (Engine.EditorHint) SetProcessInput(false);
-
-        if (_lane_switches != null)
+    /// <param name="name"></param>
+    /// <param name="index"></param>
+    /// <param name="value"></param>
+    private void OnSwitchCommandHandler(string name, byte index, byte value)
+    {        
+        if(_lane_switches?.Length > 0)
         {
-            if (_flipper_changes_lanes)
+            if(value > 0)
             {
-                if (pinGod.SwitchOn("flipper_l", @event))
+                switch (name)
                 {
-                    RotateLanesLeft();
+                    case "flipper_l":
+                        if (_flipper_changes_lanes)
+                            RotateLanesLeft();
+                        return;
+                    case "flipper_r":
+                        if (_flipper_changes_lanes)
+                            RotateLanesRight();
+                        return;
+                    default:
+                        break;
                 }
-                if (pinGod.SwitchOn("flipper_r", @event))
-                {
-                    RotateLanesRight();
-                }
-            }
-            
-            bool wasSet = false;
-            for (int i = 0; i < _lane_switches.Length; i++)
-            {
-                if (pinGod.SwitchOn(_lane_switches[i], @event))
-                {
-                    wasSet = LaneSwitchActivated(i);
-                }
-            }
 
-            if (wasSet)
-            {
-                CheckLanes();
-                UpdateLamps();
+                bool wasSet = false;
+                for (int i = 0; i < _laneSwitchNums.Length; i++)
+                {
+                    if (_laneSwitchNums[i] == index)
+                    {
+                        wasSet = LaneSwitchActivated(i);
+                        CheckLanes();
+                        UpdateLamps();
+                        break;
+                    }                    
+                }
             }
-        }
+            else //switch off
+            {
+
+            }
+        }        
     }
 
     /// <summary>
@@ -147,7 +163,7 @@ public class PinballLanesNode : PinGodGameMode
         if (!_lanesCompleted[i])
         {
             _lanesCompleted[i] = true;
-            pinGod.LogDebug($"lane {i} complete");
+            Logger.Debug(nameof(PinballLanesNode), $":lane {i} complete");
 
             result = true;
         }
@@ -184,7 +200,7 @@ public class PinballLanesNode : PinGodGameMode
         _lanesCompleted[_lanesCompleted.Length - 1] = firstNum;
 
         UpdateLamps();
-        pinGod.LogDebug("lanes: rot left: ", string.Join(",", _lanesCompleted));
+        Logger.Debug(nameof(PinballLanesNode),":rot left: ", string.Join(",", _lanesCompleted));
     }
 
     /// <summary>
@@ -200,7 +216,7 @@ public class PinballLanesNode : PinGodGameMode
         _lanesCompleted[0] = lastNum;
 
         UpdateLamps();
-        pinGod.LogDebug("lanes: rot right: ", string.Join(",", _lanesCompleted));
+        Logger.Debug(nameof(PinballLanesNode), ":rot right: ", string.Join(",", _lanesCompleted));
     }
 
     /// <summary>

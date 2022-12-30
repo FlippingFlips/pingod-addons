@@ -23,14 +23,13 @@ public abstract class Game : PinGodGameNode
 	{
 		base._EnterTree();
 
-		pinGod.LogInfo("game: _enterTree. Getting ScoreEntry and Bonus scenes from the mode tree");
+        Logger.Debug(nameof(Game), ":", nameof(_EnterTree), ":looking for ScoreEntry and Bonus scenes..");
         scoreEntry = GetNode("Modes/ScoreEntry") as ScoreEntry;
         endOfBallBonus = GetNode("Modes/Bonus") as Bonus;
 
-        pinGod.LogInfo("game: loading multiball scene:  " + MULTIBALL_SCENE);
+        Logger.Debug(nameof(Game),":loading multiball scene:  " + MULTIBALL_SCENE);
         multiballPkd = ResourceLoader.Load(MULTIBALL_SCENE) as PackedScene;
 
-        pinGod.LogInfo("game: connecting game signals");
         pinGod.Connect(nameof(PinGodGame.BallDrained), this, nameof(OnBallDrained));
 		pinGod.Connect(nameof(PinGodGame.BallEnded), this, nameof(OnBallEnded));
 		pinGod.Connect(nameof(PinGodGame.BallSaved), this, nameof(OnBallSaved));
@@ -39,7 +38,7 @@ public abstract class Game : PinGodGameNode
 		pinGod.Connect(nameof(PinGodGame.ScoreEntryEnded), this, nameof(OnScoreEntryEnded));
         //pinGod.Connect(nameof(PinGodGameBase.PlayerAdded), this, "OnPlayerAdded");
 
-        pinGod.LogInfo("game: creating tilt timeout");
+        Logger.Debug(nameof(Game), ":", nameof(_EnterTree), ":creating tilt timeout");
         _tiltedTimeOut = new Timer() { OneShot = true, WaitTime = 4, Autostart = false };
 		AddChild(_tiltedTimeOut);
 		_tiltedTimeOut.Connect("timeout", this, nameof(timeout));
@@ -50,20 +49,20 @@ public abstract class Game : PinGodGameNode
 	/// </summary>
 	public override void _Ready()
 	{
-		pinGod.LogInfo("game: _ready");
-		pinGod.BallInPlay = 1;
+        Logger.Debug(nameof(Game), ":", nameof(_Ready));
+        pinGod.BallInPlay = 1;
 		StartNewBall();
 	}
 
 	/// <summary>
-	/// Gets an instance of the multi-ball scene and add it to the Modes tree
+	/// Gets an instance of the multi-ball scene and add it to the Modes tree in group named `multi-ball`
 	/// </summary>
 	public virtual void AddMultiballSceneToTree()
 	{
 		//create an mball instance from the packed scene
 		var mball = multiballPkd.Instance();
 		//add to multiball group
-		mball.AddToGroup("multiball");
+		mball.AddToGroup("multi-ball");
 		//add to the tree
 		GetNode("Modes").AddChild(mball);
 	}
@@ -71,10 +70,11 @@ public abstract class Game : PinGodGameNode
     /// add points with 25 bonus
     /// </summary>
     /// <param name="points"></param>
-    public virtual void AddPoints(int points)
+    /// <param name="bonus"></param>
+    public virtual void AddPoints(int points, int bonus = 25)
     {
         pinGod.AddPoints(points);
-        pinGod.AddBonus(25);
+        pinGod.AddBonus(bonus);
     }
 
     /// <summary>
@@ -82,8 +82,8 @@ public abstract class Game : PinGodGameNode
     /// </summary>
     public virtual void EndMultiball()
     {
-        pinGod.LogInfo("removing multiballs");
-        GetTree().CallGroup("multiball", "EndMultiball");
+        Logger.Debug(nameof(Game), ":removing multi-balls. sending EndMultiball to multi-ball group");
+        GetTree().CallGroup("multi-ball", "EndMultiball");
         pinGod.IsMultiballRunning = false;
     }
 
@@ -92,7 +92,7 @@ public abstract class Game : PinGodGameNode
     /// </summary>
     public virtual void OnBallEnded(bool lastBall)
 	{
-		pinGod.LogInfo("game: ball ended", pinGod.BallInPlay, "last ball:" + lastBall);
+        Logger.Info(nameof(Game), ":ball ended", pinGod.BallInPlay, " last ball:" + lastBall);
 		_lastBall = lastBall;
 
 		EndMultiball();
@@ -100,13 +100,13 @@ public abstract class Game : PinGodGameNode
 		if (!pinGod.IsTilted)
 		{
 			pinGod.InBonusMode = true;
-			pinGod.LogInfo("game: adding bonus scene for player: " + pinGod.CurrentPlayerIndex);
+            Logger.Info(nameof(Game),":adding bonus scene for player: " + pinGod.CurrentPlayerIndex);
 			endOfBallBonus.StartBonusDisplay();
 			return;
 		}
 		else if (pinGod.IsTilted && lastBall)
 		{
-			pinGod.LogDebug("last ball in tilt");
+            Logger.Debug(nameof(Game),":last ball in tilt");
 			pinGod.InBonusMode = false;
 			scoreEntry.DisplayHighScore();
 			return;
@@ -116,12 +116,12 @@ public abstract class Game : PinGodGameNode
 			if (_tiltedTimeOut.IsStopped())
 			{
 				pinGod.InBonusMode = false;
-				pinGod.LogInfo("no bonus, game was tilted. running timer to make player wait");
+                Logger.Info(nameof(Game),":no bonus, game was tilted. running timer to make player wait");
 				_tiltedTimeOut.Start(4);
 			}
 			else
 			{
-				pinGod.LogDebug("Still tilted");
+                Logger.Debug(nameof(Game), ":still tilted");
 			}
 		}
 	}
@@ -130,11 +130,11 @@ public abstract class Game : PinGodGameNode
     /// </summary>
     public virtual void OnBonusEnded()
 	{
-		pinGod.LogInfo("game: bonus ended, starting new ball");
+        Logger.Debug(nameof(Game),":bonus ended, starting new ball");
 		pinGod.InBonusMode = false;
 		if (_lastBall)
 		{
-			pinGod.LogInfo("game: last ball played, end of game");
+            Logger.Debug(nameof(Game), ":last ball played, end of game");
 			scoreEntry.DisplayHighScore();
 		}
 		else
@@ -148,7 +148,7 @@ public abstract class Game : PinGodGameNode
     /// </summary>
     public virtual void OnScoreEntryEnded()
     {
-        pinGod.LogInfo(nameof(OnScoreEntryEnded));
+        Logger.Debug(nameof(Game), " ", nameof(OnScoreEntryEnded));
         pinGod.EndOfGame();
     }
 
@@ -173,11 +173,11 @@ public abstract class Game : PinGodGameNode
 
 			if (pinGod.EndBall())
 			{
-				pinGod.LogInfo("last ball played game ending");
+				Logger.Info(nameof(Game), ":last ball played, game ending");
 			}
 			else
 			{
-				pinGod.LogInfo("game: new ball starting");
+				Logger.Info(nameof(Game), ":new ball starting");
 			}
 		}
 	}
@@ -188,7 +188,7 @@ public abstract class Game : PinGodGameNode
 
 	void OnStartNewBall()
 	{
-		pinGod.LogInfo("game: starting ball after tilting");
+        Logger.Debug(nameof(Game), ":starting new ball after tilting");
 		StartNewBall();
 	}
     /// <summary>

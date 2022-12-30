@@ -27,7 +27,7 @@ public class SwitchOverlay : GridContainer
 
 	void OnToggle(bool button_pressed, string swName)
 	{
-		//pingod.LogDebug("switch overlay: " + swName + button_pressed);
+		//Logger.Debug("switch overlay: " + swName + button_pressed);
 		var sw = Machine.Switches[swName];
 		sw?.SetSwitch(button_pressed);
 	}

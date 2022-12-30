@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Threading.Tasks;
 using static Godot.GD;
+using static PinGodBase;
 
 /// <summary>
 /// Main Scene. The Entry point
@@ -38,7 +39,7 @@ public class MainScene : Node2D
     {
         //save a reference to connect signals
         pinGod = GetNode<PinGodGame>("/root/PinGodGame");
-        pinGod.LogDebug("Splash timer msecs", OS.GetSplashTickMsec());
+        Logger.Debug(nameof(MainScene), ":splash timer msecs", OS.GetSplashTickMsec());
 
         //try to catch anything unhandled here, not when ready
         AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionHandler;
@@ -53,11 +54,43 @@ public class MainScene : Node2D
         pinGod.Connect(nameof(PinGodGame.GameEnded), this, nameof(OnGameEnded));
         pinGod.Connect(nameof(PinGodGame.ServiceMenuExit), this, nameof(OnServiceMenuExit));
 
+        //connect to a switch command. the switches can come from actions or ReadStates
+        pinGod.Connect(nameof(SwitchCommand), this, nameof(OnSwitchCommandHandler));
+
         //attract mod already in the tree, get the instance so we can free it when game started
         attractnode = GetNode("Modes/Attract");
         //show a pause menu when pause enabled.
         pauseLayer = GetNode("CanvasLayer/PauseControl") as Control;
         settingsDisplay = GetNodeOrNull<Control>("CanvasLayer/SettingsDisplay");
+    }
+
+    private void OnSwitchCommandHandler(string name, byte index, byte value)
+    {
+        if (value <= 0) return;
+        if (!pinGod.IsTilted && name == "enter")
+        {
+            if (!InServiceMenu)
+            {
+                if (!string.IsNullOrWhiteSpace(_service_menu_scene_path))
+                {
+                    //enter service menu					
+                    InServiceMenu = true;
+
+                    Task.Run(() =>
+                    {
+                        if (pinGod.GameInPlay)
+                            GetNode("Modes/Game")?.QueueFree();
+                        else
+                            GetNode("Modes/Attract")?.Free();
+
+                        //load service menu into modes
+                        CallDeferred("_loaded", _resourcePreLoader.GetResource(_service_menu_scene_path.BaseName()));
+
+                        pinGod.EmitSignal("ServiceMenuEnter");
+                    });
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -74,15 +107,14 @@ public class MainScene : Node2D
             return;
         }
 
-        if (@event.IsActionPressed("quit"))
-        {
-            pinGod.Quit();
-            return;
-        }
+        //if (@event.IsActionPressed("quit"))
+        //{
+        //    pinGod.Quit();
+        //    return;
+        //}
 
         if (@event.IsActionPressed("settings"))
-        {
-            
+        {            
             if (settingsDisplay != null)
             {
                 settingsDisplay.Visible = !settingsDisplay.Visible;
@@ -97,44 +129,16 @@ public class MainScene : Node2D
                 }
             }                
         }
-
-        if (!pinGod.IsTilted)
-        {
-            if (pinGod.SwitchOn("enter", @event))
-            {
-                if (!InServiceMenu)
-                {
-                    if (!string.IsNullOrWhiteSpace(_service_menu_scene_path))
-                    {
-                        //enter service menu					
-                        InServiceMenu = true;
-
-                        Task.Run(() =>
-                        {
-                            if (pinGod.GameInPlay)
-                                GetNode("Modes/Game")?.QueueFree();
-                            else
-                                GetNode("Modes/Attract")?.Free();
-
-                            //load service menu into modes
-                            CallDeferred("_loaded", _resourcePreLoader.GetResource(_service_menu_scene_path.BaseName()));
-
-                            pinGod.EmitSignal("ServiceMenuEnter");
-                        });
-                    }
-                }
-            }
-        }
     }
 
     /// <summary>
-    /// Sets Solenoid enabled under "died"? <para/>
+    /// Sets Solenoid enabled under "alive"? <para/>
     /// pingod.vp controller coil 0, sets GameRunning on the controller
     /// </summary>
     public override void _Ready()
     {
         pauseLayer.Hide();        
-        pinGod.LogInfo("MainScene: sent IsAlive coil on for simulator");
+        Logger.Info(nameof(MainScene), ":sent IsAlive coil on for simulator");
     }
 
     /// <summary>
@@ -161,7 +165,7 @@ public class MainScene : Node2D
     void _loaded(PackedScene packedScene)
     {
         GetNode("Modes").AddChild(packedScene.Instance());
-        pinGod.LogInfo("modes added: ", packedScene.ResourceName);
+        Logger.Debug(nameof(MainScene),":modes added: ", packedScene.ResourceName);
     }
 
     /// <summary>
@@ -179,13 +183,13 @@ public class MainScene : Node2D
                 Resource res = null;
                 if (!_resourcePreLoader.HasResource(name))
                 {
-                    pinGod.LogDebug("loading mode scene resource for ", name);
+                    Logger.Debug(nameof(MainScene), ":loading mode scene resource for ", name);
                     res = Load(resourcePath);
                     _resourcePreLoader.AddResource(name, res);
                 }
                 else
                 {
-                    pinGod.LogWarning("scene resource already exists for ", name);
+                    Logger.Warning(nameof(MainScene), ":scene resource already exists for ", name);
                     res = _resourcePreLoader.GetResource(name);
                 }
                 CallDeferred("_loaded", res);
@@ -208,7 +212,7 @@ public class MainScene : Node2D
             m.Lock();
             var ril = ResourceLoader.LoadInteractive(resourcePath);
             PackedScene res; //the resource to return after finished loading
-            pinGod.LogDebug("loading-" + resourcePath);
+            Logger.Debug(nameof(MainScene), ":loading-" + resourcePath);
             //var total = ril.GetStageCount(); //total resources left to load, can be used progress bar
             while (true)
             {
@@ -233,7 +237,7 @@ public class MainScene : Node2D
 
     private void OnPauseGame()
     {
-        pinGod.LogDebug("pause");
+        Logger.Debug(nameof(MainScene), ":pause");
         pinGod.SetGamePaused();
         pauseLayer.Show();
         GetTree().Paused = true;
@@ -241,7 +245,7 @@ public class MainScene : Node2D
 
     private void OnResumeGame()
     {
-        pinGod.LogDebug("resume");
+        Logger.Debug(nameof(MainScene), ":resume");
         pinGod.SetGameResumed();
         pauseLayer.Hide();
         GetTree().Paused = false;
@@ -279,6 +283,6 @@ public class MainScene : Node2D
     }
 	private void UnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
 	{
-		pinGod.LogError($"Unhandled exception {e.ExceptionObject}");
+		Logger.Error($"Unhandled exception {e.ExceptionObject}");
 	}
 }

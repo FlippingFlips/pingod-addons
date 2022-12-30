@@ -5,8 +5,6 @@ draft: false
 weight: 20
 ---
 
-Machine Config
+🗒 [MachineConfig Class Reference](/pingod-addons/html/classMachineConfig.html)
 
-Guide for adding machine items, switch help
-
-[MachineConfig Class Reference](/pingod-addons/html/classMachineConfig.html)
+🗒 [MachineConfig Class Reference](/pingod-addons/html/classMachineConfig.html)
