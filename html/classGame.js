@@ -3,7 +3,7 @@ var classGame =
     [ "_EnterTree", "classGame.html#a6bedd922667634b008b15041e97ad20b", null ],
     [ "_Ready", "classGame.html#adb6601522ba9f3043e9a310eeafbdae8", null ],
     [ "AddMultiballSceneToTree", "classGame.html#a84d11717039e67062494dc32eb770906", null ],
-    [ "AddPoints", "classGame.html#a01a9eb836150891fa0b44e853e0222fc", null ],
+    [ "AddPoints", "classGame.html#a3f064e5764ce7a3de856eb9f690dce91", null ],
     [ "EndMultiball", "classGame.html#a60bf167fffd78d511881d50cbad4f6af", null ],
     [ "OnBallDrained", "classGame.html#a36e78b48e1422edbf0cdccb95ccb6f12", null ],
     [ "OnBallEnded", "classGame.html#aa7184657288ef95484475f3ac7ebb9ee", null ],

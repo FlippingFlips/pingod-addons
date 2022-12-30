@@ -36,7 +36,7 @@ This can make it easier to edit outside of table, keep track of changes etc. At 
  PinGod.VP.Controller  The first section marked in red is the PinGod.VP.Controller initialization.
  Game Project Location  When debugging, if the games Godot project is relative to the table (the same as this repo), then you won&rsquo;t have to adjust the script for the GameDirectory."><meta itemprop=datePublished content="2022-12-26T15:26:15+00:00">
 <meta itemprop=dateModified content="2022-10-26T15:26:15+00:00">
-<meta itemprop=wordCount content="565"><meta itemprop=image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
+<meta itemprop=wordCount content="520"><meta itemprop=image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
 <meta itemprop=keywords content></head>
 <body><div class=container><header>
 <h1>PinGod AddOns</h1><span class=version>Version 4.3.0</span><a href=https://github.com/FlippingFlips/pingod-addons class=github><i class="fab fa-github"></i></a>
@@ -106,10 +106,7 @@ This can make it easier to edit outside of table, keep track of changes etc. At 
 <hr>
 <h3 id=table-init>Table Init</h3>
 <hr>
-<p>Visual pinball <code>Table1_Init</code> is a little different here. This is where the controller is <code>Run</code>, how it is run depends on the <code>IsDebug</code> flag set.</p>
-<p>A timer interval is added to the <code>LeftFlipper</code> which checks to see if the <code>Controller.GameRunning</code> is enabled. When it is enabled then <code>InitGame</code> is invoked.</p>
-<p><img src=../../images/basicgame-vp-script-d.jpg alt=image></p>
-<p>You can set more on the Controller like these <a href=#display-settings>display settings</a></p>
+<p>Visual pinball <code>Table1_Init</code> controller is <code>Run</code>, how it is run depends on the <code>IsDebug</code> flag set.</p>
 <hr>
 <h3 id=init-game>Init game</h3>
 <hr>
@@ -255,10 +252,11 @@ Published on 26 Dec 2022
 </li>
 <li class=has-sub-menu><a href=https://FlippingFlips.github.io/pingod-addons/machine/>Machine<span class="mark closed">+</span></a>
 <ul class=sub-menu>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/machine/switchesactions/>Switches to Actions</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/machine/usingswitches/>Using Switches (Godot)</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/machine/adding-switches/>Adding Switches - PinGodGame.tscn</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/machine/adding-godot-actions/>Adding Actions - Project Settings</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/machine/usingswitches/>Using Switches C#</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/machine/usingswitchescontroller/>Using Switches (Controller)</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/machine/usingcoils/>Using Coils (Godot)</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/machine/usingcoils/>Using Coils (C#)</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/machine/usingcoilscontroller/>Using Coils (Controller)</a></li>
 </ul>
 </li>

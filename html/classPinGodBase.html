@@ -164,8 +164,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab3b0f3b213a4c00cb4cd66e1ef3f662a"><td class="memItemLeft" align="right" valign="top">delegate void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodBase.html#ab3b0f3b213a4c00cb4cd66e1ef3f662a">ServiceMenuExit</a> ()</td></tr>
 <tr class="memdesc:ab3b0f3b213a4c00cb4cd66e1ef3f662a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted signal when player exits the service menu  <a href="classPinGodBase.html#ab3b0f3b213a4c00cb4cd66e1ef3f662a">More...</a><br /></td></tr>
 <tr class="separator:ab3b0f3b213a4c00cb4cd66e1ef3f662a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62fd081cc61618d3788a567a340d4141"><td class="memItemLeft" align="right" valign="top">delegate void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodBase.html#a62fd081cc61618d3788a567a340d4141">SwitchCommand</a> (string name, byte index, byte value)</td></tr>
+<tr class="memdesc:a62fd081cc61618d3788a567a340d4141"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when a switch comes into the game. From MemoryMap.ReadStates then <a class="el" href="classPinGodGame.html#ac0334ad05f54c0a5e10dde831df3f5b7" title="Set IsEnabled on the Switch and emits PinGodBase.SwitchCommand with number and byte value Switch will...">PinGodGame.SetSwitch(int, byte)</a>  <a href="classPinGodBase.html#a62fd081cc61618d3788a567a340d4141">More...</a><br /></td></tr>
+<tr class="separator:a62fd081cc61618d3788a567a340d4141"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c601ba6243b36709250d2a8e6649bee"><td class="memItemLeft" align="right" valign="top">delegate void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodBase.html#a2c601ba6243b36709250d2a8e6649bee">VpCommand</a> (byte index)</td></tr>
-<tr class="memdesc:a2c601ba6243b36709250d2a8e6649bee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Signal sent from memory map if <a class="el" href="classGameSettings.html#a7d4411d5d06877267e367691440be1eb" title="A command switch number for the memory map so user can send a byte over a switch number Set this id g...">GameSettings.VpCommandSwitchId</a> was found while reading states  <a href="classPinGodBase.html#a2c601ba6243b36709250d2a8e6649bee">More...</a><br /></td></tr>
+<tr class="memdesc:a2c601ba6243b36709250d2a8e6649bee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Signal sent from memory map if <a class="el" href="classGameSettings.html#a7d4411d5d06877267e367691440be1eb" title="A command switch number for the memory map so user can send a byte over a switch number Set this id g...">GameSettings.VpCommandSwitchId</a> was found while reading switch states  <a href="classPinGodBase.html#a2c601ba6243b36709250d2a8e6649bee">More...</a><br /></td></tr>
 <tr class="separator:a2c601ba6243b36709250d2a8e6649bee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -559,6 +562,50 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a62fd081cc61618d3788a567a340d4141"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62fd081cc61618d3788a567a340d4141">&#9670;&nbsp;</a></span>SwitchCommand()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">delegate void PinGodBase.SwitchCommand </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">byte&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">byte&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Emitted when a switch comes into the game. From MemoryMap.ReadStates then <a class="el" href="classPinGodGame.html#ac0334ad05f54c0a5e10dde831df3f5b7" title="Set IsEnabled on the Switch and emits PinGodBase.SwitchCommand with number and byte value Switch will...">PinGodGame.SetSwitch(int, byte)</a> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td></td></tr>
+    <tr><td class="paramname">index</td><td></td></tr>
+    <tr><td class="paramname">value</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a2c601ba6243b36709250d2a8e6649bee"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2c601ba6243b36709250d2a8e6649bee">&#9670;&nbsp;</a></span>VpCommand()</h2>
 
@@ -575,7 +622,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Signal sent from memory map if <a class="el" href="classGameSettings.html#a7d4411d5d06877267e367691440be1eb" title="A command switch number for the memory map so user can send a byte over a switch number Set this id g...">GameSettings.VpCommandSwitchId</a> was found while reading states </p>
+<p>Signal sent from memory map if <a class="el" href="classGameSettings.html#a7d4411d5d06877267e367691440be1eb" title="A command switch number for the memory map so user can send a byte over a switch number Set this id g...">GameSettings.VpCommandSwitchId</a> was found while reading switch states </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">index</td><td></td></tr>

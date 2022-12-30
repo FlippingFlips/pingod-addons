@@ -15,9 +15,11 @@
 <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin=anonymous></script>
 <script src=https://FlippingFlips.github.io/pingod-addons/js/bundle.js></script><style>:root{--custom-font-color:#FFFFFF;--custom-background-color:#003300}</style>
 <link rel=stylesheet href=https://FlippingFlips.github.io/pingod-addons/css/pingod.css><meta property="og:title" content="Logging Games">
-<meta property="og:description" content="Log location  In the appdata directory under the game name under logs .log are created. Use the open_app_data.bat to open directory to open the data directory.
- Usage  Use from a pinGod reference or the static Logger in script
-void LogDebug(params object[] what); void LogInfo(params object[] what); void LogWarning(string message = null, params object[] what); void LogError(string message = null, params object[] what); PinGodLogLevel LogLevel { get; } Game logging">
+<meta property="og:description" content="Game logging Class Reference
+ Log location  In the appdata directory under the game name, logs .log are created. Use the open_app_data.bat to open directory to open the data directory.
+The image above has the users game directory open with Sublime Text.
+ SublimeText - Game Data Folder The steps to add this directory and save project:
+ Find the games appdata folder with bat file _godot_appdata_dir.bat Copy the path and use Open Folder in Sublime and open the user path Save this as a project in sublime then reopen it later for a quicker way to view logs, look at your settings etc for this game.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://FlippingFlips.github.io/pingod-addons/getting-started/logging/"><meta property="og:image" content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png"><meta property="article:section" content="getting-started">
 <meta property="article:published_time" content="2022-12-26T15:26:15+00:00">
@@ -25,15 +27,19 @@ void LogDebug(params object[] what); void LogInfo(params object[] what); void Lo
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
 <meta name=twitter:title content="Logging Games">
-<meta name=twitter:description content="Log location  In the appdata directory under the game name under logs .log are created. Use the open_app_data.bat to open directory to open the data directory.
- Usage  Use from a pinGod reference or the static Logger in script
-void LogDebug(params object[] what); void LogInfo(params object[] what); void LogWarning(string message = null, params object[] what); void LogError(string message = null, params object[] what); PinGodLogLevel LogLevel { get; } Game logging">
+<meta name=twitter:description content="Game logging Class Reference
+ Log location  In the appdata directory under the game name, logs .log are created. Use the open_app_data.bat to open directory to open the data directory.
+The image above has the users game directory open with Sublime Text.
+ SublimeText - Game Data Folder The steps to add this directory and save project:
+ Find the games appdata folder with bat file _godot_appdata_dir.bat Copy the path and use Open Folder in Sublime and open the user path Save this as a project in sublime then reopen it later for a quicker way to view logs, look at your settings etc for this game.">
 <meta itemprop=name content="Logging Games">
-<meta itemprop=description content="Log location  In the appdata directory under the game name under logs .log are created. Use the open_app_data.bat to open directory to open the data directory.
- Usage  Use from a pinGod reference or the static Logger in script
-void LogDebug(params object[] what); void LogInfo(params object[] what); void LogWarning(string message = null, params object[] what); void LogError(string message = null, params object[] what); PinGodLogLevel LogLevel { get; } Game logging"><meta itemprop=datePublished content="2022-12-26T15:26:15+00:00">
+<meta itemprop=description content="Game logging Class Reference
+ Log location  In the appdata directory under the game name, logs .log are created. Use the open_app_data.bat to open directory to open the data directory.
+The image above has the users game directory open with Sublime Text.
+ SublimeText - Game Data Folder The steps to add this directory and save project:
+ Find the games appdata folder with bat file _godot_appdata_dir.bat Copy the path and use Open Folder in Sublime and open the user path Save this as a project in sublime then reopen it later for a quicker way to view logs, look at your settings etc for this game."><meta itemprop=datePublished content="2022-12-26T15:26:15+00:00">
 <meta itemprop=dateModified content="2022-12-26T15:26:15+00:00">
-<meta itemprop=wordCount content="71"><meta itemprop=image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
+<meta itemprop=wordCount content="225"><meta itemprop=image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
 <meta itemprop=keywords content></head>
 <body><div class=container><header>
 <h1>PinGod AddOns</h1><span class=version>Version 4.3.0</span><a href=https://github.com/FlippingFlips/pingod-addons class=github><i class="fab fa-github"></i></a>
@@ -49,26 +55,49 @@ void LogDebug(params object[] what); void LogInfo(params object[] what); void Lo
 </div>
 <div class=content-container>
 <main><h1>Logging Games</h1>
+<p><a href=/pingod-addons/html/interfaceIPinballLogger.html>Game logging Class Reference</a></p>
 <hr>
 <h2 id=log-location>Log location</h2>
 <hr>
-<p>In the appdata directory under the game name under logs <code>.log</code> are created. Use the <code>open_app_data.bat</code> to open directory to open the data directory.</p>
+<p>In the appdata directory under the game name, logs <code>.log</code> are created. Use the <code>open_app_data.bat</code> to open directory to open the data directory.</p>
+<p><img src=../../images/basicgame-userdata-sublime.jpg alt=image></p>
+<p>The image above has the users game directory open with Sublime Text.</p>
 <hr>
-<h2 id=usage>Usage</h2>
+<h2 id=sublimetext---game-data-folder>SublimeText - Game Data Folder</h2>
+<p>The steps to add this directory and save project:</p>
+<ol>
+<li>Find the games appdata folder with bat file <code>_godot_appdata_dir.bat</code></li>
+<li>Copy the path and use <code>Open Folder</code> in Sublime and open the user path</li>
+<li>Save this as a project in sublime then reopen it later for a quicker way to view logs, look at your settings etc for this game.</li>
+</ol>
+<p>You could do similar with a Visual Studio code workspace or something else, this is just one example of getting back to viewing this directory.</p>
 <hr>
-<p>Use from a pinGod reference or the static Logger in script</p>
-<pre tabindex=0><code>void LogDebug(params object[] what);
+<h2 id=log-example>Log example:</h2>
+<pre tabindex=0><code>Godot Engine v3.4.2.stable.mono.official.45eaa2daf - https://godotengine.org
+OpenGL ES 3.0 Renderer: Radeon RX 570 Series
+OpenGL ES Batching: ON
+ 
+PinGodGame:_EnterTree. getting cmd args
+PinGodGamecmd line available: 0
+GameSettings:loaded:Ok
+PinGodGame:_EnterTree. log level: Debug
+PinGodGame:window: size:766x478 pos:403,221, onTop: True
+PinGodGame:window: project settings size: 1024x600
+PinGodGame:looking for game patches. res://patch/patch_{patchNum}.pck . From 1. patch_1.pck, patch_2.pck
+</code></pre><hr>
+<h2 id=script-usage>Script Usage</h2>
+<hr>
+<p>Use from a pinGod reference or the static Logger in script like Logger.Debug</p>
+<pre tabindex=0><code>void Debug(params object[] what);
 
-void LogInfo(params object[] what);
+void Info(params object[] what);
 	
-void LogWarning(string message = null, params object[] what);
+void Warning(string message = null, params object[] what);
 
-void LogError(string message = null, params object[] what);
+void Error(string message = null, params object[] what);
 
 PinGodLogLevel LogLevel { get; }
-</code></pre><p>Game logging</p>
-<p><a href=/pingod-addons/html/interfaceIPinballLogger.html>Class Reference</a></p>
-<div class=edit-meta>
+</code></pre><div class=edit-meta>
 Last updated on 26 Dec 2022
 <br>
 Published on 26 Dec 2022
@@ -115,10 +144,11 @@ Published on 26 Dec 2022
 </li>
 <li class=has-sub-menu><a href=https://FlippingFlips.github.io/pingod-addons/machine/>Machine<span class="mark closed">+</span></a>
 <ul class=sub-menu>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/machine/switchesactions/>Switches to Actions</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/machine/usingswitches/>Using Switches (Godot)</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/machine/adding-switches/>Adding Switches - PinGodGame.tscn</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/machine/adding-godot-actions/>Adding Actions - Project Settings</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/machine/usingswitches/>Using Switches C#</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/machine/usingswitchescontroller/>Using Switches (Controller)</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/machine/usingcoils/>Using Coils (Godot)</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/machine/usingcoils/>Using Coils (C#)</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/machine/usingcoilscontroller/>Using Coils (Controller)</a></li>
 </ul>
 </li>

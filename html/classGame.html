@@ -112,11 +112,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:adb6601522ba9f3043e9a310eeafbdae8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts a new game and ball (soon as this <a class="el" href="classGame.html" title="Custom Game class for Basic Game">Game</a> enters the scene tree). OnBallStarted is invoked on nodes grouped as Mode  <a href="classGame.html#adb6601522ba9f3043e9a310eeafbdae8">More...</a><br /></td></tr>
 <tr class="separator:adb6601522ba9f3043e9a310eeafbdae8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84d11717039e67062494dc32eb770906"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGame.html#a84d11717039e67062494dc32eb770906">AddMultiballSceneToTree</a> ()</td></tr>
-<tr class="memdesc:a84d11717039e67062494dc32eb770906"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets an instance of the multi-ball scene and add it to the Modes tree  <a href="classGame.html#a84d11717039e67062494dc32eb770906">More...</a><br /></td></tr>
+<tr class="memdesc:a84d11717039e67062494dc32eb770906"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets an instance of the multi-ball scene and add it to the Modes tree in group named <code>multi-ball</code>  <a href="classGame.html#a84d11717039e67062494dc32eb770906">More...</a><br /></td></tr>
 <tr class="separator:a84d11717039e67062494dc32eb770906"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01a9eb836150891fa0b44e853e0222fc"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGame.html#a01a9eb836150891fa0b44e853e0222fc">AddPoints</a> (int points)</td></tr>
-<tr class="memdesc:a01a9eb836150891fa0b44e853e0222fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">add points with 25 bonus  <a href="classGame.html#a01a9eb836150891fa0b44e853e0222fc">More...</a><br /></td></tr>
-<tr class="separator:a01a9eb836150891fa0b44e853e0222fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f064e5764ce7a3de856eb9f690dce91"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGame.html#a3f064e5764ce7a3de856eb9f690dce91">AddPoints</a> (int points, int bonus=25)</td></tr>
+<tr class="memdesc:a3f064e5764ce7a3de856eb9f690dce91"><td class="mdescLeft">&#160;</td><td class="mdescRight">add points with 25 bonus  <a href="classGame.html#a3f064e5764ce7a3de856eb9f690dce91">More...</a><br /></td></tr>
+<tr class="separator:a3f064e5764ce7a3de856eb9f690dce91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60bf167fffd78d511881d50cbad4f6af"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGame.html#a60bf167fffd78d511881d50cbad4f6af">EndMultiball</a> ()</td></tr>
 <tr class="memdesc:a60bf167fffd78d511881d50cbad4f6af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets <a class="el" href="classPinGodGame.html#adbca937e8a0daa12d283217d9f656651" title="Any multi-ball running?">PinGodGame.IsMultiballRunning</a> to false and Any node that is in the multiball group is removed from tree  <a href="classGame.html#a60bf167fffd78d511881d50cbad4f6af">More...</a><br /></td></tr>
 <tr class="separator:a60bf167fffd78d511881d50cbad4f6af"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -220,12 +220,12 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Gets an instance of the multi-ball scene and add it to the Modes tree </p>
+<p>Gets an instance of the multi-ball scene and add it to the Modes tree in group named <code>multi-ball</code> </p>
 
 </div>
 </div>
-<a id="a01a9eb836150891fa0b44e853e0222fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a01a9eb836150891fa0b44e853e0222fc">&#9670;&nbsp;</a></span>AddPoints()</h2>
+<a id="a3f064e5764ce7a3de856eb9f690dce91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f064e5764ce7a3de856eb9f690dce91">&#9670;&nbsp;</a></span>AddPoints()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -237,8 +237,18 @@ Additional Inherited Members</h2></td></tr>
           <td class="memname">virtual void Game.AddPoints </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>points</em></td><td>)</td>
+          <td class="paramname"><em>points</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>bonus</em> = <code>25</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -252,6 +262,7 @@ Additional Inherited Members</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">points</td><td></td></tr>
+    <tr><td class="paramname">bonus</td><td></td></tr>
   </table>
   </dd>
 </dl>

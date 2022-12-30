@@ -99,20 +99,17 @@ $(document).ready(function(){initNavTree('classPinballTargetsBank.html',''); ini
 Inheritance diagram for PinballTargetsBank:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classPinballTargetsBank.png" alt=""/>
- </div></div>
+  <img src="classPinballTargetsBank.png" usemap="#PinballTargetsBank_map" alt=""/>
+  <map id="PinballTargetsBank_map" name="PinballTargetsBank_map">
+<area href="classPinGodGameNode.html" title="Uses Godot Node as a base to provide PinGodGame access to a class" alt="PinGodGameNode" shape="rect" coords="0,56,120,80"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aaa431ff0be23d6b77abb255404dc4542"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinballTargetsBank.html#aaa431ff0be23d6b77abb255404dc4542">_EnterTree</a> ()</td></tr>
-<tr class="memdesc:aaa431ff0be23d6b77abb255404dc4542"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes <a class="el" href="classPinballTargetsBank.html#ad094ffad2c575f81c84d0892b90373a0" title="pinGodGame Scene">pinGod</a> and removes this node if no <a class="el" href="classPinballTargetsBank.html#af5067f12650b36c342a50fb31cd651b0" title="Switch Names">_target_switches</a> have been set  <a href="classPinballTargetsBank.html#aaa431ff0be23d6b77abb255404dc4542">More...</a><br /></td></tr>
+<tr class="memdesc:aaa431ff0be23d6b77abb255404dc4542"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes this node if no <a class="el" href="classPinballTargetsBank.html#af5067f12650b36c342a50fb31cd651b0" title="Switch Names">_target_switches</a> have been set  <a href="classPinballTargetsBank.html#aaa431ff0be23d6b77abb255404dc4542">More...</a><br /></td></tr>
 <tr class="separator:aaa431ff0be23d6b77abb255404dc4542"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab528c866ebefc4c8f587e065de1f73b4"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinballTargetsBank.html#ab528c866ebefc4c8f587e065de1f73b4">_Input</a> (InputEvent @event)</td></tr>
-<tr class="memdesc:ab528c866ebefc4c8f587e065de1f73b4"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classPinballTargetsBank.html#a1180170c72d530ed2982ac7334bb6948" title="Processes the _target_switches">ProcessTargetSwitchInputs</a>  <a href="classPinballTargetsBank.html#ab528c866ebefc4c8f587e065de1f73b4">More...</a><br /></td></tr>
-<tr class="separator:ab528c866ebefc4c8f587e065de1f73b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1180170c72d530ed2982ac7334bb6948"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinballTargetsBank.html#a1180170c72d530ed2982ac7334bb6948">ProcessTargetSwitchInputs</a> (InputEvent @event)</td></tr>
-<tr class="memdesc:a1180170c72d530ed2982ac7334bb6948"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes the <a class="el" href="classPinballTargetsBank.html#af5067f12650b36c342a50fb31cd651b0" title="Switch Names">_target_switches</a>  <a href="classPinballTargetsBank.html#a1180170c72d530ed2982ac7334bb6948">More...</a><br /></td></tr>
-<tr class="separator:a1180170c72d530ed2982ac7334bb6948"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa071352a2e31e8b9b2d93bf2561ffb6a"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinballTargetsBank.html#aa071352a2e31e8b9b2d93bf2561ffb6a">CheckTargetsCompleted</a> (int index)</td></tr>
 <tr class="memdesc:aa071352a2e31e8b9b2d93bf2561ffb6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if all targets are completed  <a href="classPinballTargetsBank.html#aa071352a2e31e8b9b2d93bf2561ffb6a">More...</a><br /></td></tr>
 <tr class="separator:aa071352a2e31e8b9b2d93bf2561ffb6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -128,12 +125,20 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a357311269c7e4747e65b5562bcca4334"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinballTargetsBank.html#a357311269c7e4747e65b5562bcca4334">UpdateLamps</a> ()</td></tr>
 <tr class="memdesc:a357311269c7e4747e65b5562bcca4334"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the lamps with matched to the same length as the switches  <a href="classPinballTargetsBank.html#a357311269c7e4747e65b5562bcca4334">More...</a><br /></td></tr>
 <tr class="separator:a357311269c7e4747e65b5562bcca4334"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classPinGodGameNode"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classPinGodGameNode')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classPinGodGameNode.html">PinGodGameNode</a></td></tr>
+<tr class="memitem:a19c34f5ba54f0581bca8f3f40d94ac6c inherit pub_methods_classPinGodGameNode"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodGameNode.html#a19c34f5ba54f0581bca8f3f40d94ac6c">_EnterTree</a> ()</td></tr>
+<tr class="memdesc:a19c34f5ba54f0581bca8f3f40d94ac6c inherit pub_methods_classPinGodGameNode"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a reference to <a class="el" href="classPinGodGameNode.html#a55b0a357068c8caae1086ad151afe00a" title="A reference to PinGodGame node">pinGod</a> in the root /root/PinGodGame  <a href="classPinGodGameNode.html#a19c34f5ba54f0581bca8f3f40d94ac6c">More...</a><br /></td></tr>
+<tr class="separator:a19c34f5ba54f0581bca8f3f40d94ac6c inherit pub_methods_classPinGodGameNode"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:ac6cc37aeaca747c09b420c747100ef41"><td class="memItemLeft" align="right" valign="top">bool[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinballTargetsBank.html#ac6cc37aeaca747c09b420c747100ef41">_targetValues</a></td></tr>
 <tr class="memdesc:ac6cc37aeaca747c09b420c747100ef41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Array of booleans if target is complete same length as <a class="el" href="classPinballTargetsBank.html#af5067f12650b36c342a50fb31cd651b0" title="Switch Names">_target_switches</a>  <a href="classPinballTargetsBank.html#ac6cc37aeaca747c09b420c747100ef41">More...</a><br /></td></tr>
 <tr class="separator:ac6cc37aeaca747c09b420c747100ef41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_classPinGodGameNode"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classPinGodGameNode')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classPinGodGameNode.html">PinGodGameNode</a></td></tr>
+<tr class="memitem:a55b0a357068c8caae1086ad151afe00a inherit pub_attribs_classPinGodGameNode"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPinGodGame.html">PinGodGame</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodGameNode.html#a55b0a357068c8caae1086ad151afe00a">pinGod</a></td></tr>
+<tr class="memdesc:a55b0a357068c8caae1086ad151afe00a inherit pub_attribs_classPinGodGameNode"><td class="mdescLeft">&#160;</td><td class="mdescRight">A reference to <a class="el" href="classPinGodGame.html" title="Create class inheriting this and use the PinGodGame.tscn. This should be set to AutoLoad with the cor...">PinGodGame</a> node  <a href="classPinGodGameNode.html#a55b0a357068c8caae1086ad151afe00a">More...</a><br /></td></tr>
+<tr class="separator:a55b0a357068c8caae1086ad151afe00a inherit pub_attribs_classPinGodGameNode"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -160,9 +165,6 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a7abaa73213cccc3c2e2763087e6dafd2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinballTargetsBank.html#a7abaa73213cccc3c2e2763087e6dafd2">_reset_when_completed</a> = true</td></tr>
 <tr class="memdesc:a7abaa73213cccc3c2e2763087e6dafd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset targets when complete  <a href="classPinballTargetsBank.html#a7abaa73213cccc3c2e2763087e6dafd2">More...</a><br /></td></tr>
 <tr class="separator:a7abaa73213cccc3c2e2763087e6dafd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad094ffad2c575f81c84d0892b90373a0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPinGodGame.html">PinGodGame</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinballTargetsBank.html#ad094ffad2c575f81c84d0892b90373a0">pinGod</a></td></tr>
-<tr class="memdesc:ad094ffad2c575f81c84d0892b90373a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">pinGodGame Scene  <a href="classPinballTargetsBank.html#ad094ffad2c575f81c84d0892b90373a0">More...</a><br /></td></tr>
-<tr class="separator:ad094ffad2c575f81c84d0892b90373a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3049d8918ec0034f573f2b00bde1894e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinballTargetsBank.html#a3049d8918ec0034f573f2b00bde1894e">_targetsCompleted</a></td></tr>
 <tr class="memdesc:a3049d8918ec0034f573f2b00bde1894e"><td class="mdescLeft">&#160;</td><td class="mdescRight">All targets completed?  <a href="classPinballTargetsBank.html#a3049d8918ec0034f573f2b00bde1894e">More...</a><br /></td></tr>
 <tr class="separator:a3049d8918ec0034f573f2b00bde1894e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -185,33 +187,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Initializes <a class="el" href="classPinballTargetsBank.html#ad094ffad2c575f81c84d0892b90373a0" title="pinGodGame Scene">pinGod</a> and removes this node if no <a class="el" href="classPinballTargetsBank.html#af5067f12650b36c342a50fb31cd651b0" title="Switch Names">_target_switches</a> have been set </p>
-
-</div>
-</div>
-<a id="ab528c866ebefc4c8f587e065de1f73b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab528c866ebefc4c8f587e065de1f73b4">&#9670;&nbsp;</a></span>_Input()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">override void PinballTargetsBank._Input </td>
-          <td>(</td>
-          <td class="paramtype">InputEvent @&#160;</td>
-          <td class="paramname"><em>event</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><a class="el" href="classPinballTargetsBank.html#a1180170c72d530ed2982ac7334bb6948" title="Processes the _target_switches">ProcessTargetSwitchInputs</a> </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">event</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Removes this node if no <a class="el" href="classPinballTargetsBank.html#af5067f12650b36c342a50fb31cd651b0" title="Switch Names">_target_switches</a> have been set </p>
 
 </div>
 </div>
@@ -319,40 +295,6 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Fired when all <a class="el" href="classPinballTargetsBank.html#ac6cc37aeaca747c09b420c747100ef41" title="Array of booleans if target is complete same length as _target_switches">_targetValues</a> are complete </p>
-
-</div>
-</div>
-<a id="a1180170c72d530ed2982ac7334bb6948"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1180170c72d530ed2982ac7334bb6948">&#9670;&nbsp;</a></span>ProcessTargetSwitchInputs()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void PinballTargetsBank.ProcessTargetSwitchInputs </td>
-          <td>(</td>
-          <td class="paramtype">InputEvent @&#160;</td>
-          <td class="paramname"><em>event</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Processes the <a class="el" href="classPinballTargetsBank.html#af5067f12650b36c342a50fb31cd651b0" title="Switch Names">_target_switches</a> </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">event</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
@@ -629,30 +571,6 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Array of booleans if target is complete same length as <a class="el" href="classPinballTargetsBank.html#af5067f12650b36c342a50fb31cd651b0" title="Switch Names">_target_switches</a> </p>
-
-</div>
-</div>
-<a id="ad094ffad2c575f81c84d0892b90373a0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad094ffad2c575f81c84d0892b90373a0">&#9670;&nbsp;</a></span>pinGod</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classPinGodGame.html">PinGodGame</a> PinballTargetsBank.pinGod</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>pinGodGame Scene </p>
 
 </div>
 </div>

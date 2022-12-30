@@ -130,7 +130,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aaf1263eab481cdf1d80804db70e2b40a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds bonus to the current player  <a href="classPinGodGame.html#aaf1263eab481cdf1d80804db70e2b40a">More...</a><br /></td></tr>
 <tr class="separator:aaf1263eab481cdf1d80804db70e2b40a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78e3354866956bd8181663c34abac56e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodGame.html#a78e3354866956bd8181663c34abac56e">AddCredits</a> (byte amt)</td></tr>
-<tr class="memdesc:a78e3354866956bd8181663c34abac56e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds credits to the <a class="el" href="classGameData.html" title="Game data for the machine. AppData%\Godot\app_userdata You can inherit this class and use the generic...">GameData</a> and emits <a class="el" href="classPinGodBase.html#a87ed597e5c92e429b1c58bb46ebeaa71" title="Emitted signal when a credit is added to game">PinGodGame.CreditAdded</a> signal  <a href="classPinGodGame.html#a78e3354866956bd8181663c34abac56e">More...</a><br /></td></tr>
+<tr class="memdesc:a78e3354866956bd8181663c34abac56e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds credits to the <a class="el" href="classGameData.html" title="Game data for the machine. AppData%\Godot\app_userdata You can inherit this class and use the generic...">GameData</a> and emits <a class="el" href="classPinGodBase.html#a87ed597e5c92e429b1c58bb46ebeaa71" title="Emitted signal when a credit is added to game">CreditAdded</a> signal  <a href="classPinGodGame.html#a78e3354866956bd8181663c34abac56e">More...</a><br /></td></tr>
 <tr class="separator:a78e3354866956bd8181663c34abac56e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aadd0ea9e80cdcf8ff09807cb26de41a6"><td class="memItemLeft" align="right" valign="top">virtual long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodGame.html#aadd0ea9e80cdcf8ff09807cb26de41a6">AddPoints</a> (long points, bool emitUpdateSignal=true)</td></tr>
 <tr class="memdesc:aadd0ea9e80cdcf8ff09807cb26de41a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds points to the current player  <a href="classPinGodGame.html#aadd0ea9e80cdcf8ff09807cb26de41a6">More...</a><br /></td></tr>
@@ -162,9 +162,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9fe8991cd50001af0503fff7265991fc"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classResources.html">Resources</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodGame.html#a9fe8991cd50001af0503fff7265991fc">GetResources</a> ()</td></tr>
 <tr class="memdesc:a9fe8991cd50001af0503fff7265991fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the <a class="el" href="classResources.html" title="Resources, graphic packs. Set to AutoLoad with a Resources.tsn in ProjectSettings.">Resources</a> autoloaded scene at "/root/Resources"  <a href="classPinGodGame.html#a9fe8991cd50001af0503fff7265991fc">More...</a><br /></td></tr>
 <tr class="separator:a9fe8991cd50001af0503fff7265991fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a0b8ac8eb3e75d479f08361dfcdd193"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodGame.html#a7a0b8ac8eb3e75d479f08361dfcdd193">IsSwitch</a> (string[] switchNames, InputEvent input)</td></tr>
-<tr class="memdesc:a7a0b8ac8eb3e75d479f08361dfcdd193"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detect if the input <code>isAction</code> found in the given switchNames. Uses <a class="el" href="classPinGodGame.html#a7690126c2f33b8dce2c57a63bfd1a1c8" title="Use in Godot _Input events. Checks a switches input event by friendly name from switch collection &quot;co...">SwitchOn(string, InputEvent)</a>  <a href="classPinGodGame.html#a7a0b8ac8eb3e75d479f08361dfcdd193">More...</a><br /></td></tr>
-<tr class="separator:a7a0b8ac8eb3e75d479f08361dfcdd193"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a135c2c74f8d199df4d027c51e45cf8"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodGame.html#a3a135c2c74f8d199df4d027c51e45cf8">IsSwitchAction</a> (string[] switchNames, InputEvent input)</td></tr>
+<tr class="memdesc:a3a135c2c74f8d199df4d027c51e45cf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detect if the input <code>isAction</code> found in the given switchNames. Uses <a class="el" href="classPinGodGame.html#a04cc6813f2938d6072370b26f69bb903" title="Use in Godot _Input events. Checks a switches input event by friendly name from switch collection &quot;co...">SwitchActionOn(string, InputEvent)</a>  <a href="classPinGodGame.html#a3a135c2c74f8d199df4d027c51e45cf8">More...</a><br /></td></tr>
+<tr class="separator:a3a135c2c74f8d199df4d027c51e45cf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad220a59c2d2205f86401ba10fb5ca0fb"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodGame.html#ad220a59c2d2205f86401ba10fb5ca0fb">IsSwitchEnabled</a> (string swName)</td></tr>
+<tr class="memdesc:ad220a59c2d2205f86401ba10fb5ca0fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks the Machine.Switches for enabled  <a href="classPinGodGame.html#ad220a59c2d2205f86401ba10fb5ca0fb">More...</a><br /></td></tr>
+<tr class="separator:ad220a59c2d2205f86401ba10fb5ca0fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74c9cfe84034395b91b3962fd576b6c1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodGame.html#a74c9cfe84034395b91b3962fd576b6c1">LoadDataFile</a> ()</td></tr>
 <tr class="memdesc:a74c9cfe84034395b91b3962fd576b6c1"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classGameData.html#a321b90543ef51eb85021656aff2422bf" title="Loads the GAME_DATA_FILE">GameData.Load</a>  <a href="classPinGodGame.html#a74c9cfe84034395b91b3962fd576b6c1">More...</a><br /></td></tr>
 <tr class="separator:a74c9cfe84034395b91b3962fd576b6c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -180,13 +183,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a16355d3ae732586f630a10064aeb1d79"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodGame.html#a16355d3ae732586f630a10064aeb1d79">LogDebug</a> (params object[] what)</td></tr>
 <tr class="separator:a16355d3ae732586f630a10064aeb1d79"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab26f85cdac2663b3fd2e29bd5c37bda6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodGame.html#ab26f85cdac2663b3fd2e29bd5c37bda6">LogError</a> (string message=null, params object[] what)</td></tr>
-<tr class="memdesc:ab26f85cdac2663b3fd2e29bd5c37bda6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uses static Logger.LogError(string, object[])  <a href="classPinGodGame.html#ab26f85cdac2663b3fd2e29bd5c37bda6">More...</a><br /></td></tr>
+<tr class="memdesc:ab26f85cdac2663b3fd2e29bd5c37bda6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uses static Logger.Error(string, object[])  <a href="classPinGodGame.html#ab26f85cdac2663b3fd2e29bd5c37bda6">More...</a><br /></td></tr>
 <tr class="separator:ab26f85cdac2663b3fd2e29bd5c37bda6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3a912f01cab5725a17fcc11f57ce5af"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodGame.html#ae3a912f01cab5725a17fcc11f57ce5af">LogInfo</a> (params object[] what)</td></tr>
-<tr class="memdesc:ae3a912f01cab5725a17fcc11f57ce5af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uses static Logger.LogInfo(object[])  <a href="classPinGodGame.html#ae3a912f01cab5725a17fcc11f57ce5af">More...</a><br /></td></tr>
+<tr class="memdesc:ae3a912f01cab5725a17fcc11f57ce5af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uses static Logger.Info(object[])  <a href="classPinGodGame.html#ae3a912f01cab5725a17fcc11f57ce5af">More...</a><br /></td></tr>
 <tr class="separator:ae3a912f01cab5725a17fcc11f57ce5af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acae82020e82af4b75803fd874eea85ee"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodGame.html#acae82020e82af4b75803fd874eea85ee">LogWarning</a> (string message=null, params object[] what)</td></tr>
-<tr class="memdesc:acae82020e82af4b75803fd874eea85ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uses static Logger.LogWarning(string, object[])  <a href="classPinGodGame.html#acae82020e82af4b75803fd874eea85ee">More...</a><br /></td></tr>
+<tr class="memdesc:acae82020e82af4b75803fd874eea85ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uses static Logger.Warning(string, object[])  <a href="classPinGodGame.html#acae82020e82af4b75803fd874eea85ee">More...</a><br /></td></tr>
 <tr class="separator:acae82020e82af4b75803fd874eea85ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a347a9b100c2399ac7a54ea44570d6b60"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodGame.html#a347a9b100c2399ac7a54ea44570d6b60">OnBallDrained</a> (SceneTree sceneTree, string group=&quot;Mode&quot;, string method=&quot;OnBallDrained&quot;)</td></tr>
 <tr class="memdesc:a347a9b100c2399ac7a54ea44570d6b60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invokes OnBallDrained on all groups marked as Mode within the scene tree.  <a href="classPinGodGame.html#a347a9b100c2399ac7a54ea44570d6b60">More...</a><br /></td></tr>
@@ -290,15 +293,24 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a404157944a57592e0306f839016a2a07"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodGame.html#a404157944a57592e0306f839016a2a07">StopMusic</a> ()</td></tr>
 <tr class="memdesc:a404157944a57592e0306f839016a2a07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop music <a class="el" href="classAudioManager.html#a7aa400ce1f0bd2714a70d0c8878c5439" title="Stops any music playing">AudioManager.StopMusic</a>  <a href="classPinGodGame.html#a404157944a57592e0306f839016a2a07">More...</a><br /></td></tr>
 <tr class="separator:a404157944a57592e0306f839016a2a07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f8bac7631068856ea7dd2c63abf7ab3"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodGame.html#a3f8bac7631068856ea7dd2c63abf7ab3">SwitchOff</a> (string swName, InputEvent inputEvent)</td></tr>
-<tr class="memdesc:a3f8bac7631068856ea7dd2c63abf7ab3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks a switches input event by friendly name that is in the <a class="el" href="classSwitches.html" title="Collection of string, PinStateObject">Switches</a> "coin", @event  <a href="classPinGodGame.html#a3f8bac7631068856ea7dd2c63abf7ab3">More...</a><br /></td></tr>
-<tr class="separator:a3f8bac7631068856ea7dd2c63abf7ab3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7690126c2f33b8dce2c57a63bfd1a1c8"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodGame.html#a7690126c2f33b8dce2c57a63bfd1a1c8">SwitchOn</a> (string swName, InputEvent inputEvent)</td></tr>
-<tr class="memdesc:a7690126c2f33b8dce2c57a63bfd1a1c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use in Godot _Input events. Checks a switches input event by friendly name from switch collection "coin", @event  <a href="classPinGodGame.html#a7690126c2f33b8dce2c57a63bfd1a1c8">More...</a><br /></td></tr>
-<tr class="separator:a7690126c2f33b8dce2c57a63bfd1a1c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5becb0447c15bc5573503d8412c5feb"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodGame.html#ab5becb0447c15bc5573503d8412c5feb">SwitchActionOff</a> (string swName, InputEvent inputEvent)</td></tr>
+<tr class="memdesc:ab5becb0447c15bc5573503d8412c5feb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks a switches input event by friendly name that is in the <a class="el" href="classSwitches.html" title="Collection of string, PinStateObject">Switches</a> "coin", @event  <a href="classPinGodGame.html#ab5becb0447c15bc5573503d8412c5feb">More...</a><br /></td></tr>
+<tr class="separator:ab5becb0447c15bc5573503d8412c5feb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04cc6813f2938d6072370b26f69bb903"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodGame.html#a04cc6813f2938d6072370b26f69bb903">SwitchActionOn</a> (string swName, InputEvent inputEvent)</td></tr>
+<tr class="memdesc:a04cc6813f2938d6072370b26f69bb903"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use in Godot _Input events. Checks a switches input event by friendly name from switch collection "coin", @event  <a href="classPinGodGame.html#a04cc6813f2938d6072370b26f69bb903">More...</a><br /></td></tr>
+<tr class="separator:a04cc6813f2938d6072370b26f69bb903"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a623d70582f6f75ebc38552fbd8fdfaef"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodGame.html#a623d70582f6f75ebc38552fbd8fdfaef">ProcessSwitch</a> (<a class="el" href="classSwitch.html">Switch</a> sw)</td></tr>
+<tr class="memdesc:a623d70582f6f75ebc38552fbd8fdfaef"><td class="mdescLeft">&#160;</td><td class="mdescRight">handle ball search and recording  <a href="classPinGodGame.html#a623d70582f6f75ebc38552fbd8fdfaef">More...</a><br /></td></tr>
+<tr class="separator:a623d70582f6f75ebc38552fbd8fdfaef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d1981d6d6a66ecb8cb90758f32d3524"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodGame.html#a9d1981d6d6a66ecb8cb90758f32d3524">SwitchOn</a> (string swName)</td></tr>
 <tr class="memdesc:a9d1981d6d6a66ecb8cb90758f32d3524"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks a switches input event by friendly name. If the "coin" switch is still held down then will return true  <a href="classPinGodGame.html#a9d1981d6d6a66ecb8cb90758f32d3524">More...</a><br /></td></tr>
 <tr class="separator:a9d1981d6d6a66ecb8cb90758f32d3524"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0334ad05f54c0a5e10dde831df3f5b7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodGame.html#ac0334ad05f54c0a5e10dde831df3f5b7">SetSwitch</a> (int swNum, byte value)</td></tr>
+<tr class="memdesc:ac0334ad05f54c0a5e10dde831df3f5b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set IsEnabled on the <a class="el" href="classSwitch.html" title="Represents a Switch in a pinball machine">Switch</a> and emits <a class="el" href="classPinGodBase.html#a62fd081cc61618d3788a567a340d4141" title="Emitted when a switch comes into the game. From MemoryMap.ReadStates then PinGodGame....">PinGodBase.SwitchCommand</a> with number and byte value <a class="el" href="classSwitch.html" title="Represents a Switch in a pinball machine">Switch</a> will be set to 0 or 1 but the signal value can be 0-255 Anything listening to the <a class="el" href="classPinGodBase.html#a62fd081cc61618d3788a567a340d4141" title="Emitted when a switch comes into the game. From MemoryMap.ReadStates then PinGodGame....">SwitchCommand</a> can get the <a class="el" href="classSwitch.html" title="Represents a Switch in a pinball machine">Switch</a> from Machine.Switches without checking keys, it will be valid sent from here  <a href="classPinGodGame.html#ac0334ad05f54c0a5e10dde831df3f5b7">More...</a><br /></td></tr>
+<tr class="separator:ac0334ad05f54c0a5e10dde831df3f5b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21a40aca6f4a8d318edf85a1d7843511"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodGame.html#a21a40aca6f4a8d318edf85a1d7843511">SetSwitch</a> (<a class="el" href="classSwitch.html">Switch</a> @switch, byte value, bool fromAction=true)</td></tr>
+<tr class="memdesc:a21a40aca6f4a8d318edf85a1d7843511"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets switch if not from action. Emits <a class="el" href="classPinGodBase.html#a62fd081cc61618d3788a567a340d4141" title="Emitted when a switch comes into the game. From MemoryMap.ReadStates then PinGodGame....">PinGodBase.SwitchCommand</a>.  <a href="classPinGodGame.html#a21a40aca6f4a8d318edf85a1d7843511">More...</a><br /></td></tr>
+<tr class="separator:a21a40aca6f4a8d318edf85a1d7843511"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33833ab965ae55ac75fb136b9e862be6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodGame.html#a33833ab965ae55ac75fb136b9e862be6">ToggleWindowBorder</a> ()</td></tr>
 <tr class="memdesc:a33833ab965ae55ac75fb136b9e862be6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Toggles the border and resize of the window  <a href="classPinGodGame.html#a33833ab965ae55ac75fb136b9e862be6">More...</a><br /></td></tr>
 <tr class="separator:a33833ab965ae55ac75fb136b9e862be6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -366,8 +378,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab3b0f3b213a4c00cb4cd66e1ef3f662a inherit pub_methods_classPinGodBase"><td class="memItemLeft" align="right" valign="top">delegate void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodBase.html#ab3b0f3b213a4c00cb4cd66e1ef3f662a">ServiceMenuExit</a> ()</td></tr>
 <tr class="memdesc:ab3b0f3b213a4c00cb4cd66e1ef3f662a inherit pub_methods_classPinGodBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted signal when player exits the service menu  <a href="classPinGodBase.html#ab3b0f3b213a4c00cb4cd66e1ef3f662a">More...</a><br /></td></tr>
 <tr class="separator:ab3b0f3b213a4c00cb4cd66e1ef3f662a inherit pub_methods_classPinGodBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62fd081cc61618d3788a567a340d4141 inherit pub_methods_classPinGodBase"><td class="memItemLeft" align="right" valign="top">delegate void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodBase.html#a62fd081cc61618d3788a567a340d4141">SwitchCommand</a> (string name, byte index, byte value)</td></tr>
+<tr class="memdesc:a62fd081cc61618d3788a567a340d4141 inherit pub_methods_classPinGodBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when a switch comes into the game. From MemoryMap.ReadStates then <a class="el" href="classPinGodGame.html#ac0334ad05f54c0a5e10dde831df3f5b7" title="Set IsEnabled on the Switch and emits PinGodBase.SwitchCommand with number and byte value Switch will...">PinGodGame.SetSwitch(int, byte)</a>  <a href="classPinGodBase.html#a62fd081cc61618d3788a567a340d4141">More...</a><br /></td></tr>
+<tr class="separator:a62fd081cc61618d3788a567a340d4141 inherit pub_methods_classPinGodBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c601ba6243b36709250d2a8e6649bee inherit pub_methods_classPinGodBase"><td class="memItemLeft" align="right" valign="top">delegate void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodBase.html#a2c601ba6243b36709250d2a8e6649bee">VpCommand</a> (byte index)</td></tr>
-<tr class="memdesc:a2c601ba6243b36709250d2a8e6649bee inherit pub_methods_classPinGodBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Signal sent from memory map if <a class="el" href="classGameSettings.html#a7d4411d5d06877267e367691440be1eb" title="A command switch number for the memory map so user can send a byte over a switch number Set this id g...">GameSettings.VpCommandSwitchId</a> was found while reading states  <a href="classPinGodBase.html#a2c601ba6243b36709250d2a8e6649bee">More...</a><br /></td></tr>
+<tr class="memdesc:a2c601ba6243b36709250d2a8e6649bee inherit pub_methods_classPinGodBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Signal sent from memory map if <a class="el" href="classGameSettings.html#a7d4411d5d06877267e367691440be1eb" title="A command switch number for the memory map so user can send a byte over a switch number Set this id g...">GameSettings.VpCommandSwitchId</a> was found while reading switch states  <a href="classPinGodBase.html#a2c601ba6243b36709250d2a8e6649bee">More...</a><br /></td></tr>
 <tr class="separator:a2c601ba6243b36709250d2a8e6649bee inherit pub_methods_classPinGodBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -445,6 +460,9 @@ Properties</h2></td></tr>
 <tr class="memitem:a53debdd003889bdb0718c011bcf837cf"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="classPinGodPlayer.html">PinGodPlayer</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodGame.html#a53debdd003889bdb0718c011bcf837cf">Players</a><code> [get, set]</code></td></tr>
 <tr class="memdesc:a53debdd003889bdb0718c011bcf837cf"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classPinGodPlayer.html" title="PinGodPlayer to hold standard pinball variables">PinGodPlayer</a> Players List for current <a class="el" href="classGame.html" title="Custom Game class for Basic Game">Game</a>  <a href="classPinGodGame.html#a53debdd003889bdb0718c011bcf837cf">More...</a><br /></td></tr>
 <tr class="separator:a53debdd003889bdb0718c011bcf837cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a811d6f3c24202543233b455f16f6eeed"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodGame.html#a811d6f3c24202543233b455f16f6eeed">QuitRequested</a><code> [get]</code></td></tr>
+<tr class="memdesc:a811d6f3c24202543233b455f16f6eeed"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classGame.html" title="Custom Game class for Basic Game">Game</a> has been set to quit  <a href="classPinGodGame.html#a811d6f3c24202543233b455f16f6eeed">More...</a><br /></td></tr>
+<tr class="separator:a811d6f3c24202543233b455f16f6eeed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a007a2ce19c043395a2cbe1e777ad36cb"><td class="memItemLeft" align="right" valign="top">byte&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodGame.html#a007a2ce19c043395a2cbe1e777ad36cb">Tiltwarnings</a><code> [get, set]</code></td></tr>
 <tr class="separator:a007a2ce19c043395a2cbe1e777ad36cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac126967fae643b3dc54d362c2cccaa6c"><td class="memItemLeft" align="right" valign="top">Dictionary&lt; string, string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodGame.html#ac126967fae643b3dc54d362c2cccaa6c">CmdArgs</a><code> [get]</code></td></tr>
@@ -649,7 +667,7 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Adds credits to the <a class="el" href="classGameData.html" title="Game data for the machine. AppData%\Godot\app_userdata You can inherit this class and use the generic...">GameData</a> and emits <a class="el" href="classPinGodBase.html#a87ed597e5c92e429b1c58bb46ebeaa71" title="Emitted signal when a credit is added to game">PinGodGame.CreditAdded</a> signal </p>
+<p>Adds credits to the <a class="el" href="classGameData.html" title="Game data for the machine. AppData%\Godot\app_userdata You can inherit this class and use the generic...">GameData</a> and emits <a class="el" href="classPinGodBase.html#a87ed597e5c92e429b1c58bb46ebeaa71" title="Emitted signal when a credit is added to game">CreditAdded</a> signal </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">amt</td><td></td></tr>
@@ -972,8 +990,8 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a id="a7a0b8ac8eb3e75d479f08361dfcdd193"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7a0b8ac8eb3e75d479f08361dfcdd193">&#9670;&nbsp;</a></span>IsSwitch()</h2>
+<a id="a3a135c2c74f8d199df4d027c51e45cf8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a135c2c74f8d199df4d027c51e45cf8">&#9670;&nbsp;</a></span>IsSwitchAction()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -982,7 +1000,7 @@ Properties</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool PinGodGame.IsSwitch </td>
+          <td class="memname">virtual bool PinGodGame.IsSwitchAction </td>
           <td>(</td>
           <td class="paramtype">string[]&#160;</td>
           <td class="paramname"><em>switchNames</em>, </td>
@@ -1006,11 +1024,46 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Detect if the input <code>isAction</code> found in the given switchNames. Uses <a class="el" href="classPinGodGame.html#a7690126c2f33b8dce2c57a63bfd1a1c8" title="Use in Godot _Input events. Checks a switches input event by friendly name from switch collection &quot;co...">SwitchOn(string, InputEvent)</a> </p>
+<p>Detect if the input <code>isAction</code> found in the given switchNames. Uses <a class="el" href="classPinGodGame.html#a04cc6813f2938d6072370b26f69bb903" title="Use in Godot _Input events. Checks a switches input event by friendly name from switch collection &quot;co...">SwitchActionOn(string, InputEvent)</a> </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">switchNames</td><td></td></tr>
     <tr><td class="paramname">input</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="ad220a59c2d2205f86401ba10fb5ca0fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad220a59c2d2205f86401ba10fb5ca0fb">&#9670;&nbsp;</a></span>IsSwitchEnabled()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool PinGodGame.IsSwitchEnabled </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>swName</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks the Machine.Switches for enabled </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">swName</td><td></td></tr>
   </table>
   </dd>
 </dl>
@@ -1194,7 +1247,7 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Uses static Logger.LogError(string, object[]) </p>
+<p>Uses static Logger.Error(string, object[]) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">message</td><td></td></tr>
@@ -1229,7 +1282,7 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Uses static Logger.LogInfo(object[]) </p>
+<p>Uses static Logger.Info(object[]) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">what</td><td></td></tr>
@@ -1273,7 +1326,7 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Uses static Logger.LogWarning(string, object[]) </p>
+<p>Uses static Logger.Warning(string, object[]) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">message</td><td></td></tr>
@@ -1596,6 +1649,40 @@ Properties</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">name</td><td></td></tr>
     <tr><td class="paramname">bus</td><td>Plays on bus name</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a623d70582f6f75ebc38552fbd8fdfaef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a623d70582f6f75ebc38552fbd8fdfaef">&#9670;&nbsp;</a></span>ProcessSwitch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void PinGodGame.ProcessSwitch </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classSwitch.html">Switch</a>&#160;</td>
+          <td class="paramname"><em>sw</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>handle ball search and recording </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sw</td><td></td></tr>
   </table>
   </dd>
 </dl>
@@ -2203,6 +2290,87 @@ Properties</h2></td></tr>
 
 </div>
 </div>
+<a id="ac0334ad05f54c0a5e10dde831df3f5b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0334ad05f54c0a5e10dde831df3f5b7">&#9670;&nbsp;</a></span>SetSwitch() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PinGodGame.SetSwitch </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>swNum</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">byte&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set IsEnabled on the <a class="el" href="classSwitch.html" title="Represents a Switch in a pinball machine">Switch</a> and emits <a class="el" href="classPinGodBase.html#a62fd081cc61618d3788a567a340d4141" title="Emitted when a switch comes into the game. From MemoryMap.ReadStates then PinGodGame....">PinGodBase.SwitchCommand</a> with number and byte value <a class="el" href="classSwitch.html" title="Represents a Switch in a pinball machine">Switch</a> will be set to 0 or 1 but the signal value can be 0-255 Anything listening to the <a class="el" href="classPinGodBase.html#a62fd081cc61618d3788a567a340d4141" title="Emitted when a switch comes into the game. From MemoryMap.ReadStates then PinGodGame....">SwitchCommand</a> can get the <a class="el" href="classSwitch.html" title="Represents a Switch in a pinball machine">Switch</a> from Machine.Switches without checking keys, it will be valid sent from here </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">swNum</td><td></td></tr>
+    <tr><td class="paramname">value</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a21a40aca6f4a8d318edf85a1d7843511"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21a40aca6f4a8d318edf85a1d7843511">&#9670;&nbsp;</a></span>SetSwitch() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PinGodGame.SetSwitch </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classSwitch.html">Switch</a> @&#160;</td>
+          <td class="paramname"><em>switch</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">byte&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>fromAction</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets switch if not from action. Emits <a class="el" href="classPinGodBase.html#a62fd081cc61618d3788a567a340d4141" title="Emitted when a switch comes into the game. From MemoryMap.ReadStates then PinGodGame....">PinGodBase.SwitchCommand</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">switch</td><td></td></tr>
+    <tr><td class="paramname">value</td><td></td></tr>
+    <tr><td class="paramname">fromAction</td><td>if false it doesn't set switch, actions should do this when checked here in SwitchOn</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a92af7e25c7507881a9838ad8f006ae25"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a92af7e25c7507881a9838ad8f006ae25">&#9670;&nbsp;</a></span>Setup()</h2>
 
@@ -2606,8 +2774,8 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a id="a3f8bac7631068856ea7dd2c63abf7ab3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3f8bac7631068856ea7dd2c63abf7ab3">&#9670;&nbsp;</a></span>SwitchOff()</h2>
+<a id="ab5becb0447c15bc5573503d8412c5feb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5becb0447c15bc5573503d8412c5feb">&#9670;&nbsp;</a></span>SwitchActionOff()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2616,7 +2784,7 @@ Properties</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool PinGodGame.SwitchOff </td>
+          <td class="memname">virtual bool PinGodGame.SwitchActionOff </td>
           <td>(</td>
           <td class="paramtype">string&#160;</td>
           <td class="paramname"><em>swName</em>, </td>
@@ -2652,8 +2820,8 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a id="a9d1981d6d6a66ecb8cb90758f32d3524"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9d1981d6d6a66ecb8cb90758f32d3524">&#9670;&nbsp;</a></span>SwitchOn() <span class="overload">[1/2]</span></h2>
+<a id="a04cc6813f2938d6072370b26f69bb903"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04cc6813f2938d6072370b26f69bb903">&#9670;&nbsp;</a></span>SwitchActionOn()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2662,42 +2830,7 @@ Properties</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool PinGodGame.SwitchOn </td>
-          <td>(</td>
-          <td class="paramtype">string&#160;</td>
-          <td class="paramname"><em>swName</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Checks a switches input event by friendly name. If the "coin" switch is still held down then will return true </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">swName</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>on / off</dd></dl>
-
-</div>
-</div>
-<a id="a7690126c2f33b8dce2c57a63bfd1a1c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7690126c2f33b8dce2c57a63bfd1a1c8">&#9670;&nbsp;</a></span>SwitchOn() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual bool PinGodGame.SwitchOn </td>
+          <td class="memname">virtual bool PinGodGame.SwitchActionOn </td>
           <td>(</td>
           <td class="paramtype">string&#160;</td>
           <td class="paramname"><em>swName</em>, </td>
@@ -2730,6 +2863,41 @@ Properties</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="a9d1981d6d6a66ecb8cb90758f32d3524"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d1981d6d6a66ecb8cb90758f32d3524">&#9670;&nbsp;</a></span>SwitchOn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool PinGodGame.SwitchOn </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>swName</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks a switches input event by friendly name. If the "coin" switch is still held down then will return true </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">swName</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>on / off</dd></dl>
 
 </div>
 </div>
@@ -3371,6 +3539,30 @@ Properties</h2></td></tr>
 </div><div class="memdoc">
 
 <p><a class="el" href="classPinGodPlayer.html" title="PinGodPlayer to hold standard pinball variables">PinGodPlayer</a> Players List for current <a class="el" href="classGame.html" title="Custom Game class for Basic Game">Game</a> </p>
+
+</div>
+</div>
+<a id="a811d6f3c24202543233b455f16f6eeed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a811d6f3c24202543233b455f16f6eeed">&#9670;&nbsp;</a></span>QuitRequested</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool PinGodGame.QuitRequested</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classGame.html" title="Custom Game class for Basic Game">Game</a> has been set to quit </p>
 
 </div>
 </div>

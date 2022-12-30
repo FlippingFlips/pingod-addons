@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['highscore_469',['HighScore',['../classHighScore.html',1,'']]],
-  ['highscores_470',['HighScores',['../classHighScores.html',1,'']]]
+  ['highscore_481',['HighScore',['../classHighScore.html',1,'']]],
+  ['highscores_482',['HighScores',['../classHighScores.html',1,'']]]
 ];

@@ -1,7 +1,6 @@
 var classTrough =
 [
     [ "_EnterTree", "classTrough.html#a9089dd794c641960ddb4fe6e7ee93dd0", null ],
-    [ "_Input", "classTrough.html#a334400ff9038e7629829bf991713625d", null ],
     [ "_Ready", "classTrough.html#a8e0a1484721a3e6895982aae2194b9a0", null ],
     [ "BallsInPlay", "classTrough.html#ad953fad81ea1b3024dfc4b120a33d355", null ],
     [ "BallsInTrough", "classTrough.html#ab60e525c35df85308bee91215c4acadc", null ],

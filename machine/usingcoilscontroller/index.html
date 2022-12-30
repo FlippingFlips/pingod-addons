@@ -17,8 +17,7 @@
 <link rel=stylesheet href=https://FlippingFlips.github.io/pingod-addons/css/pingod.css><meta property="og:title" content="Using Coils (Controller)">
 <meta property="og:description" content="Visual Pinball SolCallbacks When Visual Pinball detects changed coils the callbacks are invoked by coil number.
 The script example to handle coil 35 would be SolCallback(35) = &#34;Lampshow2&#34;. This will invoke the LampShow2 sub routine (if you have one)
-Some standard callbacks for default game:
-SolCallback(0) = &#34;Died&#34; ' If at some point Godot closes then this lets VP know about it SolCallback(1) = &#34;bsTrough.solOut&#34; ' The trough which makes the ball pop out.">
+SolCallback(0) = &#34;Alive&#34; ' If at some point Godot closes then this lets VP know about it SolCallback(1) = &#34;bsTrough.solOut&#34; ' The trough which makes the ball pop out.... SolCallback(2) = &#34;FlippersEnabled&#34; ' Enable and disable flippers, when ball drains, tilt etc Some standard callbacks for default game">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://FlippingFlips.github.io/pingod-addons/machine/usingcoilscontroller/"><meta property="og:image" content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png"><meta property="article:section" content="machine">
 <meta property="article:published_time" content="2022-12-26T15:26:15+00:00">
@@ -28,13 +27,11 @@ SolCallback(0) = &#34;Died&#34; ' If at some point Godot closes then this lets V
 <meta name=twitter:title content="Using Coils (Controller)">
 <meta name=twitter:description content="Visual Pinball SolCallbacks When Visual Pinball detects changed coils the callbacks are invoked by coil number.
 The script example to handle coil 35 would be SolCallback(35) = &#34;Lampshow2&#34;. This will invoke the LampShow2 sub routine (if you have one)
-Some standard callbacks for default game:
-SolCallback(0) = &#34;Died&#34; ' If at some point Godot closes then this lets VP know about it SolCallback(1) = &#34;bsTrough.solOut&#34; ' The trough which makes the ball pop out.">
+SolCallback(0) = &#34;Alive&#34; ' If at some point Godot closes then this lets VP know about it SolCallback(1) = &#34;bsTrough.solOut&#34; ' The trough which makes the ball pop out.... SolCallback(2) = &#34;FlippersEnabled&#34; ' Enable and disable flippers, when ball drains, tilt etc Some standard callbacks for default game">
 <meta itemprop=name content="Using Coils (Controller)">
 <meta itemprop=description content="Visual Pinball SolCallbacks When Visual Pinball detects changed coils the callbacks are invoked by coil number.
 The script example to handle coil 35 would be SolCallback(35) = &#34;Lampshow2&#34;. This will invoke the LampShow2 sub routine (if you have one)
-Some standard callbacks for default game:
-SolCallback(0) = &#34;Died&#34; ' If at some point Godot closes then this lets VP know about it SolCallback(1) = &#34;bsTrough.solOut&#34; ' The trough which makes the ball pop out."><meta itemprop=datePublished content="2022-12-26T15:26:15+00:00">
+SolCallback(0) = &#34;Alive&#34; ' If at some point Godot closes then this lets VP know about it SolCallback(1) = &#34;bsTrough.solOut&#34; ' The trough which makes the ball pop out.... SolCallback(2) = &#34;FlippersEnabled&#34; ' Enable and disable flippers, when ball drains, tilt etc Some standard callbacks for default game"><meta itemprop=datePublished content="2022-12-26T15:26:15+00:00">
 <meta itemprop=dateModified content="2022-12-26T15:26:15+00:00">
 <meta itemprop=wordCount content="87"><meta itemprop=image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
 <meta itemprop=keywords content></head>
@@ -55,14 +52,15 @@ SolCallback(0) = &#34;Died&#34; ' If at some point Godot closes then this lets V
 <h2 id=visual-pinball-solcallbacks>Visual Pinball SolCallbacks</h2>
 <p>When Visual Pinball detects changed coils the callbacks are invoked by coil number.</p>
 <p>The script example to handle coil <code>35</code> would be <code>SolCallback(35) = "Lampshow2"</code>. This will invoke the <code>LampShow2</code> sub routine (if you have one)</p>
-<p>Some standard callbacks for default game:</p>
-<pre tabindex=0><code>SolCallback(0) = &quot;Died&quot;  ' If at some point Godot closes then this lets VP know about it
+<pre tabindex=0><code>SolCallback(0) = &quot;Alive&quot;  ' If at some point Godot closes then this lets VP know about it
 SolCallback(1) = &quot;bsTrough.solOut&quot; ' The trough which makes the ball pop out....
-SolCallback(2) = &quot;FlippersEnabled&quot; ' Enable and disable flippers, when ball drains, tilt etc</code></pre><div class=edit-meta>
+SolCallback(2) = &quot;FlippersEnabled&quot; ' Enable and disable flippers, when ball drains, tilt etc
+</code></pre><p>Some standard callbacks for default game</p>
+<div class=edit-meta>
 Last updated on 26 Dec 2022
 <br>
 Published on 26 Dec 2022
-<br><a href=https://github.com/FlippingFlips/pingod-addons/edit/main/docs/content/machine/UsingCoilsController.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://FlippingFlips.github.io/pingod-addons/machine/usingcoils/ title="Using Coils (Godot)"><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - Using Coils (Godot)</a>
+<br><a href=https://github.com/FlippingFlips/pingod-addons/edit/main/docs/content/machine/UsingCoilsController.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://FlippingFlips.github.io/pingod-addons/machine/usingcoils/ title="Using Coils (C#)"><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - Using Coils (C#)</a>
 <a class="nav nav-next" href=https://FlippingFlips.github.io/pingod-addons/base-scenes/ title="Scenes Used">Next - Scenes Used <i class="fas fa-arrow-right" aria-hidden=true></i></a>
 </nav><footer><p class=powered>Powered by <a href=https://gohugo.io>Hugo</a>. Theme by <a href=https://themes.gohugo.io/hugo-theme-techdoc/>TechDoc</a>. Designed by <a href=https://github.com/thingsym/hugo-theme-techdoc>Thingsym</a>.</p>
 </footer>
@@ -105,10 +103,11 @@ Published on 26 Dec 2022
 </li>
 <li class="parent has-sub-menu"><a href=https://FlippingFlips.github.io/pingod-addons/machine/>Machine<span class="mark opened">-</span></a>
 <ul class=sub-menu>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/machine/switchesactions/>Switches to Actions</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/machine/usingswitches/>Using Switches (Godot)</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/machine/adding-switches/>Adding Switches - PinGodGame.tscn</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/machine/adding-godot-actions/>Adding Actions - Project Settings</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/machine/usingswitches/>Using Switches C#</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/machine/usingswitchescontroller/>Using Switches (Controller)</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/machine/usingcoils/>Using Coils (Godot)</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/machine/usingcoils/>Using Coils (C#)</a></li>
 <li class=active><a href=https://FlippingFlips.github.io/pingod-addons/machine/usingcoilscontroller/>Using Coils (Controller)</a></li>
 </ul>
 </li>

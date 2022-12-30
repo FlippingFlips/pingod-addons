@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['inbonusmode_772',['InBonusMode',['../classPinGodGame.html#a7ac476c50e6d6b24ce7d924f7c4e179b',1,'PinGodGame']]],
-  ['ismultiballrunning_773',['IsMultiballRunning',['../classPinGodGame.html#adbca937e8a0daa12d283217d9f656651',1,'PinGodGame']]]
+  ['inbonusmode_792',['InBonusMode',['../classPinGodGame.html#a7ac476c50e6d6b24ce7d924f7c4e179b',1,'PinGodGame']]],
+  ['ismultiballrunning_793',['IsMultiballRunning',['../classPinGodGame.html#adbca937e8a0daa12d283217d9f656651',1,'PinGodGame']]]
 ];

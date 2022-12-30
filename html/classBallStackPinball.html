@@ -109,14 +109,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aa8ea221eb3a93d46ebaad078d246731a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when switch is off  <a href="classBallStackPinball.html#aa8ea221eb3a93d46ebaad078d246731a">More...</a><br /></td></tr>
 <tr class="separator:aa8ea221eb3a93d46ebaad078d246731a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86a5dd4549ddbf2163e8c3b1eb94f7a8"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBallStackPinball.html#a86a5dd4549ddbf2163e8c3b1eb94f7a8">_EnterTree</a> ()</td></tr>
-<tr class="memdesc:a86a5dd4549ddbf2163e8c3b1eb94f7a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the timer and adds to the tree  <a href="classBallStackPinball.html#a86a5dd4549ddbf2163e8c3b1eb94f7a8">More...</a><br /></td></tr>
+<tr class="memdesc:a86a5dd4549ddbf2163e8c3b1eb94f7a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connects the OnSwitchCommandHandler  <a href="classBallStackPinball.html#a86a5dd4549ddbf2163e8c3b1eb94f7a8">More...</a><br /></td></tr>
 <tr class="separator:a86a5dd4549ddbf2163e8c3b1eb94f7a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0881a9c647c0d6001c2a2e7a1ca144df"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBallStackPinball.html#a0881a9c647c0d6001c2a2e7a1ca144df">_ExitTree</a> ()</td></tr>
 <tr class="memdesc:a0881a9c647c0d6001c2a2e7a1ca144df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the timer  <a href="classBallStackPinball.html#a0881a9c647c0d6001c2a2e7a1ca144df">More...</a><br /></td></tr>
 <tr class="separator:a0881a9c647c0d6001c2a2e7a1ca144df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf12473132bc4d0845bea61426e49514"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBallStackPinball.html#adf12473132bc4d0845bea61426e49514">_Input</a> (InputEvent @event)</td></tr>
-<tr class="memdesc:adf12473132bc4d0845bea61426e49514"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if ball stacks switch is on or off then emits <a class="el" href="classBallStackPinball.html#aee74950324dc058e801334473a393f0d" title="Emitted when switch is on">SwitchActive</a> or <a class="el" href="classBallStackPinball.html#aa8ea221eb3a93d46ebaad078d246731a" title="Emitted when switch is off">SwitchInActive</a>  <a href="classBallStackPinball.html#adf12473132bc4d0845bea61426e49514">More...</a><br /></td></tr>
-<tr class="separator:adf12473132bc4d0845bea61426e49514"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36ef67cd2ce1df51546fd230eb7e9cd8"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBallStackPinball.html#a36ef67cd2ce1df51546fd230eb7e9cd8">_Ready</a> ()</td></tr>
 <tr class="memdesc:a36ef67cd2ce1df51546fd230eb7e9cd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns off SetProcessInput to process no switches if they haven't been set  <a href="classBallStackPinball.html#a36ef67cd2ce1df51546fd230eb7e9cd8">More...</a><br /></td></tr>
 <tr class="separator:a36ef67cd2ce1df51546fd230eb7e9cd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -148,7 +145,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Creates the timer and adds to the tree </p>
+<p>Connects the OnSwitchCommandHandler </p>
 
 </div>
 </div>
@@ -168,32 +165,6 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Stops the timer </p>
-
-</div>
-</div>
-<a id="adf12473132bc4d0845bea61426e49514"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf12473132bc4d0845bea61426e49514">&#9670;&nbsp;</a></span>_Input()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">override void BallStackPinball._Input </td>
-          <td>(</td>
-          <td class="paramtype">InputEvent @&#160;</td>
-          <td class="paramname"><em>event</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Checks if ball stacks switch is on or off then emits <a class="el" href="classBallStackPinball.html#aee74950324dc058e801334473a393f0d" title="Emitted when switch is on">SwitchActive</a> or <a class="el" href="classBallStackPinball.html#aa8ea221eb3a93d46ebaad078d246731a" title="Emitted when switch is off">SwitchInActive</a> </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">event</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>

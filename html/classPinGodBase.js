@@ -20,5 +20,6 @@ var classPinGodBase =
     [ "ScoresUpdated", "classPinGodBase.html#a81b345fc98a50c2bdf3e04b8930f85e3", null ],
     [ "ServiceMenuEnter", "classPinGodBase.html#a5811784414ad7f8ce92d45c96a29edb9", null ],
     [ "ServiceMenuExit", "classPinGodBase.html#ab3b0f3b213a4c00cb4cd66e1ef3f662a", null ],
+    [ "SwitchCommand", "classPinGodBase.html#a62fd081cc61618d3788a567a340d4141", null ],
     [ "VpCommand", "classPinGodBase.html#a2c601ba6243b36709250d2a8e6649bee", null ]
 ];

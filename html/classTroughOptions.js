@@ -7,6 +7,7 @@ var classTroughOptions =
     [ "BallSaveSeconds", "classTroughOptions.html#a699d3f7c9119e595a0e468b4854c162b", null ],
     [ "Coil", "classTroughOptions.html#af5a422ce2227b0fe3dc34a35895f5aa6", null ],
     [ "EarlySaveSwitches", "classTroughOptions.html#af2853adf19562ff51280da7756edde04", null ],
+    [ "GameSwitches", "classTroughOptions.html#a5e91831e6cf20fe0e9f0446a25451b0a", null ],
     [ "MballSaveSeconds", "classTroughOptions.html#aff6797330deef2c0a24e9331468f6027", null ],
     [ "NumBallsToSave", "classTroughOptions.html#afd8dbef8b264b80f53e6c5d6dac0ee0a", null ],
     [ "PlungerLaneSw", "classTroughOptions.html#a49409eb1c7dd9b6829172df9d75c128e", null ],

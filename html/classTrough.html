@@ -106,9 +106,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9089dd794c641960ddb4fe6e7ee93dd0"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTrough.html#a9089dd794c641960ddb4fe6e7ee93dd0">_EnterTree</a> ()</td></tr>
 <tr class="memdesc:a9089dd794c641960ddb4fe6e7ee93dd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up timers in the scene for pulsing and ball saves. Sets up <a class="el" href="classTroughOptions.html" title="Trough settings">TroughOptions</a>  <a href="classTrough.html#a9089dd794c641960ddb4fe6e7ee93dd0">More...</a><br /></td></tr>
 <tr class="separator:a9089dd794c641960ddb4fe6e7ee93dd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a334400ff9038e7629829bf991713625d"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTrough.html#a334400ff9038e7629829bf991713625d">_Input</a> (InputEvent @event)</td></tr>
-<tr class="memdesc:a334400ff9038e7629829bf991713625d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Listen for actions. Mainly from trough switches and plunger lanes.  <a href="classTrough.html#a334400ff9038e7629829bf991713625d">More...</a><br /></td></tr>
-<tr class="separator:a334400ff9038e7629829bf991713625d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e0a1484721a3e6895982aae2194b9a0"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTrough.html#a8e0a1484721a3e6895982aae2194b9a0">_Ready</a> ()</td></tr>
 <tr class="memdesc:a8e0a1484721a3e6895982aae2194b9a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Just debug logs the amount of switches set in the <a class="el" href="classTroughOptions.html" title="Trough settings">TroughOptions</a>  <a href="classTrough.html#a8e0a1484721a3e6895982aae2194b9a0">More...</a><br /></td></tr>
 <tr class="separator:a8e0a1484721a3e6895982aae2194b9a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -122,7 +119,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a87a90415224276e21839248cc643a6be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable ball saves and turns off lamps  <a href="classTrough.html#a87a90415224276e21839248cc643a6be">More...</a><br /></td></tr>
 <tr class="separator:a87a90415224276e21839248cc643a6be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae20f255fedfa6a10035a036922639584"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTrough.html#ae20f255fedfa6a10035a036922639584">IsTroughFull</a> ()</td></tr>
-<tr class="memdesc:ae20f255fedfa6a10035a036922639584"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks every switch in <a class="el" href="classTroughOptions.html#af45394659d56b046aa74d9a21e2845ef" title="Switch names">TroughOptions.Switches</a> for enabled. If <a class="el" href="classTrough.html#a4d2145df0850a8388a065c208a7541f6" title="Use this to turn off trough checking, outside VP">_isDebugTrough</a> then will return full  <a href="classTrough.html#ae20f255fedfa6a10035a036922639584">More...</a><br /></td></tr>
+<tr class="memdesc:ae20f255fedfa6a10035a036922639584"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks every switch in <a class="el" href="classTroughOptions.html#a5e91831e6cf20fe0e9f0446a25451b0a" title="used by the trough to get quicker access to switches">TroughOptions.GameSwitches</a> for IsEnabled. If <a class="el" href="classTrough.html#a4d2145df0850a8388a065c208a7541f6" title="Use this to turn off trough checking, outside VP">_isDebugTrough</a> then will return IsFull true  <a href="classTrough.html#ae20f255fedfa6a10035a036922639584">More...</a><br /></td></tr>
 <tr class="separator:ae20f255fedfa6a10035a036922639584"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f61baf7a322e2bb80817330b104ebfb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTrough.html#a4f61baf7a322e2bb80817330b104ebfb">PulseTrough</a> ()</td></tr>
 <tr class="memdesc:a4f61baf7a322e2bb80817330b104ebfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pulse the ball trough  <a href="classTrough.html#a4f61baf7a322e2bb80817330b104ebfb">More...</a><br /></td></tr>
@@ -204,32 +201,6 @@ Properties</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Sets up timers in the scene for pulsing and ball saves. Sets up <a class="el" href="classTroughOptions.html" title="Trough settings">TroughOptions</a> </p>
-
-</div>
-</div>
-<a id="a334400ff9038e7629829bf991713625d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a334400ff9038e7629829bf991713625d">&#9670;&nbsp;</a></span>_Input()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">override void Trough._Input </td>
-          <td>(</td>
-          <td class="paramtype">InputEvent @&#160;</td>
-          <td class="paramname"><em>event</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Listen for actions. Mainly from trough switches and plunger lanes. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">event</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
@@ -326,7 +297,7 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Checks every switch in <a class="el" href="classTroughOptions.html#af45394659d56b046aa74d9a21e2845ef" title="Switch names">TroughOptions.Switches</a> for enabled. If <a class="el" href="classTrough.html#a4d2145df0850a8388a065c208a7541f6" title="Use this to turn off trough checking, outside VP">_isDebugTrough</a> then will return full </p>
+<p>Checks every switch in <a class="el" href="classTroughOptions.html#a5e91831e6cf20fe0e9f0446a25451b0a" title="used by the trough to get quicker access to switches">TroughOptions.GameSwitches</a> for IsEnabled. If <a class="el" href="classTrough.html#a4d2145df0850a8388a065c208a7541f6" title="Use this to turn off trough checking, outside VP">_isDebugTrough</a> then will return IsFull true </p>
 
 </div>
 </div>

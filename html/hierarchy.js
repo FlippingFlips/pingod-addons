@@ -57,9 +57,9 @@ var hierarchy =
         [ "Game", "classGame.html", null ],
         [ "PinGodGameMode", "classPinGodGameMode.html", [
           [ "PinballLanesNode", "classPinballLanesNode.html", null ]
-        ] ]
+        ] ],
+        [ "PinballTargetsBank", "classPinballTargetsBank.html", null ]
       ] ],
-      [ "PinballTargetsBank", "classPinballTargetsBank.html", null ],
       [ "ScoreMode", "classScoreMode.html", null ],
       [ "ServiceMenu", "classServiceMenu.html", null ],
       [ "Trough", "classTrough.html", null ]
