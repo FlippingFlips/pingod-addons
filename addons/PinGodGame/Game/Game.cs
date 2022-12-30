@@ -55,14 +55,14 @@ public abstract class Game : PinGodGameNode
 	}
 
 	/// <summary>
-	/// Gets an instance of the multi-ball scene and add it to the Modes tree
+	/// Gets an instance of the multi-ball scene and add it to the Modes tree in group named `multi-ball`
 	/// </summary>
 	public virtual void AddMultiballSceneToTree()
 	{
 		//create an mball instance from the packed scene
 		var mball = multiballPkd.Instance();
 		//add to multiball group
-		mball.AddToGroup("multiball");
+		mball.AddToGroup("multi-ball");
 		//add to the tree
 		GetNode("Modes").AddChild(mball);
 	}
@@ -82,7 +82,7 @@ public abstract class Game : PinGodGameNode
     /// </summary>
     public virtual void EndMultiball()
     {
-        Logger.Debug(nameof(Game), "removing multi-balls. sending EndMultiball to multi-ball group");
+        Logger.Debug(nameof(Game), ":removing multi-balls. sending EndMultiball to multi-ball group");
         GetTree().CallGroup("multi-ball", "EndMultiball");
         pinGod.IsMultiballRunning = false;
     }
