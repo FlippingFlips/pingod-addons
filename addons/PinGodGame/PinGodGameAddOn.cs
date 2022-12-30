@@ -2,32 +2,8 @@
 using Godot;
 using System;
 
-/// <summary>
-/// Not used anywhere?
-/// </summary>
-[Tool]
-public class PinGodGameAddOn : EditorPlugin
+public class PinGodGameAddOn
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public override void _EnterTree()
-	{
-		if (!Engine.EditorHint)
-		{
-			base._EnterTree();
-		}			
-	}
-
-	/// <summary>
-	/// 
-	/// </summary>
-	public override void _ExitTree()
-	{
-		if (!Engine.EditorHint)
-		{
-			base._ExitTree();
-		}		
-	}
+	public static string VERSION = "v0.93";
 }
 #endif

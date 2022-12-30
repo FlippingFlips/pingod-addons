@@ -1,9 +1,11 @@
 using Godot;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.NetworkInformation;
 using System.Threading.Tasks;
+using static Godot.HTTPRequest;
+using static PinGodBase;
 
 /// <summary>
 /// Create class inheriting this and use the PinGodGame.tscn. <para/>
@@ -18,6 +20,7 @@ public abstract class PinGodGame : PinGodBase
     [Export] bool _record_game = false;
     [Export] bool _playback_game = false;
     [Export] string _playbackfile = null;
+    [Export] string[] _gameWindowSwitches;
     #endregion
 
     #region Public Properties - Standard Pinball / Players
@@ -154,7 +157,7 @@ public abstract class PinGodGame : PinGodBase
 	{
         if (!Engine.EditorHint)
         {
-            LogDebug(nameof(PinGodGame), ":_EnterTree. getting cmd args");
+            LogDebug(nameof(PinGodGame), $":_EnterTree. {PinGodGameAddOn.VERSION}");
             CmdArgs = GetCommandLineArgs();
             LoadSettingsFile();
             Logger.LogLevel = GameSettings?.LogLevel ?? PinGodLogLevel.Warning;
@@ -247,11 +250,13 @@ public abstract class PinGodGame : PinGodBase
             ToggleWindowBorder();
         }
 
-		//Coin button. See PinGod.vbs for Standard switches
-		if (SwitchOn("coin1", @event) || SwitchOn("coin2", @event) || SwitchOn("coin3", @event))
+        if(_gameWindowSwitches?.Length > 0)
         {
-            AudioManager.PlaySfx("credit");
-            AddCredits(1);
+            foreach (var sw in _gameWindowSwitches)
+            {
+                SwitchActionOn(sw, @event);
+                SwitchActionOff(sw, @event);
+            }
         }
     }
 
@@ -524,7 +529,7 @@ public abstract class PinGodGame : PinGodBase
             .OrderByDescending(x => x.Scores).FirstOrDefault().Scores ?? 0;    
 
     /// <summary>
-    /// Detect if the input `isAction` found in the given switchNames. Uses <see cref="SwitchOn(string, InputEvent)"/>
+    /// Detect if the input `isAction` found in the given switchNames. Uses <see cref="SwitchActionOn(string, InputEvent)"/>
     /// </summary>
     /// <param name="switchNames"></param>
     /// <param name="input"></param>
@@ -533,7 +538,7 @@ public abstract class PinGodGame : PinGodBase
 	{
 		for (int i = 0; i < switchNames.Length; i++)
 		{
-			if(SwitchOn(switchNames[i], input))
+			if(SwitchActionOn(switchNames[i], input))
 			{
 				return true;
 			}
@@ -1161,37 +1166,14 @@ public abstract class PinGodGame : PinGodBase
     /// <param name="swName"></param>
     /// <param name="inputEvent"></param>
     /// <returns></returns>
-    public virtual bool SwitchOff(string swName, InputEvent inputEvent)
+    public virtual bool SwitchActionOff(string swName, InputEvent inputEvent)
     {
         if (!SwitchExists(swName)) return false;
         var sw = Machine.Switches[swName];
-        var result = sw.IsOff(inputEvent);
+        var result = sw.IsActionOff(inputEvent);
         if (result)
         {
-            if (_recordPlayback == RecordPlaybackOption.Record)
-            {
-                var recordLine = $"sw{sw.Num}|{false}|{OS.GetTicksMsec() - gameLoadTimeMsec}";
-                _recordFile?.StoreLine(recordLine);
-                LogDebug(nameof(PinGodGame), ":recorded:", recordLine);
-            }
-
-            if (BallSearchOptions.IsSearchEnabled && GameInPlay)
-            {
-                if (sw.BallSearch != BallSearchSignalOption.None)
-                {
-                    switch (sw.BallSearch)
-                    {
-                        case BallSearchSignalOption.Reset:
-                            SetBallSearchReset();
-                            break;
-                        case BallSearchSignalOption.Off:
-                            SetBallSearchStop();
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
+            SetSwitch(sw, 0);
         }
         return result;
     }
@@ -1203,14 +1185,27 @@ public abstract class PinGodGame : PinGodBase
     /// <param name="swName"></param>
     /// <param name="inputEvent"></param>
     /// <returns></returns>
-    public virtual bool SwitchOn(string swName, InputEvent inputEvent)
+    public virtual bool SwitchActionOn(string swName, InputEvent inputEvent)
     {
         if (!SwitchExists(swName)) return false;
         var sw = Machine.Switches[swName];
-        var result = sw.IsOn(inputEvent);
+        var result = sw.IsActionOn(inputEvent);
+        if (result)
+        {
+            SetSwitch(sw, 1);
+        }
+        return result;
+    }
 
+    /// <summary>
+    /// handle ball search and recording
+    /// </summary>
+    /// <param name="sw"></param>
+    /// <param name="result"></param>
+    public virtual void ProcessSwitch(Switch sw)
+    {
         //do something with ball search if switch needs to
-        if (result && BallSearchOptions.IsSearchEnabled && GameInPlay)
+        if (BallSearchOptions.IsSearchEnabled && GameInPlay)
         {
             if (sw.BallSearch != BallSearchSignalOption.None)
             {
@@ -1227,17 +1222,13 @@ public abstract class PinGodGame : PinGodBase
                 }
             }
         }
-        if (result) //record switch
-        {            
-            if (_recordPlayback == RecordPlaybackOption.Record)
-            {
-                var switchTime = OS.GetTicksMsec() - gameLoadTimeMsec;
-                var recordLine = $"sw{sw.Num}|{true}|{switchTime}";
-                _recordFile?.StoreLine(recordLine);
-                LogDebug(nameof(PinGodGame), ":recorded:", recordLine);
-            }
+        if (_recordPlayback == RecordPlaybackOption.Record) //record switch
+        {
+            var switchTime = OS.GetTicksMsec() - gameLoadTimeMsec;
+            var recordLine = $"sw{sw.Num}|{true}|{switchTime}";
+            _recordFile?.StoreLine(recordLine);
+            LogDebug(nameof(PinGodGame), ":recorded:", recordLine);
         }
-        return result;
     }
 
     /// <summary>
@@ -1249,7 +1240,37 @@ public abstract class PinGodGame : PinGodBase
     public virtual bool SwitchOn(string swName)
     {
         if (!SwitchExists(swName)) return false;
-        return Machine.Switches[swName].IsOn();
+        return Machine.Switches[swName].IsActionOn();
+    }
+
+    /// <summary>
+    /// Set IsEnabled on the Switch and emits <see cref="PinGodBase.SwitchCommand"/> with number and byte value <para/>
+    /// Switch will be set to 0 or 1 but the signal value can be 0-255 <para/>
+    /// Anything listening to the <see cref="SwitchCommand"/> can get the Switch from <see cref="Machine.Switches"/> without checking keys, it will be valid sent from here
+    /// </summary>
+    /// <param name="swNum"></param>
+    /// <param name="value"></param>
+    public void SetSwitch(int swNum, byte value)
+    {
+        var sw = Machine.Switches.Values.FirstOrDefault(x => x.Num == swNum);
+        if (sw != null)
+        {
+            SetSwitch(sw, value, false);
+        }
+    }
+
+    /// <summary>
+    /// Sets switch if not from action. Emits <see cref="PinGodBase.SwitchCommand"/>.
+    /// </summary>
+    /// <param name="switch"></param>
+    /// <param name="value"></param>
+    /// <param name="fromAction">if false it doesn't set switch, actions should do this when checked here in SwitchOn</param>
+    public void SetSwitch(Switch @switch, byte value, bool fromAction = true)
+    {
+        if(!fromAction)
+            @switch.SetSwitch(value > 0);
+        ProcessSwitch(@switch);
+        EmitSignal(nameof(SwitchCommand), @switch.Name, @switch.Num, value);
     }
 
     /// <summary>
@@ -1365,7 +1386,7 @@ public abstract class PinGodGame : PinGodBase
 	{
 		if (!Machine.Coils.ContainsKey(name))
 		{
-			LogError(nameof(SolenoidExists),$"ERROR:no solenoid found for: {name}");
+			LogError(nameof(SolenoidExists) + $" ERROR:no solenoid found: {name} \n");
 			return false;
 		}
 
@@ -1376,10 +1397,10 @@ public abstract class PinGodGame : PinGodBase
 	{
 		if (!Machine.Switches.ContainsKey(name))
 		{
-			LogError(nameof(SwitchExists),$"ERROR:no switch found for: {name}");
+			LogError(nameof(SwitchExists) + $" :ERROR:no switch found: {name} \n");
 			return false;
 		}
 
 		return true;
-	}	
+	}
 }

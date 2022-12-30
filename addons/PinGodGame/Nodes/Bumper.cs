@@ -1,39 +1,37 @@
 using Godot;
-using System;
+using static PinGodBase;
 
 /// <summary>
 /// sends BumperHit signal, plays sound and coil if given
 /// </summary>
 public class Bumper : Node
 {
-	/// <summary>
-	/// Bumper Switch name
-	/// </summary>
-	[Export] string _SwitchName = string.Empty;
+    /// <summary>
+    /// audio player
+    /// </summary>
+    public AudioStreamPlayer player;
 
-	/// <summary>
-	/// Coil name
-	/// </summary>
-	[Export] string _CoilName = string.Empty;
+    /// <summary>
+    /// The stream to play when bumper hit
+    /// </summary>
+    [Export] AudioStream _AudioStream = null;
 
-	/// <summary>
-	/// The stream to play when bumper hit
-	/// </summary>
-	[Export] AudioStream _AudioStream = null;	
+    /// <summary>
+    /// Coil name
+    /// </summary>
+    [Export] string _CoilName = string.Empty;
 
+    private PinGodGame _pinGod;
+
+    /// <summary>
+    /// Bumper Switch name
+    /// </summary>
+    [Export] string _SwitchName = string.Empty;
 	/// <summary>
 	/// Emitted on bumper input
 	/// </summary>
 	/// <param name="name"></param>
 	[Signal] delegate void BumperHit(string name);
-
-	private PinGodGame _pinGod;
-
-	/// <summary>
-	/// audio player
-	/// </summary>
-	public AudioStreamPlayer player;
-
 	/// <summary>
 	/// Switches off input if no switch available. Sets audio stream
 	/// </summary>
@@ -53,37 +51,39 @@ public class Bumper : Node
 			{
 				player.Stream = _AudioStream;
 			}
-			//else { this.RemoveChild(player); player.QueueFree(); player = null; }
-		}
+            //else { this.RemoveChild(player); player.QueueFree(); player = null; }
+
+            _pinGod.Connect(nameof(SwitchCommand), this, nameof(SwitchCommandHandler));
+        }
 	}
 
     internal void SetAudioStream(AudioStream audioStream)
     {
-		this._AudioStream = audioStream;
-		player.Stream = this._AudioStream;
+        this._AudioStream = audioStream;
+        player.Stream = this._AudioStream;
     }
 
-	/// <summary>
-	/// Plays sound and pulses the coil if gameInPlay and isn't tilted
-	/// </summary>
-	/// <param name="event"></param>
-    public override void _Input(InputEvent @event)
-	{
-		//exit no game in play or tilted
-		if (!_pinGod.GameInPlay || _pinGod.IsTilted) return;
+    private void SwitchCommandHandler(string swName, byte index, byte value)
+    {
+        //exit no game in play or tilted
+        if (!_pinGod.GameInPlay || _pinGod.IsTilted) return;
 
-		//has switch just been activated?
-		if (_pinGod.SwitchOn(_SwitchName, @event))
+		if(_SwitchName == swName)
 		{
-			//play sound for bumper
-			if (_AudioStream != null) { player.Play(); }
+			if (value > 0)
+			{
+				//play sound for bumper
+				if (_AudioStream != null) { player.Play(); }
 
-			//pulse coil
-			if(!string.IsNullOrWhiteSpace(_CoilName)) { _pinGod.SolenoidPulse(_CoilName); }
+				//pulse coil
+				if (!string.IsNullOrWhiteSpace(_CoilName)) { _pinGod.SolenoidPulse(_CoilName); }
 
-			//publish hit event
-			EmitSignal(nameof(BumperHit), _SwitchName);
+				//publish hit event
+				EmitSignal(nameof(BumperHit), _SwitchName);
+			}
+			else
+			{ //switch off}}
+			}
 		}
-		else if (_pinGod.SwitchOff(_SwitchName, @event)) { }
-	}
+    }
 }

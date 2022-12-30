@@ -1,4 +1,5 @@
 ﻿using Godot;
+using static PinGodBase;
 
 /// <summary>
 /// Handles a bank of targets, the light states and watches for completion
@@ -70,49 +71,33 @@ public class PinballTargetsBank : PinGodGameNode
             else
             {
                 _targetValues = new bool[_target_switches.Length];
+                //connect to a switch command. the switches can come from actions or ReadStates
+                pinGod.Connect(nameof(SwitchCommand), this, nameof(OnSwitchCommandHandler));
                 Logger.Debug(nameof(PinballTargetsBank), ":setting target values ", _targetValues.Length);
             }
         }
     }
 
     /// <summary>
-    /// <see cref="ProcessTargetSwitchInputs"/>
+    /// Switch handlers for lanes and slingshots
     /// </summary>
-    /// <param name="event"></param>
-    public override void _Input(InputEvent @event)
+    /// <param name="name"></param>
+    /// <param name="index"></param>
+    /// <param name="value"></param>
+    private void OnSwitchCommandHandler(string name, byte index, byte value)
     {
-        if (!Engine.EditorHint)
+        if (!pinGod.GameInPlay || pinGod.IsTilted) return;
+        
+        for (int i = 0; i < _target_switches.Length; i++)
         {
-            ProcessTargetSwitchInputs(@event);
-        }
-    }
-
-    /// <summary>
-    /// Processes the <see cref="_target_switches"/> 
-    /// </summary>
-    /// <param name="event"></param>
-    public virtual void ProcessTargetSwitchInputs(InputEvent @event)
-    {
-        if (_target_switches?.Length > 0)
-        {
-            for (int i = 0; i < _target_switches.Length; i++)
+            if(name == _target_switches[i])
             {
-                if (pinGod.SwitchOn(_target_switches[i], @event))
-                {
-                    Logger.Debug(nameof(PinballTargetsBank),":activated: ", _target_switches[i]);
-
-                    SetTargetComplete(i);                    
-
-                    if (CheckTargetsCompleted(i))
-                    {
-                        TargetsCompleted();
-                    }
-                }
+                Logger.Debug(nameof(PinballTargetsBank), ":active: ", _target_switches[i]);
+                SetTargetComplete(i);
+                if (CheckTargetsCompleted(i))
+                    TargetsCompleted();
+                break;
             }
-        }
-        else
-        {
-            SetProcessInput(false);
         }
     }
 

@@ -1,4 +1,5 @@
 using Godot;
+using static PinGodBase;
 
 /// <summary>
 /// Inherits from Node, is a mode
@@ -21,18 +22,36 @@ public class ServiceMenu : Node
     public override void _EnterTree()
 	{
 		pinGod = GetNode("/root/PinGodGame") as PinGodGame;
-	}
+        //connect to a switch command. the switches can come from actions or ReadStates
+        pinGod.Connect(nameof(SwitchCommand), this, nameof(OnSwitchCommandHandler));
+    }
 
-	/// <summary>
-	/// Checks for coin door switches, menus. enter, up , down and exit
-	/// </summary>
-	/// <param name="event"></param>
-    public override void _Input(InputEvent @event)
+    /// <summary>
+    /// Switch handlers for lanes and slingshots
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="index"></param>
+    /// <param name="value"></param>
+    private void OnSwitchCommandHandler(string name, byte index, byte value)
     {
-        if (pinGod.SwitchOn("enter", @event)) { OnEnter(); }
-        if (pinGod.SwitchOn("up", @event)) { OnUp(); }
-        if (pinGod.SwitchOn("down", @event)) { OnDown(); }
-        if (pinGod.SwitchOn("exit", @event)) { OnExit(); }
+        if (value <= 0) return;
+        switch (name)
+        {
+            case "enter":
+                OnEnter();
+                break;
+            case "up":
+                OnUp();
+                break;
+            case "down":
+                OnDown();
+                break;
+            case "exit":
+                OnExit();
+                break;
+            default:
+                break;
+        }
     }
 
     /// <summary>

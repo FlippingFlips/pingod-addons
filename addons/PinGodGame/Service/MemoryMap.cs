@@ -123,8 +123,11 @@ public class MemoryMap : IDisposable
     }
 
     /// <summary>
-    /// Reads the buffer size <see cref="SWITCH_COUNT"/> switch states from the memory map buffer at position 0. Acts on any new switch events found. <para/>
-    /// Emits a signal on VpCommand found. Switch 0 changed will process game states, switch zero used with GameSyncState.
+    /// Reads the buffer size <see cref="SWITCH_COUNT"/> switch states from the memory map buffer at position 0. <para/>
+    /// Acts on any new switch events found. <para/>
+    /// The switch state gets converted to a Godot InputEventAction with the name sw{Num} and fed into the game<para/>
+    /// It is overidden if a VpCommand found. <para/>
+    /// Switch 0 changed will process game states, switch zero used with <see cref="GameSyncState"/>.
     /// </summary>
     private void ReadStates()
     {
@@ -141,14 +144,25 @@ public class MemoryMap : IDisposable
                     //override sending switch if this is a visual pinball command
                     if(pinGodGame?.GameSettings?.VpCommandSwitchId > 0 && pinGodGame?.GameSettings?.VpCommandSwitchId == i)
                     {
-                        pinGodGame?.EmitSignal("VpCommand", buffer[i]);
+                        pinGodGame?.EmitSignal(nameof(PinGodBase.VpCommand), nameof(PinGodBase.VpCommand), buffer[i]);
                     }
                     else if (i > 0)
                     {
-                        //Feed switch into Godot
-                        bool actionState = (bool)GD.Convert(buffer[i], Variant.Type.Bool);
-                        var ev = new InputEventAction() { Action = $"sw{i}", Pressed = actionState };
-                        Input.ParseInputEvent(ev);
+                        if (true) //TODO: send this signal
+                        {
+                            //set switch IsEnabled and send signal
+                            Logger.Verbose(nameof(MemoryMap), $":sw:{i}:{buffer[i]}");
+                            pinGodGame.SetSwitch(i, buffer[i]);
+                        }
+                        else
+                        {
+
+                            //TODO: Emit a switch signal, different way of doing it
+                            //Feed switch into Godot action
+                            bool actionState = (bool)GD.Convert(buffer[i], Variant.Type.Bool);
+                            var ev = new InputEventAction() { Action = $"sw{i}", Pressed = actionState };
+                            Input.ParseInputEvent(ev);
+                        }
                     }
                     else // Use Switch 0 for game GameSyncState
                     {                        
@@ -204,12 +218,12 @@ public class MemoryMap : IDisposable
                 mutexCreated = System.Threading.Mutex.TryOpenExisting(MUTEX_NAME, out mutex);
                 if (!mutexCreated)
                 {
-                    Logger.Debug(nameof(MemoryMap), "couldn't find mutex:", MUTEX_NAME, " creating new");
+                    Logger.Debug(nameof(MemoryMap), ":couldn't find mutex:", MUTEX_NAME, " creating new");
                     mutex = new System.Threading.Mutex(true, MUTEX_NAME, out mutexCreated);
                 }
                 else
                 {
-                    Logger.Debug("mutex found:", MAP_NAME);
+                    Logger.Debug(nameof(MemoryMap),":mutex found:", MAP_NAME);
                 }
 
                 mmf = MemoryMappedFile.CreateOrOpen(MAP_NAME, MAP_SIZE);

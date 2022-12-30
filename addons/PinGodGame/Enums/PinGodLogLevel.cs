@@ -4,6 +4,10 @@
 public enum PinGodLogLevel
 {
     /// <summary>
+    /// Switches verbose
+    /// </summary>
+    Verbose,
+    /// <summary>
     /// 
     /// </summary>
     Debug,

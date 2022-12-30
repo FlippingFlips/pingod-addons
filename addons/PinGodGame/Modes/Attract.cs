@@ -1,4 +1,5 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 
 /// <summary>
@@ -38,6 +39,8 @@ public class Attract : Node
 		timer = (GetNode("AttractLayerChangeTimer") as Timer);
 		timer.WaitTime = _scene_change_secs;
 
+		pinGod.Connect(nameof(PinGodBase.SwitchCommand), this, nameof(SwitchHandler));
+
 		var nodes = GetNode("AttractLayers").GetChildren();
 		//add as canvas items as they are able to Hide / Show
 		foreach (var item in nodes)
@@ -52,32 +55,39 @@ public class Attract : Node
 		pinGod.SetBallSearchStop();
 	}
 
-	/// <summary>
-	/// Just logs attract loaded
-	/// </summary>
-	public override void _Ready()
+    private void SwitchHandler(string name, byte index, byte value)
+    {        
+        if (value > 0)
+		{
+			switch (index)
+			{
+				case 1:
+                case 2:
+                case 3: //Coin buttons. See PinGod.vbs for Standard switches
+                    pinGod.AudioManager.PlaySfx("credit");
+                    pinGod.AddCredits((byte)(1 * index));
+					break;
+                case 9: //l flipper
+                    CallDeferred("ChangeLayer", true);
+					break;
+                case 11://r flipper
+                    CallDeferred("ChangeLayer", false);
+                    break;
+				case 19://start
+                    CallDeferred(nameof(StartGame));
+					break;
+                default:
+					break;
+			}
+        }        
+    }
+
+    /// <summary>
+    /// Just logs attract loaded
+    /// </summary>
+    public override void _Ready()
 	{
 		Logger.Debug(nameof(Attract),":",nameof(_Ready));		
-	}
-
-	/// <summary>
-	/// Checks for start button presses to Start a game. Players can cycle the scenes with flippers
-	/// </summary>
-	/// <param name="event"></param>
-	public override void _Input(InputEvent @event)
-	{
-		if (pinGod.SwitchOn("start", @event))
-        {
-			CallDeferred(nameof(StartGame));
-        }
-        if (pinGod.SwitchOn("flipper_l", @event))
-		{
-			CallDeferred("ChangeLayer", true);
-		}
-		if (pinGod.SwitchOn("flipper_r", @event))
-		{
-			CallDeferred("ChangeLayer", false);
-		}
 	}
 
     private void StartGame()

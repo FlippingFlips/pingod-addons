@@ -1,4 +1,6 @@
 ﻿using Godot;
+using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>
 /// Set the exports in the scene from Godot or tscn. <see cref="_lane_switches"/> <see cref="_lane_lamps"/> and other options.
@@ -6,6 +8,7 @@
 public class PinballLanesNode : PinGodGameMode
 {
     bool[] _lanesCompleted;
+    private byte[] _laneSwitchNums;
 
     #region Exports
     [Export] bool _flipper_changes_lanes = true;
@@ -62,8 +65,54 @@ public class PinballLanesNode : PinGodGameMode
             else
             {
                 _lanesCompleted = new bool[_lane_switches.Length];
+                _laneSwitchNums = new byte[_lane_switches.Length];
+                for (int i = 0; i < _lane_switches.Length; i++)
+                {
+                    _laneSwitchNums[i]= Machine.Switches[_lane_switches[i]].Num;
+                }
+                
+                pinGod.Connect(nameof(PinGodBase.SwitchCommand), this, nameof(OnSwitchCommandHandler));
             }
         }
+    }
+
+    private void OnSwitchCommandHandler(string name, byte index, byte value)
+    {        
+        if(_lane_switches?.Length > 0)
+        {
+            if(value > 0)
+            {
+                switch (name)
+                {
+                    case "flipper_l":
+                        if (_flipper_changes_lanes)
+                            RotateLanesLeft();
+                        return;
+                    case "flipper_r":
+                        if (_flipper_changes_lanes)
+                            RotateLanesRight();
+                        return;
+                    default:
+                        break;
+                }
+
+                bool wasSet = false;
+                for (int i = 0; i < _laneSwitchNums.Length; i++)
+                {
+                    if (_laneSwitchNums[i] == index)
+                    {
+                        wasSet = LaneSwitchActivated(i);
+                        CheckLanes();
+                        UpdateLamps();
+                        break;
+                    }                    
+                }
+            }
+            else //switch off
+            {
+
+            }
+        }        
     }
 
     /// <summary>
@@ -74,35 +123,18 @@ public class PinballLanesNode : PinGodGameMode
     /// <param name="event"></param>
     public override void _Input(InputEvent @event)
     {
-        if (Engine.EditorHint) SetProcessInput(false);
+        if (Engine.EditorHint)
+        {
+            SetProcessInput(false);
+            return;
+        }
 
         if (_lane_switches != null)
         {
-            if (_flipper_changes_lanes)
-            {
-                if (pinGod.SwitchOn("flipper_l", @event))
-                {
-                    RotateLanesLeft();
-                }
-                if (pinGod.SwitchOn("flipper_r", @event))
-                {
-                    RotateLanesRight();
-                }
-            }
-            
-            bool wasSet = false;
+            //just to handle window actions
             for (int i = 0; i < _lane_switches.Length; i++)
             {
-                if (pinGod.SwitchOn(_lane_switches[i], @event))
-                {
-                    wasSet = LaneSwitchActivated(i);
-                }
-            }
-
-            if (wasSet)
-            {
-                CheckLanes();
-                UpdateLamps();
+                pinGod.SwitchActionOn(_lane_switches[i], @event);
             }
         }
     }

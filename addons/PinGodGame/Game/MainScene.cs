@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Threading.Tasks;
 using static Godot.GD;
+using static PinGodBase;
 
 /// <summary>
 /// Main Scene. The Entry point
@@ -53,11 +54,43 @@ public class MainScene : Node2D
         pinGod.Connect(nameof(PinGodGame.GameEnded), this, nameof(OnGameEnded));
         pinGod.Connect(nameof(PinGodGame.ServiceMenuExit), this, nameof(OnServiceMenuExit));
 
+        //connect to a switch command. the switches can come from actions or ReadStates
+        pinGod.Connect(nameof(SwitchCommand), this, nameof(OnSwitchCommandHandler));
+
         //attract mod already in the tree, get the instance so we can free it when game started
         attractnode = GetNode("Modes/Attract");
         //show a pause menu when pause enabled.
         pauseLayer = GetNode("CanvasLayer/PauseControl") as Control;
         settingsDisplay = GetNodeOrNull<Control>("CanvasLayer/SettingsDisplay");
+    }
+
+    private void OnSwitchCommandHandler(string name, byte index, byte value)
+    {
+        if (value <= 0) return;
+        if (!pinGod.IsTilted && name == "enter")
+        {
+            if (!InServiceMenu)
+            {
+                if (!string.IsNullOrWhiteSpace(_service_menu_scene_path))
+                {
+                    //enter service menu					
+                    InServiceMenu = true;
+
+                    Task.Run(() =>
+                    {
+                        if (pinGod.GameInPlay)
+                            GetNode("Modes/Game")?.QueueFree();
+                        else
+                            GetNode("Modes/Attract")?.Free();
+
+                        //load service menu into modes
+                        CallDeferred("_loaded", _resourcePreLoader.GetResource(_service_menu_scene_path.BaseName()));
+
+                        pinGod.EmitSignal("ServiceMenuEnter");
+                    });
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -81,8 +114,7 @@ public class MainScene : Node2D
         }
 
         if (@event.IsActionPressed("settings"))
-        {
-            
+        {            
             if (settingsDisplay != null)
             {
                 settingsDisplay.Visible = !settingsDisplay.Visible;
@@ -96,34 +128,6 @@ public class MainScene : Node2D
                     OnResumeGame();
                 }
             }                
-        }
-
-        if (!pinGod.IsTilted)
-        {
-            if (pinGod.SwitchOn("enter", @event))
-            {
-                if (!InServiceMenu)
-                {
-                    if (!string.IsNullOrWhiteSpace(_service_menu_scene_path))
-                    {
-                        //enter service menu					
-                        InServiceMenu = true;
-
-                        Task.Run(() =>
-                        {
-                            if (pinGod.GameInPlay)
-                                GetNode("Modes/Game")?.QueueFree();
-                            else
-                                GetNode("Modes/Attract")?.Free();
-
-                            //load service menu into modes
-                            CallDeferred("_loaded", _resourcePreLoader.GetResource(_service_menu_scene_path.BaseName()));
-
-                            pinGod.EmitSignal("ServiceMenuEnter");
-                        });
-                    }
-                }
-            }
         }
     }
 

@@ -9,6 +9,17 @@ public static class Logger
     /// </summary>
     public static PinGodLogLevel LogLevel { get; set; }
     /// <summary>
+    /// Use for switches, or other verbose logging
+    /// </summary>
+    /// <param name="what"></param>
+    public static void Verbose(params object[] what)
+    {
+        if (LogLevel <= PinGodLogLevel.Verbose)
+        {
+            Print(what);
+        }
+    }
+    /// <summary>
     /// 
     /// </summary>
     /// <param name="what"></param>

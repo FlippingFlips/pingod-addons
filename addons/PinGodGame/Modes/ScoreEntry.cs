@@ -72,7 +72,7 @@ public class ScoreEntry : Control
     {
         if (this.Visible && IsPlayerEnteringScore)
         {
-            if (pinGod.SwitchOn("flipper_l", @event))
+            if (pinGod.SwitchActionOn("flipper_l", @event))
             {
                 //scroll back, move the label to the left
                 selectedIndex--;
@@ -90,7 +90,7 @@ public class ScoreEntry : Control
                 _entry[currentEntryIndex] = (char)allowedChars[selectedIndex];
                 selectedName.Text = new string(_entry);
             }
-            if (pinGod.SwitchOn("flipper_r", @event))
+            if (pinGod.SwitchActionOn("flipper_r", @event))
             {
                 //scroll forward, move the label to the right
                 selectedIndex++;
@@ -109,7 +109,7 @@ public class ScoreEntry : Control
                 _entry[currentEntryIndex] = (char)allowedChars[selectedIndex];
                 selectedName.Text = new string(_entry);
             }
-            if (pinGod.SwitchOn("start", @event))
+            if (pinGod.SwitchActionOn("start", @event))
             {
                 //delete char
                 if (allowedChars[selectedIndex] == 60)
@@ -154,10 +154,6 @@ public class ScoreEntry : Control
     /// </summary>
     public override void _Ready()
     {
-		//test players
-		//GameGlobals.Players.Add(new PlayerBasicGame() { Points = 2430 });
-		//GameGlobals.Players.Add(new PlayerBasicGame() { Points = 2530 });
-
 		pinGod = GetNode("/root/PinGodGame") as PinGodGame;
 		CharSelectionSetup();
 		selectedName = GetNode("CenterContainer/VBoxContainer/Name") as Label;		

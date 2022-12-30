@@ -51,29 +51,48 @@ public class Switch
     /// </summary>
     public BallSearchSignalOption BallSearch { get; set; }
     /// <summary>
+    /// Flag set by actions and SetSwitch
+    /// </summary>
+    public bool IsEnabled { get; private set; }
+
+    /// <summary>
     /// Time last active
     /// </summary>
     public ulong Time { get; set; }
 
     /// <summary>
-    /// Sets a switch manually, pushes an InputEventAction to the queue
+    /// Sets a switch manually, pushes a InputEventAction to Input
     /// </summary>
-    /// <param name="Pressed"></param>
+    /// <param name="pressed"></param>
     /// <returns></returns>
-    public void SetSwitch(bool Pressed) => Input.ParseInputEvent(new InputEventAction() { Action = this.ToString(), Pressed = Pressed });
+    public void SetSwitchAction(bool pressed) 
+    {
+        Input.ParseInputEvent(new InputEventAction() { Action = this.ToString(), Pressed = pressed });
+        IsEnabled = pressed;
+    }
+
+    /// <summary>
+    /// Also sets the time of the switch
+    /// </summary>
+    /// <param name="enabled"></param>
+    public void SetSwitch(bool enabled)
+    {
+        IsEnabled = enabled;
+        Time = OS.GetSystemTimeMsecs();
+        Logger.Verbose(nameof(Switch), $":{this.Name}:{this.Num} = {IsEnabled}");
+    }
 
     /// <summary>
     /// Checks the current input event. IsActionPressed(sw+num)
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    public bool IsOn(InputEvent input) 
+    public bool IsActionOn(InputEvent input) 
     { 
         bool active = input.IsActionPressed(ToString());
         if (active)
         {
-            Time = OS.GetSystemTimeMsecs();
-            Logger.Debug(nameof(Switch), $":{this.Name}:{this.Num} on");
+            SetSwitch(true);
         }
         return active;
     }
@@ -82,20 +101,23 @@ public class Switch
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    public bool IsOff(InputEvent input) {
+    public bool IsActionOff(InputEvent input) {
         bool released = input.IsActionReleased(ToString());
         if (released)
         {
-            Time = OS.GetSystemTimeMsecs();
-            Logger.Debug(nameof(Switch), $":{this.Name}:{this.Num} off");
+            SetSwitch(false);
         }
         return released;
     }
     /// <summary>
-    /// Checks if On/Off
+    /// Checks if On/Off - Action pressed sw{num}
     /// </summary>
     /// <returns></returns>
-    public bool IsOn() => Input.IsActionPressed(ToString());
+    public bool IsActionOn()
+    {
+        IsEnabled = Input.IsActionPressed(ToString());
+        return IsEnabled;
+    }
 
     /// <summary>
     /// Time in milliseconds since switch used

@@ -1,4 +1,6 @@
-﻿/// <summary>
+﻿using System.Collections.Generic;
+using System.Linq;
+/// <summary>
 /// Trough settings
 /// </summary>
 public class TroughOptions
@@ -28,6 +30,16 @@ public class TroughOptions
         BallSaveLamp = ballSaveLamp;
         BallSaveLed = ballSaveLed;
         NumBallsToSave = numBallsToSave;
+
+        GameSwitches = new List<Switch>();
+        if (switches?.Length > 0)
+        {
+            for (int i = 0; i < switches.Length; i++)
+            {
+                if (Machine.Switches.ContainsKey(switches[i]))
+                    GameSwitches.Add(Machine.Switches[switches[i]]);
+            }
+        }        
     }
 
     /// <summary>
@@ -70,4 +82,5 @@ public class TroughOptions
     /// How many balls to save when in ball save
     /// </summary>
     public int NumBallsToSave { get; set; }
+    public List<Switch> GameSwitches { get; }
 }

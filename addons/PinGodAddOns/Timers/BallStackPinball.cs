@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 /// <summary>
 /// Tool: Kicker / Saucer node based on timer and to process switch actions.
@@ -29,18 +28,31 @@ public class BallStackPinball : Timer
     /// </summary>
     [Signal] public delegate void SwitchInActive();
 
-	#region Public Methods
-	/// <summary>
-	/// Creates the timer and adds to the tree
-	/// </summary>
-	public override void _EnterTree()
+    #region Public Methods
+    /// <summary>
+    /// Connects the <see cref="OnSwitchCommandHandler"/>
+    /// </summary>
+    public override void _EnterTree()
 	{
 		if (!Engine.EditorHint)
 		{
 			pingod = GetNode("/root/PinGodGame") as PinGodGame;
-			// Code to execute when in game.
-		}
+            //emit signal when the switch is active
+            pingod.Connect(nameof(PinGodBase.SwitchCommand), this, nameof(OnSwitchCommandHandler));
+        }
 	}
+
+    private void OnSwitchCommandHandler(string name, byte index, byte value)
+    {
+        if (_switch == null) return;
+        if(name == _switch)
+        {
+            if(value > 0)
+                EmitSignal(nameof(SwitchActive));
+            else
+                EmitSignal(nameof(SwitchInActive));
+        }
+    }
 
     /// <summary>
     /// Stops the timer
@@ -48,22 +60,6 @@ public class BallStackPinball : Timer
     public override void _ExitTree()
     {
         Stop();
-    }
-
-    /// <summary>
-    /// Checks if ball stacks switch is on or off then emits <see cref="SwitchActive"/> or <see cref="SwitchInActive"/>
-    /// </summary>
-    /// <param name="event"></param>
-    public override void _Input(InputEvent @event)
-    {
-        if (pingod.SwitchOn(_switch, @event))
-        {
-            EmitSignal(nameof(SwitchActive));
-        }
-        else if (pingod.SwitchOff(_switch, @event))
-        {
-            EmitSignal(nameof(SwitchInActive));
-        }
     }
 
     /// <summary>

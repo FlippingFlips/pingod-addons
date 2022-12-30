@@ -70,10 +70,11 @@ public abstract class Game : PinGodGameNode
     /// add points with 25 bonus
     /// </summary>
     /// <param name="points"></param>
-    public virtual void AddPoints(int points)
+    /// <param name="bonus"></param>
+    public virtual void AddPoints(int points, int bonus = 25)
     {
         pinGod.AddPoints(points);
-        pinGod.AddBonus(25);
+        pinGod.AddBonus(bonus);
     }
 
     /// <summary>
