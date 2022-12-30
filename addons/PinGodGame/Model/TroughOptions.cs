@@ -43,6 +43,11 @@ public class TroughOptions
     }
 
     /// <summary>
+    /// used by the trough to get quicker access to switches
+    /// </summary>
+    public List<Switch> GameSwitches { get; }
+
+    /// <summary>
     /// Switch names
     /// </summary>
     public string[] Switches { get; }
@@ -81,6 +86,5 @@ public class TroughOptions
     /// <summary>
     /// How many balls to save when in ball save
     /// </summary>
-    public int NumBallsToSave { get; set; }
-    public List<Switch> GameSwitches { get; }
+    public int NumBallsToSave { get; set; }    
 }

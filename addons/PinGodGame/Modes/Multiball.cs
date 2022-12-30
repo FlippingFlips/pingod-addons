@@ -32,7 +32,7 @@ public class Multiball : Control
 	}
 
     /// <summary>
-    /// Signal emitted from trough <see cref="Trough._Input"/>
+    /// Signal is emitted from the trough
     /// </summary>
     internal void EndMultiball() => this.QueueFree();
 }

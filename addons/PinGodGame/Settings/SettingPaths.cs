@@ -1,5 +1,11 @@
-﻿public static class SettingPaths
+﻿/// <summary>
+/// string to godot project settings paths
+/// </summary>
+public static class SettingPaths
 {
+    /// <summary>
+    /// godot display paths
+    /// </summary>
     public static class DisplaySetPaths
     {
         /// <summary>
@@ -30,8 +36,13 @@
         /// window height
         /// </summary>
         public const string HEIGHT = "display/window/size/height";
-
+        /// <summary>
+        /// value test_width path in project settings
+        /// </summary>
         public const string TEST_WIDTH = "display/window/size/test_width";
+        /// <summary>
+        /// value test_height path in project settings
+        /// </summary>
 
         public const string TEST_HEIGHT = "display/window/size/test_height";
     }

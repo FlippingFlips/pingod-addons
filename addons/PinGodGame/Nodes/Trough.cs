@@ -387,7 +387,7 @@ public class Trough : Node
 
 	#region Timers
 	/// <summary>
-	/// Disables ball save and emits <see cref="PinGodGame.BallSaveEnded"/>
+	/// Disables ball save and emits <see cref="PinGodBase.BallSaveEnded"/>
 	/// </summary>
 	void _on_BallSaverTimer_timeout()
 	{
