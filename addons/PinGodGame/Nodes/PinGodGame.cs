@@ -20,7 +20,7 @@ public abstract class PinGodGame : PinGodBase
     [Export] bool _record_game = false;
     [Export] bool _playback_game = false;
     [Export] string _playbackfile = null;
-    [Export] string[] _gameWindowSwitches;
+    [Export] string[] _gameWindowSwitches = null;
     #endregion
 
     #region Public Properties - Standard Pinball / Players
@@ -157,7 +157,7 @@ public abstract class PinGodGame : PinGodBase
 	{
         if (!Engine.EditorHint)
         {
-            LogDebug(nameof(PinGodGame), $":_EnterTree. {PinGodGameAddOn.VERSION}");
+            //LogDebug(nameof(PinGodGame), $":_EnterTree. {PinGodGameAddOn.VERSION}");
             CmdArgs = GetCommandLineArgs();
             LoadSettingsFile();
             Logger.LogLevel = GameSettings?.LogLevel ?? PinGodLogLevel.Warning;
@@ -240,6 +240,10 @@ public abstract class PinGodGame : PinGodBase
         if (@event.IsActionPressed("quit"))
         {
             LogDebug(nameof(PinGodGame), ":quit action request. quitting whole tree.");
+            //send game window ended, not alive
+            SolenoidOn("alive", 0);
+            LogInfo(nameof(PinGodGame), ":sent game ended coil: alive 0");
+
             SetGameResumed();
             GetTree().Quit(0);
             return;
@@ -354,14 +358,14 @@ public abstract class PinGodGame : PinGodBase
 		}
 	}
 
-	/// <summary>
-	/// Adds credits to the GameData and emits <see cref="PinGodGame.CreditAdded"/> signal
-	/// </summary>
-	/// <param name="amt"></param>
-	public virtual void AddCredits(byte amt)
+    /// <summary>
+    /// Adds credits to the GameData and emits <see cref="CreditAdded"/> signal
+    /// </summary>
+    /// <param name="amt"></param>
+    public virtual void AddCredits(byte amt)
 	{
 		GameData.Credits += amt;
-		EmitSignal(nameof(PinGodGame.CreditAdded));
+		EmitSignal(nameof(CreditAdded));
 	}
 
 	/// <summary>
@@ -714,12 +718,7 @@ public abstract class PinGodGame : PinGodBase
 
         LogInfo(nameof(PinGodGame), ": Quit: saved game");
 
-        if (GetTree().Paused) { GetTree().Paused = false; }
-
-		//send game ended, dead
-		SolenoidOn("alive", 0);
-        LogInfo(nameof(PinGodGame), ":sent game ended coil: alive 0");
-        memMapping?.Dispose(); //dispose invokes stop as well		
+        if (GetTree().Paused) { GetTree().Paused = false; }   
 	}
 
     /// <summary>
@@ -1201,7 +1200,6 @@ public abstract class PinGodGame : PinGodBase
     /// handle ball search and recording
     /// </summary>
     /// <param name="sw"></param>
-    /// <param name="result"></param>
     public virtual void ProcessSwitch(Switch sw)
     {
         //do something with ball search if switch needs to

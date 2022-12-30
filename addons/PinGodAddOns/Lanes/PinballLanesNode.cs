@@ -76,6 +76,14 @@ public class PinballLanesNode : PinGodGameMode
         }
     }
 
+    /// <summary>
+    /// Handles flipper inputs and changes lanes. <see cref="RotateLanesLeft"/> and <see cref="RotateLanesRight"/>. <para/>
+    /// Checks if any of the <see cref="_lane_switches"/> were used and sets <see cref="LaneSwitchActivated(int)"/> <para/>
+    /// Checks if lanes completed and updates lamps
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="index"></param>
+    /// <param name="value"></param>
     private void OnSwitchCommandHandler(string name, byte index, byte value)
     {        
         if(_lane_switches?.Length > 0)
@@ -113,30 +121,6 @@ public class PinballLanesNode : PinGodGameMode
 
             }
         }        
-    }
-
-    /// <summary>
-    /// Handles flipper inputs and changes lanes. <see cref="RotateLanesLeft"/> and <see cref="RotateLanesRight"/>. <para/>
-    /// Checks if any of the <see cref="_lane_switches"/> were used and sets <see cref="LaneSwitchActivated(int)"/> <para/>
-    /// Checks if lanes completed and updates lamps
-    /// </summary>
-    /// <param name="event"></param>
-    public override void _Input(InputEvent @event)
-    {
-        if (Engine.EditorHint)
-        {
-            SetProcessInput(false);
-            return;
-        }
-
-        if (_lane_switches != null)
-        {
-            //just to handle window actions
-            for (int i = 0; i < _lane_switches.Length; i++)
-            {
-                pinGod.SwitchActionOn(_lane_switches[i], @event);
-            }
-        }
     }
 
     /// <summary>

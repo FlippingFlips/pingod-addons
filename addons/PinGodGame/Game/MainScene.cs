@@ -107,11 +107,11 @@ public class MainScene : Node2D
             return;
         }
 
-        if (@event.IsActionPressed("quit"))
-        {
-            pinGod.Quit();
-            return;
-        }
+        //if (@event.IsActionPressed("quit"))
+        //{
+        //    pinGod.Quit();
+        //    return;
+        //}
 
         if (@event.IsActionPressed("settings"))
         {            
