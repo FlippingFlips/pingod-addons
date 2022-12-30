@@ -54,13 +54,7 @@ Getting the controller to act on some table events. Stopping the game window and
 ### Table Init
 ---
 
-Visual pinball `Table1_Init` is a little different here. This is where the controller is `Run`, how it is run depends on the `IsDebug` flag set.
-
-A timer interval is added to the `LeftFlipper` which checks to see if the `Controller.GameRunning` is enabled. When it is enabled then `InitGame` is invoked.
-
-![image](../../images/basicgame-vp-script-d.jpg)
-
-You can set more on the Controller like these [display settings](#display-settings)
+Visual pinball `Table1_Init` controller is `Run`, how it is run depends on the `IsDebug` flag set.
 
 ---
 ### Init game

@@ -538,7 +538,7 @@ public abstract class PinGodGame : PinGodBase
     /// <param name="switchNames"></param>
     /// <param name="input"></param>
     /// <returns></returns>
-    public virtual bool IsSwitch(string[] switchNames, InputEvent input)
+    public virtual bool IsSwitchAction(string[] switchNames, InputEvent input)
 	{
 		for (int i = 0; i < switchNames.Length; i++)
 		{
@@ -550,6 +550,13 @@ public abstract class PinGodGame : PinGodBase
 
 		return false;
 	}
+
+    /// <summary>
+    /// Checks the <see cref="Machine.Switches"/> for enabled
+    /// </summary>
+    /// <param name="swName"></param>
+    /// <returns></returns>
+    public virtual bool IsSwitchEnabled(string swName)=> Machine.Switches[swName].IsEnabled;
 
     /// <summary>
     /// <see cref="GameData.Load"/>

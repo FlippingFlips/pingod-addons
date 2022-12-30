@@ -5,6 +5,8 @@ draft: false
 weight: 25
 ---
 
+[Game logging Class Reference](/pingod-addons/html/interfaceIPinballLogger.html)
+
 ---
 ## Log location
 ---
@@ -13,7 +15,11 @@ In the appdata directory under the game name, logs `.log` are created. Use the `
 
 ![image](../../images/basicgame-userdata-sublime.jpg)
 
-The image has the users game directory open with Sublime Text.
+The image above has the users game directory open with Sublime Text.
+
+---
+SublimeText - Game Data Folder
+---
 
 The steps to add this directory and save project:
 
@@ -23,7 +29,10 @@ The steps to add this directory and save project:
 
 You could do similar with a Visual Studio code workspace or something else, this is just one example of getting back to viewing this directory.
 
+
+---
 Log example:
+---
 
 ```
 Godot Engine v3.4.2.stable.mono.official.45eaa2daf - https://godotengine.org
@@ -56,7 +65,3 @@ void Error(string message = null, params object[] what);
 
 PinGodLogLevel LogLevel { get; }
 ```
-
-Game logging
-
-[Class Reference](/pingod-addons/html/interfaceIPinballLogger.html)

@@ -20,5 +20,3 @@ You can use the `.bat` files in the projects root directory to load a project wi
 | file  | what it does |
 | ------------- | ------------- |
 | _link_addons.bat  | Links the `pingod-addons` repository `addons` directory into BasicGameGodot |
-| _godot_export_full.bat  | Exports `Windows Desktop` which is executable and main pack |
-| _godot_export_pck.bat  | Exports `Windows Desktop Pack` which updates the main pack. The executable will be the same for all games as it basically is Godot |
