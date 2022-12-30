@@ -87,8 +87,10 @@ public class MemoryMap : IDisposable
                 if (readStates) ReadStates();
                 await Task.Delay(writeDelay);
             }
+            Dispose();
 
-            Logger.Debug(nameof(MemoryMap), ":write states stopped...");
+            //await Task.Delay(1000);
+            //Logger.Debug(nameof(MemoryMap), ":_readWriteStatesTask stopped...");            
         }, tokenSource.Token);
     }
 
@@ -148,21 +150,14 @@ public class MemoryMap : IDisposable
                     }
                     else if (i > 0)
                     {
-                        if (true) //TODO: send this signal
-                        {
-                            //set switch IsEnabled and send signal
-                            Logger.Verbose(nameof(MemoryMap), $":sw:{i}:{buffer[i]}");
-                            pinGodGame.SetSwitch(i, buffer[i]);
-                        }
-                        else
-                        {
-
-                            //TODO: Emit a switch signal, different way of doing it
-                            //Feed switch into Godot action
-                            bool actionState = (bool)GD.Convert(buffer[i], Variant.Type.Bool);
-                            var ev = new InputEventAction() { Action = $"sw{i}", Pressed = actionState };
-                            Input.ParseInputEvent(ev);
-                        }
+                        //set switch IsEnabled and send signal
+                        Logger.Verbose(nameof(MemoryMap), $":sw:{i}:{buffer[i]}");
+                        pinGodGame.SetSwitch(i, buffer[i]);
+                        
+                        //Feed switch into Godot action
+                        //bool actionState = (bool)GD.Convert(buffer[i], Variant.Type.Bool);
+                        //var ev = new InputEventAction() { Action = $"sw{i}", Pressed = actionState };
+                        //Input.ParseInputEvent(ev);
                     }
                     else // Use Switch 0 for game GameSyncState
                     {                        
