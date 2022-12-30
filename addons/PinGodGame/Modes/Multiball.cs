@@ -32,7 +32,7 @@ public class Multiball : Control
 	}
 
     /// <summary>
-    /// Signal is emitted from the trough
+    /// Signal is emitted from the trough. Removes this control from the tree
     /// </summary>
     internal void EndMultiball() => this.QueueFree();
 }
