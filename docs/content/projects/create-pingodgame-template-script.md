@@ -72,11 +72,7 @@ An Visual Studio extension can be used for debugging Godot. Download and run the
 [godot-csharp-visualstudio/releases/tag/v2.0.0](https://github.com/godotengine/godot-csharp-visualstudio/releases/tag/v2.0.0)
 
 ---
-##### Godot 4 .
----
 
-Godot 4.x changes to use .NET [Core] Runtime rather than Mono, so you can attach to a running Godot game with the VS debugger,
+Godot4 better for this as you can use .net6 by default.
 
-https://downloads.tuxfamily.org/godotengine/4.0/beta1/mono/
-
-
+Godot 4.x changes to use .NET [Core] Runtime rather than Mono, so you can attach to a running Godot game with the VS debugger.
