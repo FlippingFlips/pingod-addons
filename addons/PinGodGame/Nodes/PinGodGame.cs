@@ -1,10 +1,8 @@
 using Godot;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using static Godot.HTTPRequest;
 using static PinGodBase;
 
 /// <summary>
@@ -54,6 +52,8 @@ public abstract class PinGodGame : PinGodBase
     /// Is ball save active
     /// </summary>
     public bool BallSaveActive { get; internal set; }
+
+    private MachineConfig machineConfig;
 
     /// <summary>
     /// Set options for game ball search
@@ -211,8 +211,7 @@ public abstract class PinGodGame : PinGodBase
         LogInfo(nameof(PinGodGame), $":window: project settings size: ", $"{w}x{h}");
         
         //full screen
-        if (GameSettings.Display.FullScreen)
-            OS.WindowFullscreen = true;
+        OS.WindowFullscreen = GameSettings.Display.FullScreen;
     }
 
     /// <summary>
@@ -237,22 +236,23 @@ public abstract class PinGodGame : PinGodBase
     public override void _Input(InputEvent @event)
     {
         //quits the game. ESC
-        if (@event.IsActionPressed("quit"))
+        if (InputMap.HasAction("quit"))
         {
-            LogDebug(nameof(PinGodGame), ":quit action request. quitting whole tree.");
-            //send game window ended, not alive
-            SolenoidOn("alive", 0);
-            LogInfo(nameof(PinGodGame), ":sent game ended coil: alive 0");
+            if (@event.IsActionPressed("quit"))
+            {
+                LogDebug(nameof(PinGodGame), ":quit action request. quitting whole tree.");
+                //send game window ended, not alive
+                SolenoidOn("alive", 0);
+                LogInfo(nameof(PinGodGame), ":sent game ended coil: alive 0");
 
-            SetGameResumed();
-            GetTree().Quit(0);
-            return;
-        }
+                SetGameResumed();
+                GetTree().Quit(0);
+                return;
+            }
+        }            
 
-        if (@event.IsActionPressed("toggle_border"))
-        {
+        if(InputMap.HasAction("toggle_border"))
             ToggleWindowBorder();
-        }
 
         if(_gameWindowSwitches?.Length > 0)
         {
@@ -305,12 +305,25 @@ public abstract class PinGodGame : PinGodBase
     {
         base._Ready();
 
-        LogDebug($"{nameof(PinGodGame)}: _Ready|looking for {nameof(BallSearchOptions)} in {nameof(MachineConfig)}");
-        BallSearchOptions = GetNode<MachineConfig>(nameof(MachineConfig))?.BallSearchOptions;
+        //setup ball search
+        var mConfigPath = $"{nameof(MachineConfig)}";
+        LogDebug($"{nameof(PinGodGame)}: _Ready|looking for {mConfigPath}");
+        if (this.HasNode(mConfigPath))
+        {
+            machineConfig = GetNode<MachineConfig>(mConfigPath);
+            BallSearchOptions = machineConfig.BallSearchOptions;
+        }            
+        else { LogDebug($"{nameof(PinGodGame)}: _Ready| no configuration found for machine"); }
 
-        LogDebug($"{nameof(PinGodGame)}: _Ready|looking for MainScene");
-        mainScene = GetNodeOrNull<MainScene>("/root/" + nameof(MainScene));
-        
+        //setup main scene if there is one
+        var mainScenePath = $"/root/{nameof(MainScene)}";
+        LogDebug($"{nameof(PinGodGame)}: _Ready|looking for node at: " + mainScenePath);       
+        if (this.HasNode(mainScenePath))
+            mainScene = GetNodeOrNull<MainScene>(mainScenePath);
+        else
+            LogDebug($"{nameof(PinGodGame)}: _Ready|node not found at " + mainScenePath);
+
+        //setup lamp overlay if there is one
         if (_lampMatrixOverlay != null)
         {
             LogDebug($"{nameof(PinGodGame)}: _Ready|setting labels for Lamp matrix overlay lamps");
@@ -323,11 +336,19 @@ public abstract class PinGodGame : PinGodBase
         //setup and run writing memory states for other application to access        
         if (GameSettings.MachineStatesWrite || GameSettings.MachineStatesRead)
         {
-            LogDebug($"{nameof(PinGodGame)}: _Ready|creating memory map");
-            LogInfo($"{nameof(PinGodGame)}: _Ready|machine states enabled. delay: " + GameSettings.MachineStatesWriteDelay);            
-            var mConfig = GetNode<MachineConfig>(nameof(MachineConfig));
-            memMapping = new MemoryMap(mConfig._memCoilCount, mConfig._memLampCount, mConfig._memLedCount, mConfig._memSwitchCount, pinGodGame: this);
-            memMapping.Start(GameSettings.MachineStatesWriteDelay);
+            if(machineConfig != null)
+            {
+                LogDebug($"{nameof(PinGodGame)}: _Ready|creating memory map");
+                LogInfo($"{nameof(PinGodGame)}: _Ready|machine states enabled. delay: " + GameSettings.MachineStatesWriteDelay);
+                memMapping = new MemoryMap(machineConfig._memCoilCount, 
+                    machineConfig._memLampCount, machineConfig._memLedCount, 
+                    machineConfig._memSwitchCount, pinGodGame: this);
+                memMapping.Start(GameSettings.MachineStatesWriteDelay);
+            }
+            else
+            {
+                LogWarning(nameof(PinGodGame), $"Read / Writes enabled and no MachineConfig found");
+            }
         }
 
         SolenoidOn("alive", 1);
@@ -908,31 +929,42 @@ public abstract class PinGodGame : PinGodBase
     }
 
     /// <summary>
-    /// Sets up the DevOverlays Tree. Enables / Disable helper overlays for lamps and switches. SwitchOverlay and LampMatrix
+    /// Sets up the DevOverlays Tree. This scene must have a `DevOverlays` node. Enables / Disable helper overlays for lamps and switches. SwitchOverlay and LampMatrix
     /// </summary>
     public virtual void SetupDevOverlays()
     {         
-        var devOverlays = GetNode("DevOverlays");
-        if (devOverlays != null)
+        //only try and find the 
+        if(_lamp_overlay_enabled || _switch_overlay_enabled)
         {
-            LogDebug(nameof(PinGodGame), ":setting up overlays");
-            if (!_lamp_overlay_enabled)
+            if (this.HasNode("DevOverlays"))
             {
-                LogDebug(nameof(PinGodGame), ":removing lamp overlay");
-                devOverlays.GetNode("LampMatrix").QueueFree();
+                var devOverlays = GetNode("DevOverlays"); //will throw error
+                if (devOverlays != null)
+                {
+                    LogDebug(nameof(PinGodGame), ":setting up overlays");
+                    if (!_lamp_overlay_enabled)
+                    {
+                        LogDebug(nameof(PinGodGame), ":removing lamp overlay");
+                        devOverlays.GetNode("LampMatrix").QueueFree();
+                    }
+                    else
+                    {
+                        _lampMatrixOverlay = devOverlays.GetNode("LampMatrix") as LampMatrix;
+                    }
+
+                    if (!_switch_overlay_enabled)
+                    {
+                        LogDebug(nameof(PinGodGame), ":removing switch overlay");
+                        devOverlays.GetNode("SwitchOverlay").QueueFree();
+                    }
+                }
+                else { LogDebug(nameof(PinGodGame), ":overlays disabled"); }
             }
             else
             {
-                _lampMatrixOverlay = devOverlays.GetNode("LampMatrix") as LampMatrix;
+                LogWarning("No DevOverlays node found");
             }
-
-            if (!_switch_overlay_enabled)
-            {
-                LogDebug(nameof(PinGodGame), ":removing switch overlay");
-                devOverlays.GetNode("SwitchOverlay").QueueFree();
-            }
-        }
-        else { LogDebug(nameof(PinGodGame), ":overlays disabled"); }
+        }        
     }
 
     /// <summary>
@@ -1301,15 +1333,19 @@ public abstract class PinGodGame : PinGodBase
     protected virtual void SetupAudio()
 	{
         LogInfo(nameof(PinGodGame),":setting up audio from settings.save");
-        AudioManager = GetNode<AudioManager>("AudioManager");
+        if (this.HasNode(nameof(AudioManager)))
+        {
+            AudioManager = GetNode<AudioManager>("AudioManager");
 
-        AudioServer.SetBusVolumeDb(0, GameSettings?.MasterVolume ?? 0);
-		AudioServer.SetBusVolumeDb(1, GameSettings?.MusicVolume ?? -6);
-		AudioServer.SetBusVolumeDb(2, GameSettings?.SfxVolume ?? -6);
-		AudioServer.SetBusVolumeDb(3, GameSettings?.VoiceVolume ?? -6);		
-		AudioManager.MusicEnabled = GameSettings?.MusicEnabled ?? true;
-		AudioManager.SfxEnabled = GameSettings?.SfxEnabled ?? true;
-		AudioManager.VoiceEnabled = GameSettings?.VoiceEnabled ?? true;
+            AudioServer.SetBusVolumeDb(0, GameSettings?.MasterVolume ?? 0);
+            AudioServer.SetBusVolumeDb(1, GameSettings?.MusicVolume ?? -6);
+            AudioServer.SetBusVolumeDb(2, GameSettings?.SfxVolume ?? -6);
+            AudioServer.SetBusVolumeDb(3, GameSettings?.VoiceVolume ?? -6);
+            AudioManager.MusicEnabled = GameSettings?.MusicEnabled ?? true;
+            AudioManager.SfxEnabled = GameSettings?.SfxEnabled ?? true;
+            AudioManager.VoiceEnabled = GameSettings?.VoiceEnabled ?? true;
+        }
+        else { LogWarning(nameof(PinGodGame), ": AudioManager node not found. Add an AudioManager child instance to the scene"); }
 	}
 	/// <summary>
 	/// Creates the recordings directory in the users folder
