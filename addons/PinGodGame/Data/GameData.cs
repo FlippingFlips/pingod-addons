@@ -1,7 +1,7 @@
 using Godot;
-using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 /// <summary>
 /// Game data for the machine. %AppData%\Godot\app_userdata <para/>
@@ -12,7 +12,7 @@ public class GameData
 	/// <summary>
 	/// File saved in the game folder in users roaming GODOT 
 	/// </summary>
-	[NotMapped]
+	[JsonIgnore]
 	const string GAME_DATA_FILE = "user://gamedata.save";
 
 	/// <summary>
@@ -55,7 +55,7 @@ public class GameData
 	/// <summary>
 	/// De-serializes gamedata from json if Type is <see cref="GameData"/>
 	/// </summary>
-	public static T DeserializeGameData<T>(string gameSettingsJson) where T : GameData => JsonConvert.DeserializeObject<T>(gameSettingsJson);
+	public static T DeserializeGameData<T>(string gameSettingsJson) where T : GameData => JsonSerializer.Deserialize<T>(gameSettingsJson);
 
     /// <summary>
     /// Loads the <see cref="GAME_DATA_FILE"/>
@@ -68,7 +68,7 @@ public class GameData
 		GameData gameData = new GameData();
 		if (err != Error.FileNotFound)
 		{
-			gameData = JsonConvert.DeserializeObject<GameData>(saveGame.GetLine());
+			gameData = JsonSerializer.Deserialize<GameData>(saveGame.GetLine());
 			saveGame.Close();
 		}
 		else
@@ -109,7 +109,7 @@ public class GameData
 	{
 		var saveGame = new File();
 		saveGame.Open(GAME_DATA_FILE, File.ModeFlags.Write);
-		saveGame.StoreLine(JsonConvert.SerializeObject(gameData));
+		saveGame.StoreLine(JsonSerializer.Serialize(gameData));
 		saveGame.Close();
 	}
 
@@ -120,7 +120,7 @@ public class GameData
 	{
 		var saveGame = new File();
 		saveGame.Open(GAME_DATA_FILE, File.ModeFlags.Write);
-		saveGame.StoreLine(JsonConvert.SerializeObject(gameData));
+		saveGame.StoreLine(JsonSerializer.Serialize(gameData));
 		saveGame.Close();
 	}
 }

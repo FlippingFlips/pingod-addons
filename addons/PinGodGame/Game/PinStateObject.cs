@@ -1,5 +1,5 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Text.Json;
 
 /// <summary>
 /// Base state object machine coil, led, lamp
@@ -125,7 +125,7 @@ public class PinStates : Dictionary<string, PinStateObject>
         {
             var states = this.GetStates();
             if (states != null)
-                return JsonConvert.SerializeObject(states);
+                return JsonSerializer.Serialize(states);
         }
 
         return string.Empty;
@@ -141,7 +141,7 @@ public class PinStates : Dictionary<string, PinStateObject>
         {
             var states = this.GetLedStates();
             if (states != null)
-                return JsonConvert.SerializeObject(states);
+                return JsonSerializer.Serialize(states);
         }
 
         return string.Empty;

@@ -1,8 +1,7 @@
 ﻿using Godot;
-using Newtonsoft.Json;
 using System;
-using System.ComponentModel.DataAnnotations.Schema;
-using static Godot.GD;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 /// <summary>
 /// Default game settings for the machine / game. <para/>
@@ -13,7 +12,7 @@ public class GameSettings
     /// <summary>
     /// File saved in the game folder in users roaming GODOT 
     /// </summary>
-    [NotMapped]
+    [JsonIgnore]
     const string GAME_SETTINGS_FILE = "user://settings.save";
 
     /// <summary>
@@ -107,7 +106,7 @@ public class GameSettings
     /// <summary>
     /// De-serializes settings from json if Type is <see cref="GameSettings"/>
     /// </summary>
-    public static T DeserializeSettings<T>(string gameSettingsJson) where T : GameSettings => JsonConvert.DeserializeObject<T>(gameSettingsJson);
+    public static T DeserializeSettings<T>(string gameSettingsJson) where T : GameSettings => JsonSerializer.Deserialize<T>(gameSettingsJson);
 
     /// <summary>
 	/// Loads game settings file from the user directory. Creates a new save file if there isn't one available
@@ -144,7 +143,7 @@ public class GameSettings
         GameSettings gS = new GameSettings();
         if (err != Error.FileNotFound)
         {
-            gS = JsonConvert.DeserializeObject<GameSettings>(settingsSave.GetLine());
+            gS = JsonSerializer.Deserialize<GameSettings>(settingsSave.GetLine());
             settingsSave.Close();
         }
         else
@@ -167,7 +166,7 @@ public class GameSettings
     {
         var saveGame = new File();
         saveGame.Open(GAME_SETTINGS_FILE, File.ModeFlags.Write);
-        saveGame.StoreLine(JsonConvert.SerializeObject(settings));
+        saveGame.StoreLine(JsonSerializer.Serialize(settings));
         saveGame.Close();
     }
 }
