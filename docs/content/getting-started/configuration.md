@@ -9,7 +9,7 @@ weight: 20
 ### Set Environment path to Godot
 ---
 
-![image](../../images/godot_cmd.jpg)
+![image](../../images/cmds/godot_cmd.jpg)
 
 ---
 ### How to add to environment (Windows)

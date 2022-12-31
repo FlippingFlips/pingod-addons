@@ -29,3 +29,20 @@ If you already have a `dotnet sdk` then you can skip this step.
 - or x86:
 
 [sdk-6.0.307-windows-x86-installer](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-6.0.307-windows-x86-installer)
+
+---
+### Git
+---
+
+Use Git to pull the repositories from Github, you don't need a Github account just the software to do this.
+
+- [Git For Windows - Download](https://gitforwindows.org/)
+
+```
+Once the installer has started, follow the instructions as provided in the Git Setup wizard screen until the installation is complete.
+Open the windows command prompt (or Git Bash).
+```
+
+Type `git version` to verify Git was installed.
+
+---

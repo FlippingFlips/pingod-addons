@@ -22,7 +22,7 @@ Saved to users app_data directory. See [Game Save Data](../game-save-data)
 #### Audio
 ---
 
-![image](../../images/basicgame-settings-audio.jpg)
+![image](../../images/settings/basicgame-settings-audio.jpg)
 
 ---
 #### Display
@@ -31,7 +31,7 @@ Saved to users app_data directory. See [Game Save Data](../game-save-data)
 - Fullscreen
 - FPS
 
-![image](../../images/basicgame-settings-display.jpg)
+![image](../../images/settings/basicgame-settings-display.jpg)
 
 ---
 #### Game
@@ -39,7 +39,7 @@ Saved to users app_data directory. See [Game Save Data](../game-save-data)
 
 - Some basic game settings
 
-![image](../../images/basicgame-settings-game.jpg)
+![image](../../images/settings/basicgame-settings-game.jpg)
 
 ---
 #### PinGod
@@ -47,4 +47,4 @@ Saved to users app_data directory. See [Game Save Data](../game-save-data)
 
 - Read/Write states can be disabled when not running with a simulator.
 
-![image](../../images/basicgame-settings-pingod.jpg)
+![image](../../images/settings/basicgame-settings-pingod.jpg)

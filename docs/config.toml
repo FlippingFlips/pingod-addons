@@ -17,7 +17,7 @@ enableMissingTranslationPlaceholders = false
     # Source Code repository section
     description = "Source"
     github_repository = "https://github.com/FlippingFlips/pingod-addons"
-    version = "4.3.0"
+    version = "0.96"
 
     # Documentation repository section
     # documentation repository (set edit link to documentation repository)

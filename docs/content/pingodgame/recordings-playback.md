@@ -5,9 +5,15 @@ draft: false
 weight: 60
 ---
 
-Quick guide on how to record and playback a game. Recording a game can speed up your game development for game logic.
+Quick guide on how to record and playback a game. 
 
-They would usually start off by using trough switches adding credits and starting a game, then any events after this to test any recorded sequence.
+Recording a game can speed up your game development for game logic.
+
+They would usually start off by using trough switches then adding credits and starting a game.
+
+Any events after this to test any recorded sequence like clearing a target bank, draining your ball.
+
+Testing modes and testing the complete game.
 
 ## Recording
 

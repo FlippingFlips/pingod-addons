@@ -6,22 +6,7 @@ draft: false
 weight: 23
 ---
 
----
-### Git Setup
----
-
-Use Git to pull the repositories from Github, you don't need a Github account just the software to do this.
-
-- [Git For Windows - Download](https://gitforwindows.org/)
-
-```
-Once the installer has started, follow the instructions as provided in the Git Setup wizard screen until the installation is complete.
-Open the windows command prompt (or Git Bash).
-```
-
-Type `git version` to verify Git was installed.
-
----
+Using Git to clone the repositories
 
 #### (Option 1) Clone
 ---
@@ -32,11 +17,11 @@ Type `git version` to verify Git was installed.
 
 3. Clone the `pingod-addons` with `git clone https://github.com/FlippingFlips/pingod-addons`
 
-![image](../../images/git-clone-addons.jpg)
+![image](../../images/cmds/git-clone-addons.jpg)
 
 4. Now clone the `pingod-basicgame` with `git clone https://github.com/FlippingFlips/pingod-basicgame`
 
-![image](../../images/git-clone-basicgame.jpg)
+![image](../../images/cmds/git-clone-basicgame.jpg)
 
 5. You will have two directories `/pingod/pingod-basicgame`, `/pingod/pingod-addons`, this is so the basicgame only has to go up one directory to link the `addons`
 

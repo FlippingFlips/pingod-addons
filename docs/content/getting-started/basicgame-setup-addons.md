@@ -22,7 +22,7 @@ You can copy the `addons` directory to your project (`BasicGameGodot` in this ex
 
 2. This will just flash up and disappear, but you will see a new folder shortcut created called `addons`
 
-![image](../../images/basicgame-project-files.jpg)
+![image](../../images/basicgame/basicgame-project-files.jpg)
 
 ---
 #### Opening shortcut
@@ -30,7 +30,7 @@ You can copy the `addons` directory to your project (`BasicGameGodot` in this ex
 
 If you open the new `addons` shortcut it will show you the files that are in `pingod-addons\addons`.
 
-![image](../../images/basicgame-addons.jpg)
+![image](../../images/basicgame/basicgame-addons.jpg)
 
 
 This shortcut can be removed without harming the files where the directory is linked from.
