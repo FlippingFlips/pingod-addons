@@ -16,6 +16,17 @@ latest: https://downloads.tuxfamily.org/godotengine/4.0/
 
 - Use the 64bit Godot.
 - Rename to `godot4.exe` add environment path
+
+Apis changes:
+
+- Have to name delegates ending with `EventHandler`
+- classes are all partial
+- OS.GetTicks to Time.GetTicksMsec
+- Vector2 to Vector2i
+- Connect needs to replaced with `new Callable(this, nameof(OnBallSearchTimeout))`
+- Event handlers can also be subscribed to with standard C# way +=
+
+
 ---
 ## Visual Debugging
 ---
@@ -84,3 +95,13 @@ Global
 	EndGlobalSection
 EndGlobal
 ```
+
+### Links
+
+https://docs.godotengine.org/en/latest/tutorials/editor/upgrading_to_godot_4.html
+
+https://docs.godotengine.org/en/latest/development/compiling/optimizing_for_size.html
+
+https://docs.godotengine.org/en/latest/tutorials/scripting/c_sharp/c_sharp_features.html#c-signals
+
+https://docs.godotengine.org/en/latest/tutorials/assets_pipeline/importing_translations.html#doc-importing-translations

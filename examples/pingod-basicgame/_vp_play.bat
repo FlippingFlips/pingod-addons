@@ -1,0 +1,1 @@
+start /B "" "C:\Visual Pinball\VPinballX.exe" -Play ".\visual_pinball\BasicGame-PinGod.vpx" && exit 0

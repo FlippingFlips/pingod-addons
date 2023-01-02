@@ -1,0 +1,43 @@
+<Project Sdk="Godot.NET.Sdk/4.0.0-beta.10">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="addons\PinGodAddOns\**" />
+    <EmbeddedResource Remove="addons\PinGodGame\**" />
+    <EmbeddedResource Remove="addons\PinGodMemoryMap\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="addons\assets\img\pinball.png" />
+    <Content Include="addons\assets\img\pingod-logo.png" />
+    <Content Include="addons\assets\img\pingod.ico" />
+    <Content Include="Properties\launchSettings.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="addons\assets\img\pinball.png.import" />
+    <None Include="addons\assets\img\pinball.svg" />
+    <None Include="addons\assets\img\pinball.svg.import" />
+    <None Include="addons\assets\img\pingod-logo.png.import" />
+    <None Include="addons\PinGod-Machine\plugin.cfg" />
+    <None Include="addons\pingod-memorymap\MemoryMapPlugin.tscn" />
+    <None Include="addons\pingod-memorymap\plugin.cfg" />
+    <None Include="addons\pingod-memorymap\project.godot" />
+    <None Include="addons\pingod-memorymap\README.md" />
+    <None Include="game\Game.tscn" />
+    <None Include="game\MainScene.tscn" />
+    <None Include="modes\BaseMode.tscn" />
+    <None Include="PinGodGame.tscn" />
+    <None Include="project.godot" />
+    <None Include="readme.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="addons\pingod-audio\" />
+  </ItemGroup>
+  <ItemGroup>
+    <!--<Compile Include="addons\pingod-memorymap\MemoryMap.cs" />-->
+    <!--<Compile Include="addons\pingod-memorymap\MemoryMapPlugin.cs" />
+    <Compile Include="addons\pingod-memorymap\PinGodMemoryMapNode.cs" />
+    <Compile Include="addons\pingod-memorymap\PinGodMemoryMapNodeExports.cs" />-->
+  </ItemGroup>
+</Project>

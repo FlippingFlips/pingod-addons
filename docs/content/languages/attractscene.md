@@ -9,6 +9,16 @@ Add translations for the game. There are also defaults to cover most standard pi
 
 The default example covers English and French in `pindog_default_lang.csv`.
 
+---
+## ReImport
+---
+
+If the text doesn't update when you run the game:
+
+1. Find the CSV in Godot file explorer from `addons/PinGodGame/Localization/pindog_default_lang.csv`.
+2. Select the file, then look in the `Import` tab (next to scene top left)
+3. Click Reimport making sure it's set as .csv, compressed
+
 ## Files
 
 ### YourGame/local
