@@ -5,29 +5,31 @@ using Godot;
 /// This add custom types to use in the Godot editor
 /// </summary>
 [Tool]
-public class PinGodAddOns : EditorPlugin
+public partial class PinGodAddOns : EditorPlugin
 {
-	const string ROOT_DIR = "addons/PinGodAddOns/";
+	const string ROOT_DIR = "addons/pingod-addons/";
 
     /// <summary>
     /// Initialization of the PlugIn. Adds CustomTypes new type with a name, a parent type, a script and an icon.
     /// </summary>
     public override void _EnterTree()
 	{
-		var script = GD.Load<Script>(ROOT_DIR+"Labels/BlinkingLabel.cs");
-		AddCustomType(nameof(BlinkingLabel), nameof(Label), script, null);
+        using var texture = GD.Load<Texture2D>("res://addons/assets/img/pinball.png");
+
+        var script = GD.Load<Script>(ROOT_DIR+"Labels/BlinkingLabel.cs");
+		AddCustomType("PinGod" + nameof(BlinkingLabel), nameof(Label), script, texture);
 
 		script = GD.Load<Script>(ROOT_DIR + "VideoPlayers/VideoPlayerPinball.cs");
-		AddCustomType(nameof(VideoPlayerPinball), nameof(VideoPlayer), script, null);
+		AddCustomType("PinGod" + nameof(VideoPlayerPinball), nameof(VideoStreamPlayer), script, texture);
 
 		script = GD.Load<Script>(ROOT_DIR + "Timers/BallStackPinball.cs");
-		AddCustomType(nameof(BallStackPinball), nameof(Timer), script, null);
+		AddCustomType("PinGod" + nameof(BallStackPinball), nameof(Timer), script, texture);		
 
 		script = GD.Load<Script>(ROOT_DIR + "Lanes/PinballLanesNode.cs");
-		AddCustomType(nameof(PinballLanesNode), nameof(Node), script, null);
+		AddCustomType("PinGod" + nameof(PinballLanesNode), nameof(Node), script, texture);
 
 		script = GD.Load<Script>(ROOT_DIR + "Targets/PinballTargetsBank.cs");
-		AddCustomType(nameof(PinballTargetsBank), nameof(Node), script, null);
+		AddCustomType("PinGod" + nameof(PinballTargetsBank), nameof(Node), script, texture);
 	}
 
 	/// <summary>

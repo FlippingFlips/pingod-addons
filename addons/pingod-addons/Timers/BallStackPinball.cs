@@ -4,7 +4,7 @@ using Godot;
 /// Tool: Kicker / Saucer node based on timer and to process switch actions.
 /// </summary>
 [Tool]
-public class BallStackPinball : Timer
+public partial class BallStackPinball : Timer
 {
     /// <summary>
     /// Coil name
@@ -21,12 +21,12 @@ public class BallStackPinball : Timer
     /// <summary>
     /// Emitted when switch is on
     /// </summary>
-    [Signal] public delegate void SwitchActive();
+    [Signal] public delegate void SwitchActiveEventHandler();
 
     /// <summary>
     /// Emitted when switch is off
     /// </summary>
-    [Signal] public delegate void SwitchInActive();
+    [Signal] public delegate void SwitchInActiveEventHandler();
 
     #region Public Methods
     /// <summary>
@@ -34,11 +34,11 @@ public class BallStackPinball : Timer
     /// </summary>
     public override void _EnterTree()
 	{
-		if (!Engine.EditorHint)
+		if (!Engine.IsEditorHint())
 		{
 			pingod = GetNode("/root/PinGodGame") as PinGodGame;
             //emit signal when the switch is active
-            pingod.Connect(nameof(PinGodBase.SwitchCommand), this, nameof(OnSwitchCommandHandler));
+            pingod.Connect(nameof(PinGodBase.SwitchCommandEventHandler), new Callable(this, nameof(OnSwitchCommandHandler)));
         }
 	}
 
@@ -67,7 +67,7 @@ public class BallStackPinball : Timer
     /// </summary>
     public override void _Ready()
     {
-		if (!Engine.EditorHint)
+		if (!Engine.IsEditorHint())
 		{
 			// Code to execute when in game.
 			if (string.IsNullOrWhiteSpace(_switch))

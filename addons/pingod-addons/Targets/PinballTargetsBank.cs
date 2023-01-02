@@ -4,7 +4,7 @@ using static PinGodBase;
 /// <summary>
 /// Handles a bank of targets, the light states and watches for completion
 /// </summary>
-public class PinballTargetsBank : PinGodGameNode
+public partial class PinballTargetsBank : PinGodGameNode
 {
     #region Exports
     /// <summary>
@@ -33,7 +33,7 @@ public class PinballTargetsBank : PinGodGameNode
     /// <summary>
     /// Fired when all <see cref="_targetValues"/> are complete
     /// </summary>
-    [Signal] protected delegate void OnTargetsCompleted();
+    [Signal] public delegate void OnTargetsCompletedEventHandler();
 
     /// <summary>
     /// 
@@ -41,7 +41,7 @@ public class PinballTargetsBank : PinGodGameNode
     /// <param name="swName"></param>
     /// <param name="complete">will be true if the target was false beforehand, meaning it was just completed</param>
 
-    [Signal] protected delegate void OnTargetActivated(string swName, bool complete);
+    [Signal] public delegate void OnTargetActivatedEventHandler(string swName, bool complete);
     #endregion
 
     #region Fields
@@ -61,7 +61,7 @@ public class PinballTargetsBank : PinGodGameNode
     /// </summary>
     public override void _EnterTree()
     {
-        if (!Engine.EditorHint)
+        if (!Engine.IsEditorHint())
         {
             if (_target_switches == null)
             {
@@ -72,7 +72,7 @@ public class PinballTargetsBank : PinGodGameNode
             {
                 _targetValues = new bool[_target_switches.Length];
                 //connect to a switch command. the switches can come from actions or ReadStates
-                pinGod.Connect(nameof(SwitchCommand), this, nameof(OnSwitchCommandHandler));
+                pinGod.Connect(nameof(SwitchCommandEventHandler), new Callable(this, nameof(OnSwitchCommandHandler)));
                 Logger.Debug(nameof(PinballTargetsBank), ":setting target values ", _targetValues.Length);
             }
         }
@@ -146,7 +146,7 @@ public class PinballTargetsBank : PinGodGameNode
     }
 
     /// <summary>
-    /// Returns whether the target was set or not. Emits <see cref="OnTargetActivated"/>.
+    /// Returns whether the target was set or not. Emits <see cref="OnTargetActivatedEventHandler"/>.
     /// </summary>
     /// <param name="index"></param>
     /// <returns></returns>
@@ -155,12 +155,12 @@ public class PinballTargetsBank : PinGodGameNode
         if (!_targetValues[index])
         {
             _targetValues[index] = true;
-            EmitSignal(nameof(OnTargetActivated), new object[] { _target_switches[index], true });
+            EmitSignal(nameof(OnTargetActivatedEventHandler), new Variant[] { _target_switches[index], true });
             UpdateLamps();
         }
         else
         {
-            EmitSignal(nameof(OnTargetActivated), new object[] { _target_switches[index], false });
+            EmitSignal(nameof(OnTargetActivatedEventHandler), new Variant[] { _target_switches[index], false });
         }        
 
         return _targetValues[index];
@@ -176,7 +176,7 @@ public class PinballTargetsBank : PinGodGameNode
         if (!_targetsCompleted)
         {
             _targetsCompleted = true;
-            EmitSignal(nameof(OnTargetsCompleted));
+            EmitSignal(nameof(OnTargetsCompletedEventHandler));
 
             if (_reset_when_completed)
             {

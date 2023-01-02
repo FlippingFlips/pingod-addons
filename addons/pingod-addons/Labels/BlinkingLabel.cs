@@ -5,7 +5,7 @@ using System;
 /// A label that blinks on a timer with optional methods for controlling the blink
 /// </summary>
 [Tool]
-public class BlinkingLabel : Label
+public partial class BlinkingLabel : Label
 {
 	/// <summary>
 	/// Speed of the timer
@@ -24,23 +24,28 @@ public class BlinkingLabel : Label
 	/// </summary>
 	public override void _EnterTree()
 	{
-		if (!Engine.EditorHint)
+		if (!Engine.IsEditorHint())
 		{
 			// Code to execute when in game.
 			//connect up to these signals to stop the timer, no need to be running all the time not in view?
-			this.Connect("hide", this, "_hide");
-			this.Connect("visibility_changed", this, "_visibility_changed");
+			
+            this.Hidden += _hide;
+            this.VisibilityChanged += _visibility_changed;
+			
 			_timer = new Timer() { Autostart = true, OneShot = false, WaitTime = _blinking <= 0 ? 0.3f : _blinking };
-			_timer.Connect("timeout", this, "timeout");
+            _timer.Timeout += timeout;
 			AddChild(_timer);
 		}
 		blinkVisible = this.Visible;
 	}
 
-	/// <summary>
-	/// Sets the color of the text, when blinks alpha is used to hide and reset to this color
-	/// </summary>
-	public override void _Ready()
+
+    private void BlinkingLabel_Hidden() => _hide();
+
+    /// <summary>
+    /// Sets the color of the text, when blinks alpha is used to hide and reset to this color
+    /// </summary>
+    public override void _Ready()
 	{
 		modulateDefaultColor = this.Modulate;
 	}

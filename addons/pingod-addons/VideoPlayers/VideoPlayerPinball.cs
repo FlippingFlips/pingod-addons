@@ -6,7 +6,7 @@ using System;
 /// <para/>
 /// </summary>
 [Tool]
-public class VideoPlayerPinball : VideoPlayer
+public partial class VideoPlayerPinball : Godot.VideoStreamPlayer
 {
 	[Export] private bool _hold = false;
 	[Export] private bool _loop = false;
@@ -19,16 +19,13 @@ public class VideoPlayerPinball : VideoPlayer
 	/// </summary>
 	public override void _EnterTree()
 	{
-		//makes the video pause?
-		PauseMode = PauseModeEnum.Stop;
-
-		if (!Engine.EditorHint)
+		if (!Engine.IsEditorHint())
 		{
 			// Code to execute when in game.
 			//connect up to these signals to stop the timer, no need to be running all the time not in view?
-			this.Connect("hide", this, "_hide");
-			this.Connect("visibility_changed", this, "_visibility_changed");
-			this.Connect("finished", this, "_finished");
+			this.Connect("hide", new Callable(this, "_hide"));
+			this.Connect("visibility_changed", new Callable(this, "_visibility_changed"));
+			this.Connect("finished", new Callable(this, "_finished"));
 		}		
 	}
 

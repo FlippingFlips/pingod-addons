@@ -5,7 +5,7 @@ using System.Linq;
 /// <summary>
 /// Set the exports in the scene from Godot or tscn. <see cref="_lane_switches"/> <see cref="_lane_lamps"/> and other options.
 /// </summary>
-public class PinballLanesNode : PinGodGameMode
+public partial class PinballLanesNode : PinGodGameMode
 {
     bool[] _lanesCompleted;
     private byte[] _laneSwitchNums;
@@ -40,12 +40,12 @@ public class PinballLanesNode : PinGodGameMode
     /// <summary>
     /// Emitted in <see cref="CheckLanes"/> if complete
     /// </summary>
-    [Signal] public delegate void LanesCompleted();
+    [Signal] public delegate void LanesCompletedEventHandler();
 
     /// <summary>
     /// Emitted in <see cref="LaneSwitchActivated"/> if complete
     /// </summary>
-    [Signal] public delegate void LaneCompleted(string swName, bool complete);
+    [Signal] public delegate void LaneCompletedEventHandler(string swName, bool complete);
     #endregion
 
     /// <summary>
@@ -53,7 +53,7 @@ public class PinballLanesNode : PinGodGameMode
     /// </summary>
     public override void _EnterTree()
     {
-        if (!Engine.EditorHint)
+        if (!Engine.IsEditorHint())
         {
             base._EnterTree();
 
@@ -71,7 +71,7 @@ public class PinballLanesNode : PinGodGameMode
                     _laneSwitchNums[i]= Machine.Switches[_lane_switches[i]].Num;
                 }
                 
-                pinGod.Connect(nameof(PinGodBase.SwitchCommand), this, nameof(OnSwitchCommandHandler));
+                pinGod.Connect(nameof(PinGodBase.SwitchCommand), new Callable(this, nameof(OnSwitchCommandHandler)));
             }
         }
     }
@@ -140,7 +140,7 @@ public class PinballLanesNode : PinGodGameMode
         }
         if (complete)
         {
-            EmitSignal(nameof(LanesCompleted));
+            EmitSignal(nameof(LanesCompletedEventHandler));
             if (_resetOnLanesCompleted) ResetLanesCompleted();
         }
         return complete;
@@ -168,7 +168,7 @@ public class PinballLanesNode : PinGodGameMode
             result = true;
         }
 
-        EmitSignal(nameof(LaneCompleted), _lane_switches[i], result);
+        EmitSignal(nameof(LaneCompletedEventHandler), _lane_switches[i], result);
         return result;
     }
 
