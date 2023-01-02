@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="47.333256"
+   height="47.454147"
+   viewBox="0 0 12.523591 12.555577"
+   version="1.1"
+   id="svg7666"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="pinball.svg"
+   inkscape:export-filename="E:\REPOSITORIES\PINBALL\FLIPPINGFLIPS\PINGOD\PINGOD-ADDONS\EXAMPLES\PINGOD-BASICGAME\addons\pingod-game\assets\img\pinball.png"
+   inkscape:export-xdpi="32.450001"
+   inkscape:export-ydpi="32.450001">
+  <defs
+     id="defs7660">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4885">
+      <path
+         d="M -3.9725e-5,540 H 960 V 1.2207e-4 L -4.3448e-5,6.1035e-5"
+         id="path4883"
+         inkscape:connector-curvature="0"
+         style="clip-rule:evenodd" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4875">
+      <path
+         d="M -1.9395e-5,540 H 960 V 1.2207e-4 L -2.3118e-5,6.1035e-5"
+         id="path4873"
+         inkscape:connector-curvature="0"
+         style="clip-rule:evenodd" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8"
+     inkscape:cx="-58.172631"
+     inkscape:cy="56.870317"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     units="px"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata7663">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-26.376903,-37.533086)">
+    <path
+       style="fill:#000000;stroke-width:0.17130835"
+       d="m 30.793919,49.880161 c -1.776022,-0.579624 -3.170836,-1.813977 -3.965937,-3.509688 -0.388707,-0.828991 -0.456897,-1.713837 -0.450709,-2.590184 0.0063,-0.897057 0.0555,-1.7393 0.498756,-2.644618 0.658149,-1.344201 1.741803,-2.397985 3.149273,-3.062465 1.009581,-0.476632 1.323333,-0.541707 2.604008,-0.540091 1.76004,0.0022 2.947315,0.474975 4.247768,1.691397 3.288252,3.075774 2.447092,8.362759 -1.641006,10.314359 -1.179208,0.562936 -3.270656,0.723623 -4.442153,0.34129 z"
+       id="path854"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#ffffff;stroke-width:0.17130835"
+       d="m 29.276629,46.140268 c -0.266845,-0.840757 -0.101063,-2.385792 0.356303,-3.320614 0.846962,-1.731127 2.436834,-2.576118 4.561071,-2.424129 0.646928,0.04628 1.176243,0.05236 1.176243,0.0135 0,-0.03887 -0.404717,-0.259084 -0.899373,-0.489378 -2.580672,-1.201477 -5.564112,0.22018 -6.12424,2.9183 -0.223726,1.077677 -0.140656,1.705006 0.379982,2.869565 0.366435,0.819642 0.774779,1.140934 0.550014,0.432759 z"
+       id="path842"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>

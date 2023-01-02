@@ -375,3 +375,6 @@ FodyWeavers.xsd
 /docs/public
 # PinGod: sub modules
 #/docs/themes/hugo-theme-techdoc
+/addons/pingod-machine/.godot
+/addons/pingod-memorymap/.godot
+/examples/pingod-basicgame/TODO/Build/data_BasicGameGodot/Mono/etc/mono
