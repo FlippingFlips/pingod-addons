@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="FontFile" uid="uid://c2swd01bayff8" path="res://addons/assets/fonts/BebasNeue.tres" id="1"]
+[ext_resource type="Script" path="res://addons/pingod-game/Nodes/CreditsLayer.cs" id="2"]
+
+[node name="Credits" type="Label"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("1")
+theme_override_font_sizes/font_size = 36
+text = "CREDITS "
+script = ExtResource("2")

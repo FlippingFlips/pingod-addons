@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://addons/pingod-game/Nodes/PinGodWindowActions.cs" id="1_47oah"]
+
+[node name="WindowInputs" type="Node"]
+process_mode = 3
+script = ExtResource("1_47oah")
+_gameWindowSwitches = PoolStringArray( "coin1", "coin2", "coin3", "start", "trough_1", "trough_2", "trough_3", "trough_4", "plunger_lane", "enter", "exit", "up", "down" )
