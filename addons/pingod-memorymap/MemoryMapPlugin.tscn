@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://daf0epg0qmt1e"]
+
+[ext_resource type="Script" path="res://addons/PinGod-MemoryMap/PinGodMemoryMapNode.cs" id="1_ptwrs"]
+
+[node name="MemoryMap" type="Node"]
+script = ExtResource("1_ptwrs")
+CoilTotal = 32
