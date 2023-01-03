@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bpd8qr2i8i3kp"]
+
+[ext_resource type="Script" path="res://scripts/CustomPinGodGame.cs" id="1_lq3yu"]
+[ext_resource type="PackedScene" path="res://addons/pingod-machine/tools/LampMatrix.tscn" id="6_savai"]
+[ext_resource type="PackedScene" path="res://addons/pingod-machine/tools/SwitchOverlay.tscn" id="7_htm07"]
+[ext_resource type="Script" path="res://addons/pingod-resources/Resources.cs" id="7_jonow"]
+
+[node name="PinGodGame" type="Node"]
+process_priority = -1
+script = ExtResource("1_lq3yu")
+_playbackfile = "res://recordings/drain_3_balls.record"
+
+[node name="DevOverlays" type="CanvasLayer" parent="."]
+layer = 128
+visible = false
+
+[node name="LampMatrix" parent="DevOverlays" instance=ExtResource("6_savai")]
+visible = false
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SwitchOverlay" parent="DevOverlays" instance=ExtResource("7_htm07")]
+visible = false
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Resources" type="ResourcePreloader" parent="."]
+script = ExtResource("7_jonow")

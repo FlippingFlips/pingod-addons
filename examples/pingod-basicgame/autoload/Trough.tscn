@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjqpjngh3kgeg"]
+
+[ext_resource type="Script" path="res://addons/pingod-trough/Trough.cs" id="1_os6ll"]
+
+[node name="Trough" type="Node"]
+script = ExtResource("1_os6ll")

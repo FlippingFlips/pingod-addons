@@ -1,6 +1,8 @@
 # PinGod - BasicGameGodot
 ---
 
+https://docs.godotengine.org/en/latest/tutorials/animation/creating_movies.html
+
 BasicGameGodot project
 
 #### Godot Scene / UI / Docs

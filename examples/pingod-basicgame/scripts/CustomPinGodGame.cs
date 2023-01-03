@@ -14,24 +14,6 @@ public partial class CustomPinGodGame : PinGodGame
         Players.Add(new BasicGamePlayer() { Name = name, Points = 0 });
     }
 
-    public override void _Ready()
-    {
-        base._Ready();
-
-        if (HasNode(nameof(Resources)))
-        {
-            LogInfo(nameof(CustomPinGodGame), ":resources pre loader node found");
-        }
-        if (HasNode(nameof(Trough)))
-        {
-            LogInfo(nameof(CustomPinGodGame), ":Trough node found");
-        }
-        if (HasNode(nameof(AudioManager)))
-        {
-            LogInfo(nameof(CustomPinGodGame), ":AudioManager node found");
-        }
-    }
-
     /// <summary>
     /// Logs when this class is setup, nothing more.
     /// </summary>

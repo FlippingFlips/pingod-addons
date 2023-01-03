@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://dk4myspip4fkv"]
+
+[ext_resource type="Script" path="res://scripts/BasicGame.cs" id="1_nd4pf"]
+[ext_resource type="PackedScene" path="res://addons/pingod-modes/scenes/ScoreMode.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://dx3c7uoxjls01" path="res://scenes/BaseMode.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://addons/pingod-modes/scenes/Tilt.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://addons/pingod-modes/scenes/ScoreEntry.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://addons/pingod-modes/scenes/Bonus.tscn" id="7"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_nd4pf")
+
+[node name="Modes" type="CanvasLayer" parent="."]
+
+[node name="ScoreMode" parent="Modes" instance=ExtResource("2")]
+
+[node name="BaseMode" parent="Modes" instance=ExtResource("3")]
+visible = false
+
+[node name="Bonus" parent="Modes" instance=ExtResource("7")]
+visible = false
+
+[node name="Tilt" parent="Modes" instance=ExtResource("5")]
+visible = false
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScoreEntry" parent="Modes" instance=ExtResource("6")]
+visible = false
+grow_horizontal = 2
+grow_vertical = 2

@@ -7,10 +7,10 @@ using static PinGodBase;
 /// </summary>
 public partial class BaseMode : Control
 {
-    [Export] string BALL_SAVE_SCENE = "res://addons/pingod-game/Scenes/BallSave.tscn";
+    [Export] string BALL_SAVE_SCENE = "res://addons/pingod-modes/scenes/BallSave.tscn";
 
     private PackedScene _ballSaveScene;
-    private BallStackPinball _ballStackSaucer;
+    private Saucer _ballSaucer;
     private Game game;
     private PinGodGame pinGod;
 
@@ -23,10 +23,10 @@ public partial class BaseMode : Control
         game = GetParent().GetParent() as BasicGame;
 
         _ballSaveScene = GD.Load<PackedScene>(BALL_SAVE_SCENE);
-        _ballStackSaucer = GetNode<BallStackPinball>(nameof(BallStackPinball));
-
-        //connect to a switch command. the switches can come from actions or ReadStates
-        pinGod.Connect(nameof(SwitchCommandEventHandler), new Callable(this, nameof(OnSwitchCommandHandler)));
+        _ballSaucer = GetNode<Saucer>(nameof(Saucer));
+        
+        //use the switch command on machine through the game as we're in a game
+        pinGod.PinGodMachine.SwitchCommand += OnSwitchCommandHandler;        
     }
 
     /// <summary>
@@ -114,7 +114,7 @@ public partial class BaseMode : Control
                 Logger.Debug($"{nameof(BaseMode)}:{nameof(OnBallStackPinball_SwitchActive)}", ": starting multiball");
                 //enable multiball and start timer on default timeout (see BaseMode scene, BallStackPinball)
                 pinGod.IsMultiballRunning = true;
-                _ballStackSaucer.Start();
+                _ballSaucer.Start();
 
                 game?.CallDeferred(nameof(BasicGame.AddMultiballSceneToTree));
                 return;
@@ -122,8 +122,12 @@ public partial class BaseMode : Control
         }
 
         //no multiball running or game not in play
-        _ballStackSaucer.Start(1f);
+        _ballSaucer.Start(1f);
     }
 
-    private void OnBallStackPinball_timeout() => _ballStackSaucer.SolenoidPulse();
+    private void OnBallStackPinball_timeout()
+    {
+        Logger.Debug(nameof(BaseMode), ":ballstack timedout");
+        _ballSaucer.Kick();
+    }
 }
