@@ -1,14 +1,14 @@
 using Godot;
 
 /// <summary>
-/// Custom Game class for Basic Game
+/// Custom Game class for Basic Game: TODO: add switch handlers for updating credits, PinGodGame
 /// </summary>
 public abstract partial class Game : PinGodGameNode
 {	
 	/// <summary>
 	/// Default scene file to use for Multi-Ball
 	/// </summary>
-	[Export] protected string MULTIBALL_SCENE = "res://addons/pingod-game/Scenes/Multiball.tscn";
+	[Export(PropertyHint.File)] protected string MULTIBALL_SCENE = "res://addons/pingod-modes/scenes/Multiball.tscn";
 
 	private bool _lastBall;
 	private Timer _tiltedTimeOut;
@@ -29,25 +29,41 @@ public abstract partial class Game : PinGodGameNode
 
         Logger.Debug(nameof(Game),":loading multiball scene:  " + MULTIBALL_SCENE);
         multiballPkd = ResourceLoader.Load(MULTIBALL_SCENE) as PackedScene;
-
-        pinGod.Connect(nameof(PinGodGame.BallDrainedEventHandler), new Callable(this, nameof(OnBallDrained)));
-		pinGod.Connect(nameof(PinGodGame.BallEndedEventHandler), new Callable(this, nameof(OnBallEnded)));
-		pinGod.Connect(nameof(PinGodGame.BallSavedEventHandler), new Callable(this, nameof(OnBallSaved)));
-		pinGod.Connect(nameof(PinGodGame.BonusEndedEventHandler), new Callable(this, nameof(OnBonusEnded)));
-		pinGod.Connect(nameof(PinGodGame.MultiBallEndedEventHandler), new Callable(this, nameof(EndMultiball)));
-		pinGod.Connect(nameof(PinGodGame.ScoreEntryEndedEventHandler), new Callable(this, nameof(OnScoreEntryEnded)));
-        //pinGod.Connect(nameof(PinGodGameBase.PlayerAdded), this, "OnPlayerAdded");
+        
+        pinGod.BallDrained += OnBallDrained;
+        pinGod.BallEnded += OnBallEnded;
+        pinGod.BallSaved += OnBallSaved;
+        pinGod.BonusEnded += OnBonusEnded;
+        pinGod.MultiBallEnded += EndMultiball;
+        pinGod.ScoreEntryEnded += OnScoreEntryEnded;
+        //pinGod.PlayerAdded += OnPlayerAdded;
 
         Logger.Debug(nameof(Game), ":", nameof(_EnterTree), ":creating tilt timeout");
         _tiltedTimeOut = new Timer() { OneShot = true, WaitTime = 4, Autostart = false };
 		AddChild(_tiltedTimeOut);
 		_tiltedTimeOut.Connect("timeout", new Callable(this, nameof(timeout)));
 	}
+    /// <summary>
+    /// Removes event handlers for pingod game events
+    /// </summary>
+    public override void _ExitTree()
+    {
+        if(pinGod != null)
+        {
+            pinGod.BallDrained -= OnBallDrained;
+            pinGod.BallEnded -= OnBallEnded;
+            pinGod.BallSaved -= OnBallSaved;
+            pinGod.BonusEnded -= OnBonusEnded;
+            pinGod.MultiBallEnded -= EndMultiball;
+            pinGod.ScoreEntryEnded -= OnScoreEntryEnded;
+        }        
+        base._ExitTree();
+    }
 
-	/// <summary>
-	/// Starts a new game and ball (soon as this Game enters the scene tree). OnBallStarted is invoked on nodes grouped as Mode
-	/// </summary>
-	public override void _Ready()
+    /// <summary>
+    /// Starts a new game and ball (soon as this Game enters the scene tree). OnBallStarted is invoked on nodes grouped as Mode
+    /// </summary>
+    public override void _Ready()
 	{
         Logger.Debug(nameof(Game), ":", nameof(_Ready));
         pinGod.BallInPlay = 1;
@@ -169,16 +185,19 @@ public abstract partial class Game : PinGodGameNode
 	{
 		if (_tiltedTimeOut.IsStopped())
 		{
-			pinGod.OnBallDrained(GetTree());
+			if(pinGod != null)
+			{
+                pinGod.OnBallDrained(GetTree());
 
-			if (pinGod.EndBall())
-			{
-				Logger.Info(nameof(Game), ":last ball played, game ending");
-			}
-			else
-			{
-				Logger.Info(nameof(Game), ":new ball starting");
-			}
+                if (pinGod.EndBall())
+                {
+                    Logger.Info(nameof(Game), ":last ball played, game ending");
+                }
+                else
+                {
+                    Logger.Info(nameof(Game), ":new ball starting");
+                }
+            }
 		}
 	}
     /// <summary>

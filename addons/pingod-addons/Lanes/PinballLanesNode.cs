@@ -33,6 +33,7 @@ public partial class PinballLanesNode : PinGodGameMode
     [Export] bool _resetOnLanesCompleted = true;
 
     [Export] bool _resetOnBallStarted = true;
+    private PinGodMachine _pingodMachine;
 
     #endregion
 
@@ -70,8 +71,12 @@ public partial class PinballLanesNode : PinGodGameMode
                 {
                     _laneSwitchNums[i]= Machine.Switches[_lane_switches[i]].Num;
                 }
-                
-                pinGod.Connect(nameof(PinGodBase.SwitchCommand), new Callable(this, nameof(OnSwitchCommandHandler)));
+
+                if (HasNode("/root/" + nameof(PinGodMachine)))
+                {
+                    _pingodMachine = GetNode<PinGodMachine>("/root/" + nameof(PinGodMachine));
+                    _pingodMachine.SwitchCommand += OnSwitchCommandHandler;
+                }
             }
         }
     }
@@ -140,7 +145,7 @@ public partial class PinballLanesNode : PinGodGameMode
         }
         if (complete)
         {
-            EmitSignal(nameof(LanesCompletedEventHandler));
+            EmitSignal(nameof(LanesCompleted));
             if (_resetOnLanesCompleted) ResetLanesCompleted();
         }
         return complete;
@@ -168,7 +173,7 @@ public partial class PinballLanesNode : PinGodGameMode
             result = true;
         }
 
-        EmitSignal(nameof(LaneCompletedEventHandler), _lane_switches[i], result);
+        EmitSignal(nameof(LaneCompleted), _lane_switches[i], result);
         return result;
     }
 

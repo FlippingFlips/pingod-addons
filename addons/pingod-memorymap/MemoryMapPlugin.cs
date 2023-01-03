@@ -6,7 +6,8 @@ using Godot;
 [Tool]
 public partial class MemoryMapPlugin : EditorPlugin
 {
-    const string ROOT_DIR = "addons/pingod-memorymap/";
+    const string ASSETS_DIR = "res://addons/assets/";
+    const string ROOT_DIR = "addons/pingod-memorymap/plugin/";
 
     /// <summary>
     /// Create a custom type for Create New Node
@@ -14,23 +15,21 @@ public partial class MemoryMapPlugin : EditorPlugin
     public override void _EnterTree()
     {
         base._EnterTree();
-        if (!Engine.IsEditorHint())
-        {
-            Logger.Info(nameof(MemoryMapPlugin), ":" + nameof(_EnterTree) + " pingod-memorymap addon");
-        }
+        Logger.Debug(nameof(MemoryMapPlugin), nameof(_EnterTree), ":" + ROOT_DIR);
+        //we're in Godot editor, load main script and a texture so it's available in the UI
+        var script = GD.Load<Script>(ROOT_DIR + nameof(PinGodMemoryMapNode) + ".cs");
+        using var texture = GD.Load<Texture2D>($"{ASSETS_DIR}img/pinball.png");
+        AddCustomType(nameof(PinGodMemoryMapNode), nameof(Node), script, texture);
+        Logger.Debug(nameof(MemoryMapPlugin), ":" + nameof(_EnterTree), " loaded plugin script");
 
-        var script = GD.Load<Script>(ROOT_DIR+ nameof(PinGodMemoryMapNode)+".cs");
-        using var texture = GD.Load<Texture2D>("res://addons/assets/img/pinball.png");
-        AddCustomType(nameof(PinGodMemoryMapNode), nameof(Node), script, texture);                     
-
-        GD.Print("enter tree in editor addon");
-        //AddAutoloadSingleton("MemoryMap", "res://addons/pingod-memorymap/MemoryMap.tscn");
+        //option to add as auto loaded with the scene, scene needs to be configured
+        AddAutoloadSingleton("MemoryMap", "res://autoload/MemoryMap.tscn");
     }
 
     public override void _Ready()
     {
         base._Ready();
-        GD.Print("memory map add on ready");
+        Logger.Debug(nameof(MemoryMapPlugin), nameof(_Ready));
     }
 
     /// <summary>
@@ -41,10 +40,13 @@ public partial class MemoryMapPlugin : EditorPlugin
         base._ExitTree();
         if (!Engine.IsEditorHint())
         {
-            Logger.Info("exit tree no editor");
+            Logger.Debug(nameof(MemoryMapPlugin), $":{nameof(_ExitTree)}");
         }
-        else { Logger.Info("exit tree editor"); }
-        //RemoveAutoloadSingleton("MemoryMap");
+        else { 
+            Logger.Debug(nameof(MemoryMapPlugin), $":{nameof(_ExitTree)} - editor, removing custom type");            
+        }
+
         RemoveCustomType(nameof(PinGodMemoryMapNode));
+        RemoveAutoloadSingleton("MemoryMap");        
     }
 }

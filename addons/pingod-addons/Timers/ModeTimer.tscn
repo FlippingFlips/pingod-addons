@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://addons/pingod-addons/Timers/ModeTimer.cs" id="2"]
+[ext_resource type="FontFile" uid="uid://c2swd01bayff8" path="res://addons/assets/fonts/BebasNeue.tres" id="2_gj3bl"]
+
+[node name="ModeTimer" type="Timer"]
+autostart = true
+script = ExtResource("2")
+_ModeTitle = "HURRY UP"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+offset_right = 370.0
+offset_bottom = 76.0
+theme_override_fonts/font = ExtResource("2_gj3bl")
+theme_override_font_sizes/font_size = 72
+text = "MODE TIME TITLE"
+
+[node name="TimeLeftLabel" type="Label" parent="VBoxContainer"]
+offset_top = 80.0
+offset_right = 370.0
+offset_bottom = 156.0
+theme_override_fonts/font = ExtResource("2_gj3bl")
+theme_override_font_sizes/font_size = 72
+text = "30"
+
+[connection signal="timeout" from="." to="." method="_on_ModeTimer_timeout"]

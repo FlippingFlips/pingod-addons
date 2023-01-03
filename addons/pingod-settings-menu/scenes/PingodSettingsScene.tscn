@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3l6ln877pca0"]
+
+[ext_resource type="Theme" uid="uid://cmi2c3y67jlsa" path="res://addons/assets/Themes/pingod_settings_theme.tres" id="1"]
+[ext_resource type="Script" path="res://addons/pingod-settings-menu/scripts/PingodSettingsScene.cs" id="2"]
+
+[node name="GameSettingsScene" type="MarginContainer"]
+size_flags_horizontal = 3
+theme = ExtResource("1")
+script = ExtResource("2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 269.0
+offset_bottom = 187.0
+
+[node name="WriteStatesCheckButton" type="CheckButton" parent="VBoxContainer"]
+offset_right = 269.0
+offset_bottom = 45.0
+text = "SETT_STATE_WRITE"
+
+[node name="ReadStatesCheckButton" type="CheckButton" parent="VBoxContainer"]
+offset_top = 49.0
+offset_right = 269.0
+offset_bottom = 94.0
+text = "SETT_STATE_READ"
+
+[node name="StatesDelaySpinBox" type="SpinBox" parent="VBoxContainer"]
+offset_top = 98.0
+offset_right = 269.0
+offset_bottom = 143.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.6
+min_value = 1.0
+max_value = 5000.0
+value = 1.0
+prefix = "SETT_STATE_DELAY"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+offset_top = 147.0
+offset_right = 269.0
+offset_bottom = 187.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+offset_right = 165.0
+offset_bottom = 40.0
+text = "SETT_LOG_LVL"
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/HBoxContainer"]
+offset_left = 169.0
+offset_right = 217.0
+offset_bottom = 16.0
+size_flags_horizontal = 3
+max_value = 3.0
+value = 1.0
+tick_count = 4
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer"]
+offset_left = 221.0
+offset_right = 269.0
+offset_bottom = 40.0
+text = "INFO"
+
+[connection signal="toggled" from="VBoxContainer/WriteStatesCheckButton" to="." method="_on_WriteStatesCheckButton_toggled"]
+[connection signal="toggled" from="VBoxContainer/ReadStatesCheckButton" to="." method="_on_ReadStatesCheckButton_toggled"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/HSlider" to="." method="_on_HSlider_value_changed"]

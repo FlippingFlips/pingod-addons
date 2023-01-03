@@ -1,0 +1,26 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://cmi2c3y67jlsa"]
+
+[ext_resource type="FontFile" uid="uid://c2swd01bayff8" path="res://addons/assets/fonts/BebasNeue.tres" id="1_olvoo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cbxlw"]
+bg_color = Color(0.396078, 0.466667, 0.568627, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jn2da"]
+bg_color = Color(0.172549, 0.196078, 0.231373, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4h2kf"]
+bg_color = Color(0.144287, 0.161264, 0.1875, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r8lme"]
+bg_color = Color(0.276642, 0.320075, 0.382813, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o7pno"]
+
+[resource]
+default_font = ExtResource("1_olvoo")
+default_font_size = 36
+TabContainer/styles/panel = SubResource("StyleBoxFlat_cbxlw")
+TabContainer/styles/tab_bg = SubResource("StyleBoxFlat_jn2da")
+TabContainer/styles/tab_disabled = SubResource("StyleBoxFlat_4h2kf")
+TabContainer/styles/tab_fg = SubResource("StyleBoxFlat_r8lme")
+Tabs/styles/tab_bg = SubResource("StyleBoxTexture_o7pno")

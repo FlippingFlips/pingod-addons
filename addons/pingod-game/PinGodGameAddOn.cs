@@ -8,47 +8,43 @@ public partial class PinGodGameAddOn : EditorPlugin
 {
     const string ROOT_DIR = "addons/pingod-game/";
 
-    /// <summary>
-    /// Initialization of the PlugIn. Adds CustomTypes new type with a name, a parent type, a script and an icon.
-    /// </summary>
     public override void _EnterTree()
     {
         base._EnterTree();
-        if (!Engine.IsEditorHint())
-        {
-            Logger.Info("enter tree pingodgame addon");
-        }
-        else { Logger.Info("enter tree in editor addon"); }
-
         SetAutoLoad();
     }
 
     private void SetAutoLoad()
     {
-        var path = "res://PinGodGame.tscn";
-        GD.Print($"setting autoload, looking for PinGodGame. PinGodGame.tscn at {path}");
-        if (FileAccess.FileExists(path))
+        var path = "res://autoload/PinGodGame.tscn";
+        Logger.Debug(nameof(PinGodGameAddOn), $"setting autoload, looking for a PinGodGame.tscn at {path}");
+
+        //assign the scene when in editor
+        if (Engine.IsEditorHint())
         {
-            Logger.Info($"found PinGodGame at res://PinGodGame.tscn");
-            AddAutoloadSingleton("PinGodGame", "res://PinGodGame.tscn");
-        }
-        else if (FileAccess.FileExists("res://game/PinGodGame.tscn"))
-        {
-            Logger.Info($"found PinGodGame at res://game/PinGodGame.tscn");
-            AddAutoloadSingleton("PinGodGame", "res://game/PinGodGame.tscn");
-        }
-        else if (FileAccess.FileExists("res://addons/pingod-game/Scenes/PinGodGame.tscn"))
-        {
-            Logger.Info($"found PinGodGame at res://addons/pingod-game/Scenes/PinGodGame.tscn");
-            AddAutoloadSingleton("PinGodGame", "res://addons/pingod-game/Scenes/PinGodGame.tscn");
-        }
-        else { Logger.Info("WARNING: failed to set autoload PinGodGame.tscn"); }
+            if (FileAccess.FileExists(path))
+            {
+                Logger.Info(nameof(PinGodGameAddOn), $"found PinGodGame at res://autoload/PinGodGame.tscn");
+                AddAutoloadSingleton(nameof(PinGodGame), "res://autoload/PinGodGame.tscn");
+            }
+            else if (FileAccess.FileExists("res://game/PinGodGame.tscn"))
+            {
+                Logger.Info(nameof(PinGodGameAddOn), $"found PinGodGame at res://game/PinGodGame.tscn");
+                AddAutoloadSingleton(nameof(PinGodGame), "res://game/PinGodGame.tscn");
+            }
+            else if (FileAccess.FileExists($"{ROOT_DIR}Scenes/PinGodGame.tscn"))
+            {
+                Logger.Info(nameof(PinGodGameAddOn), $"found PinGodGame at {ROOT_DIR}Scenes/PinGodGame.tscn");
+                AddAutoloadSingleton(nameof(PinGodGame), $"{ROOT_DIR}Scenes/PinGodGame.tscn");
+            }
+            else { Logger.Warning("autoload for PinGodGame.tscn could be set.", nameof(PinGodGameAddOn), "WARNING: failed to set autoload " + path); }
+        }        
     }
 
     public override void _Ready()
     {
         base._Ready();
-        Logger.Info("pingod game addon ready");
+        Logger.Debug(nameof(PinGodGameAddOn), nameof(_Ready));
     }
 
     /// <summary>
@@ -58,10 +54,13 @@ public partial class PinGodGameAddOn : EditorPlugin
     {
         base._ExitTree();
         if (!Engine.IsEditorHint())
-        {            
-            Logger.Info("exit tree no editor");
+        {
+            Logger.Debug(nameof(PinGodGameAddOn), $":{nameof(_ExitTree)}: removing AutoLoad scene");
         }
-        else { Logger.Info("exit tree editor"); }
-        RemoveAutoloadSingleton("PinGodGame");
+        else 
+        {
+            Logger.Debug(nameof(PinGodGameAddOn), $":{nameof(_ExitTree)}: removing AutoLoad scene from editor");
+        }
+        RemoveAutoloadSingleton(nameof(PinGodGame));
     }
 }

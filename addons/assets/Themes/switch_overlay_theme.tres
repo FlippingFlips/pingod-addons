@@ -1,0 +1,26 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://cpqovrw1o0dw3"]
+
+[ext_resource type="FontFile" uid="uid://c2swd01bayff8" path="res://addons/assets/fonts/BebasNeue.tres" id="1_4t02d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tu8vd"]
+bg_color = Color(1, 0.466667, 0.466667, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7f8ht"]
+bg_color = Color(1, 0.168627, 0.168627, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_76bwn"]
+bg_color = Color(0.101961, 0.67451, 0.113725, 1)
+
+[resource]
+default_font = ExtResource("1_4t02d")
+Button/colors/font_color = Color(0.88, 0.88, 0.88, 1)
+Button/colors/font_color_disabled = Color(0.9, 0.9, 0.9, 0.2)
+Button/colors/font_color_hover = Color(0.94, 0.94, 0.94, 1)
+Button/colors/font_color_pressed = Color(1, 1, 1, 1)
+Button/constants/hseparation = 3
+Button/fonts/font = ExtResource("1_4t02d")
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = SubResource("StyleBoxFlat_tu8vd")
+Button/styles/normal = SubResource("StyleBoxFlat_7f8ht")
+Button/styles/pressed = SubResource("StyleBoxFlat_76bwn")

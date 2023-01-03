@@ -24,9 +24,9 @@ public partial class AudioManager : Node
     /// </summary>
     [Export]
     public Godot.Collections.Dictionary<string, string> SfxAssets { get; private set; } = new Godot.Collections.Dictionary<string, string>() {
-        { "credit" , "res://addons/pingod-game/assets/audio/sfx/credit.wav"},
-        { "tilt" , "res://addons/pingod-game/assets/audio/sfx/tilt.wav"},
-        { "warning" , "res://addons/pingod-game/assets/audio/sfx/tilt_warning.wav"}
+        { "credit" , "res://addons/assets/audio/sfx/credit.wav"},
+        { "tilt" , "res://addons/assets/audio/sfx/tilt.wav"},
+        { "warning" , "res://addons/assets/audio/sfx/tilt_warning.wav"}
     };
 
     /// <summary>
@@ -45,6 +45,8 @@ public partial class AudioManager : Node
     /// Collection of music audiostream resources
     /// </summary>
     public Dictionary<string, AudioStream> Music { get; private set; }
+
+    [Export]
 
     /// <summary>
     /// Disable / Enable music
@@ -88,11 +90,13 @@ public partial class AudioManager : Node
     {
         if (!Engine.IsEditorHint())
         {
-            MusicPlayer = GetNode("MusicPlayer") as AudioStreamPlayer;
-            SfxPlayer = GetNode("SfxPlayer") as AudioStreamPlayer;
-            VoicePlayer = GetNode("VoicePlayer") as AudioStreamPlayer;
-
-            //LoadSoundPckResources();
+            //create players and add to tree
+            MusicPlayer = new();
+            SfxPlayer = new();
+            VoicePlayer = new();
+            AddChild(MusicPlayer);
+            AddChild(SfxPlayer);
+            AddChild(VoicePlayer);
 
             Music = new Dictionary<string, AudioStream>();
             Sfx = new Dictionary<string, AudioStream>();

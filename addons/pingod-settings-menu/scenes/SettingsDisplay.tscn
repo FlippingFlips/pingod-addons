@@ -1,0 +1,100 @@
+[gd_scene load_steps=7 format=3 uid="uid://b38tedw34jcf7"]
+
+[ext_resource type="PackedScene" path="res://addons/pingod-settings-menu/scenes/DisplaySettings.tscn" id="1"]
+[ext_resource type="Theme" uid="uid://cmi2c3y67jlsa" path="res://addons/assets/Themes/pingod_settings_theme.tres" id="1_cnq06"]
+[ext_resource type="FontFile" uid="uid://c2swd01bayff8" path="res://addons/assets/fonts/BebasNeue.tres" id="1_hsabi"]
+[ext_resource type="PackedScene" uid="uid://b3l6ln877pca0" path="res://addons/pingod-settings-menu/scenes/PingodSettingsScene.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://addons/pingod-settings-menu/scenes/GameSettingsScene.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://addons/pingod-settings-menu/scenes/AudioSettings.tscn" id="4"]
+
+[node name="SettingsDisplay" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_cnq06")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_hsabi")
+theme_override_font_sizes/font_size = 18
+
+[node name="Display" type="Label" parent="TabContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 27.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Display"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DisplaySettings" parent="TabContainer/Display/ScrollContainer" instance=ExtResource("1")]
+offset_right = 384.0
+offset_bottom = 364.0
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+
+[node name="Audio" type="Label" parent="TabContainer"]
+visible = false
+
+[node name="AudioSettings" parent="TabContainer/Audio" instance=ExtResource("4")]
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+
+[node name="Game" type="Label" parent="TabContainer"]
+visible = false
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Game"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameSettingsScene" parent="TabContainer/Game/ScrollContainer" instance=ExtResource("3")]
+offset_right = 150.0
+offset_bottom = 193.0
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+
+[node name="Pingod" type="Label" parent="TabContainer"]
+visible = false
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Pingod"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameSettingsScene" parent="TabContainer/Pingod/ScrollContainer" instance=ExtResource("2")]
+offset_right = 319.0
+offset_bottom = 237.0
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+grow_vertical = 2
+
+[node name="VSlider" type="VSlider" parent="Panel"]
+min_value = -72.0
+max_value = 6.0
+value = -6.0
+tick_count = 78
