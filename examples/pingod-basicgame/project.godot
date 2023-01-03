@@ -24,6 +24,15 @@ config/windows_native_icon="res://addons/assets/img/pingod.ico"
 buses/default_bus_layout="res://assets/audio/audio_bus_layout.tres"
 default_bus_layout="res://assets/audio/audio_bus_layout.tres"
 
+[autoload]
+
+AudioManager="*res://autoload/AudioManager.tscn"
+PinGodGame="*res://autoload/PinGodGame.tscn"
+Machine="*res://autoload/Machine.tscn"
+MemoryMap="*res://autoload/MemoryMap.tscn"
+Trough="*res://autoload/Trough.tscn"
+WindowActions="*res://autoload/WindowActions.tscn"
+
 [debug]
 
 settings/fps/force_fps=31
@@ -42,6 +51,10 @@ window/vsync/use_vsync=false
 [dotnet]
 
 project/assembly_name="BasicGameGodot"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/pingod-addons/plugin.cfg", "res://addons/pingod-audio/plugin.cfg", "res://addons/pingod-game/plugin.cfg", "res://addons/pingod-machine/plugin.cfg", "res://addons/pingod-memorymap/plugin.cfg", "res://addons/pingod-trough/plugin.cfg", "res://addons/pingod-window-commands/plugin.cfg")
 
 [importer_defaults]
 

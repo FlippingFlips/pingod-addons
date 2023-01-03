@@ -79,6 +79,8 @@
     <None Include="autoload\Resources.tscn" />
     <None Include="autoload\Trough.tscn" />
     <None Include="autoload\WindowActions.tscn" />
+    <None Include="export_presets.cfg" />
+    <None Include="Game.tscn" />
     <None Include="local\BasicGameLang.csv" />
     <None Include="project.godot" />
     <None Include="readme.md" />
