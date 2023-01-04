@@ -1,13 +1,11 @@
 using Godot;
-using System;
-using static PinGodBase;
 
 /// <summary>
 /// Base mode example
 /// </summary>
 public partial class BaseMode : Control
 {
-    [Export(PropertyHint.File)] string BALL_SAVE_SCENE = "res://addons/pingod-modes/scenes/BallSave.tscn";
+    [Export(PropertyHint.File)] string BALL_SAVE_SCENE = "res://addons/pingod-ballsave/BallSave.tscn";
 
     private PackedScene _ballSaveScene;
     private Saucer _ballSaucer;

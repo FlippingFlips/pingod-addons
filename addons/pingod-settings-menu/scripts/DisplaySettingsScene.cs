@@ -23,24 +23,36 @@ public partial class DisplaySettingsScene : MarginContainer
     }
 
     /// <summary>
-    /// Gets settings and setups default UI controls.
+    /// Sets up the input controls
     /// </summary>
     public override void _Ready()
     {
-        Logger.Warning(nameof(DisplaySettingsScene), ":", nameof(_Ready));
-        base._Ready();        
-        //setup options for stretch modes
-        var stretchOption = GetNode<OptionButton>("VBoxContainer/StretchAspectOptionButton");
+        Logger.Debug(nameof(DisplaySettingsScene), ":", nameof(_Ready));
+        base._Ready();
 
-        GetTree().Root.ContentScaleAspect = Window.ContentScaleAspectEnum.Expand;
+        //ContentScaleAspectEnum
+        //GetTree().Root.ContentScaleAspect = Window..Expand;
+        var stretchOption = GetNode<OptionButton>("VBoxContainer/StretchAspectOptionButton");
         foreach (var item in Enum.GetValues(typeof(Window.ContentScaleAspectEnum)))
         {
             var i = (long)item;
             var ii = (int)i;
             stretchOption.AddItem(item.ToString(), ii);
         }
+        PinGodStretchAspect aspect = (PinGodStretchAspect)_displaySettings.AspectOption;
+        stretchOption.Selected = (int)aspect;
 
-        if(_displaySettings != null)
+        //ContentScaleModeEnum
+        var scaleOption = GetNode<OptionButton>("VBoxContainer/ScaleModeOptionButton");
+        foreach (var item in Enum.GetValues(typeof(Window.ContentScaleModeEnum)))
+        {
+            var i = (long)item;
+            var ii = (int)i;
+            scaleOption.AddItem(item.ToString(), ii);
+        }        
+        scaleOption.Selected = (int)_displaySettings.ContentScaleMode;
+
+        if (_displaySettings != null)
         {
             GetNode<Label>("VBoxContainer/HBoxContainer/DefaultWindowSizeLabel").Text =
             $"ORIGINAL RESOLUTION: {_displaySettings.WidthDefault} X {_displaySettings.HeightDefault}";
@@ -58,8 +70,6 @@ public partial class DisplaySettingsScene : MarginContainer
 
             //aspect ratio
             //var val = ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.ASPECT).ToString();
-            PinGodStretchAspect aspect = (PinGodStretchAspect)_displaySettings.AspectOption;//()Enum.Parse(typeof(PinGodStretchAspect), );
-            stretchOption.Selected = (int)aspect;
         }        
     }
 
@@ -116,6 +126,13 @@ public partial class DisplaySettingsScene : MarginContainer
         ProjectSettings.SetSetting(SettingPaths.DisplaySetPaths.ASPECT, ((PinGodStretchAspect)index).ToString());
         pinGod.SetMainSceneAspectRatio();
         _displaySettings.AspectOption = index;        
+    }
+
+    void _on_scale_mode_option_button_item_selected(int index)
+    {
+        //ProjectSettings.SetSetting(SettingPaths.DisplaySetPaths., ((PinGodStretchAspect)index).ToString());        
+        _displaySettings.ContentScaleMode = (Window.ContentScaleModeEnum)index;
+        GetTree().Root.ContentScaleMode = _displaySettings.ContentScaleMode;
     }
 
     private void SetFullScreen(bool enabled)

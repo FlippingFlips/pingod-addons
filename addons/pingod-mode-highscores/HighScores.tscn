@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://addons/pingod-modes/scripts/HighScores.cs" id="1"]
+[ext_resource type="Script" path="res://addons/pingod-mode-highscores/HighScores.cs" id="1"]
 [ext_resource type="FontFile" uid="uid://c2swd01bayff8" path="res://addons/assets/fonts/BebasNeue.tres" id="2_dirbw"]
 
 [node name="HighScores" type="Control"]

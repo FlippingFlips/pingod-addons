@@ -8,7 +8,7 @@ public abstract partial class Game : PinGodGameNode
 	/// <summary>
 	/// Default scene file to use for Multi-Ball
 	/// </summary>
-	[Export(PropertyHint.File)] protected string MULTIBALL_SCENE = "res://addons/pingod-modes/scenes/Multiball.tscn";
+	[Export(PropertyHint.File)] protected string MULTIBALL_SCENE = "res://addons/pingod-mode-multiball/Multiball.tscn";
 
 	private bool _lastBall;
 	private Timer _tiltedTimeOut;
@@ -30,13 +30,17 @@ public abstract partial class Game : PinGodGameNode
         Logger.Debug(nameof(Game),":loading multiball scene:  " + MULTIBALL_SCENE);
         multiballPkd = ResourceLoader.Load(MULTIBALL_SCENE) as PackedScene;
         
-        pinGod.BallDrained += OnBallDrained;
-        pinGod.BallEnded += OnBallEnded;
-        pinGod.BallSaved += OnBallSaved;
-        pinGod.BonusEnded += OnBonusEnded;
-        pinGod.MultiBallEnded += EndMultiball;
-        pinGod.ScoreEntryEnded += OnScoreEntryEnded;
-        //pinGod.PlayerAdded += OnPlayerAdded;
+        if(pinGod != null)
+        {
+            pinGod.BallDrained += OnBallDrained;
+            pinGod.BallEnded += OnBallEnded;
+            pinGod.BallSaved += OnBallSaved;
+            pinGod.BonusEnded += OnBonusEnded;
+            pinGod.MultiBallEnded += EndMultiball;
+            pinGod.ScoreEntryEnded += OnScoreEntryEnded;
+            //pinGod.PlayerAdded += OnPlayerAdded;
+        }
+        else { Logger.Warning(nameof(Game), ": No PinGodGame found in root"); }
 
         Logger.Debug(nameof(Game), ":", nameof(_EnterTree), ":creating tilt timeout");
         _tiltedTimeOut = new Timer() { OneShot = true, WaitTime = 4, Autostart = false };

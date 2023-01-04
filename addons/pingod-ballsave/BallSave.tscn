@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dc6ygt2nvbhaj"]
 
 [ext_resource type="Script" path="res://addons/pingod-addons/Labels/BlinkingLabel.cs" id="1"]
-[ext_resource type="Script" path="res://addons/pingod-modes/scripts/BallSave.cs" id="2"]
+[ext_resource type="Script" path="res://addons/pingod-ballsave/BallSave.cs" id="2"]
 [ext_resource type="LabelSettings" uid="uid://sn8c6lfbh7fw" path="res://addons/assets/labels/score_label_settings.tres" id="2_ns8k6"]
 
 [node name="BallSave" type="Control"]

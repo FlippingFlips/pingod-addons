@@ -233,9 +233,12 @@ public abstract partial class PinGodGame : PinGodBase
             SaveWindow();
         }
 
+        GetTree().Root.ContentScaleMode = Adjustments.Display.ContentScaleMode;
+        GetTree().Root.ContentScaleAspect = (Window.ContentScaleAspectEnum)Adjustments.Display.AspectOption;
+
         //on top
         DisplayServer.WindowSetFlag(DisplayServer.WindowFlags.AlwaysOnTop, Adjustments.Display.AlwaysOnTop);
-        //OS.MoveWindowToForeground();
+        //OS.MoveWindowToForeground();        
 
         //set the width, position
         DisplayServer.WindowSetPosition(new Vector2i((int)Adjustments.Display.X, (int)Adjustments.Display.Y));
@@ -852,10 +855,11 @@ public abstract partial class PinGodGame : PinGodBase
     /// </summary>
     public void SetMainSceneAspectRatio()
     {
-        var minW = (int)ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.WIDTH);
-        var minH = (int)ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.HEIGHT);
+        var asp = (PinGodStretchAspect)Enum.Parse(typeof(PinGodStretchAspect),ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.ASPECT).ToString());
+        GetTree().Root.ContentScaleAspect = (Window.ContentScaleAspectEnum)asp;
 
-        var asp = Enum.Parse(typeof(PinGodStretchAspect),ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.ASPECT).ToString());
+        //asp = (PinGodStretchAspect)Enum.Parse(typeof(PinGodStretchAspect), ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.).ToString());
+        //GetTree().Root.ContentScaleMode = (Window.ContentScaleModeEnum)asp;
 
         //GetNodeOrNull<MainScene>("/root/MainScene")?
         //    .GetTree().SetScreenStretch(SceneTree.StretchMode.Mode2d, (SceneTree.StretchAspect)(int)asp, 
@@ -863,7 +867,7 @@ public abstract partial class PinGodGame : PinGodBase
 
         //DisplayServer.WindowSetMode(DisplayServer.WindowMode.Minimized)
         //DisplayServer.DialogShow
-        
+
 
         //this.SetWinFlag(DisplayServer.WindowFlags)
     }

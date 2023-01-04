@@ -1,4 +1,5 @@
-﻿/// <summary>
+﻿using Godot;
+/// <summary>
 /// Window / Display settings
 /// </summary>
 public partial class DisplaySettings
@@ -58,5 +59,6 @@ public partial class DisplaySettings
     /// <summary>
     /// StartSaver Y position
     /// </summary>
-    public int Y { get; set; }    
+    public int Y { get; set; }
+    public Window.ContentScaleModeEnum ContentScaleMode { get; set; }
 }

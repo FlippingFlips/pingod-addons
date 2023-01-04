@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dahdy0sba6qmh"]
+
+[ext_resource type="Script" path="res://addons/pingod-mode-multiball/Multiball.cs" id="1_gppn4"]
+[ext_resource type="PackedScene" uid="uid://b0fw60medksyy" path="res://addons/pingod-addons/Timers/ModeTimer.tscn" id="2_575kt"]
+
+[node name="Multiball" type="Control" groups=["Multiball"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gppn4")
+_showModeTimer = false
+
+[node name="ModeTimer" parent="." instance=ExtResource("2_575kt")]
+_ModeName = "multiball_timer"
+_ModeTitle = "MULTIBALL"
+
+[connection signal="ModeTimedOut" from="ModeTimer" to="." method="_on_mode_timer_mode_timed_out"]

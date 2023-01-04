@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://addons/pingod-modes/scripts/Bonus.cs" id="2"]
+[ext_resource type="Script" path="res://addons/pingod-mode-bonus/Bonus.cs" id="2"]
 [ext_resource type="Texture2D" uid="uid://cfy7fd5ef1bdl" path="res://addons/assets/img/pingod-logo.png" id="3"]
 [ext_resource type="FontFile" uid="uid://c2swd01bayff8" path="res://addons/assets/fonts/BebasNeue.tres" id="3_w0xt5"]
 

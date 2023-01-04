@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://addons/pingod-addons/Labels/BlinkingLabel.cs" id="1"]
 [ext_resource type="FontFile" uid="uid://c2swd01bayff8" path="res://addons/assets/fonts/BebasNeue.tres" id="2_dknxm"]
-[ext_resource type="Script" path="res://addons/pingod-modes/scripts/Attract.cs" id="4"]
-[ext_resource type="PackedScene" path="res://addons/pingod-modes/scenes/HighScores.tscn" id="5"]
+[ext_resource type="Script" path="res://addons/pingod-mode-attract/Attract.cs" id="4"]
+[ext_resource type="PackedScene" path="res://addons/pingod-mode-highscores/HighScores.tscn" id="5"]
 [ext_resource type="Script" path="res://addons/pingod-addons/Labels/CreditsLabel.cs" id="5_fgurf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_xeaq5"]

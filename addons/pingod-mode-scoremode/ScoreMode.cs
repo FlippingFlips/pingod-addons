@@ -1,19 +1,25 @@
 using Godot;
 using Godot.Collections;
+using System;
 
 /// <summary>
 /// Simple score display mode for 4 players with ball information. Used in the <see cref="Game"/> Scene
 /// </summary>
 public partial class ScoreMode : Node
 {
+    [ExportCategory("debug")]
+    [Export] bool _isDebugMode = false;
+
     /// <summary>
     /// Show Player ones ScoreP1 label if set to true. Normally in a pinball the scorep1 would not display with main score unless multi-player
     /// </summary>
+    [ExportCategory("options")]
     [Export] bool _single_player_p1_visible = false;
 
     [Export] bool _show_main_score_multiplayer = true;
 
     #region Node paths to select in scene
+    [ExportCategory("score labels")]
     [Export] NodePath _ballInfoLabel = null;
     [Export] NodePath _playerInfoLabel = null;
     [Export] NodePath _scoreLabel = null;
@@ -44,20 +50,42 @@ public partial class ScoreMode : Node
     protected Label[] ScoreLabels;
     #endregion
 
+    public PinGodPlayer[] Players { get; private set; }
+
     /// <summary>
     /// Connects to signals to update scores
     /// </summary>
     public override void _EnterTree()
     {
-        pinGod = GetNode("/root/PinGodGame") as PinGodGame;
-
-        //signals
-        pinGod.Connect("GameStarted", new Callable(this, nameof(OnScoresUpdated)));
-        pinGod.Connect("ScoresUpdated", new Callable(this, nameof(OnScoresUpdated)));
-        pinGod.Connect("PlayerAdded", new Callable(this, nameof(OnScoresUpdated)));
+        if (HasNode("/root/PinGodGame"))
+        {
+            pinGod = GetNode("/root/PinGodGame") as PinGodGame;
+            //signals
+            pinGod.Connect("GameStarted", new Callable(this, nameof(OnScoresUpdated)));
+            pinGod.Connect("ScoresUpdated", new Callable(this, nameof(OnScoresUpdated)));
+            pinGod.Connect("PlayerAdded", new Callable(this, nameof(OnScoresUpdated)));
+        }
+        else
+        { 
+            Logger.Debug(nameof(ScoreMode), $": no PinGodGame could be found");
+            if (_isDebugMode)
+            {
+                SetupDebugMode();
+            }
+        }
 
         if (_scoreLabels?.Count <= 0) Logger.Warning("No _scoreLabels have been defined for the ScoreMode.");
         else ScoreLabels = new Label[_scoreLabels.Count];
+    }
+
+    private void SetupDebugMode()
+    {
+        Players = new PinGodPlayer[] { new(), new(), new(), new() };
+        Logger.Debug(nameof(ScoreMode), $": DEBUG. Fake players");
+        Players[0].Points = 280000;
+        Players[1].Points = 260000;
+        Players[2].Points = 240000;
+        Players[3].Points = 220000;
     }
 
     /// <summary>
@@ -67,7 +95,6 @@ public partial class ScoreMode : Node
     {
         GetBallPlayerInfoLabels();
         GetPlayerScoreLabels();
-
         CallDeferred(nameof(OnScoresUpdated));
     }
 
@@ -89,6 +116,7 @@ public partial class ScoreMode : Node
         for (int i = 0; i < _scoreLabels.Count; i++)
         {
             ScoreLabels[i] = _scoreLabels[i] != null ? GetNode<Label>(_scoreLabels[i]) : null;
+            ScoreLabels[i].Text = null;
         }
     }
 
@@ -98,21 +126,19 @@ public partial class ScoreMode : Node
     public virtual void OnScoresUpdated()
     {
         //Logger.LogDebug("scores updated");
-        if (pinGod.Players?.Count > 0)
-        {
-            //main score display if "ScoreMain" available
+        if (pinGod?.Players?.Count > 0)
+        {            
             if (scoreLabel != null)
             {
                 if (pinGod.Player.Points > -1)
                 {
-                    if(pinGod.Players.Count > 1 && !_show_main_score_multiplayer) 
+                    //more than 1 player, show main score?
+                    if (pinGod.Players.Count > 1 && !_show_main_score_multiplayer) 
                     {
                         scoreLabel.Text = null;
                     }
-                    else
-                    {
-                        scoreLabel.Text = pinGod.Player.Points.ToScoreString();                        
-                    }
+                    //set main score label
+                    else { scoreLabel.Text = pinGod.Player.Points.ToScoreString();}
                 }
                 else
                 {
@@ -120,9 +146,11 @@ public partial class ScoreMode : Node
                 }
             }
 
+            //in all player labels update their scores
             int i = 0;
             foreach (var player in pinGod.Players)
             {
+                //this hides displaying a multi-player score for the single player.
                 if (pinGod.Players.Count == 1 && i == 0 && !_single_player_p1_visible)
                 {
                     i++;
@@ -157,13 +185,28 @@ public partial class ScoreMode : Node
         }
         else
         {
-            //give default in case we have no players and ball
-            if (scoreLabel != null)
-                scoreLabel.Text = ((long)369000).ToScoreString();
-            if (ballInfolabel != null)
-                ballInfolabel.Text = $"BALL: 369";
-            if (playerInfoLabel != null)
-                playerInfoLabel.Text = $"PLAYER: 369";
+            if (_isDebugMode)
+            {
+                if (Players.Length > 1 && !_show_main_score_multiplayer)
+                {
+                    scoreLabel.Text = null;
+                }
+                else
+                {
+                    scoreLabel.Text = (Players[0].Points).ToScoreString();
+                }
+
+                for (int i = 0; i < ScoreLabels.Length-1; i++)
+                {
+                    ScoreLabels[i].Text = (Players[i].Points).ToScoreString();
+                }
+
+                if (ballInfolabel != null)
+                    ballInfolabel.Text = Tr("BALL") + " 3";
+
+                if (playerInfoLabel != null)
+                    playerInfoLabel.Text = Tr("PLAYER") + " PLAYER: 1";
+            }
         }
     }
 

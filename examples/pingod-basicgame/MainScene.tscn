@@ -1,14 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://d3hfn3rhaxuc4"]
+[gd_scene load_steps=5 format=3 uid="uid://b0mii6h2k3ldi"]
 
 [ext_resource type="PackedScene" uid="uid://dje3q12enwe12" path="res://addons/pingod-game/scenes/PauseLayer.tscn" id="3_ilmwe"]
 [ext_resource type="PackedScene" uid="uid://b38tedw34jcf7" path="res://addons/pingod-settings-menu/SettingsDisplay.tscn" id="4_2doe2"]
-[ext_resource type="PackedScene" path="res://addons/pingod-modes/scenes/Attract.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://addons/pingod-mode-attract/Attract.tscn" id="5"]
 [ext_resource type="Script" path="res://addons/pingod-game/Game/MainScene.cs" id="6"]
 
 [node name="MainScene" type="Node2D"]
 process_mode = 3
 script = ExtResource("6")
-_game_scene_path = "res://Game.tscn"
+_service_menu_scene_path = "res://addons/pingod-mode-servicemenu/ServiceMenu.tscn"
 
 [node name="Modes" type="Node" parent="."]
 process_mode = 1
@@ -23,6 +23,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 1024.0
+offset_bottom = 600.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3

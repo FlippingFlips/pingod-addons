@@ -22,12 +22,12 @@ public partial class MainScene : Node2D
     /// <summary>
     /// Path to the Game.tscn. 
     /// </summary>
-    [Export(PropertyHint.File)] protected string _game_scene_path = "res://game/Game.tscn";
+    [Export(PropertyHint.File)] protected string _game_scene_path = "res://Game.tscn";
 
     /// <summary>
     /// Path to service menu scene
     /// </summary>
-    [Export(PropertyHint.File)] protected string _service_menu_scene_path = "res://addons/pingod-modes/scenes/ServiceMenu.tscn";
+    [Export(PropertyHint.File)] protected string _service_menu_scene_path = "res://addons/pingod-servicemenu/ServiceMenu.tscn";
 
     private Node attractnode;
     Mutex m = new Mutex();
