@@ -24,10 +24,6 @@ public abstract partial class PinGodBase : Node
     /// </summary>
 	[Signal] public delegate void BallSaveEndedEventHandler();
     /// <summary>
-    /// Emitted signal when ball save starts
-    /// </summary>
-    [Signal] public delegate void BallSaveStartedEventHandler();
-    /// <summary>
     /// Emitted signal when bonus is ended
     /// </summary>
     [Signal] public delegate void BonusEndedEventHandler();

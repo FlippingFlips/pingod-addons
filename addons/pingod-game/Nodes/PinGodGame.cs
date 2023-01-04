@@ -277,8 +277,6 @@ public abstract partial class PinGodGame : PinGodBase
             if (@event.IsActionPressed("quit"))
             {
                 LogDebug(nameof(PinGodGame), ":quit action request. quitting whole tree.");
-                //send game window ended, not alive
-                Machine.SetCoil("alive", 0);
                 LogInfo(nameof(PinGodGame), ":sent game ended coil: alive 0");
 
                 //todo: commented out, is it needed? :)
@@ -398,6 +396,7 @@ public abstract partial class PinGodGame : PinGodBase
             }
         }
 
+        LogInfo(nameof(PinGodGame), ":sent pingod game ready coil: alive 1");
         Machine.SetCoil("alive", 1);
     }
 
@@ -463,7 +462,7 @@ public abstract partial class PinGodGame : PinGodBase
     /// Starts the <see cref="Trough.StartBallSaver(float)"/> ball saver
     /// </summary>
     /// <param name="secs"></param>
-    internal void BallSaveEnabled(float secs) => _trough?.StartBallSaver(secs);
+    //internal void BallSaveEnabled(float secs) => _trough?.StartBallSaver(secs);
 
     /// <summary>
     /// Creates a new <see cref="PinGodPlayer"/>. Override this for your own custom players
@@ -815,10 +814,8 @@ public abstract partial class PinGodGame : PinGodBase
     /// <param name="state"></param>
 	public virtual void SetLampState(string name, byte state)
 	{
-		if (!LampExists(name)) return;
-		var lamp = Machine.Lamps[name];
+        var lamp = Machine.SetLamp(name, state);
 		if (_lampMatrixOverlay != null) { _lampMatrixOverlay.SetState(lamp.Num, state); }
-		lamp.State = state;
 	}
 
     /// <summary>
@@ -1114,8 +1111,9 @@ public abstract partial class PinGodGame : PinGodBase
             GameData.Credits--;
             BallsPerGame = (byte)(GameSettings.BallsPerGame > 5 ? 5 : GameSettings.BallsPerGame);
 
-            if(_trough != null)
-                _trough._ball_save_seconds = (byte)(GameSettings.BallSaveTime > 20 ? 20 : GameSettings.BallSaveTime);
+            //TODO: set the ball save seconds from game settings
+            //if(_trough != null)
+            //    _trough._ball_save_seconds = (byte)(GameSettings.BallSaveTime > 20 ? 20 : GameSettings.BallSaveTime);
 
             CreatePlayer($"P{Players.Count + 1}");
             CurrentPlayerIndex = 0;
@@ -1275,7 +1273,7 @@ public abstract partial class PinGodGame : PinGodBase
             LogDebug(nameof(PinGodGame), ":recorded:", recordLine);
         }
 
-        //send SwitchCommand
+        //send OnSwitchCommand
         EmitSignal("SwitchCommand", @switch.Name, @switch.Num, value);
     }
 
