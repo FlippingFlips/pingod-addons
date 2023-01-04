@@ -4,4 +4,4 @@
 
 [node name="WindowActions" type="Node"]
 script = ExtResource("1_xxid2")
-_gameWindowSwitches = PackedStringArray("coin1", "coin2", "coin3", "start", "trough_1", "trough_2", "trough_3", "trough_4", "plunger_lane", "enter", "exit", "up", "down", "mball_saucer", "inlane_l", "tilt", "slam_tilt")
+_gameWindowSwitches = PackedStringArray("coin1", "coin2", "coin3", "start", "trough_1", "trough_2", "trough_3", "trough_4", "plunger_lane", "enter", "exit", "up", "down", "mball_saucer", "inlane_l", "tilt", "slam_tilt", "flipper_l", "flipper_r")

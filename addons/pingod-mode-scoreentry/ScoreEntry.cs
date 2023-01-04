@@ -59,6 +59,7 @@ public partial class ScoreEntry : Control
     /// </summary>
     public override void _EnterTree()
     {
+        Logger.Info(nameof(ScoreEntry), ":",nameof(_EnterTree));
         selectedCharLabel = _selectedChar == null ? null : GetNode<Label>(_selectedChar);
         playerMessageLabel = _playerMessage == null ? null : GetNode<Label>(_playerMessage);       
         _entry = new char[_nameMaxLength];
@@ -279,6 +280,7 @@ public partial class ScoreEntry : Control
     private void OnSwitchCommandHandler(string name, byte index, byte value)
     {
         if (value <= 0) return;
+        Logger.Info(nameof(ScoreEntry), ":", nameof(OnSwitchCommandHandler));
         if (this.Visible && IsPlayerEnteringScore)
         {
             switch (name)
