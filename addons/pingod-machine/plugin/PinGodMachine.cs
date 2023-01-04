@@ -1,6 +1,8 @@
 ﻿using Godot;
 using Godot.Collections;
 using System.Linq;
+using System.Xml.Linq;
+using static PulseTimer;
 
 /// <summary>
 /// Machine Godot Node. Holds all machine items before runtime. Adds to the static collections in <see cref="Machine"/>
@@ -33,6 +35,8 @@ public partial class PinGodMachine : Node
     [Export] Dictionary<string, byte> _leds = new Dictionary<string, byte>();
     private PinGodMemoryMapNode _pinGodMemoryMapNode;
     [Export] Dictionary<string, byte> _switches = new Dictionary<string, byte>();
+    [Signal] public delegate void CoilPulseTimedOutEventHandler(string name);
+
     /// <summary>
     /// Emitted when a switch comes into the game. From <see cref="PinGodMemoryMapNode.ReadStates"/> then <see cref="PinGodGame.SetSwitch(int, byte)"/>
     /// </summary>
@@ -71,15 +75,9 @@ public partial class PinGodMachine : Node
             //adds machine items and actions
 			AddCustomMachineItems(_coils, _switches, _lamps, _leds);
 
-            if (GetParent().HasNode(nameof(PinGodMemoryMapNode)))
+            if (GetParent().HasNode("MemoryMap"))
             {
-                _pinGodMemoryMapNode = GetParent().GetNode<PinGodMemoryMapNode>(nameof(PinGodMemoryMapNode));
-                if(_pinGodMemoryMapNode != null)
-                {
-                    //listen for events from a memory map
-                    _pinGodMemoryMapNode.SwitchCommand += _pinGodMemoryMapNode_SwitchCommand;
-                    Logger.Debug(nameof(PinGodMachine), ":listening for events from plug-in ", nameof(PinGodMemoryMapNode));
-                }
+                _pinGodMemoryMapNode = GetParent().GetNode<PinGodMemoryMapNode>("MemoryMap");
             }
 
             //create and add a ball search timer
@@ -88,6 +86,17 @@ public partial class PinGodMachine : Node
             this.AddChild(BallSearchTimer);
         }		
 	}
+
+    public override void _Ready()
+    {
+        base._Ready();
+        if (_pinGodMemoryMapNode != null)
+        {
+            //listen for events from a memory map
+            _pinGodMemoryMapNode.MemorySwitchSignal += OnSwitchCommand;
+            Logger.Debug(nameof(PinGodMachine), ":listening for events from plug-in ", nameof(PinGodMemoryMapNode));
+        }
+    }
 
     /// <summary>
     /// Pulse coils in the SearchCoils when ball search times out
@@ -101,7 +110,7 @@ public partial class PinGodMachine : Node
                 Logger.Debug(nameof(PinGodGame), ":pulsing search coils");
                 for (int i = 0; i < BallSearchOptions?.SearchCoils.Length; i++)
                 {
-                    CoilPulseTimer(BallSearchOptions?.SearchCoils[i], 255);
+                    CoilPulse(BallSearchOptions?.SearchCoils[i], 255);
                 }
             }
         }
@@ -158,10 +167,10 @@ public partial class PinGodMachine : Node
     /// </summary>
     /// <param name="swNum"></param>
     /// <param name="value"></param>
-    public void SetSwitch(string name, byte value)
+    public void SetSwitch(string name, byte value, bool fromAction = true)
     {
         var sw = Machine.Switches[name];
-        SetSwitch(sw, value, false);
+        SetSwitch(sw, value, fromAction);
     }
 
     /// <summary>
@@ -171,12 +180,12 @@ public partial class PinGodMachine : Node
     /// </summary>
     /// <param name="swNum"></param>
     /// <param name="value"></param>
-    public void SetSwitch(int swNum, byte value)
+    public void SetSwitch(int swNum, byte value, bool fromAction = true)
     {
         var sw = Machine.Switches.Values.FirstOrDefault(x => x.Num == swNum);
         if (sw != null)
         {
-            SetSwitch(sw, value, false);
+            SetSwitch(sw, value, fromAction);
         }
     }
 
@@ -189,6 +198,7 @@ public partial class PinGodMachine : Node
     /// <param name="fromAction">if false, it doesn't set the machine switch value</param>
     public void SetSwitch(Switch @switch, byte value, bool fromAction = true)
     {
+        Logger.Info("set switch from action: " + fromAction);
         if (!fromAction)
             @switch.SetSwitch(value > 0);
 
@@ -236,16 +246,11 @@ public partial class PinGodMachine : Node
     /// Creates a time a connects with the 'pulsetimer_{name}'. Timeout removes the timer sets the state 0
     /// </summary>
     /// <param name="name"></param>
-    /// <param name="pulse">Has an integer here because in simulation.</param>
-    internal void CoilPulseTimer(string name, int pulse = 255)
+    /// <param name="pulse">milliseconds. Has an integer here because in simulation, we can use higher if want longer timer</param>
+    internal void CoilPulse(string name, int pulse = 255)
     {
-        //SolenoidPulseTimer
-        var macCoil = Machine.Coils[name];
-        var timer = new Timer() { Autostart = false, OneShot = true, Name = $"pulsetimer_{name}", WaitTime = pulse };
-        timer.Connect("timeout", new Callable(this, nameof(CoilPulseTimedOut)));
-        macCoil.State = 1;
-        AddChild(timer);
-        timer.Start();
+        Logger.Info("coil pulse timer " + name);
+        AddChild(new PulseTimer() { Autostart = true, OneShot = true, Name = name, WaitTime = pulse });
     }
 
     /// <summary>
@@ -307,29 +312,18 @@ public partial class PinGodMachine : Node
         Logger.Debug(nameof(PinGodMachine), $":switches={Machine.Switches.Count}:coils={Machine.Coils.Count}:lamps={Machine.Lamps.Count},:leds={Machine.Leds.Count}");
     }
 
-    private void _pinGodMemoryMapNode_SwitchCommand(string name, int index, byte value)
+    private void OnSwitchCommand(string name, int index, byte value)
     {
         Logger.Debug(nameof(PinGodMachine), $": setSwitch--n:{name},numVal:{index}-{value}");
         if (string.IsNullOrWhiteSpace(name))
         {
-            SetSwitch(index, value);
+            SetSwitch(index, value, false);
         }
         else
         {
-            SetSwitch(name, value);
+            SetSwitch(name, value, false);
         }
         
     }
-    /// <summary>
-    /// Queue frees a `pulsetimer_name` solenoid Timer from using <see cref="Machine.Coils"/>
-    /// </summary>
-    /// <param name="name"></param>
-    private void CoilPulseTimedOut(string name)
-    {
-        var pinObj = Machine.Coils[name];
-        pinObj.State = 0;
-        var timer = GetNodeOrNull<Timer>($"pulsetimer_{name}");
-        Logger.Verbose(nameof(PinGodGame), $":pulsetimer_{name}:pulsed timed out");
-        timer?.QueueFree();
-    }
+
 }

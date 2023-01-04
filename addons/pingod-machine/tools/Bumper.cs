@@ -1,4 +1,5 @@
 using Godot;
+using System.Reflection.PortableExecutable;
 using static PinGodBase;
 
 [Tool]
@@ -28,11 +29,13 @@ public partial class Bumper : Node
     /// Bumper Switch name
     /// </summary>
     [Export] string _SwitchName = string.Empty;
-	/// <summary>
-	/// Emitted on bumper input
-	/// </summary>
-	/// <param name="name"></param>
-	[Signal] public delegate void BumperHitEventHandler(string name);
+    private PinGodMachine _machine;
+
+    /// <summary>
+    /// Emitted on bumper input
+    /// </summary>
+    /// <param name="name"></param>
+    [Signal] public delegate void BumperHitEventHandler(string name);
 	/// <summary>
 	/// Switches off input if no switch available. Sets audio stream
 	/// </summary>
@@ -66,8 +69,8 @@ public partial class Bumper : Node
             //get switch event from Machine
             if (HasNode("/root/Machine"))
             {
-                var machine = GetNode<PinGodMachine>("/root/Machine");
-                machine.SwitchCommand += SwitchCommandHandler;
+                _machine = GetNode<PinGodMachine>("/root/Machine");
+                _machine.SwitchCommand += SwitchCommandHandler;
             }
         }
 	}
@@ -90,8 +93,8 @@ public partial class Bumper : Node
 				//play sound for bumper
 				if (_AudioStream != null) { player.Play(); }
 
-				//pulse coil
-				if (!string.IsNullOrWhiteSpace(_CoilName)) { _pinGod.SolenoidPulse(_CoilName); }
+                //pulse coil
+				if (!string.IsNullOrWhiteSpace(_CoilName)) { _machine?.CoilPulse(_CoilName); }
 
 				//publish hit event
 				EmitSignal(nameof(BumperHit), _SwitchName);
