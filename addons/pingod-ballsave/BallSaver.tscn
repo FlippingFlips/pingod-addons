@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8lc8uqw1kec0"]
+
+[ext_resource type="Script" path="res://addons/pingod-ballsave/BallSaver.cs" id="1_g2f6p"]
+
+[node name="BallSaver" type="Timer"]
+script = ExtResource("1_g2f6p")
