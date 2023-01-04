@@ -104,9 +104,9 @@ public partial class Saucer : Timer
     }
 
     /// <summary>
-    /// Uses <see cref="PinGodMachine.CoilPulseTimer(string, int)(string)"/>.
+    /// Uses <see cref="PinGodMachine.CoilPulse(string, int)(string)"/>.
     /// </summary>
-    public void Kick(int pulse = 255) => _pingodMachine?.CoilPulseTimer(_coil, pulse);
+    public void Kick(int pulse = 255) => _pingodMachine?.CoilPulse(_coil, pulse);
 
     #endregion
 }

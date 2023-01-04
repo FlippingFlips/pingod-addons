@@ -1273,7 +1273,7 @@ public abstract partial class PinGodGame : PinGodBase
             LogDebug(nameof(PinGodGame), ":recorded:", recordLine);
         }
 
-        //send OnSwitchCommand
+        //send SwitchCommand
         EmitSignal("SwitchCommand", @switch.Name, @switch.Num, value);
     }
 
