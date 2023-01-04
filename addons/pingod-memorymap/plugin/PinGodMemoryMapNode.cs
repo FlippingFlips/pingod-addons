@@ -17,7 +17,7 @@ public partial class PinGodMemoryMapNode : Node
     /// <param name="name"></param>
     /// <param name="index"></param>
     /// <param name="value"></param>
-    [Godot.Signal] public delegate void SwitchCommandEventHandler(string name, int index, byte value);
+    [Godot.Signal] public delegate void MemorySwitchSignalEventHandler(string name, int index, byte value);
 
     /// <summary>
     /// MemoryMapNode loaded. Needs to be enabled in options. Removes if isn't enabled and write/read delay isn't high enough.<para/>
@@ -30,14 +30,14 @@ public partial class PinGodMemoryMapNode : Node
         {
             if (!this.IsEnabled)
             {
-                Logger.Warning("removing PinGo-Memory addon. Node IsEnabled=false");
+                Logger.Warning(nameof(PinGodMemoryMapNode), ":removing PinGo-Memory addon. Node IsEnabled=false");
                 this.QueueFree();
                 return;
             }
 
             if (this.WriteDelay < 0 && this.ReadDelay < 0)
             {
-                Logger.Warning("removing PinGo-Memory addon. enable the read delay and write delay with values higher than 1");
+                Logger.Warning(nameof(PinGodMemoryMapNode),"removing PinGo-Memory addon. enable the read delay and write delay with values higher than 1");
                 this.QueueFree();
                 return;
             }
@@ -59,16 +59,25 @@ public partial class PinGodMemoryMapNode : Node
                 this.QueueFree();
                 return;
             }
-
-            //got this far so we can start memory mapping            
-            Logger.Info(nameof(PinGodMemoryMapNode), ":memory map loaded, starting read/write state tasks.");
-            mMap.MemorySwitchEventHandler += MMap_MemorySwitchEventHandler;
+            
+            if (mMap != null)
+            {
+                //got this far so we can start memory mapping            
+                Logger.Info(nameof(PinGodMemoryMapNode), ":memory map loaded, starting read/write state tasks.");
+                Logger.Debug(nameof(PinGodMemoryMapNode), nameof(_Ready), ": setup event handling from switches");
+                mMap.MemorySwitchEventHandler += MMap_MemorySwitchEventHandler;
+            }
             Start();
         }
         else
         {
             GD.Print(nameof(PinGodMemoryMapNode), ":script in editor, doing nothing");
         }
+    }
+
+    public override void _Ready()
+    {
+        base._Ready();
     }
 
     public override void _ExitTree()
@@ -82,8 +91,8 @@ public partial class PinGodMemoryMapNode : Node
 
     private void MMap_MemorySwitchEventHandler(object sender, SwitchEventArgs sw)
     {
-        Logger.Debug(nameof(PinGodMemoryMapNode), sender.ToString());
-        EmitSignal(nameof(SwitchCommand), new Variant[] { string.Empty, sw.Num, sw.Value});
+        Logger.Debug(nameof(PinGodMemoryMapNode), $": map switch: {sw.Num}={sw.Value}");        
+        EmitSignal(nameof(MemorySwitchSignal), new Variant[] { string.Empty, sw.Num, sw.Value});
     }
 
     void Start()

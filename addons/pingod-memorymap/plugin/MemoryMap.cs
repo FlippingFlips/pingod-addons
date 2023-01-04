@@ -24,7 +24,7 @@ public class MemoryMap : IDisposable
     private Task _writeStatesTask;
     private MemoryMappedFile mmf;
     bool mutexCreated;
-    byte[] switchBuffer = new byte[64 * 2];
+    byte[] switchBuffer;
     private CancellationTokenSource tokenSource;
     public readonly int TOTAL_COIL;
     public readonly int TOTAL_LAMP;
@@ -32,8 +32,8 @@ public class MemoryMap : IDisposable
     public readonly int TOTAL_SWITCH;
     private MemoryMappedViewAccessor viewAccessor;
 
-    public delegate void SwitchHandler (object sender, SwitchEventArgs sw);
-    public event SwitchHandler MemorySwitchEventHandler;  
+    public delegate void MemorySwitchHandler (object sender, SwitchEventArgs sw);
+    public event MemorySwitchHandler MemorySwitchEventHandler;  
 
     /// <summary>
     /// Sets up memory mapping and offsets. Counts for machine items are added to get memory address offsets <para/>
@@ -55,7 +55,8 @@ public class MemoryMap : IDisposable
         this.TOTAL_COIL = coilCount * 2;
         this.TOTAL_LAMP = lampCount * 2;
         this.TOTAL_LED = ledCount * 3;
-        this.TOTAL_SWITCH = switchCount * 2;        
+        this.TOTAL_SWITCH = switchCount * 2;
+        switchBuffer = new byte[TOTAL_SWITCH];
         this.writeStates = writeStates;
         this.readStates = readStates;
         VpCommandSwitch = vpCommandSwitch;
@@ -97,7 +98,7 @@ public class MemoryMap : IDisposable
                 Logger.Info(nameof(MemoryMap), ":running Write States Task");
                 while (!tokenSource.IsCancellationRequested)
                 {
-                    //WriteStates(); //TODO: need to get states here
+                    WriteStates();
                     await Task.Delay(writeStates);
                 }
 
@@ -105,12 +106,12 @@ public class MemoryMap : IDisposable
                 Logger.Info(nameof(MemoryMap), ":writes states stopped");
             }, tokenSource.Token);
         }
-        //read states to memory
+        //read states from memory
         if (readStates > -1)
         {
             _readStatesTask = Task.Run(async () =>
             {
-                Logger.Info(nameof(MemoryMap), ":Running Read States Task");
+                Logger.Info(nameof(MemoryMap), ":running Read States Task");
                 while (!tokenSource.IsCancellationRequested)
                 {
                     ReadStates();
@@ -178,11 +179,13 @@ public class MemoryMap : IDisposable
                     }
                     else if (i > 0)
                     {
+                        Logger.Info("read states run. switch changed");
                         //set switch IsEnabled and send signal
                         //Logger.Verbose(nameof(MemoryMap), $":sw:{i}:{buffer[i]}");
 
                         //TODO
-                        //pinGodGame.SetSwitch(i, buffer[i]);                        
+                        //pinGodGame.SetSwitch(i, buffer[i]);
+
                         MemorySwitchEventHandler?.Invoke(this, new SwitchEventArgs(i, buffer[i]));
 
                         //Feed switch into Godot action
@@ -239,20 +242,20 @@ public class MemoryMap : IDisposable
     /// <summary>
     /// Writes coils, lamps and leds
     /// </summary>
-    void WriteStates(byte[] coils, byte[] lamps, byte[] leds)
+    void WriteStates()
     {
         //var start = OS.GetTicksMsec();        
         //GD.Print("write states");
 
-        ////get game machine states
-        //var coilBytes = coils;
-        //var lampsBytes = Machine.Lamps.GetStatesArray(TOTAL_LAMP);
-        //var ledArray = Machine.Leds.GetLedStatesArray(TOTAL_LED);
+        //get game machine states
+        var coilBytes = Machine.Coils.GetStatesArray(TOTAL_COIL);
+        var lampsBytes = Machine.Lamps.GetStatesArray(TOTAL_LAMP);
+        var ledArray = Machine.Leds.GetLedStatesArray(TOTAL_LED);
 
         //write states
-        viewAccessor.WriteArray(0, coils, 0, coils.Length);
-        viewAccessor.WriteArray(_offsetLamps, lamps, 0, lamps.Length);
-        viewAccessor.WriteArray(_offsetLeds, leds, 0, leds.Length);
+        viewAccessor.WriteArray(0, coilBytes, 0, coilBytes.Length);
+        viewAccessor.WriteArray(_offsetLamps, lampsBytes, 0, lampsBytes.Length);
+        viewAccessor.WriteArray(_offsetLeds, ledArray, 0, ledArray.Length);
 
         //Print("states written in:", OS.GetTicksMsec() - start);
     }
