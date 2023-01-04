@@ -9,7 +9,7 @@ using static PinGodBase;
 /// </summary>
 public partial class Trough : Node
 {
-    private PinGodMachine _machineConfig;
+    private PinGodMachine _machine;
 
     private int _mballSaveSecondsRemaining;
 
@@ -38,31 +38,21 @@ public partial class Trough : Node
 	{
         Logger.Debug(nameof(Trough), ":_EnterTree");
 
-        ballSaverTimer = new Timer { Name = "BallSaverTimer", OneShot=true, WaitTime=1 };
-        AddChild(ballSaverTimer);
-        troughPulseTimer = new Timer { Name = "TroughPulseTimer", OneShot =false, WaitTime = 1 };
+        troughPulseTimer = new Timer { Name = "TroughPulseTimer", OneShot =false, WaitTime = 1 };        
         AddChild(troughPulseTimer);
+        troughPulseTimer.Timeout += _trough_pulse_timeout;
+
         Logger.Debug(nameof(Trough), ":added BallSaverTimer|TroughPulseTimer");
 
-        if (HasNode("/root/PinGodGame"))
-		{
-            pinGod = GetNode("/root/PinGodGame") as PinGodGame;
-            Logger.Debug(nameof(Trough), ":Found " + nameof(PinGodGame));
-        }
-
-        //looking for machine config
-		if (GetParent().HasNode("Machine"))
-		{
-			_machineConfig = GetParent().GetNode<PinGodMachine>("Machine");
-			_machineConfig.SwitchCommand += OnSwitchCommand;//switch commands
-            Logger.Debug(nameof(Trough), ":Found Machine Node");
-        }
-
         //trough options
-        TroughOptions = new TroughOptions(_trough_switches, _trough_solenoid, _plunger_lane_switch,
-			_auto_plunge_solenoid, _early_save_switches, _ball_save_seconds, _ball_save_multiball_seconds, _ball_save_lamp, _ball_save_led, _number_of_balls_to_save);
+        TroughOptions = new TroughOptions(_trough_switches, _trough_solenoid);
 
         Logger.Debug(nameof(Trough), ":_EnterTree: setup complete");
+    }
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
     }
 
     /// <summary>
@@ -71,6 +61,25 @@ public partial class Trough : Node
     public override void _Ready()
     {
         Logger.Debug(nameof(Trough), ":_ready. switch_count: ", TroughOptions?.Switches.Length);
+
+        if (HasNode("/root/PinGodGame"))
+        {
+            pinGod = GetNode("/root/PinGodGame") as PinGodGame;
+            Logger.Debug(nameof(Trough), ":Found " + nameof(PinGodGame));
+        }
+
+        //looking for machine config
+        if (GetParent().HasNode("/root/Machine"))
+        {
+            _machine = GetParent().GetNode<PinGodMachine>("/root/Machine");
+            Logger.Debug(nameof(Trough), ":Found Machine Node");
+        }
+
+        if (_machine != null)
+        {
+            Logger.Debug(nameof(Trough), ":" + nameof(_Ready), ": hooking on to /root/Machine switch commands");
+            _machine.SwitchCommand += OnSwitchCommand;//switch commands
+        }
     }
 
     /// <summary>
@@ -94,16 +103,6 @@ public partial class Trough : Node
             }
         }
         return cnt;
-    }
-
-    /// <summary>
-    /// Disable ball saves and turns off lamps
-    /// </summary>
-    public void DisableBallSave()
-    {
-        pinGod.BallSaveActive = false;
-        troughPulseTimer.Stop();
-        UpdateLamps(LightState.Off);
     }
 
     /// <summary>
@@ -132,32 +131,14 @@ public partial class Trough : Node
             }
         }
 
-        Logger.Verbose(nameof(Trough), ":isTroughFull: " + isFull);
+        //Logger.Verbose(nameof(Trough), ":isTroughFull: " + isFull);
         return isFull;
     }
 
     /// <summary>
     /// Pulse the ball trough
     /// </summary>
-    public void PulseTrough() => _machineConfig.CoilPulseTimer(TroughOptions.Coil);
-
-    /// <summary>
-    /// Activates the ball saver if not already running. Blinks the ball saver lamp
-    /// </summary>
-    /// <returns>True if the ball saver is active</returns>
-    public bool StartBallSaver(float seconds = 8)
-    {
-        Logger.Debug(nameof(Trough), $":ball_save_started:" + seconds);
-        ballSaverTimer.Stop();
-        ballSaverTimer.Start(seconds);
-        UpdateLamps(LightState.Blink);
-        if (pinGod != null)
-        {
-            pinGod.BallSaveActive = true;            
-        }
-
-        return true;
-    }
+    public void PulseTrough() => _machine.CoilPulse(TroughOptions.Coil);
 
     /// <summary>
     /// Starts multi-ball trough
@@ -171,7 +152,7 @@ public partial class Trough : Node
         TroughOptions.NumBallsToSave = numOfBalls;
 
         _mballSaveSecondsRemaining = TroughOptions.MballSaveSeconds;
-        StartBallSaver(TroughOptions.MballSaveSeconds);
+        //TODO: Ball saver start
 
         if (pulseTimerDelay > 0)
             _startMballTrough(pulseTimerDelay);
@@ -235,57 +216,19 @@ public partial class Trough : Node
         CallDeferred("_startMballTrough", 1f);
     }
 
-    private void OnPlungerSwitchHandler(byte value)
-    {
-        if (!pinGod?.GameInPlay ?? false) return;
-        if (pinGod?.IsTilted ?? true) return;
-
-        if(pinGod != null)
-        {
-            //switch on
-            if (value > 0)
-            {
-                //auto plunge the ball if in ball save or game is tilted to get the balls back
-                if (pinGod.BallSaveActive || pinGod.IsMultiballRunning)
-                {
-                    pinGod.SolenoidPulse(TroughOptions.AutoPlungerCoil);
-                    Logger.Verbose(nameof(Trough), ":auto plunger saved");
-                }
-            }
-            //switch off
-            else
-            {
-                //start a ball saver if game in play
-                if (pinGod.GameInPlay && !pinGod.BallStarted && !pinGod.IsTilted && !pinGod.IsMultiballRunning)
-                {
-                    if (_set_ball_started_on_plunger_lane)
-                        pinGod.BallStarted = true;
-
-                    if (_set_ball_save_on_plunger_lane)
-                    {
-                        var saveStarted = StartBallSaver(TroughOptions.BallSaveSeconds);
-                        if (saveStarted)
-                        {
-                            UpdateLamps(LightState.Blink);
-                            pinGod.EmitSignal(nameof(PinGodGame.BallSaveStarted));
-                        }
-                    }
-                }
-            }
-        }        
-    }
-
     void OnSwitchCommand(string swName, byte index, byte value)
-    {
-		var on = value > 0;
+    {        
+        var on = value > 0;
+
+        if (string.IsNullOrEmpty(swName) && index > 0)
+        {
+            swName = Machine.Switches?.GetSwitch(index)?.Name;
+        }
+
 		if (swName.Contains("trough")) //trough switch handler
 		{
-			Logger.Verbose($"{nameof(Trough)}:{nameof(OnSwitchCommand)}", "trough on switch: " + swName);
+			Logger.Verbose($"{nameof(Trough)}:{nameof(OnSwitchCommand)}", " trough on switch: " + swName);
 			OnTroughSwitchCommand(swName, index, value);
-		}
-		else if (swName == _plunger_lane_switch) //ball save auto plunger, plunger_lane
-		{
-			OnPlungerSwitchHandler(value);
 		}
 		else
 		{
@@ -319,7 +262,7 @@ public partial class Trough : Node
 	/// <param name="value"></param>
 	private void OnTroughSwitchCommand(string swName, byte index, byte value)
 	{
-		Logger.Verbose(nameof(Trough), $":{nameof(OnTroughSwitchCommand)}:{index}-{value}");
+		//Logger.Verbose(nameof(Trough), $":{nameof(OnTroughSwitchCommand)}:{index}-{value}");
 
 		//trough switch enabled and PinGodGame is available
 		if (value > 0)
@@ -333,7 +276,7 @@ public partial class Trough : Node
                     if (pinGod.BallSaveActive && !pinGod.IsTilted)
                     {
                         Logger.Debug(nameof(Trough), ":ball_saved");
-                        pinGod.SolenoidPulse(TroughOptions.Coil);
+                        PulseTrough();
                         pinGod.EmitSignal(nameof(PinGodGame.BallSaved));
                     }
                     else
@@ -364,41 +307,19 @@ public partial class Trough : Node
 			Logger.Verbose(nameof(Trough), ":off : ", swName);
 		}
 	}
-	/// <summary>
-	/// Sets the shoot again lamp / or led state
-	/// </summary>
-	/// <param name="state"></param>
-	private void UpdateLamps(LightState state)
-	{
-		if (!string.IsNullOrWhiteSpace(TroughOptions.BallSaveLamp))
-		{
-			pinGod.SetLampState(TroughOptions.BallSaveLamp, (byte)state);
-		}
-		else if (!string.IsNullOrWhiteSpace(TroughOptions.BallSaveLed))
-		{
-			pinGod.SetLedState(TroughOptions.BallSaveLed, (byte)state, ColorTranslator.ToOle(System.Drawing.Color.Yellow));
-		}
-	}
 
 	#region Timers
-	/// <summary>
-	/// Disables ball save and emits <see cref="PinGodBase.BallSaveEnded"/>
-	/// </summary>
-	void _on_BallSaverTimer_timeout()
-	{
-		DisableBallSave();
-		pinGod.EmitSignal(nameof(PinGodGame.BallSaveEnded));
-	}
 
 	/// <summary>
 	/// Timer for pulsing balls from trough
 	/// </summary>
 	void _trough_pulse_timeout()
 	{
-		_mballSaveSecondsRemaining--;
+        Logger.Debug(nameof(Trough), ": trough pulse time out");
+        _mballSaveSecondsRemaining--;
 		if (_mballSaveSecondsRemaining < 1)
 		{
-			DisableBallSave();			
+			//DisableBallSave(); //todo disable ball saves
 			Logger.Debug(nameof(Trough), ": ended mball trough pulse timer");
 		}
 

@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
 
 /// <summary>
 /// Static machine class which holds the machine item <see cref="PinStates"/> like lamps, leds, coils, switches 
@@ -23,7 +25,12 @@ public static class Machine
     public static readonly Switches Switches = new Switches() { };
 
     public static void SetCoil(string name, byte state) => Coils[name].State = state;
-    public static void SetLamp(string name, byte state) => Lamps[name].State = state;
+    public static PinStateObject SetLamp(string name, byte state)
+    {
+        var lamp = Lamps[name];
+        lamp.State= state;
+        return lamp;
+    }
     public static void SetLed(string name, int color) => Leds[name].Color = color;
     public static void SetSwitch(string name, byte state) => Switches[name].SetSwitch(state>0);
 
@@ -52,6 +59,43 @@ public static class Machine
     /// <param name="name"></param>
     /// <returns>True id <see cref="Switch.IsEnabled"/></returns>
     public static bool IsSwitchOn(string name) => Switches[name].IsEnabled;
+
+    public static void SetLed(string name, byte state, System.Drawing.Color? colour)
+    {
+        var c = colour.HasValue ?
+            System.Drawing.ColorTranslator.ToOle(colour.Value) : Machine.Leds[name].Color;
+        SetLed(name, state, c);
+    }
+
+    public static void SetLed(string name, byte state, byte r, byte g, byte b)
+    {
+        var c = System.Drawing.Color.FromArgb(r, g, b);
+        var ole = System.Drawing.ColorTranslator.ToOle(c);
+        SetLed(name, state, ole);
+    }
+
+    public static PinStateObject SetLed(string name, byte state, int color)
+    {
+        var led = Machine.Leds[name];
+        led.State = state;
+        led.Color = color > 0 ? color : led.Color;
+        return led;
+    }
+
+    /// <summary>
+    /// Sets led from RGB
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="state"></param>
+    /// <param name="r"></param>
+    /// <param name="g"></param>
+    /// <param name="b"></param>
+    public static void SetLedState(string name, byte state, byte r, byte g, byte b)
+    {
+        var c = System.Drawing.Color.FromArgb(r, g, b);
+        var ole = System.Drawing.ColorTranslator.ToOle(c);
+        SetLed(name, state, ole);
+    }
 }
 
 /// <summary>
@@ -62,7 +106,16 @@ public partial class Coils : PinStates { }
 /// <summary>
 /// Collection of string, <see cref="PinStateObject"/>
 /// </summary>
-public partial class Switches : Dictionary<string, Switch> { }
+public partial class Switches : Dictionary<string, Switch> 
+{ 
+    public Switch GetSwitch(string name)
+    {
+        this.TryGetValue(name, out Switch sw);
+        return sw;
+    }
+
+    public Switch GetSwitch(int num) => this.Values.FirstOrDefault(x => x.Num == num);
+}
 
 /// <summary>
 /// Collection of string, <see cref="PinStateObject"/>

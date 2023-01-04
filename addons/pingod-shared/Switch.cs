@@ -79,7 +79,7 @@ public partial class Switch
     {
         IsEnabled = enabled;
         Time = Godot.Time.GetTicksMsec();
-        Logger.Debug(nameof(Switch), $":{this.Name}:{this.Num} = {IsEnabled}");
+        Logger.Verbose(nameof(Switch), $":{this.Name}:{this.Num}={IsEnabled}");
     }
 
     /// <summary>

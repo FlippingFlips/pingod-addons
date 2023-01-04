@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 /// <summary>
 /// Trough settings
 /// </summary>
@@ -10,26 +9,10 @@ public partial class TroughOptions
     /// </summary>
     /// <param name="switches"></param>
     /// <param name="coil"></param>
-    /// <param name="plungerLaneSw"></param>
-    /// <param name="autoPlungerCoil"></param>
-    /// <param name="earlySaveSwitches"></param>
-    /// <param name="ballSaveSeconds"></param>
-    /// <param name="mballSaveSeconds"></param>
-    /// <param name="ballSaveLamp"></param>
-    /// <param name="ballSaveLed"></param>
-    /// <param name="numBallsToSave"></param>
-    public TroughOptions(string[] switches, string coil, string plungerLaneSw, string autoPlungerCoil = "", string[] earlySaveSwitches = null, int ballSaveSeconds = 8, int mballSaveSeconds = 8, string ballSaveLamp = "", string ballSaveLed = "", int numBallsToSave = 1)
+    public TroughOptions(string[] switches, string coil)
     {
         Switches = switches;
         Coil = coil;
-        PlungerLaneSw = plungerLaneSw;
-        AutoPlungerCoil = autoPlungerCoil;
-        EarlySaveSwitches = earlySaveSwitches;
-        BallSaveSeconds = ballSaveSeconds;
-        MballSaveSeconds = mballSaveSeconds;
-        BallSaveLamp = ballSaveLamp;
-        BallSaveLed = ballSaveLed;
-        NumBallsToSave = numBallsToSave;
 
         GameSwitches = new List<Switch>();
         if (switches?.Length > 0)
@@ -59,10 +42,10 @@ public partial class TroughOptions
     /// Shooter lane, Plunger Lane switch name
     /// </summary>
     public string PlungerLaneSw { get; }
-    /// <summary>
-    /// Auto plunger solenoid
-    /// </summary>
-    public string AutoPlungerCoil { get; }
+    ///// <summary>
+    ///// Auto plunger solenoid
+    ///// </summary>
+    //public string AutoPlungerCoil { get; }
     /// <summary>
     /// Switches like out-lanes to early save
     /// </summary>
