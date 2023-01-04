@@ -227,6 +227,11 @@ public partial class MainScene : Node2D
         LoadSceneMode(_game_scene_path);
     }
 
+    /// <summary>
+    /// Calls <see cref="OnGameEnded"/>, removes the game played and calls <see cref="Reload"/>
+    /// </summary>
+    public void ResetGame() => OnGameEnded();
+
     void _loaded(PackedScene packedScene)
     {
         if (packedScene != null)
@@ -342,6 +347,9 @@ public partial class MainScene : Node2D
         }
     }
 
+    /// <summary>
+    /// Reload the current scene, the main scene.
+    /// </summary>
     void Reload() => GetTree().ReloadCurrentScene();
 
     private void UnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)

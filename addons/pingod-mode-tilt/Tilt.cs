@@ -1,50 +1,83 @@
 using Godot;
-using static PinGodBase;
 
 /// <summary>
 /// Tilt. "slam_tilt" or "tilt" switches.
 /// </summary>
 public partial class Tilt : Control
 {
+
     /// <summary>
-    /// singleton
+    /// Time machine waits to end after tilted
     /// </summary>
-    protected PinGodGame pinGod;
+    [Export] byte _inTiltedSeconds = 5;
 
     /// <summary>
     /// How many warnings a player is allowed before tilting
     /// </summary>
     [Export] byte _num_tilt_warnings = 2;
 
+    /// <summary>
+    /// Emitted signal when game is tilted
+    /// </summary>
+    [Signal] public delegate void GameTiltedEventHandler();
+
+
+    protected PinGodGame pinGod;
+    private PinGodMachine _machine;        
     private BlinkingLabel blinkingLayer;
     float displayForSecs = 2f;
+    bool _slamTilted;    
     private Timer timer;
     private Trough trough;
-    private PinGodMachine _pingodMachine;
+
+    /// <summary>
+    /// Sets Visible to false
+    /// </summary>
+    public virtual void _on_Timer_timeout()
+    {
+        Visible = false;
+        if (_slamTilted)
+        {
+            //reset the game
+            var ms = GetNodeOrNull<MainScene>("/root/MainScene");
+            ms?.ResetGame();
+        }
+    }
 
     /// <summary>
     /// Gets access to the game and the trough. Gets the timer and label to show if tilted
     /// </summary>
     public override void _Ready()
 	{
+        Logger.Debug(nameof(Tilt), ":", nameof(_Ready));
 		//hide this mode
 		Visible = false;
 
-		pinGod = GetNode("/root/PinGodGame") as PinGodGame;
-		trough = pinGod.GetNodeOrNull<Trough>("Trough");
-		//text layer to display warnings and tilted
-		blinkingLayer = GetNode("CenterContainer/BlinkingLabel") as BlinkingLabel;
+        if (HasNode("/root/PinGodGame"))
+        {
+            pinGod = GetNode("/root/PinGodGame") as PinGodGame;
+            _num_tilt_warnings = pinGod.Adjustments.TiltWarnings;
+        }
+
+        if (HasNode("/root/Trough"))
+        {
+            trough = GetNode<Trough>("/root/Trough");
+        }
+
+        //switch commands
+        if (HasNode("/root/Machine"))
+        {
+            _machine = GetNode<PinGodMachine>("/root/Machine");
+            _machine.SwitchCommand += OnSwitchCommand;
+        }
+        else { Logger.WarningRich(nameof(Tilt), ": [color=yellow]", "no Machine node in root found", "[/color]"); }
+
+        //text layer to display warnings and tilted
+        blinkingLayer = GetNode("CenterContainer/BlinkingLabel") as BlinkingLabel;
 		blinkingLayer.Text = "";
 
 		//timer to hide the tilt layers
 		timer = GetNode("Timer") as Timer;
-
-		//switch commands
-        if (HasNode("/root/" + nameof(PinGodMachine)))
-        {
-            _pingodMachine = GetNode<PinGodMachine>("/root/" + nameof(PinGodMachine));
-            _pingodMachine.SwitchCommand += OnSwitchCommand;
-        }
     }
 
     /// <summary>
@@ -69,8 +102,9 @@ public partial class Tilt : Control
         pinGod.IsTilted = true;
         pinGod.EnableFlippers(0);
         Visible = true;
-
-        //trough?.DisableBallSave(); TODO: disable ball save from TILT
+        timer.Start(_inTiltedSeconds);
+        _slamTilted = true;
+        _machine?.DisableBallSaver();        
     }
 
     /// <summary>
@@ -81,6 +115,7 @@ public partial class Tilt : Control
     /// <param name="value"></param>
     public virtual void OnSwitchCommand(string swName, byte index, byte value)
     {
+        Logger.Debug("switch " + swName);
         if (!pinGod.GameInPlay) return;
         if (pinGod.IsTilted) return;
         var on = value > 0;
@@ -115,10 +150,11 @@ public partial class Tilt : Control
         {
             pinGod.IsTilted = true;
             pinGod.EnableFlippers(0);
-            //trough?.DisableBallSave(); //TODO: disable ball save tilted
             Visible = true;
             Logger.Info(nameof(Tilt), ":game tilted");
             ShowTilt();
+            _machine?.DisableBallSaver();
+            EmitSignal(nameof(GameTilted));
         }
         //show warnings
         else
@@ -138,6 +174,7 @@ public partial class Tilt : Control
     public virtual void ShowTilt()
     {
         pinGod.PlaySfx("tilt");
+        timer.Stop();
         //stop the timer for showing tilt information
         CallDeferred(nameof(SetText), Tr("TILT"));
     }
@@ -147,14 +184,10 @@ public partial class Tilt : Control
     /// </summary>
     public virtual void ShowWarning()
     {
+        timer.Stop();
         timer.Start(displayForSecs);
-        pinGod.PlaySfx("warning");
+        pinGod?.PlaySfx("warning");
         CallDeferred(nameof(SetText), $"{Tr("TILT_WARN")} {pinGod.Tiltwarnings}");
         Visible = true;
     }
-
-    /// <summary>
-    /// Sets Visible to false
-    /// </summary>
-    public virtual void _on_Timer_timeout() => Visible = false;
 }

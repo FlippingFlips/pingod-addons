@@ -118,6 +118,8 @@ public partial class PinGodMachine : Node
         }
     }
 
+    public void DisableBallSaver() => _ballSaver?.DisableBallSave();
+
     /// <summary>
     /// 
     /// </summary>

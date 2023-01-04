@@ -671,7 +671,7 @@ public abstract partial class PinGodGame : PinGodBase
     /// <param name="bus">defaults to bus named Sfx</param>
     public virtual void PlaySfx(string name, string bus = "Sfx")
 	{
-		AudioManager.PlaySfx(name, bus);
+		AudioManager?.PlaySfx(name, bus);
 	}
 
     /// <summary>

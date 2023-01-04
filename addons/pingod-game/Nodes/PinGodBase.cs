@@ -41,10 +41,6 @@ public abstract partial class PinGodBase : Node
     /// </summary>
     [Signal] public delegate void GameStartedEventHandler();
     /// <summary>
-    /// Emitted signal when game is tilted
-    /// </summary>
-    [Signal] public delegate void GameTiltedEventHandler();
-    /// <summary>
     /// Emitted signal when a mode times out
     /// </summary>
     [Signal] public delegate void ModeTimedOutEventHandler(string title);

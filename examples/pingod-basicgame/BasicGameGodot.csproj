@@ -50,6 +50,7 @@
     <None Include="addons\pingod-machine\tools\LampMatrix.tscn" />
     <None Include="addons\pingod-mode-multiball\Multiball.tscn" />
     <None Include="addons\pingod-mode-servicemenu\ServiceMenu.tscn" />
+    <None Include="addons\pingod-mode-tilt\Tilt.tscn" />
     <None Include="addons\pingod-plunger_lane\plugin.cfg" />
     <None Include="addons\pingod-plunger_lane\README.md" />
     <None Include="addons\pingod-resources\Resources.tscn" />
