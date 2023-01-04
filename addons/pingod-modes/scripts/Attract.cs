@@ -39,7 +39,7 @@ public partial class Attract : Node
 		timer = (GetNode("AttractLayerChangeTimer") as Timer);
 		timer.WaitTime = _scene_change_secs;
 
-		//var err = pinGod.Connect(nameof(PinGodBase.SwitchCommandEventHandler), new Callable(this, nameof(SwitchHandler)));
+		//var err = pinGod.Connect(nameof(PinGodBase.SwitchEventHandler), new Callable(this, nameof(MemorySwitchHandler)));
 		//godot4 connecting signal
 		if (pinGod ==null && HasNode("/root/PinGodGame"))
 		{

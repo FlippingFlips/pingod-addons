@@ -69,7 +69,8 @@ public partial class Tilt : Control
         pinGod.IsTilted = true;
         pinGod.EnableFlippers(0);
         Visible = true;
-        trough?.DisableBallSave();
+
+        //trough?.DisableBallSave(); TODO: disable ball save from TILT
     }
 
     /// <summary>
@@ -114,7 +115,7 @@ public partial class Tilt : Control
         {
             pinGod.IsTilted = true;
             pinGod.EnableFlippers(0);
-            trough?.DisableBallSave();
+            //trough?.DisableBallSave(); //TODO: disable ball save tilted
             Visible = true;
             Logger.Info(nameof(Tilt), ":game tilted");
             ShowTilt();
