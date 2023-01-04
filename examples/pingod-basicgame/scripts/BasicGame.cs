@@ -16,4 +16,14 @@ public partial class BasicGame : Game
     //Godot.PCKPacker p = new Godot.PCKPacker();
     //p.PckStart("test.pck");
     //p.AddFile("res://")
+
+    public void OnBallSaveDisabled()
+    {
+        Logger.Log(PinGodLogLevel.Info, nameof(BasicGame), ":"+nameof(OnBallSaveDisabled));
+    }
+
+    public void OnBallSaveEnabled()
+    {
+        Logger.Log(PinGodLogLevel.Info, nameof(BasicGame), ":" + nameof(OnBallSaveEnabled));
+    }
 }

@@ -2,7 +2,7 @@
   "profiles": {
     "Godot (normal debug)": {
       "commandName": "Executable",
-      "executablePath": "C:\\Godot4\\godot4.exe",
+      "executablePath": "C:\\Godot4\\godot.exe",
       "commandLineArgs": "--path .",
       "workingDirectory": ".",
       "environmentVariables": {
@@ -16,7 +16,7 @@
     },
     "Godot (verbose)": {
       "commandName": "Executable",
-      "executablePath": "C:\\Godot4\\godot4.exe",
+      "executablePath": "C:\\Godot4\\godot.exe",
       "commandLineArgs": "--path . --verbose",
       "workingDirectory": ".",
       "environmentVariables": {
@@ -30,7 +30,7 @@
     },
     "Godot Editor (Don't debug)'": {
       "commandName": "Executable",
-      "executablePath": "C:\\Godot4\\godot4.exe",
+      "executablePath": "C:\\Godot4\\godot.exe",
       "commandLineArgs": "-e --path .",
       "workingDirectory": ".",
       "environmentVariables": {
@@ -44,7 +44,7 @@
     },
     "Export Release (Windows Desktop)'": {
       "commandName": "Executable",
-      "executablePath": "C:\\Godot4\\godot4.exe",
+      "executablePath": "C:\\Godot4\\godot.exe",
       "commandLineArgs": "--export-release \"Windows Desktop\"",
       "workingDirectory": ".",
       "nativeDebugging": false

@@ -1,1 +1,1 @@
-godot4 -e
+godot -e

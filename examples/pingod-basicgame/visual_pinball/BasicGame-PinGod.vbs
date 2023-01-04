@@ -61,6 +61,13 @@ Sub Table1_Init
 
 	If Err Then MsgBox Err.Description : Exit Sub
 
+	LeftFlipper.TimerInterval = 200
+	LeftFlipper.TimerEnabled = 1
+End Sub
+'Game ready checker from flipper timer
+Sub LeftFlipper_Timer
+	LeftFlipper.TimerEnabled = 0
+	if not Controller.GameRunning Then LeftFlipper.TimerEnabled = 1 : Exit Sub
 	InitGame
 End Sub
 
@@ -180,6 +187,7 @@ Sub PinGodAlive(Enabled)
 	'on error resume next	
 	If enabled = 1 then
 		Debug.Print "Game window ready"
+		'bsTrough.Reset	= trough not created yet
 	Else
 		Debug.Print "Game window lost."
 		MsgBox "Game window lost."

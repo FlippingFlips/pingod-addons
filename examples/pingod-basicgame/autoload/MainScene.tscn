@@ -19,4 +19,5 @@ visible = false
 z_index = 25
 
 [node name="SettingsDisplay" parent="." instance=ExtResource("4_2doe2")]
+visible = false
 z_index = 50

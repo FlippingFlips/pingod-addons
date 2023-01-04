@@ -7,7 +7,7 @@ using static PinGodBase;
 /// </summary>
 public partial class BaseMode : Control
 {
-    [Export] string BALL_SAVE_SCENE = "res://addons/pingod-modes/scenes/BallSave.tscn";
+    [Export(PropertyHint.File)] string BALL_SAVE_SCENE = "res://addons/pingod-modes/scenes/BallSave.tscn";
 
     private PackedScene _ballSaveScene;
     private Saucer _ballSaucer;
@@ -95,6 +95,7 @@ public partial class BaseMode : Control
     /// <param name="time">removes the scene after the time</param>
     private void DisplayBallSaveScene(float time = 2f)
     {
+        Logger.Verbose(nameof(BaseMode), ": displaying ball save scene");
         var ballSaveScene = _ballSaveScene.Instantiate<BallSave>();
         ballSaveScene.SetRemoveAfterTime(time);
         AddChild(_ballSaveScene.Instantiate());

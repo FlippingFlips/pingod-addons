@@ -5,5 +5,4 @@
 [node name="PinGodMemoryMapNode" type="Node"]
 script = ExtResource("1_5dc7h")
 IsEnabled = true
-WriteDelay = 50
-ReadDelay = 50
+SwitchTotal = 128
