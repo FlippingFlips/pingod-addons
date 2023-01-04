@@ -124,7 +124,7 @@ public partial class ScoreEntry : Control
                 pinGod.GameData.HighScores = pinGod.GameData.HighScores.OrderByDescending(x => x.Scores)
                     .Take(pinGod.Adjustments.MaxHiScoresCount)
                     .ToList();
-                Logger.Info(nameof(ScoreEntry), ":hi score added", entry, _cPlayer.Points);
+                Logger.Info(nameof(ScoreEntry), ":hi score added ", entry, " ", _cPlayer.Points);
             }
             catch (Exception ex) { Logger.Warning("player finish score adding to hi scores. " + ex.ToString()); }
         }
@@ -221,7 +221,7 @@ public partial class ScoreEntry : Control
         {
             selectedIndex = 0;
             selectedCharLabel.SetPosition(new Vector2(selectedCharLabel.Position.x + (_selectCharMargin * allowedChars.Length - _selectCharMargin), selectedCharLabel.Position.y));
-            Logger.Info(nameof(ScoreEntry), ":set flip r start");
+            Logger.Debug(nameof(ScoreEntry), ":set flip r start");
         }
         else if (selectedIndex == 0)
         {
@@ -280,7 +280,6 @@ public partial class ScoreEntry : Control
     private void OnSwitchCommandHandler(string name, byte index, byte value)
     {
         if (value <= 0) return;
-        Logger.Info(nameof(ScoreEntry), ":", nameof(OnSwitchCommandHandler));
         if (this.Visible && IsPlayerEnteringScore)
         {
             switch (name)

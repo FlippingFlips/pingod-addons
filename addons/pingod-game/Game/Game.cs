@@ -29,18 +29,11 @@ public abstract partial class Game : PinGodGameNode
 
         Logger.Debug(nameof(Game),":loading multiball scene:  " + MULTIBALL_SCENE);
         multiballPkd = ResourceLoader.Load(MULTIBALL_SCENE) as PackedScene;
-        
-        if(pinGod != null)
+
+        if (pinGod == null)
         {
-            pinGod.BallDrained += OnBallDrained;
-            pinGod.BallEnded += OnBallEnded;
-            pinGod.BallSaved += OnBallSaved;
-            pinGod.BonusEnded += OnBonusEnded;
-            pinGod.MultiBallEnded += EndMultiball;
-            pinGod.ScoreEntryEnded += OnScoreEntryEnded;
-            //pinGod.PlayerAdded += OnPlayerAdded;
+            Logger.Warning(nameof(Game), ": No PinGodGame found in root");
         }
-        else { Logger.Warning(nameof(Game), ": No PinGodGame found in root"); }
 
         Logger.Debug(nameof(Game), ":", nameof(_EnterTree), ":creating tilt timeout");
         _tiltedTimeOut = new Timer() { OneShot = true, WaitTime = 4, Autostart = false };
@@ -62,6 +55,7 @@ public abstract partial class Game : PinGodGameNode
             pinGod.ScoreEntryEnded -= OnScoreEntryEnded;
         }        
         base._ExitTree();
+        Logger.Debug(nameof(Game), ":", nameof(_ExitTree));
     }
 
     /// <summary>
@@ -69,6 +63,17 @@ public abstract partial class Game : PinGodGameNode
     /// </summary>
     public override void _Ready()
 	{
+        if (pinGod != null)
+        {
+            pinGod.BallDrained += OnBallDrained;
+            pinGod.BallEnded += OnBallEnded;
+            pinGod.BallSaved += OnBallSaved;
+            pinGod.BonusEnded += OnBonusEnded;
+            pinGod.MultiBallEnded += EndMultiball;
+            pinGod.ScoreEntryEnded += OnScoreEntryEnded;
+            //pinGod.PlayerAdded += OnPlayerAdded;
+        }
+
         Logger.Debug(nameof(Game), ":", nameof(_Ready));
         pinGod.BallInPlay = 1;
 		StartNewBall();

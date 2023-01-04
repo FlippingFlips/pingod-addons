@@ -521,6 +521,8 @@ public abstract partial class PinGodGame : PinGodBase
 	public virtual void EndOfGame()
 	{
 		GameInPlay = false;
+        IsTilted = false;
+        BallInPlay = 0;
 		GameData.GamesFinished++;
 		ResetTilt();
 		gameEndTime = Time.GetTicksMsec();

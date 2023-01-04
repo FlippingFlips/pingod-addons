@@ -95,9 +95,6 @@ public partial class MainScene : Node2D
             _machine.SwitchCommand += OnSwitchCommandHandler;
             Logger.Info(nameof(MainScene), ":listening for switches from Machine");
         }
-
-        //attract mod already in the tree, get the instance so we can free it when game started
-        attractnode = GetNode("Modes/Attract");
     }
 
     public override void _Input(InputEvent @event)
@@ -105,7 +102,8 @@ public partial class MainScene : Node2D
         base._Input(@event);        
         if (!@event.IsActionType()) return;
         if (@event is InputEventMouse) return;
-        var name = @event.ResourceName;
+        
+        //todo: move all of this into window actions
         if (InputMap.HasAction("settings"))
         {
             if (@event.IsActionPressed("settings"))
@@ -139,6 +137,13 @@ public partial class MainScene : Node2D
                 return;
             }
         }
+    }
+
+    public override void _Ready()
+    {
+        base._Ready();
+        //attract mod already in the tree, get the instance so we can free it when game started
+        attractnode = GetNode("Modes/Attract");
     }
 
     private void OnPauseGame()
@@ -194,7 +199,7 @@ public partial class MainScene : Node2D
                         if (pinGod.GameInPlay)
                             GetNode("Modes/Game")?.QueueFree();
                         else
-                            GetNode("Modes/Attract")?.Free();
+                            GetNode("Modes/Attract")?.QueueFree();
 
                         //load service menu into modes
                         CallDeferred("_loaded", _resourcePreLoader.GetResource(_service_menu_scene_path.GetBaseName()));
@@ -267,17 +272,22 @@ public partial class MainScene : Node2D
                     _resourcePreLoader.AddResource(name, res);
                 }
                 else
-                {
-                    Logger.Warning(nameof(MainScene), ":_resourcePreLoader null or scene resource doesn't exists for ", name);
-                    //return;
+                {                    
                     res = _resourcePreLoader.GetResource(name);
                 }
+
+                if(res == null)
+                    Logger.Warning(nameof(MainScene), ":_resourcePreLoader null or scene resource doesn't exists for ", name);
+
                 CallDeferred("_loaded", res);
             }
             m.Unlock();
 
-            //remove the attract mode
-            attractnode.CallDeferred("queue_free");
+            if (!attractnode.IsQueuedForDeletion())
+            {
+                //remove the attract mode
+                attractnode?.CallDeferred("queue_free");
+            }
         });
     }
 
