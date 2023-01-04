@@ -17,8 +17,9 @@ public partial class DisplaySettingsScene : MarginContainer
         if (HasNode("/root/PinGodGame"))
         {
             pinGod = GetNode<PinGodGame>("/root/PinGodGame");
-            _displaySettings = pinGod.GameSettings.Display;
-        }        
+            _displaySettings = pinGod.Adjustments.Display;
+        }
+        else { Logger.Warning(nameof(DisplaySettingsScene), ": no PinGodGame found"); }
     }
 
     /// <summary>
@@ -26,8 +27,8 @@ public partial class DisplaySettingsScene : MarginContainer
     /// </summary>
     public override void _Ready()
     {
-        base._Ready();
-
+        Logger.Warning(nameof(DisplaySettingsScene), ":", nameof(_Ready));
+        base._Ready();        
         //setup options for stretch modes
         var stretchOption = GetNode<OptionButton>("VBoxContainer/StretchAspectOptionButton");
 
@@ -114,7 +115,7 @@ public partial class DisplaySettingsScene : MarginContainer
     {         
         ProjectSettings.SetSetting(SettingPaths.DisplaySetPaths.ASPECT, ((PinGodStretchAspect)index).ToString());
         pinGod.SetMainSceneAspectRatio();
-        _displaySettings.AspectOption = index;
+        _displaySettings.AspectOption = index;        
     }
 
     private void SetFullScreen(bool enabled)
@@ -123,6 +124,6 @@ public partial class DisplaySettingsScene : MarginContainer
             DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
         else
             DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);        
-        pinGod.GameSettings.Display.FullScreen = enabled;
+        pinGod.Adjustments.Display.FullScreen = enabled;
     }
 }

@@ -21,11 +21,7 @@ public partial class PlungerLane : Node
         if (HasNode("/root/Machine"))
         {
             machine = GetNode<PinGodMachine>("/root/Machine");
-            machine.SwitchCommand += OnPlungerSwitchHandler;
-        }
-        if (GetParent().HasNode("BallSaver"))
-        {
-            ballSaver = GetParent().GetNode<BallSaver>(nameof(BallSaver));
+            ballSaver = machine._ballSaver;
             machine.SwitchCommand += OnPlungerSwitchHandler;
         }
     }
@@ -41,20 +37,23 @@ public partial class PlungerLane : Node
         //switch on
         if (value > 0)
         {
-            if (pinGod != null)
+            if(ballSaver?.IsBallSaveActive() ?? false) // || pinGod.IsMultiballRunning
             {
-                //auto plunge the ball if in ball save or game is tilted to get the balls back
-                if (pinGod.BallSaveActive || pinGod.IsMultiballRunning)
-                {
-                    machine?.CoilPulse(_auto_plunge_solenoid);
-                    Logger.Verbose(nameof(PlungerLane), ":auto plunger saved");
-                    EmitSignal(nameof(AutoPlungerFired));
-                }
+                AutoFire();
             }
-            else if(machine != null)
-            {
-                Logger.Verbose(nameof(PlungerLane), ": plunger lane switch active. No pinGod game running.");
-            }
+
+            //if (pinGod != null)
+            //{
+            //    //auto plunge the ball if in ball save or game is tilted to get the balls back
+            //    if (pinGod.BallSaveActive || pinGod.IsMultiballRunning)
+            //    {
+            //        AutoFire();
+            //    }
+            //}
+            //else if(machine != null)
+            //{
+            //    Logger.Verbose(nameof(PlungerLane), ": plunger lane switch active. No pinGod game running.");
+            //}
         }
         //switch off
         else
@@ -69,9 +68,10 @@ public partial class PlungerLane : Node
 
                     if (_set_ball_save_on_plunger_lane)
                     {
-                        ballSaver.StartBallSaver();
+                        
+                        ballSaver.StartSaver();
                         //TODO: set ball saver on here
-                        //var saveStarted = StartBallSaver(TroughOptions.BallSaveSeconds);
+                        //var saveStarted = StartSaver(TroughOptions.BallSaveSeconds);
                         //if (saveStarted)
                         //{
                         //    pinGod.EmitSignal(nameof(PinGodGame.BallSaveStarted));
@@ -82,4 +82,16 @@ public partial class PlungerLane : Node
         }
     }
 
+    public void AutoFire()
+    {
+        if (IsSwitchActive())
+        {
+            machine?.CoilPulse(_auto_plunge_solenoid);            
+            EmitSignal(nameof(AutoPlungerFired));
+            Logger.Debug(nameof(PlungerLane), ":auto plunger saved");
+        }
+        else { Logger.Debug(nameof(PlungerLane), ": can't AutoFire when plunger lane is inactive."); }
+    }
+
+    public bool IsSwitchActive() => Machine.IsSwitchOn((_plunger_lane_switch));
 }

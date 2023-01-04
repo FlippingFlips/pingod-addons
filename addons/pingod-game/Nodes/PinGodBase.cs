@@ -78,7 +78,7 @@ public abstract partial class PinGodBase : Node
 	[Signal] public delegate void ServiceMenuExitEventHandler();
 
     /// <summary>
-    /// Signal sent from memory map if <see cref="GameSettings.VpCommandSwitchId"/> was found while reading switch states
+    /// Signal sent from memory map if <see cref="Adjustments.VpCommandSwitchId"/> was found while reading switch states
     /// </summary>
     /// <param name="index"></param>
     [Signal] public delegate void VpCommandEventHandler(byte index);

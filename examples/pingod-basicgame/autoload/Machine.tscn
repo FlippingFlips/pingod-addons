@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://j2gs2e31nynl"]
+[gd_scene load_steps=5 format=3 uid="uid://j2gs2e31nynl"]
 
 [ext_resource type="Script" path="res://addons/pingod-machine/plugin/PinGodMachine.cs" id="1_rpe2g"]
+[ext_resource type="Script" path="res://addons/pingod-plunger_lane/PlungerLane.cs" id="2_1vjn7"]
+[ext_resource type="Script" path="res://addons/pingod-trough/Trough.cs" id="2_o66u1"]
+[ext_resource type="Script" path="res://addons/pingod-ballsave/BallSaver.cs" id="3_fmtvq"]
 
 [node name="PinGodMachine" type="Node"]
 script = ExtResource("1_rpe2g")
@@ -45,3 +48,12 @@ _switches = {
 "trough_4": 84,
 "up": 6
 }
+
+[node name="Trough" type="Node" parent="."]
+script = ExtResource("2_o66u1")
+
+[node name="PlungerLane" type="Node" parent="."]
+script = ExtResource("2_1vjn7")
+
+[node name="BallSaver" type="Timer" parent="."]
+script = ExtResource("3_fmtvq")

@@ -14,6 +14,7 @@ public partial class CustomPinGodGame : PinGodGame
         Players.Add(new BasicGamePlayer() { Name = name, Points = 0 });
     }
 
+
     /// <summary>
     /// Logs when this class is setup, nothing more.
     /// </summary>

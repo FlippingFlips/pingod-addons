@@ -196,14 +196,44 @@ public class MemoryMap : IDisposable
                     else // Use Switch 0 for game GameSyncState
                     {                        
                         var syncState = (GameSyncState)buffer[i];
-                        //TODO
-                        //var action = ProcessGameState(syncState);                    
+                        var action = ProcessGameState(syncState);
+                        Logger.Debug(nameof(MemoryMap), ": processed GameSyncState action=", action);
                     }
                 }
             }
         }
 
         switchBuffer = buffer;
+    }
+
+    /// <summary>
+    /// Process a gameSyncState into a input event, then feed into Godot input
+    /// </summary>
+    /// <param name="syncState"></param>
+    /// <returns></returns>
+    private string ProcessGameState(GameSyncState syncState)
+    {
+        var ev = new InputEventAction() { Action = "", Pressed = true };
+        switch (syncState)
+        {
+            case GameSyncState.quit:
+                ev.Action = GameSyncState.quit.ToString();
+                break;
+            case GameSyncState.pause: //pause / resume on a toggle, not held down
+            case GameSyncState.resume:
+                ev.Action = GameSyncState.pause.ToString();
+                ev.Pressed = true;
+                break;
+            case GameSyncState.None:
+            default:
+                break;
+        }
+
+        if (!string.IsNullOrWhiteSpace(ev.Action))
+        {
+            Input.ParseInputEvent(ev);
+        }
+        return ev.Action;
     }
 
     /// <summary>

@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" path="res://addons/pingod-game/scenes/WindowInputs.tscn" id="6_b3kvw"]
 [ext_resource type="PackedScene" path="res://addons/pingod-game/scenes/Resources.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://dje3q12enwe12" path="res://addons/pingod-game/scenes/PauseLayer.tscn" id="8_axlrh"]
-[ext_resource type="PackedScene" uid="uid://b38tedw34jcf7" path="res://addons/pingod-settings-menu/scenes/SettingsDisplay.tscn" id="9_e0ulx"]
+[ext_resource type="PackedScene" uid="uid://b38tedw34jcf7" path="res://addons/pingod-settings-menu/SettingsDisplay.tscn" id="9_e0ulx"]
 [ext_resource type="Script" path="res://addons/PinGod-MemoryMap/MemoryMapScript.cs" id="11_lrrnn"]
 
 [node name="PinGodGame" type="Node"]

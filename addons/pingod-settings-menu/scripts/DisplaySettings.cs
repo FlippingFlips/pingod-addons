@@ -52,11 +52,11 @@ public partial class DisplaySettings
     /// </summary>
     public int WidthDefault { get; set; } = 1024;
     /// <summary>
-    /// Start X position
+    /// StartSaver X position
     /// </summary>
     public int X { get; set; }
     /// <summary>
-    /// Start Y position
+    /// StartSaver Y position
     /// </summary>
     public int Y { get; set; }    
 }

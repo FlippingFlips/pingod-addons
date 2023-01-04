@@ -17,18 +17,18 @@ public partial class TroughPlugin : EditorPlugin
 	{
         Logger.Debug(nameof(PinGodWindowCommands), nameof(_EnterTree), ":" + ROOT_DIR + $":version:{VERSION}");
         if (Engine.IsEditorHint())
-        {     
+        {
             /*
-             * custom type
+             * custom type            
+            */
             using var texture = GD.Load<Texture2D>($"{ASSETS_DIR}img/pinball.png");
             var script = GD.Load<Script>(ROOT_DIR + nameof(Trough) + ".cs");
             AddCustomType(nameof(Trough), nameof(Node), script, texture);
             Logger.Debug(nameof(TroughPlugin), ":" + nameof(_EnterTree), " loaded custom types");
-            */
 
-            Logger.Debug(nameof(PinGodWindowCommands), ":" + nameof(_EnterTree), $" ");
-            AddAutoloadSingleton(nameof(Trough), "res://autoload/Trough.tscn");
-            Logger.Info(nameof(PinGodWindowCommands), $": Autoload autoload/Trough.tscn. Access scene from node /root/Trough");
+            //Logger.Debug(nameof(PinGodWindowCommands), ":" + nameof(_EnterTree), $" ");
+            //AddAutoloadSingleton(nameof(Trough), "res://autoload/Trough.tscn");
+            //Logger.Info(nameof(PinGodWindowCommands), $": Autoload autoload/Trough.tscn. Access scene from node /root/Trough");
         }
         else
         {
@@ -47,6 +47,7 @@ public partial class TroughPlugin : EditorPlugin
     public override void _ExitTree()
 	{
         Logger.Debug(nameof(TroughPlugin), ":" + nameof(_EnterTree), " removing types");
-        RemoveAutoloadSingleton(nameof(Trough));
-	}
+        RemoveCustomType(nameof(Trough));
+        //RemoveAutoloadSingleton(nameof(Trough));
+    }
 }

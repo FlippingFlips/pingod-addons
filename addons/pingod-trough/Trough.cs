@@ -1,4 +1,5 @@
 using Godot;
+using System;
 using System.Drawing;
 using static PinGodBase;
 
@@ -10,8 +11,6 @@ using static PinGodBase;
 public partial class Trough : Node
 {
     private PinGodMachine _machine;
-
-    private int _mballSaveSecondsRemaining;
 
     /// <summary>
     /// Enables ball save when leaving plunger lane if ball is started, <see cref="PinGodGame.BallStarted"/>
@@ -146,14 +145,17 @@ public partial class Trough : Node
     /// <param name="numOfBalls">num of balls to save</param>
     /// <param name="ballSaveTime"></param>
     /// <param name="pulseTimerDelay">Timer to pulse trough</param>
-    public void StartMultiball(byte numOfBalls, byte ballSaveTime, float pulseTimerDelay = 1)
+    public void StartMultiball(byte numOfBalls, byte ballSaveTime = 0, float pulseTimerDelay = 1)
     {
-        TroughOptions.MballSaveSeconds = ballSaveTime;
-        TroughOptions.NumBallsToSave = numOfBalls;
+        if(_machine?._ballSaver != null)
+        {
+            var balls = numOfBalls == 0 ? 1 : numOfBalls;
+            _machine._ballSaver._number_of_balls_to_save = (byte)balls;
 
-        _mballSaveSecondsRemaining = TroughOptions.MballSaveSeconds;
-        //TODO: Ball saver start
-
+            //if leave save time to zero it will use the default set value
+            _machine?._ballSaver.StartSaverMultiball(ballSaveTime);
+        }
+        
         if (pulseTimerDelay > 0)
             _startMballTrough(pulseTimerDelay);
 
@@ -162,15 +164,14 @@ public partial class Trough : Node
 
     void _startMballTrough(float delay)
     {
-        Logger.Debug(nameof(Trough), ":start mball trough pulse timer: " + delay);
-        troughPulseTimer.Start(delay);
+        Logger.Debug(nameof(Trough), ":start m-ball trough pulse timer delay: " + delay);
+        troughPulseTimer.Start(delay);        
     }
 
     private void FireEarlySave()
     {
         Logger.Debug(nameof(Trough), $": {nameof(FireEarlySave)}");
         PulseTrough();
-        pinGod?.EmitSignal(nameof(PinGodBase.BallSaved));
     }
 
     bool IsTroughActionSwitchOn(InputEvent input)
@@ -210,11 +211,7 @@ public partial class Trough : Node
         return false;
     }
 
-    private void OnMultiballStarted()
-    {
-        Logger.Debug(nameof(Trough), ": mball starting save for ", _mballSaveSecondsRemaining);
-        CallDeferred("_startMballTrough", 1f);
-    }
+    private void OnMultiballStarted() => CallDeferred(nameof(_startMballTrough), 1f);
 
     void OnSwitchCommand(string swName, byte index, byte value)
     {        
@@ -229,29 +226,6 @@ public partial class Trough : Node
 		{
 			Logger.Verbose($"{nameof(Trough)}:{nameof(OnSwitchCommand)}", " trough on switch: " + swName);
 			OnTroughSwitchCommand(swName, index, value);
-		}
-		else
-		{
-            //check the early save switches
-            if (pinGod != null)
-			{                
-                if (pinGod.IsBallStarted && !pinGod.IsTilted && pinGod.BallSaveActive)
-                {
-                    for (int i = 0; i < TroughOptions?.EarlySaveSwitches?.Length; i++)
-                    {
-                        if (TroughOptions.EarlySaveSwitches[i] == swName)
-                        {
-                            FireEarlySave();
-                            pinGod.EmitSignal(nameof(PinGodGame.BallSaved));
-                            break;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                Logger.WarningRich("[code=yellow]", nameof(Trough), ": plugin requires PinGodGame to act on BallSaved: ", swName, "[/color]");
-            }
 		}
 	}
 	/// <summary>
@@ -273,7 +247,7 @@ public partial class Trough : Node
                 //trough full
                 if (troughFull && pinGod.IsBallStarted && !pinGod.IsMultiballRunning)
                 {
-                    if (pinGod.BallSaveActive && !pinGod.IsTilted)
+                    if (_machine?.IsBallSaveActive() ?? false && !pinGod.IsTilted)
                     {
                         Logger.Debug(nameof(Trough), ":ball_saved");
                         PulseTrough();
@@ -308,32 +282,33 @@ public partial class Trough : Node
 		}
 	}
 
-	#region Timers
+    #region Timers
 
-	/// <summary>
-	/// Timer for pulsing balls from trough
-	/// </summary>
-	void _trough_pulse_timeout()
+    /// <summary>
+    /// Timer for feeding balls into plunger lane when in a multi-ball from the trough
+    /// </summary>
+    void _trough_pulse_timeout()
 	{
         Logger.Debug(nameof(Trough), ": trough pulse time out");
-        _mballSaveSecondsRemaining--;
-		if (_mballSaveSecondsRemaining < 1)
-		{
-			//DisableBallSave(); //todo disable ball saves
-			Logger.Debug(nameof(Trough), ": ended mball trough pulse timer");
-		}
-
-        //ball is in plunger lane
-        if (Machine.IsSwitchOn(TroughOptions.PlungerLaneSw) && TroughOptions.BallSaveSeconds > 0)
+        if(_machine?._plungerLane != null && _machine._ballSaver !=null)
         {
-            var ballsIntTrough = BallsInTrough();
-            var b = TroughOptions.Switches.Length - ballsIntTrough;
-            Logger.Debug(nameof(Trough), ":balls in trough=" + ballsIntTrough + $":ball={b}:numToSave:{TroughOptions.NumBallsToSave}");
-            if (b < TroughOptions.NumBallsToSave)
+            var sw = Machine.Switches[_machine._plungerLane._plunger_lane_switch];
+            
+            Logger.Verbose(nameof(Trough), ": plunger lane time since:", sw.TimeSinceChange(), " is on=",sw.IsEnabled, " ball saver time=", _machine._ballSaver.TimeRemaining);
+            //ball isn't in plunger lane and ball saver on then put ball into lane
+            if (!_machine._plungerLane.IsSwitchActive() && _machine._ballSaver.TimeRemaining > 0)
             {
-                PulseTrough();
+                var ballsIntTrough = BallsInTrough();
+                var b = TroughOptions.Switches.Length - ballsIntTrough;
+                Logger.Debug(nameof(Trough), ":balls in trough=" + ballsIntTrough + $":ball={b}:numToSave:{TroughOptions.NumBallsToSave}");
+                if (b < _machine._ballSaver._number_of_balls_to_save)
+                {
+                    PulseTrough();
+                }
             }
+            else { Logger.Debug(nameof(Trough), ": plunger lane is active, can't put ball in lane while active."); }
         }
+        else { Logger.Debug(nameof(Trough), ": No plunger lane or ball saver nodes found"); }
 	}
 	#endregion
 }

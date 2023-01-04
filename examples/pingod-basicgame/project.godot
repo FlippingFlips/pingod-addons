@@ -12,9 +12,10 @@ config_version=5
 
 config/name="BasicGameGodot"
 config/description="Example game running Godot projects with Visual Pinball"
-run/main_scene="res://autoload/MainScene.tscn"
+run/main_scene="res://MainScene.tscn"
 config/features=PackedStringArray("4.0", "C#")
 boot_splash/image="res://addons/assets/img/pingod-logo.png"
+boot_splash/fullsize=false
 boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="res://addons/assets/img/pingod-logo.png"
 config/windows_native_icon="res://addons/assets/img/pingod.ico"
@@ -29,7 +30,6 @@ default_bus_layout="res://assets/audio/audio_bus_layout.tres"
 WindowActions="*res://autoload/WindowActions.tscn"
 AudioManager="*res://autoload/AudioManager.tscn"
 Machine="*res://autoload/Machine.tscn"
-Trough="*res://autoload/Trough.tscn"
 MemoryMap="*res://autoload/MemoryMap.tscn"
 PinGodGame="*res://autoload/PinGodGame.tscn"
 
@@ -40,9 +40,11 @@ debug/settings/stdout/print_fps=true
 
 [display]
 
+window/size/viewport_width=1024
+window/size/viewport_height=600
 window/size/borderless=true
 window/size/always_on_top=true
-window/stretch/mode="2d"
+window/stretch/mode="viewport"
 window/stretch/aspect="keep_height"
 window/size/test_width=1024.0
 window/size/test_height=600.0
@@ -54,7 +56,7 @@ project/assembly_name="BasicGameGodot"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/pingod-addons/plugin.cfg", "res://addons/pingod-audio/plugin.cfg", "res://addons/pingod-game/plugin.cfg", "res://addons/pingod-machine/plugin.cfg", "res://addons/pingod-memorymap/plugin.cfg", "res://addons/pingod-trough/plugin.cfg", "res://addons/pingod-window-commands/plugin.cfg", "res://addons/pingod-ballsave/plugin.cfg", "res://addons/pingod-plunger_lane/plugin.cfg")
+enabled=PackedStringArray("res://addons/pingod-addons/plugin.cfg", "res://addons/pingod-audio/plugin.cfg", "res://addons/pingod-game/plugin.cfg", "res://addons/pingod-machine/plugin.cfg", "res://addons/pingod-memorymap/plugin.cfg", "res://addons/pingod-window-commands/plugin.cfg", "res://addons/pingod-ballsave/plugin.cfg", "res://addons/pingod-plunger_lane/plugin.cfg", "res://addons/pingod-trough/plugin.cfg")
 
 [importer_defaults]
 

@@ -37,10 +37,7 @@ public abstract partial class PinGodGame : PinGodBase
     /// Maximum players on machine
     /// </summary>
 	public byte MaxPlayers = 4;
-    /// <summary>
-    /// Todo: move doing it like this, audio manager plugin
-    /// </summary>
-	const string AUDIO_MANAGER = "res://addons/pingod-game/Audio/AudioManager.tscn";
+
     private MainScene mainScene;
     /// <summary>
     /// 
@@ -87,7 +84,7 @@ public abstract partial class PinGodGame : PinGodBase
     /// <summary>
     /// 
     /// </summary>
-    public GameSettings GameSettings { get; internal set; }
+    public Adjustments Adjustments { get; internal set; }
     /// <summary>
     /// Is Ball Started?
     /// </summary>
@@ -161,7 +158,7 @@ public abstract partial class PinGodGame : PinGodBase
             //LogDebug(nameof(PinGodGame), $":_EnterTree. {PinGodGameAddOn.VERSION}");
             CmdArgs = GetCommandLineArgs();
             LoadSettingsFile();
-            Logger.LogLevel = GameSettings?.LogLevel ?? PinGodLogLevel.Warning;
+            Logger.LogLevel = Adjustments?.LogLevel ?? PinGodLogLevel.Warning;
             LogInfo(nameof(PinGodGame), ":_EnterTree. log level: " + Logger.LogLevel);
 
             SetupWindow();
@@ -172,8 +169,7 @@ public abstract partial class PinGodGame : PinGodBase
             if (HasNode("/root/Trough"))
             {
                 _trough = GetNodeOrNull<Trough>("/root/Trough");
-            }
-            else { LogWarning("[color=yellow]",nameof(PinGodGame), ": trough not found","[/color]"); }
+            }            
 
             Setup();
             SetupAudio();
@@ -190,8 +186,15 @@ public abstract partial class PinGodGame : PinGodBase
                 PinGodMachine = GetNode<PinGodMachine>(machineNode);
                 BallSearchOptions = PinGodMachine.BallSearchOptions;
                 PinGodMachine.SwitchCommand += PinGodMachine_SwitchCommand;
+
+                if(_trough == null && PinGodMachine.HasNode("Trough"))
+                {
+                    _trough = PinGodMachine.GetNode("Trough") as Trough;
+                }                
             }
             else { Logger.WarningRich("[color=yellow]", $"{nameof(PinGodGame)}: _Ready| PinGodMachine not found", "[/color]"); }
+
+            if(_trough == null) Logger.WarningRich("[color=yellow]", nameof(PinGodGame), ": trough not found", "[/color]");
         }
     }
 
@@ -221,29 +224,31 @@ public abstract partial class PinGodGame : PinGodBase
     /// </summary>
     private void SetupWindow()
     {        
-        if (GameSettings?.Display == null)
+        if (Adjustments?.Display == null)
         {
             LogInfo(nameof(PinGodGame),":creating initial display settings");
-            GameSettings.Display = new DisplaySettings() { AlwaysOnTop = true };
+            if (Adjustments == null)
+                Adjustments = new Adjustments();
+            Adjustments.Display = new DisplaySettings() { AlwaysOnTop = true };
             SaveWindow();
         }
 
         //on top
-        DisplayServer.WindowSetFlag(DisplayServer.WindowFlags.AlwaysOnTop, GameSettings.Display.AlwaysOnTop);
+        DisplayServer.WindowSetFlag(DisplayServer.WindowFlags.AlwaysOnTop, Adjustments.Display.AlwaysOnTop);
         //OS.MoveWindowToForeground();
 
         //set the width, position
-        DisplayServer.WindowSetPosition(new Vector2i((int)GameSettings.Display.X, (int)GameSettings.Display.Y));
-        DisplayServer.WindowSetSize(new Vector2i((int)GameSettings.Display.Width, (int)GameSettings.Display.Height));
+        DisplayServer.WindowSetPosition(new Vector2i((int)Adjustments.Display.X, (int)Adjustments.Display.Y));
+        DisplayServer.WindowSetSize(new Vector2i((int)Adjustments.Display.Width, (int)Adjustments.Display.Height));
         var w = ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.WIDTH);
         var h = ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.HEIGHT);
         var size = DisplayServer.WindowGetSize();
         var pos = DisplayServer.WindowGetPosition();
-        LogInfo(nameof(PinGodGame), $":window: size:{size.x}x{size.y} pos:{pos.x},{pos.y}, onTop: {GameSettings.Display.AlwaysOnTop}");
+        LogInfo(nameof(PinGodGame), $":window: size:{size.x}x{size.y} pos:{pos.x},{pos.y}, onTop: {Adjustments.Display.AlwaysOnTop}");
         LogInfo(nameof(PinGodGame), $":window: project settings size: ", $"{w}x{h}");
 
         //full screen        
-        if (GameSettings.Display.FullScreen)
+        if (Adjustments.Display.FullScreen)
             DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
 
         //title
@@ -356,46 +361,6 @@ public abstract partial class PinGodGame : PinGodBase
             }
         }
 
-        //setup and run writing memory states for other application to access        
-        if (GameSettings.MachineStatesWrite || GameSettings.MachineStatesRead)
-        {
-            if(PinGodMachine != null)
-            {
-                //LogDebug($"{nameof(PinGodGame)}: _Ready|creating memory map");
-                //LogInfo($"{nameof(PinGodGame)}: _Ready|machine states enabled. delay: " + GameSettings.MachineStatesWriteDelay);
-
-                //if (HasNode("/root/MemoryMap"))
-                //{
-                //    if (HasNode("MemoryMap"))
-                //    {
-                //        LogInfo(nameof(PinGodGame), $": MemoryMap node found");
-                //        MemoryMapScript memmap = GetNode<MemoryMapScript>("MemoryMap");
-                //    }
-                //    else
-                //    {
-
-                //    }
-                    
-                //    LogWarning("TODO: Mem mapping");
-                //}
-                //else
-                //{
-                //    LogWarning("WARN:mem map not found");
-                //}
-                
-                
-                //TODO: start map in memorymapped file
-                //memMapping = new MemoryMap(machineConfig._memCoilCount, 
-                //    machineConfig._memLampCount, machineConfig._memLedCount, 
-                //    machineConfig._memSwitchCount, pinGodGame: this);
-                //memMapping.Start(GameSettings.MachineStatesWriteDelay);
-            }
-            else
-            {
-                LogWarning(nameof(PinGodGame), $"Read / Writes enabled and no MachineConfig found");
-            }
-        }
-
         LogInfo(nameof(PinGodGame), ":sent pingod game ready coil: alive 1");
         Machine.SetCoil("alive", 1);
     }
@@ -462,7 +427,7 @@ public abstract partial class PinGodGame : PinGodBase
     /// Starts the <see cref="Trough.StartBallSaver(float)"/> ball saver
     /// </summary>
     /// <param name="secs"></param>
-    //internal void BallSaveEnabled(float secs) => _trough?.StartBallSaver(secs);
+    //internal void BallSaveEnabled(float secs) => _trough?.StartSaver(secs);
 
     /// <summary>
     /// Creates a new <see cref="PinGodPlayer"/>. Override this for your own custom players
@@ -635,9 +600,9 @@ public abstract partial class PinGodGame : PinGodBase
 	}
 
 	/// <summary>
-	/// Override when using your own GameSettings
+	/// Override when using your own Adjustments
 	/// </summary>
-	public virtual void LoadSettingsFile() => GameSettings = GameSettings.Load();
+	public virtual void LoadSettingsFile() => Adjustments = Adjustments.Load();
 
     /// <summary>
     /// 
@@ -775,9 +740,9 @@ public abstract partial class PinGodGame : PinGodBase
 	public virtual void SaveGameData() => GameData.Save(GameData);
 
     /// <summary>
-    /// Invokes <see cref="GameSettings.Save(GameSettings)"/>
+    /// Invokes <see cref="Adjustments.Save(Adjustments)"/>
     /// </summary>
-	public virtual void SaveGameSettings() => GameSettings.Save(GameSettings);
+	public virtual void SaveGameSettings() => Adjustments.Save(Adjustments);
 
     /// <summary>
     /// Saves a recording file if <see cref="RecordPlaybackOption.Record"/> is set
@@ -799,10 +764,14 @@ public abstract partial class PinGodGame : PinGodBase
     {
         var size = this.WinGetSize();
         var pos = this.WinGetPos();
-        GameSettings.Display.X = pos.x;
-        GameSettings.Display.Y = pos.y;
-        GameSettings.Display.Width = size.x;
-        GameSettings.Display.Height = size.y;
+
+        if(Adjustments?.Display != null)
+        {
+            Adjustments.Display.X = pos.x;
+            Adjustments.Display.Y = pos.y;
+            Adjustments.Display.Width = size.x;
+            Adjustments.Display.Height = size.y;
+        }
         ProjectSettings.SetSetting(SettingPaths.DisplaySetPaths.TEST_WIDTH, size.x);
         ProjectSettings.SetSetting(SettingPaths.DisplaySetPaths.TEST_HEIGHT, size.y);
     }
@@ -891,6 +860,10 @@ public abstract partial class PinGodGame : PinGodBase
         //GetNodeOrNull<MainScene>("/root/MainScene")?
         //    .GetTree().SetScreenStretch(SceneTree.StretchMode.Mode2d, (SceneTree.StretchAspect)(int)asp, 
         //        new Vector2(minW, minH));
+
+        //DisplayServer.WindowSetMode(DisplayServer.WindowMode.Minimized)
+        //DisplayServer.DialogShow
+        
 
         //this.SetWinFlag(DisplayServer.WindowFlags)
     }
@@ -1109,11 +1082,11 @@ public abstract partial class PinGodGame : PinGodBase
 
             //remove a credit and add a new player
             GameData.Credits--;
-            BallsPerGame = (byte)(GameSettings.BallsPerGame > 5 ? 5 : GameSettings.BallsPerGame);
+            BallsPerGame = (byte)(Adjustments.BallsPerGame > 5 ? 5 : Adjustments.BallsPerGame);
 
             //TODO: set the ball save seconds from game settings
             //if(_trough != null)
-            //    _trough._ball_save_seconds = (byte)(GameSettings.BallSaveTime > 20 ? 20 : GameSettings.BallSaveTime);
+            //    _trough._ball_save_seconds = (byte)(Adjustments.BallSaveTime > 20 ? 20 : Adjustments.BallSaveTime);
 
             CreatePlayer($"P{Players.Count + 1}");
             CurrentPlayerIndex = 0;
@@ -1166,7 +1139,7 @@ public abstract partial class PinGodGame : PinGodBase
         GameData.BallsStarted++;
         ResetTilt();
         Player = Players[CurrentPlayerIndex];
-        if (Player.ExtraBalls > 0 && Player.ExtraBallsAwarded < GameSettings.MaxExtraBalls)
+        if (Player.ExtraBalls > 0 && Player.ExtraBallsAwarded < Adjustments.MaxExtraBalls)
         {
             Player.ExtraBalls--;
             Player.ExtraBallsAwarded++;
@@ -1294,13 +1267,13 @@ public abstract partial class PinGodGame : PinGodBase
         if (this.HasNode(nameof(AudioManager)))
         {
             AudioManager = GetNode<AudioManager>("AudioManager");
-            AudioServer.SetBusVolumeDb(0, GameSettings?.MasterVolume ?? 0f);
-            AudioServer.SetBusVolumeDb(1, GameSettings?.MusicVolume ?? -6.0f);
-            AudioServer.SetBusVolumeDb(2, GameSettings?.SfxVolume ?? -6.0f);
-            AudioServer.SetBusVolumeDb(3, GameSettings?.VoiceVolume ?? -6.0f);
-            AudioManager.MusicEnabled = GameSettings?.MusicEnabled ?? true;
-            AudioManager.SfxEnabled = GameSettings?.SfxEnabled ?? true;
-            AudioManager.VoiceEnabled = GameSettings?.VoiceEnabled ?? true;
+            AudioServer.SetBusVolumeDb(0, Adjustments?.MasterVolume ?? 0f);
+            AudioServer.SetBusVolumeDb(1, Adjustments?.MusicVolume ?? -6.0f);
+            AudioServer.SetBusVolumeDb(2, Adjustments?.SfxVolume ?? -6.0f);
+            AudioServer.SetBusVolumeDb(3, Adjustments?.VoiceVolume ?? -6.0f);
+            AudioManager.MusicEnabled = Adjustments?.MusicEnabled ?? true;
+            AudioManager.SfxEnabled = Adjustments?.SfxEnabled ?? true;
+            AudioManager.VoiceEnabled = Adjustments?.VoiceEnabled ?? true;
         }
         else { LogWarning(nameof(PinGodGame), ": AudioManager node not found. Add an AudioManager child instance to the scene"); }
 	}

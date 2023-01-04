@@ -20,47 +20,47 @@ public partial class PingodSettingsScene : MarginContainer
         }
 
         var _stateDelaySpinbox = GetNode<SpinBox>("VBoxContainer/StatesDelaySpinBox");
-        _stateDelaySpinbox.Value = pinGod?.GameSettings?.MachineStatesWriteDelay ?? 10;
+        _stateDelaySpinbox.Value = pinGod?.Adjustments?.MachineStatesWriteDelay ?? 10;
         _stateDelaySpinbox.Prefix = Tr("SETT_STATE_DELAY");
 
         var _readStatesCheck = GetNode<CheckButton>("VBoxContainer/ReadStatesCheckButton");
-        _readStatesCheck.SetPressedNoSignal(pinGod?.GameSettings?.MachineStatesRead ?? true);
+        _readStatesCheck.SetPressedNoSignal(pinGod?.Adjustments?.MachineStatesRead ?? true);
         _readStatesCheck.Text = Tr("SETT_STATE_READ");
 
         var _writeStatsCheck = GetNode<CheckButton>("VBoxContainer/WriteStatesCheckButton");
-        _writeStatsCheck.SetPressedNoSignal(pinGod?.GameSettings?.MachineStatesWrite ?? true);
+        _writeStatsCheck.SetPressedNoSignal(pinGod?.Adjustments?.MachineStatesWrite ?? true);
         _writeStatsCheck.Text = Tr("SETT_STATE_WRITE");
 
         var logLvlSlider = GetNode<HSlider>("VBoxContainer/HBoxContainer/HSlider");
-        var lvl = pinGod?.GameSettings?.LogLevel ?? 0;
+        var lvl = pinGod?.Adjustments?.LogLevel ?? 0;
         logLvlSlider.Value = (int)lvl;
         UpdateLoggerText();
     }
 
     private void UpdateLoggerText()
     {
-        GetNode<Label>("VBoxContainer/HBoxContainer/Label2").Text = pinGod?.GameSettings?.LogLevel.ToString() ?? string.Empty;
+        GetNode<Label>("VBoxContainer/HBoxContainer/Label2").Text = pinGod?.Adjustments?.LogLevel.ToString() ?? string.Empty;
     }
 
     void _on_StatesDelaySpinBox_changed(int val)
     {
-        if (pinGod != null) pinGod.GameSettings.MachineStatesWriteDelay = val;
+        if (pinGod != null) pinGod.Adjustments.MachineStatesWriteDelay = val;
     }
 
     void _on_ReadStatesCheckButton_toggled(bool pressed)
     {
-        if (pinGod != null) pinGod.GameSettings.MachineStatesRead = pressed;
+        if (pinGod != null) pinGod.Adjustments.MachineStatesRead = pressed;
     }
 
     void _on_WriteStatesCheckButton_toggled(bool pressed)
     {
-        if (pinGod != null) pinGod.GameSettings.MachineStatesWrite = pressed;
+        if (pinGod != null) pinGod.Adjustments.MachineStatesWrite = pressed;
     }
 
     void _on_HSlider_value_changed(float val)
     {
         var lvl = (PinGodLogLevel)val;
-        if (pinGod != null) pinGod.GameSettings.LogLevel = lvl;
+        if (pinGod != null) pinGod.Adjustments.LogLevel = lvl;
         UpdateLoggerText();
     }
 }

@@ -102,8 +102,9 @@ if (@event is InputEventKey keyEvent && keyEvent.Pressed && keyEvent.CtrlPressed
 
     private static void ToggleBorder()
     {
-        Display.ToggleWinFlag(DisplayServer.WindowFlags.Borderless);
-        Display.ToggleWinFlag(DisplayServer.WindowFlags.ResizeDisabled);
+        Display.ToggleWinFlag(
+            DisplayServer.WindowFlags.ResizeDisabled | 
+            DisplayServer.WindowFlags.Borderless);
     }
 
     private void Quit()

@@ -121,7 +121,7 @@ public partial class ScoreEntry : Control
                     Scores = _cPlayer.Points
                 });
                 pinGod.GameData.HighScores = pinGod.GameData.HighScores.OrderByDescending(x => x.Scores)
-                    .Take(pinGod.GameSettings.MaxHiScoresCount)
+                    .Take(pinGod.Adjustments.MaxHiScoresCount)
                     .ToList();
                 Logger.Info(nameof(ScoreEntry), ":hi score added", entry, _cPlayer.Points);
             }
@@ -155,7 +155,7 @@ public partial class ScoreEntry : Control
             playerMessageLabel.Text = Tr("HI_SCORE_ENTRY").Replace("%d", (CurrentPlayer + 1).ToString());
 
         //hi scores has enough room to add new at any points
-        if (pinGod.GameData.HighScores.Count < pinGod.GameSettings.MaxHiScoresCount)
+        if (pinGod.GameData.HighScores.Count < pinGod.Adjustments.MaxHiScoresCount)
         {
             Logger.Debug(nameof(ScoreEntry), ":hi-score has space, adding this player");
             CurrentPlayer++;

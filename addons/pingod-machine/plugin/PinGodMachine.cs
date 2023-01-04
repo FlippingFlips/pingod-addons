@@ -35,6 +35,9 @@ public partial class PinGodMachine : Node
     [Export] Dictionary<string, byte> _leds = new Dictionary<string, byte>();
     private PinGodMemoryMapNode _pinGodMemoryMapNode;
     [Export] Dictionary<string, byte> _switches = new Dictionary<string, byte>();
+    public BallSaver _ballSaver;
+    public PlungerLane _plungerLane;
+
     [Signal] public delegate void CoilPulseTimedOutEventHandler(string name);
 
     /// <summary>
@@ -84,8 +87,25 @@ public partial class PinGodMachine : Node
             BallSearchTimer = new Timer() { Autostart = false, OneShot = false };
             BallSearchTimer.Connect("timeout", new Callable(this, nameof(OnBallSearchTimeout)));
             this.AddChild(BallSearchTimer);
+
+            if (HasNode("BallSaver"))
+            {
+                _ballSaver = GetNode<BallSaver>("BallSaver");
+                _ballSaver.BallSaved += _ballSaver_BallSaved;
+            }
+            if (HasNode("PlungerLane"))
+            {
+                _plungerLane = GetNode<PlungerLane>("PlungerLane");
+            }
         }		
 	}
+
+    private void _ballSaver_BallSaved(bool earlySwitch = false)
+    {
+        Logger.Debug(nameof(PinGodMachine), ": ball saved. TODO: act");
+        if (_plungerLane != null)
+            _plungerLane.AutoFire();
+    }
 
     public override void _Ready()
     {
@@ -97,6 +117,12 @@ public partial class PinGodMachine : Node
             Logger.Debug(nameof(PinGodMachine), ":listening for events from plug-in ", nameof(PinGodMemoryMapNode));
         }
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns>True is <see cref="BallSaver"/> is active and not null</returns>
+    public bool IsBallSaveActive() => _ballSaver?.IsBallSaveActive() ?? false;
 
     /// <summary>
     /// Pulse coils in the SearchCoils when ball search times out

@@ -71,6 +71,8 @@ public partial class GameData
 		}
 		else { Save(gameData); }
 
+		if (gameData == null)
+			gameData = new GameData();
 		return gameData;
 	}
 
@@ -84,12 +86,12 @@ public partial class GameData
 		if (FileAccess.GetOpenError() != Error.FileNotFound)
 		{
 			gD = DeserializeGameData<T>(dataSave.GetLine());
-            Logger.Info(nameof(GameSettings), ":gamedata.save loaded");
+            Logger.Info(nameof(Adjustments), ":gamedata.save loaded");
         }
 		else
 		{
 			Save(gD);
-            Logger.Info(nameof(GameSettings), ":gamedata.save created");
+            Logger.Info(nameof(Adjustments), ":gamedata.save created");
         }
 
 		return gD;

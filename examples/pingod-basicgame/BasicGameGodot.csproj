@@ -33,6 +33,7 @@
     <None Include="addons\pingod-audio\README.md" />
     <None Include="addons\pingod-ballsave\plugin.cfg" />
     <None Include="addons\pingod-ballsave\README.md" />
+    <None Include="addons\pingod-data-settings\README.md" />
     <None Include="addons\pingod-game\plugin.cfg" />
     <None Include="addons\pingod-game\README.md" />
     <None Include="addons\pingod-game\Scenes\MainScene.tscn" />
@@ -58,9 +59,14 @@
     <None Include="addons\pingod-plunger_lane\README.md" />
     <None Include="addons\pingod-resources\Resources.tscn" />
     <None Include="addons\pingod-machine\tools\SwitchOverlay.tscn" />
+    <None Include="addons\pingod-settings-menu\plugin.cfg" />
+    <None Include="addons\pingod-settings-menu\scenes\AudioSettings.tscn" />
+    <None Include="addons\pingod-settings-menu\scenes\DisplaySettings.tscn" />
+    <None Include="addons\pingod-settings-menu\scenes\GameSettingsScene.tscn" />
+    <None Include="addons\pingod-settings-menu\scenes\PingodSettingsScene.tscn" />
+    <None Include="addons\pingod-settings-menu\scenes\SettingsDisplay.tscn" />
     <None Include="addons\pingod-trough\Trough.tscn" />
     <None Include="addons\PinGod-Machine\plugin.cfg" />
-    <None Include="addons\pingod-machine\project.godot" />
     <None Include="addons\pingod-machine\README.md" />
     <None Include="addons\pingod-memorymap\MemoryMapPlugin.tscn" />
     <None Include="addons\pingod-memorymap\plugin.cfg" />
@@ -71,7 +77,6 @@
     <None Include="addons\pingod-trough\plugin.cfg" />
     <None Include="addons\pingod-trough\README.md" />
     <None Include="addons\pingod-window-commands\plugin.cfg" />
-    <None Include="addons\pingod-window-commands\project.godot" />
     <None Include="addons\pingod-window-commands\README.md" />
     <None Include="autoload\AudioManager.tscn" />
     <None Include="autoload\Machine.tscn" />

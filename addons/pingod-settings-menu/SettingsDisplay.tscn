@@ -18,6 +18,7 @@ grow_vertical = 2
 theme = ExtResource("1_cnq06")
 
 [node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -27,12 +28,10 @@ theme_override_fonts/font = ExtResource("1_hsabi")
 theme_override_font_sizes/font_size = 18
 
 [node name="Display" type="Label" parent="TabContainer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 27.0
+layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Display"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -40,15 +39,16 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="DisplaySettings" parent="TabContainer/Display/ScrollContainer" instance=ExtResource("1")]
-offset_right = 384.0
-offset_bottom = 364.0
+layout_mode = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 50
 
 [node name="Audio" type="Label" parent="TabContainer"]
 visible = false
+layout_mode = 2
 
 [node name="AudioSettings" parent="TabContainer/Audio" instance=ExtResource("4")]
+layout_mode = 1
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 30
@@ -56,8 +56,10 @@ theme_override_constants/margin_top = 30
 
 [node name="Game" type="Label" parent="TabContainer"]
 visible = false
+layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Game"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -65,15 +67,16 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="GameSettingsScene" parent="TabContainer/Game/ScrollContainer" instance=ExtResource("3")]
-offset_right = 150.0
-offset_bottom = 193.0
+layout_mode = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 50
 
 [node name="Pingod" type="Label" parent="TabContainer"]
 visible = false
+layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Pingod"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -81,19 +84,20 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="GameSettingsScene" parent="TabContainer/Pingod/ScrollContainer" instance=ExtResource("2")]
-offset_right = 319.0
-offset_bottom = 237.0
+layout_mode = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 50
 
 [node name="Panel" type="Panel" parent="."]
 visible = false
+layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 grow_vertical = 2
 
 [node name="VSlider" type="VSlider" parent="Panel"]
+layout_mode = 0
 min_value = -72.0
 max_value = 6.0
 value = -6.0

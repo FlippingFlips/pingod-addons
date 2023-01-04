@@ -17,6 +17,16 @@ public partial class BasicGame : Game
     //p.PckStart("test.pck");
     //p.AddFile("res://")
 
+    /*
+     * Create window inside the game
+     private Window _window;
+            _window = new Godot.Window() { Size = new Vector2i(300, 200) };
+        AddChild(_window);
+        _window.Show();
+            _window.Hide();
+        _window.QueueFree();
+     */
+
     public void OnBallSaveDisabled()
     {
         Logger.Log(PinGodLogLevel.Info, nameof(BasicGame), ":"+nameof(OnBallSaveDisabled));

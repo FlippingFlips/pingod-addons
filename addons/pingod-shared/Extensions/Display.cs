@@ -18,7 +18,7 @@ public static class Display
     /// <param name="flags"></param>
     /// <param name="on"></param>
     /// <param name="windowId"></param>
-    public static void SetWinFlag(this PinGodGame pingod, WindowFlags flags, bool on, int windowId=0)
+    public static void SetWinFlag(WindowFlags flags, bool on, int windowId=0)
         => WindowSetFlag(flags, on, windowId);
 
     /// <summary>
@@ -27,9 +27,6 @@ public static class Display
     /// <param name="pinGod"></param>
     /// <param name="flags"></param>
     /// <param name="windowId"></param>
-    public static void ToggleWinFlag(this PinGodGame pinGod, WindowFlags flags, int windowId=0)
+    public static void ToggleWinFlag(WindowFlags flags, int windowId=0)
         => WindowSetFlag(flags, !WindowGetFlag(flags), windowId);
-
-    public static void ToggleWinFlag(WindowFlags flags, int windowId = 0)
-    => WindowSetFlag(flags, !WindowGetFlag(flags), windowId);
 }

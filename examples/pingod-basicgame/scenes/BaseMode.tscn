@@ -20,5 +20,4 @@ _coil = "mball_saucer"
 _switch = "mball_saucer"
 
 [connection signal="SwitchActive" from="Saucer" to="." method="OnBallStackPinball_SwitchActive"]
-[connection signal="SwitchInActive" from="Saucer" to="." method="OnBallStackInActive"]
 [connection signal="timeout" from="Saucer" to="." method="OnBallStackPinball_timeout"]

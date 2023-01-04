@@ -55,11 +55,11 @@ public partial class MainScene : Node2D
             pinGod = GetNode<PinGodGame>("/root/PinGodGame");
 
         //show a pause menu when pause enabled.
-        if (this.HasNode("PauseControl"))
-            pauseLayer = GetNode("PauseControl") as Control;
+        if (this.HasNode("Controls/PauseControl"))
+            pauseLayer = GetNode("Controls/PauseControl") as Control;
 
-        if (this.HasNode("SettingsDisplay"))
-            settingsDisplay = GetNodeOrNull<Control>("SettingsDisplay");
+        if (this.HasNode("Controls/SettingsDisplay"))
+            settingsDisplay = GetNodeOrNull<Control>("Controls/SettingsDisplay");
 
         //TODO: Godot 4 splashtime
         //Logger.Debug(nameof(MainScene), ":splash timer msecs", OS.GetSplashTickMsec());
@@ -113,6 +113,7 @@ public partial class MainScene : Node2D
                 if (settingsDisplay != null)
                 {
                     var visible = !settingsDisplay.Visible;
+                    settingsDisplay.Visible = visible;
                     if (visible)
                     {
                         if (!GetTree().Paused)
@@ -121,8 +122,7 @@ public partial class MainScene : Node2D
                     else
                     {
                         OnResumeGame();
-                    }
-                    settingsDisplay.Visible = visible;
+                    }                    
                 }
             }
         }
@@ -132,7 +132,7 @@ public partial class MainScene : Node2D
             if (@event.IsActionPressed("pause"))
             {
                 //if (!settingsDisplay?.Visible ?? false)
-                if (!settingsDisplay.Visible)
+                if (!settingsDisplay?.Visible ?? false)
                 {
                     if (pauseLayer.Visible) OnResumeGame(); else OnPauseGame();
                 }                
@@ -144,7 +144,7 @@ public partial class MainScene : Node2D
     private void OnPauseGame()
     {
         Logger.Debug(nameof(PinGodGame), ":pause");
-        GetTree().Paused = true;
+        GetNode("/root").GetTree().Paused = true;
         //settingsDisplay.GetTree().Paused = false;        
         pauseLayer.Show();
     }
@@ -153,7 +153,9 @@ public partial class MainScene : Node2D
     {
         Logger.Debug(nameof(PinGodGame), ":resume");
         pauseLayer.Hide();
-        GetTree().Paused = false;
+
+        //GetTree().Paused = false;
+        GetNode("/root").GetTree().Paused = false;
     }
 
     private void Pause()
