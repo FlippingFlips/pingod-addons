@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://scripts/BasicGame.cs" id="1_nd4pf"]
 [ext_resource type="PackedScene" uid="uid://dqknh6wilqsdh" path="res://addons/pingod-mode-scoremode/ScoreMode.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://dx3c7uoxjls01" path="res://scenes/BaseMode.tscn" id="3"]
-[ext_resource type="PackedScene" path="res://addons/pingod-mode-tilt/Tilt.tscn" id="5"]
-[ext_resource type="PackedScene" path="res://addons/pingod-mode-scoreentry/ScoreEntry.tscn" id="6"]
-[ext_resource type="PackedScene" path="res://addons/pingod-mode-bonus/Bonus.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://sae1nyqil4v3" path="res://addons/pingod-mode-tilt/Tilt.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://u8mp5bwlyuk0" path="res://addons/pingod-mode-scoreentry/ScoreEntry.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://cj3cy11pu52to" path="res://addons/pingod-mode-bonus/Bonus.tscn" id="7"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_nd4pf")
@@ -21,10 +21,6 @@ visible = false
 
 [node name="Tilt" parent="Modes" instance=ExtResource("5")]
 visible = false
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="ScoreEntry" parent="Modes" instance=ExtResource("6")]
 visible = false
-grow_horizontal = 2
-grow_vertical = 2

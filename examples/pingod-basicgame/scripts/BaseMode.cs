@@ -10,21 +10,25 @@ public partial class BaseMode : Control
     private PackedScene _ballSaveScene;
     private Saucer _ballSaucer;
     private Game game;
-    private PinGodGame pinGod;
+    private IPinGodGame pinGod;
 
     /// <summary>
     /// Gets access to <see cref="PinGodGame"/> and the main <see cref="Game"/> scene. 
     /// </summary>
     public override void _EnterTree()
     {
-        pinGod = GetNode("/root/PinGodGame") as PinGodGame;
+        if (HasNode("/root/PinGodGame"))
+        {
+            pinGod = GetNode("/root/PinGodGame") as IPinGodGame;
+            //use the switch command on machine through the game as we're in a game
+            pinGod.PinGodMachine.SwitchCommand += OnSwitchCommandHandler;
+        }
+        else { Logger.WarningRich(nameof(BaseMode), "[color=red]", ": no PinGodGame found", "[/color]"); }
+        
         game = GetParent().GetParent() as BasicGame;
 
         _ballSaveScene = GD.Load<PackedScene>(BALL_SAVE_SCENE);
-        _ballSaucer = GetNode<Saucer>(nameof(Saucer));
-        
-        //use the switch command on machine through the game as we're in a game
-        pinGod.PinGodMachine.SwitchCommand += OnSwitchCommandHandler;        
+        _ballSaucer = GetNode<Saucer>(nameof(Saucer));               
     }
 
     /// <summary>

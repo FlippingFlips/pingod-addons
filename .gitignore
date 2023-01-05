@@ -381,3 +381,9 @@ FodyWeavers.xsd
 /addons/pingod-audio/.godot
 /examples/pingod-basicgame/TODO
 /examples/pingod-basicgame-noscript/.godot
+/examples/pingod-basicgame/pingod_basicgame.xml
+/examples/pingod-basicgame/local/BasicGameLang.en.translation
+/addons/assets/Localization/pingod_default_lang.ja.translation
+/addons/assets/Localization/pingod_default_lang.fr.translation
+/addons/assets/Localization/pingod_default_lang.es.translation
+/addons/assets/Localization/pingod_default_lang.en.translation

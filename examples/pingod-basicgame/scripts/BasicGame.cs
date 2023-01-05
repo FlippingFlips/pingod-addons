@@ -29,11 +29,11 @@ public partial class BasicGame : Game
 
     public void OnBallSaveDisabled()
     {
-        Logger.Log(PinGodLogLevel.Info, nameof(BasicGame), ":"+nameof(OnBallSaveDisabled));
+        Logger.Log(LogLevel.Info, Logger.BBColor.green, nameof(BasicGame), ":"+nameof(OnBallSaveDisabled));
     }
 
     public void OnBallSaveEnabled()
     {
-        Logger.Log(PinGodLogLevel.Info, nameof(BasicGame), ":" + nameof(OnBallSaveEnabled));
+        Logger.Log(LogLevel.Info, Logger.BBColor.green, nameof(BasicGame), ":" + nameof(OnBallSaveEnabled));
     }
 }
