@@ -3,5 +3,5 @@
 [ext_resource type="Script" path="res://addons/pingod-memorymap/plugin/PinGodMemoryMapNode.cs" id="1_ptwrs"]
 
 [node name="MemoryMap" type="Node"]
+editor_description = "Memory map file for communication with simulators etc."
 script = ExtResource("1_ptwrs")
-CoilTotal = 32

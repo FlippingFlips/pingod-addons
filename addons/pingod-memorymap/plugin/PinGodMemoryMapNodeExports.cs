@@ -32,7 +32,7 @@ public partial class PinGodMemoryMapNode
     byte LedTotal = 64;
     [Export(PropertyHint.Range, "64,256")]
     [ExportGroup("Map")]
-    byte SwitchTotal = 64;
+    byte SwitchTotal = 128;
     [Export]
     [ExportGroup("Mutex")]
     string MutexName = "pingod_vp_mutex";
