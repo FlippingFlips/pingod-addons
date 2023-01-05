@@ -1,7 +1,7 @@
 ﻿/// <summary>
 /// 
 /// </summary>
-public enum PinGodLogLevel
+public enum LogLevel
 {
     /// <summary>
     /// Switches verbose

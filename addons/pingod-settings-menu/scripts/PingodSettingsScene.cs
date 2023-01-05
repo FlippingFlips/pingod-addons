@@ -59,7 +59,7 @@ public partial class PingodSettingsScene : MarginContainer
 
     void _on_HSlider_value_changed(float val)
     {
-        var lvl = (PinGodLogLevel)val;
+        var lvl = (LogLevel)val;
         if (pinGod != null) pinGod.Adjustments.LogLevel = lvl;
         UpdateLoggerText();
     }

@@ -6,33 +6,62 @@ using static Godot.GD;
 public static class Logger
 {
     /// <summary>    
-    public static PinGodLogLevel LogLevel { get; set; } = 0;
+    public static LogLevel LogLevel { get; set; } = 0;
     /// <summary>
     /// Use for switches, or other verbose logging
     /// </summary>
     /// <param name="what"></param>
     public static void Verbose(params object[] what)
     {
-        if (LogLevel <= PinGodLogLevel.Verbose)
+        if (LogLevel <= LogLevel.Verbose)
         {
             Print(what);
             //Log(PinGodLogLevel.Verbose, what);            
         }
     }
+
     /// <summary>
-    /// Appends the log level to arguments
+    /// Appends the log level and color to arguments
     /// </summary>
     /// <param name="logLevel"></param>
     /// <param name="what"></param>
-    public static void Log(PinGodLogLevel logLevel, params object[] what) => 
-        Print(logLevel, what);
+    public static void Log(LogLevel logLevel, BBColor color, params object[] what)
+    {
+        if (logLevel < LogLevel) return;
+
+        var arr = new object[what.Length + 1];
+        var msg = string.Empty;
+        var endTag = string.Empty;
+        if(color > 0)
+        {            
+            msg += $"[color={color}]";
+            endTag += "[/color]";
+        }
+        msg += $"[{logLevel}]:";
+        if(color>0)
+            msg += endTag;
+
+        arr[0] = msg;
+        what.CopyTo(arr, 1);
+        PrintRich(arr);
+    }         
+
+    public enum BBColor
+    {
+        white,
+        red,
+        yellow,
+        blue,
+        green
+    }
+
     /// <summary>
     /// 
     /// </summary>
     /// <param name="what"></param>
     public static void Debug(params object[] what)
     {
-        if (LogLevel <= PinGodLogLevel.Debug)
+        if (LogLevel <= LogLevel.Debug)
         {
             Print(what);
             //Log(PinGodLogLevel.Debug, what);
@@ -45,10 +74,10 @@ public static class Logger
     /// <param name="what"></param>
     public static void Error(string message = null, params object[] what)
     {
-        if (LogLevel <= PinGodLogLevel.Error)
+        if (LogLevel <= LogLevel.Error)
         {
-            if (what?.Length > 0) PrintErr(PinGodLogLevel.Error, message, what);
-            else PrintErr(PinGodLogLevel.Error,message, what);
+            if (what?.Length > 0) PrintErr(LogLevel.Error, message, what);
+            else PrintErr(LogLevel.Error,message, what);
             //PushError(message);
         }
     }
@@ -58,7 +87,7 @@ public static class Logger
     /// <param name="what"></param>
     public static void Info(params object[] what)
     {
-        if (LogLevel <= PinGodLogLevel.Info)
+        if (LogLevel <= LogLevel.Info)
         {
             Print(what);
             //Log(PinGodLogLevel.Info, what);            
@@ -71,7 +100,7 @@ public static class Logger
     /// <param name="what"></param>
     public static void Warning(params object[] what)
     {
-        if (LogLevel <= PinGodLogLevel.Warning && what?.Length>0)
+        if (LogLevel <= LogLevel.Warning && what?.Length>0)
         {
             
             Print(what);
@@ -92,7 +121,7 @@ public static class Logger
     /// <param name="what"></param>
     public static void WarningRich(params object[] what)
     {
-        if (LogLevel <= PinGodLogLevel.Warning && what?.Length > 0)
+        if (LogLevel <= LogLevel.Warning && what?.Length > 0)
         {
 
             PrintRich(what);

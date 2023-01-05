@@ -20,6 +20,7 @@ public partial class PinGodWindowActionsNode : Node
     public override void _EnterTree()
     {
         base._EnterTree();
+        Logger.Log(LogLevel.Info, Logger.BBColor.green, nameof(PinGodWindowActionsNode), ":" + nameof(_EnterTree));
 
         if (!Engine.IsEditorHint())
         {
@@ -27,7 +28,7 @@ public partial class PinGodWindowActionsNode : Node
             {
                 if (HasNode("/root/Machine"))
                 {
-                    Logger.Debug(nameof(PinGodWindowActionsNode), $": {nameof(PinGodMachine)} found in Tree");
+                    Logger.Debug(nameof(PinGodWindowActionsNode), $": {nameof(PinGodMachine)} found in Tree");                    
                     _machine = GetNode<PinGodMachine>("/root/Machine");
                 }
                 else
