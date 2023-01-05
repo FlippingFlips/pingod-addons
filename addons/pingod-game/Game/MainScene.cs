@@ -18,7 +18,7 @@ public partial class MainScene : Node2D
     /// </summary>
     [Signal] public delegate void GameResumedEventHandler();
 
-    internal ResourcePreloader _resourcePreLoader;
+    internal Resources _resourcePreLoader;
     /// <summary>
     /// Path to the Game.tscn. 
     /// </summary>
@@ -27,7 +27,7 @@ public partial class MainScene : Node2D
     /// <summary>
     /// Path to service menu scene
     /// </summary>
-    [Export(PropertyHint.File)] protected string _service_menu_scene_path = "res://addons/pingod-servicemenu/ServiceMenu.tscn";
+    [Export(PropertyHint.File)] protected string _service_menu_scene_path = "res://addons/pingod-mode-servicemenu/ServiceMenu.tscn";
 
     private Node attractnode;
     Mutex m = new Mutex();
@@ -72,8 +72,8 @@ public partial class MainScene : Node2D
 
 
         //load Resources node from PinGodGame and load service menu
-        if (pinGod?.HasNode("Resources") ?? false)
-            _resourcePreLoader = pinGod.GetNode("Resources") as ResourcePreloader;
+        if (HasNode("/root/Resources"))
+            _resourcePreLoader = GetNode("/root/Resources") as Resources;
         else Logger.Warning(nameof(MainScene), $":WARN: no node found in pingod game under Resources");
 
 
@@ -352,8 +352,21 @@ public partial class MainScene : Node2D
     {
         if (!string.IsNullOrWhiteSpace(_service_menu_scene_path))
         {
-            var sMenu = Load(_service_menu_scene_path) as PackedScene;
-            _resourcePreLoader?.AddResource(_service_menu_scene_path.GetBaseName(), sMenu);
+            if(_resourcePreLoader == null) { Logger.Warning(nameof(MainScene), ": no preloader Resources found"); }
+            else
+            {
+                var svcSceneName = _service_menu_scene_path.GetBaseName();
+                Logger.Debug(nameof(MainScene), ": pre loading service menu with base name: ", svcSceneName);
+                if (!_resourcePreLoader.HasResource(svcSceneName))
+                {
+                    var sMenu = Load(_service_menu_scene_path) as PackedScene;
+                    _resourcePreLoader?.AddResource(_service_menu_scene_path.GetBaseName(), sMenu);
+                }
+                else
+                {
+                    Logger.Debug(nameof(MainScene), ": pre loading service menu already has that resource: ", svcSceneName);
+                }
+            }            
         }
     }
 
