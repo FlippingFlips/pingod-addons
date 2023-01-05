@@ -93,7 +93,7 @@ public partial class AdjustmentsWithExports
     /// Logging level
     /// </summary>
     [ExportCategory("Logging")]
-    [Export(PropertyHint.Enum)] public PinGodLogLevel LogLevel { get; set; } = PinGodLogLevel.Error;
+    [Export(PropertyHint.Enum)] public LogLevel LogLevel { get; set; } = LogLevel.Error;
 
     /// <summary>
     /// Read from memory map?

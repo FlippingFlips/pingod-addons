@@ -78,7 +78,7 @@ public partial class Adjustments
     /// <summary>
     /// Logging level
     /// </summary>
-    public PinGodLogLevel LogLevel { get; set; } = PinGodLogLevel.Error;
+    public LogLevel LogLevel { get; set; } = LogLevel.Error;
 
     /// <summary>
     /// Read from memory map?
