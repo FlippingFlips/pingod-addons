@@ -9,6 +9,11 @@
 [ext_resource type="LabelSettings" uid="uid://briscw7dffuya" path="res://addons/assets/labels/info_label_settings.tres" id="6_1sch4"]
 
 [node name="ScoreMode" type="Node" groups=["Mode"]]
+editor_description = "- Create any scene with script as base
+- Create labels and place where you want them
+- Select labels for the Score Label and Score Labels
+- No matter on score display this will cover most
+"
 script = ExtResource("1")
 _ballInfoLabel = NodePath("BallInfo")
 _playerInfoLabel = NodePath("PlayerInfo")
@@ -33,18 +38,12 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="pingod-logo" type="TextureRect" parent="CenterContainer"]
-offset_left = 287.0
-offset_top = 55.0
-offset_right = 737.0
-offset_bottom = 544.0
+layout_mode = 2
 texture = ExtResource("5")
 stretch_mode = 5
 
 [node name="ScoreMain" type="Label" parent="CenterContainer"]
-offset_left = 473.0
-offset_top = 200.0
-offset_right = 551.0
-offset_bottom = 400.0
+layout_mode = 2
 text = "0"
 label_settings = ExtResource("3_enb82")
 horizontal_alignment = 1
