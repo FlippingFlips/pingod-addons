@@ -157,7 +157,18 @@ public abstract partial class PinGodGame : PinGodBase
         {
             //LogDebug(nameof(PinGodGame), $":_EnterTree. {PinGodGameAddOn.VERSION}");
             CmdArgs = GetCommandLineArgs();
-            LoadSettingsFile();
+
+            //adjustments from root
+            LogDebug(nameof(PinGodGame), nameof(_EnterTree), ": looking for adjustments module...");
+            if (HasNode("/root/Adjustments"))
+            {
+                Adjustments = GetNode<AdjustmentsScript>("/root/Adjustments")?._adjustments ?? null;
+                if(Adjustments != null)
+                    LogInfo(nameof(PinGodGame), nameof(_EnterTree), ": adjustments loaded.");
+            }
+            else { LogDebug(nameof(PinGodGame), nameof(_EnterTree), ": adjustments module not found..."); }
+
+
             Logger.LogLevel = Adjustments?.LogLevel ?? PinGodLogLevel.Warning;
             LogInfo(nameof(PinGodGame), ":_EnterTree. log level: " + Logger.LogLevel);
 
@@ -604,11 +615,6 @@ public abstract partial class PinGodGame : PinGodBase
         }
 	}
 
-	/// <summary>
-	/// Override when using your own Adjustments
-	/// </summary>
-	public virtual void LoadSettingsFile() => Adjustments = Adjustments.Load();
-
     /// <summary>
     /// 
     /// </summary>
@@ -853,28 +859,6 @@ public abstract partial class PinGodGame : PinGodBase
 	}
 
     /// <summary>
-    /// Sets the Width and Height of the window from `display/window/size` settings. Sets SetScreenStretch from aspect ratio settings in `display/window/stretch/aspect`
-    /// </summary>
-    public void SetMainSceneAspectRatio()
-    {
-        var asp = (PinGodStretchAspect)Enum.Parse(typeof(PinGodStretchAspect),ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.ASPECT).ToString());
-        GetTree().Root.ContentScaleAspect = (Window.ContentScaleAspectEnum)asp;
-
-        //asp = (PinGodStretchAspect)Enum.Parse(typeof(PinGodStretchAspect), ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.).ToString());
-        //GetTree().Root.ContentScaleMode = (Window.ContentScaleModeEnum)asp;
-
-        //GetNodeOrNull<MainScene>("/root/MainScene")?
-        //    .GetTree().SetScreenStretch(SceneTree.StretchMode.Mode2d, (SceneTree.StretchAspect)(int)asp, 
-        //        new Vector2(minW, minH));
-
-        //DisplayServer.WindowSetMode(DisplayServer.WindowMode.Minimized)
-        //DisplayServer.DialogShow
-
-
-        //this.SetWinFlag(DisplayServer.WindowFlags)
-    }
-
-    /// <summary>
     /// Sets up machine items from the collections, starts memory mapping and recordings
     /// </summary>
     public virtual void Setup()
@@ -1085,6 +1069,7 @@ public abstract partial class PinGodGame : PinGodBase
 
             Players.Clear(); //clear any players from previous game
             GameInPlay = true;
+            if (PinGodMachine != null) PinGodMachine.GameInPlay = true;
 
             //remove a credit and add a new player
             GameData.Credits--;
@@ -1355,6 +1340,7 @@ public abstract partial class PinGodGame : PinGodBase
     private void OnServiceMenuEnter()
     {
         GameInPlay = false;
+        if (PinGodMachine != null) PinGodMachine.GameInPlay = false;
         ResetTilt();
         EnableFlippers(0);
     }
