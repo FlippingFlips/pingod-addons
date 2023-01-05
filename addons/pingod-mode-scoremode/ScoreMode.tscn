@@ -1,12 +1,17 @@
 [gd_scene load_steps=8 format=3 uid="uid://dqknh6wilqsdh"]
 
 [ext_resource type="Script" path="res://addons/pingod-mode-scoremode/ScoreMode.cs" id="1"]
-[ext_resource type="LabelSettings" uid="uid://sn8c6lfbh7fw" path="res://addons/assets/labels/score_label_settings.tres" id="3_enb82"]
-[ext_resource type="FontFile" uid="uid://c2swd01bayff8" path="res://addons/assets/fonts/BebasNeue.tres" id="3_q0cdk"]
+[ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="3_abej1"]
 [ext_resource type="Script" path="res://addons/pingod-addons/Labels/CreditsLabel.cs" id="4_hwnjx"]
 [ext_resource type="Texture2D" uid="uid://cfy7fd5ef1bdl" path="res://addons/assets/img/pingod-logo.png" id="5"]
 [ext_resource type="LabelSettings" uid="uid://c27tpsu725rdq" path="res://addons/assets/labels/multiplayer_score_label_settings.tres" id="5_guw73"]
-[ext_resource type="LabelSettings" uid="uid://briscw7dffuya" path="res://addons/assets/labels/info_label_settings.tres" id="6_1sch4"]
+[ext_resource type="LabelSettings" uid="uid://du7brlqvx8j4s" path="res://addons/assets/labels/info_label_settings.tres" id="5_y7657"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4hebh"]
+font = ExtResource("3_abej1")
+font_size = 170
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
 
 [node name="ScoreMode" type="Node" groups=["Mode"]]
 editor_description = "- Create any scene with script as base
@@ -45,7 +50,7 @@ stretch_mode = 5
 [node name="ScoreMain" type="Label" parent="CenterContainer"]
 layout_mode = 2
 text = "0"
-label_settings = ExtResource("3_enb82")
+label_settings = SubResource("LabelSettings_4hebh")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -57,7 +62,6 @@ offset_left = 20.0
 offset_top = 53.0
 offset_right = 49.0
 offset_bottom = 129.0
-theme_override_fonts/font = ExtResource("3_q0cdk")
 theme_override_font_sizes/font_size = 128
 text = "0"
 label_settings = ExtResource("5_guw73")
@@ -73,7 +77,6 @@ offset_top = 53.0
 offset_right = -20.0
 offset_bottom = 129.0
 grow_horizontal = 0
-theme_override_fonts/font = ExtResource("3_q0cdk")
 theme_override_font_sizes/font_size = 128
 text = "0"
 label_settings = ExtResource("5_guw73")
@@ -83,7 +86,6 @@ anchors_preset = -1
 anchor_top = 0.757
 anchor_bottom = 0.757
 offset_left = 20.0
-theme_override_fonts/font = ExtResource("3_q0cdk")
 theme_override_font_sizes/font_size = 128
 text = "0"
 label_settings = ExtResource("5_guw73")
@@ -96,7 +98,6 @@ anchor_right = 1.0
 anchor_bottom = 0.757
 offset_right = -20.0
 grow_horizontal = 0
-theme_override_fonts/font = ExtResource("3_q0cdk")
 theme_override_font_sizes/font_size = 128
 text = "0"
 label_settings = ExtResource("5_guw73")
@@ -110,7 +111,7 @@ offset_top = -40.0
 offset_right = 113.0
 grow_vertical = 0
 text = "Player: "
-label_settings = ExtResource("6_1sch4")
+label_settings = ExtResource("5_y7657")
 
 [node name="BallInfo" type="Label" parent="."]
 anchors_preset = 3
@@ -124,7 +125,7 @@ offset_right = -20.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "BALL: "
-label_settings = ExtResource("6_1sch4")
+label_settings = ExtResource("5_y7657")
 
 [node name="PinGodCreditsLabel" type="Label" parent="."]
 anchors_preset = 7
@@ -138,5 +139,5 @@ offset_right = 34.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "CREDITS "
-label_settings = ExtResource("6_1sch4")
+label_settings = ExtResource("5_y7657")
 script = ExtResource("4_hwnjx")

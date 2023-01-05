@@ -33,7 +33,7 @@ public partial class HighScores : Control
         }
 		else
 		{
-			Label.Text = $"2,000,000    DUB\n\r1,000,000    D I\n\r500,000    TER";
+			Label.Text = $"2,000,000    DUB\n1,000,000    D I\n500,000    TER";
 		}
 	}
 }

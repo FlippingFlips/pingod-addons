@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b0fw60medksyy"]
 
 [ext_resource type="Script" path="res://addons/pingod-addons/Timers/ModeTimer.cs" id="2"]
-[ext_resource type="FontFile" uid="uid://c2swd01bayff8" path="res://addons/assets/fonts/BebasNeue.tres" id="2_gj3bl"]
+[ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="2_gj3bl"]
 
 [node name="ModeTimer" type="Timer"]
 autostart = true
@@ -18,21 +18,26 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Name" type="Label" parent="VBoxContainer"]
-layout_mode = 2
+offset_right = 370.0
+offset_bottom = 76.0
 theme_override_fonts/font = ExtResource("2_gj3bl")
 theme_override_font_sizes/font_size = 72
 text = "MODE NAME"
 horizontal_alignment = 1
 
 [node name="Title" type="Label" parent="VBoxContainer"]
-layout_mode = 2
+offset_top = 80.0
+offset_right = 370.0
+offset_bottom = 156.0
 theme_override_fonts/font = ExtResource("2_gj3bl")
 theme_override_font_sizes/font_size = 72
 text = "MODE TIME TITLE"
 horizontal_alignment = 1
 
 [node name="TimeLeftLabel" type="Label" parent="VBoxContainer"]
-layout_mode = 2
+offset_top = 160.0
+offset_right = 370.0
+offset_bottom = 236.0
 theme_override_fonts/font = ExtResource("2_gj3bl")
 theme_override_font_sizes/font_size = 72
 text = "30"

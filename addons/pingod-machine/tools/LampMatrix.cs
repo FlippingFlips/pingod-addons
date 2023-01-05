@@ -20,7 +20,7 @@ public partial class LampMatrix : GridContainer
 		base._EnterTree();
 
 		try
-		{			
+		{	
 			_lampScene = ResourceLoader.Load<PackedScene>(_lamp_scene);
 		}
 		catch { }

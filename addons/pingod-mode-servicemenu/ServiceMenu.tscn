@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://n2sh6pnbjj22"]
 
 [ext_resource type="Script" path="res://addons/pingod-mode-servicemenu/ServiceMenu.cs" id="1"]
-[ext_resource type="FontFile" uid="uid://c2swd01bayff8" path="res://addons/assets/fonts/BebasNeue.tres" id="2_shk8b"]
+[ext_resource type="LabelSettings" uid="uid://4mc7o3ufn6pb" path="res://addons/assets/labels/service_label_settings.tres" id="2_yqi7o"]
 
 [node name="ServiceMenu" type="CanvasLayer"]
 script = ExtResource("1")
@@ -22,7 +22,9 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="CenterContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_shk8b")
-theme_override_font_sizes/font_size = 64
+offset_left = 291.0
+offset_top = 250.0
+offset_right = 733.0
+offset_bottom = 350.0
 text = "SERVICE_TITLE"
+label_settings = ExtResource("2_yqi7o")

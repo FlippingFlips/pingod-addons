@@ -100,7 +100,7 @@ public partial class Tilt : Control
         SetText(Tr("SLAMTILT"));
         pinGod.PlaySfx("tilt");
         pinGod.IsTilted = true;
-        pinGod.EnableFlippers(0);
+        pinGod.EnableFlippers(false);
         Visible = true;
         timer.Start(_inTiltedSeconds);
         _slamTilted = true;
@@ -149,7 +149,7 @@ public partial class Tilt : Control
         if (pinGod.Tiltwarnings > _num_tilt_warnings)
         {
             pinGod.IsTilted = true;
-            pinGod.EnableFlippers(0);
+            pinGod.EnableFlippers(false);
             Visible = true;
             Logger.Info(nameof(Tilt), ":game tilted");
             ShowTilt();

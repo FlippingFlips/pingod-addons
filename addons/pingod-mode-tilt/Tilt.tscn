@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/pingod-addons/Labels/BlinkingLabel.cs" id="1"]
 [ext_resource type="Script" path="res://addons/pingod-mode-tilt/Tilt.cs" id="2"]
-[ext_resource type="FontFile" uid="uid://c2swd01bayff8" path="res://addons/assets/fonts/BebasNeue.tres" id="3"]
+[ext_resource type="LabelSettings" uid="uid://sn8c6lfbh7fw" path="res://addons/assets/labels/score_label_settings.tres" id="2_hkkv5"]
 
 [node name="Tilt" type="Control" groups=["Mode"]]
 layout_mode = 3
@@ -32,9 +32,9 @@ grow_vertical = 2
 
 [node name="BlinkingLabel" type="Label" parent="CenterContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3")
 theme_override_font_sizes/font_size = 128
 text = "TILT"
+label_settings = ExtResource("2_hkkv5")
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("1")

@@ -25,6 +25,8 @@ public static class Machine
     public static readonly Switches Switches = new Switches() { };
 
     public static void SetCoil(string name, byte state) => Coils[name].State = state;
+
+    public static void SetCoil(string name, bool state) => Coils[name].State = (byte)(state == true ? 1 : 0);
     public static PinStateObject SetLamp(string name, byte state)
     {
         var lamp = Lamps[name];

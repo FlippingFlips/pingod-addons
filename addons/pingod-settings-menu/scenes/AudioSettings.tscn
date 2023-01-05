@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3 uid="uid://dx4wcqpiyuir7"]
 
 [ext_resource type="Script" path="res://addons/pingod-settings-menu/scripts/AudioSettings.cs" id="2"]
-[ext_resource type="FontFile" uid="uid://c2swd01bayff8" path="res://addons/assets/fonts/BebasNeue.tres" id="2_hjyqr"]
+[ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="2_hjyqr"]
+[ext_resource type="LabelSettings" uid="uid://du7brlqvx8j4s" path="res://addons/assets/labels/info_label_settings.tres" id="3_lq8g4"]
 
 [sub_resource type="Theme" id="2"]
 
@@ -9,21 +10,18 @@
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("2")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_right = 1152.0
-offset_bottom = 648.0
+layout_mode = 2
 
 [node name="MasterContainer" type="HBoxContainer" parent="VBoxContainer"]
-offset_right = 1152.0
-offset_bottom = 40.0
+layout_mode = 2
 
 [node name="MasterLabel" type="Label" parent="VBoxContainer/MasterContainer"]
-offset_right = 417.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
 theme_override_fonts/font = ExtResource("2_hjyqr")
@@ -31,11 +29,7 @@ theme_override_font_sizes/font_size = 36
 text = "SETT_VOL_MASTER"
 
 [node name="HSlider" type="HSlider" parent="VBoxContainer/MasterContainer"]
-offset_left = 421.0
-offset_right = 1089.0
-offset_bottom = 40.0
-grow_horizontal = 0
-grow_vertical = 0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 1.6
@@ -48,25 +42,17 @@ tick_count = 86
 ticks_on_borders = true
 
 [node name="Label" type="Label" parent="VBoxContainer/MasterContainer"]
-offset_left = 1093.0
-offset_right = 1152.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 theme_override_fonts/font = ExtResource("2_hjyqr")
 theme_override_font_sizes/font_size = 36
 text = "-6.00"
+label_settings = ExtResource("3_lq8g4")
 
 [node name="MusicContainer" type="HBoxContainer" parent="VBoxContainer"]
-offset_top = 44.0
-offset_right = 1152.0
-offset_bottom = 89.0
+layout_mode = 2
 
 [node name="CheckButton" type="CheckButton" parent="VBoxContainer/MusicContainer"]
-offset_right = 417.0
-offset_bottom = 45.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
 theme_override_fonts/font = ExtResource("2_hjyqr")
@@ -75,11 +61,7 @@ text = "SETT_VOL_MUSIC"
 flat = true
 
 [node name="HSlider" type="HSlider" parent="VBoxContainer/MusicContainer"]
-offset_left = 421.0
-offset_right = 1089.0
-offset_bottom = 45.0
-grow_horizontal = 0
-grow_vertical = 0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 1.6
@@ -92,26 +74,17 @@ tick_count = 86
 ticks_on_borders = true
 
 [node name="Label" type="Label" parent="VBoxContainer/MusicContainer"]
-offset_left = 1093.0
-offset_top = 2.0
-offset_right = 1152.0
-offset_bottom = 42.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 theme_override_fonts/font = ExtResource("2_hjyqr")
 theme_override_font_sizes/font_size = 36
 text = "-6.00"
+label_settings = ExtResource("3_lq8g4")
 
 [node name="SfxContainer" type="HBoxContainer" parent="VBoxContainer"]
-offset_top = 93.0
-offset_right = 1152.0
-offset_bottom = 138.0
+layout_mode = 2
 
 [node name="CheckButton" type="CheckButton" parent="VBoxContainer/SfxContainer"]
-offset_right = 417.0
-offset_bottom = 45.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
 theme_override_fonts/font = ExtResource("2_hjyqr")
@@ -120,11 +93,7 @@ text = "SETT_VOL_SFX"
 flat = true
 
 [node name="HSlider" type="HSlider" parent="VBoxContainer/SfxContainer"]
-offset_left = 421.0
-offset_right = 1089.0
-offset_bottom = 45.0
-grow_horizontal = 0
-grow_vertical = 0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 1.6
@@ -137,26 +106,17 @@ tick_count = 86
 ticks_on_borders = true
 
 [node name="Label" type="Label" parent="VBoxContainer/SfxContainer"]
-offset_left = 1093.0
-offset_top = 2.0
-offset_right = 1152.0
-offset_bottom = 42.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 theme_override_fonts/font = ExtResource("2_hjyqr")
 theme_override_font_sizes/font_size = 36
 text = "-6.00"
+label_settings = ExtResource("3_lq8g4")
 
 [node name="VoiceContainer" type="HBoxContainer" parent="VBoxContainer"]
-offset_top = 142.0
-offset_right = 1152.0
-offset_bottom = 187.0
+layout_mode = 2
 
 [node name="CheckButton" type="CheckButton" parent="VBoxContainer/VoiceContainer"]
-offset_right = 417.0
-offset_bottom = 45.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
 theme_override_fonts/font = ExtResource("2_hjyqr")
@@ -165,11 +125,7 @@ text = "SETT_VOL_VOICE"
 flat = true
 
 [node name="HSlider" type="HSlider" parent="VBoxContainer/VoiceContainer"]
-offset_left = 421.0
-offset_right = 1089.0
-offset_bottom = 45.0
-grow_horizontal = 0
-grow_vertical = 0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 1.6
@@ -182,15 +138,11 @@ tick_count = 86
 ticks_on_borders = true
 
 [node name="Label" type="Label" parent="VBoxContainer/VoiceContainer"]
-offset_left = 1093.0
-offset_top = 2.0
-offset_right = 1152.0
-offset_bottom = 42.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 theme_override_fonts/font = ExtResource("2_hjyqr")
 theme_override_font_sizes/font_size = 36
 text = "-6.00"
+label_settings = ExtResource("3_lq8g4")
 
 [connection signal="value_changed" from="VBoxContainer/MasterContainer/HSlider" to="." method="_on_VolumeSliderMaster_value_changed"]
 [connection signal="toggled" from="VBoxContainer/MusicContainer/CheckButton" to="." method="_on_CheckButtonMusic_toggled"]

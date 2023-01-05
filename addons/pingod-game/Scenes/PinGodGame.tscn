@@ -1,31 +1,14 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=4 format=3 uid="uid://bp2y5onpop3oe"]
 
 [ext_resource type="Script" path="res://addons/pingod-game/Nodes/PinGodGame.cs" id="1_7d45p"]
-[ext_resource type="PackedScene" path="res://addons/pingod-game/scenes/SwitchOverlay.tscn" id="2"]
-[ext_resource type="PackedScene" path="res://addons/pingod-game/scenes/LampMatrix.tscn" id="3"]
-[ext_resource type="PackedScene" path="res://addons/pingod-game/scenes/Trough.tscn" id="4"]
-[ext_resource type="PackedScene" uid="uid://bl6yu04g57053" path="res://addons/pingod-audio/AudioManager.tscn" id="6"]
-[ext_resource type="PackedScene" path="res://addons/pingod-game/scenes/WindowInputs.tscn" id="6_b3kvw"]
-[ext_resource type="PackedScene" path="res://addons/pingod-game/scenes/Resources.tscn" id="7"]
-[ext_resource type="PackedScene" uid="uid://dje3q12enwe12" path="res://addons/pingod-game/scenes/PauseLayer.tscn" id="8_axlrh"]
-[ext_resource type="PackedScene" uid="uid://b38tedw34jcf7" path="res://addons/pingod-settings-menu/SettingsDisplay.tscn" id="9_e0ulx"]
-[ext_resource type="Script" path="res://addons/PinGod-MemoryMap/MemoryMapScript.cs" id="11_lrrnn"]
+[ext_resource type="PackedScene" path="res://addons/pingod-machine/tools/SwitchOverlay.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://addons/pingod-machine/tools/LampMatrix.tscn" id="3"]
 
 [node name="PinGodGame" type="Node"]
 script = ExtResource("1_7d45p")
 _playbackfile = "res://recordings/drain_3_balls.record"
 
-[node name="Trough" parent="." instance=ExtResource("4")]
-process_mode = 1
-
-[node name="AudioManager" parent="." instance=ExtResource("6")]
-process_mode = 1
-
-[node name="WindowActionInputHandler" parent="." instance=ExtResource("6_b3kvw")]
-
 [node name="DevOverlays" type="CanvasLayer" parent="."]
-layer = 128
-visible = false
 
 [node name="LampMatrix" parent="DevOverlays" instance=ExtResource("3")]
 visible = false
@@ -36,25 +19,3 @@ grow_vertical = 2
 visible = false
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="PauseControl" parent="." instance=ExtResource("8_axlrh")]
-process_mode = 2
-visible = false
-z_index = 25
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="SettingsDisplay" parent="." instance=ExtResource("9_e0ulx")]
-visible = false
-z_index = 50
-
-[node name="Resources" parent="." instance=ExtResource("7")]
-_resourcePacks = []
-
-[node name="MemoryMap" type="Node" parent="."]
-script = ExtResource("11_lrrnn")
-IsEnabled = true
-
-[node name="MemoryMapScript2" type="Node" parent="."]
-script = ExtResource("11_lrrnn")
-IsEnabled = true

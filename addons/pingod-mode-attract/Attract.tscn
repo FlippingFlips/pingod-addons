@@ -1,13 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://d2hmpmtrai4vy"]
+[gd_scene load_steps=8 format=3 uid="uid://d2hmpmtrai4vy"]
 
 [ext_resource type="Script" path="res://addons/pingod-addons/Labels/BlinkingLabel.cs" id="1"]
-[ext_resource type="FontFile" uid="uid://c2swd01bayff8" path="res://addons/assets/fonts/BebasNeue.tres" id="2_dknxm"]
+[ext_resource type="LabelSettings" uid="uid://d3thqwe1groaa" path="res://addons/assets/labels/attract_label_settings.tres" id="2_odcig"]
 [ext_resource type="Script" path="res://addons/pingod-mode-attract/Attract.cs" id="4"]
-[ext_resource type="PackedScene" path="res://addons/pingod-mode-highscores/HighScores.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://bqpu6dyjeoob2" path="res://addons/pingod-mode-highscores/HighScores.tscn" id="5"]
 [ext_resource type="Script" path="res://addons/pingod-addons/Labels/CreditsLabel.cs" id="5_fgurf"]
+[ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="5_s6yfo"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_xeaq5"]
-font = ExtResource("2_dknxm")
+font = ExtResource("5_s6yfo")
 font_size = 36
 
 [node name="Attract" type="Control"]
@@ -46,9 +47,8 @@ grow_vertical = 2
 
 [node name="PushStart" type="Label" parent="AttractLayers/PushStart"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_dknxm")
-theme_override_font_sizes/font_size = 128
 text = "ATTRACT_TITLE_1"
+label_settings = ExtResource("2_odcig")
 script = ExtResource("1")
 _blinking = 0.5
 
