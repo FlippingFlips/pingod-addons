@@ -8,13 +8,13 @@ public abstract partial class PinGodGameNode : Node
     /// <summary>
     /// A reference to PinGodGame node
     /// </summary>
-    public PinGodGame pinGod;
+    public IPinGodGame pinGod;
 
     /// <summary>
     /// Gets a reference to <see cref="pinGod"/> in the root /root/PinGodGame
     /// </summary>
     public override void _EnterTree()
     {
-        pinGod = GetNodeOrNull("/root/PinGodGame") as PinGodGame;        
+        pinGod = GetNodeOrNull("/root/PinGodGame") as IPinGodGame;        
     }
 }

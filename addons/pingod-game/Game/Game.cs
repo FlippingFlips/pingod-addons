@@ -1,9 +1,9 @@
 using Godot;
 
 /// <summary>
-/// Custom Game class for Basic Game: TODO: add switch handlers for updating credits, PinGodGame
+/// Custom Game class for Basic Game
 /// </summary>
-public abstract partial class Game : PinGodGameNode
+public abstract partial class Game : PinGodGameNode, IGame
 {	
 	/// <summary>
 	/// Default scene file to use for Multi-Ball
@@ -47,12 +47,13 @@ public abstract partial class Game : PinGodGameNode
     {
         if(pinGod != null)
         {
-            pinGod.BallDrained -= OnBallDrained;
-            pinGod.BallEnded -= OnBallEnded;
-            pinGod.BallSaved -= OnBallSaved;
-            pinGod.BonusEnded -= OnBonusEnded;
-            pinGod.MultiBallEnded -= EndMultiball;
-            pinGod.ScoreEntryEnded -= OnScoreEntryEnded;
+            var pg = pinGod as PinGodGame;
+            pg.BallDrained -= OnBallDrained;
+            pg.BallEnded -= OnBallEnded;
+            pg.BallSaved -= OnBallSaved;
+            pg.BonusEnded -= OnBonusEnded;
+            pg.MultiBallEnded -= EndMultiball;
+            pg.ScoreEntryEnded -= OnScoreEntryEnded;
         }        
         base._ExitTree();
         Logger.Debug(nameof(Game), ":", nameof(_ExitTree));
@@ -65,12 +66,13 @@ public abstract partial class Game : PinGodGameNode
 	{
         if (pinGod != null)
         {
-            pinGod.BallDrained += OnBallDrained;
-            pinGod.BallEnded += OnBallEnded;
-            pinGod.BallSaved += OnBallSaved;
-            pinGod.BonusEnded += OnBonusEnded;
-            pinGod.MultiBallEnded += EndMultiball;
-            pinGod.ScoreEntryEnded += OnScoreEntryEnded;
+            var pg = pinGod as PinGodGame;
+            pg.BallDrained += OnBallDrained;
+            pg.BallEnded += OnBallEnded;
+            pg.BallSaved += OnBallSaved;
+            pg.BonusEnded += OnBonusEnded;
+            pg.MultiBallEnded += EndMultiball;
+            pg.ScoreEntryEnded += OnScoreEntryEnded;
             //pinGod.PlayerAdded += OnPlayerAdded;
         }
 

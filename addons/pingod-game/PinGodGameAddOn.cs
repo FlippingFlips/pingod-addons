@@ -6,7 +6,7 @@ using Godot;
 [Tool]
 public partial class PinGodGameAddOn : EditorPlugin
 {
-    const string ROOT_DIR = "addons/pingod-game/";
+    const string ROOT_DIR = "res://addons/pingod-game/";
 
     public override void _EnterTree()
     {
@@ -24,18 +24,20 @@ public partial class PinGodGameAddOn : EditorPlugin
         {
             if (FileAccess.FileExists(path))
             {
-                Logger.Info(nameof(PinGodGameAddOn), $"found PinGodGame at res://autoload/PinGodGame.tscn");
-                AddAutoloadSingleton(nameof(PinGodGame), "res://autoload/PinGodGame.tscn");
+                Logger.Info(nameof(PinGodGameAddOn), $"found PinGodGame at {path}");
+                AddAutoloadSingleton(nameof(PinGodGame), path);
             }
             else if (FileAccess.FileExists("res://game/PinGodGame.tscn"))
             {
-                Logger.Info(nameof(PinGodGameAddOn), $"found PinGodGame at res://game/PinGodGame.tscn");
-                AddAutoloadSingleton(nameof(PinGodGame), "res://game/PinGodGame.tscn");
+                path = "res://game/PinGodGame.tscn";
+                Logger.Info(nameof(PinGodGameAddOn), $"found PinGodGame at {path}");
+                AddAutoloadSingleton(nameof(PinGodGame), path);
             }
-            else if (FileAccess.FileExists($"{ROOT_DIR}Scenes/PinGodGame.tscn"))
+            else if (FileAccess.FileExists($"{ROOT_DIR}scenes/PinGodGame.tscn"))
             {
-                Logger.Info(nameof(PinGodGameAddOn), $"found PinGodGame at {ROOT_DIR}Scenes/PinGodGame.tscn");
-                AddAutoloadSingleton(nameof(PinGodGame), $"{ROOT_DIR}Scenes/PinGodGame.tscn");
+                path = $"{ROOT_DIR}scenes/PinGodGame.tscn";
+                Logger.Info(nameof(PinGodGameAddOn), $"found PinGodGame at {path}");
+                AddAutoloadSingleton(nameof(PinGodGame), path);
             }
             else { Logger.Warning("autoload for PinGodGame.tscn could be set.", nameof(PinGodGameAddOn), "WARNING: failed to set autoload " + path); }
         }        

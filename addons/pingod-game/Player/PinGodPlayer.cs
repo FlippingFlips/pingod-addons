@@ -1,7 +1,7 @@
 /// <summary>
 /// PinGodPlayer to hold standard pinball variables
 /// </summary>
-public partial class PinGodPlayer : IPlayer
+public partial class PinGodPlayer : IPinGodPlayer
 {
     /// <summary>
     /// 
