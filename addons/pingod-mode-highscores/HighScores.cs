@@ -26,8 +26,14 @@ public partial class HighScores : Control
 	/// </summary>
 	public override void _Ready()
 	{
-		if (pinGod == null) return;
-		var scores = string.Join("\n\r", pinGod?.GameData?.HighScores?.Select(x => $"{x.Scores.ToScoreString()}    {x.Name}"));
-		Label.Text = scores;
+		if (pinGod != null)
+		{
+            var scores = string.Join("\n\r", pinGod?.GameData?.HighScores?.Select(x => $"{x.Scores.ToScoreString()}    {x.Name}"));
+            Label.Text = scores;
+        }
+		else
+		{
+			Label.Text = $"2,000,000    DUB\n\r1,000,000    D I\n\r500,000    TER";
+		}
 	}
 }

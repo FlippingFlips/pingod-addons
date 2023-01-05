@@ -30,30 +30,29 @@ public partial class DisplaySettingsScene : MarginContainer
         Logger.Debug(nameof(DisplaySettingsScene), ":", nameof(_Ready));
         base._Ready();
 
-        //ContentScaleAspectEnum
-        //GetTree().Root.ContentScaleAspect = Window..Expand;
-        var stretchOption = GetNode<OptionButton>("VBoxContainer/StretchAspectOptionButton");
-        foreach (var item in Enum.GetValues(typeof(Window.ContentScaleAspectEnum)))
-        {
-            var i = (long)item;
-            var ii = (int)i;
-            stretchOption.AddItem(item.ToString(), ii);
-        }
-        PinGodStretchAspect aspect = (PinGodStretchAspect)_displaySettings.AspectOption;
-        stretchOption.Selected = (int)aspect;
-
-        //ContentScaleModeEnum
-        var scaleOption = GetNode<OptionButton>("VBoxContainer/ScaleModeOptionButton");
-        foreach (var item in Enum.GetValues(typeof(Window.ContentScaleModeEnum)))
-        {
-            var i = (long)item;
-            var ii = (int)i;
-            scaleOption.AddItem(item.ToString(), ii);
-        }        
-        scaleOption.Selected = (int)_displaySettings.ContentScaleMode;
-
         if (_displaySettings != null)
         {
+            //ContentScaleAspectEnum        
+            var stretchOption = GetNode<OptionButton>("VBoxContainer/StretchAspectOptionButton");
+            foreach (var item in Enum.GetValues(typeof(Window.ContentScaleAspectEnum)))
+            {
+                var i = (long)item;
+                var ii = (int)i;
+                stretchOption.AddItem(item.ToString(), ii);
+            }
+            PinGodStretchAspect aspect = (PinGodStretchAspect)_displaySettings?.AspectOption;
+            stretchOption.Selected = (int)aspect;
+
+            //ContentScaleModeEnum
+            var scaleOption = GetNode<OptionButton>("VBoxContainer/ScaleModeOptionButton");
+            foreach (var item in Enum.GetValues(typeof(Window.ContentScaleModeEnum)))
+            {
+                var i = (long)item;
+                var ii = (int)i;
+                scaleOption.AddItem(item.ToString(), ii);
+            }
+            scaleOption.Selected = (int)_displaySettings.ContentScaleMode;
+
             GetNode<Label>("VBoxContainer/HBoxContainer/DefaultWindowSizeLabel").Text =
             $"ORIGINAL RESOLUTION: {_displaySettings.WidthDefault} X {_displaySettings.HeightDefault}";
 

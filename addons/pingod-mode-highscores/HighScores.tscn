@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3 uid="uid://bqpu6dyjeoob2"]
 
 [ext_resource type="Script" path="res://addons/pingod-mode-highscores/HighScores.cs" id="1"]
-[ext_resource type="FontFile" uid="uid://c2swd01bayff8" path="res://addons/assets/fonts/BebasNeue.tres" id="2_dirbw"]
+[ext_resource type="LabelSettings" uid="uid://bw1f77h4d4dta" path="res://addons/assets/labels/hiscores_title_label_settings.tres" id="2_fwjdm"]
+[ext_resource type="LabelSettings" uid="uid://6frfh7m1smy4" path="res://addons/assets/labels/hiscores_score_label_settings.tres" id="3_hm8f7"]
 
 [node name="HighScores" type="Control"]
 layout_mode = 3
@@ -13,6 +14,7 @@ grow_vertical = 2
 script = ExtResource("1")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -20,22 +22,14 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-offset_left = 412.0
-offset_top = 222.0
-offset_right = 740.0
-offset_bottom = 426.0
+layout_mode = 2
 
 [node name="Label2" type="Label" parent="CenterContainer/VBoxContainer"]
-offset_right = 328.0
-offset_bottom = 100.0
-theme_override_fonts/font = ExtResource("2_dirbw")
-theme_override_font_sizes/font_size = 96
+layout_mode = 2
 text = "HI_SCORES"
+label_settings = ExtResource("2_fwjdm")
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
-offset_top = 104.0
-offset_right = 328.0
-offset_bottom = 204.0
-theme_override_fonts/font = ExtResource("2_dirbw")
-theme_override_font_sizes/font_size = 96
+layout_mode = 2
 text = "SCORE"
+label_settings = ExtResource("3_hm8f7")
