@@ -7,7 +7,7 @@ using Godot;
 public partial class AudioManagerPlugin : EditorPlugin
 {
     const string ASSETS_DIR = "res://addons/assets/";
-    const string ROOT_DIR = "addons/pingod-audio/";
+    const string ROOT_DIR = "res://addons/pingod-audio/";
     const string VERSION = "1.0";
 
     /// <summary>
@@ -22,9 +22,18 @@ public partial class AudioManagerPlugin : EditorPlugin
             var script = GD.Load<Script>(ROOT_DIR + nameof(AudioManager) + ".cs");            
             Logger.Debug(nameof(AudioManagerPlugin), ":" + nameof(_EnterTree), " loaded custom types");
 
-            var scenePath = "res://autoload/AudioManager.tscn";
-            AddAutoloadSingleton(nameof(AudioManager), scenePath);
-            Logger.Info(nameof(AudioManagerPlugin), $": Autoload {scenePath}. Access scene from node /root/Machine");
+            var scenePath = "res://autoload/AudioManager.tscn";                       
+            if (FileAccess.FileExists(scenePath))
+            {
+                AddAutoloadSingleton(nameof(AudioManager), scenePath);
+                Logger.Info(nameof(AudioManagerPlugin), $": Autoload {scenePath}. Access scene from node /root/AudioManager");
+            }
+            else
+            {
+                scenePath = ROOT_DIR + "AudioManager.tscn";
+                AddAutoloadSingleton(nameof(AudioManager), scenePath);
+                Logger.Info(nameof(AudioManagerPlugin), $": Autoload {scenePath}. Access scene from node /root/AudioManager");
+            }
         }        
     }
 
