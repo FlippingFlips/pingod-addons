@@ -64,8 +64,12 @@ public partial class ScoreEntry : Control
         playerMessageLabel = _playerMessage == null ? null : GetNode<Label>(_playerMessage);       
         _entry = new char[_nameMaxLength];
 
-        pinGod = GetNode("/root/PinGodGame") as PinGodGame;
-        pinGod.PinGodMachine.Connect("SwitchCommand", new Callable(this, nameof(OnSwitchCommandHandler)));
+        if (HasNode("/root/PinGodGame"))
+        {
+            pinGod = GetNode("/root/PinGodGame") as PinGodGame;
+            pinGod.PinGodMachine.Connect("SwitchCommand", new Callable(this, nameof(OnSwitchCommandHandler)));
+        }
+        else { Logger.Warning(nameof(ScoreEntry), ": no PinGodGame found"); }
     }
 
     /// <summary>
