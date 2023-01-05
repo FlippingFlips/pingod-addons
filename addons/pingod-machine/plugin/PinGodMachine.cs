@@ -56,6 +56,8 @@ public partial class PinGodMachine : Node
     /// </summary>
     public Timer BallSearchTimer { get; set; }
 
+    public bool GameInPlay { get; set; }
+
     /// <summary>
     /// <see cref="AddCustomMachineItems"/>
     /// </summary>
@@ -226,11 +228,12 @@ public partial class PinGodMachine : Node
     /// <param name="fromAction">if false, it doesn't set the machine switch value</param>
     public void SetSwitch(Switch @switch, byte value, bool fromAction = true)
     {
-        Logger.Info("set switch from action: " + fromAction);
+        Logger.Verbose($"set switch {@switch.Num}, from godot action?:" + fromAction);
         if (!fromAction)
             @switch.SetSwitch(value > 0);
 
         //ProcessSwitch(@switch);
+        ProcessSwitch(@switch);
         EmitSignal(nameof(SwitchCommand), @switch.Name, @switch.Num, value);
     }
 
