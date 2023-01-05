@@ -1,9 +1,9 @@
-[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://briscw7dffuya"]
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://du7brlqvx8j4s"]
 
-[ext_resource type="FontFile" uid="uid://c2swd01bayff8" path="res://addons/assets/fonts/BebasNeue.tres" id="1_xv45a"]
+[ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="1_e5tsv"]
 
 [resource]
-font = ExtResource("1_xv45a")
+font = ExtResource("1_e5tsv")
 font_size = 36
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)

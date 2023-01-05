@@ -1,9 +1,9 @@
 [gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://ca0bhq43bliiv"]
 
-[ext_resource type="FontFile" uid="uid://c2swd01bayff8" path="res://addons/assets/fonts/BebasNeue.tres" id="1_ptpo2"]
+[ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="1_anoqx"]
 
 [resource]
-font = ExtResource("1_ptpo2")
+font = ExtResource("1_anoqx")
 font_size = 196
 outline_size = 16
 outline_color = Color(0, 0, 0, 1)
