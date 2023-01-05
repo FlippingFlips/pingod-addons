@@ -3,7 +3,7 @@
 [ext_resource type="FontFile" uid="uid://c2swd01bayff8" path="res://addons/assets/fonts/BebasNeue.tres" id="1_olvoo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cbxlw"]
-bg_color = Color(0.396078, 0.466667, 0.568627, 1)
+bg_color = Color(0.117647, 0.278431, 0.392157, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jn2da"]
 bg_color = Color(0.172549, 0.196078, 0.231373, 1)

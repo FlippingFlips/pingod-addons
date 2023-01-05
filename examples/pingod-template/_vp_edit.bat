@@ -1,0 +1,1 @@
+start /B "" "C:\Visual Pinball\VPinballX.exe" -Edit ".\visual_pinball\basicdisplay-pingod.vpx" && exit 0

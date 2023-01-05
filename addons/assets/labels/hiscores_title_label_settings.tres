@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://bw1f77h4d4dta"]
+
+[ext_resource type="FontFile" uid="uid://c2swd01bayff8" path="res://addons/assets/fonts/BebasNeue.tres" id="1_pieot"]
+
+[resource]
+font = ExtResource("1_pieot")
+font_size = 128
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
