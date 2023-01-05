@@ -21,7 +21,8 @@ public partial class SettingsMenuPlugin : EditorPlugin
         }
         else
         {
-
+            //var scenePath = "res://autoload/Machine.tscn";
+            //AddAutoloadSingleton("Machine", scenePath);
         }
     }
 
@@ -37,6 +38,6 @@ public partial class SettingsMenuPlugin : EditorPlugin
 	{
         Logger.Debug(nameof(SettingsMenuPlugin), ":" + nameof(_EnterTree), " removing types");
         //RemoveCustomType(nameof(Trough));
-        //RemoveAutoloadSingleton(nameof(Trough));
+        //RemoveAutoloadSingleton("Settings");
     }
 }

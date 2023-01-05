@@ -6,20 +6,22 @@ using System;
 /// </summary>
 public partial class DisplaySettingsScene : MarginContainer
 {
+    private Adjustments _adjustments;
     private DisplaySettings _displaySettings;
-    private PinGodGame pinGod;
+    //private PinGodGame pinGod;
     /// <summary>
     /// Sets up and gets <see cref="_displaySettings"/>
     /// </summary>
     public override void _EnterTree()
     {
         base._EnterTree();
-        if (HasNode("/root/PinGodGame"))
+        if (HasNode("/root/Adjustments"))
         {
-            pinGod = GetNode<PinGodGame>("/root/PinGodGame");
-            _displaySettings = pinGod.Adjustments.Display;
+            Logger.Debug(nameof(DisplaySettingsScene), ": getting adjustments from AdjustmentsScript");
+            _adjustments = GetNode<AdjustmentsScript>("/root/Adjustments")._adjustments;
+            _displaySettings = _adjustments?.Display;
         }
-        else { Logger.Warning(nameof(DisplaySettingsScene), ": no PinGodGame found"); }
+        else { Logger.Warning(nameof(DisplaySettingsScene), ":WARN no /root/Adjustments found"); }
     }
 
     /// <summary>
@@ -123,15 +125,16 @@ public partial class DisplaySettingsScene : MarginContainer
     void _on_StretchAspectOptionButton_item_selected(int index)
     {         
         ProjectSettings.SetSetting(SettingPaths.DisplaySetPaths.ASPECT, ((PinGodStretchAspect)index).ToString());
-        pinGod.SetMainSceneAspectRatio();
+        var asp = (PinGodStretchAspect)Enum.Parse(typeof(PinGodStretchAspect), ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.ASPECT).ToString());
+        GetTree().Root.ContentScaleAspect = (Window.ContentScaleAspectEnum)asp;
         _displaySettings.AspectOption = index;        
     }
 
     void _on_scale_mode_option_button_item_selected(int index)
     {
         //ProjectSettings.SetSetting(SettingPaths.DisplaySetPaths., ((PinGodStretchAspect)index).ToString());        
-        _displaySettings.ContentScaleMode = (Window.ContentScaleModeEnum)index;
         GetTree().Root.ContentScaleMode = _displaySettings.ContentScaleMode;
+        _displaySettings.ContentScaleMode = (Window.ContentScaleModeEnum)index;
     }
 
     private void SetFullScreen(bool enabled)
@@ -140,6 +143,6 @@ public partial class DisplaySettingsScene : MarginContainer
             DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
         else
             DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);        
-        pinGod.Adjustments.Display.FullScreen = enabled;
+        _displaySettings.FullScreen = enabled;
     }
 }

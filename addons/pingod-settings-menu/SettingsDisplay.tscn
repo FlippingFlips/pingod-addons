@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://b38tedw34jcf7"]
 
-[ext_resource type="PackedScene" path="res://addons/pingod-settings-menu/scenes/DisplaySettings.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://bf65wjcixne1f" path="res://addons/pingod-settings-menu/scenes/DisplaySettings.tscn" id="1"]
 [ext_resource type="Theme" uid="uid://cmi2c3y67jlsa" path="res://addons/assets/Themes/pingod_settings_theme.tres" id="1_cnq06"]
 [ext_resource type="FontFile" uid="uid://c2swd01bayff8" path="res://addons/assets/fonts/BebasNeue.tres" id="1_hsabi"]
 [ext_resource type="PackedScene" uid="uid://b3l6ln877pca0" path="res://addons/pingod-settings-menu/scenes/PingodSettingsScene.tscn" id="2"]
