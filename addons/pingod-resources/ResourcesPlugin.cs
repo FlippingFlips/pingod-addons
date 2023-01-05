@@ -6,7 +6,7 @@ using Godot;
 [Tool]
 public partial class ResourcesPlugin : EditorPlugin
 {
-    const string ROOT_DIR = "addons/pingod-resources/";
+    const string ROOT_DIR = "res://addons/pingod-resources/";
 
     public override void _EnterTree()
     {
@@ -17,7 +17,7 @@ public partial class ResourcesPlugin : EditorPlugin
     private void SetAutoLoad()
     {
         var path = "res://autoload/Resources.tscn";
-        Logger.Debug(nameof(ResourcesPlugin), $"setting autoload scene at {path}");
+        Logger.Debug(nameof(ResourcesPlugin), $" looking for scene at {path}");
 
         //assign the scene when in editor
         if (Engine.IsEditorHint())
@@ -25,15 +25,15 @@ public partial class ResourcesPlugin : EditorPlugin
             if (FileAccess.FileExists(path))
             {
                 Logger.Info(nameof(ResourcesPlugin), $"found at {path}");
-                AddAutoloadSingleton("PinGod" + nameof(Resources), path);
+                AddAutoloadSingleton(nameof(Resources), path);
             }
-            else if (FileAccess.FileExists("res://" +ROOT_DIR+"/Resources.tscn"))
+            else if (FileAccess.FileExists(ROOT_DIR+"/Resources.tscn"))
             {
-                path = "res://" + ROOT_DIR + "/Resources.tscn";
-                Logger.Info(nameof(ResourcesPlugin), $"found {path}");
-                AddAutoloadSingleton("PinGod"+nameof(Resources), path);
+                path = ROOT_DIR + nameof(Resources) + ".tscn";
+                Logger.Info(nameof(ResourcesPlugin), $": Resources found {path}");
+                AddAutoloadSingleton(nameof(Resources), path);
             }
-            else { Logger.Warning("autoload for Resources.tscn could be set.", nameof(ResourcesPlugin), "WARNING: failed to set autoload " + path); }
+            else { Logger.Warning("autoload for Resources.tscn could be set.", nameof(Resources), "WARNING: failed to set autoload " + path); }
         }        
     }
 
@@ -57,6 +57,6 @@ public partial class ResourcesPlugin : EditorPlugin
         {
             Logger.Debug(nameof(ResourcesPlugin), $":{nameof(_ExitTree)}: removing AutoLoad scene from editor");
         }
-        RemoveAutoloadSingleton("PinGod"+nameof(Resources));
+        RemoveAutoloadSingleton(nameof(Resources));
     }
 }

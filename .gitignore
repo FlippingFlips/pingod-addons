@@ -380,3 +380,4 @@ FodyWeavers.xsd
 /examples/pingod-basicgame/TODO/Build/data_BasicGameGodot/Mono/etc/mono
 /addons/pingod-audio/.godot
 /examples/pingod-basicgame/TODO
+/examples/pingod-basicgame-noscript/.godot
