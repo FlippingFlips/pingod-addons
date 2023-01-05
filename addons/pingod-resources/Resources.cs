@@ -4,7 +4,7 @@ using Godot;
 /// Resources, graphic packs. Set to AutoLoad with a Resources.tsn in ProjectSettings. <para/>
 /// 
 /// </summary>
-public partial class Resources : ResourcePreloader
+public partial class Resources : Node
 {
     [Export] Godot.Collections.Dictionary<string, string> _resources = new Godot.Collections.Dictionary<string, string>();
 
@@ -13,6 +13,8 @@ public partial class Resources : ResourcePreloader
     /// </summary>
 
     [Export] Godot.Collections.Array<string> _resourcePacks = new Godot.Collections.Array<string>() { "pingod.gfx.pck", "pingod.snd.pck" };
+
+    ResourcePreloader _resourcePreloader = new ResourcePreloader();
 
     /// <summary>
     /// Working directory to load pingod.gfx.pck
@@ -26,34 +28,33 @@ public partial class Resources : ResourcePreloader
     {
         base._EnterTree();
 
-        //TODO: broken
-        //if (!Engine.IsEditorHint())
-        //{
-        //    if(_resourcePacks?.Count > 0)
-        //    {
-        //        var exePath = OS.GetExecutablePath();
-        //        WorkingDirectory = System.IO.Path.GetDirectoryName(exePath);
-        //        foreach (var resourcePack in _resourcePacks)
-        //        {
-        //            if (!LoadResourcePack("res://" + resourcePack))
-        //            {
-        //                LoadResourcePack(System.IO.Path.Combine(WorkingDirectory,resourcePack));
-        //            }
-        //        }
+        if (!Engine.IsEditorHint())
+        {
+            if (_resourcePacks?.Count > 0)
+            {
+                var exePath = OS.GetExecutablePath();
+                WorkingDirectory = System.IO.Path.GetDirectoryName(exePath);
+                foreach (var resourcePack in _resourcePacks)
+                {
+                    if (!LoadResourcePack("res://" + resourcePack))
+                    {
+                        LoadResourcePack(System.IO.Path.Combine(WorkingDirectory, resourcePack));
+                    }
+                }
 
-        //        LoadResources();
-        //    }                  
-        //}
+                LoadResources();
+            }
+        }
     }
 
     /// <summary>
-    /// Loads a resource pack with <see cref="ProjectSettings.LoadResourcePack"/>
+    /// Loads a resource pack with <see cref="ProjectSettings.LoadResourcePack"/> into the resource system, res://
     /// </summary>
     /// <param name="filePath"></param>
     private static bool LoadResourcePack(string filePath)
     {
         if (ProjectSettings.LoadResourcePack(filePath))
-        {
+        {            
             Logger.Info(nameof(Resources), "resource pack loaded:", filePath);
             return true; 
         }
@@ -126,4 +127,10 @@ public partial class Resources : ResourcePreloader
             return null;
         }            
     }
+
+    public virtual void AddResource(string name, Resource res) => _resourcePreloader.AddResource(name, res);
+    public virtual Resource GetResource(string name) => _resourcePreloader.GetResource(name);
+    public virtual string[] GetResourceList() => _resourcePreloader.GetResourceList();
+    public virtual bool HasResource(string name) => _resourcePreloader.HasResource(name);
+    public virtual void RemoveResource(string name) => _resourcePreloader.RemoveResource(name);
 }

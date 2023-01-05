@@ -7,6 +7,7 @@ using Godot;
 public partial class ResourcesPlugin : EditorPlugin
 {
     const string ROOT_DIR = "res://addons/pingod-resources/";
+    const string VERSION = "1.0";
 
     public override void _EnterTree()
     {
