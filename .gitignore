@@ -388,3 +388,5 @@ FodyWeavers.xsd
 /addons/assets/Localization/pingod_default_lang.es.translation
 /addons/assets/Localization/pingod_default_lang.en.translation
 /examples/pingod-template - Copy/.godot
+/examples/pingod-game-pindar/.godot
+/examples/pingod-app-memorymap-window/.godot

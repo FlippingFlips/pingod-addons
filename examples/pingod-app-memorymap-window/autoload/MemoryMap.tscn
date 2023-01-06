@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bi0078r2es2g1"]
+
+[ext_resource type="Script" path="res://addons/pingod-memorymap/plugin/PinGodMemoryMapNode.cs" id="1_xcc85"]
+
+[node name="MemoryMap" type="Node"]
+editor_description = "Memory map file for communication with simulators etc."
+script = ExtResource("1_xcc85")
+IsEnabled = true
+ReadDelay = -1
