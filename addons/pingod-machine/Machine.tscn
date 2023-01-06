@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://addons/pingod-plunger_lane/PlungerLane.cs" id="3_nwj2m"]
 [ext_resource type="Script" path="res://addons/pingod-ballsave/BallSaver.cs" id="4_yl6xf"]
 
-[node name="PinGodMachine" type="Node"]
+[node name="Machine" type="Node"]
 editor_description = "PinGodMachine
 
 Trough			= manages ball trough

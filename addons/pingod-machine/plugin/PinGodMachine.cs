@@ -1,14 +1,23 @@
 ﻿using Godot;
 using Godot.Collections;
+using System.Collections.Generic;
+using System;
 using System.Linq;
 using System.Xml.Linq;
 using static PulseTimer;
+using BasicGameGodot.addons.pingod_machine.tools;
 
 /// <summary>
 /// Machine Godot Node. Holds all machine items before runtime. Adds to the static collections in <see cref="Machine"/>
 /// </summary>
 public partial class PinGodMachine : Node
 {
+    #region Exports
+    [ExportCategory("Record / Playback")]
+    [Export] RecordPlaybackOption recordPlayback = RecordPlaybackOption.Off;
+    [Export(PropertyHint.GlobalFile, "*.record")] string _playbackfile = null;
+
+    [ExportCategory("Ball Search")]
     /// <summary>
     /// Coil names to pulse when ball searching
     /// </summary>
@@ -24,20 +33,20 @@ public partial class PinGodMachine : Node
     /// </summary>
     [Export] public string[] _ball_search_stop_switches;
 
-    static bool _instanceLoaded = false;
     /// <summary>
     /// How long to wait for ball searching and reset
     /// </summary>
     [Export] private int _ball_search_wait_time_secs = 10;
 
-    [Export] Dictionary<string, byte> _coils = new Dictionary<string, byte>();
-    [Export] Dictionary<string, byte> _lamps = new Dictionary<string, byte>();
-    [Export] Dictionary<string, byte> _leds = new Dictionary<string, byte>();
-    private PinGodMemoryMapNode _pinGodMemoryMapNode;
-    [Export] Dictionary<string, byte> _switches = new Dictionary<string, byte>();
-    public BallSaver _ballSaver;
-    public PlungerLane _plungerLane;
+    [ExportCategory("Machine Items")]
 
+    [Export] Godot.Collections.Dictionary<string, byte> _coils = new();
+    [Export] Godot.Collections.Dictionary<string, byte> _lamps = new();
+    [Export] Godot.Collections.Dictionary<string, byte> _leds = new();
+    [Export] Godot.Collections.Dictionary<string, byte> _switches = new();
+    #endregion
+
+    #region Signals
     [Signal] public delegate void CoilPulseTimedOutEventHandler(string name);
 
     /// <summary>
@@ -47,6 +56,18 @@ public partial class PinGodMachine : Node
     /// <param name="index"></param>
     /// <param name="value"></param>
     [Signal] public delegate void SwitchCommandEventHandler(string name, byte index, byte value);
+    #endregion
+
+    public BallSaver _ballSaver;
+    public PlungerLane _plungerLane;
+
+    static bool _instanceLoaded = false;
+    private PinGodMemoryMapNode _pinGodMemoryMapNode;
+    private RecordPlaybackOption _recordPlayback;    
+    private EventRecordFile _recordFile;
+
+    ulong _machineLoadTime;
+
     /// <summary>
     /// 
     /// </summary>
@@ -71,8 +92,10 @@ public partial class PinGodMachine : Node
 				this.QueueFree();
 				return;
             }
-
+            
             _instanceLoaded = true;
+
+            _recordFile = new EventRecordFile();
 
             //ball search options
             BallSearchOptions = new BallSearchOptions(_ball_search_coils, _ball_search_stop_switches, _ball_search_wait_time_secs, _ball_search_enabled);
@@ -102,6 +125,49 @@ public partial class PinGodMachine : Node
         }		
 	}
 
+    /// <summary>
+    /// Saves recordings if enabled and runs <see cref="Quit(bool)"/>
+    /// </summary>
+    public override void _ExitTree()
+    {
+        if (_recordPlayback == RecordPlaybackOption.Record)
+        {
+            Logger.Info(nameof(PinGodMachine), ":_ExitTree, saving recordings");            
+        }
+        else Logger.Info(nameof(PinGodMachine), ":_ExitTree");
+    }
+
+    /// <summary>
+    /// Process playback events. Turns off if playback is switched off.
+    /// </summary>
+    /// <param name="delta"></param>
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+        if (_recordPlayback != RecordPlaybackOption.Playback)
+        {
+            SetProcess(false);
+            Logger.Info(nameof(PinGodMachine), ": Playback _Process loop stopped. No recordings are being played back.");
+            return;
+        }
+        else
+        {
+            var cnt = _recordFile.GetQueueCount();
+            if (cnt <= 0)
+            {
+                Logger.Info(nameof(PinGodMachine), ": playback events ended, RecordPlayback is off.");
+                _recordPlayback = RecordPlaybackOption.Off;
+                _recordFile.SaveRecording();
+                return;
+            }
+
+            
+            var evt = _recordFile.ProcessQueue(_machineLoadTime);
+            if(evt !=null)
+                SetSwitch(evt.EvtName, evt.State, false);
+        }
+    }
+
     private void _ballSaver_BallSaved(bool earlySwitch = false)
     {
         Logger.Debug(nameof(PinGodMachine), ": ball saved. TODO: act");
@@ -118,6 +184,11 @@ public partial class PinGodMachine : Node
             _pinGodMemoryMapNode.MemorySwitchSignal += OnSwitchCommand;
             Logger.Debug(nameof(PinGodMachine), ":listening for events from plug-in ", nameof(PinGodMemoryMapNode));
         }
+
+        //set start time
+        _machineLoadTime = Godot.Time.GetTicksMsec();
+        //set up recording / playback from [export] properties
+        SetUpRecordingsOrPlayback(recordPlayback, _playbackfile);
     }
 
     public void DisableBallSaver() => _ballSaver?.DisableBallSave();
@@ -228,13 +299,52 @@ public partial class PinGodMachine : Node
     /// <param name="fromAction">if false, it doesn't set the machine switch value</param>
     public void SetSwitch(Switch @switch, byte value, bool fromAction = true)
     {
-        Logger.Verbose($"set switch {@switch.Num}, from godot action?:" + fromAction);
+        //Logger.Verbose($"set switch {@switch.Num}, from godot action?:" + fromAction);
         if (!fromAction)
-            @switch.SetSwitch(value > 0);
+            @switch.SetSwitch(value);
 
-        //ProcessSwitch(@switch);
+        //record switch
+        if (_recordPlayback == RecordPlaybackOption.Record)
+        {
+            _recordFile.RecordEventByName(@switch, _machineLoadTime);
+        }
+
         ProcessSwitch(@switch);
         EmitSignal(nameof(SwitchCommand), @switch.Name, @switch.Num, value);
+    }
+
+    public virtual void SetUpRecordingsOrPlayback(RecordPlaybackOption playbackOption, string playbackfile)
+    {
+        _recordPlayback = playbackOption;
+
+        Logger.Debug(nameof(PinGodMachine), ":setup playback?: ", _recordPlayback.ToString());
+        if (_recordPlayback == RecordPlaybackOption.Playback)
+        {
+            if (string.IsNullOrWhiteSpace(playbackfile))
+            {
+                Logger.Warning(nameof(PinGodMachine),":",nameof(SetUpRecordingsOrPlayback), ": playback enabled but no record file set.");
+                _recordPlayback = RecordPlaybackOption.Off;
+            }
+            else
+            {                
+                try
+                {
+                    if(_recordFile.PopulateQueueFromPlaybackFile(playbackfile) == Error.Ok)
+                    {
+                        Logger.Info(nameof(PinGodMachine), ":running playback file: ", playbackfile);
+                    }                    
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error($"playback file failed: " + ex.Message);
+                }
+            }
+        }
+        else if (_recordPlayback == RecordPlaybackOption.Record)
+        {
+            _recordFile.StartRecording(playbackfile);            
+            Logger.Debug(nameof(PinGodMachine), ":game recording on");
+        }
     }
 
     /// <summary>
@@ -291,7 +401,7 @@ public partial class PinGodMachine : Node
     /// <param name="switches"></param>
     /// <param name="lamps"></param>
     /// <param name="leds"></param>
-    protected void AddCustomMachineItems(Dictionary<string, byte> coils, Dictionary<string, byte> switches, Dictionary<string, byte> lamps, Dictionary<string, byte> leds)
+    protected void AddCustomMachineItems(Godot.Collections.Dictionary<string, byte> coils, Godot.Collections.Dictionary<string, byte> switches, Godot.Collections.Dictionary<string, byte> lamps, Godot.Collections.Dictionary<string, byte> leds)
     {
         foreach (var coil in coils.Keys)
         {
