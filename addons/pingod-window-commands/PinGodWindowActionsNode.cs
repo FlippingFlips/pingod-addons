@@ -108,10 +108,16 @@ if (@event is InputEventKey keyEvent && keyEvent.Pressed && keyEvent.CtrlPressed
     }
 
     private void Quit()
-    {
-        Logger.Debug(nameof(PinGodWindowActionsNode), ":quit action request. quitting whole tree.");
-        //todo: commented out, is it needed? :)
-        //SetGameResumed();
-        GetTree().Quit(0);
+    {        
+        if (HasNode("/root/PinGodGame"))
+        {
+            Logger.Debug(nameof(PinGodWindowActionsNode), ":quit action request. quitting pingodGame");
+            GetNodeOrNull<PinGodGame>("/root/PinGodGame").Quit();
+        }
+        else
+        {
+            Logger.Debug(nameof(PinGodWindowActionsNode), ":quit action request. quitting tree.");
+            GetTree().Quit(0);
+        }
     }
 }
