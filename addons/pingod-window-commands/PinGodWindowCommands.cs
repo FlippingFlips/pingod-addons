@@ -2,13 +2,13 @@ using Godot;
 using System.IO;
 
 /// <summary>
-/// AudioManager node
+/// Window commands. Handles UI and actions.
 /// </summary>
 [Tool]
 public partial class PinGodWindowCommands : EditorPlugin
 {
     const string ASSETS_DIR = "res://addons/assets/";
-    const string ROOT_DIR = "addons/pingod-window-commands/";
+    const string ROOT_DIR = "res://addons/pingod-window-commands/";
     const string VERSION = "1.0";
 
     /// <summary>
@@ -26,15 +26,20 @@ public partial class PinGodWindowCommands : EditorPlugin
             */
 
             var scenePath = $"res://autoload/WindowActions.tscn";
+            Logger.Debug(nameof(PinGodWindowCommands), ":" + nameof(_EnterTree), $": looking for WindowActions scene....");
             if (Godot.FileAccess.FileExists(scenePath))
-            {
-                Logger.Debug(nameof(PinGodWindowCommands), ":" + nameof(_EnterTree), $" ");                
+            {                            
                 AddAutoloadSingleton("WindowActions", scenePath);
                 Logger.Info(nameof(PinGodWindowCommands), $": Autoload " + scenePath, ". Access scene from node /root/WindowActions");
             }
+            else if(Godot.FileAccess.FileExists(ROOT_DIR+"WindowActions.tscn"))
+            {                
+                AddAutoloadSingleton("WindowActions", ROOT_DIR + "WindowActions.tscn");
+                Logger.Info(nameof(PinGodWindowCommands), $": Autoloaded " + ROOT_DIR + "WindowActions.tscn", ". Access scene from node /root/WindowActions\nTo customize settings or add game switches duplicate the WindowActions.tscn to the autoload folder and re-enable plugin.");
+            }
             else
             {
-                Logger.WarningRich("[color=yellow]", nameof(PinGodWindowCommands), ": Create scene file with " + nameof(PinGodWindowActionsNode) + " as a base script at"  + scenePath, "[/color]");
+                Logger.WarningRich("[color=yellow]", nameof(PinGodWindowCommands), ": Create scene file with " + nameof(PinGodWindowActionsNode) + " as a base script at" + scenePath, "[/color]");
             }
         }
 

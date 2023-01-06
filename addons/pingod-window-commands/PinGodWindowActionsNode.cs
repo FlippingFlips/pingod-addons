@@ -56,8 +56,7 @@ public partial class PinGodWindowActionsNode : Node
             {
                 if (@event.IsActionPressed("quit"))
                 {
-                    Quit();
-                    return;
+                    Quit();                    
                 }
             }
 

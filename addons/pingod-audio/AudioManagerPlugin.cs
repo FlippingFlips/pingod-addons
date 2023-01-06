@@ -33,6 +33,7 @@ public partial class AudioManagerPlugin : EditorPlugin
                 scenePath = ROOT_DIR + "AudioManager.tscn";
                 AddAutoloadSingleton(nameof(AudioManager), scenePath);
                 Logger.Info(nameof(AudioManagerPlugin), $": Autoload {scenePath}. Access scene from node /root/AudioManager");
+                Logger.Info(nameof(AudioManagerPlugin), $": Add a scene in /autoload/AudioManager.tscn then re-enable the plugin\n Use the AutoManager.cs script or your own.");
             }
         }        
     }

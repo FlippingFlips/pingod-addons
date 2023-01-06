@@ -5,7 +5,7 @@ using Godot;
 public partial class PinGodMachinePlugin : EditorPlugin
 {
     const string ASSETS_DIR = "res://addons/assets/";
-    const string ROOT_DIR = "addons/pingod-machine/";
+    const string ROOT_DIR = "res://addons/pingod-machine/";
     const string VERSION = "1.0";
 
     /// <summary>
@@ -33,9 +33,19 @@ public partial class PinGodMachinePlugin : EditorPlugin
             Logger.Debug(nameof(PinGodMachinePlugin), $":TOOL: {nameof(TargetsBank)}. USAGE: add to scene and set target switch names, hook to OnTargetsCompleted, OnTargetActivated");
 
             var scenePath = "res://autoload/Machine.tscn";
-            AddAutoloadSingleton("Machine", scenePath);
-            Logger.Info(nameof(PinGodMachinePlugin), $": Autoload {scenePath}. Access scene from node /root/Machine");
-        }        
+            if (FileAccess.FileExists(scenePath))
+            {
+                AddAutoloadSingleton("Machine", scenePath);
+                Logger.Info(nameof(PinGodMachinePlugin), $": Autoload {scenePath}. Access scene from node /root/Machine");               
+            }
+            else
+            {
+                scenePath = ROOT_DIR + nameof(Machine)+".tscn";
+                AddAutoloadSingleton(nameof(Machine), scenePath);
+                Logger.Info(nameof(PinGodMachinePlugin), $": Autoload {scenePath}. Access scene from node /root/Machine");
+                Logger.Info(nameof(PinGodMachinePlugin), $": Add a scene in /autoload/Machine.tscn and derive from the machine script to customize the machine.");
+            }
+        }
     }
 
     public override void _Ready()

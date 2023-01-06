@@ -30,14 +30,14 @@ public partial class PinGodMemoryMapNode : Node
         {
             if (!this.IsEnabled)
             {
-                Logger.Warning(nameof(PinGodMemoryMapNode), ":removing PinGo-Memory addon. Node IsEnabled=false");
+                Logger.Warning(nameof(PinGodMemoryMapNode), ": PinGod-Memory addon disabled. Use IsEnabled in the scene.\n**Duplicate the default MemoryMap.tscn and put in autoload directory, change settings in scene and re-enable the plugin.**");
                 this.QueueFree();
                 return;
             }
 
             if (this.WriteDelay < 0 && this.ReadDelay < 0)
             {
-                Logger.Warning(nameof(PinGodMemoryMapNode),"removing PinGo-Memory addon. enable the read delay and write delay with values higher than 1");
+                Logger.Warning(nameof(PinGodMemoryMapNode), "removing PinGod-Memory addon. enable the read delay and write delay with values higher than 1");
                 this.QueueFree();
                 return;
             }
