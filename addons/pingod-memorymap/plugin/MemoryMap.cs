@@ -20,6 +20,7 @@ public class MemoryMap : IDisposable
     private int _offsetLeds;
     private int _offsetSwitches;
     private MemoryMappedViewAccessor _switchMapping;
+    private MemoryMappedViewAccessor _switchWriteMapping;
     private Task _readStatesTask;
     private Task _writeStatesTask;
     private MemoryMappedFile mmf;
@@ -171,27 +172,10 @@ public class MemoryMap : IDisposable
                 //last state in buffer changed
                 if (buffer[i] != switchBuffer[i])
                 {                   
-                    //override sending switch if this is a visual pinball command
-                    if(VpCommandSwitch.HasValue && VpCommandSwitch.Value > 0 && VpCommandSwitch.Value == i)
+                    if (i > 0)
                     {
-                        //TODO: emit vpswitch, not using godot
-                        //pinGodGame?.EmitSignal(nameof(PinGodBase.VpCommandEventHandler), nameof(PinGodBase.VpCommandEventHandler), buffer[i]);
-                    }
-                    else if (i > 0)
-                    {
-                        Logger.Info("read states run. switch changed");
-                        //set switch IsEnabled and send signal
-                        //Logger.Verbose(nameof(MemoryMap), $":sw:{i}:{buffer[i]}");
-
-                        //TODO
-                        //pinGodGame.SetSwitch(i, buffer[i]);
-
+                        //event to anyone listening for incoming memory maps
                         MemorySwitchEventHandler?.Invoke(this, new SwitchEventArgs(i, buffer[i]));
-
-                        //Feed switch into Godot action
-                        //bool actionState = (bool)GD.Convert(buffer[i], Variant.Type.Bool);
-                        //var ev = new InputEventAction() { Action = $"sw{i}", Pressed = actionState };
-                        //Input.ParseInputEvent(ev);
                     }
                     else // Use Switch 0 for game GameSyncState
                     {                        
@@ -261,6 +245,7 @@ public class MemoryMap : IDisposable
             
             viewAccessor = mmf.CreateViewAccessor(0, MAP_SIZE, MemoryMappedFileAccess.ReadWrite);
             _switchMapping = mmf.CreateViewAccessor(_offsetSwitches, TOTAL_SWITCH * 2, MemoryMappedFileAccess.Read);
+            _switchWriteMapping = mmf.CreateViewAccessor(_offsetSwitches, TOTAL_SWITCH * 2, MemoryMappedFileAccess.Write);
             //GD.Print("offset for switches: ", _offsetSwitches);
         }
         else
@@ -288,6 +273,29 @@ public class MemoryMap : IDisposable
         viewAccessor.WriteArray(_offsetLeds, ledArray, 0, ledArray.Length);
 
         //Print("states written in:", OS.GetTicksMsec() - start);
+    }
+
+    /// <summary>
+    /// Pushes a switch into the memory, on and off, off and on <para/>
+    /// This used for extra control, multiple windows. While a game is running this can be used to send switches to the game
+    /// </summary>
+    /// <param name="swNum"></param>
+    /// <param name="swValue"></param>
+    internal void WriteSwitchPulse(int swNum, byte swValue)
+    {
+        byte[] arr = new byte[TOTAL_SWITCH / 2];
+        arr[swNum] = (byte)swNum; arr[swNum+1] = swValue;
+        arr[swNum+=2] = (byte)swNum; arr[swNum += 3] = (byte)(swValue > 0 ? 1: 0);
+        //write the switches to memory map.
+        _switchWriteMapping.WriteArray<byte>(0, arr, 0, arr.Length);
+    }
+
+    internal void WriteSwitch(int swNum, byte swValue)
+    {
+        byte[] arr = new byte[TOTAL_SWITCH / 2];
+        arr[swNum-1] = (byte)(swNum-1); arr[swNum] = swValue;
+        //write the switches to memory map.
+        _switchWriteMapping.WriteArray<byte>(0, arr, 0, arr.Length);
     }
 
     public enum GameSyncState

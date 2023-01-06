@@ -89,6 +89,26 @@ public partial class PinGodMemoryMapNode : Node
         Logger.Info(nameof(PinGodMemoryMapNode), ":memory map exited");
     }
 
+    public void WriteSwitchPulseToMemory(int swNum, byte swValue)
+    {
+        //set the switch on/off
+        var sw = Machine.Switches.GetSwitch(swNum);
+        sw.SetSwitch(swValue);
+
+        //write to memory
+        mMap.WriteSwitchPulse(swNum, swValue);
+    }
+
+    public void WriteSwitchToMemory(int swNum, byte swValue)
+    {
+        //set the switch on/off
+        var sw = Machine.Switches.GetSwitch(swNum);
+        sw.SetSwitch(swValue);
+
+        //write to memory
+        mMap.WriteSwitch(swNum, swValue);
+    }
+
     private void MMap_MemorySwitchEventHandler(object sender, SwitchEventArgs sw)
     {
         Logger.Debug(nameof(PinGodMemoryMapNode), $": map switch: {sw.Num}={sw.Value}");        
