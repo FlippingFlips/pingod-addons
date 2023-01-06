@@ -28,7 +28,7 @@ public partial class HighScores : Control
 	{
 		if (pinGod != null)
 		{
-            var scores = string.Join("\n\r", pinGod?.GameData?.HighScores?.Select(x => $"{x.Scores.ToScoreString()}    {x.Name}"));
+            var scores = string.Join("\n", pinGod?.GameData?.HighScores?.Select(x => $"{x.Scores.ToScoreString()}    {x.Name}"));
             Label.Text = scores;
         }
 		else
