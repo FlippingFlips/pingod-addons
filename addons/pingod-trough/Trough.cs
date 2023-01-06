@@ -37,6 +37,13 @@ public partial class Trough : Node
 	{
         Logger.Debug(nameof(Trough), ":_EnterTree");
 
+        if (!_isEnabled)
+        {
+            Logger.Info(nameof(Trough), ":_EnterTree", " trough is disabled in scene, freeing up");
+            this.QueueFree();
+            return;
+        }
+
         troughPulseTimer = new Timer { Name = "TroughPulseTimer", OneShot =false, WaitTime = 1 };        
         AddChild(troughPulseTimer);
         troughPulseTimer.Timeout += _trough_pulse_timeout;
@@ -96,7 +103,7 @@ public partial class Trough : Node
         var cnt = 0;
         for (int i = 0; i < TroughOptions.Switches.Length; i++)
         {
-            if (Machine.Switches[TroughOptions.Switches[i]].IsEnabled)
+            if (Machine.Switches[TroughOptions.Switches[i]].IsEnabled())
             {
                 cnt++;
             }
@@ -123,7 +130,7 @@ public partial class Trough : Node
 
         for (int i = 0; i < TroughOptions.GameSwitches.Count - BallsLocked; i++)
         {
-            if (!TroughOptions.GameSwitches[i].IsEnabled)
+            if (!TroughOptions.GameSwitches[i].IsEnabled())
             {
                 isFull = false;
                 break;
@@ -289,12 +296,12 @@ public partial class Trough : Node
     /// </summary>
     void _trough_pulse_timeout()
 	{
-        Logger.Debug(nameof(Trough), ": trough pulse time out");
+        //Logger.Debug(nameof(Trough), ": trough pulse time out");
         if(_machine?._plungerLane != null && _machine._ballSaver !=null)
         {
             var sw = Machine.Switches[_machine._plungerLane._plunger_lane_switch];
             
-            Logger.Verbose(nameof(Trough), ": plunger lane time since:", sw.TimeSinceChange(), " is on=",sw.IsEnabled, " ball saver time=", _machine._ballSaver.TimeRemaining);
+            Logger.Verbose(nameof(Trough), ": plunger lane time since:", sw.TimeSinceChange(), " is on=",sw.IsEnabled(), " ball saver time=", _machine._ballSaver.TimeRemaining);
             //ball isn't in plunger lane and ball saver on then put ball into lane
             if (!_machine._plungerLane.IsSwitchActive() && _machine._ballSaver.TimeRemaining > 0)
             {

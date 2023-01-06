@@ -2,15 +2,23 @@
 
 public partial class PlungerLane : Node
 {
+    [Export] public bool _isEnabled = true;
+    [Signal] public delegate void AutoPlungerFiredEventHandler();
+
     private PinGodGame pinGod;
     private PinGodMachine machine;
-    private BallSaver ballSaver;
-
-    [Signal] public delegate void AutoPlungerFiredEventHandler();
+    private BallSaver ballSaver;        
 
     public override void _Ready()
     {
         if (Engine.IsEditorHint()) return;
+
+        if (!_isEnabled)
+        {
+            Logger.Info(nameof(PlungerLane), nameof(_EnterTree), ": removing plunger lane plugin");
+            this.QueueFree();
+            return;
+        }
 
         Logger.Debug(nameof(PlungerLane), nameof(_EnterTree));
 

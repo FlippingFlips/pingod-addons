@@ -1,43 +1,35 @@
 ﻿using Godot;
 using System.Drawing;
 using System.Linq;
-using System.Net.NetworkInformation;
-using System.Reflection.PortableExecutable;
-using System.Xml.Linq;
 
 public partial class BallSaver : Timer
 {
     #region Exports
+    [Export] public bool _isPluginEnabled = true;
     /// <summary>
     /// default ball save time
     /// </summary>
     [Export] public byte _ball_save_seconds = 8;
-
     /// <summary>
     /// ball save grace time
     /// </summary>
     [Export] public byte _ball_save_grace_seconds = 2;
-
     /// <summary>
     /// The lamp name to cycle for ball saves
     /// </summary>
     [Export] public string _ball_save_lamp = "";
-
     /// <summary>
     /// The led name to cycle for ball saves
     /// </summary>
     [Export] public string _ball_save_led = "shoot_again";
-
     /// <summary>
     /// default ball save in multi-ball
     /// </summary>
     [Export] public byte _ball_save_multiball_seconds = 8;
-
     /// <summary>
     /// number of balls to save, defaults to one single ball play
     /// </summary>
     [Export] public byte _number_of_balls_to_save = 1;
-
     /// <summary>
     /// Early switch ball save names. outlane_l outlane_r
     /// </summary>
@@ -60,6 +52,14 @@ public partial class BallSaver : Timer
     public override void _EnterTree()
     {
         base._EnterTree();
+
+        if (!_isPluginEnabled)
+        {
+            Logger.Info(nameof(BallSave), ":plugin is disabled in scene, removing");
+            this.QueueFree();
+            return;
+        }
+
         //set wait time 1 to repeat so we can count down the remaining time
         OneShot = false; WaitTime = 1;
         //hook to the timeout

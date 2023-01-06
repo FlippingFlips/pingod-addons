@@ -8,7 +8,9 @@ public partial class Trough : Node
     /// <summary>
     /// Use this to turn off trough checking, outside VP
     /// </summary>
-    [Export] public bool _isDebugTrough = false; 
+    [Export] public bool _isDebugTrough = false;
+
+    [Export] public bool _isEnabled = true;
 
     /// <summary>
     /// The solenoid / coil name to use when kicking the ball from the trough

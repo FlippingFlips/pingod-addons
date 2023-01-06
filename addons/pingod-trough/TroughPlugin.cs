@@ -15,7 +15,7 @@ public partial class TroughPlugin : EditorPlugin
     /// </summary>
     public override void _EnterTree()
 	{
-        Logger.Debug(nameof(PinGodWindowCommands), nameof(_EnterTree), ":" + ROOT_DIR + $":version:{VERSION}");
+        Logger.Info("PLUGIN-", nameof(TroughPlugin), $": version: {VERSION} / {ROOT_DIR}");
         if (Engine.IsEditorHint())
         {
             /*
