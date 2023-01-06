@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqpu6dyjeoob2"]
+[gd_scene load_steps=3 format=3 uid="uid://bqpu6dyjeoob2"]
 
 [ext_resource type="Script" path="res://addons/pingod-mode-highscores/HighScores.cs" id="1"]
-[ext_resource type="LabelSettings" uid="uid://bw1f77h4d4dta" path="res://addons/assets/labels/hiscores_title_label_settings.tres" id="2_fwjdm"]
-[ext_resource type="LabelSettings" uid="uid://6frfh7m1smy4" path="res://addons/assets/labels/hiscores_score_label_settings.tres" id="3_hm8f7"]
+[ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="2_82sx4"]
 
 [node name="HighScores" type="Control"]
 layout_mode = 3
@@ -26,10 +25,12 @@ layout_mode = 2
 
 [node name="Label2" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_82sx4")
+theme_override_font_sizes/font_size = 96
 text = "HI_SCORES"
-label_settings = ExtResource("2_fwjdm")
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_82sx4")
+theme_override_font_sizes/font_size = 72
 text = "SCORE"
-label_settings = ExtResource("3_hm8f7")

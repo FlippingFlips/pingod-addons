@@ -12,7 +12,6 @@ Trough			= manages ball trough
 PlungerLane	= detects switch, auto plunges if ball saver
 BallSaver		= ball saver + multiball"
 script = ExtResource("1_sbm0p")
-_ball_search_coils = PackedStringArray("mball_saucer")
 _ball_search_stop_switches = PackedStringArray("mball_saucer", "trough_1", "trough_2", "trough_3", "trough_4")
 _coils = {
 "alive": 0,
@@ -38,7 +37,7 @@ _switches = {
 "flipper_r": 11,
 "inlane_l": 22,
 "inlane_r": 23,
-"mball_saucer": 27,
+"mball_saucer": null,
 "outlane_l": 21,
 "outlane_r": 24,
 "plunger_lane": 20,

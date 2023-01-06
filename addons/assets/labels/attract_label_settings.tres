@@ -1,9 +1,0 @@
-[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://d3thqwe1groaa"]
-
-[ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="1_0uv7j"]
-
-[resource]
-font = ExtResource("1_0uv7j")
-font_size = 148
-outline_size = 16
-outline_color = Color(0, 0, 0, 1)

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/pingod-mode-bonus/Bonus.cs" id="2"]
 [ext_resource type="Texture2D" uid="uid://cfy7fd5ef1bdl" path="res://addons/assets/img/pingod-logo.png" id="3"]
-[ext_resource type="LabelSettings" uid="uid://ca0bhq43bliiv" path="res://addons/assets/labels/bonus_label_settings.tres" id="4_ifnid"]
+[ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="3_lxf2w"]
 
 [node name="Bonus" type="Control"]
 layout_mode = 3
@@ -43,9 +43,10 @@ offset_right = 367.5
 offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_lxf2w")
+theme_override_font_sizes/font_size = 150
 text = "END OF BALL
 BONUS"
-label_settings = ExtResource("4_ifnid")
 horizontal_alignment = 1
 vertical_alignment = 1
 
