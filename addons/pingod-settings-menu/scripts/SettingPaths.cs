@@ -43,7 +43,15 @@ public static class SettingPaths
         /// <summary>
         /// value test_height path in project settings
         /// </summary>
-
         public const string TEST_HEIGHT = "display/window/size/test_height";
+        /// <summary>
+        /// enum int
+        /// </summary>
+        public const string CONTENT_SCALE_MODE = "display/window/stretch/mode";
+        /// <summary>
+        /// typeof double
+        /// </summary>
+        public const string CONTENT_SCALE = "display/window/stretch/scale";
+
     }
 }

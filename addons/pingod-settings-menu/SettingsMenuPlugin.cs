@@ -15,7 +15,7 @@ public partial class SettingsMenuPlugin : EditorPlugin
     /// </summary>
     public override void _EnterTree()
 	{
-        Logger.Debug(nameof(SettingsMenuPlugin), nameof(_EnterTree), ":" + ROOT_DIR + $":version:{VERSION}");
+        Logger.Info("PLUGIN-", nameof(SettingsMenuPlugin), $": version: {VERSION} / {ROOT_DIR}");
         if (Engine.IsEditorHint())
         {
         }
