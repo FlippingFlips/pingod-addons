@@ -34,7 +34,7 @@ public static class Machine
         return lamp;
     }
     public static void SetLed(string name, int color) => Leds[name].Color = color;
-    public static void SetSwitch(string name, byte state) => Switches[name].SetSwitch(state>0);
+    public static void SetSwitch(string name, byte state) => Switches[name].SetSwitch(state);
 
     public static void DisableAllLamps()
     {
@@ -60,7 +60,7 @@ public static class Machine
     /// <summary>
     /// <param name="name"></param>
     /// <returns>True id <see cref="Switch.IsEnabled"/></returns>
-    public static bool IsSwitchOn(string name) => Switches[name].IsEnabled;
+    public static bool IsSwitchOn(string name) => Switches[name].IsEnabled();
 
     public static void SetLed(string name, byte state, System.Drawing.Color? colour)
     {

@@ -27,7 +27,7 @@ public partial class PulseTimer : Timer
     private void PulseTimer_Timeout()
     {
         Machine.Coils[Name].State = 0;
-        GD.Print("pulse time out " + Name);
+        //GD.Print("pulse time out " + Name);
         this.QueueFree();
     }
 }

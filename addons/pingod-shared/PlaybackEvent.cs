@@ -9,7 +9,7 @@ public partial class PlaybackEvent
     /// <param name="evtName"></param>
     /// <param name="state"></param>
     /// <param name="time"></param>
-    public PlaybackEvent(string evtName, bool state, uint time)
+    public PlaybackEvent(string evtName, byte state, uint time)
     {
         EvtName = evtName;
         State = state;
@@ -22,7 +22,7 @@ public partial class PlaybackEvent
     /// <summary>
     /// event state
     /// </summary>
-    public bool State { get; }
+    public byte State { get; }
     /// <summary>
     /// At what time event happened
     /// </summary>

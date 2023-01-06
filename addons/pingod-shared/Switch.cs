@@ -53,12 +53,13 @@ public partial class Switch
     /// <summary>
     /// Flag set by actions and SetSwitch
     /// </summary>
-    public bool IsEnabled { get; private set; }
+    public bool IsEnabled() => State > 0;
 
     /// <summary>
     /// Time last active
     /// </summary>
     public ulong Time { get; set; }
+    public byte State { get; set; }
 
     /// <summary>
     /// Sets a switch manually, pushes a InputEventAction to Input
@@ -68,16 +69,16 @@ public partial class Switch
     public void SetSwitchAction(bool pressed) 
     {
         Input.ParseInputEvent(new InputEventAction() { Action = this.ToString(), Pressed = pressed });
-        IsEnabled = pressed;
+        State = (byte)(pressed ? 1 : 0);
     }
 
     /// <summary>
     /// Sets <see cref="IsEnabled"/> and sets the time of the switch
     /// </summary>
     /// <param name="enabled"></param>
-    public void SetSwitch(bool enabled)
+    public void SetSwitch(byte state)
     {
-        IsEnabled = enabled;
+        State = state;
         Time = Godot.Time.GetTicksMsec();
         Logger.Verbose(nameof(Switch), $":{this.Name}:{this.Num}={IsEnabled}");
     }
@@ -94,7 +95,7 @@ public partial class Switch
         bool active = input.IsActionPressed(ToString());
         if (active)
         {
-            SetSwitch(true);
+            SetSwitch(1);
         }
         return active;
     }
@@ -107,7 +108,7 @@ public partial class Switch
         bool released = input.IsActionReleased(ToString());
         if (released)
         {
-            SetSwitch(false);
+            SetSwitch(0);
         }
         return released;
     }
@@ -117,8 +118,8 @@ public partial class Switch
     /// <returns></returns>
     public bool IsActionOn()
     {
-        IsEnabled = Input.IsActionPressed(ToString());
-        return IsEnabled;
+        State = (byte)(Input.IsActionPressed(ToString()) == true ? 1 : 0);
+        return IsEnabled();
     }
 
     /// <summary>

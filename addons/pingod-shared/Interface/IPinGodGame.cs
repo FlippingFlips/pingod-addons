@@ -259,10 +259,6 @@ public interface IPinGodGame
     /// </summary>
     void SaveGameSettings();
     /// <summary>
-    /// Saves a recording file if <see cref="RecordPlaybackOption.Record"/> is set
-    /// </summary>
-    void SaveRecording();
-    /// <summary>
     /// Saves window position to game display settings as position isn't in PS? Use test_width and test_height for custom to keep the original project settings
     /// </summary>
     void SaveWindow();
@@ -325,13 +321,6 @@ public interface IPinGodGame
     /// Sets up the DevOverlays Tree. This scene must have a `DevOverlays` node. Enables / Disable helper overlays for lamps and switches. SwitchOverlay and LampMatrix
     /// </summary>
     void SetupDevOverlays();
-    /// <summary>
-    /// Sets up recording or playback from a .recording file
-    /// </summary>
-    /// <param name="playbackEnabled"></param>
-    /// <param name="recordingEnabled"></param>
-    /// <param name="playbackfile"></param>
-    void SetUpRecordingsOrPlayback(bool playbackEnabled, bool recordingEnabled, string playbackfile);
     /// <summary>
     /// <see cref="Machine.SetCoil(name, state)"/>
     /// </summary>

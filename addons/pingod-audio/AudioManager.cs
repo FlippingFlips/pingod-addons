@@ -17,7 +17,7 @@ public partial class AudioManager : Node
     /// <summary>
     /// Collection of assets to load on startup
     /// </summary>
-    [Export] public Godot.Collections.Dictionary<string, string> MusicAssets { get; private set; } = new Godot.Collections.Dictionary<string, string>();
+    [Export] public Godot.Collections.Dictionary<string, string> MusicAssets { get; set; }
 
     /// <summary>
     /// Assets dictionary with some default sounds
@@ -32,7 +32,7 @@ public partial class AudioManager : Node
     /// <summary>
     /// Collection of voice assets to load on startup
     /// </summary>
-    [Export] public Godot.Collections.Dictionary<string, string> VoiceAssets { get; private set; } = new Godot.Collections.Dictionary<string, string>();
+    [Export] public Godot.Collections.Dictionary<string, string> VoiceAssets = new Godot.Collections.Dictionary<string, string>();
 
     #endregion
 
@@ -112,10 +112,13 @@ public partial class AudioManager : Node
                 AddVoice(vox.Value, vox.Key);
             }
 
-            foreach (var music in MusicAssets)
+            if(MusicAssets?.Count > 0)
             {
-                AddMusic(music.Value, music.Key);
-            }
+                foreach (var music in MusicAssets)
+                {
+                    AddMusic(music.Value, music.Key);
+                }
+            }            
         }
     }
 

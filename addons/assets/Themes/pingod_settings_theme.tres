@@ -2,25 +2,25 @@
 
 [ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="1_olvoo"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7g5gs"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ck6lt"]
 bg_color = Color(0.117647, 0.278431, 0.392157, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r6n2r"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o0qqg"]
 bg_color = Color(0.172549, 0.196078, 0.231373, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h7460"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4y0xg"]
 bg_color = Color(0.144287, 0.161264, 0.1875, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s6lew"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ybg3u"]
 bg_color = Color(0.276642, 0.320075, 0.382813, 1)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kocne"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_iw8il"]
 
 [resource]
 default_font = ExtResource("1_olvoo")
 default_font_size = 36
-TabContainer/styles/panel = SubResource("StyleBoxFlat_7g5gs")
-TabContainer/styles/tab_bg = SubResource("StyleBoxFlat_r6n2r")
-TabContainer/styles/tab_disabled = SubResource("StyleBoxFlat_h7460")
-TabContainer/styles/tab_fg = SubResource("StyleBoxFlat_s6lew")
-Tabs/styles/tab_bg = SubResource("StyleBoxTexture_kocne")
+TabContainer/styles/panel = SubResource("StyleBoxFlat_ck6lt")
+TabContainer/styles/tab_bg = SubResource("StyleBoxFlat_o0qqg")
+TabContainer/styles/tab_disabled = SubResource("StyleBoxFlat_4y0xg")
+TabContainer/styles/tab_fg = SubResource("StyleBoxFlat_ybg3u")
+Tabs/styles/tab_bg = SubResource("StyleBoxTexture_iw8il")

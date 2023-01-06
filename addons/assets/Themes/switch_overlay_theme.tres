@@ -2,25 +2,27 @@
 
 [ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="1_4t02d"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nl2y5"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l4qgx"]
 bg_color = Color(1, 0.466667, 0.466667, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6lqlm"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1j3mj"]
 bg_color = Color(1, 0.168627, 0.168627, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ps5wy"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1defv"]
 bg_color = Color(0.101961, 0.67451, 0.113725, 1)
 
 [resource]
 default_font = ExtResource("1_4t02d")
-Button/colors/font_color = Color(0.88, 0.88, 0.88, 1)
+default_font_size = 44
+Button/colors/font_color = Color(0.843137, 0.937255, 0.423529, 1)
 Button/colors/font_color_disabled = Color(0.9, 0.9, 0.9, 0.2)
 Button/colors/font_color_hover = Color(0.94, 0.94, 0.94, 1)
 Button/colors/font_color_pressed = Color(1, 1, 1, 1)
-Button/constants/hseparation = 3
+Button/constants/hseparation = 15
+Button/font_sizes/font_size = 26
 Button/fonts/font = ExtResource("1_4t02d")
 Button/styles/disabled = null
 Button/styles/focus = null
-Button/styles/hover = SubResource("StyleBoxFlat_nl2y5")
-Button/styles/normal = SubResource("StyleBoxFlat_6lqlm")
-Button/styles/pressed = SubResource("StyleBoxFlat_ps5wy")
+Button/styles/hover = SubResource("StyleBoxFlat_l4qgx")
+Button/styles/normal = SubResource("StyleBoxFlat_1j3mj")
+Button/styles/pressed = SubResource("StyleBoxFlat_1defv")
