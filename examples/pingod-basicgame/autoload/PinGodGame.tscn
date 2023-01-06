@@ -7,8 +7,7 @@
 [node name="PinGodGame" type="Node"]
 process_priority = -1
 script = ExtResource("1_lq3yu")
-_lamp_overlay_enabled = true
-_playbackfile = "res://recordings/drain_3_balls.record"
+_playbackfile = "C:/Users/funky/AppData/Roaming/Godot/app_userdata/BasicGameGodot/recordings/132831383097797020.record"
 
 [node name="DevOverlays" type="CanvasLayer" parent="."]
 layer = 128

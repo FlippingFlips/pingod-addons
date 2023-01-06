@@ -1,6 +1,62 @@
-[gd_scene load_steps=2 format=3 uid="uid://bg80dss5qc0bt"]
+[gd_scene load_steps=3 format=3 uid="uid://bg80dss5qc0bt"]
 
 [ext_resource type="Script" path="res://addons/pingod-resources/Resources.cs" id="1_wa3d4"]
+[ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="2_3nh6v"]
 
 [node name="Resources" type="Node"]
 script = ExtResource("1_wa3d4")
+_preloadPackedScenes = ["res://Game.tscn", "res://addons/pingod-mode-servicemenu/ServiceMenu.tscn", "res://addons/pingod-mode-tilt/Tilt.tscn", "res://scenes/BaseMode.tscn", "res://addons/pingod-mode-bonus/Bonus.tscn", "res://addons/pingod-mode-scoremode/ScoreMode.tscn", "res://addons/pingod-mode-scoreentry/ScoreEntry.tscn"]
+
+[node name="LoadingControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="LoadingControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0.0117647, 0, 1)
+
+[node name="Label" type="Label" parent="LoadingControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -149.0
+offset_top = -50.0
+offset_right = 149.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.713726, 0.713726, 0.713726, 1)
+theme_override_fonts/font = ExtResource("2_3nh6v")
+theme_override_font_sizes/font_size = 96
+text = "LOADING"
+
+[node name="Label2" type="Label" parent="LoadingControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = 40.0
+offset_right = 77.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.713726, 0.713726, 0.713726, 1)
+theme_override_fonts/font = ExtResource("2_3nh6v")
+theme_override_font_sizes/font_size = 56
+text = "Scenes"

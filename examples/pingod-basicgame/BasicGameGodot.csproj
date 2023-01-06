@@ -25,7 +25,6 @@
     <None Include="addons\assets\img\pingod-logo.png.import" />
     <None Include="addons\assets\Localization\pingod_default_lang.csv" />
     <None Include="addons\pingod-addons\plugin.cfg" />
-    <None Include="addons\pingod-addons\project.godot" />
     <None Include="addons\pingod-addons\README.md" />
     <None Include="addons\pingod-audio\AudioManager.tscn" />
     <None Include="addons\pingod-audio\plugin.cfg" />
@@ -46,6 +45,7 @@
     <None Include="addons\pingod-game\Scenes\PinGodGame.tscn" />
     <None Include="addons\pingod-machine\tools\Lamp.tscn" />
     <None Include="addons\pingod-machine\tools\LampMatrix.tscn" />
+    <None Include="addons\pingod-memorymap\MemoryMap.tscn" />
     <None Include="addons\pingod-mode-multiball\Multiball.tscn" />
     <None Include="addons\pingod-mode-scoreentry\ScoreEntry.tscn" />
     <None Include="addons\pingod-mode-servicemenu\ServiceMenu.tscn" />
@@ -59,12 +59,11 @@
     <None Include="addons\pingod-settings-menu\scenes\DisplaySettings.tscn" />
     <None Include="addons\pingod-settings-menu\scenes\GameSettingsScene.tscn" />
     <None Include="addons\pingod-settings-menu\scenes\PingodSettingsScene.tscn" />
+    <None Include="addons\pingod-mode-trophy\README.md" />
     <None Include="addons\pingod-trough\Trough.tscn" />
     <None Include="addons\PinGod-Machine\plugin.cfg" />
     <None Include="addons\pingod-machine\README.md" />
-    <None Include="addons\pingod-memorymap\MemoryMapPlugin.tscn" />
     <None Include="addons\pingod-memorymap\plugin.cfg" />
-    <None Include="addons\pingod-memorymap\project.godot" />
     <None Include="addons\pingod-memorymap\README.md" />
     <None Include="addons\pingod-resources\plugin.cfg" />
     <None Include="addons\pingod-trough\plugin.cfg" />
@@ -88,8 +87,5 @@
     <None Include="scenes\BaseMode.tscn" />
     <None Include="visual_pinball\BasicGame-PinGod.vbs" />
     <None Include="visual_pinball\readme.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="addons\pingod-addons\Targets\" />
   </ItemGroup>
 </Project>
