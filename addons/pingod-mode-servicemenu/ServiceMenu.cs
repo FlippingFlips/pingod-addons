@@ -1,5 +1,4 @@
 using Godot;
-using static PinGodBase;
 
 /// <summary>
 /// Inherits from Node, is a mode
@@ -14,7 +13,7 @@ public partial class ServiceMenu : Node
 	/// <summary>
 	/// Pingod game reference
 	/// </summary>
-    protected PinGodGame pinGod;
+    protected IPinGodGame pinGod;
     private PinGodMachine _pingodMachine;
 
     /// <summary>
@@ -22,7 +21,7 @@ public partial class ServiceMenu : Node
     /// </summary>
     public override void _EnterTree()
 	{
-		pinGod = GetNode("/root/PinGodGame") as PinGodGame;
+		pinGod = GetNode("/root/PinGodGame") as IPinGodGame;
 
         if (HasNode("/root/" + nameof(PinGodMachine)))
         {
@@ -82,7 +81,7 @@ public partial class ServiceMenu : Node
     public virtual void OnExit() 
 	{
 		pinGod.PlaySfx("exit");
-		pinGod.EmitSignal("ServiceMenuExit");
+		//pinGod.EmitSignal("ServiceMenuExit"); //TODO
 		this.QueueFree();
 	}
 
