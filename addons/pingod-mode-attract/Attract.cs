@@ -1,7 +1,5 @@
 using Godot;
-using System;
 using System.Collections.Generic;
-using static PinGodBase;
 
 /// <summary>
 /// A basic attract mode that can start a game and cycle scenes with flippers. Add scenes into the "AttractLayers" in scene tree
@@ -25,7 +23,7 @@ public partial class Attract : Node
 	/// <summary>
 	/// access to the <see cref="PinGodGame"/> singleton
 	/// </summary>
-	protected PinGodGame pinGod;
+	protected IPinGodGame pinGod;
 	List<CanvasItem> Scenes = new List<CanvasItem>();
 	private Timer timer;
 	#endregion
@@ -43,7 +41,7 @@ public partial class Attract : Node
 		//godot4 connecting signal
 		if (pinGod ==null && HasNode("/root/PinGodGame"))
 		{
-            pinGod = (GetNode("/root/PinGodGame") as PinGodGame);
+            pinGod = (GetNode("/root/PinGodGame") as IPinGodGame);
         }
 
         if (pinGod?.PinGodMachine != null)

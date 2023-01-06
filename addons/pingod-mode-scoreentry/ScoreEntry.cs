@@ -12,7 +12,7 @@ public partial class ScoreEntry : Control
     /// <summary>
     /// 
     /// </summary>
-    protected PinGodGame pinGod;
+    protected IPinGodGame pinGod;
 
     private PinGodPlayer _cPlayer;
 
@@ -43,6 +43,8 @@ public partial class ScoreEntry : Control
     /// </summary>
     [Export] NodePath _selectedChar = null;
 
+    [Signal] public delegate void ScoreEntryEndedEventHandler();
+
     int[] allowedChars;
     int currentEntryIndex = 0;
     int CurrentPlayer = 0;
@@ -66,7 +68,7 @@ public partial class ScoreEntry : Control
 
         if (HasNode("/root/PinGodGame"))
         {
-            pinGod = GetNode("/root/PinGodGame") as PinGodGame;
+            pinGod = GetNode("/root/PinGodGame") as IPinGodGame;
             pinGod.PinGodMachine.Connect("SwitchCommand", new Callable(this, nameof(OnSwitchCommandHandler)));
         }
         else { Logger.Warning(nameof(ScoreEntry), ": no PinGodGame found"); }
@@ -107,7 +109,7 @@ public partial class ScoreEntry : Control
     /// </summary>
 	public virtual void OnNewHighScore()
     {
-        Logger.Debug(nameof(ScoreEntry), ":new high score made");
+        Logger.Debug(nameof(ScoreEntry), ": NEW HIGH SCORE MADE:");
     }
 
     /// <summary>
@@ -115,6 +117,7 @@ public partial class ScoreEntry : Control
     /// </summary>
     public virtual void OnPlayerFinishedEntry()
     {
+        Logger.Debug(nameof(ScoreEntry), nameof(OnPlayerFinishedEntry));
         if (pinGod.GameData?.HighScores != null)
         {
             try
@@ -148,6 +151,7 @@ public partial class ScoreEntry : Control
     {
         if (CurrentPlayer > PlayerCount - 1)
         {
+            Logger.Debug(nameof(ScoreEntry), nameof(MoveNextPlayer), ": current player higher than players count, finished");
             return false;
         }
 
@@ -157,9 +161,12 @@ public partial class ScoreEntry : Control
         _cPlayer = pinGod.Players[CurrentPlayer] ?? new PinGodPlayer() { Points = 1000000 };
 
         if (playerMessageLabel != null)
+        {
             playerMessageLabel.Text = Tr("HI_SCORE_ENTRY").Replace("%d", (CurrentPlayer + 1).ToString());
+            Logger.Debug(nameof(ScoreEntry), ":", playerMessageLabel.Text);
+        }            
 
-        //hi scores has enough room to add new at any points
+        //hi scores has enough room to add new at any points, by default they go on board
         if (pinGod.GameData.HighScores.Count < pinGod.Adjustments.MaxHiScoresCount)
         {
             Logger.Debug(nameof(ScoreEntry), ":hi-score has space, adding this player");
@@ -168,10 +175,10 @@ public partial class ScoreEntry : Control
         //this hi score isn't as big as the others
         else if (!pinGod.GameData.HighScores.Any(x => x.Scores < _cPlayer.Points))
         {
-            Logger.Debug(nameof(ScoreEntry), ":hi score not large enough for board");
             CurrentPlayer++;
             if (!MoveNextPlayer())
             {
+                Logger.Debug(nameof(ScoreEntry), nameof(MoveNextPlayer), ": player score not large enough for entering, moving to player=", CurrentPlayer+1);
                 QuitScoreEntry();
                 return false;
             }
@@ -304,9 +311,10 @@ public partial class ScoreEntry : Control
     }
     private void QuitScoreEntry()
     {
-		IsPlayerEnteringScore = false;
+        Logger.Debug(nameof(ScoreEntry), nameof(QuitScoreEntry), ": score entry mode ending");
+        IsPlayerEnteringScore = false;
 		this.Visible = false;
-		Logger.Info(nameof(ScoreEntry), "score_entry: quit score entry");
-		pinGod.EmitSignal("ScoreEntryEnded");
+        //emit signal to let know players have finished
+        EmitSignal(nameof(ScoreEntryEnded));
 	}
 }
