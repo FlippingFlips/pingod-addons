@@ -17,3 +17,5 @@ visible = false
 
 [node name="ScoreEntry" parent="Modes" instance=ExtResource("6")]
 visible = false
+
+[connection signal="ScoreEntryEnded" from="Modes/ScoreEntry" to="." method="OnScoreEntryEnded"]

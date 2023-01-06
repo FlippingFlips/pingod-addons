@@ -9,13 +9,10 @@ using System.Threading.Tasks;
 /// This should be set to AutoLoad with the corresponding scene for games, see Project Settings <para/>
 /// Has <see cref="Trough"/>
 /// </summary>
-public abstract partial class PinGodGame : PinGodBase, IPinGodGame
+public partial class PinGodGame : PinGodBase, IPinGodGame
 {
     #region Exports
     [Export] bool _lamp_overlay_enabled = false;
-    [Export] bool _playback_game = false;
-    [Export] string _playbackfile = null;
-    [Export] bool _record_game = false;
     [Export] bool _switch_overlay_enabled = false;
     #endregion
 
@@ -32,13 +29,7 @@ public abstract partial class PinGodGame : PinGodBase, IPinGodGame
     /// <summary>
     /// The memory map used to communicate states between software
     /// </summary>
-    protected PinGodMemoryMapNode memMapping;
-    private Queue<PlaybackEvent> _playbackQueue;
-    /// <summary>
-    /// recording actions to file using godot
-    /// </summary>
-    private FileAccess _recordFile;
-    private RecordPlaybackOption _recordPlayback;
+    protected PinGodMemoryMapNode memMapping;    
     private ulong gameEndTime;
     private ulong gameLoadTimeMsec;
     private ulong gameStartTime;
@@ -106,9 +97,20 @@ public abstract partial class PinGodGame : PinGodBase, IPinGodGame
             }
             else { LogDebug(nameof(PinGodGame), nameof(_EnterTree), ": adjustments module not found..."); }
 
+            if (HasNode("/root/AudioManager"))
+            {
+                AudioManager = GetNode<AudioManager>("/root/AudioManager");
+            }
 
             Logger.LogLevel = Adjustments?.LogLevel ?? LogLevel.Warning;
             LogInfo(nameof(PinGodGame), ":_EnterTree. log level: " + Logger.LogLevel);
+
+            Display.GetDisplayProjectSettings();
+
+            AudioServer.SetBusVolumeDb(0, Adjustments?.MasterVolume ?? 0f);
+            AudioServer.SetBusVolumeDb(1, Adjustments?.MusicVolume ?? -6.0f);
+            AudioServer.SetBusVolumeDb(2, Adjustments?.SfxVolume ?? -6.0f);
+            AudioServer.SetBusVolumeDb(3, Adjustments?.VoiceVolume ?? -6.0f);
 
             SetupWindow();
             LoadPatches();
@@ -120,8 +122,8 @@ public abstract partial class PinGodGame : PinGodBase, IPinGodGame
                 _trough = GetNodeOrNull<Trough>("/root/Trough");
             }
 
-            Setup();
             SetupAudio();
+            Setup();            
 
             LogInfo(nameof(PinGodGame), ":enter tree setup complete");
             gameLoadTimeMsec = Godot.Time.GetTicksMsec();
@@ -146,90 +148,14 @@ public abstract partial class PinGodGame : PinGodBase, IPinGodGame
             if (_trough == null) Logger.WarningRich("[color=yellow]", nameof(PinGodGame), ": trough not found", "[/color]");
         }
     }
-    /// <summary>
-    /// Saves recordings if enabled and runs <see cref="Quit(bool)"/>
-    /// </summary>
-    public override void _ExitTree()
-    {
-        if (_recordPlayback == RecordPlaybackOption.Record)
-        {
-            LogInfo(nameof(PinGodGame), ":_ExitTree, saving recordings");
-            SaveRecording();
-        }
-        else LogInfo(nameof(PinGodGame), ":_ExitTree");
 
-        Quit(true);
-    }
-    /// <summary>
-    /// Listens for any escape action preses. Handles coin switches, adds credits. Toggle border F2 default
-    /// </summary>
-    /// <param name="event"></param>
-    public override void _Input(InputEvent @event)
-    {
-        //quits the game. ESC
-        if (InputMap.HasAction("quit"))
-        {
-            if (@event.IsActionPressed("quit"))
-            {
-                LogDebug(nameof(PinGodGame), ":quit action request. quitting whole tree.");
-                LogInfo(nameof(PinGodGame), ":sent game ended coil: alive 0");
-
-                //todo: commented out, is it needed? :)
-                //SetGameResumed();
-                GetTree().Quit(0);
-                return;
-            }
-        }
-
-        //if (InputMap.HasAction("pause"))
-        //{
-        //    if (@event.IsActionPressed("pause"))
-        //    {
-        //        //if (!settingsDisplay?.Visible ?? false)
-        //        TogglePause();
-        //        return;
-        //    }
-        //}
-    }
-    /// <summary>
-    /// Processes playback events...Processing is disabled if it isn't enabled and playback is finished
-    /// </summary>
-    /// <param name="delta"></param>
-    public override void _Process(double delta)
-    {
-        if (_recordPlayback != RecordPlaybackOption.Playback)
-        {
-            SetProcess(false);
-            LogInfo(nameof(PinGodGame), ":_Process loop stopped. No recordings are being played back.");
-            return;
-        }
-        else
-        {
-            if (_playbackQueue?.Count <= 0)
-            {
-                LogInfo(nameof(PinGodGame), ":playback events ended");
-                _recordPlayback = RecordPlaybackOption.Off;
-                return;
-            }
-
-            var time = Time.GetTicksMsec() - gameLoadTimeMsec;
-            var nextEvt = _playbackQueue.Peek().Time;
-            if (nextEvt <= time)
-            {
-                var pEvent = _playbackQueue.Dequeue();
-                var ev = new InputEventAction() { Action = pEvent.EvtName, Pressed = pEvent.State };
-                Input.ParseInputEvent(ev);
-                LogInfo(nameof(PinGodGame), ":playback evt ", pEvent.EvtName);
-            }
-        }
-    }
     /// <summary>
     /// Game initialized. Memory map is created here if read and write is enabled. <para/>  Gets <see cref="BallSearchOptions"/>, sets up a <see cref="_lampMatrixOverlay"/> <para/>
     /// Gets hold of the <see cref="MainScene"/> to control window size, stretch
     /// </summary>
     public override void _Ready()
     {
-        base._Ready();
+        base._Ready();        
 
         //setup main scene if there is one
         var mainScenePath = $"/root/{nameof(MainScene)}";
@@ -365,7 +291,7 @@ public abstract partial class PinGodGame : PinGodBase, IPinGodGame
 
         return false;
     }
-    public virtual bool IsSwitchEnabled(string swName) => Machine.Switches[swName].IsEnabled;
+    public virtual bool IsSwitchEnabled(string swName) => Machine.Switches[swName].IsEnabled();
     public virtual void LoadDataFile() => GameData = GameData.Load();
     public virtual void LoadPatches()
     {
@@ -392,9 +318,9 @@ public abstract partial class PinGodGame : PinGodBase, IPinGodGame
     public virtual void OnBallDrained(SceneTree sceneTree, string group = "Mode", string method = "OnBallDrained") => sceneTree.CallGroup(group, method);
     public virtual void OnBallSaved(SceneTree sceneTree, string group = "Mode", string method = "OnBallSaved") => sceneTree.CallGroup(group, method);
     public virtual void OnBallStarted(SceneTree sceneTree, string group = "Mode", string method = "OnBallStarted") => sceneTree.CallGroup(group, method);
-    public virtual void PlayMusic(string name, float pos = 0) => AudioManager.PlayMusic(name, pos);
+    public virtual void PlayMusic(string name, float pos = 0) => AudioManager?.PlayMusic(name, pos);
     public virtual void PlaySfx(string name, string bus = "Sfx") => AudioManager?.PlaySfx(name, bus);
-    public virtual void PlayVoice(string name, string bus = "Voice") => AudioManager.PlayVoice(name, bus);
+    public virtual void PlayVoice(string name, string bus = "Voice") => AudioManager?.PlayVoice(name, bus);
     public virtual void Quit(bool saveData = true)
     {
         //send game window ended, not alive        
@@ -425,6 +351,8 @@ public abstract partial class PinGodGame : PinGodBase, IPinGodGame
         LogInfo(nameof(PinGodGame), ": Quit: saved game");
 
         if (GetTree().Paused) { GetTree().Paused = false; }
+
+        GetTree().Quit(0);
     }
     public virtual int RandomNumber(int from, int to) => randomNumGenerator.RandiRange(from, to);
     public virtual void ResetTilt()
@@ -434,15 +362,7 @@ public abstract partial class PinGodGame : PinGodBase, IPinGodGame
     }
     public virtual void SaveGameData() => GameData.Save(GameData);
     public virtual void SaveGameSettings() => Adjustments.Save(Adjustments);
-    public virtual void SaveRecording()
-    {
-        if (_recordPlayback == RecordPlaybackOption.Record)
-        {
-            _recordFile?.Flush();
-            _recordFile?.Free();
-            LogInfo(nameof(PinGodGame), ":recording file closed");
-        }
-    }
+
     public virtual void SaveWindow()
     {
         var size = this.WinGetSize();
@@ -504,16 +424,7 @@ public abstract partial class PinGodGame : PinGodBase, IPinGodGame
     public void SetSwitch(Switch @switch, byte value, bool fromAction = true)
     {
         if (!fromAction)
-            @switch.SetSwitch(value > 0);
-
-        //record switch
-        if (_recordPlayback == RecordPlaybackOption.Record)
-        {
-            var switchTime = Time.GetTicksMsec() - gameLoadTimeMsec;
-            var recordLine = $"sw{@switch.Num}|{true}|{switchTime}";
-            _recordFile?.StoreLine(recordLine);
-            LogDebug(nameof(PinGodGame), ":recorded:", recordLine);
-        }
+            @switch.SetSwitch(value);
 
         //send SwitchCommand
         EmitSignal("SwitchCommand", @switch.Name, @switch.Num, value);
@@ -521,9 +432,6 @@ public abstract partial class PinGodGame : PinGodBase, IPinGodGame
     public virtual void Setup()
     {
         ServiceMenuEnter += OnServiceMenuEnter;
-
-        //set up recording / playback
-        SetUpRecordingsOrPlayback(_playback_game, _record_game, _playbackfile);
 
         //remove the overlays if disabled
         SetupDevOverlays();
@@ -563,59 +471,7 @@ public abstract partial class PinGodGame : PinGodBase, IPinGodGame
             }
         }
     }
-    public virtual void SetUpRecordingsOrPlayback(bool playbackEnabled, bool recordingEnabled, string playbackfile)
-    {
-        _recordPlayback = RecordPlaybackOption.Off;
-        if (playbackEnabled) _recordPlayback = RecordPlaybackOption.Playback;
-        else if (recordingEnabled) _recordPlayback = RecordPlaybackOption.Record;
 
-        LogDebug(nameof(PinGodGame), ":setup playback?: ", _recordPlayback.ToString());
-        if (_recordPlayback == RecordPlaybackOption.Playback)
-        {
-            if (string.IsNullOrWhiteSpace(playbackfile))
-            {
-                LogWarning("set a playback file from user directory eg: user://recordings/26232613.record");
-                _recordPlayback = RecordPlaybackOption.Off;
-            }
-            else
-            {
-                LogInfo(nameof(PinGodGame), ":running playback file: ", playbackfile);
-                try
-                {
-                    var pBackFile = FileAccess.Open(playbackfile, FileAccess.ModeFlags.Read);
-                    if (FileAccess.GetOpenError() == Error.FileNotFound)
-                    {
-                        _recordPlayback = RecordPlaybackOption.Off;
-                        LogError("playback file not found, set playback false");
-                    }
-                    else
-                    {
-                        string[] eventLine = null;
-                        _playbackQueue = new Queue<PlaybackEvent>();
-                        while ((eventLine = pBackFile.GetCsvLine("|"))?.Length == 3)
-                        {
-                            bool.TryParse(eventLine[1], out var state);
-                            uint.TryParse(eventLine[2], out var time);
-                            _playbackQueue.Enqueue(new PlaybackEvent(eventLine[0], state, time));
-                        }
-                        pBackFile.Free();
-                        _playbackQueue.Reverse();
-                        LogInfo(nameof(PinGodGame), $" {_playbackQueue.Count} playback events queued. first action: ", _playbackQueue.Peek().EvtName);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    LogError($"playback file failed: " + ex.Message);
-                }
-            }
-        }
-        else if (_recordPlayback == RecordPlaybackOption.Record)
-        {
-            var userDir = CreateRecordingsDirectory();
-            _recordFile = FileAccess.Open(playbackfile, FileAccess.ModeFlags.WriteRead);
-            LogDebug(nameof(PinGodGame), ":game recording on");
-        }
-    }
     public virtual void SolenoidOn(string name, byte state) => Machine.SetCoil(name, state);
     public virtual async void SolenoidPulse(string name, byte pulse = 255)
     {
@@ -775,33 +631,15 @@ public abstract partial class PinGodGame : PinGodBase, IPinGodGame
     protected virtual void SetupAudio()
     {
         LogInfo(nameof(PinGodGame), ":setting up audio from settings.save");
-        if (this.HasNode(nameof(AudioManager)))
-        {
-            AudioManager = GetNode<AudioManager>("AudioManager");
-            AudioServer.SetBusVolumeDb(0, Adjustments?.MasterVolume ?? 0f);
-            AudioServer.SetBusVolumeDb(1, Adjustments?.MusicVolume ?? -6.0f);
-            AudioServer.SetBusVolumeDb(2, Adjustments?.SfxVolume ?? -6.0f);
-            AudioServer.SetBusVolumeDb(3, Adjustments?.VoiceVolume ?? -6.0f);
+        if (AudioManager !=null)
+        {            
             AudioManager.MusicEnabled = Adjustments?.MusicEnabled ?? true;
             AudioManager.SfxEnabled = Adjustments?.SfxEnabled ?? true;
             AudioManager.VoiceEnabled = Adjustments?.VoiceEnabled ?? true;
         }
         else { LogWarning(nameof(PinGodGame), ": AudioManager node not found. Add an AudioManager child instance to the scene"); }
     }
-    /// <summary>
-    /// Creates the recordings directory in the users folder
-    /// </summary>
-    /// <returns>The path to the recordings</returns>
-    private string CreateRecordingsDirectory()
-    {
-        var userDir = OS.GetUserDataDir();
-        var dir = userDir + $"/recordings/";
 
-        if (!System.IO.Directory.Exists(userDir))
-            System.IO.Directory.CreateDirectory(dir);
-
-        return dir;
-    }
     /// <summary>
     /// Parses user command lines args in the --key=value format
     /// </summary>
@@ -905,7 +743,9 @@ public abstract partial class PinGodGame : PinGodBase, IPinGodGame
             LogInfo(nameof(PinGodGame), ":creating initial display settings");
             if (Adjustments == null)
                 Adjustments = new Adjustments();
-            Adjustments.Display = new DisplaySettings() { AlwaysOnTop = true };
+
+            //set the display as default from project settings and save
+            Adjustments.Display = Display.GetDisplayProjectSettings();
             SaveWindow();
         }
 
@@ -916,9 +756,6 @@ public abstract partial class PinGodGame : PinGodBase, IPinGodGame
         DisplayServer.WindowSetFlag(DisplayServer.WindowFlags.AlwaysOnTop, Adjustments.Display.AlwaysOnTop);
         //OS.MoveWindowToForeground();        
 
-        //set the width, position
-        DisplayServer.WindowSetPosition(new Vector2i((int)Adjustments.Display.X, (int)Adjustments.Display.Y));
-        DisplayServer.WindowSetSize(new Vector2i((int)Adjustments.Display.Width, (int)Adjustments.Display.Height));
         var w = ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.WIDTH);
         var h = ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.HEIGHT);
         var size = DisplayServer.WindowGetSize();

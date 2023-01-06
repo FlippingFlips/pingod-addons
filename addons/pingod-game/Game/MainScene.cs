@@ -23,8 +23,6 @@ public partial class MainScene : Node2D
     private Resources _resources;
     private Node attractnode;
 
-    Mutex m = new Mutex();
-
     private Control pauseLayer;
 
     private Control settingsDisplay;
@@ -54,30 +52,22 @@ public partial class MainScene : Node2D
         //show a pause menu when pause enabled.
         if (this.HasNode("Controls/PauseControl"))
             pauseLayer = GetNode("Controls/PauseControl") as Control;
-
+        //settings display
         if (this.HasNode("Controls/SettingsDisplay"))
             settingsDisplay = GetNodeOrNull<Control>("Controls/SettingsDisplay");
 
-        //TODO: Godot 4 splashtime
-        //Logger.Debug(nameof(MainScene), ":splash timer msecs", OS.GetSplashTickMsec());
-
-        //try to catch anything unhandled here, not when ready
+        //not working..
         AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionHandler;
 
         //PauseMode = PauseModeEnum.Process; //new Godot4 ProcessModeEnum.Always
         this.ProcessMode = ProcessModeEnum.Always;
 
-
-        //load Resources node from PinGodGame and load service menu
+        //load Resources node from PinGodGame
         if (HasNode("/root/Resources"))
         {
             _resources = GetNode("/root/Resources") as Resources;
         }            
         else Logger.Warning(nameof(MainScene), $":WARN: no node found in pingod game under Resources");
-
-
-        //PreloadServiceMenu();
-        LoadSceneMode(_service_menu_scene_path, false);
 
         //connect to a switch command. the switches can come from actions or ReadStates
         if (!HasNode("/root/Machine"))
@@ -136,7 +126,7 @@ public partial class MainScene : Node2D
 
     public override void _Ready()
     {
-        base._Ready();
+        base._Ready();        
 
         //save a reference to connect signals
         if (HasNode("/root/PinGodGame"))
@@ -148,7 +138,7 @@ public partial class MainScene : Node2D
         pinGod?.Connect(nameof(PinGodGame.ServiceMenuExit), new Callable(this, nameof(OnServiceMenuExit)));
 
         //attract mod already in the tree, get the instance so we can free it when game started
-        attractnode = GetNode("Modes/Attract");
+        attractnode = GetNode("Modes/Attract");          
     }
 
     /// <summary>
@@ -174,7 +164,7 @@ public partial class MainScene : Node2D
     public virtual void StartGame()
     {
         //load the game scene mode and add to Modes tree		
-        LoadSceneMode(_game_scene_path, destroyAttract:true);        
+        LoadSceneMode(_game_scene_path, destroyAttract:true);  
     }
 
     /// <summary>
@@ -191,83 +181,63 @@ public partial class MainScene : Node2D
     }
 
     /// <summary>
-    /// Runs a new task to load a scene and poll until finished. Display freezes in VP without this (godot 3), if scenes are med/large <para/>
-    /// <see cref="_loaded(PackedScene)"/>, this will be added a child to the Modes node</summary>
-    /// <param name="resourcePath">path to scene, res://myscene.tscn</param>
-    /// <param name="addToModesOnLoad">will add the loaded scene as a child in Modes if true</param>
-    private async void LoadSceneMode(string resourcePath, bool addToModesOnLoad = true, bool destroyAttract = false)
-    {
-        await Task.Run(() =>
-        {
-            m.Lock();
-            string name = resourcePath.GetBaseName();
-            if (!string.IsNullOrWhiteSpace(name))
-            {
-                if (_resources == null)
-                {
-                    Logger.WarningRich("[color=red]", nameof(MainScene), ":no /root/Resources, skipping load resource", "[/color]");
-                    return;
-                }
-
-                Resource res = null;
-                if (!_resources.HasResource(name))
-                {
-                    Logger.Debug(nameof(MainScene), ":loading mode scene resource for ", name);
-                    res = Load(resourcePath);
-                    _resources.AddResource(name, res);
-                }
-                else
-                {
-                    res = _resources.GetResource(name);
-                }
-
-                if (res == null)
-                    Logger.Warning(nameof(MainScene), ":_resourcePreLoader null or scene resource doesn't exists for ", name);
-
-                if(addToModesOnLoad)
-                    CallDeferred("_loaded", res);
-            }
-            if (destroyAttract)
-            {
-                if (!attractnode.IsQueuedForDeletion())
-                {
-                    //remove the attract mode
-                    attractnode?.CallDeferred("queue_free");
-                }
-            }
-            m.Unlock();
-        });
-    }
-
-    /// <summary>
-    /// Probably best to use <see cref="LoadSceneMode(string)"/> Runs a new task to load a scene and poll until finished. Display freezes in VP without this if scenes are med/large <para/>
-    /// <see cref="_loaded(PackedScene)"/>, this will be added a child to the Modes node
+    /// Loads a scene and adds to the Modes (Node) in this scene if set to do so. <para/>
+    /// It's best if these scenes are already loaded into the preloaded by using the packed scenes in Resources.tscn (autoload). <para/>
+    /// Example: BasicGame uses service mode and Game.tscn preloaded, so when they come here it is getting a resource that was already loaded.
     /// </summary>
-    private void LoadSceneModeInteractive(string resourcePath)
+    /// <param name="resourcePath"></param>
+    /// <param name="addToModesOnLoad"></param>
+    /// <param name="destroyAttract"></param>
+    private void LoadSceneMode(string resourcePath, bool addToModesOnLoad = true, bool destroyAttract = false)
     {
-        Task.Run(() =>
+        if (_resources == null)
         {
-            m.Lock();
-            PackedScene res = ResourceLoader.Load(resourcePath) as PackedScene;
-            //PackedScene res; //the resource to return after finished loading
-            Logger.Debug(nameof(MainScene), ":loading-" + resourcePath);
-            //var total = ril.GetStageCount(); //total resources left to load, can be used progress bar
+            Logger.WarningRich("[color=red]", nameof(MainScene), ":no /root/Resources, skipping load resource", "[/color]");
+            return;
+        }
 
-            //TODO: removed because of Godot4, this was LoadResourceInteractive
-            //while (true)
-            //{
-            //	var err = ril.Poll();
-            //	if (err == Error.FileEof)
-            //	{
-            //		res = ril.GetResource() as PackedScene;
-            //		break;
-            //	}
-            //}
+        //name without the .tscn for some reason
+        string name = resourcePath.GetBaseName();
 
-            CallDeferred(nameof(_loaded), res);
+        Resource res = null;
+        if (_resources.HasResource(name))
+        {
+            //already loaded
+            res = _resources.GetResource(name);
+        }
+        else
+        {
+            //load from path
+            if (!FileAccess.FileExists(resourcePath))
+            {
+                Logger.WarningRich("[color=red]", nameof(MainScene), $": LoadScene but no resource found at {resourcePath}", "[/color]");
+                return;
+            }
 
-            m.Unlock();
-        });
+            Logger.Debug(nameof(MainScene), ":loading mode scene resource for ", name);
+            res = Load(resourcePath);
+            _resources.AddResource(name, res);
+        }
+
+        //
+        if (res == null)
+        {
+            Logger.Warning(nameof(MainScene), ":_resourcePreLoader null or scene resource doesn't exists for ", name);
+        }
+        else
+        {
+            if (addToModesOnLoad)
+                CallDeferred("_loaded", res);
+        }
+
+        if (destroyAttract)
+        {
+            if (!attractnode.IsQueuedForDeletion())
+            {
+                //remove the attract mode
+                attractnode.QueueFree();
+            }
+        }
     }
 
     void OnGameStarted()
@@ -313,9 +283,9 @@ public partial class MainScene : Node2D
                     Task.Run(() =>
                     {
                         if (pinGod.GameInPlay)
-                            GetNode("Modes/Game")?.QueueFree();
+                            GetNodeOrNull("Modes/Game")?.QueueFree();
                         else
-                            GetNode("Modes/Attract")?.QueueFree();
+                            GetNodeOrNull("Modes/Attract")?.QueueFree();
 
                         //load service menu into modes
                         CallDeferred("_loaded", _resources?.GetResource(_service_menu_scene_path.GetBaseName()));
@@ -346,43 +316,6 @@ public partial class MainScene : Node2D
         }
     }
 
-    /// <summary>
-    /// add the game to preloader
-    /// </summary>
-    private void PreloadGameScene()
-    {
-        if(_resources != null)
-        {
-            if (!string.IsNullOrWhiteSpace(_game_scene_path))
-            {
-                var sMenu = Load(_game_scene_path) as PackedScene;
-                _resources?.AddResource(_game_scene_path.GetBaseName(), sMenu);
-            }
-        }
-        else { Logger.Warning(nameof(MainScene), nameof(PreloadGameScene), ": no /root/Resources found."); }
-    }
-
-    /// <summary>
-    /// add the service menu scene to preloader
-    /// </summary>
-    private void PreloadServiceMenu()
-    {
-        if(_resources != null)
-        {            
-            if (!string.IsNullOrWhiteSpace(_service_menu_scene_path))
-            {
-                var svcSceneName = _service_menu_scene_path.GetBaseName();
-                Logger.Debug(nameof(MainScene), ": pre loading service menu with base name: ", svcSceneName);
-                if (!_resources.HasResource(svcSceneName))
-                {
-                    var sMenu = Load(_service_menu_scene_path) as PackedScene;
-                    _resources?.AddResource(_service_menu_scene_path.GetBaseName(), sMenu);
-                }
-            }
-            else { Logger.Warning(nameof(MainScene), nameof(PreloadServiceMenu), ": service menu scene not found: ", _service_menu_scene_path); }
-        }
-        else { Logger.Warning(nameof(MainScene), nameof(PreloadServiceMenu), ": no /root/Resources found."); }
-    }
 
     /// <summary>
     /// Reload the current scene, the main scene.

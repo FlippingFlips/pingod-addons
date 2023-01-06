@@ -3,7 +3,7 @@ using Godot;
 /// <summary>
 /// Custom Game class for Basic Game
 /// </summary>
-public abstract partial class Game : PinGodGameNode, IGame
+public partial class Game : PinGodGameNode, IGame
 {	
 	/// <summary>
 	/// Default scene file to use for Multi-Ball
@@ -24,8 +24,8 @@ public abstract partial class Game : PinGodGameNode, IGame
 		base._EnterTree();
 
         Logger.Debug(nameof(Game), ":", nameof(_EnterTree), ":looking for ScoreEntry and Bonus scenes..");
-        scoreEntry = GetNode("Modes/ScoreEntry") as ScoreEntry;
-        endOfBallBonus = GetNode("Modes/Bonus") as Bonus;
+        scoreEntry = GetNodeOrNull<ScoreEntry>("Modes/ScoreEntry");
+        endOfBallBonus = GetNodeOrNull<Bonus>("Modes/Bonus");
 
         Logger.Debug(nameof(Game),":loading multiball scene:  " + MULTIBALL_SCENE);
         multiballPkd = ResourceLoader.Load(MULTIBALL_SCENE) as PackedScene;
@@ -53,7 +53,6 @@ public abstract partial class Game : PinGodGameNode, IGame
             pg.BallSaved -= OnBallSaved;
             pg.BonusEnded -= OnBonusEnded;
             pg.MultiBallEnded -= EndMultiball;
-            pg.ScoreEntryEnded -= OnScoreEntryEnded;
         }        
         base._ExitTree();
         Logger.Debug(nameof(Game), ":", nameof(_ExitTree));
@@ -72,7 +71,6 @@ public abstract partial class Game : PinGodGameNode, IGame
             pg.BallSaved += OnBallSaved;
             pg.BonusEnded += OnBonusEnded;
             pg.MultiBallEnded += EndMultiball;
-            pg.ScoreEntryEnded += OnScoreEntryEnded;
             //pinGod.PlayerAdded += OnPlayerAdded;
         }
 
@@ -128,14 +126,14 @@ public abstract partial class Game : PinGodGameNode, IGame
 		{
 			pinGod.InBonusMode = true;
             Logger.Info(nameof(Game),":adding bonus scene for player: " + pinGod.CurrentPlayerIndex);
-			endOfBallBonus.StartBonusDisplay();
+			endOfBallBonus?.StartBonusDisplay();
 			return;
 		}
 		else if (pinGod.IsTilted && lastBall)
 		{
             Logger.Debug(nameof(Game),":last ball in tilt");
 			pinGod.InBonusMode = false;
-			scoreEntry.DisplayHighScore();
+			scoreEntry?.DisplayHighScore();
 			return;
 		}
 		else if (pinGod.IsTilted)
@@ -162,7 +160,7 @@ public abstract partial class Game : PinGodGameNode, IGame
 		if (_lastBall)
 		{
             Logger.Debug(nameof(Game), ":last ball played, end of game");
-			scoreEntry.DisplayHighScore();
+			scoreEntry?.DisplayHighScore();
 		}
 		else
 		{
@@ -184,8 +182,11 @@ public abstract partial class Game : PinGodGameNode, IGame
     /// </summary>
     public virtual void StartNewBall()
     {
+        //disable lamps, we're not using led in this game
         pinGod.DisableAllLamps();
+        //start the ball
         pinGod.StartNewBall();
+        //let all scenes that are in the Mode group that the ball has started
         pinGod.OnBallStarted(GetTree());
     }
 
@@ -224,7 +225,7 @@ public abstract partial class Game : PinGodGameNode, IGame
     /// <summary>
     /// Uses Godots <see cref="Godot.Object.CallDeferred(string, object[])"/> to invoke <see cref="OnStartNewBall"/> on Tilt timeouts
     /// </summary>
-    void timeout()
+    protected void timeout()
     {		
 		if (!_lastBall)
 		{

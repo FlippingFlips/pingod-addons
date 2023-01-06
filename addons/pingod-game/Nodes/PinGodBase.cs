@@ -17,7 +17,6 @@ public abstract partial class PinGodBase : Node
     [Signal] public delegate void MultiBallEndedEventHandler();
     [Signal] public delegate void MultiballStartedEventHandler();
     [Signal] public delegate void PlayerAddedEventHandler();
-    [Signal] public delegate void ScoreEntryEndedEventHandler();
     [Signal] public delegate void ScoresUpdatedEventHandler();
     [Signal] public delegate void ServiceMenuEnterEventHandler();
     [Signal] public delegate void ServiceMenuExitEventHandler();

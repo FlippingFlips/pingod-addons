@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://b1gdymtfppht2"]
+[gd_scene load_steps=2 format=3 uid="uid://b1gdymtfppht2"]
 
-[ext_resource type="LabelSettings" uid="uid://du7brlqvx8j4s" path="res://addons/assets/labels/info_label_settings.tres" id="1_fn8jj"]
 [ext_resource type="Script" path="res://addons/pingod-addons/Labels/CreditsLabel.cs" id="2"]
 
 [node name="Credits" type="Label"]
@@ -13,5 +12,4 @@ grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 1
 text = "CREDITS "
-label_settings = ExtResource("1_fn8jj")
 script = ExtResource("2")
