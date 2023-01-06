@@ -6,17 +6,12 @@ using System.Drawing;
 /// </summary>
 public partial class PinGodWindowActionsNode : Node
 {
-    [Export] bool _standardInputHandlingOn = true;
-    [Export] bool _sendPingodMachineSwitches = true;
+    private Adjustments _adjustments;
     [Export] string[] _gameWindowSwitches = null;
-
     private PinGodMachine _machine;
-
-    public override void _Ready()
-    {
-        base._Ready();
-    }
-
+    [Export] bool _sendPingodMachineSwitches = true;
+    [Export] bool _standardInputHandlingOn = true;
+    [Export] bool _setDisplayFromAdjustments = true;
     public override void _EnterTree()
     {
         base._EnterTree();
@@ -28,7 +23,7 @@ public partial class PinGodWindowActionsNode : Node
             {
                 if (HasNode("/root/Machine"))
                 {
-                    Logger.Debug(nameof(PinGodWindowActionsNode), $": {nameof(PinGodMachine)} found in Tree");                    
+                    Logger.Debug(nameof(PinGodWindowActionsNode), $": {nameof(PinGodMachine)} found in Tree");
                     _machine = GetNode<PinGodMachine>("/root/Machine");
                 }
                 else
@@ -38,7 +33,7 @@ public partial class PinGodWindowActionsNode : Node
                 }
             }
             else { Logger.Debug(nameof(PinGodWindowActionsNode), ":Machine switch handling off"); }
-        }        
+        }
     }
 
     public override void _Input(InputEvent @event)
@@ -56,7 +51,7 @@ public partial class PinGodWindowActionsNode : Node
             {
                 if (@event.IsActionPressed("quit"))
                 {
-                    Quit();                    
+                    Quit();
                 }
             }
 
@@ -97,18 +92,47 @@ if (@event is InputEventKey keyEvent && keyEvent.Pressed && keyEvent.CtrlPressed
                     //SwitchActionOn(sw, @event);                
                 }
             }
-        }        
+        }
     }
 
+    /// <summary>
+    /// Sets the window from adjustments
+    /// </summary>
+    public override void _Ready()
+    {
+        base._Ready();
+        if (HasNode("/root/Adjustments"))
+        {
+            _adjustments = GetNodeOrNull<AdjustmentsScript>("/root/Adjustments")?._adjustments;
+            if(_setDisplayFromAdjustments)
+                SetWindowFromAdjustments();
+        }
+    }
+
+    /// <summary>
+    /// Sets the window from (see <see cref="DisplaySettings"/>) found in the (see <see cref="Adjustments"/>)
+    /// </summary>
+    public virtual void SetWindowFromAdjustments()
+    {
+        if (_adjustments != null)
+        {
+            DisplayServer.WindowSetSize(new Vector2i(_adjustments.Display.Width, _adjustments.Display.Height));
+            DisplayServer.WindowSetPosition(new Vector2i(_adjustments.Display.X, _adjustments.Display.Y));
+        }
+    }
+
+    /// <summary>
+    /// Toggles the border and resize
+    /// </summary>
     private static void ToggleBorder()
     {
         Display.ToggleWinFlag(
-            DisplayServer.WindowFlags.ResizeDisabled | 
+            DisplayServer.WindowFlags.ResizeDisabled |
             DisplayServer.WindowFlags.Borderless);
     }
 
     private void Quit()
-    {        
+    {
         if (HasNode("/root/PinGodGame"))
         {
             Logger.Debug(nameof(PinGodWindowActionsNode), ":quit action request. quitting pingodGame");
