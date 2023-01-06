@@ -12,17 +12,18 @@ public partial class ResourcesPlugin : EditorPlugin
     public override void _EnterTree()
     {
         base._EnterTree();
+        Logger.Info("PLUGIN-", nameof(ResourcesPlugin), $": version: {VERSION} / {ROOT_DIR}");
         SetAutoLoad();
     }
 
     private void SetAutoLoad()
     {
-        var path = "res://autoload/Resources.tscn";
-        Logger.Debug(nameof(ResourcesPlugin), $" looking for scene at {path}");
-
         //assign the scene when in editor
         if (Engine.IsEditorHint())
         {
+            var path = "res://autoload/Resources.tscn";
+            Logger.Debug(nameof(ResourcesPlugin), $" looking for scene at {path}");
+
             if (FileAccess.FileExists(path))
             {
                 Logger.Info(nameof(ResourcesPlugin), $"found at {path}");
