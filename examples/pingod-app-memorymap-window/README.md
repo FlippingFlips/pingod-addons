@@ -6,6 +6,10 @@ This example requires another game running with MemoryMap enabled to read the sw
 
 It will generate your buttons if you use your game Machine.tscn.
 
+![image](screen.jpg)
+
+The above image is running the BasicGame alongside this window. It shouldn't matter on the order these two are launched or even if you close the game and reload it, you should still be able to send switches to the game via memory.
+
 ---
 
 You need just 3 plugins for this to work

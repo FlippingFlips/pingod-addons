@@ -7,7 +7,7 @@
 
 [node name="Machine" type="Node"]
 script = ExtResource("1_rpe2g")
-recordPlayback = 1
+recordPlayback = 0
 _playbackfile = "user://recordings/my_test_record.record"
 _ball_search_coils = PackedStringArray("mball_saucer")
 _ball_search_stop_switches = PackedStringArray("mball_saucer", "trough_1", "trough_2", "trough_3", "trough_4")
