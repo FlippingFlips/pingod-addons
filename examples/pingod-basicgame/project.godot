@@ -27,14 +27,13 @@ default_bus_layout="res://assets/audio/audio_bus_layout.tres"
 
 [autoload]
 
-Resources="*res://autoload/Resources.tscn"
 WindowActions="*res://autoload/WindowActions.tscn"
+Adjustments="*res://addons/autoload/Adjustments/Adjustments.tscn"
+Machine="*res://autoload/Machine.tscn"
 AudioManager="*res://autoload/AudioManager.tscn"
-Adjustments="*res://addons/pingod-data-settings/Adjustments.tscn"
-Audits="*res://addons/pingod-data-settings/Audits.tscn"
+Resources="*res://autoload/Resources.tscn"
 PinGodGame="*res://autoload/PinGodGame.tscn"
 MemoryMap="*res://autoload/MemoryMap.tscn"
-Machine="*res://autoload/Machine.tscn"
 
 [debug]
 
@@ -58,7 +57,7 @@ project/assembly_name="BasicGameGodot"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/pingod-window-commands/plugin.cfg", "res://addons/pingod-addons/plugin.cfg", "res://addons/pingod-audio/plugin.cfg", "res://addons/pingod-ballsave/plugin.cfg", "res://addons/pingod-data-settings/plugin.cfg", "res://addons/pingod-game/plugin.cfg", "res://addons/pingod-memorymap/plugin.cfg", "res://addons/pingod-plunger_lane/plugin.cfg", "res://addons/pingod-resources/plugin.cfg", "res://addons/pingod-trough/plugin.cfg", "res://addons/pingod-machine/plugin.cfg")
+enabled=PackedStringArray()
 
 [importer_defaults]
 

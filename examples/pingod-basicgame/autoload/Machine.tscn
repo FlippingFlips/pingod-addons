@@ -1,13 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://j2gs2e31nynl"]
+[gd_scene load_steps=5 format=3 uid="uid://twc0sd1ch1lc"]
 
-[ext_resource type="Script" path="res://addons/pingod-machine/plugin/PinGodMachine.cs" id="1_rpe2g"]
-[ext_resource type="Script" path="res://addons/pingod-plunger_lane/PlungerLane.cs" id="2_1vjn7"]
-[ext_resource type="Script" path="res://addons/pingod-trough/Trough.cs" id="2_o66u1"]
-[ext_resource type="Script" path="res://addons/pingod-ballsave/BallSaver.cs" id="3_fmtvq"]
+[ext_resource type="Script" path="res://addons/pingod-core/Service/MachineNode.cs" id="1_rpe2g"]
+[ext_resource type="Script" path="res://addons/pingod-core/PlungerLane/PlungerLane.cs" id="2_1vjn7"]
+[ext_resource type="Script" path="res://addons/pingod-core/BallStacks/Trough.cs" id="2_o66u1"]
+[ext_resource type="Script" path="res://addons/pingod-core/BallSaver/BallSaver.cs" id="3_fmtvq"]
 
 [node name="Machine" type="Node"]
 script = ExtResource("1_rpe2g")
-recordPlayback = 0
 _playbackfile = "user://recordings/my_test_record.record"
 _ball_search_coils = PackedStringArray("mball_saucer")
 _ball_search_stop_switches = PackedStringArray("mball_saucer", "trough_1", "trough_2", "trough_3", "trough_4")

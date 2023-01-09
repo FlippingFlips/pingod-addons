@@ -1,11 +1,15 @@
 using Godot;
+using PinGod.Core;
+using PinGod.Core.BallStacks;
+using PinGod.Game;
+using PinGod.Modes;
 
 /// <summary>
 /// Base mode example
 /// </summary>
 public partial class BaseMode : Control
 {
-    [Export(PropertyHint.File)] string BALL_SAVE_SCENE = "res://addons/pingod-ballsave/BallSave.tscn";
+    [Export(PropertyHint.File)] string BALL_SAVE_SCENE = "res://addons/modes/ballsave/BallSave.tscn";
 
     private PackedScene _ballSaveScene;
     private Saucer _ballSaucer;
@@ -16,7 +20,16 @@ public partial class BaseMode : Control
     /// Gets access to <see cref="PinGodGame"/> and the main <see cref="Game"/> scene. 
     /// </summary>
     public override void _EnterTree()
+    {        
+        game = GetParent().GetParent() as BasicGame;
+
+        _ballSaveScene = GD.Load<PackedScene>(BALL_SAVE_SCENE);
+        _ballSaucer = GetNode<Saucer>(nameof(Saucer));               
+    }
+
+    public override void _Ready()
     {
+        base._Ready();
         if (HasNode("/root/PinGodGame"))
         {
             pinGod = GetNode("/root/PinGodGame") as IPinGodGame;
@@ -24,11 +37,6 @@ public partial class BaseMode : Control
             pinGod.PinGodMachine.SwitchCommand += OnSwitchCommandHandler;
         }
         else { Logger.WarningRich(nameof(BaseMode), "[color=red]", ": no PinGodGame found", "[/color]"); }
-        
-        game = GetParent().GetParent() as BasicGame;
-
-        _ballSaveScene = GD.Load<PackedScene>(BALL_SAVE_SCENE);
-        _ballSaucer = GetNode<Saucer>(nameof(Saucer));               
     }
 
     /// <summary>
@@ -97,7 +105,7 @@ public partial class BaseMode : Control
     /// <param name="time">removes the scene after the time</param>
     private void DisplayBallSaveScene(float time = 2f)
     {
-        Logger.Verbose(nameof(BaseMode), ": displaying ball save scene");
+        Logger.Debug(nameof(BaseMode), ": displaying ball save scene");
         var ballSaveScene = _ballSaveScene.Instantiate<BallSave>();
         ballSaveScene.SetRemoveAfterTime(time);
         AddChild(_ballSaveScene.Instantiate());

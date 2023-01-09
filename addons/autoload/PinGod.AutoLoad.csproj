@@ -1,0 +1,31 @@
+<Project Sdk="Godot.NET.Sdk/4.0.0-beta.10">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="Adjustments\Adjustments.tscn" />
+    <None Include="Adjustments\plugin.cfg" />
+    <None Include="Adjustments\README.md" />
+    <None Include="AudioManager\AudioManager.tscn" />
+    <None Include="AudioManager\plugin.cfg" />
+    <None Include="AudioManager\README.md" />
+    <None Include="Machine\Machine.tscn" />
+    <None Include="Machine\plugin.cfg" />
+    <None Include="Machine\README.md" />
+    <None Include="MemoryMap\MemoryMap.tscn" />
+    <None Include="MemoryMap\plugin.cfg" />
+    <None Include="MemoryMap\README.md" />
+    <None Include="PinGodGame\plugin.cfg" />
+    <None Include="PinGodGame\README.md" />
+    <None Include="Resources\plugin.cfg" />
+    <None Include="Resources\README.md" />
+    <None Include="Resources\Resources.tscn" />
+    <None Include="WindowActions\plugin.cfg" />
+    <None Include="WindowActions\README.md" />
+    <None Include="WindowActions\WindowActions.tscn" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\pingod-core\PinGod.Core.csproj" />
+  </ItemGroup>
+</Project>

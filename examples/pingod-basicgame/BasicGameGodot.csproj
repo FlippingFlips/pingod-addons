@@ -1,91 +1,31 @@
-<Project Sdk="Godot.NET.Sdk/4.0.0-beta.10">
+﻿<Project Sdk="Godot.NET.Sdk/4.0.0-beta.10">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="game\**" />
-    <Compile Remove="modes\**" />
-    <EmbeddedResource Remove="addons\PinGodAddOns\**" />
-    <EmbeddedResource Remove="addons\PinGodGame\**" />
-    <EmbeddedResource Remove="addons\PinGodMemoryMap\**" />
-    <EmbeddedResource Remove="game\**" />
-    <EmbeddedResource Remove="modes\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="addons\assets\img\pinball.png" />
-    <Content Include="addons\assets\img\pingod-logo.png" />
-    <Content Include="addons\assets\img\pingod.ico" />
-    <Content Include="Properties\launchSettings.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="addons\assets\img\pinball.png.import" />
-    <None Include="addons\assets\img\pinball.svg" />
-    <None Include="addons\assets\img\pinball.svg.import" />
-    <None Include="addons\assets\img\pingod-logo.png.import" />
-    <None Include="addons\assets\Localization\pingod_default_lang.csv" />
-    <None Include="addons\pingod-addons\plugin.cfg" />
-    <None Include="addons\pingod-addons\README.md" />
-    <None Include="addons\pingod-audio\AudioManager.tscn" />
-    <None Include="addons\pingod-audio\plugin.cfg" />
-    <None Include="addons\pingod-audio\project.godotw" />
-    <None Include="addons\pingod-audio\README.md" />
-    <None Include="addons\pingod-ballsave\BallSave.tscn" />
-    <None Include="addons\pingod-ballsave\BallSaver.tscn" />
-    <None Include="addons\pingod-ballsave\plugin.cfg" />
-    <None Include="addons\pingod-ballsave\README.md" />
-    <None Include="addons\pingod-data-settings\README.md" />
-    <None Include="addons\pingod-game\plugin.cfg" />
-    <None Include="addons\pingod-game\README.md" />
-    <None Include="addons\pingod-game\Scenes\MainScene.tscn" />
-    <None Include="addons\pingod-machine\tools\Bumper.tscn" />
-    <None Include="addons\pingod-game\Scenes\CreditsLayer.tscn" />
-    <None Include="addons\pingod-addons\Timers\ModeTimer.tscn" />
-    <None Include="addons\pingod-game\Scenes\PauseLayer.tscn" />
-    <None Include="addons\pingod-game\Scenes\PinGodGame.tscn" />
-    <None Include="addons\pingod-machine\tools\Lamp.tscn" />
-    <None Include="addons\pingod-machine\tools\LampMatrix.tscn" />
-    <None Include="addons\pingod-memorymap\MemoryMap.tscn" />
-    <None Include="addons\pingod-mode-multiball\Multiball.tscn" />
-    <None Include="addons\pingod-mode-scoreentry\ScoreEntry.tscn" />
-    <None Include="addons\pingod-mode-servicemenu\ServiceMenu.tscn" />
-    <None Include="addons\pingod-mode-tilt\Tilt.tscn" />
-    <None Include="addons\pingod-plunger_lane\plugin.cfg" />
-    <None Include="addons\pingod-plunger_lane\README.md" />
-    <None Include="addons\pingod-resources\Resources.tscn" />
-    <None Include="addons\pingod-machine\tools\SwitchOverlay.tscn" />
-    <None Include="addons\pingod-settings-menu\plugin.cfg-not-a-plugin" />
-    <None Include="addons\pingod-settings-menu\scenes\AudioSettings.tscn" />
-    <None Include="addons\pingod-settings-menu\scenes\DisplaySettings.tscn" />
-    <None Include="addons\pingod-settings-menu\scenes\GameSettingsScene.tscn" />
-    <None Include="addons\pingod-settings-menu\scenes\PingodSettingsScene.tscn" />
-    <None Include="addons\pingod-mode-trophy\README.md" />
-    <None Include="addons\pingod-trough\Trough.tscn" />
-    <None Include="addons\PinGod-Machine\plugin.cfg" />
-    <None Include="addons\pingod-machine\README.md" />
-    <None Include="addons\pingod-memorymap\plugin.cfg" />
-    <None Include="addons\pingod-memorymap\README.md" />
-    <None Include="addons\pingod-resources\plugin.cfg" />
-    <None Include="addons\pingod-trough\plugin.cfg" />
-    <None Include="addons\pingod-trough\README.md" />
-    <None Include="addons\pingod-window-commands\plugin.cfg" />
-    <None Include="addons\pingod-window-commands\README.md" />
+    <None Include="addons\autoload\Adjustments\plugin.cfg" />
+    <None Include="addons\autoload\Adjustments\README.md" />
+    <None Include="addons\autoload\AudioManager\plugin.cfg" />
+    <None Include="addons\autoload\Machine\plugin.cfg" />
+    <None Include="addons\autoload\Machine\README.md" />
+    <None Include="addons\autoload\MemoryMap\plugin.cfg" />
+    <None Include="addons\autoload\MemoryMap\README.md" />
+    <None Include="addons\autoload\PinGodGame\plugin.cfg" />
+    <None Include="addons\autoload\PinGodGame\README.md" />
+    <None Include="addons\autoload\Resources\plugin.cfg" />
+    <None Include="addons\autoload\Resources\README.md" />
+    <None Include="addons\autoload\WindowActions\plugin.cfg" />
+    <None Include="addons\autoload\WindowActions\README.md" />
+    <None Include="addons\editor-plugin\machine-plugins\switches\SwitchOverlay.tscn" />
     <None Include="autoload\AudioManager.tscn" />
     <None Include="autoload\Machine.tscn" />
     <None Include="autoload\MemoryMap.tscn" />
     <None Include="autoload\PinGodGame.tscn" />
     <None Include="autoload\README.md" />
     <None Include="autoload\Resources.tscn" />
-    <None Include="autoload\Trough.tscn" />
     <None Include="autoload\WindowActions.tscn" />
-    <None Include="export_presets.cfg" />
-    <None Include="Game.tscn" />
-    <None Include="local\BasicGameLang.csv" />
-    <None Include="MainScene.tscn" />
     <None Include="project.godot" />
-    <None Include="readme.md" />
     <None Include="scenes\BaseMode.tscn" />
-    <None Include="visual_pinball\BasicGame-PinGod.vbs" />
-    <None Include="visual_pinball\readme.md" />
   </ItemGroup>
 </Project>

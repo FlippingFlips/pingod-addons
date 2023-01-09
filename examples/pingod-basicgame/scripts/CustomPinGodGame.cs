@@ -1,4 +1,6 @@
 ﻿using Godot;
+using PinGod.Core;
+using PinGod.Game;
 
 /// <summary>
 /// Custom class of <see cref="PinGodGame"/> to override when a player is added

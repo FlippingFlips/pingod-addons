@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c7km528rk8sfc"]
-
-[ext_resource type="Script" path="res://addons/pingod-plunger_lane/PlungerLane.cs" id="1_xpds5"]
-
-[node name="PlungerLane" type="Node"]
-script = ExtResource("1_xpds5")

@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dx3c7uoxjls01"]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/BaseMode.cs" id="1_k8ccg"]
-[ext_resource type="Script" path="res://addons/pingod-addons/Timers/Saucer.cs" id="2_wg3gl"]
+[ext_resource type="Script" path="res://addons/pingod-core/BallStacks/Saucer.cs" id="2_wg3gl"]
 
 [node name="BaseMode" type="Control" groups=["Mode"]]
 layout_mode = 3

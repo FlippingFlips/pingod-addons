@@ -1,11 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bg80dss5qc0bt"]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://addons/pingod-resources/Resources.cs" id="1_wa3d4"]
+[ext_resource type="Script" path="res://addons/pingod-core/Service/Resources.cs" id="1_wa3d4"]
 [ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="2_3nh6v"]
 
 [node name="Resources" type="Node"]
 script = ExtResource("1_wa3d4")
-_preloadPackedScenes = ["res://Game.tscn", "res://addons/pingod-mode-servicemenu/ServiceMenu.tscn", "res://addons/pingod-mode-tilt/Tilt.tscn", "res://scenes/BaseMode.tscn", "res://addons/pingod-mode-bonus/Bonus.tscn", "res://addons/pingod-mode-scoremode/ScoreMode.tscn", "res://addons/pingod-mode-scoreentry/ScoreEntry.tscn"]
 
 [node name="LoadingControl" type="Control" parent="."]
 layout_mode = 3

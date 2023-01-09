@@ -2,13 +2,13 @@
 
 [ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="1_4t02d"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l4qgx"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0lhha"]
 bg_color = Color(1, 0.466667, 0.466667, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1j3mj"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gbo8u"]
 bg_color = Color(1, 0.168627, 0.168627, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1defv"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_me1wm"]
 bg_color = Color(0.101961, 0.67451, 0.113725, 1)
 
 [resource]
@@ -23,6 +23,6 @@ Button/font_sizes/font_size = 26
 Button/fonts/font = ExtResource("1_4t02d")
 Button/styles/disabled = null
 Button/styles/focus = null
-Button/styles/hover = SubResource("StyleBoxFlat_l4qgx")
-Button/styles/normal = SubResource("StyleBoxFlat_1j3mj")
-Button/styles/pressed = SubResource("StyleBoxFlat_1defv")
+Button/styles/hover = SubResource("StyleBoxFlat_0lhha")
+Button/styles/normal = SubResource("StyleBoxFlat_gbo8u")
+Button/styles/pressed = SubResource("StyleBoxFlat_me1wm")

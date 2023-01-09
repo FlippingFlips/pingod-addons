@@ -1,5 +1,8 @@
 ﻿
 using Godot;
+using PinGod.Base;
+using PinGod.Core;
+using PinGod.Game;
 /// <summary>
 /// BasicGame with Modes tree (game/Game.tscn). This does nothing itself here but is loaded from Game.tscn <para/>
 /// this.GetTree().Root.Connect("gui_focus_changed", this, "gui_focus_changed"); 

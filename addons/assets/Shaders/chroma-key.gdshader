@@ -3,8 +3,8 @@ render_mode blend_mix;
 
 uniform bool use_mult;
 uniform float key_distance : hint_range(0, 1);
-uniform vec4 chroma_key : hint_color;
-uniform vec4 color : hint_color;
+uniform vec4 chroma_key : source_color;
+uniform vec4 color : source_color;
 
 void fragment() {
   COLOR = texture(TEXTURE, UV);

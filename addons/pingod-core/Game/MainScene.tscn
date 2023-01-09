@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0rjh6o0gfwwk"]
+
+[ext_resource type="Script" path="res://addons/pingod-core/Game/MainScene.cs" id="1_l1a55"]
+[ext_resource type="PackedScene" uid="uid://d314cxixgd6su" path="res://addons/modes/pause-settings/PauseSetting.tscn" id="2_0thwn"]
+[ext_resource type="PackedScene" path="res://addons/modes/attract/Attract.tscn" id="3_k56nk"]
+
+[node name="MainScene" type="Node"]
+process_mode = 3
+script = ExtResource("1_l1a55")
+_game_scene_path = "res://addons/pingod-game/Game.tscn"
+_service_menu_scene_path = "res://addons/modes/servicemenu/ServiceMenu.tscn"
+
+[node name="Modes" type="Node" parent="."]
+process_mode = 1
+
+[node name="Attract" parent="Modes" instance=ExtResource("3_k56nk")]
+z_index = -1
+
+[node name="PauseAndSettings" parent="." instance=ExtResource("2_0thwn")]
+editor_description = ""

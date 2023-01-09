@@ -6,6 +6,7 @@
 # PinGod - Godot
 # import files that are built, no need to be in source
 *.import
+*.godot
 Exported
 .mono
 temp
@@ -391,3 +392,9 @@ FodyWeavers.xsd
 /examples/pingod-game-pindar/.godot
 /examples/pingod-app-memorymap-window/.godot
 /examples/pingod-game-motu/.godot
+/examples/pingod-game-evildead/.godot
+/examples/pingod-game-evildead
+/examples/pingod-game-motu
+/examples/pingod-template-win-audit-adjust/.godot
+/examples/pingod-game-pindar
+/examples/pingod-basicgame-noscript
