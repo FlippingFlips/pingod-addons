@@ -5,6 +5,7 @@ using PinGod.Modes;
 using System;
 using System.Linq;
 using PinGod.EditorPlugins;
+using System.Security.Principal;
 
 namespace PinGod.Core.Service
 {
@@ -182,7 +183,7 @@ namespace PinGod.Core.Service
 
             if (_switchWindowEnabled && _switchWindow != null)
             {
-                CallDeferred(nameof(SetUpSwitchWindow));
+                CallDeferred(nameof(SetUpSwitchWindow));                
             }
             else
             {

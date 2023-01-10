@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/pingod-core/Service/MachineNode.cs" id="1_rpe2g"]
 [ext_resource type="Script" path="res://addons/pingod-core/PlungerLane/PlungerLane.cs" id="2_1vjn7"]
-[ext_resource type="PackedScene" uid="uid://bfda816jne6ks" path="res://addons/editor-plugin/windows/SwitchWindow.tscn" id="2_lv65y"]
+[ext_resource type="PackedScene" uid="uid://c1i3xe5c0i1n0" path="res://addons/editor-plugin/windows/PlayfieldWindow.tscn" id="2_mcwh2"]
 [ext_resource type="Script" path="res://addons/pingod-core/BallStacks/Trough.cs" id="2_o66u1"]
 [ext_resource type="Script" path="res://addons/modes/ballsave/BallSaver.cs" id="3_fmtvq"]
 
@@ -50,7 +50,7 @@ _switches = {
 "up": 6
 }
 _switchWindowEnabled = true
-_switchWindow = ExtResource("2_lv65y")
+_switchWindow = ExtResource("2_mcwh2")
 _playbackfile = "user://recordings/my_test_record.record"
 
 [node name="Trough" type="Node" parent="."]

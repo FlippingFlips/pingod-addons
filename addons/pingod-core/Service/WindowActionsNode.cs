@@ -19,11 +19,6 @@ namespace PinGod.Core.Service
         private Adjustments _adjustments;
         private MachineNode _machine;
 
-        /// <summary>
-        /// Window manager
-        /// </summary>
-        private Dictionary<string, Window> _windows = new Dictionary<string, Window>();
-
         #region Godot overrides
         public override void _EnterTree()
         {
@@ -49,24 +44,6 @@ namespace PinGod.Core.Service
 
                 GetTree().Root.CloseRequested += Root_CloseRequested;
             }
-        }
-
-        private void Root_CloseRequested()
-        {
-            Quit();
-        }
-
-        /// <summary>
-        /// Kill the windows
-        /// </summary>
-        public override void _ExitTree()
-        {
-            foreach (var win in _windows?.Values)
-            {
-                win.QueueFree();
-            }
-
-            base._ExitTree();
         }
 
         public override void _Input(InputEvent @event)
@@ -144,6 +121,11 @@ namespace PinGod.Core.Service
 
         #endregion
 
+        private void Root_CloseRequested()
+        {
+            Quit();
+        }
+
         /// <summary>
         /// Sets the window from (see <see cref="DisplaySettings"/>) found in the (see <see cref="Adjustments"/>)
         /// </summary>
@@ -170,7 +152,7 @@ namespace PinGod.Core.Service
         private void Quit()
         {
             Logger.Debug(nameof(WindowActionsNode), ":quit action request. quitting tree.");
-            //free here to make sure teh _exit method is invoked on the scripts
+            //free here to make sure the _exit method is invoked on the scripts
             foreach (var item in GetTree().Root.GetChildren())
             {
                 if (item.Name == nameof(PinGodGame))
