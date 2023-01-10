@@ -27,7 +27,7 @@ namespace PinGod.AutoLoad
                 //{
                 //	var scene = GD.Load("res://autoload/Machine.tscn") as PackedScene;
 
-                //	_machineNode = scene.Instantiate() as PinGodMachine;
+                //	_machineNode = scene.Instantiate() as MachineNode;
 
                 //	if(_machineNode!=null)
                 //                 GD.Print("found machine");

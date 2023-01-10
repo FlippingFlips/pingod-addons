@@ -17,7 +17,7 @@ public partial class MachinePlugin : EditorPlugin
     public override void _EnterTree()
     {
         base._EnterTree();
-        Logger.Debug(nameof(MachinePlugin), nameof(_EnterTree), ": PinGodMachinePlugin - " + $"VERSION:{VERSION}");
+        Logger.Debug(nameof(MachinePlugin), nameof(_EnterTree), ": MachineNodePlugin - " + $"VERSION:{VERSION}");
         if (!Engine.IsEditorHint())
         {
             Logger.Debug(nameof(MachinePlugin), ":" + nameof(_EnterTree));

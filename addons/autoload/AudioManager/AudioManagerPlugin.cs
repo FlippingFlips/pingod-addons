@@ -12,6 +12,7 @@ namespace PinGod.AutoLoad
     {
         const string ASSETS_DIR = "res://addons/assets/";
         const string ROOT_DIR = "res://addons/autoload/AudioManager/";
+        const string SVC_DIR = "res://addons/pingod-core/Service/";
         const string VERSION = "1.0";
 
         /// <summary>
@@ -23,7 +24,7 @@ namespace PinGod.AutoLoad
             if (Engine.IsEditorHint())
             {
                 using var texture = GD.Load<Texture2D>($"{ASSETS_DIR}img/pinball.png");
-                var script = GD.Load<Script>("res://addons/pingod-core/Service/" + nameof(AudioManager) + ".cs");
+                var script = GD.Load<Script>(SVC_DIR + nameof(AudioManager) + ".cs");
                 Logger.Debug(nameof(AudioManagerPlugin), ":" + nameof(_EnterTree), " loaded custom types");
 
                 var scenePath = "res://autoload/AudioManager.tscn";

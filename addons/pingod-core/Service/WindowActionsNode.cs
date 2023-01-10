@@ -1,5 +1,7 @@
 ﻿using Godot;
+using Godot.Collections;
 using PinGod.Base;
+using System;
 
 namespace PinGod.Core.Service
 {
@@ -7,13 +9,21 @@ namespace PinGod.Core.Service
     /// Handles input from the window. Converts actions to switches <see cref="_gameWindowSwitches"/>
     /// </summary>
     public partial class WindowActionsNode : Node
-    {
-        private Adjustments _adjustments;
-        [Export] string[] _gameWindowSwitches = null;
-        private MachineNode _machine;
+    {        
+        [Export] string[] _gameWindowSwitches = null;        
         [Export] bool _sendPingodMachineSwitches = true;
         [Export] bool _standardInputHandlingOn = true;
-        [Export] bool _setDisplayFromAdjustments = true;
+        [Export] bool _setDisplayFromAdjustments = true;        
+
+        private Adjustments _adjustments;
+        private MachineNode _machine;
+
+        /// <summary>
+        /// Window manager
+        /// </summary>
+        private Dictionary<string, Window> _windows = new Dictionary<string, Window>();
+
+        #region Godot overrides
         public override void _EnterTree()
         {
             base._EnterTree();
@@ -35,7 +45,27 @@ namespace PinGod.Core.Service
                     }
                 }
                 else { Logger.Debug(nameof(WindowActionsNode), ":Machine switch handling off"); }
+
+                GetTree().Root.CloseRequested += Root_CloseRequested;
             }
+        }
+
+        private void Root_CloseRequested()
+        {
+            Quit();
+        }
+
+        /// <summary>
+        /// Kill the windows
+        /// </summary>
+        public override void _ExitTree()
+        {
+            foreach (var win in _windows?.Values)
+            {
+                win.QueueFree();
+            }
+
+            base._ExitTree();
         }
 
         public override void _Input(InputEvent @event)
@@ -79,7 +109,7 @@ namespace PinGod.Core.Service
     }
     */
 
-            //action to switch. if this event is an action go through the actions set in the game window switches
+            //action to switch. if this event is an action, go through the actions set in the game window switches
             if (_sendPingodMachineSwitches)
             {
                 if (_machine != null && _gameWindowSwitches?.Length > 0)
@@ -111,6 +141,8 @@ namespace PinGod.Core.Service
             }
         }
 
+        #endregion
+
         /// <summary>
         /// Sets the window from (see <see cref="DisplaySettings"/>) found in the (see <see cref="Adjustments"/>)
         /// </summary>
@@ -136,16 +168,14 @@ namespace PinGod.Core.Service
 
         private void Quit()
         {
-            if (HasNode("/root/PinGodGame"))
+            Logger.Debug(nameof(WindowActionsNode), ":quit action request. quitting tree.");
+            //free here to make sure teh _exit method is invoked on the scripts
+            foreach (var item in GetTree().Root.GetChildren())
             {
-                Logger.Debug(nameof(WindowActionsNode), ":quit action request. quitting pingodGame");
-                GetNodeOrNull<IPinGodGame>("/root/PinGodGame").Quit();
+                item.QueueFree();
             }
-            else
-            {
-                Logger.Debug(nameof(WindowActionsNode), ":quit action request. quitting tree.");
-                GetTree().Quit(0);
-            }
+            //quit this window
+            GetTree().Quit(0);
         }
     }
 }

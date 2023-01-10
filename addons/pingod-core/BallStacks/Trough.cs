@@ -104,7 +104,7 @@ namespace PinGod.Core.BallStacks
             var cnt = 0;
             for (int i = 0; i < TroughOptions.Switches.Length; i++)
             {
-                if (Machine.Switches[TroughOptions.Switches[i]].IsEnabled())
+                if (TroughOptions.GameSwitches[i].IsEnabled())
                 {
                     cnt++;
                 }
@@ -300,18 +300,21 @@ namespace PinGod.Core.BallStacks
             if (_machine?._plungerLane != null && _machine._ballSaver != null)
             {
                 var sw = Machine.Switches[_machine._plungerLane._plunger_lane_switch];
+                //Logger.Verbose(nameof(Trough), ": plunger lane time since:", sw.TimeSinceChange(), " is on=", sw.IsEnabled(), " ball saver time=", _machine._ballSaver.TimeRemaining);
 
-                Logger.Verbose(nameof(Trough), ": plunger lane time since:", sw.TimeSinceChange(), " is on=", sw.IsEnabled(), " ball saver time=", _machine._ballSaver.TimeRemaining);
                 //ball isn't in plunger lane and ball saver on then put ball into lane
-                if (!_machine._plungerLane.IsSwitchActive() && _machine._ballSaver.TimeRemaining > 0)
+                if (!_machine._plungerLane.IsSwitchActive())
                 {
-                    var ballsIntTrough = BallsInTrough();
-                    var b = TroughOptions.Switches.Length - ballsIntTrough;
-                    Logger.Debug(nameof(Trough), ":balls in trough=" + ballsIntTrough + $":ball={b}:numToSave:{TroughOptions.NumBallsToSave}");
-                    if (b < _machine._ballSaver._number_of_balls_to_save)
+                    if(_machine._ballSaver.TimeRemaining > 0)
                     {
-                        PulseTrough();
-                    }
+                        var ballsIntTrough = BallsInTrough();
+                        var b = TroughOptions.Switches.Length - ballsIntTrough;
+                        Logger.Debug(nameof(Trough), ":balls in trough=" + ballsIntTrough + $":ball={b}:numToSave:{TroughOptions.NumBallsToSave}");
+                        if (b < _machine._ballSaver._number_of_balls_to_save)
+                        {
+                            PulseTrough();
+                        }
+                    }                    
                 }
                 else { Logger.Debug(nameof(Trough), ": plunger lane is active, can't put ball in lane while active."); }
             }

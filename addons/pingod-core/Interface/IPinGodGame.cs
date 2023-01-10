@@ -76,7 +76,7 @@ namespace PinGod.Core
         /// <summary>
         /// Machine node reference. Should be autoloaded as Machine
         /// </summary>
-        MachineNode PinGodMachine { get; }
+        MachineNode MachineNode { get; }
         /// <summary>
         /// Current player. Base <see cref="PinGodPlayer"/>
         /// </summary>

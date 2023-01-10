@@ -70,7 +70,7 @@ namespace PinGod.Modes { /// <summary>
             if (HasNode("/root/PinGodGame"))
             {
                 pinGod = GetNode("/root/PinGodGame") as IPinGodGame;
-                pinGod.PinGodMachine.Connect("SwitchCommand", new Callable(this, nameof(OnSwitchCommandHandler)));
+                pinGod.MachineNode.Connect("SwitchCommand", new Callable(this, nameof(OnSwitchCommandHandler)));
             }
             else { Logger.Warning(nameof(ScoreEntry), ": no PinGodGame found"); }
         }

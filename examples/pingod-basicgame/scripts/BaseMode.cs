@@ -9,7 +9,10 @@ using PinGod.Modes;
 /// </summary>
 public partial class BaseMode : Control
 {
-    [Export(PropertyHint.File)] string BALL_SAVE_SCENE = "res://addons/modes/ballsave/BallSave.tscn";
+    /// <summary>
+    /// Scene to play when ball saves active
+    /// </summary>
+    [Export(PropertyHint.File)] string BALL_SAVE_SCENE;
 
     private PackedScene _ballSaveScene;
     private Saucer _ballSaucer;
@@ -23,7 +26,10 @@ public partial class BaseMode : Control
     {        
         game = GetParent().GetParent() as BasicGame;
 
-        _ballSaveScene = GD.Load<PackedScene>(BALL_SAVE_SCENE);
+        //set the ball save packed scene
+        if(!string.IsNullOrWhiteSpace(BALL_SAVE_SCENE)) _ballSaveScene = GD.Load<PackedScene>(BALL_SAVE_SCENE);
+        else { Logger.Warning(nameof(BaseMode), ": no ball save scene set"); }
+
         _ballSaucer = GetNode<Saucer>(nameof(Saucer));               
     }
 
@@ -34,7 +40,7 @@ public partial class BaseMode : Control
         {
             pinGod = GetNode("/root/PinGodGame") as IPinGodGame;
             //use the switch command on machine through the game as we're in a game
-            pinGod.PinGodMachine.SwitchCommand += OnSwitchCommandHandler;
+            pinGod.MachineNode.SwitchCommand += OnSwitchCommandHandler;
         }
         else { Logger.WarningRich(nameof(BaseMode), "[color=red]", ": no PinGodGame found", "[/color]"); }
     }

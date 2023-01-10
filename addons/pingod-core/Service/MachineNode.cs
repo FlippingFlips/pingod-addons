@@ -1,9 +1,10 @@
 ﻿using Godot;
 using PinGod.Base;
 using PinGod.Core.Nodes.PlungerLane;
-using PinGod.Core.Nodes.Timers;
+using PinGod.Modes;
 using System;
 using System.Linq;
+using PinGod.EditorPlugins;
 
 namespace PinGod.Core.Service
 {
@@ -13,10 +14,6 @@ namespace PinGod.Core.Service
     public partial class MachineNode : Node
     {
         #region Exports
-        [ExportCategory("Record / Playback")]
-        [Export] RecordPlaybackOption recordPlayback = RecordPlaybackOption.Off;
-        [Export(PropertyHint.GlobalFile, "*.record")] string _playbackfile = null;
-
         [ExportCategory("Ball Search")]
         /// <summary>
         /// Coil names to pulse when ball searching
@@ -39,11 +36,18 @@ namespace PinGod.Core.Service
         [Export] private int _ball_search_wait_time_secs = 10;
 
         [ExportCategory("Machine Items")]
-
         [Export] Godot.Collections.Dictionary<string, byte> _coils = new();
         [Export] Godot.Collections.Dictionary<string, byte> _lamps = new();
-        [Export] Godot.Collections.Dictionary<string, byte> _leds = new();
-        [Export] Godot.Collections.Dictionary<string, byte> _switches = new();
+        [Export] Godot.Collections.Dictionary<string, byte> _leds = new();        
+        [Export] Godot.Collections.Dictionary<string, byte> _switches = new();        
+
+        [ExportCategory("Switch Window")]
+        [Export] bool _switchWindowEnabled = false;
+        [Export] PackedScene _switchWindow;
+
+        [ExportCategory("Record / Playback")]
+        [Export] RecordPlaybackOption recordPlayback = RecordPlaybackOption.Off;
+        [Export(PropertyHint.GlobalFile, "*.record")] string _playbackfile = null;
         #endregion
 
         #region Signals
@@ -62,12 +66,10 @@ namespace PinGod.Core.Service
         public PlungerLane _plungerLane;
 
         static bool _instanceLoaded = false;
-        private MemoryMapNode _pinGodMemoryMapNode;
-        private RecordPlaybackOption _recordPlayback;
-        private EventRecordFile _recordFile;
-
         ulong _machineLoadTime;
-
+        private MemoryMapNode _pinGodMemoryMapNode;
+        private EventRecordFile _recordFile;
+        private RecordPlaybackOption _recordPlayback;
         /// <summary>
         /// 
         /// </summary>
@@ -168,13 +170,6 @@ namespace PinGod.Core.Service
             }
         }
 
-        private void _ballSaver_BallSaved(bool earlySwitch = false)
-        {
-            Logger.Debug(nameof(MachineNode), ": ball saved. TODO: act");
-            if (_plungerLane != null)
-                _plungerLane.AutoFire();
-        }
-
         public override void _Ready()
         {
             base._Ready();
@@ -185,10 +180,30 @@ namespace PinGod.Core.Service
                 Logger.Debug(nameof(MachineNode), ":listening for events from plug-in ", nameof(MemoryMapNode));
             }
 
+            if (_switchWindowEnabled && _switchWindow != null)
+            {
+                CallDeferred(nameof(SetUpSwitchWindow));
+            }
+            else
+            {
+                Logger.Debug(nameof(MachineNode), ": switch window not enabled or scene isn't set");
+            }
+
             //set start time
             _machineLoadTime = Godot.Time.GetTicksMsec();
             //set up recording / playback from [export] properties
             SetUpRecordingsOrPlayback(recordPlayback, _playbackfile);
+        }
+
+        /// <summary>
+        /// Creates a <see cref="PulseTimer"/> and adds as child. Pulse timer deal with removing from tree
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="pulse">milliseconds. Has an integer here because in simulation, we can use higher if want longer timer</param>
+        public virtual void CoilPulse(string name, int pulse = 255)
+        {
+            Logger.Debug(nameof(MachineNode), $":coil:{name} pulse timer:{pulse}");
+            AddChild(new PulseTimer() { Autostart = true, OneShot = true, Name = name, WaitTime = pulse });
         }
 
         public void DisableBallSaver() => _ballSaver?.DisableBallSave();
@@ -384,17 +399,6 @@ namespace PinGod.Core.Service
         }
 
         /// <summary>
-        /// Creates a <see cref="PulseTimer"/> and adds as child. Pulse timer deal with removing from tree
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="pulse">milliseconds. Has an integer here because in simulation, we can use higher if want longer timer</param>
-        public virtual void CoilPulse(string name, int pulse = 255)
-        {
-            Logger.Debug(nameof(MachineNode), $":coil:{name} pulse timer:{pulse}");
-            AddChild(new PulseTimer() { Autostart = true, OneShot = true, Name = name, WaitTime = pulse });
-        }
-
-        /// <summary>
         /// Adds custom machine items. Actions are created for switches if they do not exist
         /// </summary>
         /// <param name="coils"></param>
@@ -453,6 +457,12 @@ namespace PinGod.Core.Service
             Logger.Debug(nameof(MachineNode), $":switches={Machine.Switches.Count}:coils={Machine.Coils.Count}:lamps={Machine.Lamps.Count},:leds={Machine.Leds.Count}");
         }
 
+        private void _ballSaver_BallSaved(bool earlySwitch = false)
+        {
+            Logger.Debug(nameof(MachineNode), ": ball saved. TODO: act");
+            if (_plungerLane != null)
+                _plungerLane.AutoFire();
+        }
         private void OnSwitchCommand(string name, int index, byte value)
         {
             Logger.Debug(nameof(MachineNode), $": setSwitch--n:{name},numVal:{index}-{value}");
@@ -467,5 +477,20 @@ namespace PinGod.Core.Service
 
         }
 
+        private void SetUpSwitchWindow()
+        {
+            //create window and add scene to instance
+            var window = _switchWindow.Instantiate() as WindowPinGod;
+            window.InitPackedScene();
+            //add window to the root window
+            var rootWin = this.GetTree().Root;
+            rootWin.GuiEmbedSubwindows = false;
+            rootWin.CallDeferred("add_child", window);
+
+            rootWin.GrabFocus();
+            //returns the scenes in this root
+            var windows = rootWin.GetChildren();//.Where(x => x.GetType() == typeof(Window));
+            GD.Print("windows: " + string.Join(',', windows.Select(x => x.Name)));
+        }
     }
 }

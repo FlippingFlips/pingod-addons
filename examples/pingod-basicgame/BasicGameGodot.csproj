@@ -18,6 +18,7 @@
     <None Include="addons\autoload\WindowActions\plugin.cfg" />
     <None Include="addons\autoload\WindowActions\README.md" />
     <None Include="addons\editor-plugin\machine-plugins\switches\SwitchOverlay.tscn" />
+    <None Include="addons\editor-plugin\machine-plugins\switches\SwitchPanel.tscn" />
     <None Include="autoload\AudioManager.tscn" />
     <None Include="autoload\Machine.tscn" />
     <None Include="autoload\MemoryMap.tscn" />

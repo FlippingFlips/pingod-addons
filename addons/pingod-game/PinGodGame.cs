@@ -77,7 +77,7 @@ namespace PinGod.Game
         public bool IsMultiballRunning { get; set; } = false;
         public bool IsTilted { get; set; }
         public LogLevel LogLevel { get; set; } = LogLevel.Info;
-        public MachineNode PinGodMachine { get; private set; }
+        public MachineNode MachineNode { get; private set; }
         public IPinGodPlayer Player { get; private set; }
         public List<IPinGodPlayer> Players { get; set; }
         public bool QuitRequested { get; private set; }
@@ -144,16 +144,16 @@ namespace PinGod.Game
                 if (HasNode(machineNode))
                 {
                     LogDebug($"{nameof(PinGodGame)}: _Ready| MachineConfig found");
-                    PinGodMachine = GetNode<MachineNode>(machineNode);
-                    BallSearchOptions = PinGodMachine.BallSearchOptions;
-                    PinGodMachine.SwitchCommand += PinGodMachine_SwitchCommand;
+                    MachineNode = GetNode<MachineNode>(machineNode);
+                    BallSearchOptions = MachineNode.BallSearchOptions;
+                    MachineNode.SwitchCommand += MachineNode_SwitchCommand;
 
-                    if (_trough == null && PinGodMachine.HasNode("Trough"))
+                    if (_trough == null && MachineNode.HasNode("Trough"))
                     {
-                        _trough = PinGodMachine.GetNode("Trough") as Trough;
+                        _trough = MachineNode.GetNode("Trough") as Trough;
                     }
                 }
-                else { Logger.WarningRich("[color=yellow]", $"{nameof(PinGodGame)}: _Ready| PinGodMachine not found", "[/color]"); }
+                else { Logger.WarningRich("[color=yellow]", $"{nameof(PinGodGame)}: _Ready| MachineNode not found", "[/color]"); }
 
                 if (_trough == null) Logger.WarningRich("[color=yellow]", nameof(PinGodGame), ": trough not found", "[/color]");
             }
@@ -496,8 +496,8 @@ namespace PinGod.Game
                 {
                     if (!_trough.IsTroughFull()) //return if trough isn't full. TODO: needs debug option to remove check
                     {
-                        LogInfo(nameof(PinGodGame), ":Trough not ready. Can't start game with empty trough.");
-                        PinGodMachine.BallSearchTimer.Start(1);
+                        LogInfo(nameof(PinGodGame), ":Trough not ready. Can't start game with empty trough. Balls="+ _trough.BallsInTrough());
+                        MachineNode.BallSearchTimer.Start(1);
                         return false;
                     }
                 }
@@ -509,7 +509,7 @@ namespace PinGod.Game
 
                 Players.Clear(); //clear any players from previous game
                 GameInPlay = true;
-                if (PinGodMachine != null) PinGodMachine.GameInPlay = true;
+                if (MachineNode != null) MachineNode.GameInPlay = true;
 
                 //remove a credit and add a new player
                 Audits.Credits--;
@@ -671,7 +671,7 @@ namespace PinGod.Game
         private void OnServiceMenuEnter()
         {
             GameInPlay = false;
-            if (PinGodMachine != null) PinGodMachine.GameInPlay = false;
+            if (MachineNode != null) MachineNode.GameInPlay = false;
             ResetTilt();
             EnableFlippers(false);
         }
@@ -690,7 +690,7 @@ namespace PinGod.Game
                 timer?.QueueFree();
             }
         }
-        private void PinGodMachine_SwitchCommand(string name, byte index, byte value)
+        private void MachineNode_SwitchCommand(string name, byte index, byte value)
         {
             if (value > 0)
             {

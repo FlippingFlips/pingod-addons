@@ -59,8 +59,8 @@ namespace PinGod.Modes
             base._ExitTree();
             timer?.Stop();
             Logger.Debug(nameof(Attract), ":", nameof(_ExitTree));
-            if (pinGod?.PinGodMachine != null)
-                pinGod.PinGodMachine.SwitchCommand -= OnPinGodSwitchCommand;
+            if (pinGod?.MachineNode != null)
+                pinGod.MachineNode.SwitchCommand -= OnPinGodSwitchCommand;
         }
 
         /// <summary>
@@ -75,12 +75,12 @@ namespace PinGod.Modes
                 pinGod = (GetNode("/root/PinGodGame") as IPinGodGame);
             }
 
-            if (pinGod?.PinGodMachine != null)
-                pinGod.PinGodMachine.SwitchCommand += OnPinGodSwitchCommand;
+            if (pinGod?.MachineNode != null)
+                pinGod.MachineNode.SwitchCommand += OnPinGodSwitchCommand;
             else { Logger.WarningRich(nameof(Attract), ":[color=yellow]", "IPinGodGame wasn't found in root, no machine switch handlers were added[/color]"); }
 
             //stop the ball search
-            pinGod?.PinGodMachine?.SetBallSearchStop();
+            pinGod?.MachineNode?.SetBallSearchStop();
 
             timer = (GetNode("AttractLayerChangeTimer") as Timer);
             timer.WaitTime = _scene_change_secs;

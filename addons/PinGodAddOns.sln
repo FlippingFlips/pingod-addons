@@ -1,0 +1,78 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PinGod.AutoLoad", "..\..\pingod-addons-new\addons\autoload\PinGod.AutoLoad.csproj", "{1525A2C6-C724-49E3-9805-89F05C4F63E0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PinGod.EditorPlugins", "..\..\pingod-addons-new\addons\editor-plugin\PinGod.EditorPlugins.csproj", "{E001014A-1E4B-4E1C-A0FC-2CF989D96E59}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PinGod.Modes", "..\..\pingod-addons-new\addons\modes\PinGod.Modes.csproj", "{BDC37780-D8D7-4238-861F-45CE21E8E1FA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PinGod.Base", "..\..\pingod-addons-new\addons\pingod-base\PinGod.Base.csproj", "{936CEFC5-CA24-4E90-BCF9-12436DEFA19E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PinGod.Core", "..\..\pingod-addons-new\addons\pingod-core\PinGod.Core.csproj", "{FC602C1A-4736-47D5-8F37-EB55FA524DD2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PinGod.Game", "..\..\pingod-addons-new\addons\pingod-game\PinGod.Game.csproj", "{1AA5F1C9-0A8E-4836-A225-FCCC05A0190B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		ExportDebug|Any CPU = ExportDebug|Any CPU
+		ExportRelease|Any CPU = ExportRelease|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1525A2C6-C724-49E3-9805-89F05C4F63E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1525A2C6-C724-49E3-9805-89F05C4F63E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1525A2C6-C724-49E3-9805-89F05C4F63E0}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{1525A2C6-C724-49E3-9805-89F05C4F63E0}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{1525A2C6-C724-49E3-9805-89F05C4F63E0}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{1525A2C6-C724-49E3-9805-89F05C4F63E0}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{1525A2C6-C724-49E3-9805-89F05C4F63E0}.Release|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{1525A2C6-C724-49E3-9805-89F05C4F63E0}.Release|Any CPU.Build.0 = ExportRelease|Any CPU
+		{E001014A-1E4B-4E1C-A0FC-2CF989D96E59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E001014A-1E4B-4E1C-A0FC-2CF989D96E59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E001014A-1E4B-4E1C-A0FC-2CF989D96E59}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{E001014A-1E4B-4E1C-A0FC-2CF989D96E59}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{E001014A-1E4B-4E1C-A0FC-2CF989D96E59}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{E001014A-1E4B-4E1C-A0FC-2CF989D96E59}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{E001014A-1E4B-4E1C-A0FC-2CF989D96E59}.Release|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{E001014A-1E4B-4E1C-A0FC-2CF989D96E59}.Release|Any CPU.Build.0 = ExportRelease|Any CPU
+		{BDC37780-D8D7-4238-861F-45CE21E8E1FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDC37780-D8D7-4238-861F-45CE21E8E1FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDC37780-D8D7-4238-861F-45CE21E8E1FA}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{BDC37780-D8D7-4238-861F-45CE21E8E1FA}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{BDC37780-D8D7-4238-861F-45CE21E8E1FA}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{BDC37780-D8D7-4238-861F-45CE21E8E1FA}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{BDC37780-D8D7-4238-861F-45CE21E8E1FA}.Release|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{BDC37780-D8D7-4238-861F-45CE21E8E1FA}.Release|Any CPU.Build.0 = ExportRelease|Any CPU
+		{936CEFC5-CA24-4E90-BCF9-12436DEFA19E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{936CEFC5-CA24-4E90-BCF9-12436DEFA19E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{936CEFC5-CA24-4E90-BCF9-12436DEFA19E}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{936CEFC5-CA24-4E90-BCF9-12436DEFA19E}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{936CEFC5-CA24-4E90-BCF9-12436DEFA19E}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{936CEFC5-CA24-4E90-BCF9-12436DEFA19E}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{936CEFC5-CA24-4E90-BCF9-12436DEFA19E}.Release|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{936CEFC5-CA24-4E90-BCF9-12436DEFA19E}.Release|Any CPU.Build.0 = ExportRelease|Any CPU
+		{FC602C1A-4736-47D5-8F37-EB55FA524DD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC602C1A-4736-47D5-8F37-EB55FA524DD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC602C1A-4736-47D5-8F37-EB55FA524DD2}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{FC602C1A-4736-47D5-8F37-EB55FA524DD2}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{FC602C1A-4736-47D5-8F37-EB55FA524DD2}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{FC602C1A-4736-47D5-8F37-EB55FA524DD2}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{FC602C1A-4736-47D5-8F37-EB55FA524DD2}.Release|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{FC602C1A-4736-47D5-8F37-EB55FA524DD2}.Release|Any CPU.Build.0 = ExportRelease|Any CPU
+		{1AA5F1C9-0A8E-4836-A225-FCCC05A0190B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AA5F1C9-0A8E-4836-A225-FCCC05A0190B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AA5F1C9-0A8E-4836-A225-FCCC05A0190B}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{1AA5F1C9-0A8E-4836-A225-FCCC05A0190B}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{1AA5F1C9-0A8E-4836-A225-FCCC05A0190B}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{1AA5F1C9-0A8E-4836-A225-FCCC05A0190B}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{1AA5F1C9-0A8E-4836-A225-FCCC05A0190B}.Release|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{1AA5F1C9-0A8E-4836-A225-FCCC05A0190B}.Release|Any CPU.Build.0 = ExportRelease|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

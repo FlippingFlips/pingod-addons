@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://addons/pingod-core/Service/MachineNode.cs" id="1_sbm0p"]
 [ext_resource type="Script" path="res://addons/pingod-core/BallStacks/Trough.cs" id="2_y2nw4"]
 [ext_resource type="Script" path="res://addons/pingod-core/PlungerLane/PlungerLane.cs" id="3_nwj2m"]
-[ext_resource type="Script" path="res://addons/pingod-core/BallSaver/BallSaver.cs" id="4_yl6xf"]
+[ext_resource type="Script" path="res://addons/modes/ballsave/BallSaver.cs" id="4_yl6xf"]
 
 [node name="Machine" type="Node"]
 editor_description = "PinGodMachine

@@ -1,7 +1,7 @@
 ﻿using Godot;
 using PinGod.Base;
 
-namespace PinGod.addons.editor_plugin.display_plugins
+namespace PinGod.EditorPlugins
 {
     /// <summary>
     /// Simple screen slider as used in older DMD games. Slide in from a direction, pause then slide out. <para/>

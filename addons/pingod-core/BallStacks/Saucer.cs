@@ -107,7 +107,7 @@ namespace PinGod.Core.BallStacks
         }
 
         /// <summary>
-        /// Uses <see cref="PinGodMachine.CoilPulse(string, int)(string)"/>.
+        /// Uses <see cref="MachineNode.CoilPulse(string, int)(string)"/>.
         /// </summary>
         public void Kick(int pulse = 255) => _pingodMachine?.CoilPulse(_coil, pulse);
 

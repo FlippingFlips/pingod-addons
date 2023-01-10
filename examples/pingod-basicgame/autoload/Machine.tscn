@@ -1,13 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://twc0sd1ch1lc"]
+[gd_scene load_steps=6 format=3 uid="uid://bx0nkn8heoy1b"]
 
 [ext_resource type="Script" path="res://addons/pingod-core/Service/MachineNode.cs" id="1_rpe2g"]
 [ext_resource type="Script" path="res://addons/pingod-core/PlungerLane/PlungerLane.cs" id="2_1vjn7"]
+[ext_resource type="PackedScene" uid="uid://bfda816jne6ks" path="res://addons/editor-plugin/windows/SwitchWindow.tscn" id="2_lv65y"]
 [ext_resource type="Script" path="res://addons/pingod-core/BallStacks/Trough.cs" id="2_o66u1"]
-[ext_resource type="Script" path="res://addons/pingod-core/BallSaver/BallSaver.cs" id="3_fmtvq"]
+[ext_resource type="Script" path="res://addons/modes/ballsave/BallSaver.cs" id="3_fmtvq"]
 
 [node name="Machine" type="Node"]
 script = ExtResource("1_rpe2g")
-_playbackfile = "user://recordings/my_test_record.record"
 _ball_search_coils = PackedStringArray("mball_saucer")
 _ball_search_stop_switches = PackedStringArray("mball_saucer", "trough_1", "trough_2", "trough_3", "trough_4")
 _coils = {
@@ -49,6 +49,9 @@ _switches = {
 "trough_4": 84,
 "up": 6
 }
+_switchWindowEnabled = true
+_switchWindow = ExtResource("2_lv65y")
+_playbackfile = "user://recordings/my_test_record.record"
 
 [node name="Trough" type="Node" parent="."]
 script = ExtResource("2_o66u1")
