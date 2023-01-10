@@ -11,11 +11,15 @@ editor_description = "/// <summary>
 /// What you would do for your game is duplicate this scene and make your own from it, replacing the image and button names to your switch names. <para/>
 /// You would want to duplicate the scene for this script too and set the switch window in the MachineNode scene.
 /// </summary>"
+sdf_oversize = 0
+sdf_scale = 0
 title = "Switch Window"
 position = Vector2i(50, 50)
 size = Vector2i(400, 900)
 current_screen = 1
 transient = true
+unresizable = true
+extend_to_title = true
 min_size = Vector2i(0, 800)
 max_size = Vector2i(400, 900)
 content_scale_mode = 2

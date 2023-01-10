@@ -2,6 +2,8 @@ using Godot;
 using PinGod.Core;
 using PinGod.Core.Service;
 using PinGod.EditorPlugins;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 
 /// <summary>
 /// This window relies on a child having a Control node which contains playfield image and buttons. <para/>
@@ -14,6 +16,8 @@ using PinGod.EditorPlugins;
 public partial class PlayfieldWindow : WindowPinGod
 {
     private MachineNode _machine;
+
+    const string WIN_SAVE = "user://playfieldwindow.save";
 
     public override void _Ready()
     {
@@ -39,6 +43,22 @@ public partial class PlayfieldWindow : WindowPinGod
         {
             Logger.Error(nameof(PlayfieldWindow), nameof(_Ready), ": no MachineNode found, unable to send switches to the game.");
         }
+
+        if (FileAccess.FileExists(WIN_SAVE))
+        {
+            using var settingsSave = FileAccess.Open(WIN_SAVE, FileAccess.ModeFlags.Read);
+            var obj = JsonSerializer.Deserialize<PlayfieldWindowSave>(settingsSave.GetLine());
+            this.Position = new Vector2i(obj.X, obj.Y);
+        }
+    }
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+        //save the window position
+        using var saveGame = FileAccess.Open(WIN_SAVE, FileAccess.ModeFlags.Write);
+        var winSave = new PlayfieldWindowSave { X = Position.x, Y = Position.y };
+        saveGame.StoreLine(JsonSerializer.Serialize<PlayfieldWindowSave>(winSave));
     }
 
     void OnPlayfieldSwitchWindow(string name, byte state)
@@ -52,4 +72,10 @@ public partial class PlayfieldWindow : WindowPinGod
         }            
         else _machine.SetSwitch(name, state, false);
     }
+}
+
+public class PlayfieldWindowSave
+{
+    public int X { get; set; }
+    public int Y { get; set; }
 }
