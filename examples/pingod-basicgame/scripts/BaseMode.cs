@@ -110,11 +110,15 @@ public partial class BaseMode : Control
     /// </summary>
     /// <param name="time">removes the scene after the time</param>
     private void DisplayBallSaveScene(float time = 2f)
-    {
-        Logger.Debug(nameof(BaseMode), ": displaying ball save scene");
-        var ballSaveScene = _ballSaveScene.Instantiate<BallSave>();
-        ballSaveScene.SetRemoveAfterTime(time);
-        AddChild(_ballSaveScene.Instantiate());
+    {        
+        var ballSaveScene = _ballSaveScene?.Instantiate<BallSave>();
+        if(ballSaveScene != null)
+        {
+            Logger.Debug(nameof(BaseMode), ": displaying ball save scene");
+            ballSaveScene.SetRemoveAfterTime(time);
+            AddChild(_ballSaveScene.Instantiate());
+        }
+        else { Logger.Debug(nameof(BaseMode), ": ball saver scene not set."); }
     }
 
     /// <summary>
