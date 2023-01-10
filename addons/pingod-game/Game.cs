@@ -118,6 +118,29 @@ namespace PinGod.Game
         }
 
         /// <summary>
+        /// Invokes <see cref="PinGodGame.OnBallDrained(SceneTree, string, string)"/> on the whole tree
+        /// </summary>
+        public virtual void OnBallDrained()
+        {
+            if (_tiltedTimeOut.IsStopped())
+            {
+                if (pinGod != null)
+                {
+                    pinGod.OnBallDrained(GetTree());
+
+                    if (pinGod.EndBall())
+                    {
+                        Logger.Info(nameof(Game), ":last ball played, game ending");
+                    }
+                    else
+                    {
+                        Logger.Info(nameof(Game), ":new ball starting");
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Add a display at end of ball
         /// </summary>
         public virtual void OnBallEnded(bool lastBall)
@@ -156,6 +179,11 @@ namespace PinGod.Game
             }
         }
         /// <summary>
+        /// Signals to Mode groups OnBallSaved
+        /// </summary>
+        public virtual void OnBallSaved() => pinGod.OnBallSaved(GetTree());
+
+        /// <summary>
         /// Displays high score if this is the last ball.
         /// </summary>
         public virtual void OnBonusEnded()
@@ -183,6 +211,15 @@ namespace PinGod.Game
         }
 
         /// <summary>
+        /// Just before <see cref="StartNewBall"/> is called
+        /// </summary>
+        public virtual void OnStartNewBall()
+        {
+            Logger.Debug(nameof(Game), ":starting new ball after tilting");
+            StartNewBall();
+        }
+
+        /// <summary>
         /// Starts new ball in PinGod and invokes OnBallStarted on all Mode groups
         /// </summary>
         public virtual void StartNewBall()
@@ -195,38 +232,6 @@ namespace PinGod.Game
             pinGod.OnBallStarted(GetTree());
         }
 
-        /// <summary>
-        /// Invokes <see cref="PinGodGame.OnBallDrained(SceneTree, string, string)"/> on the whole tree
-        /// </summary>
-        public virtual void OnBallDrained()
-        {
-            if (_tiltedTimeOut.IsStopped())
-            {
-                if (pinGod != null)
-                {
-                    pinGod.OnBallDrained(GetTree());
-
-                    if (pinGod.EndBall())
-                    {
-                        Logger.Info(nameof(Game), ":last ball played, game ending");
-                    }
-                    else
-                    {
-                        Logger.Info(nameof(Game), ":new ball starting");
-                    }
-                }
-            }
-        }
-        /// <summary>
-        /// Signals to Mode groups OnBallSaved
-        /// </summary>
-        public virtual void OnBallSaved() => pinGod.OnBallSaved(GetTree());
-
-        void OnStartNewBall()
-        {
-            Logger.Debug(nameof(Game), ":starting new ball after tilting");
-            StartNewBall();
-        }
         /// <summary>
         /// Uses Godots <see cref="Godot.Object.CallDeferred(string, object[])"/> to invoke <see cref="OnStartNewBall"/> on Tilt timeouts
         /// </summary>

@@ -342,9 +342,9 @@ namespace PinGod.Game
 
             LogInfo(nameof(PinGodGame), ": Quit: saved game");
 
-            if (GetTree().Paused) { GetTree().Paused = false; }
-
-            GetTree().Quit(0);
+            this.QueueFree();
+            //if (GetTree().Paused) { GetTree().Paused = false; }
+            //GetTree().Quit(0);
         }
         public virtual int RandomNumber(int from, int to) => randomNumGenerator.RandiRange(from, to);
         public virtual void ResetTilt()
