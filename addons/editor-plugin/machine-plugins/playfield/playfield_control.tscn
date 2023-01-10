@@ -1,0 +1,175 @@
+[gd_scene load_steps=4 format=3 uid="uid://cyvdrta2totih"]
+
+[ext_resource type="Theme" uid="uid://bcbhvghnhmgd7" path="res://addons/editor-plugin/machine-plugins/playfield/playfield_button_theme.tres" id="1_3h2nl"]
+[ext_resource type="Texture2D" uid="uid://drcaj1m00eitd" path="res://addons/assets/img/playfield_blueprint_vp.png" id="2_1kqoi"]
+[ext_resource type="Script" path="res://addons/editor-plugin/machine-plugins/playfield/playfield_control.gd" id="2_kvqu0"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -624.0
+offset_bottom = 308.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_3h2nl")
+script = ExtResource("2_kvqu0")
+
+[node name="PlayfieldTextureRect" type="TextureRect" parent="."]
+texture_repeat = 1
+layout_direction = 1
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 908.0
+texture = ExtResource("2_1kqoi")
+stretch_mode = 6
+
+[node name="Buttons" type="Control" parent="."]
+editor_description = "Most buttons are toggles, but some you want not to toggle, like targets, coin + start buttons. Duplicate a button give it a name that matches your switch."
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="coin1" type="Button" parent="Buttons"]
+layout_mode = 1
+offset_left = 240.0
+offset_top = 870.0
+offset_right = 294.0
+offset_bottom = 897.0
+text = "COIN1"
+
+[node name="start" type="Button" parent="Buttons"]
+layout_mode = 1
+offset_left = 300.0
+offset_top = 870.0
+offset_right = 352.0
+offset_bottom = 897.0
+text = "START"
+
+[node name="plunger_lane" type="Button" parent="Buttons"]
+layout_mode = 1
+offset_left = 367.0
+offset_top = 825.0
+offset_right = 391.0
+offset_bottom = 846.0
+rotation = -1.57079
+toggle_mode = true
+
+[node name="outlane_l" type="Button" parent="Buttons"]
+layout_mode = 1
+offset_left = 10.0
+offset_top = 672.0
+offset_right = 34.0
+offset_bottom = 693.0
+rotation = -1.57079
+toggle_mode = true
+
+[node name="inlane_l" type="Button" parent="Buttons"]
+layout_mode = 1
+offset_left = 44.0
+offset_top = 672.0
+offset_right = 68.0
+offset_bottom = 693.0
+rotation = -1.57079
+toggle_mode = true
+
+[node name="inlane_r" type="Button" parent="Buttons"]
+layout_mode = 1
+offset_left = 301.0
+offset_top = 671.0
+offset_right = 325.0
+offset_bottom = 692.0
+rotation = -1.57079
+toggle_mode = true
+
+[node name="outlane_r" type="Button" parent="Buttons"]
+layout_mode = 1
+offset_left = 335.0
+offset_top = 671.0
+offset_right = 359.0
+offset_bottom = 692.0
+rotation = -1.57079
+toggle_mode = true
+
+[node name="sling_l" type="Button" parent="Buttons"]
+layout_mode = 1
+offset_left = 87.0
+offset_top = 646.0
+offset_right = 141.0
+offset_bottom = 673.0
+scale = Vector2(0.319999, 0.56)
+
+[node name="flipper_l" type="Button" parent="Buttons"]
+layout_mode = 1
+offset_left = 108.0
+offset_top = 750.0
+offset_right = 162.0
+offset_bottom = 777.0
+scale = Vector2(0.319999, 0.56)
+
+[node name="flipper_r" type="Button" parent="Buttons"]
+layout_mode = 1
+offset_left = 242.0
+offset_top = 749.0
+offset_right = 296.0
+offset_bottom = 776.0
+scale = Vector2(0.319999, 0.56)
+
+[node name="sling_r" type="Button" parent="Buttons"]
+layout_mode = 1
+offset_left = 265.0
+offset_top = 647.0
+offset_right = 319.0
+offset_bottom = 674.0
+scale = Vector2(0.319999, 0.56)
+
+[node name="mball_saucer" type="Button" parent="Buttons"]
+layout_mode = 1
+offset_left = 14.0
+offset_top = 186.0
+offset_right = 38.0
+offset_bottom = 207.0
+rotation = -1.57079
+toggle_mode = true
+
+[node name="trough_1" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 288.537
+offset_top = 801.0
+offset_right = 312.537
+offset_bottom = 822.0
+rotation = 0.988307
+toggle_mode = true
+
+[node name="trough_2" type="Button" parent="Buttons"]
+layout_mode = 1
+offset_left = 310.537
+offset_top = 787.0
+offset_right = 334.537
+offset_bottom = 808.0
+rotation = 0.988307
+toggle_mode = true
+
+[node name="trough_3" type="Button" parent="Buttons"]
+layout_mode = 1
+offset_left = 332.537
+offset_top = 774.0
+offset_right = 356.537
+offset_bottom = 795.0
+rotation = 0.988307
+toggle_mode = true
+
+[node name="trough_4" type="Button" parent="Buttons"]
+layout_mode = 1
+offset_left = 352.537
+offset_top = 762.0
+offset_right = 376.537
+offset_bottom = 783.0
+rotation = 0.988307
+toggle_mode = true
