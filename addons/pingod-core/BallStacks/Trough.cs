@@ -119,7 +119,10 @@ namespace PinGod.Core.BallStacks
         public bool IsTroughFull()
         {
             if (_isDebugTrough)
+            {
+                Logger.Verbose(nameof(Trough), ": DEBUG TROUGH IS ON, always full, switch off for simulator.");
                 return true;
+            }                
 
             if (TroughOptions?.GameSwitches?.Count <= 0)
             {

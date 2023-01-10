@@ -465,7 +465,7 @@ namespace PinGod.Core.Service
         }
         private void OnSwitchCommand(string name, int index, byte value)
         {
-            Logger.Debug(nameof(MachineNode), $": setSwitch--n:{name},numVal:{index}-{value}");
+            Logger.Verbose(nameof(MachineNode), $": setSwitch--n:{name},numVal:{index}-{value}");
             if (string.IsNullOrWhiteSpace(name))
             {
                 SetSwitch(index, value, false);
@@ -490,7 +490,7 @@ namespace PinGod.Core.Service
             rootWin.GrabFocus();
             //returns the scenes in this root
             var windows = rootWin.GetChildren();//.Where(x => x.GetType() == typeof(Window));
-            GD.Print("windows: " + string.Join(',', windows.Select(x => x.Name)));
+            Logger.Info("windows: " + string.Join(',', windows.Select(x => x.Name)));
         }
     }
 }

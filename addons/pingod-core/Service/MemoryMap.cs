@@ -89,7 +89,7 @@ namespace PinGod.Core.Service
         {
             if (_writeStatesTask != null || _readStatesTask != null)
             {
-                GD.Print("memory map already initialized!");
+                Logger.Info("memory map already initialized!");
                 return;
             }
 

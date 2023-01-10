@@ -98,7 +98,6 @@ namespace PinGod.EditorPlugins
             var tween = GetTree().CreateTween();
             tween.TweenProperty(this, "position", new Vector2(0, 0), _inTime);
             tween.TweenInterval(_pauseTime);
-            GD.Print("moving to " + endX);
             tween.TweenProperty(this, "position", new Vector2(endX, endY), _outTime);
 
             //tween.TweenCallback(new Callable(this, nameof(QueueFree)));

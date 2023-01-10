@@ -28,7 +28,6 @@ namespace PinGod.EditorPlugins
         {
             if (!Engine.IsEditorHint())
             {
-                Logger.LogLevel = LogLevel.Verbose;
                 _switches = Machine.Switches;//?.Values.OrderBy(x => x.Num);
                 _troughButtons = new List<Button>();
                 //create a button from all switches

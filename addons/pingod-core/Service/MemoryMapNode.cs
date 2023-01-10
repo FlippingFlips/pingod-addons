@@ -65,14 +65,14 @@ namespace PinGod.Core.Service
                 {
                     //got this far so we can start memory mapping            
                     Logger.Info(nameof(MemoryMapNode), ":memory map loaded, starting read/write state tasks.");
-                    Logger.Debug(nameof(MemoryMapNode), nameof(_Ready), ": setup event handling from switches");
+                    Logger.Info(nameof(MemoryMapNode), nameof(_Ready), ": setup event handling from switches");
                     mMap.MemorySwitchEventHandler += MMap_MemorySwitchEventHandler;
                 }
                 Start();
             }
             else
             {
-                GD.Print(nameof(MemoryMapNode), ":script in editor, doing nothing");
+                Logger.Info(nameof(MemoryMapNode), ":script in editor, doing nothing");
             }
         }
 
@@ -112,7 +112,7 @@ namespace PinGod.Core.Service
 
         private void MMap_MemorySwitchEventHandler(object sender, SwitchEventArgs sw)
         {
-            Logger.Debug(nameof(MemoryMapNode), $": map switch: {sw.Num}={sw.Value}");
+            Logger.Verbose(nameof(MemoryMapNode), $": map switch: {sw.Num}={sw.Value}");
             EmitSignal(nameof(MemorySwitchSignal), new Variant[] { string.Empty, sw.Num, sw.Value });
         }
 

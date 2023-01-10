@@ -1,5 +1,6 @@
 using Godot;
 using PinGod.Base;
+using PinGod.Core;
 using PinGod.Core.Service;
 
 namespace PinGod.AutoLoad
@@ -35,14 +36,13 @@ namespace PinGod.AutoLoad
 
                 //GetTree().ReloadCurrentScene();
 
-                GD.Print("hello");
                 if (Machine.Switches?.Count > 0)
                 {
-                    GD.Print("Switches found");
+                    Logger.Debug("Switches found");
                 }
                 else
                 {
-                    GD.Print("Create tree");
+                    //todo: finish or remove
                     var tree = GetNode<Tree>(nameof(Tree));
                     TreeItem root = tree.CreateItem();
                     root.SetText(0, "Switches");

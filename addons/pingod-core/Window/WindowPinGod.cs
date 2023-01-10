@@ -15,14 +15,14 @@ namespace PinGod.EditorPlugins
 
         private void PinGodWindow_CloseRequested()
         {
-            GD.Print("close request");
+            Logger.Debug(nameof(WindowPinGod), ":close request");
             this.QueueFree();
         }
 
         public override void _ExitTree()
         {
             base._ExitTree();
-            GD.Print($"{Name} exiting");
+            Logger.Debug(nameof(WindowPinGod), ":exiting");
         }
 
         /// <summary>

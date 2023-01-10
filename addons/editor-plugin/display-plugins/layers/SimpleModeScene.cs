@@ -113,7 +113,7 @@ namespace PinGod.EditorPlugins
         /// <param name="lbLg"></param>
         /// <param name="lbSm"></param>
         /// <param name="delay">if greater than 1 it will play for given time then set visible to false on this control</param>
-        public virtual void PlaySequence(string anim = "disappear", string lbLg = "", string lbSm = "", float delay = 2f)
+        public virtual void PlaySequence(string anim = "default", string lbLg = "", string lbSm = "", float delay = 2f)
         {
             //any running timer stop it
             _clearDisplayTimer.Stop();
@@ -129,7 +129,7 @@ namespace PinGod.EditorPlugins
             SetLabelText(1, lbSm);
             //show then hide after delay
             Visible = true;
-            if (delay > 1)
+            if (delay > 0)
             {
                 _clearDisplayTimer.Start(delay);
             }
