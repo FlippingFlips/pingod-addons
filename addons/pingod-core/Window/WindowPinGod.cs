@@ -3,6 +3,9 @@ using PinGod.Core;
 
 namespace PinGod.EditorPlugins
 {
+    /// <summary>
+    /// Window that can load a given packed scene when InitPackedScene is used
+    /// </summary>
     public partial class WindowPinGod : Window
     {
         [Export] PackedScene _scene;
@@ -28,7 +31,7 @@ namespace PinGod.EditorPlugins
         /// <summary>
         /// call this to instance the scene given into the window as child
         /// </summary>
-        public void InitPackedScene()
+        public virtual void InitPackedScene()
         {
             if (_scene != null)
             {

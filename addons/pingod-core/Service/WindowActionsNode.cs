@@ -1,6 +1,7 @@
 ﻿using Godot;
 using Godot.Collections;
 using PinGod.Base;
+using PinGod.Game;
 using System;
 
 namespace PinGod.Core.Service
@@ -172,7 +173,16 @@ namespace PinGod.Core.Service
             //free here to make sure teh _exit method is invoked on the scripts
             foreach (var item in GetTree().Root.GetChildren())
             {
-                item.QueueFree();
+                if (item.Name == nameof(PinGodGame))
+                {
+                    //need to do this as it doesn't quit itself
+                    var pg = item as IPinGodGame;
+                    pg?.Quit();
+                }
+                else
+                {
+                    item.QueueFree();
+                }
             }
             //quit this window
             GetTree().Quit(0);
