@@ -1,14 +1,21 @@
 extends Control
 
-signal switch_active(name, state)
+signal switch_active(name, state) 
+var _troughBtns = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for button in get_node("Buttons").get_children():
+		if button.name.begins_with("trough"):
+			_troughBtns.append(button)
 		if(button.toggle_mode == true):
 			button.pressed.connect(_on_pressed.bind(button))
 		else:
-			button.pressed.connect(_on_pulse_pressed.bind(button))
+			button.pressed.connect(_on_pulse_pressed.bind(button))	
+	var troughBtn = get_node("AllTroughButton") as Button	
+	troughBtn.pressed.connect(_on_trough_pressed)
+	var resetBtn = get_node("ResetGameButton") as Button	
+	resetBtn.pressed.connect(_on_reset_pressed)
 
 func _on_pressed(button):
 	print(button.name, " was pressed:", button.button_pressed)	
@@ -20,3 +27,15 @@ func _on_pressed(button):
 func _on_pulse_pressed(button):
 	print(button.name, " pulse pressed")
 	emit_signal("switch_active", button.name, 2)
+
+func _on_reset_pressed():
+	var evt = InputEventAction.new()
+	evt.action = "reset"
+	evt.pressed = true
+	Input.parse_input_event((evt))
+	
+func _on_trough_pressed():
+	for btn in _troughBtns:
+		(btn as Button).set_pressed_no_signal(true);
+		#(btn as Button).button_pressed=true;
+		emit_signal("switch_active", (btn as Button).name, 1)

@@ -21,7 +21,6 @@ script = ExtResource("2_kvqu0")
 [node name="PlayfieldTextureRect" type="TextureRect" parent="."]
 texture_repeat = 1
 layout_direction = 1
-layout_mode = 0
 offset_right = 400.0
 offset_bottom = 908.0
 texture = ExtResource("2_1kqoi")
@@ -29,7 +28,7 @@ stretch_mode = 6
 
 [node name="Buttons" type="Control" parent="."]
 editor_description = "Most buttons are toggles, but some you want not to toggle, like targets, coin + start buttons. Duplicate a button give it a name that matches your switch."
-layout_mode = 1
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -37,23 +36,55 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="coin1" type="Button" parent="Buttons"]
-layout_mode = 1
-offset_left = 240.0
-offset_top = 870.0
-offset_right = 294.0
-offset_bottom = 897.0
+offset_left = 281.0
+offset_top = 873.0
+offset_right = 335.0
+offset_bottom = 900.0
+scale = Vector2(0.736438, 0.736438)
 text = "COIN1"
 
+[node name="exit" type="Button" parent="Buttons"]
+offset_left = 78.0
+offset_top = 875.0
+offset_right = 132.0
+offset_bottom = 902.0
+scale = Vector2(0.659074, 0.742996)
+text = "exit
+"
+
+[node name="down" type="Button" parent="Buttons"]
+offset_left = 114.0
+offset_top = 875.0
+offset_right = 168.0
+offset_bottom = 902.0
+scale = Vector2(0.659074, 0.742996)
+text = "down"
+
+[node name="up" type="Button" parent="Buttons"]
+offset_left = 151.0
+offset_top = 875.0
+offset_right = 205.0
+offset_bottom = 902.0
+scale = Vector2(0.659074, 0.742996)
+text = "up"
+
+[node name="enter" type="Button" parent="Buttons"]
+offset_left = 188.0
+offset_top = 875.0
+offset_right = 242.0
+offset_bottom = 902.0
+scale = Vector2(0.659074, 0.742996)
+text = "enter"
+
 [node name="start" type="Button" parent="Buttons"]
-layout_mode = 1
-offset_left = 300.0
-offset_top = 870.0
-offset_right = 352.0
-offset_bottom = 897.0
+offset_left = 322.0
+offset_top = 873.0
+offset_right = 374.0
+offset_bottom = 900.0
+scale = Vector2(0.751852, 0.751852)
 text = "START"
 
 [node name="plunger_lane" type="Button" parent="Buttons"]
-layout_mode = 1
 offset_left = 367.0
 offset_top = 825.0
 offset_right = 391.0
@@ -62,7 +93,6 @@ rotation = -1.57079
 toggle_mode = true
 
 [node name="outlane_l" type="Button" parent="Buttons"]
-layout_mode = 1
 offset_left = 10.0
 offset_top = 672.0
 offset_right = 34.0
@@ -71,7 +101,6 @@ rotation = -1.57079
 toggle_mode = true
 
 [node name="inlane_l" type="Button" parent="Buttons"]
-layout_mode = 1
 offset_left = 44.0
 offset_top = 672.0
 offset_right = 68.0
@@ -80,7 +109,6 @@ rotation = -1.57079
 toggle_mode = true
 
 [node name="inlane_r" type="Button" parent="Buttons"]
-layout_mode = 1
 offset_left = 301.0
 offset_top = 671.0
 offset_right = 325.0
@@ -89,7 +117,6 @@ rotation = -1.57079
 toggle_mode = true
 
 [node name="outlane_r" type="Button" parent="Buttons"]
-layout_mode = 1
 offset_left = 335.0
 offset_top = 671.0
 offset_right = 359.0
@@ -98,7 +125,6 @@ rotation = -1.57079
 toggle_mode = true
 
 [node name="sling_l" type="Button" parent="Buttons"]
-layout_mode = 1
 offset_left = 87.0
 offset_top = 646.0
 offset_right = 141.0
@@ -106,7 +132,6 @@ offset_bottom = 673.0
 scale = Vector2(0.319999, 0.56)
 
 [node name="flipper_l" type="Button" parent="Buttons"]
-layout_mode = 1
 offset_left = 108.0
 offset_top = 750.0
 offset_right = 162.0
@@ -114,7 +139,6 @@ offset_bottom = 777.0
 scale = Vector2(0.319999, 0.56)
 
 [node name="flipper_r" type="Button" parent="Buttons"]
-layout_mode = 1
 offset_left = 242.0
 offset_top = 749.0
 offset_right = 296.0
@@ -122,7 +146,6 @@ offset_bottom = 776.0
 scale = Vector2(0.319999, 0.56)
 
 [node name="sling_r" type="Button" parent="Buttons"]
-layout_mode = 1
 offset_left = 265.0
 offset_top = 647.0
 offset_right = 319.0
@@ -130,7 +153,6 @@ offset_bottom = 674.0
 scale = Vector2(0.319999, 0.56)
 
 [node name="mball_saucer" type="Button" parent="Buttons"]
-layout_mode = 1
 offset_left = 14.0
 offset_top = 186.0
 offset_right = 38.0
@@ -139,37 +161,52 @@ rotation = -1.57079
 toggle_mode = true
 
 [node name="trough_1" type="Button" parent="Buttons"]
-layout_mode = 0
-offset_left = 288.537
-offset_top = 801.0
-offset_right = 312.537
-offset_bottom = 822.0
+offset_left = 276.537
+offset_top = 809.0
+offset_right = 300.537
+offset_bottom = 830.0
 rotation = 0.988307
 toggle_mode = true
 
 [node name="trough_2" type="Button" parent="Buttons"]
-layout_mode = 1
-offset_left = 310.537
-offset_top = 787.0
-offset_right = 334.537
-offset_bottom = 808.0
+offset_left = 298.537
+offset_top = 795.0
+offset_right = 322.537
+offset_bottom = 816.0
 rotation = 0.988307
 toggle_mode = true
 
 [node name="trough_3" type="Button" parent="Buttons"]
-layout_mode = 1
-offset_left = 332.537
-offset_top = 774.0
-offset_right = 356.537
-offset_bottom = 795.0
+offset_left = 320.537
+offset_top = 782.0
+offset_right = 344.537
+offset_bottom = 803.0
 rotation = 0.988307
 toggle_mode = true
 
 [node name="trough_4" type="Button" parent="Buttons"]
-layout_mode = 1
-offset_left = 352.537
-offset_top = 762.0
-offset_right = 376.537
-offset_bottom = 783.0
+offset_left = 340.537
+offset_top = 770.0
+offset_right = 364.537
+offset_bottom = 791.0
 rotation = 0.988307
 toggle_mode = true
+
+[node name="AllTroughButton" type="Button" parent="."]
+offset_left = 273.0
+offset_top = 845.0
+offset_right = 471.0
+offset_bottom = 872.0
+rotation = -0.557953
+scale = Vector2(0.482606, 0.723905)
+text = "Activate Trough Switches"
+
+[node name="ResetGameButton" type="Button" parent="."]
+offset_left = 10.0
+offset_top = 809.0
+offset_right = 208.0
+offset_bottom = 844.0
+rotation = 0.00191092
+scale = Vector2(0.261378, 0.66501)
+theme_override_font_sizes/font_size = 22
+text = "reset"
