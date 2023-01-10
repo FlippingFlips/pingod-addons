@@ -347,6 +347,22 @@ namespace PinGod.Game
             //GetTree().Quit(0);
         }
         public virtual int RandomNumber(int from, int to) => randomNumGenerator.RandiRange(from, to);
+
+        public virtual void ResetGame()
+        {            
+            BallStarted = false;
+            BallInPlay = 0;
+            CurrentPlayerIndex = 0;
+            Players = new List<IPinGodPlayer>();
+            GameInPlay = false;
+            InBonusMode = false;
+            IsMultiballRunning = false;
+            IsTilted = false;
+            QuitRequested = false;
+            Tiltwarnings = 0;
+            FlippersEnabled = false;
+            BallInPlay = 0;
+        }
         public virtual void ResetTilt()
         {
             Tiltwarnings = 0;
@@ -354,7 +370,6 @@ namespace PinGod.Game
         }
         public virtual void SaveGameData() => Audits.Save(Audits);
         public virtual void SaveGameSettings() => Adjustments.Save(Adjustments);
-
         public virtual void SetLampState(string name, byte state)
         {
             var lamp = Machine.SetLamp(name, state);
