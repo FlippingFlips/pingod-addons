@@ -24,7 +24,7 @@ namespace PinGod.Core.addons.Video
             {
                 // Code to execute when in game.
                 //connect up to these signals to stop the timer, no need to be running all the time not in view?
-                this.Connect("hide", new Callable(this, "_hide"));
+                this.Connect("hidden", new Callable(this, "_hide"));
                 this.Connect("visibility_changed", new Callable(this, "_visibility_changed"));
                 this.Connect("finished", new Callable(this, "_finished"));
             }
