@@ -57,16 +57,23 @@ namespace PinGod.Core.Game
             }
         }
 
-        private void _resources_ResourcesLoaded(int amt)
+        public override void _Input(InputEvent @event)
         {
-            Logger.Info(nameof(MainScene), nameof(_resources_ResourcesLoaded), $":{amt}");
-            Logger.Debug(nameof(MainScene), ":loaded resources:" + string.Join(',', _resources.GetResourceList()));
-            //this.Visible = true; todo
+            base._Input(@event);
+            if (!@event.IsActionType()) return;
+            if (@event is InputEventMouse) return;
+
+            //reset Main Scene, set reset off
+            if (@event.IsActionPressed("reset"))
+            {
+                ResetGame();
+                Input.ParseInputEvent(new InputEventAction { Action = "reset", Pressed = false });
+            }
         }
 
         public override void _Ready()
         {
-            base._Ready();
+            base._Ready();            
 
             //load Resources node from PinGodGame
             if (HasNode("/root/Resources"))
@@ -89,19 +96,22 @@ namespace PinGod.Core.Game
             //attract mod already in the tree, get the instance so we can free it when game started
             attractnode = GetNode("Modes/Attract");
 
-            //this.Visible = false;
+            //disable the input processing if no reset action found
+            if (!InputMap.HasAction("reset")) SetProcessInput(false);
         }
 
         /// <summary>
         /// End game, reloads the original scene, removing anything added. This could be used as a reset from VP with F3.
         /// </summary>
-        public async virtual void OnGameEnded()
+        public virtual void OnGameEnded()
         {
-            await Task.Run(() =>
+            var game = GetNodeOrNull("Modes/Game");
+            if(game != null)
             {
-                GetNode("Modes/Game").QueueFree();
-                CallDeferred(nameof(Reload));
-            });
+                game.QueueFree();
+            }
+            pinGod?.ResetGame();
+            CallDeferred(nameof(Reload));
         }
 
         /// <summary>
@@ -135,6 +145,12 @@ namespace PinGod.Core.Game
             }
         }
 
+        private void _resources_ResourcesLoaded(int amt)
+        {
+            Logger.Info(nameof(MainScene), nameof(_resources_ResourcesLoaded), $":{amt}");
+            Logger.Debug(nameof(MainScene), ":loaded resources:" + string.Join(',', _resources.GetResourceList()));
+            //this.Visible = true; todo
+        }
         /// <summary>
         /// Loads a scene and adds to the Modes (Node) in this scene if set to do so. <para/>
         /// It's best if these scenes are already loaded into the preloaded by using the packed scenes in Resources.tscn (autoload). <para/>

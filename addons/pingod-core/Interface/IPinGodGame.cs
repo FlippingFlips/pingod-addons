@@ -253,6 +253,10 @@ namespace PinGod.Core
         /// <returns></returns>
         int RandomNumber(int from, int to);
         /// <summary>
+        /// Reset the game
+        /// </summary>
+        void ResetGame();
+        /// <summary>
         /// Reset player warnings and tilt
         /// </summary>
         void ResetTilt();
@@ -384,6 +388,6 @@ namespace PinGod.Core
         /// <param name="sceneTree"></param>
         /// <param name="group"></param>
         /// <param name="method"></param>
-        void UpdateLamps(SceneTree sceneTree, string group = "Mode", string method = "UpdateLamps");       
+        void UpdateLamps(SceneTree sceneTree, string group = "Mode", string method = "UpdateLamps");        
     }
 }
