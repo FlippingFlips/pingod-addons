@@ -1,17 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://blqcputfixful"]
+[gd_scene load_steps=2 format=3 uid="uid://blqcputfixful"]
 
 [ext_resource type="Script" path="res://addons/pingod-game/PinGodGame.cs" id="1_7d45p"]
-[ext_resource type="PackedScene" path="res://addons/editor-plugin/machine-plugins/lamps/LampMatrix.tscn" id="3"]
 
 [node name="PinGodGame" type="Node"]
 process_priority = -1
 script = ExtResource("1_7d45p")
-
-[node name="DevOverlays" type="CanvasLayer" parent="."]
-layer = 128
-visible = false
-
-[node name="LampMatrix" parent="DevOverlays" instance=ExtResource("3")]
-visible = false
-grow_horizontal = 2
-grow_vertical = 2

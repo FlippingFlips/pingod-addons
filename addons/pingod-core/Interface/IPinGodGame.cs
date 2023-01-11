@@ -316,10 +316,6 @@ namespace PinGod.Core
         /// </summary>
         void Setup();
         /// <summary>
-        /// Sets up the DevOverlays Tree. This scene must have a `DevOverlays` node. Enables / Disable helper overlays for lamps and switches. SwitchOverlay and LampMatrix
-        /// </summary>
-        void SetupDevOverlays();
-        /// <summary>
         /// <see cref="Machine.SetCoil(name, state)"/>
         /// </summary>
         /// <param name="name"></param>

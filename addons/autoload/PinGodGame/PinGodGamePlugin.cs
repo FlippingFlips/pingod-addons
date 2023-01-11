@@ -10,6 +10,7 @@ namespace PinGod.AutoLoad
     public partial class PinGodGamePlugin : EditorPlugin
     {
         const string ROOT_DIR = "res://addons/autoload/PinGodGame/";
+        const string PINGODGAME_SCENE = "res://addons/pingod-game/PinGodGame.tscn";
 
         public override void _EnterTree()
         {
@@ -17,6 +18,9 @@ namespace PinGod.AutoLoad
             SetAutoLoad();
         }
 
+        /// <summary>
+        /// You want to be able to override this scene because you may want to us a custom script inheriting from pingodgame
+        /// </summary>
         private void SetAutoLoad()
         {
             var path = "res://autoload/PinGodGame.tscn";
@@ -36,13 +40,12 @@ namespace PinGod.AutoLoad
                     Logger.Info(nameof(PinGodGamePlugin), $"found PinGodGame at {path}");
                     AddAutoloadSingleton("PinGodGame", path);
                 }
-                else if (FileAccess.FileExists($"res://addons/pingod-game/PinGodGame.tscn"))
+                else if (FileAccess.FileExists(PINGODGAME_SCENE))
                 {
-                    path = $"res://addons/pingod-game/PinGodGame.tscn";
-                    Logger.Info(nameof(PinGodGamePlugin), $"found PinGodGame at {path}");
-                    AddAutoloadSingleton("PinGodGame", path);
+                    Logger.Info(nameof(PinGodGamePlugin), $"found PinGodGame at {PINGODGAME_SCENE}");
+                    AddAutoloadSingleton("PinGodGame", PINGODGAME_SCENE);
                 }
-                else { Logger.Warning("autoload for PinGodGame.tscn could be set.", nameof(PinGodGamePlugin), "WARNING: failed to set autoload " + path); }
+                else { Logger.Warning("autoload for PinGodGame.tscn could be set.", nameof(PinGodGamePlugin), "WARNING: failed to set autoload " + PINGODGAME_SCENE); }
             }
         }
 

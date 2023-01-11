@@ -1,24 +1,7 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://dmpkevxqw84mx"]
 
 [ext_resource type="Script" path="res://scripts/CustomPinGodGame.cs" id="1_lq3yu"]
-[ext_resource type="PackedScene" uid="uid://b3uukfemnc5t8" path="res://addons/editor-plugin/machine-plugins/lamps/LampMatrix.tscn" id="6_savai"]
-[ext_resource type="PackedScene" path="res://addons/editor-plugin/machine-plugins/switches/SwitchOverlay.tscn" id="7_htm07"]
 
 [node name="PinGodGame" type="Node"]
 process_priority = -1
 script = ExtResource("1_lq3yu")
-_playbackfile = "C:/Users/funky/AppData/Roaming/Godot/app_userdata/BasicGameGodot/recordings/132831383097797020.record"
-
-[node name="DevOverlays" type="CanvasLayer" parent="."]
-layer = 128
-visible = false
-
-[node name="LampMatrix" parent="DevOverlays" instance=ExtResource("6_savai")]
-visible = false
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="SwitchOverlay" parent="DevOverlays" instance=ExtResource("7_htm07")]
-visible = false
-grow_horizontal = 2
-grow_vertical = 2

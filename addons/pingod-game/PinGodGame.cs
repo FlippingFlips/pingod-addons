@@ -20,11 +20,6 @@ namespace PinGod.Game
     /// </summary>
     public partial class PinGodGame : PinGodBase, IPinGodGame
     {
-        #region Exports
-        [Export] bool _lamp_overlay_enabled = false;
-        [Export] bool _switch_overlay_enabled = false;
-        #endregion
-
         #region Fields
         /// <summary>
         /// Maximum players on machine
@@ -424,44 +419,6 @@ namespace PinGod.Game
         public virtual void Setup()
         {
             ServiceMenuEnter += OnServiceMenuEnter;
-
-            //remove the overlays if disabled
-            SetupDevOverlays();
-        }
-        public virtual void SetupDevOverlays()
-        {
-            //only try and find the 
-            if (_lamp_overlay_enabled || _switch_overlay_enabled)
-            {
-                if (this.HasNode("DevOverlays"))
-                {
-                    var devOverlays = GetNode("DevOverlays"); //will throw error
-                    if (devOverlays != null)
-                    {
-                        LogDebug(nameof(PinGodGame), ":setting up overlays");
-                        if (!_lamp_overlay_enabled)
-                        {
-                            LogDebug(nameof(PinGodGame), ":removing lamp overlay");
-                            devOverlays.GetNode("LampMatrix").QueueFree();
-                        }
-                        else
-                        {
-                            _lampMatrixOverlay = devOverlays.GetNode("LampMatrix") as LampMatrix;
-                        }
-
-                        if (!_switch_overlay_enabled)
-                        {
-                            LogDebug(nameof(PinGodGame), ":removing switch overlay");
-                            devOverlays.GetNode("SwitchOverlay").QueueFree();
-                        }
-                    }
-                    else { LogDebug(nameof(PinGodGame), ":overlays disabled"); }
-                }
-                else
-                {
-                    LogWarning("No DevOverlays node found");
-                }
-            }
         }
 
         public virtual void SolenoidOn(string name, byte state) => Machine.SetCoil(name, state);
