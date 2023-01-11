@@ -11,6 +11,7 @@
 script = ExtResource("1_nd4pf")
 
 [node name="Modes" type="CanvasLayer" parent="."]
+layer = -1
 
 [node name="ScoreMode" parent="Modes" instance=ExtResource("2")]
 
