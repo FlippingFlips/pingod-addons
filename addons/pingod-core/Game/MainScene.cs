@@ -65,9 +65,10 @@ namespace PinGod.Core.Game
 
             //reset Main Scene, set reset off
             if (@event.IsActionPressed("reset"))
-            {
+            {                
                 ResetGame();
                 Input.ParseInputEvent(new InputEventAction { Action = "reset", Pressed = false });
+                _machine?.RecordAction("reset", 1);
             }
         }
 
@@ -108,7 +109,8 @@ namespace PinGod.Core.Game
             var game = GetNodeOrNull("Modes/Game");
             if(game != null)
             {
-                game.QueueFree();
+                //this.RemoveChild(game);
+                //game.QueueFree();
             }
             pinGod?.ResetGame();
             CallDeferred(nameof(Reload));
