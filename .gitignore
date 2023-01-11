@@ -400,3 +400,5 @@ FodyWeavers.xsd
 /examples/pingod-basicgame-noscript
 /examples/pingod-game-scifi
 /examples/startergame
+/addons/pingod-proc
+/examples/pingod-proc

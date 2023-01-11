@@ -204,11 +204,12 @@ namespace PinGod.Core.Service
             switch (syncState)
             {
                 case GameSyncState.quit:
-                    ev.Action = GameSyncState.quit.ToString();
+                    ev.Action = syncState.ToString();
                     break;
                 case GameSyncState.pause: //pause / resume on a toggle, not held down
                 case GameSyncState.resume:
-                    ev.Action = GameSyncState.pause.ToString();
+                case GameSyncState.reset:
+                    ev.Action = syncState.ToString();
                     ev.Pressed = true;
                     break;
                 case GameSyncState.None:
@@ -318,7 +319,11 @@ namespace PinGod.Core.Service
             /// <summary>
             /// resume godot
             /// </summary>
-            resume
+            resume,
+            /// <summary>
+            /// resume godot
+            /// </summary>
+            reset
         }
     }
 }
