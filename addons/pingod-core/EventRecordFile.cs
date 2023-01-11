@@ -91,6 +91,7 @@ namespace PinGod.Core
         /// flushes the record file
         /// </summary>
         public virtual void SaveRecording()
+
         {
             if (_recordPlayback == RecordPlaybackOption.Record)
             {
@@ -120,5 +121,12 @@ namespace PinGod.Core
             var recordLine = $"{@switch.Name}|{@switch.State}|{switchTime}";
             _recordFile?.StoreLine(recordLine);
         }
+
+        internal void RecordEventAction(string action, byte pressed, ulong machineLoadTime)
+        {
+            var switchTime = Time.GetTicksMsec() - machineLoadTime;
+            var recordLine = $"action_{action}|{pressed}|{switchTime}";
+            _recordFile?.StoreLine(recordLine);
+        }        
     }
 }
