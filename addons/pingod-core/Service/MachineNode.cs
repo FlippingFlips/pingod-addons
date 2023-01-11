@@ -67,6 +67,7 @@ namespace PinGod.Core.Service
         private EventRecordFile _recordFile;
         private RecordPlaybackOption _recordPlayback;
         private Trough _trough;
+        private Label _recordingStatusLabel;
 
         /// <summary>
         /// 
@@ -123,6 +124,10 @@ namespace PinGod.Core.Service
                 {
                     _plungerLane = GetNode<PlungerLane>("PlungerLane");
                 }
+
+                //display status of recordings
+                _recordingStatusLabel = GetNodeOrNull<Label>("RecordingStatusLabel");
+                if (_recordingStatusLabel != null) _recordingStatusLabel.Text = string.Empty;
             }
         }
 
@@ -148,7 +153,7 @@ namespace PinGod.Core.Service
             if (_recordPlayback != RecordPlaybackOption.Playback)
             {
                 SetProcess(false);
-                Logger.Info(nameof(MachineNode), ": Playback _Process loop stopped. No recordings are being played back.");
+                Logger.Info(nameof(MachineNode), ": Playback _Process loop stopped. No recordings are being played back.");                
                 return;
             }
             else
@@ -159,13 +164,19 @@ namespace PinGod.Core.Service
                     Logger.Info(nameof(MachineNode), ": playback events ended, RecordPlayback is off.");
                     _recordPlayback = RecordPlaybackOption.Off;
                     _recordFile.SaveRecording();
+                    if (_recordingStatusLabel != null) _recordingStatusLabel.Text = "Machine:Playback ended";
                     return;
                 }
 
-
                 var evt = _recordFile.ProcessQueue(_machineLoadTime);
                 if (evt != null)
-                    SetSwitch(evt.EvtName, evt.State, false);
+                {
+                    if (!evt.EvtName.StartsWith("action_"))
+                        SetSwitch(evt.EvtName, evt.State, false);
+                    else Input.ParseInputEvent(
+                        new InputEventAction { Action = evt.EvtName.Replace("action_", ""), 
+                        Pressed = evt.State > 0 ? true : false});
+                }                    
             }
         }
 
@@ -336,6 +347,7 @@ namespace PinGod.Core.Service
                 {
                     Logger.Warning(nameof(MachineNode), ":", nameof(SetUpRecordingsOrPlayback), ": playback enabled but no record file set.");
                     _recordPlayback = RecordPlaybackOption.Off;
+                    if (_recordingStatusLabel != null) _recordingStatusLabel.Text = "Machine:No playback file found";
                 }
                 else
                 {
@@ -344,6 +356,7 @@ namespace PinGod.Core.Service
                         if (_recordFile.PopulateQueueFromPlaybackFile(playbackfile) == Error.Ok)
                         {
                             Logger.Info(nameof(MachineNode), ":running playback file: ", playbackfile);
+                            if (_recordingStatusLabel != null) _recordingStatusLabel.Text = "Machine:Playback in progress";
                         }
                     }
                     catch (Exception ex)
@@ -356,6 +369,7 @@ namespace PinGod.Core.Service
             {
                 _recordFile.StartRecording(playbackfile);
                 Logger.Debug(nameof(MachineNode), ":game recording on");
+                if (_recordingStatusLabel != null) _recordingStatusLabel.Text = "Machine:Recording in progress";
             }
         }
 
@@ -492,6 +506,16 @@ namespace PinGod.Core.Service
             //returns the scenes in this root
             var windows = rootWin.GetChildren();//.Where(x => x.GetType() == typeof(Window));
             Logger.Info("windows: " + string.Join(',', windows.Select(x => x.Name)));
+        }
+
+        /// <summary>
+        /// Record a godot normal godot action, not a switch. Recording game reset.
+        /// </summary>
+        /// <param name="action"></param>
+        /// <param name="state"></param>
+        internal void RecordAction(string action, byte state)
+        {
+            _recordFile.RecordEventAction(action, state, _machineLoadTime);
         }
     }
 }

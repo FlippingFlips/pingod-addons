@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3 uid="uid://b5a503vfdgonh"]
 
 [ext_resource type="Script" path="res://addons/pingod-core/Service/MachineNode.cs" id="1_sbm0p"]
 [ext_resource type="Script" path="res://addons/pingod-core/BallStacks/Trough.cs" id="2_y2nw4"]
 [ext_resource type="Script" path="res://addons/pingod-core/PlungerLane/PlungerLane.cs" id="3_nwj2m"]
 [ext_resource type="Script" path="res://addons/modes/ballsave/BallSaver.cs" id="4_yl6xf"]
+[ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="5_7isp6"]
 
 [node name="Machine" type="Node"]
 editor_description = "PinGodMachine
@@ -61,3 +62,14 @@ script = ExtResource("3_nwj2m")
 
 [node name="BallSaver" type="Timer" parent="."]
 script = ExtResource("4_yl6xf")
+
+[node name="RecordingStatusLabel" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -104.0
+offset_bottom = 23.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("5_7isp6")
+theme_override_font_sizes/font_size = 32
+text = "Machine: RECORDING"
