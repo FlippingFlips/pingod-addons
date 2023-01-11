@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using PinGod.EditorPlugins;
 using System.Security.Principal;
+using PinGod.Core.BallStacks;
 
 namespace PinGod.Core.Service
 {
@@ -20,32 +21,26 @@ namespace PinGod.Core.Service
         /// Coil names to pulse when ball searching
         /// </summary>
         [Export] public string[] _ball_search_coils;
-
         /// <summary>
         /// 
         /// </summary>
         [Export] public bool _ball_search_enabled = true;
-
         /// <summary>
         /// Switches that stop the ball searching
         /// </summary>
         [Export] public string[] _ball_search_stop_switches;
-
         /// <summary>
         /// How long to wait for ball searching and reset
         /// </summary>
         [Export] private int _ball_search_wait_time_secs = 10;
-
         [ExportCategory("Machine Items")]
         [Export] Godot.Collections.Dictionary<string, byte> _coils = new();
         [Export] Godot.Collections.Dictionary<string, byte> _lamps = new();
         [Export] Godot.Collections.Dictionary<string, byte> _leds = new();        
         [Export] Godot.Collections.Dictionary<string, byte> _switches = new();        
-
         [ExportCategory("Switch Window")]
         [Export] bool _switchWindowEnabled = false;
         [Export] PackedScene _switchWindow;
-
         [ExportCategory("Record / Playback")]
         [Export] RecordPlaybackOption recordPlayback = RecordPlaybackOption.Off;
         [Export(PropertyHint.GlobalFile, "*.record")] string _playbackfile = null;
@@ -71,6 +66,8 @@ namespace PinGod.Core.Service
         private MemoryMapNode _pinGodMemoryMapNode;
         private EventRecordFile _recordFile;
         private RecordPlaybackOption _recordPlayback;
+        private Trough _trough;
+
         /// <summary>
         /// 
         /// </summary>
@@ -118,6 +115,7 @@ namespace PinGod.Core.Service
 
                 if (HasNode("BallSaver"))
                 {
+                    //hook up to the ball saved event
                     _ballSaver = GetNode<BallSaver>("BallSaver");
                     _ballSaver.BallSaved += _ballSaver_BallSaved;
                 }
@@ -181,14 +179,12 @@ namespace PinGod.Core.Service
                 Logger.Debug(nameof(MachineNode), ":listening for events from plug-in ", nameof(MemoryMapNode));
             }
 
-            if (_switchWindowEnabled && _switchWindow != null)
-            {
-                CallDeferred(nameof(SetUpSwitchWindow));                
-            }
-            else
-            {
-                Logger.Debug(nameof(MachineNode), ": switch window not enabled or scene isn't set");
-            }
+            //Setup a switch developer window if enabled and exists
+            if (_switchWindowEnabled && _switchWindow != null) CallDeferred(nameof(SetUpSwitchWindow));
+            else { Logger.Debug(nameof(MachineNode), ": switch window not enabled or scene isn't set"); }
+
+            //get the trough
+            if (HasNode("Trough")) _trough = GetNodeOrNull<Trough>("Trough");
 
             //set start time
             _machineLoadTime = Godot.Time.GetTicksMsec();
@@ -459,10 +455,14 @@ namespace PinGod.Core.Service
         }
 
         private void _ballSaver_BallSaved(bool earlySwitch = false)
-        {
-            Logger.Debug(nameof(MachineNode), ": ball saved. TODO: act");
-            if (_plungerLane != null)
-                _plungerLane.AutoFire();
+        {            
+            if(earlySwitch)
+                _trough.PulseTrough();
+
+            //if (_plungerLane != null)
+            //    _plungerLane.AutoFire();
+
+            Logger.Debug(nameof(MachineNode), ": ball saved");
         }
         private void OnSwitchCommand(string name, int index, byte value)
         {
