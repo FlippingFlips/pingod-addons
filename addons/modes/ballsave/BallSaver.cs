@@ -1,6 +1,7 @@
 ﻿using Godot;
 using PinGod.Base;
 using PinGod.Core;
+using PinGod.Core.BallStacks;
 using PinGod.Core.Service;
 using System.Drawing;
 using System.Linq;
@@ -12,31 +13,35 @@ namespace PinGod.Modes
         #region Exports
         [Export] public bool _isPluginEnabled = true;
         /// <summary>
-        /// default ball save time
+        /// default Ball save time
         /// </summary>
         [Export] public byte _ball_save_seconds = 8;
         /// <summary>
-        /// ball save grace time
+        /// Ball save grace time
         /// </summary>
         [Export] public byte _ball_save_grace_seconds = 2;
         /// <summary>
-        /// The lamp name to cycle for ball saves
+        /// Allow multiple
+        /// </summary>
+        [Export] public bool _allowMutlipleSaves = false;
+        /// <summary>
+        /// The lamp name to cycle for Ball saves
         /// </summary>
         [Export] public string _ball_save_lamp = "";
         /// <summary>
-        /// The led name to cycle for ball saves
+        /// The led name to cycle for Ball saves
         /// </summary>
         [Export] public string _ball_save_led = "shoot_again";
         /// <summary>
-        /// default ball save in multi-ball
+        /// default Ball save in multi-Ball
         /// </summary>
         [Export] public byte _ball_save_multiball_seconds = 8;
         /// <summary>
-        /// number of balls to save, defaults to one single ball play
+        /// number of balls to save, defaults to one single Ball play
         /// </summary>
         [Export] public byte _number_of_balls_to_save = 1;
         /// <summary>
-        /// Early switch ball save names. outlane_l outlane_r
+        /// Early switch Ball save names. outlane_l outlane_r
         /// </summary>
         [Export] public string[] _early_save_switches = { "outlane_l", "outlane_r" };
         #endregion
@@ -89,14 +94,19 @@ namespace PinGod.Modes
             if (_machine != null) _machine.SwitchCommand -= _machine_SwitchCommand;
         }
 
+        /// <summary>
+        /// Handles the early switches
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="index"></param>
+        /// <param name="value"></param>
         private void _machine_SwitchCommand(string name, byte index, byte value)
         {
             if (_ballSaveActive && _early_save_switches.Contains(name))
             {
-                //Logger.WarningRich("[code=yellow]", nameof(Trough), ": plugin requires PinGodGame to act on BallSaved: ", swName, "[/color]");
-                //FireEarlySave();
-                //emit ball saved early switch
+                //emit Ball saved early switch
                 EmitSignal(nameof(BallSaved), true);
+                if (!_allowMutlipleSaves) DisableBallSave();
             }
         }
 
@@ -124,7 +134,7 @@ namespace PinGod.Modes
         }
 
         /// <summary>
-        /// Disable ball saves and turns off lamps
+        /// Disable Ball saves and turns off lamps
         /// </summary>
         public void DisableBallSave()
         {
@@ -136,14 +146,21 @@ namespace PinGod.Modes
             EmitSignal(nameof(BallSaveDisabled));
         }
 
+        private void FireEarlySave()
+        {
+            Logger.Debug(nameof(Trough), $": {nameof(FireEarlySave)}");
+            //PulseTrough();
+        }
+
         public virtual bool IsBallSaveActive() => _ballSaveActive;
 
         /// <summary>
-        /// Activates the ball saver if not already running. Blinks the ball saver lamp
+        /// Activates the Ball saver if not already running. Blinks the Ball saver lamp
         /// </summary>
-        /// <returns>True if the ball saver is active</returns>
-        public bool StartSaver(float seconds = 0)
+        /// <returns>True if the Ball saver is active</returns>
+        public bool StartSaver(float seconds = 0, bool allowMultipleSaves = false)
         {
+            _allowMutlipleSaves = allowMultipleSaves;
             seconds = seconds > 0 ? seconds : _ball_save_seconds;
             TimeRemaining = seconds;
             _ballSaveActive = true;
@@ -155,8 +172,9 @@ namespace PinGod.Modes
             return true;
         }
 
-        public bool StartSaverMultiball(float seconds = 0)
+        public bool StartSaverMultiball(float seconds = 0, bool allowMultipleSaves = true)
         {
+            _allowMutlipleSaves = allowMultipleSaves;
             seconds = seconds > 0 ? seconds : _ball_save_multiball_seconds;
             Logger.Debug(nameof(BallSaver), $": starting multi-ball saves");
             return StartSaver(seconds);
