@@ -12,10 +12,15 @@ func _ready():
 			button.pressed.connect(_on_pressed.bind(button))
 		else:
 			button.pressed.connect(_on_pulse_pressed.bind(button))	
+	# Connect trough
 	var troughBtn = get_node("AllTroughButton") as Button	
 	troughBtn.pressed.connect(_on_trough_pressed)
+	# Connect Reset
 	var resetBtn = get_node("ResetGameButton") as Button	
 	resetBtn.pressed.connect(_on_reset_pressed)
+	# Connect Recordings
+	var recordBtn = get_node("RecordingOptionButton") as OptionButton	
+	recordBtn.item_selected.connect(_on_record_item_selected)	
 
 func _on_pressed(button):
 	print(button.name, " was pressed:", button.button_pressed)	
@@ -33,6 +38,9 @@ func _on_reset_pressed():
 	evt.action = "reset"
 	evt.pressed = true
 	Input.parse_input_event((evt))
+	
+func _on_record_item_selected(index):
+	emit_signal("switch_active", "_record", index)
 	
 func _on_trough_pressed():
 	for btn in _troughBtns:

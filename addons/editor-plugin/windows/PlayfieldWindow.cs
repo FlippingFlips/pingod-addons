@@ -2,6 +2,7 @@ using Godot;
 using PinGod.Core;
 using PinGod.Core.Service;
 using PinGod.EditorPlugins;
+using System;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
@@ -15,9 +16,13 @@ using System.Text.Json.Nodes;
 /// </summary>
 public partial class PlayfieldWindow : WindowPinGod
 {
-    private MachineNode _machine;
-
     const string WIN_SAVE = "user://playfieldwindow.save";
+    private MachineNode _machine;
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+        SaveWindowSettings();
+    }
 
     public override void _Ready()
     {
@@ -29,21 +34,14 @@ public partial class PlayfieldWindow : WindowPinGod
             this.QueueFree();
             return;
         }
-            
 
-        _machine = GetNodeOrNull<MachineNode>("/root/Machine");
-        if(_machine != null)
-        {
-            //connect to switch from the godot gd script
-            playfield_control.Connect("switch_active", new Callable(this, nameof(OnPlayfieldSwitchWindow)));
-            //have to set the postion as the child is off, this is what we would want in most cases anyway.
-            playfield_control.Position = new Vector2(0, 0);            
-        }
-        else
-        {
-            Logger.Error(nameof(PlayfieldWindow), nameof(_Ready), ": no MachineNode found, unable to send switches to the game.");
-        }
+        SetupMachineNode(playfield_control);
 
+        LoadWindowSettings();
+    }
+
+    void LoadWindowSettings()
+    {
         if (FileAccess.FileExists(WIN_SAVE))
         {
             using var settingsSave = FileAccess.Open(WIN_SAVE, FileAccess.ModeFlags.Read);
@@ -52,25 +50,49 @@ public partial class PlayfieldWindow : WindowPinGod
         }
     }
 
-    public override void _ExitTree()
+    /// <summary>
+    /// When this window receives a button switch from the playfield control
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="state">2 = pulse, on then off instant</param>
+    void OnPlayfieldSwitchWindow(string name, byte state)
     {
-        base._ExitTree();
+        Logger.Verbose(nameof(PlayfieldWindow), $": playfield window: {name}-{state}");
+
+        if(name == "_record") 
+        { 
+            
+        }
+        else if (state == 2)
+        {
+            _machine.SetSwitch(name, 1, false);
+            _machine.SetSwitch(name, 0, false);
+        }
+        else _machine.SetSwitch(name, state, false);
+    }
+
+    void SaveWindowSettings()
+    {
         //save the window position
         using var saveGame = FileAccess.Open(WIN_SAVE, FileAccess.ModeFlags.Write);
         var winSave = new PlayfieldWindowSave { X = Position.x, Y = Position.y };
         saveGame.StoreLine(JsonSerializer.Serialize<PlayfieldWindowSave>(winSave));
     }
 
-    void OnPlayfieldSwitchWindow(string name, byte state)
+    private void SetupMachineNode(Control playfield_control)
     {
-        Logger.Verbose(nameof(PlayfieldWindow), $": playfield window: {name}-{state}");
-
-        if(state == 2)
+        _machine = GetNodeOrNull<MachineNode>("/root/Machine");
+        if (_machine != null)
         {
-            _machine.SetSwitch(name, 1, false);
-            _machine.SetSwitch(name, 0, false);
-        }            
-        else _machine.SetSwitch(name, state, false);
+            //connect to switch from the godot gd script
+            playfield_control.Connect("switch_active", new Callable(this, nameof(OnPlayfieldSwitchWindow)));
+            //have to set the postion as the child is off, this is what we would want in most cases anyway.
+            playfield_control.Position = new Vector2(0, 0);
+        }
+        else
+        {
+            Logger.Error(nameof(PlayfieldWindow), nameof(_Ready), ": no MachineNode found, unable to send switches to the game.");
+        }
     }
 }
 

@@ -43,6 +43,14 @@ offset_bottom = 900.0
 scale = Vector2(0.736438, 0.736438)
 text = "COIN1"
 
+[node name="start" type="Button" parent="Buttons"]
+offset_left = 322.0
+offset_top = 873.0
+offset_right = 374.0
+offset_bottom = 900.0
+scale = Vector2(0.751852, 0.751852)
+text = "START"
+
 [node name="exit" type="Button" parent="Buttons"]
 offset_left = 78.0
 offset_top = 875.0
@@ -76,13 +84,21 @@ offset_bottom = 902.0
 scale = Vector2(0.659074, 0.742996)
 text = "enter"
 
-[node name="start" type="Button" parent="Buttons"]
-offset_left = 322.0
-offset_top = 873.0
-offset_right = 374.0
-offset_bottom = 900.0
-scale = Vector2(0.751852, 0.751852)
-text = "START"
+[node name="tilt" type="Button" parent="Buttons"]
+offset_left = 13.0
+offset_top = 843.0
+offset_right = 67.0
+offset_bottom = 870.0
+scale = Vector2(0.659074, 0.742996)
+text = "tilt"
+
+[node name="slam_tilt" type="Button" parent="Buttons"]
+offset_left = 53.0
+offset_top = 843.0
+offset_right = 107.0
+offset_bottom = 870.0
+scale = Vector2(0.659074, 0.742996)
+text = "slam_tilt"
 
 [node name="plunger_lane" type="Button" parent="Buttons"]
 offset_left = 367.0
@@ -202,11 +218,24 @@ scale = Vector2(0.482606, 0.723905)
 text = "Activate Trough Switches"
 
 [node name="ResetGameButton" type="Button" parent="."]
-offset_left = 10.0
-offset_top = 809.0
-offset_right = 208.0
-offset_bottom = 844.0
+offset_left = 11.0
+offset_top = 873.0
+offset_right = 209.0
+offset_bottom = 908.0
 rotation = 0.00191092
 scale = Vector2(0.261378, 0.66501)
 theme_override_font_sizes/font_size = 22
 text = "reset"
+
+[node name="RecordingOptionButton" type="OptionButton" parent="."]
+offset_left = 12.0
+offset_top = 807.0
+offset_right = 99.0
+offset_bottom = 834.0
+item_count = 3
+popup/item_0/text = "Off"
+popup/item_0/id = 0
+popup/item_1/text = "On"
+popup/item_1/id = 1
+popup/item_2/text = "playback"
+popup/item_2/id = 2
