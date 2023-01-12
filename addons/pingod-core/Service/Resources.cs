@@ -1,6 +1,9 @@
 using Godot;
 using PinGod.Core;
+using PinGod.Modes;
+using System;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 
 namespace PinGod.Core.Service
 {
@@ -261,6 +264,23 @@ namespace PinGod.Core.Service
                 Logger.Debug(string.Join(",", GetResourceList()));
             else
                 Logger.Debug("no resources found in Resources.tscn");
+        }
+
+        public virtual PackedScene GetPackedSceneFromResource(string scenePath)
+        {
+            if (!string.IsNullOrWhiteSpace(scenePath))
+            {
+                var name = scenePath.GetBaseName();
+                var res = Resolve(name);
+                if(res != null)
+                {
+                    return res as PackedScene;
+                }
+                else { Logger.Warning(nameof(Game), $": no packed from {scenePath} could be created."); }
+            }
+            else { Logger.WarningRich(nameof(Game), "[color=yellow]", $" {scenePath} doesn't exist", "[/color]"); }
+
+            return null;
         }
     }
 }
