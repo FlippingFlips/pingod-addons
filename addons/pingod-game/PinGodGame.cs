@@ -76,6 +76,7 @@ namespace PinGod.Game
         public MachineNode MachineNode { get; private set; }
         public IPinGodPlayer Player { get; private set; }
         public List<IPinGodPlayer> Players { get; set; }
+        public List<IPinGodPlayer> PlayersLastGame { get; set; }
         public bool QuitRequested { get; private set; }
         public byte Tiltwarnings { get; set; }
         #endregion
@@ -346,18 +347,19 @@ namespace PinGod.Game
         public virtual int RandomNumber(int from, int to) => randomNumGenerator.RandiRange(from, to);
         public virtual void ResetGame()
         {            
-            BallStarted = false;
             BallInPlay = 0;
+            BallStarted = false;
             CurrentPlayerIndex = 0;
-            Players = new List<IPinGodPlayer>();
+            FlippersEnabled = false;
             GameInPlay = false;
             InBonusMode = false;
             IsMultiballRunning = false;
+            IsPlayerEnteringHighscore = false;
             IsTilted = false;
+            PlayersLastGame = Players;
+            Players?.Clear();
             QuitRequested = false;
             Tiltwarnings = 0;
-            FlippersEnabled = false;
-            BallInPlay = 0;
         }
         public virtual void ResetTilt()
         {

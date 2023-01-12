@@ -87,6 +87,10 @@ namespace PinGod.Core
         /// </summary>
         List<IPinGodPlayer> Players { get; set; }
         /// <summary>
+        /// <see cref="IPinGodPlayer"/> Players List from the last game
+        /// </summary>
+        List<IPinGodPlayer> PlayersLastGame { get; set; }
+        /// <summary>
         /// Game has been set to quit
         /// </summary>
         bool QuitRequested { get; }
