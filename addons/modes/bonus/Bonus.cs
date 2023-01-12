@@ -19,6 +19,7 @@ namespace PinGod.Modes
         /// Display for, default 5 secs
         /// </summary>
         [Export] protected float _display_for_seconds = 5;
+
         internal Label label;
         /// <summary>
         /// <see cref="PinGodGame"/> singleton
@@ -38,12 +39,13 @@ namespace PinGod.Modes
             {
                 pinGod = GetNode<IPinGodGame>("/root/PinGodGame");
             }
-            //get nodes from this scene tree
-            timer = GetNode("Timer") as Timer;
-            label = GetNode("Label") as Label;
+            Logger.Info(nameof(Bonus), ":_EnterTree");
+        }
 
-            if (string.IsNullOrWhiteSpace(_defaultText))
-                _defaultText = Tr("BONUS_EOB");
+        public override void _ExitTree()
+        {
+            base._ExitTree();
+            Logger.Debug(nameof(Bonus), ":", nameof(_ExitTree));
         }
 
         /// <summary>
@@ -51,8 +53,16 @@ namespace PinGod.Modes
         /// </summary>
         public override void _Ready()
         {
+            Logger.Info(nameof(Bonus), ":_Ready");
+            //get nodes from this scene tree
+            timer = GetNode("Timer") as Timer;
+            label = GetNode("Label") as Label;
+
+            if (string.IsNullOrWhiteSpace(_defaultText))
+                _defaultText = Tr("BONUS_EOB");
+
             if (!timer.IsStopped())
-                timer.Stop();
+                timer.Stop();            
         }
 
         /// <summary>
@@ -64,6 +74,7 @@ namespace PinGod.Modes
             timer.Stop();
             this.Visible = false;
             pinGod?.EmitSignal(nameof(PinGodBase.BonusEnded));
+            this.QueueFree();
         }
 
         /// <summary>

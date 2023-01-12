@@ -1,10 +1,15 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=7 format=3 uid="uid://cykvufg16bv30"]
 
 [ext_resource type="Script" path="res://addons/pingod-core/Service/Resources.cs" id="1_wa3d4"]
 [ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="2_3nh6v"]
+[ext_resource type="PackedScene" uid="uid://cm3hf1m8bn1nl" path="res://addons/modes/bonus/Bonus.tscn" id="2_dlvif"]
+[ext_resource type="PackedScene" uid="uid://b46rdcwxkw0gu" path="res://addons/modes/scoreentry/ScoreEntry.tscn" id="3_tpnnr"]
+[ext_resource type="PackedScene" uid="uid://cukmt8esxykqv" path="res://addons/modes/tilt/Tilt.tscn" id="4_w83kh"]
+[ext_resource type="PackedScene" path="res://addons/modes/multiball/Multiball.tscn" id="5_5nywg"]
 
 [node name="Resources" type="Node"]
 script = ExtResource("1_wa3d4")
+_packScenes = [ExtResource("2_dlvif"), ExtResource("3_tpnnr"), ExtResource("4_w83kh"), ExtResource("5_5nywg")]
 
 [node name="LoadingControl" type="Control" parent="."]
 layout_mode = 3

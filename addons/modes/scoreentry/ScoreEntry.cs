@@ -44,19 +44,29 @@ namespace PinGod.Modes { /// <summary>
         /// </summary>
         [Export] NodePath _selectedChar = null;
 
-        [Signal] public delegate void ScoreEntryEndedEventHandler();
-
         int[] allowedChars;
+
         int currentEntryIndex = 0;
+
         int CurrentPlayer = 0;
+
         string entry = "";
+
         bool IsPlayerEnteringScore = false;
+
         int PlayerCount;
+
         private Label playerMessageLabel;
+
         private Label selectedCharLabel;
+
         private Vector2 selectedCharLabelStartPos;
+
         int selectedIndex = 0;
+
         private Label selectedName;
+
+        [Signal] public delegate void ScoreEntryEndedEventHandler();
         /// <summary>
         /// get ref to the labels needed for the scene
         /// </summary>
@@ -73,6 +83,12 @@ namespace PinGod.Modes { /// <summary>
                 pinGod.MachineNode.Connect("SwitchCommand", new Callable(this, nameof(OnSwitchCommandHandler)));
             }
             else { Logger.Warning(nameof(ScoreEntry), ": no PinGodGame found"); }
+        }
+
+        public override void _ExitTree()
+        {
+            base._ExitTree();
+            Logger.Info(nameof(ScoreEntry), ":", nameof(_ExitTree));
         }
 
         /// <summary>
@@ -93,6 +109,8 @@ namespace PinGod.Modes { /// <summary>
         public virtual void DisplayHighScore()
         {
             Logger.Info(nameof(ScoreEntry), ":display high score");
+
+            if (pinGod != null) pinGod.IsPlayerEnteringHighscore = true;
             IsPlayerEnteringScore = true;
             this.Visible = true;
             PlayerCount = pinGod.Players?.Count ?? 0;
@@ -313,10 +331,12 @@ namespace PinGod.Modes { /// <summary>
         private void QuitScoreEntry()
         {
             Logger.Debug(nameof(ScoreEntry), nameof(QuitScoreEntry), ": score entry mode ending");
+            if (pinGod != null) pinGod.IsPlayerEnteringHighscore = false;
             IsPlayerEnteringScore = false;
             this.Visible = false;
             //emit signal to let know players have finished
             EmitSignal(nameof(ScoreEntryEnded));
+            this.QueueFree();
         }
     }
 }

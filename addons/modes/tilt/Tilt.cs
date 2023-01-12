@@ -11,29 +11,44 @@ using PinGod.EditorPlugins;
 public partial class Tilt : Control
 {
 
+    protected IPinGodGame pinGod;
+
     /// <summary>
     /// Time machine waits to end after tilted
     /// </summary>
     [Export] byte _inTiltedSeconds = 5;
+
+    private MachineNode _machine;
 
     /// <summary>
     /// How many warnings a player is allowed before tilting
     /// </summary>
     [Export] byte _num_tilt_warnings = 2;
 
+    bool _slamTilted;
+
+    BlinkingLabel blinkingLayer;
+
+    float displayForSecs = 2f;
+
+    //protected Timer timer;
+
+    private Trough trough;
+    private Tween _tween;
+
     /// <summary>
     /// Emitted signal when game is tilted
     /// </summary>
     [Signal] public delegate void GameTiltedEventHandler();
 
-
-    protected IPinGodGame pinGod;
-    private MachineNode _machine;        
-    private BlinkingLabel blinkingLayer;
-    float displayForSecs = 2f;
-    bool _slamTilted;    
-    private Timer timer;
-    private Trough trough;
+    public override void _ExitTree()
+    {
+        Logger.Debug(nameof(Tilt), ":", nameof(_ExitTree));
+        if(_machine!=null) _machine.SwitchCommand -= OnSwitchCommand;
+        blinkingLayer?.QueueFree();
+        if(_tween!=null) _tween.Finished -= _on_Timer_timeout;
+        base._ExitTree();        
+    }
 
     /// <summary>
     /// Sets Visible to false
@@ -44,11 +59,11 @@ public partial class Tilt : Control
         if (_slamTilted)
         {
             //reset the game
-            var ms = GetNodeOrNull<MainScene>("/root/MainScene");
-            ms?.ResetGame();
+            //var ms = GetNodeOrNull<MainScene>("/root/MainScene");
+            //ms?.ResetGame();
+            Input.ParseInputEvent(new InputEventAction { Action = "reset", Pressed = true });
         }
     }
-
     /// <summary>
     /// Gets access to the game and the trough. Gets the timer and label to show if tilted
     /// </summary>
@@ -80,9 +95,6 @@ public partial class Tilt : Control
         //text layer to display warnings and tilted
         blinkingLayer = GetNode("CenterContainer/BlinkingLabel") as BlinkingLabel;
 		blinkingLayer.Text = "";
-
-		//timer to hide the tilt layers
-		timer = GetNode("Timer") as Timer;
     }
 
     /// <summary>
@@ -90,7 +102,7 @@ public partial class Tilt : Control
     /// </summary>
     public virtual void OnBallStarted()
     {
-        if (!timer.IsStopped()) { timer.Stop(); }
+        if (_tween?.IsRunning() ?? false) { _tween.Stop(); }
         SetText("");
         Visible = false;
     }
@@ -100,14 +112,14 @@ public partial class Tilt : Control
     /// </summary>
     public virtual void OnSlamTilt()
     {
-        timer.Stop();
+        _tween?.Stop();
         Logger.Info(nameof(Tilt), ":slam tilt");
         SetText(Tr("SLAMTILT"));
         pinGod.PlaySfx("tilt");
         pinGod.IsTilted = true;
         pinGod.EnableFlippers(false);
         Visible = true;
-        timer.Start(_inTiltedSeconds);
+        CreateTiltTween(_inTiltedSeconds);
         _slamTilted = true;
         _machine?.DisableBallSaver();        
     }
@@ -144,9 +156,9 @@ public partial class Tilt : Control
     /// Warnings and tilts if warnings go over limit of the <see cref="PinGodGame.Tiltwarnings"/>
     /// </summary>
     public virtual void OnTilt()
-    {
+    {        
         Logger.Info(nameof(Tilt), ":tilt active");
-        if (!timer.IsStopped()) { timer.Stop(); }
+        if (_tween?.IsRunning() ?? false) { _tween?.Stop(); }
 
         //add a warning
         pinGod.Tiltwarnings++;
@@ -177,9 +189,9 @@ public partial class Tilt : Control
     /// Sets a blinking layer text label using the translate message TILT to languages available
     /// </summary>
     public virtual void ShowTilt()
-    {
+    {        
         pinGod.PlaySfx("tilt");
-        timer.Stop();
+        _tween.Stop();
         //stop the timer for showing tilt information
         CallDeferred(nameof(SetText), Tr("TILT"));
     }
@@ -189,10 +201,23 @@ public partial class Tilt : Control
     /// </summary>
     public virtual void ShowWarning()
     {
-        timer.Stop();
-        timer.Start(displayForSecs);
+        CreateTiltTween(displayForSecs);
         pinGod?.PlaySfx("warning");
         CallDeferred(nameof(SetText), $"{Tr("TILT_WARN")} {pinGod.Tiltwarnings}");
         Visible = true;
+    }
+
+    void CreateTiltTween(float secs)
+    {
+        if (_tween != null)
+        {
+            _tween.Stop();
+            _tween.Finished -= _on_Timer_timeout;
+        }        
+        _tween = CreateTween();
+        _tween.Finished += _on_Timer_timeout;
+        _tween.SetLoops(1);
+        _tween.TweenInterval(secs);
+
     }
 }

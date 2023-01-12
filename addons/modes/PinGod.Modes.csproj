@@ -3,4 +3,8 @@
     <TargetFramework>net6.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\editor-plugin\PinGod.EditorPlugins.csproj" />
+    <ProjectReference Include="..\pingod-core\PinGod.Core.csproj" />
+  </ItemGroup>
 </Project>

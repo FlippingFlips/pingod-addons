@@ -163,7 +163,7 @@ namespace PinGod.Modes
         /// <summary>
         /// Switches the scenes visibility on a timer. Plays lamp seq in VP
         /// </summary>
-        private void _on_Timer_timeout()
+        public virtual void _on_Timer_timeout()
         {
             CallDeferred("ChangeLayer", false);
         }

@@ -2,6 +2,7 @@ using Godot;
 using PinGod.Core;
 using PinGod.Core.Service;
 using PinGod.Modes;
+using System.Reflection;
 
 namespace PinGod.Game
 {
@@ -10,16 +11,22 @@ namespace PinGod.Game
     /// </summary>
     public partial class Game : PinGodGameNode, IGame
     {
+        public Tilt tilt;
+
+        [ExportCategory("Mode Scenes")]
+        [Export(PropertyHint.File)] protected string BONUS_SCENE;
         /// <summary>
         /// Default scene file to use for Multi-Ball
         /// </summary>
-        [Export(PropertyHint.File)] protected string MULTIBALL_SCENE = "res://addons/modes/multiball/Multiball.tscn";
+        [Export(PropertyHint.File)] protected string MULTIBALL_SCENE;
+        [Export(PropertyHint.File)] protected string SCORE_ENTRY_SCENE;
+        [Export(PropertyHint.File)] protected string TILT_SCENE;
 
         private bool _lastBall;
+        private CanvasLayer _modesUpper;
+        private Resources _resources;
         private Timer _tiltedTimeOut;
-        private Bonus endOfBallBonus;
         private PackedScene multiballPkd;
-        private ScoreEntry scoreEntry;
 
         /// <summary>
         /// Connects signals to basic game events, handles tilt time outs
@@ -27,13 +34,13 @@ namespace PinGod.Game
         public override void _EnterTree()
         {
             base._EnterTree();
-
             Logger.Debug(nameof(Game), ":", nameof(_EnterTree), ":looking for ScoreEntry and Bonus scenes..");
-            scoreEntry = GetNodeOrNull<ScoreEntry>("Modes/ScoreEntry");
-            endOfBallBonus = GetNodeOrNull<Bonus>("Modes/Bonus");
+
+            //modes upper canvas.
+            _modesUpper = GetNodeOrNull<CanvasLayer>("Modes-Upper");            
 
             Logger.Debug(nameof(Game), ":loading multiball scene:  " + MULTIBALL_SCENE);
-            multiballPkd = ResourceLoader.Load(MULTIBALL_SCENE) as PackedScene;
+            //multiballPkd = ResourceLoader.Load(MULTIBALL_SCENE) as PackedScene; //TODO packed scene
 
             if (pinGod == null)
             {
@@ -45,6 +52,7 @@ namespace PinGod.Game
             AddChild(_tiltedTimeOut);
             _tiltedTimeOut.Connect("timeout", new Callable(this, nameof(timeout)));
         }
+
         /// <summary>
         /// Removes event handlers for pingod game events
         /// </summary>
@@ -59,8 +67,9 @@ namespace PinGod.Game
                 pg.BonusEnded -= OnBonusEnded;
                 pg.MultiBallEnded -= EndMultiball;
             }
-            base._ExitTree();
+            _modesUpper.GetNodeOrNull<Tilt>(nameof(Tilt))?.QueueFree();
             Logger.Debug(nameof(Game), ":", nameof(_ExitTree));
+            base._ExitTree();            
         }
 
         /// <summary>
@@ -78,6 +87,11 @@ namespace PinGod.Game
                 pg.MultiBallEnded += EndMultiball;
                 //pinGod.PlayerAdded += OnPlayerAdded;
             }
+
+            if (HasNode("/root/Resources")) _resources = GetNodeOrNull<Resources>("/root/Resources");
+
+            //TILT
+            LoadAndStartTiltMode();
 
             Logger.Debug(nameof(Game), ":", nameof(_Ready));
             pinGod.BallInPlay = 1;
@@ -118,6 +132,66 @@ namespace PinGod.Game
         }
 
         /// <summary>
+        /// Load the <see cref="BONUS_SCENE"/> from the <see cref="Resources"/>. Creates and instance and adds to the Modes-Upper <para/>
+        /// This scene is clear when finished. Override this if you're not using or to add to it. The <see cref="BONUS_SCENE"/> can be changed in the Game inspector
+        /// </summary>
+        public virtual void LoadAndStartBonusMode()
+        {
+            var scene = _resources.GetPackedSceneFromResource(BONUS_SCENE);
+            if (scene != null)
+            {
+                Logger.Info(nameof(Game), ":adding bonus scene for player: " + pinGod.CurrentPlayerIndex);
+                pinGod.InBonusMode = true;
+                var bonus = scene.Instantiate() as Bonus;
+                _modesUpper.AddChild(bonus);
+                bonus.StartBonusDisplay();                
+            }
+
+            if (!string.IsNullOrWhiteSpace(BONUS_SCENE))
+            {
+                Logger.Info(nameof(Game), ":adding bonus scene for player: " + pinGod.CurrentPlayerIndex);
+                pinGod.InBonusMode = true;
+                var bonusScene = _resources?.GetResource(BONUS_SCENE.GetBaseName()) as PackedScene;
+                if (bonusScene != null)
+                {
+                    var bonus = bonusScene.Instantiate() as Bonus;
+                    _modesUpper.AddChild(bonus);
+                    bonus.StartBonusDisplay();
+                }
+                else { Logger.Warning(nameof(Game), ": no bonus scene could be created. Is the scene added to resources and the scene packed scene is set here?"); }
+            }
+            else { Logger.WarningRich(nameof(Game), "[color=yellow]", " OnBallEnded: No Bonus scene set", "[/color]"); }
+        }
+
+        /// <summary>
+        /// Load the <see cref="SCORE_ENTRY_SCENE"/> from the <see cref="Resources"/>. Creates and instance and adds to the Modes-Upper <para/>
+        /// This scene is clear when finished. Override this if you're not using or to add to it. The <see cref="SCORE_ENTRY_SCENE"/> can be changed in the Game inspector
+        /// </summary>
+        public virtual void LoadAndStartScoreEntryMode()
+        {
+            var scene = _resources.GetPackedSceneFromResource(SCORE_ENTRY_SCENE);
+            if (scene != null)
+            {
+                Logger.Info(nameof(Game), ":adding score entry scene");
+                var scoreEntry = scene.Instantiate() as ScoreEntry;
+                _modesUpper.AddChild(scoreEntry);
+                scoreEntry.ScoreEntryEnded += OnScoreEntryEnded;
+                scoreEntry?.DisplayHighScore();
+            }
+        }
+
+        public virtual void LoadAndStartTiltMode()
+        {
+            var scene = _resources.GetPackedSceneFromResource(TILT_SCENE);
+            if (scene != null)
+            {
+                Logger.Info(nameof(Game), ":adding tilt scene");
+                var tilt = scene.Instantiate() as Tilt;
+                _modesUpper.AddChild(tilt);
+            }
+        }
+
+        /// <summary>
         /// Invokes <see cref="PinGodGame.OnBallDrained(SceneTree, string, string)"/> on the whole tree
         /// </summary>
         public virtual void OnBallDrained()
@@ -152,16 +226,14 @@ namespace PinGod.Game
 
             if (!pinGod.IsTilted)
             {
-                pinGod.InBonusMode = true;
-                Logger.Info(nameof(Game), ":adding bonus scene for player: " + pinGod.CurrentPlayerIndex);
-                endOfBallBonus?.StartBonusDisplay();
+                LoadAndStartBonusMode();
                 return;
             }
             else if (pinGod.IsTilted && lastBall)
             {
                 Logger.Debug(nameof(Game), ":last ball in tilt");
                 pinGod.InBonusMode = false;
-                scoreEntry?.DisplayHighScore();
+                LoadAndStartScoreEntryMode();
                 return;
             }
             else if (pinGod.IsTilted)
@@ -178,6 +250,7 @@ namespace PinGod.Game
                 }
             }
         }
+
         /// <summary>
         /// Signals to Mode groups OnBallSaved
         /// </summary>
@@ -193,7 +266,7 @@ namespace PinGod.Game
             if (_lastBall)
             {
                 Logger.Debug(nameof(Game), ":last ball played, end of game");
-                scoreEntry?.DisplayHighScore();
+                LoadAndStartScoreEntryMode();
             }
             else
             {
@@ -201,6 +274,7 @@ namespace PinGod.Game
                 pinGod.UpdateLamps(GetTree());
             }
         }
+
         /// <summary>
         /// When score entry is finished set <see cref="PinGodGame.EndOfGame"/>
         /// </summary>

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=4 format=3 uid="uid://cm3hf1m8bn1nl"]
 
 [ext_resource type="Script" path="res://addons/modes/bonus/Bonus.cs" id="2"]
 [ext_resource type="Texture2D" uid="uid://cfy7fd5ef1bdl" path="res://addons/assets/img/pingod-logo.png" id="3"]
@@ -15,7 +15,6 @@ script = ExtResource("2")
 _display_for_seconds = 2.0
 
 [node name="BackgroundColour" type="ColorRect" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -31,7 +30,6 @@ position = Vector2(519.583, 292.553)
 texture = ExtResource("3")
 
 [node name="Label" type="Label" parent="."]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

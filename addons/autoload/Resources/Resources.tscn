@@ -1,9 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://cw03jto1jk831"]
+[gd_scene load_steps=6 format=3 uid="uid://cw03jto1jk831"]
 
 [ext_resource type="Script" path="res://addons/pingod-core/Service/Resources.cs" id="1"]
+[ext_resource type="PackedScene" uid="uid://cm3hf1m8bn1nl" path="res://addons/modes/bonus/Bonus.tscn" id="2_5juft"]
+[ext_resource type="PackedScene" path="res://addons/modes/multiball/Multiball.tscn" id="3_e6x3x"]
+[ext_resource type="PackedScene" uid="uid://cukmt8esxykqv" path="res://addons/modes/tilt/Tilt.tscn" id="4_lvcxv"]
+[ext_resource type="PackedScene" uid="uid://b46rdcwxkw0gu" path="res://addons/modes/scoreentry/ScoreEntry.tscn" id="5_fiba4"]
 
 [node name="Resources" type="ResourcePreloader"]
 script = ExtResource("1")
+_packScenes = [ExtResource("2_5juft"), ExtResource("3_e6x3x"), ExtResource("4_lvcxv"), ExtResource("5_fiba4")]
 
 [node name="LoadingControl" type="Control" parent="."]
 layout_mode = 3
@@ -14,6 +19,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="LoadingControl"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -23,6 +29,7 @@ mouse_filter = 2
 color = Color(0, 0.0117647, 0, 1)
 
 [node name="Label" type="Label" parent="LoadingControl"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -39,6 +46,7 @@ theme_override_font_sizes/font_size = 96
 text = "LOADING..."
 
 [node name="Label2" type="Label" parent="LoadingControl"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
