@@ -90,19 +90,6 @@ namespace PinGod.Game
                 //LogDebug(nameof(PinGodGame), $":_EnterTree. {PinGodGameAddOn.VERSION}");
                 CmdArgs = GetCommandLineArgs();
 
-                //adjustments from root            
-                if (HasNode("/root/Adjustments"))
-                {
-                    var node = GetNodeOrNull<AdjustmentsNode>("/root/Adjustments");
-                    if (node != null)
-                    {
-                        LogDebug(nameof(PinGodGame), nameof(_EnterTree), ": adjustments and audits module found...");
-                        Adjustments = node._adjustments;
-                        Audits = node._audits;
-                    }
-                }
-                else { LogDebug(nameof(PinGodGame), nameof(_EnterTree), ": adjustments module not found..."); }
-
                 if (HasNode("/root/AudioManager"))
                 {
                     AudioManager = GetNodeOrNull<AudioManager>("/root/AudioManager");
@@ -110,15 +97,13 @@ namespace PinGod.Game
                         LogInfo(nameof(PinGodGame), ":_EnterTree. audio manager found");
                 }
 
-                Logger.LogLevel = Adjustments?.LogLevel ?? LogLevel.Warning;
                 LogInfo(nameof(PinGodGame), ":_EnterTree. log level: " + Logger.LogLevel);
 
                 AudioServer.SetBusVolumeDb(0, Adjustments?.MasterVolume ?? 0f);
                 AudioServer.SetBusVolumeDb(1, Adjustments?.MusicVolume ?? -6.0f);
                 AudioServer.SetBusVolumeDb(2, Adjustments?.SfxVolume ?? -6.0f);
                 AudioServer.SetBusVolumeDb(3, Adjustments?.VoiceVolume ?? -6.0f);
-
-                SetupWindow();
+                
                 LoadPatches();
 
                 //get trough from tree
@@ -161,6 +146,22 @@ namespace PinGod.Game
         public override void _Ready()
         {
             base._Ready();
+
+            //adjustments from root            
+            if (HasNode("/root/Adjustments"))
+            {
+                var node = GetNodeOrNull<AdjustmentsNode>("/root/Adjustments");
+                if (node != null)
+                {
+                    Logger.LogLevel = node._adjustments.LogLevel;
+                    LogDebug(nameof(PinGodGame), nameof(_EnterTree), ": adjustments and audits module found...");
+                    Adjustments = node._adjustments;
+                    Audits = node._audits;
+                }
+            }
+            else { LogDebug(nameof(PinGodGame), nameof(_EnterTree), ": adjustments module not found..."); }
+
+            SetupWindow();
 
             //setup main scene if there is one
             var mainScenePath = $"/root/{nameof(MainScene)}";
@@ -715,6 +716,7 @@ namespace PinGod.Game
             //title
             //DisplayServer.WindowSetTitle
         }
+
         private bool SolenoidExists(string name)
         {
             if (!Machine.Coils.ContainsKey(name))
