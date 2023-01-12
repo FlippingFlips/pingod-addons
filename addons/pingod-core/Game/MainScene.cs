@@ -110,7 +110,7 @@ namespace PinGod.Core.Game
             if(game != null)
             {
                 //this.RemoveChild(game);
-                //game.QueueFree();
+                game.QueueFree();
             }
             pinGod?.ResetGame();
             CallDeferred(nameof(Reload));
