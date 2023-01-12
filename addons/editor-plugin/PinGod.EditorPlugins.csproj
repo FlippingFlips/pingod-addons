@@ -8,4 +8,7 @@
     <None Include="machine-plugins\lamps\Lamp.tscn" />
     <None Include="machine-plugins\lamps\LampMatrix.tscn" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\pingod-core\PinGod.Core.csproj" />
+  </ItemGroup>
 </Project>

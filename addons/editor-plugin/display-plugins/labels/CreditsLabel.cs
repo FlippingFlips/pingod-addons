@@ -1,6 +1,6 @@
 using Godot;
 using PinGod.Core;
-using PinGod.Game;
+using PinGod.Core.Game;
 
 namespace PinGod.EditorPlugins
 {
@@ -23,8 +23,8 @@ namespace PinGod.EditorPlugins
             base._ExitTree();
             if (pingod != null)
             {
-                (pingod as PinGodGame).CreditAdded -= UpdateCredits;
-                (pingod as PinGodGame).PlayerAdded -= OnPlayerAdded;
+                (pingod as PinGodBase).CreditAdded -= UpdateCredits;
+                (pingod as PinGodBase).PlayerAdded -= OnPlayerAdded;
             }
         }
 
@@ -39,8 +39,8 @@ namespace PinGod.EditorPlugins
                 pingod = GetNode("/root/PinGodGame") as IPinGodGame;
                 if (pingod != null)
                 {
-                    (pingod as PinGodGame).CreditAdded += UpdateCredits;
-                    (pingod as PinGodGame).PlayerAdded += OnPlayerAdded;
+                    (pingod as PinGodBase).CreditAdded += UpdateCredits;
+                    (pingod as PinGodBase).PlayerAdded += OnPlayerAdded;
                 }
                 else { Logger.WarningRich(nameof(CreditsLabel), ":[color=yellow]", "IPinGodGame wasn't found in root, no coin credit switch handlers were added[/color]"); }
             }
