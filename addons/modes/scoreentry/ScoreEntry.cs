@@ -1,13 +1,15 @@
 using Godot;
 using PinGod.Base;
 using PinGod.Core;
+using PinGod.Core.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PinGod.Modes { /// <summary>
-                         /// Simple score entry: Sends <see cref="ScoreEntryEnded"/> TODO entries, placeholder
-                         /// </summary>
+namespace PinGod.Modes
+{ /// <summary>
+  /// Simple score entry: Sends <see cref="ScoreEntryEnded"/> TODO entries, placeholder
+  /// </summary>
     public partial class ScoreEntry : Control
     {
         /// <summary>
@@ -65,6 +67,7 @@ namespace PinGod.Modes { /// <summary>
         int selectedIndex = 0;
 
         private Label selectedName;
+        private AdjustmentsNode _adjustments;
 
         [Signal] public delegate void ScoreEntryEndedEventHandler();
         /// <summary>
@@ -87,8 +90,8 @@ namespace PinGod.Modes { /// <summary>
 
         public override void _ExitTree()
         {
-            base._ExitTree();
             Logger.Info(nameof(ScoreEntry), ":", nameof(_ExitTree));
+            base._ExitTree();
         }
 
         /// <summary>
@@ -98,6 +101,8 @@ namespace PinGod.Modes { /// <summary>
         {
             CharSelectionSetup();
             selectedName = GetNode("CenterContainer/VBoxContainer/Name") as Label;
+
+            if (HasNode("/root/Adjustments")) _adjustments = GetNodeOrNull<AdjustmentsNode>("/root/Adjustments");
 
             IsPlayerEnteringScore = true;
             selectedCharLabelStartPos = new Vector2(selectedCharLabel?.Position.x ?? 0, selectedCharLabel?.Position.y ?? 0);
@@ -109,11 +114,9 @@ namespace PinGod.Modes { /// <summary>
         public virtual void DisplayHighScore()
         {
             Logger.Info(nameof(ScoreEntry), ":display high score");
-
-            if (pinGod != null) pinGod.IsPlayerEnteringHighscore = true;
             IsPlayerEnteringScore = true;
             this.Visible = true;
-            PlayerCount = pinGod.Players?.Count ?? 0;
+            PlayerCount = pinGod?.Players?.Count ?? 0;
             if (PlayerCount <= 0)
             {
                 Logger.Error("Need players for this mode to cycle through");
@@ -137,18 +140,20 @@ namespace PinGod.Modes { /// <summary>
         public virtual void OnPlayerFinishedEntry()
         {
             Logger.Debug(nameof(ScoreEntry), nameof(OnPlayerFinishedEntry));
-            if (pinGod.Audits?.HighScores != null)
+
+
+            if (_adjustments?._audits?.HighScores !=null)
             {
                 try
                 {
-                    pinGod.Audits?.HighScores?.Add(new HighScore()
+                    _adjustments._audits.HighScores.Add(new HighScore()
                     {
                         Name = new string(_entry),
                         Created = DateTime.Now,
                         Scores = _cPlayer.Points
                     });
-                    pinGod.Audits.HighScores = pinGod.Audits.HighScores.OrderByDescending(x => x.Scores)
-                        .Take(pinGod.Adjustments.MaxHiScoresCount)
+                    _adjustments._audits.HighScores = _adjustments._audits.HighScores.OrderByDescending(x => x.Scores)
+                        .Take(_adjustments._adjustments.MaxHiScoresCount)
                         .ToList();
                     Logger.Info(nameof(ScoreEntry), ":hi score added ", entry, " ", _cPlayer.Points);
                 }
@@ -177,7 +182,7 @@ namespace PinGod.Modes { /// <summary>
             //reset the entry player initials
             entry = string.Empty;
             //get the player to check hi scores
-            _cPlayer = pinGod.Players[CurrentPlayer] ?? new PinGodPlayer() { Points = 1000000 };
+            _cPlayer = pinGod?.Players[CurrentPlayer] ?? new PinGodPlayer() { Points = 1000000 };
 
             if (playerMessageLabel != null)
             {
@@ -186,13 +191,13 @@ namespace PinGod.Modes { /// <summary>
             }
 
             //hi scores has enough room to add new at any points, by default they go on board
-            if (pinGod.Audits.HighScores.Count < pinGod.Adjustments.MaxHiScoresCount)
+            if (_adjustments._audits.HighScores.Count < _adjustments._adjustments.MaxHiScoresCount)
             {
                 Logger.Debug(nameof(ScoreEntry), ":hi-score has space, adding this player");
                 CurrentPlayer++;
             }
             //this hi score isn't as big as the others
-            else if (!pinGod.Audits.HighScores.Any(x => x.Scores < _cPlayer.Points))
+            else if (!_adjustments._audits.HighScores.Any(x => x.Scores < _cPlayer.Points))
             {
                 CurrentPlayer++;
                 if (!MoveNextPlayer())
@@ -331,7 +336,6 @@ namespace PinGod.Modes { /// <summary>
         private void QuitScoreEntry()
         {
             Logger.Debug(nameof(ScoreEntry), nameof(QuitScoreEntry), ": score entry mode ending");
-            if (pinGod != null) pinGod.IsPlayerEnteringHighscore = false;
             IsPlayerEnteringScore = false;
             this.Visible = false;
             //emit signal to let know players have finished
