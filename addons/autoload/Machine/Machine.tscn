@@ -1,9 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://b5a503vfdgonh"]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://addons/pingod-core/Service/MachineNode.cs" id="1_sbm0p"]
 [ext_resource type="Script" path="res://addons/pingod-core/BallStacks/Trough.cs" id="2_y2nw4"]
 [ext_resource type="Script" path="res://addons/pingod-core/PlungerLane/PlungerLane.cs" id="3_nwj2m"]
-[ext_resource type="Script" path="res://addons/modes/ballsave/BallSaver.cs" id="4_yl6xf"]
+[ext_resource type="Script" path="res://addons/pingod-core/Service/BallSaver.cs" id="4_yl6xf"]
 [ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="5_7isp6"]
 
 [node name="Machine" type="Node"]
