@@ -1,11 +1,9 @@
 ﻿using Godot;
 using PinGod.Base;
 using PinGod.Core.Nodes.PlungerLane;
-using PinGod.Modes;
 using System;
 using System.Linq;
 using PinGod.EditorPlugins;
-using System.Security.Principal;
 using PinGod.Core.BallStacks;
 
 namespace PinGod.Core.Service
@@ -383,7 +381,7 @@ namespace PinGod.Core.Service
         public virtual bool SwitchActionOff(string swName, InputEvent inputEvent)
         {
             var sw = Machine.Switches[swName];
-            var result = sw.IsActionOff(inputEvent);
+            var result = sw?.IsActionOff(inputEvent) ?? false;
             if (result)
             {
                 SetSwitch(sw, 0);

@@ -1,8 +1,5 @@
 ﻿using Godot;
-using Godot.Collections;
 using PinGod.Base;
-using PinGod.Game;
-using System;
 
 namespace PinGod.Core.Service
 {
@@ -155,7 +152,7 @@ namespace PinGod.Core.Service
             //free here to make sure the _exit method is invoked on the scripts
             foreach (var item in GetTree().Root.GetChildren())
             {
-                if (item.Name == nameof(PinGodGame))
+                if (item.Name == "PinGodGame")
                 {
                     //need to do this as it doesn't quit itself
                     var pg = item as IPinGodGame;
