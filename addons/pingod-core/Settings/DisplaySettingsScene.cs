@@ -17,14 +17,7 @@ public partial class DisplaySettingsScene : MarginContainer
     /// </summary>
     public override void _EnterTree()
     {
-        base._EnterTree();
-        if (HasNode("/root/Adjustments"))
-        {
-            Logger.Debug(nameof(DisplaySettingsScene), ": getting adjustments from AdjustmentsScript");
-            _adjustments = GetNode<AdjustmentsNode>("/root/Adjustments")._adjustments;
-            _displaySettings = _adjustments?.Display;
-        }
-        else { Logger.WarningRich(nameof(DisplaySettingsScene), nameof(_EnterTree), ":[color=yellow]", "AdjustmentsScript not found in /root/Adjustments. Used for saving display adjustments[/color]"); }
+        base._EnterTree();        
     }
 
     /// <summary>
@@ -34,6 +27,14 @@ public partial class DisplaySettingsScene : MarginContainer
     {
         Logger.Debug(nameof(DisplaySettingsScene), ":", nameof(_Ready));
         base._Ready();
+
+        if (HasNode("/root/Adjustments"))
+        {
+            Logger.Debug(nameof(DisplaySettingsScene), ": getting adjustments from AdjustmentsScript");
+            _adjustments = GetNode<AdjustmentsNode>("/root/Adjustments")._adjustments;
+            _displaySettings = _adjustments?.Display;
+        }
+        else { Logger.WarningRich(nameof(DisplaySettingsScene), nameof(_EnterTree), ":[color=yellow]", "AdjustmentsScript not found in /root/Adjustments. Used for saving display adjustments[/color]"); }
 
         if (_displaySettings != null)
         {

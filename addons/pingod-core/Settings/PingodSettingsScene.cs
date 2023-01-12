@@ -20,7 +20,11 @@ public partial class PingodSettingsScene : MarginContainer
         {
             pinGod = GetNode<IPinGodGame>("/root/PinGodGame");
         }
+    }
 
+    public override void _Ready()
+    {
+        base._Ready();
         var _stateDelaySpinbox = GetNode<SpinBox>("VBoxContainer/StatesDelaySpinBox");
         _stateDelaySpinbox.Value = pinGod?.Adjustments?.MachineStatesWriteDelay ?? 10;
         _stateDelaySpinbox.Prefix = Tr("SETT_STATE_DELAY");
