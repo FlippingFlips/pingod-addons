@@ -1,7 +1,6 @@
 ﻿using Godot;
 using PinGod.Base;
 using PinGod.Core.Service;
-using PinGod.Modes;
 
 namespace PinGod.Core.Nodes.PlungerLane
 {
