@@ -65,6 +65,7 @@ namespace PinGod.Core
         /// Any multi-ball running?
         /// </summary>
         bool IsMultiballRunning { get; set; }
+        bool IsPlayerEnteringHighscore { get; set; }
         /// <summary>
         /// Is Game tilted?
         /// </summary>
@@ -92,7 +93,8 @@ namespace PinGod.Core
         /// <summary>
         /// Amount of tilt warnings the machine is on.
         /// </summary>
-        byte Tiltwarnings { get; set; }
+        byte Tiltwarnings { get; set; }        
+
         void _EnterTree();
 
         void _ExitTree();
