@@ -9,4 +9,7 @@
     <None Include="BallStacks\Trough.tscn" />
     <None Include="ModeTimer\ModeTimer.tscn" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\pingod-base\PinGod.Base.csproj" />
+  </ItemGroup>
 </Project>

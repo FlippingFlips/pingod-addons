@@ -70,6 +70,7 @@ namespace PinGod.Game
                 .OrderByDescending(x => x.Scores).FirstOrDefault().Scores ?? 0;
         public bool InBonusMode { get; set; } = false;
         public bool IsMultiballRunning { get; set; } = false;
+        public bool IsPlayerEnteringHighscore { get; set; }
         public bool IsTilted { get; set; }
         public LogLevel LogLevel { get; set; } = LogLevel.Info;
         public MachineNode MachineNode { get; private set; }
@@ -343,7 +344,6 @@ namespace PinGod.Game
             //GetTree().Quit(0);
         }
         public virtual int RandomNumber(int from, int to) => randomNumGenerator.RandiRange(from, to);
-
         public virtual void ResetGame()
         {            
             BallStarted = false;
@@ -421,7 +421,6 @@ namespace PinGod.Game
         {
             ServiceMenuEnter += OnServiceMenuEnter;
         }
-
         public virtual void SolenoidOn(string name, byte state) => Machine.SetCoil(name, state);
         public virtual async void SolenoidPulse(string name, byte pulse = 255)
         {
@@ -572,7 +571,8 @@ namespace PinGod.Game
         public virtual bool SwitchOn(string swName)
         {
             if (!SwitchExists(swName)) return false;
-            return Machine.Switches[swName].IsActionOn();
+            var sw = Machine.Switches[swName];
+            return sw?.IsActionOn() ?? false;
         }
         public virtual void UpdateLamps(SceneTree sceneTree, string group = "Mode", string method = "UpdateLamps") => sceneTree.CallGroup(group, method);
         #endregion
@@ -675,8 +675,9 @@ namespace PinGod.Game
                         AudioManager?.PlaySfx("credit");
                         AddCredits((byte)(1 * index));
                         break;
-                    case 19://start
-                        CallDeferred(nameof(StartGame));
+                    case 19://start or add player
+                        if(!IsTilted && !IsPlayerEnteringHighscore)
+                            CallDeferred(nameof(StartGame));
                         break;
                     default:
                         break;
