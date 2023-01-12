@@ -1,7 +1,7 @@
 ﻿namespace PinGod.Base
 {
     /// <summary>
-    /// Used by <see cref="Switch"/>
+    /// Used by <see cref="GodotSwitch"/>
     /// </summary>
     public enum BallSearchSignalOption
     {
