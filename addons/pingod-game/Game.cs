@@ -27,6 +27,7 @@ namespace PinGod.Game
         private Resources _resources;
         private Timer _tiltedTimeOut;
         private PackedScene multiballPkd;
+        private ScoreEntry _scoreEntry;
 
         /// <summary>
         /// Connects signals to basic game events, handles tilt time outs
@@ -68,6 +69,7 @@ namespace PinGod.Game
                 pg.MultiBallEnded -= EndMultiball;
             }
             _modesUpper.GetNodeOrNull<Tilt>(nameof(Tilt))?.QueueFree();
+            if (_scoreEntry != null) _scoreEntry.ScoreEntryEnded -= OnScoreEntryEnded;
             Logger.Debug(nameof(Game), ":", nameof(_ExitTree));
             base._ExitTree();            
         }
@@ -77,6 +79,12 @@ namespace PinGod.Game
         /// </summary>
         public override void _Ready()
         {
+            Logger.Debug(nameof(Game), ":", nameof(_Ready));
+
+            //get resource singleton
+            if (HasNode("/root/Resources")) _resources = GetNodeOrNull<Resources>("/root/Resources");
+
+            //wire pin god game events
             if (pinGod != null)
             {
                 var pg = pinGod as PinGodGame;
@@ -86,14 +94,12 @@ namespace PinGod.Game
                 pg.BonusEnded += OnBonusEnded;
                 pg.MultiBallEnded += EndMultiball;
                 //pinGod.PlayerAdded += OnPlayerAdded;
-            }
-
-            if (HasNode("/root/Resources")) _resources = GetNodeOrNull<Resources>("/root/Resources");
+            }                        
 
             //TILT
             LoadAndStartTiltMode();
-
-            Logger.Debug(nameof(Game), ":", nameof(_Ready));
+            
+            //start new ball
             pinGod.BallInPlay = 1;
             StartNewBall();
         }
@@ -146,21 +152,6 @@ namespace PinGod.Game
                 _modesUpper.AddChild(bonus);
                 bonus.StartBonusDisplay();                
             }
-
-            if (!string.IsNullOrWhiteSpace(BONUS_SCENE))
-            {
-                Logger.Info(nameof(Game), ":adding bonus scene for player: " + pinGod.CurrentPlayerIndex);
-                pinGod.InBonusMode = true;
-                var bonusScene = _resources?.GetResource(BONUS_SCENE.GetBaseName()) as PackedScene;
-                if (bonusScene != null)
-                {
-                    var bonus = bonusScene.Instantiate() as Bonus;
-                    _modesUpper.AddChild(bonus);
-                    bonus.StartBonusDisplay();
-                }
-                else { Logger.Warning(nameof(Game), ": no bonus scene could be created. Is the scene added to resources and the scene packed scene is set here?"); }
-            }
-            else { Logger.WarningRich(nameof(Game), "[color=yellow]", " OnBallEnded: No Bonus scene set", "[/color]"); }
         }
 
         /// <summary>
@@ -173,10 +164,11 @@ namespace PinGod.Game
             if (scene != null)
             {
                 Logger.Info(nameof(Game), ":adding score entry scene");
-                var scoreEntry = scene.Instantiate() as ScoreEntry;
-                _modesUpper.AddChild(scoreEntry);
-                scoreEntry.ScoreEntryEnded += OnScoreEntryEnded;
-                scoreEntry?.DisplayHighScore();
+                _scoreEntry = scene.Instantiate() as ScoreEntry;
+                _modesUpper.AddChild(_scoreEntry);
+                _scoreEntry.ScoreEntryEnded += OnScoreEntryEnded;
+                pinGod.IsPlayerEnteringHighscore = true;
+                _scoreEntry.DisplayHighScore();
             }
         }
 
@@ -281,6 +273,7 @@ namespace PinGod.Game
         public virtual void OnScoreEntryEnded()
         {
             Logger.Debug(nameof(Game), " ", nameof(OnScoreEntryEnded));
+            pinGod.IsPlayerEnteringHighscore = false;
             pinGod.EndOfGame();
         }
 
