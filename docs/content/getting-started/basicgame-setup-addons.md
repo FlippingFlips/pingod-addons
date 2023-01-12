@@ -6,15 +6,15 @@ draft: false
 weight: 24
 ---
 
-To run the `BasicGameGodot` project you will need the `addons` directory linked or copied.
+To run the `pingod-basigame` project in the examples folder you will need the `addons` directory linked or copied.
 
 These `addons` contain base files and pinball framework that a game will use.
 
 ---
-#### Link the PinGod.VP.AddOns
+#### Link the AddOns
 ---
 
-You can copy the `addons` directory to your project (`BasicGameGodot` in this example), but it's better to use a `symbolic link` to the addons so we are not duplicating files and you can keep the same addons across projects.
+You can copy the `addons` directory to your project (`pingame-basicgame` in this example), but it's better to use a `symbolic link` to the addons so we are not duplicating files and you can keep the same addons across projects.
 
 ---
 
@@ -33,4 +33,4 @@ If you open the new `addons` shortcut it will show you the files that are in `pi
 ![image](../../images/basicgame/basicgame-addons.jpg)
 
 
-This shortcut can be removed without harming the files where the directory is linked from.
+*This shortcut can be removed without harming the files where the directory is linked from.*

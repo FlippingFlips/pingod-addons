@@ -19,18 +19,10 @@ Using Git to clone the repositories
 
 ![image](../../images/cmds/git-clone-addons.jpg)
 
-4. Now clone the `pingod-basicgame` with `git clone https://github.com/FlippingFlips/pingod-basicgame`
-
-![image](../../images/cmds/git-clone-basicgame.jpg)
-
-5. You will have two directories `/pingod/pingod-basicgame`, `/pingod/pingod-addons`, this is so the basicgame only has to go up one directory to link the `addons`
-
-You could also use your own fork and clone that.
+*You could also use your own fork and clone that.*
 
 ---
 #### (Option 2) Downloading zipped repo
 ---
 
 [pingod-addons](https://github.com/FlippingFlips/pingod-addons/archive/refs/heads/main.zip)
-
-[pingod-basicgame](https://github.com/FlippingFlips/pingod-basicgame/archive/refs/heads/main.zip)
