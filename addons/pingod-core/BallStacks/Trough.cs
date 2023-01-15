@@ -67,6 +67,13 @@ namespace PinGod.Core.BallStacks
         /// </summary>
         public override void _Ready()
         {
+            if (!_isEnabled)
+            {
+                Logger.Info(nameof(Trough), ":_Ready", " trough is disabled in scene, freeing up");
+                this.QueueFree();
+                return;
+            }
+
             Logger.Debug(nameof(Trough), ":_ready. switch_count: ", TroughOptions?.Switches.Length);
 
             if (HasNode("/root/PinGodGame"))
