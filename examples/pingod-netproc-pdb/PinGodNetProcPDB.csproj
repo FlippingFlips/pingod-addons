@@ -18,7 +18,7 @@
     <None Include="autoload\Resources.tscn" />
     <None Include="autoload\WindowActions.tscn" />
     <None Include="netproc.db" />
-    <None Include="nuget\.gdignores" />
+    <None Include="nuget\.gdignore" />
     <None Include="README.md" />
   </ItemGroup>
  
