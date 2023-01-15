@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=3 uid="uid://bovytl2p8u031"]
+
+[ext_resource type="Script" path="res://autoload/MachinePROC.cs" id="1_8kvyb"]
+[ext_resource type="Script" path="res://addons/pingod-core/BallStacks/Trough.cs" id="2_y2nw4"]
+[ext_resource type="Script" path="res://addons/pingod-core/PlungerLane/PlungerLane.cs" id="3_nwj2m"]
+[ext_resource type="Script" path="res://addons/pingod-core/Service/BallSaver.cs" id="4_yl6xf"]
+[ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="5_7isp6"]
+
+[node name="Machine" type="Node"]
+editor_description = "P-ROC PinGodMachine"
+script = ExtResource("1_8kvyb")
+_ball_search_stop_switches = PackedStringArray("mball_saucer", "trough_1", "trough_2", "trough_3", "trough_4")
+_coils = {
+"alive": 0,
+"auto_plunger": 3,
+"disable_shows": 33,
+"flippers": 2,
+"lampshow_1": 34,
+"lampshow_2": 35,
+"mball_saucer": 4,
+"trough": 1
+}
+_leds = {
+"shoot_again": 1
+}
+_switches = {
+"coin1": 0,
+"coin2": 1,
+"coin3": 2,
+"coinDoor": 3,
+"down": 5,
+"enter": 7,
+"exit": 4,
+"flipperLwL": 8,
+"flipperLwR": 9,
+"inlane_l": 17,
+"inlane_r": 18,
+"outlane_l": 19,
+"outlane_r": 20,
+"plunger_lane": 16,
+"slam_tilt": 16,
+"sling_l": 21,
+"sling_r": 22,
+"start": 10,
+"tilt": 23,
+"trough_1": 12,
+"trough_2": 13,
+"trough_3": 14,
+"trough_4": 15,
+"up": 6
+}
+
+[node name="Trough" type="Node" parent="."]
+script = ExtResource("2_y2nw4")
+
+[node name="PlungerLane" type="Node" parent="."]
+script = ExtResource("3_nwj2m")
+
+[node name="BallSaver" type="Timer" parent="."]
+script = ExtResource("4_yl6xf")
+
+[node name="RecordingStatusLabel" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -104.0
+offset_bottom = 23.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("5_7isp6")
+theme_override_font_sizes/font_size = 32
+text = "Machine: RECORDING"
