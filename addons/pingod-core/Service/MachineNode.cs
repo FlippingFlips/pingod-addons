@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using PinGod.EditorPlugins;
 using PinGod.Core.BallStacks;
+using Godot.Collections;
 
 namespace PinGod.Core.Service
 {
@@ -32,10 +33,10 @@ namespace PinGod.Core.Service
         /// </summary>
         [Export] private int _ball_search_wait_time_secs = 10;
         [ExportCategory("Machine Items")]
-        [Export] Godot.Collections.Dictionary<string, byte> _coils = new();
-        [Export] Godot.Collections.Dictionary<string, byte> _lamps = new();
-        [Export] Godot.Collections.Dictionary<string, byte> _leds = new();        
-        [Export] Godot.Collections.Dictionary<string, byte> _switches = new();        
+        [Export] protected Dictionary<string, byte> _coils = new();
+        [Export] protected Dictionary<string, byte> _lamps = new();
+        [Export] protected Dictionary<string, byte> _leds = new();        
+        [Export] protected Dictionary<string, byte> _switches = new();        
         [ExportCategory("Switch Window")]
         [Export] bool _switchWindowEnabled = false;
         [Export] PackedScene _switchWindow;
@@ -79,7 +80,7 @@ namespace PinGod.Core.Service
         public bool GameInPlay { get; set; }
 
         /// <summary>
-        /// <see cref="AddCustomMachineItems"/>
+        /// Sets up BallSearch, Machine Items, Ball Saver, plunger lane
         /// </summary>
         public override void _EnterTree()
         {
@@ -91,42 +92,37 @@ namespace PinGod.Core.Service
                     this.QueueFree();
                     return;
                 }
-
                 _instanceLoaded = true;
 
-                _recordFile = new EventRecordFile();
-
-                //ball search options
-                BallSearchOptions = new BallSearchOptions(_ball_search_coils, _ball_search_stop_switches, _ball_search_wait_time_secs, _ball_search_enabled);
-
+                //ball search
+                SetupBallSearch();
                 //adds machine items and actions
                 AddCustomMachineItems(_coils, _switches, _lamps, _leds);
-
-                if (GetParent().HasNode("MemoryMap"))
-                {
-                    _pinGodMemoryMapNode = GetParent().GetNode<MemoryMapNode>("MemoryMap");
-                }
-
-                //create and add a ball search timer
-                BallSearchTimer = new Timer() { Autostart = false, OneShot = false };
-                BallSearchTimer.Connect("timeout", new Callable(this, nameof(OnBallSearchTimeout)));
-                this.AddChild(BallSearchTimer);
-
+                //memory map
+                if (GetParent().HasNode("MemoryMap")) { _pinGodMemoryMapNode = GetParent().GetNode<MemoryMapNode>("MemoryMap"); }
+                //hook up to the ball saved event
                 if (HasNode("BallSaver"))
-                {
-                    //hook up to the ball saved event
+                {                    
                     _ballSaver = GetNode<BallSaver>("BallSaver");
                     _ballSaver.BallSaved += _ballSaver_BallSaved;
                 }
-                if (HasNode("PlungerLane"))
-                {
-                    _plungerLane = GetNode<PlungerLane>("PlungerLane");
-                }
-
+                //plunger lane
+                if (HasNode("PlungerLane")) { _plungerLane = GetNode<PlungerLane>("PlungerLane"); }
                 //display status of recordings
+                _recordFile = new EventRecordFile();
                 _recordingStatusLabel = GetNodeOrNull<Label>("RecordingStatusLabel");
                 if (_recordingStatusLabel != null) _recordingStatusLabel.Text = string.Empty;
             }
+        }
+
+        private void SetupBallSearch()
+        {
+            //ball search options
+            BallSearchOptions = new BallSearchOptions(_ball_search_coils, _ball_search_stop_switches, _ball_search_wait_time_secs, _ball_search_enabled);
+            //create and add a ball search timer
+            BallSearchTimer = new Timer() { Autostart = false, OneShot = false };
+            BallSearchTimer.Connect("timeout", new Callable(this, nameof(OnBallSearchTimeout)));
+            this.AddChild(BallSearchTimer);
         }
 
         /// <summary>
@@ -318,7 +314,7 @@ namespace PinGod.Core.Service
         /// <param name="switch"></param>
         /// <param name="value"></param>
         /// <param name="fromAction">if false, it doesn't set the machine switch value</param>
-        public void SetSwitch(Switch @switch, byte value, bool fromAction = true)
+        public virtual void SetSwitch(Switch @switch, byte value, bool fromAction = true)
         {
             //Logger.Verbose($"set switch {@switch.Num}, from godot action?:" + fromAction);
             if (!fromAction)
@@ -414,7 +410,8 @@ namespace PinGod.Core.Service
         /// <param name="switches"></param>
         /// <param name="lamps"></param>
         /// <param name="leds"></param>
-        protected void AddCustomMachineItems(Godot.Collections.Dictionary<string, byte> coils, Godot.Collections.Dictionary<string, byte> switches, Godot.Collections.Dictionary<string, byte> lamps, Godot.Collections.Dictionary<string, byte> leds)
+        protected virtual void AddCustomMachineItems(Dictionary<string, byte> coils,
+            Dictionary<string, byte> switches, Dictionary<string, byte> lamps, Dictionary<string, byte> leds)
         {
             foreach (var coil in coils.Keys)
             {
@@ -428,9 +425,9 @@ namespace PinGod.Core.Service
             {
                 //create an action for the switch if it doesn't exist.
                 var swVal = switches[sw];
-                if (!Godot.InputMap.HasAction("sw" + swVal))
+                if (!InputMap.HasAction("sw" + swVal))
                 {
-                    Godot.InputMap.AddAction("sw" + swVal);
+                    InputMap.AddAction("sw" + swVal);
                 }
 
                 if (BallSearchOptions.StopSearchSwitches?.Any(x => x == sw) ?? false)

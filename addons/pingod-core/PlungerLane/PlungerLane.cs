@@ -1,6 +1,6 @@
 ﻿using Godot;
-using PinGod.Base;
 using PinGod.Core.Service;
+using PinGod.Game;
 
 namespace PinGod.Core.Nodes.PlungerLane
 {
@@ -26,7 +26,7 @@ namespace PinGod.Core.Nodes.PlungerLane
             else Logger.Info(nameof(PlungerLane), nameof(_EnterTree));            
 
             //get pingodgame and machine
-            if (HasNode("/root/PinGodGame")) pinGod = GetNode<IPinGodGame>("/root/PinGodGame");
+            if (HasNode("/root/PinGodGame")) pinGod = GetNode<PinGodGame>("/root/PinGodGame");
             if (HasNode("/root/Machine"))
             {
                 machine = GetNode<MachineNode>("/root/Machine");

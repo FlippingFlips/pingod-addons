@@ -198,8 +198,11 @@ namespace PinGod.Game
         }
         public virtual void AddCredits(byte amt)
         {
-            Audits.Credits += amt;
-            EmitSignal(nameof(CreditAdded), Audits.Credits);
+            if(Audits != null)
+            {
+                Audits.Credits += amt;
+                EmitSignal(nameof(CreditAdded), Audits.Credits);
+            }            
         }
         public virtual long AddPoints(long points, bool emitUpdateSignal = true)
         {
