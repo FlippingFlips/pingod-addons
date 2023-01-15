@@ -319,10 +319,10 @@ namespace PinGod.Modes
             {
                 switch (name)
                 {
-                    case "flipper_l":
+                    case "flipperLwL":
                         OnLeftFlipper();
                         break;
-                    case "flipper_r":
+                    case "flipperLwR":
                         OnRightFlipper();
                         break;
                     case "start":

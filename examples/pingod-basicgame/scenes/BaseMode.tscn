@@ -16,8 +16,8 @@ script = ExtResource("1_k8ccg")
 wait_time = 2.0
 one_shot = true
 script = ExtResource("2_wg3gl")
-_coil = "mball_saucer"
-_switch = "mball_saucer"
+_coil = "mballSaucer"
+_switch = "mballSaucer"
 
 [connection signal="SwitchActive" from="Saucer" to="." method="OnBallStackPinball_SwitchActive"]
 [connection signal="timeout" from="Saucer" to="." method="OnBallStackPinball_timeout"]

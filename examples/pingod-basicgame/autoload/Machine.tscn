@@ -9,8 +9,8 @@
 
 [node name="Machine" type="Node"]
 script = ExtResource("1_rpe2g")
-_ball_search_coils = PackedStringArray("mball_saucer")
-_ball_search_stop_switches = PackedStringArray("mball_saucer", "trough_1", "trough_2", "trough_3", "trough_4")
+_ball_search_coils = PackedStringArray("mballSaucer")
+_ball_search_stop_switches = PackedStringArray("mballSaucer", "trough0", "trough1", "trough2", "trough3")
 _coils = {
 "alive": 0,
 "auto_plunger": 3,
@@ -18,7 +18,7 @@ _coils = {
 "flippers": 2,
 "lampshow_1": 34,
 "lampshow_2": 35,
-"mball_saucer": 4,
+"mballSaucer": 4,
 "trough": 1
 }
 _leds = {
@@ -31,23 +31,23 @@ _switches = {
 "down": 5,
 "enter": 7,
 "exit": 4,
-"flipper_l": 9,
-"flipper_r": 11,
-"inlane_l": 22,
-"inlane_r": 23,
-"mball_saucer": 27,
-"outlane_l": 21,
-"outlane_r": 24,
-"plunger_lane": 20,
-"slam_tilt": 16,
-"sling_l": 25,
-"sling_r": 26,
+"flipperLwL": 9,
+"flipperLwR": 11,
+"inlaneL": 22,
+"inlaneR": 23,
+"mballSaucer": 27,
+"outlaneL": 21,
+"outlaneR": 24,
+"plungerLane": 20,
+"slamTilt": 16,
+"slingL": 25,
+"slingR": 26,
 "start": 19,
 "tilt": 17,
-"trough_1": 81,
-"trough_2": 82,
-"trough_3": 83,
-"trough_4": 84,
+"trough0": 81,
+"trough1": 82,
+"trough2": 83,
+"trough3": 84,
 "up": 6
 }
 _switchWindowEnabled = true

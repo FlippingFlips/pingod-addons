@@ -42,7 +42,7 @@ namespace PinGod.Core
         /// <summary>
         /// Early switch Ball save names. outlane_l outlane_r
         /// </summary>
-        [Export] public string[] _early_save_switches = { "outlane_l", "outlane_r" };
+        [Export] public string[] _early_save_switches = { "outlaneL", "outlaneR" };
         #endregion
 
         #region Signals

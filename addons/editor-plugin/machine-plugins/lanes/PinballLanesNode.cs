@@ -101,11 +101,11 @@ namespace PinGod.EditorPlugins
                 {
                     switch (name)
                     {
-                        case "flipper_l":
+                        case "flipperLwL":
                             if (_flipper_changes_lanes)
                                 RotateLanesLeft();
                             return;
-                        case "flipper_r":
+                        case "flipperLwR":
                             if (_flipper_changes_lanes)
                                 RotateLanesRight();
                             return;

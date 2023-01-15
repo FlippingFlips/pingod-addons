@@ -99,8 +99,8 @@ public partial class MachinePROC : MachineNode
     {        
         if (_pinGodProc != null)
         {
-            var sw = _switches[@switch.Name];
-            SetSwitchFakeProc(_pinGodProc._procGame, "flipperLwL", value > 0 ? true : false);            
+            //var sw = _switches[@switch.Name];
+            SetSwitchFakeProc(_pinGodProc._procGame, @switch.Name, value > 0 ? true : false);            
         }        
         base.SetSwitch(@switch, value, fromAction);
     }

@@ -6,7 +6,7 @@ using PinGod.Core.Service;
 using PinGod.EditorPlugins;
 
 /// <summary>
-/// Tilt. "slam_tilt" or "tilt" switches.
+/// Tilt. "slamTilt" or "tilt" switches.
 /// </summary>
 public partial class Tilt : Control
 {
@@ -143,7 +143,7 @@ public partial class Tilt : Control
                 case "tilt":
                     OnTilt();
                     break;
-                case "slam_tilt":
+                case "slamTilt":
                     OnSlamTilt();
                     break;
                 default:

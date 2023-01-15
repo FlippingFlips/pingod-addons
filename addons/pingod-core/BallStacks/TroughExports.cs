@@ -22,6 +22,6 @@ namespace PinGod.Core.BallStacks
         /// <summary>
         /// Switch names, defaults trough_1 -- trough_4
         /// </summary>
-        [Export] public string[] _trough_switches = { "trough_1", "trough_2", "trough_3", "trough_4" };
+        [Export] public string[] _trough_switches = { "trough0", "trough1", "trough2", "trough3" };
     }
 }

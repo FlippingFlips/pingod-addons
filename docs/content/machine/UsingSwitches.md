@@ -9,7 +9,7 @@ weight: 30
 ### Using in game scene c# scripts
 ---
 
-Connect to a SwitchCommand. Only needs to be done once in EnterTree
+Connect to a SwitchCommand. Only needs to be done once in _EnterTree
 
 ```
 //Godot Enter Tree Override. Get pingod and connect to a SwitchCommand signal on it
@@ -31,18 +31,18 @@ private void SwitchCommandHandler(string swName, byte index, byte value)
     {
         switch (swName)
         {
-            case "inlane_l":					
-            case "inlane_r":
+            case "inlaneL":					
+            case "inlaneR":
             case "bumper_l":
             case "bumper_r":
                 AddPointsPlaySound(SMALL_SCORE);
                 break;
-            case "outlane_r":
-            case "outlane_l":
+            case "outlaneR":
+            case "outlaneL":
                 AddPointsPlaySound(MED_SCORE);
                 break;
-            case "sling_l":
-            case "sling_r":
+            case "slingL":
+            case "slingR":
             case "spinner":
                 AddPointsPlaySound(MIN_SCORE);
                 break;
@@ -59,7 +59,7 @@ private void SwitchCommandHandler(string swName, byte index, byte value)
 #### Check a switch state
 
 ```
-bool switchOn = Machine.Switches["plunger_lane"].IsEnabled
+bool switchOn = Machine.Switches["plungerLane"].IsEnabled
 
 //or
 switchOn = pinGod.IsSwitchEnabled(swName);

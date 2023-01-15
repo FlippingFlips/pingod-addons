@@ -12,7 +12,7 @@ namespace PinGod.Core.Nodes.PlungerLane
         /// <summary>
         /// THe switch name used for the plunger lane
         /// </summary>
-        [Export] public string _plunger_lane_switch = "plunger_lane";
+        [Export] public string _plunger_lane_switch = "plungerLane";
 
         /// <summary>
         /// Sets the <see cref="PinGodGame.BallStarted"/>

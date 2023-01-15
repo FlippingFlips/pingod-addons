@@ -56,16 +56,16 @@ public partial class BaseMode : Control
         if (value <= 0) return;
         switch (name)
         {
-            case "outlane_l":
-            case "outlane_r":
+            case "outlaneL":
+            case "outlaneR":
                 game.AddPoints(100);
                 break;
-            case "inlane_l":
-            case "inlane_r":
+            case "inlaneL":
+            case "inlaneR":
                 game.AddPoints(50);
                 break;
-            case "sling_l":
-            case "sling_r":
+            case "slingL":
+            case "slingR":
                 game.AddPoints(50);
                 break;
             default:
