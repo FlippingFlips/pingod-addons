@@ -30,7 +30,7 @@ namespace PinGod.Modes
         /// </summary>
         public override void _Ready()
         {
-            if (pinGod != null)
+            if (pinGod?.Audits?.HighScores != null)
             {
                 var scores = string.Join("\n", pinGod?.Audits?.HighScores?.Select(x => $"{x.Scores.ToScoreString()}    {x.Name}"));
                 Label.Text = scores;

@@ -45,7 +45,7 @@ namespace PinGod.EditorPlugins
                 else { Logger.WarningRich(nameof(CreditsLabel), ":[color=yellow]", "IPinGodGame wasn't found in root, no coin credit switch handlers were added[/color]"); }
             }
 
-            UpdateCredits(pingod?.Audits.Credits ?? 0);
+            UpdateCredits(pingod?.Audits?.Credits ?? 0);
         }
 
         /// <summary>
