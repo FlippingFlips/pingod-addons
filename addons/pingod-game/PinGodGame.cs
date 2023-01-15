@@ -288,7 +288,11 @@ namespace PinGod.Game
             this.EmitSignal(nameof(GameEnded));
         }
         public virtual ulong GetLastSwitchChangedTime(string sw) => Machine.Switches[sw].TimeSinceChange();
-        public virtual Resources GetResources() => GetNodeOrNull<Resources>("Resources");
+        /// <summary>
+        /// GetNodeOrNull or the /root/Resources
+        /// </summary>
+        /// <returns></returns>
+        public virtual Resources GetResources() => GetNodeOrNull<Resources>("/root/Resources");
         public virtual bool IsSwitchAction(string[] switchNames, InputEvent input)
         {
             for (int i = 0; i < switchNames.Length; i++)

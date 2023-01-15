@@ -15,12 +15,22 @@ public partial class MyMode : PinGodProcMode
     }
     public override void UpdateLamps() => Logger.Info(GetType().Name, ":", nameof(UpdateLamps));
 
+    /// <summary>
+    /// Switch handler for flipper. Default to T
+    /// </summary>
+    /// <param name="sw"></param>
+    /// <returns></returns>
     public bool sw_flipperLwL_active(Switch sw = null) 
     {        
         Logger.Info(GetType().Name, ":", nameof(sw_flipperLwL_active), $": {sw.TimeSinceChange()}");
         return true;
     }
 
+    /// <summary>
+    /// HOld delay Switch handler for flipper. Default to T
+    /// </summary>
+    /// <param name="sw"></param>
+    /// <returns></returns>
     public bool sw_flipperLwL_active_for_1s(Switch sw = null)
     {
         Logger.Info(GetType().Name, ":", nameof(sw_flipperLwL_active), $": {sw.TimeSinceChange()}");

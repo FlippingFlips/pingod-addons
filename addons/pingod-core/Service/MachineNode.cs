@@ -473,6 +473,13 @@ namespace PinGod.Core.Service
 
             Logger.Debug(nameof(MachineNode), ": ball saved");
         }
+
+        /// <summary>
+        /// Memory map switch event. Coming from external, like a simulator through the memory mapping file
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="index"></param>
+        /// <param name="value"></param>
         private void OnSwitchCommand(string name, int index, byte value)
         {
             Logger.Verbose(nameof(MachineNode), $": setSwitch--n:{name},numVal:{index}-{value}");
@@ -484,7 +491,6 @@ namespace PinGod.Core.Service
             {
                 SetSwitch(name, value, false);
             }
-
         }
 
         private void SetUpSwitchWindow()
