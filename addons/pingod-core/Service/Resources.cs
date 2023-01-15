@@ -50,6 +50,7 @@ namespace PinGod.Core.Service
             if (!Engine.IsEditorHint())
             {
                 SetProcess(false);
+                this._isBusy = false;
                 _loadingControl = GetNodeOrNull<Control>("LoadingControl");
                 _label2 = _loadingControl?.GetNodeOrNull<Label>("Label2");
             }
@@ -63,6 +64,7 @@ namespace PinGod.Core.Service
             base._ExitTree();
             _resourcesLoading?.Clear();
             SetProcess(false);
+            this._isBusy = false;
         }
 
         /// <summary>
@@ -70,6 +72,8 @@ namespace PinGod.Core.Service
         /// </summary>
         double time = 1.0;
         int totalResourcesLoaded = 0;
+        private bool _isBusy;
+
         public override void _Process(double delta)
         {
             if (_resourcesLoading?.Count > 0)
@@ -98,6 +102,7 @@ namespace PinGod.Core.Service
             else
             {
                 SetProcess(false); ShowLoading(false); time = 0.5;
+                this._isBusy = false;
                 EmitSignal(nameof(ResourcesLoaded), totalResourcesLoaded);
                 totalResourcesLoaded = 0;
             }
@@ -106,6 +111,7 @@ namespace PinGod.Core.Service
         public override void _Ready()
         {
             SetProcess(false);
+            this._isBusy = false;
             base._Ready();
             if (!Engine.IsEditorHint())
             {
@@ -150,6 +156,7 @@ namespace PinGod.Core.Service
                 {
                     Logger.Info(nameof(Resources), ": loading threaded resource: ", path);
                     _resourcesLoading.Enqueue(path);
+                    _isBusy = true;
                     SetProcess(true);
                     ShowLoading(true);
                 }
@@ -183,7 +190,7 @@ namespace PinGod.Core.Service
             if (_packScenes?.Count <= 0)
             {
                 EmitSignal(nameof(ResourcesLoaded), 0);
-                this._loadingControl.Visible = false;
+                this._loadingControl.Visible = false;                
             }
 
             foreach (var scene in _packScenes)
@@ -282,5 +289,7 @@ namespace PinGod.Core.Service
 
             return null;
         }
+
+        internal bool IsLoading() => _isBusy;
     }
 }

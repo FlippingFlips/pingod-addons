@@ -4,8 +4,13 @@ using PinGod.Game;
 using System.Threading.Tasks;
 using System.Threading;
 using Godot;
-using PinGod.Core.Game;
+using PinGod.Core.Service;
+using NetProc.Game.Modes;
+using System.Linq;
 
+/// <summary>
+/// Inheriting PinGodGame to take over with a P-ROC.
+/// </summary>
 public partial class ProcPinGodGame : PinGodGame
 {
     private MachinePROC _procMachine;
@@ -17,6 +22,8 @@ public partial class ProcPinGodGame : PinGodGame
     /// </summary>
     public PinGodProcGameController _procGame;
     private PinGodProcMode _mode;
+    private AttractMode _AttractMode;
+    private Resources _resources;
 
     public override void _EnterTree()
     {
@@ -44,9 +51,17 @@ public partial class ProcPinGodGame : PinGodGame
         _procMachine = this.MachineNode as MachinePROC;
         if (_procMachine != null)
         {
+
+            _resources = GetResources();
+
+
             //CREATE AND SETUP PROC MACHINE
             CreateProcGame(_procMachine._machineConfig);
             Logger.Info(nameof(MachinePROC), ": ProcGame created. Setting up MachineNode from ProcGame.");
+
+
+            //_procGame.Logger. = NetProc.Domain.PinProc.LogLevel.Verbose;
+            Logger.LogLevel = PinGod.Base.LogLevel.Verbose;
 
             //SET MACHINE ITEMS FROM PROC TO PINGOD
             SetupPinGodotFromProcGame();
@@ -55,19 +70,60 @@ public partial class ProcPinGodGame : PinGodGame
             try 
             {
                 StartProcGameLoop();
-
-                _mode = new MyMode(_procGame, 10, this);
-
-                var ms = GetNodeOrNull<Node2D>("/root/ProcScene");
-                if(ms != null)
-                {
-                    //ms.AddChild(_mode); //TODO: addchild node
-                    _procGame.Modes.Add(_mode);
-                    _procGame.AddPlayer();
-                }                
             }
             catch (System.Exception ex) { Logger.Error(nameof(MachinePROC), nameof(_Ready), $"{ex.Message} - {ex.InnerException?.Message}"); }
         }        
+    }
+
+    /// <summary>
+    /// Runs until the resources are ready. For first run, load all scenes, this waits not blocking, then load the Attract.
+    /// </summary>
+    /// <param name="_delta"></param>
+    public override void _Process(double _delta)
+    {
+        base._Process(_delta);
+        if(_resources != null)
+        {
+            bool result = _resources?.IsLoading() ?? true;
+            if (!result)
+            {
+                //resources loaded
+                SetProcess(false);
+                OnResourcesLoaded();
+            }
+        }
+    }
+
+    /// <summary>
+    /// The Resources node has loaded all resources. Now we can get any packed scenes and use in modes <para/>
+    /// </summary>
+    private void OnResourcesLoaded()
+    {
+        _mode = new MyMode(_procGame, 10, this);
+        _AttractMode = new AttractMode(_procGame, 12, this);
+
+        //get the trough switches
+        var troughSw = _procGame.Switches.Values
+            .Where(x => x.Name.Contains("trough"))
+            .Select(x=>x.Name);        
+        var _troughMode = new Trough(_procGame, troughSw.ToArray(),
+            "", "trough", new string[] { "outlaneL", "outlaneR" },
+            "plungerLane");
+
+        _troughMode.Game.Modes.Add(_troughMode);
+
+        _troughMode.EnableBallSave(true);
+
+        var ms = GetNodeOrNull<Node2D>("/root/ProcScene");
+        if (ms != null)
+        {
+            //ms.AddChild(_mode); //TODO: addchild node
+            _procGame.Modes.Add(_mode);
+            _procGame.Modes.Add(_AttractMode);
+
+            Logger.Info($"MODES RUNNING:" + _procGame.Modes.Modes.Count);
+            _procGame.AddPlayer();
+        }
     }
 
     /// <summary>
@@ -82,7 +138,6 @@ public partial class ProcPinGodGame : PinGodGame
         //load config and setup machine
         _procGame.LoadConfig(machineConfig);
     }
-
 
     /// <summary>
     /// Adds machine items from <see cref="_procGame"/> into this Machine node <para/>

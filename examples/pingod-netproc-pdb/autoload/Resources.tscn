@@ -1,9 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://cw03jto1jk831"]
+[gd_scene load_steps=3 format=3 uid="uid://cw03jto1jk831"]
 
 [ext_resource type="Script" path="res://addons/pingod-core/Service/Resources.cs" id="1"]
+[ext_resource type="PackedScene" uid="uid://dlcv2a2q12prb" path="res://addons/modes/attract/Attract.tscn" id="2_bfqu2"]
 
 [node name="Resources" type="ResourcePreloader"]
+process_priority = -10
 script = ExtResource("1")
+_packScenes = [ExtResource("2_bfqu2")]
 
 [node name="LoadingControl" type="Control" parent="."]
 layout_mode = 3
