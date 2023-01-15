@@ -202,7 +202,7 @@ publish/
 PublishScripts/
 
 # NuGet Packages
-# *.nupkg
+#*.nupkg
 # NuGet Symbol Packages
 *.snupkg
 # The packages folder can be ignored because of Package Restore
@@ -213,7 +213,7 @@ PublishScripts/
 #!**/[Pp]ackages/repositories.config
 # NuGet v3's project.json files produces more ignorable files
 #*.nuget.props
-#*.nuget.targets
+*.nuget.targets
 
 # Microsoft Azure Build Output
 csx/
@@ -406,4 +406,4 @@ FodyWeavers.xsd
 /examples/pingod-playfieldwindow
 /examples/!template - Copy
 /examples/pingod-netproc-pdb/addons
-/EXAMPLES/PINGOD-NETPROC-PDB/nuget
+!/examples/pingod-netproc-pdb/nuget
