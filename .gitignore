@@ -202,7 +202,7 @@ publish/
 PublishScripts/
 
 # NuGet Packages
-*.nupkg
+# *.nupkg
 # NuGet Symbol Packages
 *.snupkg
 # The packages folder can be ignored because of Package Restore
@@ -406,3 +406,5 @@ FodyWeavers.xsd
 /examples/pingod-playfieldwindow
 /examples/!template - Copy
 /examples/pingod-netproc-pdb/addons
+
+!examples/pingod-netproc-pdb/nuget
