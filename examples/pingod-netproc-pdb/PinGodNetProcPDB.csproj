@@ -18,13 +18,7 @@
     <None Include="autoload\Resources.tscn" />
     <None Include="autoload\WindowActions.tscn" />
     <None Include="netproc.db" />
-    <None Include="nuget\.gdignore" />
-    <None Include="nuget\NetProc.1.0.16.nupkg" />
-    <None Include="nuget\NetProc.Data.1.0.16.nupkg" />
-    <None Include="nuget\NetProc.Dmd.1.0.16.nupkg" />
-    <None Include="nuget\NetProc.Domain.1.0.16.nupkg" />
-    <None Include="nuget\NetProc.Game.1.0.16.nupkg" />
-    <None Include="nuget\NetProc.Ports.WSLED.1.0.16.nupkg" />
+    <None Include="nuget\.gdignores" />
     <None Include="README.md" />
   </ItemGroup>
  
