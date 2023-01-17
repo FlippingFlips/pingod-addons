@@ -22,14 +22,15 @@
     <None Include="autoload\PinGodGame.tscn" />
     <None Include="autoload\Resources.tscn" />
     <None Include="autoload\WindowActions.tscn" />
+    <None Include="modes\README.md" />
     <None Include="nuget.config" />
     <None Include="nuget\.gdignore" />
     <None Include="README.md" />
   </ItemGroup>
  
   <ItemGroup>
-    <PackageReference Include="NetProc.Data" Version="1.0.18" />
-    <PackageReference Include="NetProc.Game" Version="1.0.18" />
+    <PackageReference Include="NetProc.Data" Version="1.0.20" />
+    <PackageReference Include="NetProc.Game" Version="1.0.20" />
   </ItemGroup>  
  
 
