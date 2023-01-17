@@ -8,7 +8,7 @@ using PinGod.Modes;
 /// </summary>
 public class ScoreDisplayProcMode : PinGodProcMode
 {
-    private ScoreMode _scoreDisplay;
+    private ScoreModePROC _scoreDisplay;
 
     /// <summary>
     /// Custom class of <see cref="ScoreMode"/>. This needs to be custom so we can use the P-ROC game controller players.
@@ -28,7 +28,7 @@ public class ScoreDisplayProcMode : PinGodProcMode
         var res = _resources?.GetResource(SCORE_MODE_SCENE.GetBaseName()) as PackedScene;
         if(res != null)
         {
-            _scoreDisplay = res.Instantiate() as ScoreMode;
+            _scoreDisplay = res.Instantiate() as ScoreModePROC;
             if (_scoreDisplay != null)
             {
                 AddChildSceneToCanvasLayer(_scoreDisplay);

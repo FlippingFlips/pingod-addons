@@ -32,6 +32,13 @@ public class PinGodProcGameController : BaseGameController
         PinGodGame = pinGodGame;
     }
 
+    public override IPlayer AddPlayer()
+    {        
+        var player = base.AddPlayer();
+        _scoreDisplay?.UpdateScores();
+        return player;
+    }
+
     /// <summary>
     /// Add points to the CurrentPlayer and update the Godot display
     /// </summary>
@@ -47,6 +54,7 @@ public class PinGodProcGameController : BaseGameController
         base.BallEnded();
         //TODO: remove modes on ball starting, these modes remove when a new ball ends
         Modes.Remove(_mode);
+        _scoreDisplay?.UpdateScores();
     }
 
     public override void BallStarting()
@@ -55,6 +63,7 @@ public class PinGodProcGameController : BaseGameController
         //TODO: add modes on ball starting, these modes start when a new ball does
         _mode = new MyMode(this, 10, (PinGodGameProc)PinGodGame);
         Modes.Add(_mode);
+        _scoreDisplay?.UpdateScores();
     }
 
     public override void GameEnded()
