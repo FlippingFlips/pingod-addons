@@ -14,7 +14,7 @@ using System;
 public class PinGodProcGameController : BaseGameController
 {
     public readonly IPinGodGame PinGodGame;
-    public readonly IFakeProcDevice ProcFake;    
+    public readonly IFakeProcDevice ProcFake;
 
     /// <summary>
     /// A P-ROC based <see cref="IMode"/>
@@ -23,12 +23,23 @@ public class PinGodProcGameController : BaseGameController
     private PinGodProcMode _mode;
     private ScoreDisplayProcMode _scoreDisplay;
 
-    public PinGodProcGameController(MachineType machineType, ILogger logger = null, bool simulated = false, MachineConfiguration configuration = null, IPinGodGame pinGodGame = null) 
+    public PinGodProcGameController(MachineType machineType, ILogger logger = null, bool simulated = false,
+        MachineConfiguration configuration = null, IPinGodGame pinGodGame = null)
         : base(machineType, logger, simulated, configuration)
     {
         ProcFake = PROC as IFakeProcDevice;
         PinGodGame = pinGodGame;
-    }    
+    }
+
+    /// <summary>
+    /// Add points to the CurrentPlayer and update the Godot display
+    /// </summary>
+    /// <param name="p">points</param>
+    public override void AddPoints(long p)
+    {
+        base.AddPoints(p);
+        _scoreDisplay?.UpdateScores();
+    }
 
     public override void BallEnded()
     {
@@ -96,7 +107,7 @@ public class PinGodProcGameController : BaseGameController
     /// </summary>
     /// <exception cref="NotImplementedException"></exception>
     internal void MachineResourcesReady()
-    {        
+    {
         _AttractMode = new AttractMode(this, 12, PinGodGame);
         _scoreDisplay = new ScoreDisplayProcMode(this, 2, (PinGodGameProc)PinGodGame);
 

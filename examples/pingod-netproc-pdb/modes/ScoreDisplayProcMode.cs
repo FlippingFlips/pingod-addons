@@ -11,9 +11,9 @@ public class ScoreDisplayProcMode : PinGodProcMode
     private ScoreMode _scoreDisplay;
 
     /// <summary>
-    /// The default score mode with its script. add this to the layers
+    /// Custom class of <see cref="ScoreMode"/>. This needs to be custom so we can use the P-ROC game controller players.
     /// </summary>
-    const string SCORE_MODE_SCENE = "res://addons/modes/scoremode/ScoreMode.tscn";
+    const string SCORE_MODE_SCENE = "res://scenes/ScoreMode/ScoreModePROC.tscn";
 
     /// <summary>
     /// Gets the score display scene from Resources and adds it to the Godot tree
@@ -45,9 +45,14 @@ public class ScoreDisplayProcMode : PinGodProcMode
         if (_scoreDisplay != null)
         {
             RemoveChildSceneFromCanvasLayer(_scoreDisplay);
-            _scoreDisplay.QueueFree();
+            _scoreDisplay.QueueFree();            
         }
     }
 
     public override void ModeStarted() => base.ModeStarted();
+
+    /// <summary>
+    /// Updates the scores in the ScoreMode canvas
+    /// </summary>
+    internal void UpdateScores() => _scoreDisplay?.OnScoresUpdated();
 }
