@@ -5,10 +5,15 @@ using PinGod.Game;
 using PinGod.Core;
 
 /// <summary>
-/// Base PinGod P-ROC class
+/// Base PinGod P-ROC Mode class. This is a P-ROC Mode but with an added CanvasLayer from Godot. P-ROC modes have a layer property for the DMD. If you need to use a scene from Godot with a P-ROC mode then inherit this base <para/>
+/// You would have a scene running with a CanvasLayer node named Modes, then this "Layer" is added to that with the layer priority set from P-ROC mode priority. The priority for CanvasLayer is the order it's shown. <para/>
+/// When the mode is removed from the game modes then this layer is cleared from the (CanvasLayer)Modes. <para/>
+/// This base mode needs the Resources autoload plug-in running to load packed scenes. You would add the scene that you're loading into this layer in the Resources.tscn. This scene is preloaded there, so when we need to add to this layer we can get it from the preloaded resources.
 /// </summary>
 public abstract class PinGodProcMode : Mode
 {
+    [Export(PropertyHint.File)] string defaultScene = "res://PinGodLogoScene.tscn";
+
     /// <summary>
     /// The Scene should contain a Modes node
     /// </summary>
@@ -20,9 +25,8 @@ public abstract class PinGodProcMode : Mode
     public CanvasLayer CanvasLayer { get; private set; }
 
     protected Resources _resources { get; private set; }
-    public IPinGodGame PinGod { get; }
 
-    [Export(PropertyHint.File)] string defaultScene = "res://PinGodLogoScene.tscn";
+    public IPinGodGame PinGod { get; }    
 
     /// <summary>
     /// The node where we had our CanvasLayer
@@ -43,7 +47,7 @@ public abstract class PinGodProcMode : Mode
     public PinGodProcMode(IGameController game, int priority, IPinGodGame pinGod, string defaultScene = null, bool loadDefaultScene = true) : base(game, priority)
     {
         PinGod = pinGod;
-        GetAndCreateCanvasLayers(priority);        
+        GetAndCreateCanvasLayers(priority);
     }
 
     public virtual void AddChildSceneToCanvasLayer(Node node) => CanvasLayer.CallDeferred("add_child", node);
@@ -65,6 +69,7 @@ public abstract class PinGodProcMode : Mode
         }
         else { Logger.Warning(nameof(PinGodGameMode), ": no Modes canvas found"); }
     }
+
     /// <summary>
     /// Loads a packed scene and adds child
     /// </summary>
@@ -90,5 +95,5 @@ public abstract class PinGodProcMode : Mode
         base.ModeStopped();
     }
 
-    public virtual void RemoveChildSceneFromCanvasLayer(Node node) => CanvasLayer.RemoveChild(node);
+    public virtual void RemoveChildSceneFromCanvasLayer(Node node) => CanvasLayer?.RemoveChild(node);
 }

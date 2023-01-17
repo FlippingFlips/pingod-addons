@@ -10,6 +10,9 @@
 	  <UpdateAssemblyInfo>true</UpdateAssemblyInfo>
 	<!--<IncludeSymbols>False</IncludeSymbols>-->
   </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Properties\launchSettings.json" />
+  </ItemGroup>
  
   <ItemGroup>
     <None Include="autoload\Adjustments.tscn" />

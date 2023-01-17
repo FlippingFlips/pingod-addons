@@ -3,6 +3,9 @@ using NetProc.Domain;
 using PinGod.Game;
 using PinGod.Modes;
 
+/// <summary>
+/// A P-ROC (PinGodProcMode) but reusing the default PinGod ScoreDisplay
+/// </summary>
 public class ScoreDisplayProcMode : PinGodProcMode
 {
     private ScoreMode _scoreDisplay;
@@ -12,6 +15,14 @@ public class ScoreDisplayProcMode : PinGodProcMode
     /// </summary>
     const string SCORE_MODE_SCENE = "res://addons/modes/scoremode/ScoreMode.tscn";
 
+    /// <summary>
+    /// Gets the score display scene from Resources and adds it to the Godot tree
+    /// </summary>
+    /// <param name="game"></param>
+    /// <param name="priority"></param>
+    /// <param name="pinGod"></param>
+    /// <param name="defaultScene"></param>
+    /// <param name="loadDefaultScene"></param>
     public ScoreDisplayProcMode(IGameController game, int priority, PinGodGame pinGod, string defaultScene = null, bool loadDefaultScene = true) : base(game, priority, pinGod, defaultScene, loadDefaultScene)
     {
         var res = _resources?.GetResource(SCORE_MODE_SCENE.GetBaseName()) as PackedScene;
@@ -38,8 +49,5 @@ public class ScoreDisplayProcMode : PinGodProcMode
         }
     }
 
-    public override void ModeStarted()
-    {
-        base.ModeStarted();        
-    }
+    public override void ModeStarted() => base.ModeStarted();
 }

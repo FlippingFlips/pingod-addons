@@ -1,6 +1,5 @@
-﻿using Godot;
-using NetProc.Domain;
-using PinGod.Core;
+﻿using NetProc.Domain;
+using NetProc.Domain.PinProc;
 using PinGod.Game;
 using Switch = NetProc.Domain.Switch;
 
@@ -10,15 +9,15 @@ public partial class MyMode : PinGodProcMode
 
     public override void ModeStarted()
     {
-        Logger.Info(GetType().Name, ":", nameof(ModeStarted));
+        Game.Logger.Log(GetType().Name+":"+nameof(ModeStarted), LogLevel.Debug);
         (Game as PinGodProcGameController).Trough.LaunchBalls(1, null, false);
     }
     public override void ModeStopped()
     {
-        Logger.Info(GetType().Name, ":", nameof(ModeStopped));
+        Game.Logger.Log(GetType().Name + ":" + nameof(ModeStopped), LogLevel.Debug);
         base.ModeStopped();
     }
-    public override void UpdateLamps() => Logger.Info(GetType().Name, ":", nameof(UpdateLamps));
+    public override void UpdateLamps() => Game.Logger.Log(GetType().Name + ":" + nameof(UpdateLamps), LogLevel.Debug);
 
     /// <summary>
     /// Switch handler for flipper. Default to T
@@ -27,7 +26,7 @@ public partial class MyMode : PinGodProcMode
     /// <returns></returns>
     public bool sw_flipperLwL_active(Switch sw = null)
     {
-        Logger.Info(GetType().Name, ":", nameof(sw_flipperLwL_active), $": {sw.TimeSinceChange()}");
+        Game.Logger.Log(GetType().Name + ":" + nameof(sw_flipperLwL_active)+ $": {sw.TimeSinceChange()}", LogLevel.Debug);
         return true;
     }
 
@@ -38,7 +37,7 @@ public partial class MyMode : PinGodProcMode
     /// <returns></returns>
     public bool sw_flipperLwL_active_for_1s(Switch sw = null)
     {
-        Logger.Info(GetType().Name, ":", nameof(sw_flipperLwL_active), $": {sw.TimeSinceChange()}");
+        Game.Logger.Log(GetType().Name + ":" + nameof(sw_flipperLwL_active_for_1s) + $": {sw.TimeSinceChange()}", LogLevel.Debug);
         return true;
     }
 }

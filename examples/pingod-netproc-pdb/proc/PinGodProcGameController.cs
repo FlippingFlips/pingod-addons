@@ -4,14 +4,22 @@ using NetProc.Game;
 using PinGod.Core;
 using System;
 
+/// <summary>
+/// A PinGod P-ROC Game controller. This overrides methods from the P-ROC <see cref="BaseGameController"/>. <para/>
+/// This GameController is built using an <see cref="IFakeProcDevice"/>, but that could be a real* <see cref="IProcDevice"/> board by switching off simulation. *The project and Godot would have to be x86 if real <para/>
+/// Add modes to <see cref="BallStarting"/> and remove them from <see cref="BallEnded"/> (this is if the mode starts and ends here of course) <para/>
+/// <see cref="GameStarted"/> adds the ScoreDisplay. (Attract is removed from switch handler in that mode). <para/>
+/// <see cref="GameEnded"/> removes the ScoreDisplay and adds the attract (which is newed up)
+/// </summary>
 public class PinGodProcGameController : BaseGameController
 {
-    public readonly IFakeProcDevice ProcFake;
+    public readonly IPinGodGame PinGodGame;
+    public readonly IFakeProcDevice ProcFake;    
+
     /// <summary>
     /// A P-ROC based <see cref="IMode"/>
     /// </summary>
     private AttractMode _AttractMode;
-
     private PinGodProcMode _mode;
     private ScoreDisplayProcMode _scoreDisplay;
 
@@ -20,9 +28,8 @@ public class PinGodProcGameController : BaseGameController
     {
         ProcFake = PROC as IFakeProcDevice;
         PinGodGame = pinGodGame;
-    }
+    }    
 
-    public IPinGodGame PinGodGame { get; }
     public override void BallEnded()
     {
         base.BallEnded();
@@ -81,15 +88,8 @@ public class PinGodProcGameController : BaseGameController
         Logger.Log($"extra balls: {this.CurrentPlayer().ExtraBalls}", LogLevel.Debug);
     }
 
-    public override void StartGame()
-    {
-        base.StartGame();               
-    }
-
-    public override void StartBall()
-    {
-        base.StartBall();
-    }
+    public override void StartGame() => base.StartGame();
+    public override void StartBall() => base.StartBall();
 
     /// <summary>
     /// After display has loaded all the 'first load' resources. This calls reset on the game.

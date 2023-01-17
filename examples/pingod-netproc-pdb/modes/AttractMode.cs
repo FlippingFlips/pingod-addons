@@ -2,6 +2,11 @@
 using NetProc.Domain;
 using PinGod.Core;
 
+/// <summary>
+/// A P-ROC (PinGodProcMode) but reusing the default PinGod Attract.tscn. <para/>
+/// When the mode starts the <see cref="ATTRACT_SCENE"/> is loaded into the tree. <para/> 
+/// This mode handles start button to remove this mode and start the game if the P-ROC trough is full.
+/// </summary>
 internal class AttractMode : PinGodProcMode
 {
     /// <summary>
@@ -44,7 +49,7 @@ internal class AttractMode : PinGodProcMode
     }
 
     /// <summary>
-    /// Start button, starts game and adds a player if the trough is full
+    /// Start button, starts game and adds a player if the trough is full. //TODO: BallSearch if no balls when push start
     /// </summary>
     /// <param name="sw"></param>
     /// <returns></returns>
@@ -61,8 +66,7 @@ internal class AttractMode : PinGodProcMode
         }
         else
         {
-            Game.Logger?.Log("attract start. trough balls:" + _game.Trough.NumBalls());
-            //TODO: Ball search
+            Game.Logger?.Log("attract start. trough balls:" + _game.Trough.NumBalls());            
         }
         return SWITCH_CONTINUE;
     }
