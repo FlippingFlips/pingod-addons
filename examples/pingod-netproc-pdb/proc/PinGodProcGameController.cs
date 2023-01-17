@@ -22,6 +22,7 @@ public class PinGodProcGameController : BaseGameController
     private AttractMode _AttractMode;
     private PinGodProcMode _mode;
     private ScoreDisplayProcMode _scoreDisplay;
+    private MachineSwitchHandlerMode _machineSwitchHandlerMode;
 
     public PinGodProcGameController(MachineType machineType, ILogger logger = null, bool simulated = false,
         MachineConfiguration configuration = null, IPinGodGame pinGodGame = null)
@@ -61,7 +62,9 @@ public class PinGodProcGameController : BaseGameController
         base.GameEnded();
         Modes.Remove(_scoreDisplay);
 
+        _machineSwitchHandlerMode = new MachineSwitchHandlerMode(this, (PinGodGameProc)PinGodGame);
         _AttractMode = new AttractMode(this, 12, PinGodGame);
+        Modes.Add(_machineSwitchHandlerMode);
         Modes.Add(_AttractMode);
     }
 
@@ -86,7 +89,7 @@ public class PinGodProcGameController : BaseGameController
 
         //_troughMode.EnableBallSave(true);
 
-        //ms.AddChild(_mode); //TODO: addchild node
+        Modes.Add(_machineSwitchHandlerMode);
         Modes.Add(_AttractMode);
 
         Logger.Log($"MODES RUNNING:" + Modes.Modes.Count);
@@ -110,7 +113,7 @@ public class PinGodProcGameController : BaseGameController
     {
         _AttractMode = new AttractMode(this, 12, PinGodGame);
         _scoreDisplay = new ScoreDisplayProcMode(this, 2, (PinGodGameProc)PinGodGame);
-
+        _machineSwitchHandlerMode = new MachineSwitchHandlerMode(this, (PinGodGameProc)PinGodGame);
         Reset();
     }
 }

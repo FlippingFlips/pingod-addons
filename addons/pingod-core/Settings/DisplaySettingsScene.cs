@@ -81,7 +81,7 @@ public partial class DisplaySettingsScene : MarginContainer
     void _on_CheckButtonAlwaysOnTop_toggled(bool pressed)
     {
         Logger.Debug(nameof(DisplaySettingsScene), ":on top pressed " + pressed);
-        DisplayServer.WindowSetFlag(DisplayServer.WindowFlags.AlwaysOnTop, pressed);
+        Display.SetAlwaysOnTop(pressed);
         ProjectSettings.SetSetting(SettingPaths.DisplaySetPaths.ALWAYS_ON_TOP, pressed);
         _displaySettings.AlwaysOnTop= pressed;
     }

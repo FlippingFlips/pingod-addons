@@ -119,6 +119,14 @@ INSERT INTO Adjustments (Id, Name, Description, Options, OptionType, ValueDefaul
 ('VOICE_VOL', 'Voice Volume','','[0--30]', 0, -6, -6, 'STANDARD_ADJ', 'AUDIO'),
 ('FX_VOL', 'Sound FX Volume','','[0--30]', 0, -6, -6, 'STANDARD_ADJ', 'AUDIO'),
 ('MATCH_PERCENT', 'Match Percent','Match percent, 0 off', '[0-20]', 0, 5, 5, 'STANDARD_ADJ', 'GENERAL'),
+('DISP_W', 'Display Width','','[100-1920]', 0, 1920, 800, 'STANDARD_ADJ', 'DISPLAY'),
+('DISP_H', 'Display Height','','[100-1080]', 0, 1080, 600, 'STANDARD_ADJ', 'DISPLAY'),
+('DISP_X', 'Display X','','[0-1920]', 0, 0, 0, 'STANDARD_ADJ', 'DISPLAY'),
+('DISP_Y', 'Display Y','','[0-1080]', 0, 0, 0, 'STANDARD_ADJ', 'DISPLAY'),
+('DISP_MODE', 'Display Mode','Defaults to 0 = window','[0-4]', 0, 0, 0, 'STANDARD_ADJ', 'DISPLAY'),
+('DISP_CONT_SCALE_MODE', 'Content Scale Mode','','[Disabled,CanvasItems,Viewport]', 2, 0, 0, 'STANDARD_ADJ', 'DISPLAY'),
+('DISP_CONT_SCALE_ASPECT', 'Content Scale Aspect','','[Ignore, Keep, KeepWidth, KeepHeight, Expand]', 2, 0, 0, 'STANDARD_ADJ', 'DISPLAY'),
+('DISP_TOP', 'Display On Top','','[0-1]', 0, 1, 1, 'STANDARD_ADJ', 'DISPLAY'),
 ('TILT_WARNINGS', 'Tilt Warnings','Number of tilt warnings before tilt', '[0-20]', 0, 3, 3, 'STANDARD_ADJ', 'GENERAL');
 --('XB_RESERVE', '0', 4, 'GENERAL', '[0, 1]', 'If enabled and in multiplayer the rounds continue with xb given at the end'),
 -- todo: chase ball for ball search
@@ -141,10 +149,16 @@ INSERT INTO Adjustments (Id, Name, Description, Options, OptionType, ValueDefaul
 --INSERT INTO Settings (Id, Value, Type) VALUES ('RECORDING_SET_PLAYBACK_ON_END', NULL, 'RECORDING');
 
 -- AUDITS (STANDARD)
-INSERT INTO Audits (Id, Value, Type, Info) VALUES
-('GAMES_STARTED', '0', 0, 'Games started log'), ('GAMES_PLAYED', '0', 0, 'Games completed log'), ('XB_AWARDED', '0', 0, 'Total extra balls awarded'),
-('REPLAYS', '0', 0, 'Total replays awarded'), ('MATCHES', '0', 0, 'Total Matches Awarded'),
-('POWERED_ON_TIMES', '0', 0, 'Times machine powered on'), ('TOTAL_BALLS_PLAYED', '0', 0, 'Total balls played');
+INSERT INTO Audits (Id, Value, Type, Description) VALUES
+('CREDITS', 0, 0, 'Credits in machine'), 
+('CREDITS_TOTAL', 0, 0, 'Total credits used'), 
+('GAMES_STARTED', 0, 0, 'Games started log'), 
+('GAMES_PLAYED', '0', 0, 'Games completed log'), 
+('XB_AWARDED', '0', 0, 'Total extra balls awarded'),
+('REPLAYS', 0, 0, 'Total replays awarded'), 
+('MATCHES', 0, 0, 'Total Matches Awarded'),
+('POWERED_ON_TIMES', 0, 0, 'Times machine powered on'),
+('TOTAL_BALLS_PLAYED', 0, 0, 'Total balls played');
 
 -- AUDITS (GAME) TODO: LOG SWITCHES, MODES, TIMES
 

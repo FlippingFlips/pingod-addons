@@ -118,10 +118,7 @@ namespace PinGod.Core.Service
 
         #endregion
 
-        private void Root_CloseRequested()
-        {
-            Quit();
-        }
+        private void Root_CloseRequested() => Quit();
 
         /// <summary>
         /// Sets the window from (see <see cref="DisplaySettings"/>) found in the (see <see cref="Adjustments"/>)
@@ -130,8 +127,8 @@ namespace PinGod.Core.Service
         {
             if (_adjustments != null)
             {
-                DisplayServer.WindowSetSize(new Vector2i(_adjustments.Display.Width, _adjustments.Display.Height));
-                DisplayServer.WindowSetPosition(new Vector2i(_adjustments.Display.X, _adjustments.Display.Y));
+                Display.SetSize(_adjustments.Display.Width, _adjustments.Display.Height);
+                Display.SetPosition(_adjustments.Display.X, _adjustments.Display.Y);
             }
         }
 

@@ -17,16 +17,17 @@ internal class AttractMode : PinGodProcMode
     private PackedScene _attractScene;
     private Node _attractInstance;
     private PinGodProcGameController _game;
+    private PinGodGameProc _pingod;
 
     public AttractMode(IGameController game, int priority, IPinGodGame pinGod) : base(game, priority, pinGod) 
     {
         _game = Game as PinGodProcGameController;
+        _pingod = pinGod as PinGodGameProc;
     }
 
     public override void ModeStarted()
     {
         base.ModeStarted();
-
         //get the pre loaded resource, create instance and add to base mode canvas
         _attractScene = _resources?.GetResource(ATTRACT_SCENE.GetBaseName()) as PackedScene;
         _attractInstance = _attractScene.Instantiate();
@@ -55,6 +56,9 @@ internal class AttractMode : PinGodProcMode
     /// <returns></returns>
     public bool sw_start_active(NetProc.Domain.Switch sw)
     {
+        //no credits
+        if (_pingod.Credits <= 0) return SWITCH_CONTINUE;
+
         Game.Logger?.Log("start button active");
         if (_game.Trough?.IsFull() ?? false) //todo: credit check?
         {
@@ -63,6 +67,7 @@ internal class AttractMode : PinGodProcMode
             Game.AddPlayer();
             Game.StartBall();
             Game.Modes.Remove(this);
+            _pingod.Database.IncrementAuditValue("CREDITS_TOTAL", 1);
         }
         else
         {

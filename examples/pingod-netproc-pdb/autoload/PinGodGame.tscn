@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://blqcputfixful"]
+[gd_scene load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://proc/PinGodGameProc.cs" id="1_jowfi"]
+[ext_resource type="Script" path="res://game/PinGodGameProc.cs" id="1_jowfi"]
 
 [node name="PinGodGame" type="Node"]
 process_priority = -1

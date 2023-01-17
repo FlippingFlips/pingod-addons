@@ -1,5 +1,4 @@
 ﻿using Godot;
-using PinGod.Base;
 using static Godot.DisplayServer;
 
 namespace PinGod.Core
@@ -9,11 +8,37 @@ namespace PinGod.Core
     /// </summary>
     public static class Display
     {
-        public static Godot.Vector2i WinGetPos(this IPinGodGame pinGod)
-        => WindowGetPosition();
+        public static void SetAlwaysOnTop(bool onTop) => WindowSetFlag(WindowFlags.AlwaysOnTop, onTop);
 
-        public static Godot.Vector2i WinGetSize(this IPinGodGame pinGod)
-            => WindowGetSize();
+        public static Window.ContentScaleModeEnum GetContentScale(Node node)
+            => node.GetTree().Root.ContentScaleMode;
+
+        public static Window.ContentScaleAspectEnum GetAspectOption(Node node)
+            => node.GetTree().Root.ContentScaleAspect;
+
+        public static void SetContentScale(Node node, Window.ContentScaleModeEnum contentScale)
+            => node.GetTree().Root.ContentScaleMode = contentScale;
+
+        public static void SetAspectOption(Node node, Window.ContentScaleAspectEnum aspectOpt)
+            => node.GetTree().Root.ContentScaleAspect = aspectOpt;
+
+        /// <summary>
+        /// Sets main window position
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public static void SetPosition(int x, int y) => WindowSetPosition(new Vector2i(x, y));
+
+        /// <summary>
+        /// Sets main window size
+        /// </summary>
+        /// <param name="w"></param>
+        /// <param name="h"></param>
+        public static void SetSize(int w, int h) => WindowSetSize(new Vector2i(w, h));
+
+        public static Godot.Vector2i WinGetPos(this IPinGodGame pinGod) => WindowGetPosition();
+
+        public static Godot.Vector2i WinGetSize(this IPinGodGame pinGod) => WindowGetSize();
 
         /// <summary>
         /// Set windows flags like border less

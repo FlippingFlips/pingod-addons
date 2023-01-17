@@ -1,4 +1,3 @@
-using NetProc.Data;
 using NetProc.Domain;
 using NetProc.Domain.PinProc;
 using PinGod.Core;
@@ -10,49 +9,30 @@ using PinGod.Core.Service;
 /// EnterTree initializes a database, gets machine config
 /// </summary>
 public partial class MachinePROC : MachineNode
-{
-    public MachineConfiguration _machineConfig;
-    private PinGodGameProc _pinGodProc;
-
-    const bool DELETE_DB_ON_INIT = true;
-    const bool IS_MACHINE_PDB = true;
+{           
+    private PinGodGameProc _pinGodGameProc;
 
     /// <summary> and machine configuration. Machine config is held public here
     /// Creates database
     /// </summary>
     public override void _EnterTree()
     {
-        base._EnterTree();
-        try
-        {
-            //DATABASE - EF CORE SQLITE
-            Logger.Info(nameof(MachinePROC), ": init database");
-            using var ctx = new NetProcDbContext();
-            ctx.InitializeDatabase(true, DELETE_DB_ON_INIT);
-
-            //MACHINE CONFIG FROM DATABASE TABLES
-            Logger.Info(nameof(MachinePROC), ": database init complete, creating"+nameof(MachineConfiguration));
-            _machineConfig = ctx.GetMachineConfiguration();
-            Logger.Info(nameof(MachinePROC), ": machine config created\n",
-                $"      Machine Type: {_machineConfig.PRGame.MachineType}, Balls: {_machineConfig.PRGame.NumBalls}\n Creating ProcGame...");
-        }
-        catch (System.Exception ex)
-        {
-            Logger.Error(nameof(MachinePROC), $"{ex.Message} {ex.InnerException?.Message}");
-        }
+        base._EnterTree();        
     }
 
+    /// <summary>
+    /// Saves the database and Dispose of the connection
+    /// </summary>
     public override void _ExitTree()
     {
         Logger.Info(nameof(MachinePROC), ":", nameof(_ExitTree));
-
         base._ExitTree();
     }
 
     public override void _Ready()
     {
         base._Ready();
-        _pinGodProc = GetNodeOrNull<PinGodGameProc>("/root/PinGodGame");
+        _pinGodGameProc = GetNodeOrNull<PinGodGameProc>("/root/PinGodGame");        
     }
 
     /// <summary>
@@ -64,6 +44,22 @@ public partial class MachinePROC : MachineNode
         _lamps.Clear();
         _leds.Clear();
         _switches.Clear();
+    }
+
+    /// <summary>
+    /// Calls base set switch but will set fake p-roc switch first
+    /// </summary>
+    /// <param name="switch"></param>
+    /// <param name="value"></param>
+    /// <param name="fromAction"></param>
+    public override void SetSwitch(PinGod.Core.Switch @switch, byte value, bool fromAction = true)
+    {
+        if (_pinGodGameProc != null)
+        {
+            //var sw = _switches[@switch.Name];
+            SetSwitchFakeProc(_pinGodGameProc.PinGodProcGame, @switch.Name, value > 0 ? true : false);
+        }
+        base.SetSwitch(@switch, value, fromAction);
     }
 
     internal void AddCoil(string name, byte number) => _coils.Add(name, number);
@@ -80,27 +76,11 @@ public partial class MachinePROC : MachineNode
     internal void SetSwitchFakeProc(IGameController gc, string name, bool enabled)
     {
         var proc = gc?.PROC as IFakeProcDevice;
-        if(proc != null)
+        if (proc != null)
         {
             var sw = gc.Switches[name];
             var evtT = enabled ? EventType.SwitchClosedDebounced : EventType.SwitchOpenDebounced;
             proc.AddSwitchEvent(sw.Number, evtT);
-        }        
-    }
-
-    /// <summary>
-    /// Calls base set switch but will set fake p-roc switch first
-    /// </summary>
-    /// <param name="switch"></param>
-    /// <param name="value"></param>
-    /// <param name="fromAction"></param>
-    public override void SetSwitch(PinGod.Core.Switch @switch, byte value, bool fromAction = true)
-    {        
-        if (_pinGodProc != null)
-        {
-            //var sw = _switches[@switch.Name];
-            SetSwitchFakeProc(_pinGodProc.PinGodProcGame, @switch.Name, value > 0 ? true : false);            
-        }        
-        base.SetSwitch(@switch, value, fromAction);
-    }
+        }
+    }   
 }
