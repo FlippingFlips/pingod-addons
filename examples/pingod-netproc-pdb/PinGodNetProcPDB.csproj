@@ -4,9 +4,12 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <Platforms>AnyCPU</Platforms>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>   
-	<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>   
-	<IncludeSymbols>False</IncludeSymbols>
-  </PropertyGroup>  
+	<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+	  <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+	  <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+	  <UpdateAssemblyInfo>true</UpdateAssemblyInfo>
+	<!--<IncludeSymbols>False</IncludeSymbols>-->
+  </PropertyGroup>
  
   <ItemGroup>
     <None Include="autoload\Adjustments.tscn" />
@@ -16,14 +19,15 @@
     <None Include="autoload\PinGodGame.tscn" />
     <None Include="autoload\Resources.tscn" />
     <None Include="autoload\WindowActions.tscn" />
-    <None Include="netproc.db" />
     <None Include="nuget.config" />
     <None Include="nuget\.gdignore" />
     <None Include="README.md" />
-  </ItemGroup>  
+  </ItemGroup>
  
   <ItemGroup>
-    <PackageReference Include="NetProc.Data" Version="1.0.16.13" />
-    <PackageReference Include="NetProc.Game" Version="1.0.16.13" />
+    <PackageReference Include="NetProc.Data" Version="1.0.18" />
+    <PackageReference Include="NetProc.Game" Version="1.0.18" />
   </ItemGroup>  
+ 
+
 </Project>

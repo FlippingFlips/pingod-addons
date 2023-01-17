@@ -2,7 +2,6 @@
 using NetProc.Domain;
 using NetProc.Domain.PinProc;
 using PinGod.Core;
-using static System.Net.Mime.MediaTypeNames;
 
 internal class PinGodProcLogger : ILogger
 {
@@ -31,5 +30,5 @@ internal class PinGodProcLogger : ILogger
         GD.Print(logObjs);
     }
 
-    bool CanLog(LogLevel logLevel) => logLevel <= LogLevel;
+    bool CanLog(LogLevel logLevel) => LogLevel <= logLevel;
 }

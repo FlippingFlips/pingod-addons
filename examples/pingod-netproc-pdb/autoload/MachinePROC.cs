@@ -12,7 +12,7 @@ using PinGod.Core.Service;
 public partial class MachinePROC : MachineNode
 {
     public MachineConfiguration _machineConfig;
-    private ProcPinGodGame _pinGodProc;
+    private PinGodGameProc _pinGodProc;
 
     const bool DELETE_DB_ON_INIT = true;
     const bool IS_MACHINE_PDB = true;
@@ -23,7 +23,6 @@ public partial class MachinePROC : MachineNode
     public override void _EnterTree()
     {
         base._EnterTree();
-
         try
         {
             //DATABASE - EF CORE SQLITE
@@ -53,7 +52,7 @@ public partial class MachinePROC : MachineNode
     public override void _Ready()
     {
         base._Ready();
-        _pinGodProc = GetNodeOrNull<ProcPinGodGame>("/root/PinGodGame");
+        _pinGodProc = GetNodeOrNull<PinGodGameProc>("/root/PinGodGame");
     }
 
     /// <summary>
@@ -100,16 +99,8 @@ public partial class MachinePROC : MachineNode
         if (_pinGodProc != null)
         {
             //var sw = _switches[@switch.Name];
-            SetSwitchFakeProc(_pinGodProc._procGame, @switch.Name, value > 0 ? true : false);            
+            SetSwitchFakeProc(_pinGodProc.PinGodProcGame, @switch.Name, value > 0 ? true : false);            
         }        
         base.SetSwitch(@switch, value, fromAction);
     }
-
-
-
-    //protected override void AddCustomMachineItems(Dictionary<string, byte> coils, Dictionary<string, byte> switches, Dictionary<string, byte> lamps, Dictionary<string, byte> leds)
-    //{
-
-    //    base.AddCustomMachineItems(coils, switches, lamps, leds);
-    //}
 }

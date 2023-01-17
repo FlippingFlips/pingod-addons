@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://blqcputfixful"]
 
-[ext_resource type="Script" path="res://proc/ProcPinGodGame.cs" id="1_tjngx"]
+[ext_resource type="Script" path="res://proc/PinGodGameProc.cs" id="1_jowfi"]
 
 [node name="PinGodGame" type="Node"]
 process_priority = -1
-script = ExtResource("1_tjngx")
+script = ExtResource("1_jowfi")
