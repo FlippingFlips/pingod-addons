@@ -73,6 +73,8 @@ namespace PinGod.Modes
             if (pinGod == null && HasNode("/root/PinGodGame"))
             {
                 pinGod = (GetNode("/root/PinGodGame") as IPinGodGame);
+                //update any credits labels
+                pinGod.EmitSignal("CreditAdded", pinGod.Credits);
             }
 
             if (pinGod?.MachineNode != null)

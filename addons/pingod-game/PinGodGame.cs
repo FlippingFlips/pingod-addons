@@ -61,6 +61,10 @@ namespace PinGod.Game
         /// Commands args incoming from <see cref="GetCommandLineArgs"/>
         /// </summary>
         public Dictionary<string, string> CmdArgs { get; private set; }
+        /// <summary>
+        /// Local Credits value. Is set from audits
+        /// </summary>
+        public int Credits { get; set; }
         public byte CurrentPlayerIndex { get; set; }
         public bool FlippersEnabled { get; private set; }
         public Audits Audits { get; internal set; }
@@ -196,6 +200,10 @@ namespace PinGod.Game
                 Player.Bonus += points;
             }
         }
+        /// <summary>
+        /// Adds credits if using Adjustments
+        /// </summary>
+        /// <param name="amt"></param>
         public virtual void AddCredits(byte amt)
         {
             if(Audits != null)
@@ -693,9 +701,9 @@ namespace PinGod.Game
             }
         }
         /// <summary>
-        /// Sets up window from settings. Sets position. Sets on top (the project should have this off in the Godot UI for this to work). Sets full screen
+        /// Sets up window from Adjustments if available. Sets position. Sets on top (the project should have this off in the Godot UI for this to work). Sets full screen
         /// </summary>
-        private void SetupWindow()
+        public virtual void SetupWindow()
         {
             if (Adjustments?.Display == null)
             {
@@ -705,12 +713,14 @@ namespace PinGod.Game
 
             var w = Adjustments.Display.Width;
             var h = Adjustments.Display.Height;
-            LogInfo(nameof(PinGodGame), $":window: resolution set from project settings: ", $"{w}x{h}");
+            LogInfo(nameof(PinGodGame), $":window: resolution from adjustments: ", $"{w}x{h}");
 
-            GetTree().Root.ContentScaleMode = (Window.ContentScaleModeEnum)Adjustments.Display.ContentScaleMode;
-            GetTree().Root.ContentScaleAspect = (Window.ContentScaleAspectEnum)Adjustments.Display.AspectOption;
+            //scale and aspect ratio
+            Display.SetContentScale(this, (Window.ContentScaleModeEnum)Adjustments.Display.ContentScaleMode);
+            Display.SetAspectOption(this, (Window.ContentScaleAspectEnum)Adjustments.Display.AspectOption);
+
             //on top
-            DisplayServer.WindowSetFlag(DisplayServer.WindowFlags.AlwaysOnTop, Adjustments.Display.AlwaysOnTop);
+            Display.SetAlwaysOnTop(Adjustments.Display.AlwaysOnTop);
             //OS.MoveWindowToForeground();
 
             var size = DisplayServer.WindowGetSize();

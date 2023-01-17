@@ -36,6 +36,10 @@ namespace PinGod.Core
         bool BallStarted { get; set; }
         Error Connect(StringName signal, Callable callable, uint flags = 0);
         /// <summary>
+        /// Coin credits
+        /// </summary>
+        public int Credits { get; set; }
+        /// <summary>
         /// Index of current player, 0 for player_1
         /// </summary>
         byte CurrentPlayerIndex { get; set; }

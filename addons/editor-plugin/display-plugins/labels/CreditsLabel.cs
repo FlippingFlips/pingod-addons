@@ -12,11 +12,6 @@ namespace PinGod.EditorPlugins
     {
         int _credits = 0;
         private IPinGodGame pingod;
-        public override void _EnterTree()
-        {
-            base._EnterTree();
-
-        }
 
         public override void _ExitTree()
         {
@@ -44,8 +39,6 @@ namespace PinGod.EditorPlugins
                 }
                 else { Logger.WarningRich(nameof(CreditsLabel), ":[color=yellow]", "IPinGodGame wasn't found in root, no coin credit switch handlers were added[/color]"); }
             }
-
-            UpdateCredits(pingod?.Audits?.Credits ?? 0);
         }
 
         /// <summary>
@@ -57,7 +50,7 @@ namespace PinGod.EditorPlugins
             if (pingod != null)
             {
                 if (credits > 0)
-                    _credits = pingod?.Audits?.Credits ?? 0;
+                    _credits = credits;
             }
             this.Text = $"{_credits} {Tr("CREDITS")}";
         }
