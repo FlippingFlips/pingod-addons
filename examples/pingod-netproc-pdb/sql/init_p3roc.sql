@@ -4,27 +4,28 @@
 INSERT INTO Machine (Id, MachineType, NumBalls, DisplayMonitor) VALUES (1, 7, 4, 0);
 
 -- Table: Coils
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search) VALUES ('A0-B0-0', 'flipperLwRMain', 30, '', 0, 0);
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search) VALUES ('A0-B0-1', 'flipperLwRHold', 30, '', 0, 0);
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search) VALUES ('A0-B0-2', 'flipperLwLMain', 30, '', 0, 0);
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search) VALUES ('A0-B0-3', 'flipperLwLHold', 30, '', 0, 0);
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search) VALUES ('A0-B0-4', 'trough', 30, '', 0, 0);
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search) VALUES ('A0-B0-5', 'sling_l', 30, '', 0, 20);
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search) VALUES ('A0-B0-6', 'sling_r', 30, '', 0, 20);
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search) VALUES ('A0-B0-7', 'bumper_1', 30, '', 0, 20);
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search) VALUES ('A0-B0-8', 'bumper_2', 30, '', 0, 20);
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search) VALUES ('A0-B0-9', 'bumper_3', 30, '', 0, 20);
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-0', 'flipperLwRMain', 30, '', 0, 0, '');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-1', 'flipperLwRHold', 30, '', 0, 0, '');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-2', 'flipperLwLMain', 30, '', 0, 0, '');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-3', 'flipperLwLHold', 30, '', 0, 0, '');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-4', 'trough', 30, '', 0, 0, 'trough');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-5', 'sling_l', 30, '', 0, 20, 'sling');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-6', 'sling_r', 30, '', 0, 20, 'sling');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-7', 'bumper_1', 30, '', 0, 20, 'bumper');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-8', 'bumper_2', 30, '', 0, 20, 'bumper');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-9', 'bumper_3', 30, '', 0, 20, 'bumper');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-10', 'alive', 30, '', 0, 20, ''); -- simulation
 
 -- Table: Leds
-INSERT INTO Leds (Number, Name, Bus, Polarity, Discriminator) VALUES 
-('A0-R0-G1-B2', 'start', '', 0, 0),
-('A0-R3-G4-B5', 'shooter', '', 0, 0),
-('A0-R6-G7-B8', 'unused_0', '', 0, 0),
-('A0-R9-G10-B11', 'unused_1', '', 0, 0),
-('A0-R12-G13-B14', 'unused_2', '', 0, 0),
-('A0-R15-G16-B17', 'unused_4', '', 0, 0),
-('A0-R18-G19-B20', 'unused_5', '', 0, 0),
-('A0-R21-G22-B23', 'unused_6', '', 0, 0);
+INSERT INTO Leds (Number, Name, Bus, Polarity, Tags) VALUES 
+('A0-R0-G1-B2', 'start', '', 0,  ''),
+('A0-R3-G4-B5', 'shooter', '', 0,  ''),
+('A0-R6-G7-B8', 'unused_0', '', 0,  ''),
+('A0-R9-G10-B11', 'unused_1', '', 0,''),
+('A0-R12-G13-B14', 'unused_2', '', 0,''),
+('A0-R15-G16-B17', 'unused_4', '', 0,''),
+('A0-R18-G19-B20', 'unused_5', '', 0,''),
+('A0-R21-G22-B23', 'unused_6', '', 0,'');
 
 -- Table: Switches
 INSERT INTO Switches (Number, Name, Type, Tags, SearchReset, SearchStop) VALUES 
@@ -42,17 +43,17 @@ INSERT INTO Switches (Number, Name, Type, Tags, SearchReset, SearchStop) VALUES
 ('08', 'flipperLwL', 0, '', '', 'closed'),
 ('09', 'flipperLwR', 0, '', '', 'closed'),
 ('10', 'start', 0, '', '', ''), 
-('11', 'plungerLane', 0, '', '', 'closed'),
+('11', 'plungerLane', 0, 'shooterLane', '', 'closed'),
 ('12', 'trough0', 0, 'trough', '', 'closed'),
 ('13', 'trough1', 0, 'trough', '', 'closed'),
 ('14', 'trough2', 0, 'trough', '', 'closed'),
-('15', 'trough3', 0, 'trough', '', 'closed'),
+('15', 'trough3', 0, 'trough,troughEject', '', 'closed'),
 -- board 1/A
 ('16', 'slamTilt', 0, '', '', 'closed'),
 ('17', 'inlaneL', 0, '', '', ''),
 ('18', 'inlaneR', 0, '', '', ''),
-('19', 'outlaneL', 0, '', '', ''),
-('20', 'outlaneR', 0, 'shooter', '', ''),
+('19', 'outlaneL', 0, 'early', '', ''),
+('20', 'outlaneR', 0, 'early', '', ''),
 ('21', 'slingL', 0, 'sling', 'open', ''),
 ('22', 'slingR', 0, 'sling', 'open', ''),
 ('23', 'tilt', 0, '', '', 'closed'),
