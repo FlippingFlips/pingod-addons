@@ -40,4 +40,16 @@ public partial class MyMode : PinGodProcMode
         Game.Logger.Log(GetType().Name + ":" + nameof(sw_flipperLwL_active_for_1s) + $": {sw.TimeSinceChange()}", LogLevel.Debug);
         return true;
     }
+
+    public bool sw_slingL_active(Switch sw = null)
+    {
+        (Game as PinGodProcGameController).AddPoints(100);
+        return true;
+    }
+
+    public bool sw_slingR_active(Switch sw = null)
+    {
+        (Game as PinGodProcGameController).AddPoints(100);
+        return true;
+    }
 }

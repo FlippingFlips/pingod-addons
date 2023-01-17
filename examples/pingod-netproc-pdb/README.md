@@ -33,7 +33,7 @@ This uses a `IFakeProcDevice`, but that can be swapped with a single `simulated`
 - Also overrides `SetSwitch` from the machine and calls `SetSwitchFakeProc` before that base method which signals to Godot switch handlers.
 
 ---
-### `proc\ProcPinGodGame.cs`
+### `proc\PinGodGameProc.cs`
 
 - Replaces the default autoload `PinGodGame` in `autoload/PinGodGame.tscn`
 
