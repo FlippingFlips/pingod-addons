@@ -67,11 +67,15 @@ internal class AttractMode : PinGodProcMode
             Game.AddPlayer();
             Game.StartBall();
             Game.Modes.Remove(this);
-            _pingod.Database.IncrementAuditValue("CREDITS_TOTAL", 1);
+            _pingod.PinGodProcGame.Database.IncrementAuditValue("CREDITS_TOTAL", 1);
+            _pingod.PinGodProcGame.Database.IncrementAuditValue("CREDITS", -1);
+            _pingod.Credits--;
         }
         else
         {
-            Game.Logger?.Log("attract start. trough balls:" + _game.Trough.NumBalls());            
+            Game.Logger?.Log("attract start. trough balls=" + _game.Trough.NumBalls() + ", running ball search.", NetProc.Domain.PinProc.LogLevel.Debug);
+            _pingod.PinGodProcGame.BallSearch();
+            
         }
         return SWITCH_CONTINUE;
     }

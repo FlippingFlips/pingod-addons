@@ -18,9 +18,9 @@ INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES 
 
 -- Table: Leds
 INSERT INTO Leds (Number, Name, Bus, Polarity, Tags) VALUES 
-('A0-R0-G1-B2', 'start', '', 0,  ''),
+('A0-R0-G1-B2', 'start', '', 0,  'start'),
 ('A0-R3-G4-B5', 'shooter', '', 0,  ''),
-('A0-R6-G7-B8', 'unused_0', '', 0,  ''),
+('A0-R6-G7-B8', 'shootAgain', '', 0,  'shootAgain'),
 ('A0-R9-G10-B11', 'unused_1', '', 0,''),
 ('A0-R12-G13-B14', 'unused_2', '', 0,''),
 ('A0-R15-G16-B17', 'unused_4', '', 0,''),

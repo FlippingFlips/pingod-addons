@@ -19,7 +19,7 @@ public class MachineSwitchHandlerMode : PinGodProcMode
         if(_doorSwitches?.Length > 0)
         {
             for (int i = 0; i < _doorSwitches.Length; i++)
-                AddSwitchHandler(_doorSwitches[i], SwitchHandleType.active, 0, new SwitchAcceptedHandler(HandleDoorSwitch));
+                AddSwitchHandler(_doorSwitches[i], SwitchHandleType.closed, 0, new SwitchAcceptedHandler(HandleDoorSwitch));
         }
         else { Game.Logger.Log("WARN: no door switches found.", NetProc.Domain.PinProc.LogLevel.Warning); }
 
@@ -46,9 +46,12 @@ public class MachineSwitchHandlerMode : PinGodProcMode
             case "up":
                 if (Game.Switches["coinDoor"].IsClosed())
                 {
-
+                    //todo: should run the service menu?
                 }
-                else { Game.Logger.Log("coin door not open", NetProc.Domain.PinProc.LogLevel.Debug); }
+                else 
+                { 
+                    Game.Logger.Log("coin door isn't open.", NetProc.Domain.PinProc.LogLevel.Debug); 
+                }
             break;
             case "coinDoor":
             case "coin1":

@@ -5,20 +5,13 @@ using System.Threading.Tasks;
 using System.Threading;
 using Godot;
 using PinGod.Core.Service;
-using System.Linq;
-using NetProc.Data;
+using NetProc.Domain.PinProc;
 
 /// <summary>
 /// Inheriting PinGodGame to take over with a P-ROC.
 /// </summary>
 public partial class PinGodGameProc : PinGodGame
-{    
-    public INetProcDbContext Database;
-    /// <summary>
-    /// Delete the database each time game is run? Useful when adding new items when testing
-    /// </summary>
-    const bool DELETE_DB_ON_INIT = false;
-    const bool IS_PDB_MACHINE = true;
+{        
     const int PROC_DELAY = 1;
 
     /// <summary>
@@ -37,49 +30,19 @@ public partial class PinGodGameProc : PinGodGame
     /// <summary>
     /// To cancel the PROC loop
     /// </summary>
-    private CancellationTokenSource tokenSource;
-    private MachineConfiguration _machineConfig;
-
-    public PinGodGameProc()
-    {
-        try
-        {
-            InitDatabaseAndMachineConfig();
-            Credits = Database.GetAuditValue("CREDITS");
-        }
-        catch (System.Exception ex)
-        {
-            Logger.Error(nameof(MachinePROC), $"{ex.Message} {ex.InnerException?.Message}");
-            throw;
-        }
-    }
+    private CancellationTokenSource tokenSource;    
 
     #region Godot Overrides
-    public override void _EnterTree()
-    {
-        base._EnterTree();
-    }
 
     /// <summary>
     /// Quit the P-ROC game loop
     /// </summary>
     public override void _ExitTree()
     {
-        if (Database != null)
-        {
-            try
-            {
-                //set display size + pos to database
-                WindowSaveSettings();
-                //any changes to our lookup are tracked, this saves
-                Database.SaveChanges();
-                Database.Dispose();
-            }
-            catch (System.Exception ex)
-            {
-                Logger.Error(nameof(MachinePROC), $"--ERROR: {ex.Message} {ex.InnerException?.Message}");
-            }
-        }
+        //set display size + pos to database
+        WindowSaveSettings();
+
+        PinGodProcGame?.ExitGame();
 
         if (!tokenSource?.IsCancellationRequested ?? true)
             tokenSource?.Cancel();
@@ -116,13 +79,11 @@ public partial class PinGodGameProc : PinGodGame
         MachinePROC = this.MachineNode as MachinePROC;
         if (MachinePROC != null)
         {
-            WindowLoadSettings();
-
             _resources = GetResources();
 
             //CREATE AND SETUP PROC MACHINE
-            CreateProcGame(_machineConfig);
-            Logger.Info(nameof(MachinePROC), ": ProcGame created. Setting up MachineNode from ProcGame.");
+            CreateProcGame();
+            Logger.Info(nameof(PinGodGameProc), ": ProcGame created. Setting up MachineNode from ProcGame.");
 
             //PinGodProcGame.Logger. = NetProc.Domain.PinProc.LogLevel.Verbose;
             Logger.LogLevel = PinGod.Base.LogLevel.Verbose;
@@ -130,14 +91,17 @@ public partial class PinGodGameProc : PinGodGame
             //SET MACHINE ITEMS FROM PROC TO PINGOD
             SetupPinGodotFromProcGame();
             Logger.Info(nameof(MachinePROC), ": ProcGame and database setup complete.");
+
+            WindowLoadSettings();
         }
+
     }
     #endregion
 
     public override void AddCredits(byte amt)
     {        
         Credits += amt;
-        Database.IncrementAuditValue("CREDITS", amt);
+        PinGodProcGame.Database.IncrementAuditValue("CREDITS", amt);
         EmitSignal(nameof(CreditAdded), Credits);
     }
 
@@ -154,39 +118,12 @@ public partial class PinGodGameProc : PinGodGame
     /// true here is simulated and can get away with running with FakePinProc            
     /// </summary>
     /// <param name="machineConfig"></param>
-    private void CreateProcGame(MachineConfiguration machineConfig)
+    private void CreateProcGame()
     {
-        PinGodProcGame = new PinGodProcGameController(machineConfig.PRGame.MachineType, 
-            new PinGodProcLogger() { LogLevel = NetProc.Domain.PinProc.LogLevel.Verbose}, true, machineConfig, this);
+        PinGodProcGame = new PinGodProcGameController(MachineType.PDB, 
+            new PinGodProcLogger() { LogLevel = NetProc.Domain.PinProc.LogLevel.Verbose}, true, null, this);
         //don't need to use LoadConfig anymore with this controller
         //PinGodProcGame.LoadConfig(machineConfig);
-    }
-
-
-    /// <summary>
-    /// Creates 
-    /// </summary>
-    /// <returns></returns>
-    private void InitDatabaseAndMachineConfig()
-    {
-        var initTime = Godot.Time.GetTicksMsec();
-        //DATABASE - EF CORE SQLITE
-        Logger.Info(nameof(MachinePROC), ": init database");
-        Database = new NetProcDbContext();
-        Database.InitializeDatabase(IS_PDB_MACHINE, DELETE_DB_ON_INIT);
-
-        //MACHINE CONFIG FROM DATABASE TABLES
-        Logger.Info(nameof(MachinePROC), ": database init complete, creating" + nameof(MachineConfiguration));
-        _machineConfig = Database.GetMachineConfiguration();
-        Logger.Info(nameof(MachinePROC), ": machine config created\n",
-            $"      Machine Type: {_machineConfig.PRGame.MachineType}, Balls: {_machineConfig.PRGame.NumBalls}\n Creating ProcGame...");
-
-
-        Database.IncrementAuditValue("POWERED_ON_TIMES", 1);
-
-        var endTime = Godot.Time.GetTicksMsec();
-        var total = (endTime - initTime) / 1000;
-        Logger.Info(nameof(MachinePROC), $": database initialized in {total} secs. {nameof(DELETE_DB_ON_INIT)}? {DELETE_DB_ON_INIT}");
     }
 
     /// <summary>
@@ -258,13 +195,15 @@ public partial class PinGodGameProc : PinGodGame
     /// </summary>
     private void WindowLoadSettings()
     {
-        DisplayServer.WindowSetMode((DisplayServer.WindowMode)Database.GetAdjustmentValue("DISP_MODE"));
-        Display.SetContentScale(this, (Window.ContentScaleModeEnum)Database.GetAdjustmentValue("DISP_CONT_SCALE_MODE"));
-        Display.SetAspectOption(this, (Window.ContentScaleAspectEnum)Database.GetAdjustmentValue("DISP_CONT_SCALE_ASPECT"));
+        if (PinGodProcGame?.Database == null) return;
+
+        DisplayServer.WindowSetMode((DisplayServer.WindowMode)PinGodProcGame.Database.GetAdjustmentValue("DISP_MODE"));
+        Display.SetContentScale(this, (Window.ContentScaleModeEnum)PinGodProcGame.Database.GetAdjustmentValue("DISP_CONT_SCALE_MODE"));
+        Display.SetAspectOption(this, (Window.ContentScaleAspectEnum)PinGodProcGame.Database.GetAdjustmentValue("DISP_CONT_SCALE_ASPECT"));
         //get display size + pos from database values
-        Display.SetSize(Database.GetAdjustmentValue("DISP_W"), Database.GetAdjustmentValue("DISP_H"));
-        Display.SetPosition(Database.GetAdjustmentValue("DISP_X"), Database.GetAdjustmentValue("DISP_Y"));
-        Display.SetAlwaysOnTop(Database.GetAdjustmentValue("DISP_TOP") > 0 ? true : false);
+        Display.SetSize(PinGodProcGame.Database.GetAdjustmentValue("DISP_W"), PinGodProcGame.Database.GetAdjustmentValue("DISP_H"));
+        Display.SetPosition(PinGodProcGame.Database.GetAdjustmentValue("DISP_X"), PinGodProcGame.Database.GetAdjustmentValue("DISP_Y"));
+        Display.SetAlwaysOnTop(PinGodProcGame.Database.GetAdjustmentValue("DISP_TOP") > 0 ? true : false);
     }
 
     /// <summary>
@@ -272,13 +211,16 @@ public partial class PinGodGameProc : PinGodGame
     /// </summary>
     private void WindowSaveSettings()
     {
-        var winSize = DisplayServer.WindowGetSize(0);
-        var winPos = DisplayServer.WindowGetPosition(0);
-        Database.SetAdjustmentValue("DISP_W", winSize.x); Database.SetAdjustmentValue("DISP_H", winSize.y);
-        Database.SetAdjustmentValue("DISP_X", winPos.x); Database.SetAdjustmentValue("DISP_Y", winPos.y);
-        Database.SetAdjustmentValue("DISP_TOP", DisplayServer.WindowGetFlag(DisplayServer.WindowFlags.AlwaysOnTop) ? 1 : 0);
-        Database.SetAdjustmentValue("DISP_MODE", (int)DisplayServer.WindowGetMode());
-        Database.SetAdjustmentValue("DISP_CONT_SCALE_MODE", (int)Display.GetContentScale(this));
-        Database.SetAdjustmentValue("DISP_CONT_SCALE_ASPECT", (int)Display.GetAspectOption(this));
+        if(PinGodProcGame?.Database != null)
+        {
+            var winSize = DisplayServer.WindowGetSize(0);
+            var winPos = DisplayServer.WindowGetPosition(0);
+            PinGodProcGame.Database.SetAdjustmentValue("DISP_W", winSize.x); PinGodProcGame.Database.SetAdjustmentValue("DISP_H", winSize.y);
+            PinGodProcGame.Database.SetAdjustmentValue("DISP_X", winPos.x); PinGodProcGame.Database.SetAdjustmentValue("DISP_Y", winPos.y);
+            PinGodProcGame.Database.SetAdjustmentValue("DISP_TOP", DisplayServer.WindowGetFlag(DisplayServer.WindowFlags.AlwaysOnTop) ? 1 : 0);
+            PinGodProcGame.Database.SetAdjustmentValue("DISP_MODE", (int)DisplayServer.WindowGetMode());
+            PinGodProcGame.Database.SetAdjustmentValue("DISP_CONT_SCALE_MODE", (int)Display.GetContentScale(this));
+            PinGodProcGame.Database.SetAdjustmentValue("DISP_CONT_SCALE_ASPECT", (int)Display.GetAspectOption(this));
+        }        
     }
 }

@@ -63,6 +63,7 @@ _isEnabled = false
 
 [node name="BallSaver" type="Timer" parent="."]
 script = ExtResource("4_yl6xf")
+_isPluginEnabled = false
 
 [node name="RecordingStatusLabel" type="Label" parent="."]
 anchors_preset = 1

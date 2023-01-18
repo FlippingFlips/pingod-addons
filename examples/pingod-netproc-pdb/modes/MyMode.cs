@@ -52,4 +52,26 @@ public partial class MyMode : PinGodProcMode
         (Game as PinGodProcGameController).AddPoints(100);
         return true;
     }
+
+    /// <summary>
+    /// Start button, starts game and adds a player if the trough is full. //TODO: BallSearch if no balls when push start
+    /// </summary>
+    /// <param name="sw"></param>
+    /// <returns></returns>
+    public bool sw_start_active(NetProc.Domain.Switch sw)
+    {
+        //no credits
+        if (PinGod.Credits <= 0) return SWITCH_CONTINUE;        
+
+        //TODO: change max players to database
+        if(Game.Ball == 1 && Game.Players.Count < 4)
+        {
+            (Game as PinGodProcGameController).Database.IncrementAuditValue("CREDITS_TOTAL", 1);
+            (Game as PinGodProcGameController).Database.IncrementAuditValue("CREDITS", -1);
+            Game.AddPlayer();
+            Game.Logger?.Log(nameof(MyMode) + ": player added");
+        }        
+
+        return SWITCH_CONTINUE;
+    }
 }
