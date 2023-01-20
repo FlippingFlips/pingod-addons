@@ -2,7 +2,9 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
-  </PropertyGroup>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+  </PropertyGroup>  
   <ItemGroup>
     <None Include="addons\autoload\Adjustments\plugin.cfg" />
     <None Include="addons\autoload\Adjustments\README.md" />

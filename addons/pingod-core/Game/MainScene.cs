@@ -1,5 +1,6 @@
 using Godot;
 using PinGod.Core.Service;
+using PinGod.Modes;
 using System;
 using System.Threading.Tasks;
 using static Godot.GD;
@@ -94,11 +95,19 @@ namespace PinGod.Core.Game
             pinGod?.Connect("GameEnded", new Callable(this, nameof(OnGameEnded)));
             pinGod?.Connect("ServiceMenuExit", new Callable(this, nameof(OnServiceMenuExit)));
 
-            //attract mod already in the tree, get the instance so we can free it when game started
-            attractnode = GetNode("Modes/Attract");
-
             //disable the input processing if no reset action found
             if (!InputMap.HasAction("reset")) SetProcessInput(false);
+        }
+
+        public void AddAttract(string path = "res://addons/modes/attract/Attract.tscn")
+        {
+            var scene = _resources.GetResource(path.GetBaseName()) as PackedScene;            
+            if(scene != null)
+            {
+                attractnode = scene.Instantiate<Attract>();
+                GetNode("Modes").AddChild(attractnode);
+            }
+            else { Logger.WarningRich(nameof(MainScene), ":[color=yellow] No attract sene found at " + path + "[/color]"); }
         }
 
         /// <summary>
@@ -113,7 +122,7 @@ namespace PinGod.Core.Game
                 game.QueueFree();
             }
             pinGod?.ResetGame();
-            CallDeferred(nameof(Reload));
+            CallDeferred(nameof(Reload));            
         }
 
         /// <summary>
@@ -203,7 +212,7 @@ namespace PinGod.Core.Game
                     CallDeferred("_loaded", res);
             }
 
-            if (destroyAttract)
+            if (destroyAttract && attractnode != null)
             {
                 if (!attractnode.IsQueuedForDeletion())
                 {
@@ -257,7 +266,11 @@ namespace PinGod.Core.Game
         /// <summary>
         /// Reload the current scene, the main scene.
         /// </summary>
-        void Reload() => GetTree().ReloadCurrentScene();
+        void Reload()
+        {
+            //GetTree().ReloadCurrentScene();
+            AddAttract();
+        }
 
         private void UnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
         {

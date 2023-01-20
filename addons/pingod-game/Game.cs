@@ -41,7 +41,7 @@ namespace PinGod.Game
             _modesUpper = GetNodeOrNull<CanvasLayer>("Modes-Upper");            
 
             Logger.Debug(nameof(Game), ":loading multiball scene:  " + MULTIBALL_SCENE);
-            //multiballPkd = ResourceLoader.Load(MULTIBALL_SCENE) as PackedScene; //TODO packed scene
+            multiballPkd = ResourceLoader.Load(MULTIBALL_SCENE) as PackedScene;
 
             if (pinGod == null)
             {

@@ -34,6 +34,7 @@ namespace PinGod.Game
         /// The memory map used to communicate states between software
         /// </summary>
         protected MemoryMapNode memMapping;
+        public Resources _resources;
         private ulong gameEndTime;
         private ulong gameLoadTimeMsec;
         private ulong gameStartTime;
@@ -186,6 +187,8 @@ namespace PinGod.Game
                     _lampMatrixOverlay.SetLabel(item.Value.Num, item.Key);
                 }
             }
+
+            _resources = GetResources();
 
             LogInfo(nameof(PinGodGame), ":sent pingod game ready coil: alive 1");
             Machine.SetCoil("alive", 1);

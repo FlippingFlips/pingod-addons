@@ -1,5 +1,6 @@
 ﻿using Godot;
 using PinGod.Core;
+using PinGod.Core.Game;
 using PinGod.Game;
 
 /// <summary>
@@ -7,6 +8,35 @@ using PinGod.Game;
 /// </summary>
 public partial class CustomPinGodGame : PinGodGame
 {
+    public override void _Process(double _delta)
+    {
+        base._Process(_delta);
+        if (_resources != null)
+        {
+            bool result = _resources?.IsLoading() ?? true;
+            if (!result)
+            {
+                //resources loaded
+                SetProcess(false);
+                OnResourcesLoaded();
+            }
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    private void OnResourcesLoaded()
+    {
+        var ms = GetNodeOrNull<MainScene>("/root/MainScene");
+        if (ms != null)
+        {
+            Logger.WarningRich(nameof(CustomPinGodGame), ":Resources loaded");
+            ms.AddAttract();
+        }
+        else { Logger.WarningRich(nameof(CustomPinGodGame), "[color=yellow] no MainScene found.[/color]"); }
+    }
+
     /// <summary>
     /// override to create our own player type for this game
     /// </summary>
@@ -27,8 +57,6 @@ public partial class CustomPinGodGame : PinGodGame
 
         //get the root viewport
         GetTree().Root.SizeChanged += on_size_changed;
-
-
     }
 
     private void on_size_changed()
