@@ -28,21 +28,27 @@ namespace PinGod.Core.Service
         /// Switches that stop the ball searching
         /// </summary>
         [Export] public string[] _ball_search_stop_switches;
+        [ExportCategory("Machine Items")]
+        [Export] protected Dictionary<string, byte> _coils = new();
+
+        [Export] protected Dictionary<string, byte> _lamps = new();
+
+        [Export] protected Dictionary<string, byte> _leds = new();
+
+        [Export] protected Dictionary<string, byte> _switches = new();
+
         /// <summary>
         /// How long to wait for ball searching and reset
         /// </summary>
         [Export] private int _ball_search_wait_time_secs = 10;
-        [ExportCategory("Machine Items")]
-        [Export] protected Dictionary<string, byte> _coils = new();
-        [Export] protected Dictionary<string, byte> _lamps = new();
-        [Export] protected Dictionary<string, byte> _leds = new();        
-        [Export] protected Dictionary<string, byte> _switches = new();        
+        [Export(PropertyHint.GlobalFile, "*.record")] string _playbackfile = null;
+
+        [Export] PackedScene _switchWindow;
+
         [ExportCategory("Switch Window")]
         [Export] bool _switchWindowEnabled = false;
-        [Export] PackedScene _switchWindow;
         [ExportCategory("Record / Playback")]
         [Export] RecordPlaybackOption recordPlayback = RecordPlaybackOption.Off;
-        [Export(PropertyHint.GlobalFile, "*.record")] string _playbackfile = null;
         #endregion
 
         #region Signals
@@ -64,10 +70,9 @@ namespace PinGod.Core.Service
         ulong _machineLoadTime;
         private MemoryMapNode _pinGodMemoryMapNode;
         private EventRecordFile _recordFile;
+        private Label _recordingStatusLabel;
         private RecordPlaybackOption _recordPlayback;
         private Trough _trough;
-        private Label _recordingStatusLabel;
-
         /// <summary>
         /// 
         /// </summary>
@@ -115,16 +120,6 @@ namespace PinGod.Core.Service
             }
         }
 
-        private void SetupBallSearch()
-        {
-            //ball search options
-            BallSearchOptions = new BallSearchOptions(_ball_search_coils, _ball_search_stop_switches, _ball_search_wait_time_secs, _ball_search_enabled);
-            //create and add a ball search timer
-            BallSearchTimer = new Timer() { Autostart = false, OneShot = false };
-            BallSearchTimer.Connect("timeout", new Callable(this, nameof(OnBallSearchTimeout)));
-            this.AddChild(BallSearchTimer);
-        }
-
         /// <summary>
         /// Saves recordings if enabled and runs <see cref="Quit(bool)"/>
         /// </summary>
@@ -147,7 +142,7 @@ namespace PinGod.Core.Service
             if (_recordPlayback != RecordPlaybackOption.Playback)
             {
                 SetProcess(false);
-                Logger.Info(nameof(MachineNode), ": Playback _Process loop stopped. No recordings are being played back.");                
+                Logger.Info(nameof(MachineNode), ": Playback _Process loop stopped. No recordings are being played back.");
                 return;
             }
             else
@@ -168,9 +163,12 @@ namespace PinGod.Core.Service
                     if (!evt.EvtName.StartsWith("action_"))
                         SetSwitch(evt.EvtName, evt.State, false);
                     else Input.ParseInputEvent(
-                        new InputEventAction { Action = evt.EvtName.Replace("action_", ""), 
-                        Pressed = evt.State > 0 ? true : false});
-                }                    
+                        new InputEventAction
+                        {
+                            Action = evt.EvtName.Replace("action_", ""),
+                            Pressed = evt.State > 0 ? true : false
+                        });
+                }
             }
         }
 
@@ -234,6 +232,25 @@ namespace PinGod.Core.Service
             }
 
             BallSearchTimer?.Stop();
+        }
+
+        /// <summary>
+        /// Memory map switch event. Coming from external, like a simulator through the memory mapping file
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="index"></param>
+        /// <param name="value"></param>
+        public virtual void OnSwitchCommand(string name, int index, byte value)
+        {
+            Logger.Verbose(nameof(MachineNode), $": setSwitch--n:{name},numVal:{index}-{value}");
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                SetSwitch(index, value, false);
+            }
+            else
+            {
+                SetSwitch(name, value, false);
+            }
         }
 
         /// <summary>
@@ -404,6 +421,16 @@ namespace PinGod.Core.Service
         }
 
         /// <summary>
+        /// Record a godot normal godot action, not a switch. Recording game reset.
+        /// </summary>
+        /// <param name="action"></param>
+        /// <param name="state"></param>
+        internal void RecordAction(string action, byte state)
+        {
+            _recordFile.RecordEventAction(action, state, _machineLoadTime);
+        }
+
+        /// <summary>
         /// Adds custom machine items. Actions are created for switches if they do not exist
         /// </summary>
         /// <param name="coils"></param>
@@ -464,8 +491,8 @@ namespace PinGod.Core.Service
         }
 
         private void _ballSaver_BallSaved(bool earlySwitch = false)
-        {            
-            if(earlySwitch)
+        {
+            if (earlySwitch)
                 _trough.PulseTrough();
 
             //if (_plungerLane != null)
@@ -474,25 +501,15 @@ namespace PinGod.Core.Service
             Logger.Debug(nameof(MachineNode), ": ball saved");
         }
 
-        /// <summary>
-        /// Memory map switch event. Coming from external, like a simulator through the memory mapping file
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="index"></param>
-        /// <param name="value"></param>
-        private void OnSwitchCommand(string name, int index, byte value)
+        private void SetupBallSearch()
         {
-            Logger.Verbose(nameof(MachineNode), $": setSwitch--n:{name},numVal:{index}-{value}");
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                SetSwitch(index, value, false);
-            }
-            else
-            {
-                SetSwitch(name, value, false);
-            }
+            //ball search options
+            BallSearchOptions = new BallSearchOptions(_ball_search_coils, _ball_search_stop_switches, _ball_search_wait_time_secs, _ball_search_enabled);
+            //create and add a ball search timer
+            BallSearchTimer = new Timer() { Autostart = false, OneShot = false };
+            BallSearchTimer.Connect("timeout", new Callable(this, nameof(OnBallSearchTimeout)));
+            this.AddChild(BallSearchTimer);
         }
-
         private void SetUpSwitchWindow()
         {
             //create window and add scene to instance
@@ -507,16 +524,6 @@ namespace PinGod.Core.Service
             //returns the scenes in this root
             var windows = rootWin.GetChildren();//.Where(x => x.GetType() == typeof(Window));
             Logger.Info("windows: " + string.Join(',', windows.Select(x => x.Name)));
-        }
-
-        /// <summary>
-        /// Record a godot normal godot action, not a switch. Recording game reset.
-        /// </summary>
-        /// <param name="action"></param>
-        /// <param name="state"></param>
-        internal void RecordAction(string action, byte state)
-        {
-            _recordFile.RecordEventAction(action, state, _machineLoadTime);
         }
     }
 }

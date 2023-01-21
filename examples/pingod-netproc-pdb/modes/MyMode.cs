@@ -66,8 +66,8 @@ public partial class MyMode : PinGodProcMode
         //TODO: change max players to database
         if(Game.Ball == 1 && Game.Players.Count < 4)
         {
-            (Game as PinGodProcGameController).Database.IncrementAuditValue("CREDITS_TOTAL", 1);
-            (Game as PinGodProcGameController).Database.IncrementAuditValue("CREDITS", -1);
+            (Game as PinGodProcGameController).IncrementAudit("CREDITS_TOTAL", 1);
+            (Game as PinGodProcGameController).IncrementAudit("CREDITS", 1);
             Game.AddPlayer();
             Game.Logger?.Log(nameof(MyMode) + ": player added");
         }        

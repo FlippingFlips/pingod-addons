@@ -1,20 +1,20 @@
-﻿BEGIN TRANSACTION;
+BEGIN TRANSACTION;
 
 -- Table: Machine PDB = 7
 INSERT INTO Machine (Id, MachineType, NumBalls, DisplayMonitor) VALUES (1, 7, 4, 0);
 
 -- Table: Coils
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-0', 'flipperLwRMain', 30, '', 0, 0, '');
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-1', 'flipperLwRHold', 30, '', 0, 0, '');
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-2', 'flipperLwLMain', 30, '', 0, 0, '');
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-3', 'flipperLwLHold', 30, '', 0, 0, '');
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-4', 'trough', 30, '', 0, 0, 'trough');
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-5', 'sling_l', 30, '', 0, 20, 'sling');
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-6', 'sling_r', 30, '', 0, 20, 'sling');
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-7', 'bumper_1', 30, '', 0, 20, 'bumper');
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-8', 'bumper_2', 30, '', 0, 20, 'bumper');
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-9', 'bumper_3', 30, '', 0, 20, 'bumper');
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-10', 'alive', 30, '', 0, 20, ''); -- simulation
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-0', 'alive', 30, '', 0, 0, ''); -- simulation
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-1', 'flipperLwRMain', 30, '', 0, 0, '');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-2', 'flipperLwRHold', 30, '', 0, 0, '');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-3', 'flipperLwLMain', 30, '', 0, 0, '');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-4', 'flipperLwLHold', 30, '', 0, 0, '');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-5', 'trough', 30, '', 0, 0, 'trough');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-6', 'sling_l', 30, '', 0, 20, 'sling');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-7', 'sling_r', 30, '', 0, 20, 'sling');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-8', 'bumper_1', 30, '', 0, 20, 'bumper');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-9', 'bumper_2', 30, '', 0, 20, 'bumper');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-10', 'bumper_3', 30, '', 0, 20, 'bumper');
 
 -- Table: Leds
 INSERT INTO Leds (Number, Name, Bus, Polarity, Tags) VALUES 

@@ -1,5 +1,6 @@
 ﻿using Godot;
 using PinGod.Base;
+using System.Reflection.Metadata.Ecma335;
 
 namespace PinGod.Core.Service
 {
@@ -8,10 +9,7 @@ namespace PinGod.Core.Service
     /// </summary>
     public partial class MemoryMapNode : Node
     {
-        static MemoryMap mMap;
-
-        const string ROOT_DIR = "addons/pingod-addons/";
-
+        protected static MemoryMap mMap;
         /// <summary>
         /// Emitted when a switch comes into the game. From <see cref="MemoryMap.ReadStates"/>
         /// </summary>
@@ -31,54 +29,22 @@ namespace PinGod.Core.Service
             {
                 if (!this.IsEnabled)
                 {
-                    Logger.Warning(nameof(MemoryMapNode), ": PinGod-Memory addon disabled. Use IsEnabled in the scene.\n**Duplicate the default MemoryMap.tscn and put in autoload directory, change settings in scene and re-enable the plugin.**");
+                    Logger.WarningRich(nameof(MemoryMapNode), ":[color-yellow] PinGod-Memory addon disabled. Use IsEnabled in the scene.\n**Duplicate the default MemoryMap.tscn and put in autoload directory, change settings in scene and re-enable the plugin.** [/color]");
                     this.QueueFree();
                     return;
                 }
 
                 if (this.WriteDelay < 0 && this.ReadDelay < 0)
                 {
-                    Logger.Warning(nameof(MemoryMapNode), "removing PinGod-Memory addon. enable the read delay and write delay with values higher than 1");
+                    Logger.WarningRich(nameof(MemoryMapNode), ":[color-yellow]removing PinGod-Memory addon. enable the read delay and write delay with values higher than 1[/color]");
                     this.QueueFree();
                     return;
                 }
-
-                if (mMap == null)
-                {
-                    //todo vp command switch
-                    mMap = new MemoryMap(this.MutexName, MapName, WriteDelay, ReadDelay, CoilTotal, LampTotal, LedTotal, SwitchTotal);
-
-                    Logger.Debug(nameof(MemoryMapNode), $@":MappingFile Created. mutex:{MutexName}, map:{MapName}");
-                    Logger.Debug(nameof(MemoryMapNode), $@": Read:{WriteDelay},write:{WriteDelay}. showing count-total bytes");
-                    Logger.Debug(nameof(MemoryMapNode), $@": coils:{CoilTotal}-{mMap.TOTAL_COIL},sw:{SwitchTotal}-{mMap.TOTAL_SWITCH},lamps:{LampTotal}-{mMap.TOTAL_LAMP},led:{LedTotal}-{mMap.TOTAL_LED}");
-                    //Logger.Debug(nameof(PinGodMemoryMapNode), $":offsets:coils:0,lamps:{mMap.},leds:{_offsetLeds},switches:{_offsetSwitches}");
-                }
-                else
-                {
-                    //adding another one...
-                    Logger.Warning(nameof(MemoryMapNode), "$:WARN:MemoryMapScript already added");
-                    this.QueueFree();
-                    return;
-                }
-
-                if (mMap != null)
-                {
-                    //got this far so we can start memory mapping            
-                    Logger.Info(nameof(MemoryMapNode), ":memory map loaded, starting read/write state tasks.");
-                    Logger.Info(nameof(MemoryMapNode), nameof(_Ready), ": setup event handling from switches");
-                    mMap.MemorySwitchEventHandler += MMap_MemorySwitchEventHandler;
-                }
-                Start();
             }
             else
             {
                 Logger.Info(nameof(MemoryMapNode), ":script in editor, doing nothing");
             }
-        }
-
-        public override void _Ready()
-        {
-            base._Ready();
         }
 
         public override void _ExitTree()
@@ -89,6 +55,52 @@ namespace PinGod.Core.Service
             Stop();
             Logger.Info(nameof(MemoryMapNode), ":memory map exited");
         }
+
+        public override void _Ready()
+        {
+            base._Ready();
+
+            if (mMap == null)
+            {
+                //todo vp command switch
+                CreateMemoryMap();
+
+                Logger.Debug(nameof(MemoryMapNode), $@": MappingFile Created. mutex:{MutexName}, map:{MapName}");
+                Logger.Debug(nameof(MemoryMapNode), $@": Read:{ReadDelay},write:{WriteDelay}. showing count-total bytes");
+                Logger.Debug(nameof(MemoryMapNode), $@": coils:{CoilTotal}-{mMap.TOTAL_COIL},sw:{SwitchTotal}-{mMap.TOTAL_SWITCH},lamps:{LampTotal}-{mMap.TOTAL_LAMP},led:{LedTotal}-{mMap.TOTAL_LED}");
+                //Logger.Debug(nameof(PinGodMemoryMapNode), $":offsets:coils:0,lamps:{mMap.},leds:{_offsetLeds},switches:{_offsetSwitches}");
+            }
+            else
+            {
+                //adding another one...
+                Logger.Warning(nameof(MemoryMapNode), "$:WARN:MemoryMapScript already added");
+                this.QueueFree();
+                return;
+            }
+
+            if (mMap != null)
+            {
+                //got this far so we can start memory mapping            
+                Logger.Info(nameof(MemoryMapNode), ":memory map loaded, starting read/write state tasks.");
+                Logger.Info(nameof(MemoryMapNode), nameof(_Ready), ": setup event handling from switches");
+                mMap.MemorySwitchEventHandler += MMap_MemorySwitchEventHandler;
+            }
+            Start();
+        }
+
+        /// <summary>
+        /// Creates the <see cref="mMap"/>, <see cref="MemoryMap"/> <para/>
+        /// Override to create your own here.
+        /// </summary>
+        public virtual void CreateMemoryMap()
+        {
+            mMap = new MemoryMap(this.MutexName, MapName, WriteDelay, ReadDelay, CoilTotal, LampTotal, LedTotal, SwitchTotal);
+        }
+
+        public int CoilCount() => mMap.TOTAL_COIL;
+        internal int LampCount() => mMap.TOTAL_LAMP;
+        internal int LedCount() => mMap.TOTAL_LED;
+        internal int SwitchCount() => mMap.TOTAL_SWITCH;
 
         public void WriteSwitchPulseToMemory(int swNum, byte swValue)
         {
@@ -116,21 +128,18 @@ namespace PinGod.Core.Service
             EmitSignal(nameof(MemorySwitchSignal), new Variant[] { string.Empty, sw.Num, sw.Value });
         }
 
-        void Start()
-        {
-            if (mMap != null)
-            {
-                mMap.Start();
-            }
-        }
+        /// <summary>
+        /// Starts the memory map tasks
+        /// </summary>
+        public virtual void Start() => mMap?.Start();
 
+        /// <summary>
+        /// stops tasks and disposes of memory mapping
+        /// </summary>
         void Stop()
         {
-            if (mMap != null)
-            {
-                mMap.Stop();
-                mMap.Dispose();
-            }
+            mMap?.Stop();
+            mMap?.Dispose();
         }
     }
 }

@@ -50,8 +50,8 @@ _switches = {
 "trough3": 15,
 "up": 6
 }
-_switchWindowEnabled = true
 _switchWindow = ExtResource("2_ef2qi")
+_switchWindowEnabled = true
 
 [node name="Trough" type="Node" parent="."]
 script = ExtResource("2_y2nw4")

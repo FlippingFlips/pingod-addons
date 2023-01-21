@@ -150,9 +150,9 @@ namespace PinGod.Modes
                     {
                         Name = new string(_entry),
                         Created = DateTime.Now,
-                        Scores = _cPlayer.Points
+                        Points = _cPlayer.Points
                     });
-                    _adjustments._audits.HighScores = _adjustments._audits.HighScores.OrderByDescending(x => x.Scores)
+                    _adjustments._audits.HighScores = _adjustments._audits.HighScores.OrderByDescending(x => x.Points)
                         .Take(_adjustments._adjustments.MaxHiScoresCount)
                         .ToList();
                     Logger.Info(nameof(ScoreEntry), ":hi score added ", entry, " ", _cPlayer.Points);
@@ -197,7 +197,7 @@ namespace PinGod.Modes
                 CurrentPlayer++;
             }
             //this hi score isn't as big as the others
-            else if (!_adjustments._audits.HighScores.Any(x => x.Scores < _cPlayer.Points))
+            else if (!_adjustments._audits.HighScores.Any(x => x.Points < _cPlayer.Points))
             {
                 CurrentPlayer++;
                 if (!MoveNextPlayer())

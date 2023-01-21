@@ -3,12 +3,12 @@ using NetProc.Data.Model;
 using NetProc.Domain;
 using NetProc.Domain.Modes;
 using NetProc.Domain.PinProc;
-using NetProc.Domain.Players;
 using NetProc.Game;
 using PinGod.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 /// <summary>
 /// A PinGod P-ROC Game controller. This overrides methods from the P-ROC <see cref="BaseGameController"/>. <para/>
@@ -17,47 +17,34 @@ using System.Linq;
 /// <see cref="GameStarted"/> adds the ScoreDisplay. (Attract is removed from switch handler in that mode). <para/>
 /// <see cref="GameEnded"/> removes the ScoreDisplay and adds the attract (which is newed up)
 /// </summary>
-public class PinGodProcGameController : BaseGameController
+public class PinGodProcGameController : NetProcDataGameController
 {
-    /// <summary>
-    /// Delete the database each time game is run? Useful when adding new items when testing
-    /// </summary>
-    const bool DELETE_DB_ON_INIT = true;
-    const bool IS_PDB_MACHINE = true;
-
     public readonly PinGodGameProc PinGodGame;
     public readonly IFakeProcDevice ProcFake;
-    public INetProcDbContext Database;
+
+    public byte[] _lastCoilStates;
+
+    public int[] _lastLedStates;
 
     /// <summary>
     /// A P-ROC based <see cref="IMode"/>
     /// </summary>
     private AttractMode _AttractMode;
     private BallSave _ballSave;
+    private BallSearch _ballSearch;
+    private CancellationTokenSource _gameLoopCancelToken;
+    private MachineSwitchHandlerMode _machineSwitchHandlerMode;
+    private MemoryMapPROCNode _memMap;
     private MyMode _myMode;
     private ScoreDisplayProcMode _scoreDisplay;
-    private MachineSwitchHandlerMode _machineSwitchHandlerMode;
-    private BallSearch _ballSearch;
-    private List<NetProc.Data.Model.Player> _dbPlayers = new List<NetProc.Data.Model.Player>();
-    GamePlayed _gamePlayed = new GamePlayed();
 
-    public PinGodProcGameController(MachineType machineType, ILogger logger = null, bool simulated = false,
-        MachineConfiguration configuration = null, IPinGodGame pinGodGame = null)
-        : base(machineType, logger, simulated, configuration)
+    public PinGodProcGameController(MachineType machineType, bool deleteOnInit = false, ILogger logger = null, bool simulated = false,
+        IPinGodGame pinGodGame = null, MachineConfiguration configuration = null) 
+        : base(machineType, deleteOnInit, logger, simulated, configuration)
     {
         ProcFake = PROC as IFakeProcDevice;
         PinGodGame = pinGodGame as PinGodGameProc;
-
-        try
-        {
-            InitDatabaseAndMachineConfig();
-            PinGodGame.Credits = Database.GetAuditValue("CREDITS");
-        }
-        catch (System.Exception ex)
-        {
-            Logger.Log(nameof(MachinePROC) + $"{ex.Message} {ex.InnerException?.Message}", LogLevel.Error);
-            throw;
-        }
+        PinGodGame.Credits = GetAudit("CREDITS");
     }
 
     public override IPlayer AddPlayer()
@@ -78,33 +65,17 @@ public class PinGodProcGameController : BaseGameController
         _scoreDisplay?.UpdateScores();
     }
 
-    public override IPlayer CreatePlayer(string name)
-    {
-        var dbPlayer = Database.Players.FirstOrDefault(p => p.Name == name);
-        if (dbPlayer == null)
-        {
-            dbPlayer = new NetProc.Data.Model.Player() { Name = name, Initials = "" };
-            Database.Players.Add(dbPlayer);
-            Database.SaveChanges();
-            Logger.Log(nameof(PinGodProcGameController) + $"created new database player");
-        }
-        _dbPlayers.Add(dbPlayer);
-
-        var player = new PinGodPROCPlayer(name, dbPlayer.Id);
-        return player;
-    }
-
     public override void BallEnded()
     {
         base.BallEnded();
-        Database.IncrementAuditValue("TOTAL_BALLS_PLAYED", 1);
+        
         //TODO: remove modes on ball starting, these modes remove when a new ball ends
         Modes.Remove(_myMode);
         _scoreDisplay?.UpdateScores();
 
         //add ball stats for the player
-        var player = CurrentPlayer() as PinGodPROCPlayer;
-        player.BallStats.Add(new BallPlayed { Ball = (byte)this.Ball, Points = player.Score, Time = this.GetBallTime() });
+        var player = CurrentPlayer() as PlayerDb;
+        player.BallStats.Add(new BallPlayed { Ball = (byte)this.Ball, Points = player.Score, Time = this.GetBallTime() });        
     }
 
     public override void BallStarting()
@@ -121,100 +92,54 @@ public class PinGodProcGameController : BaseGameController
     {
         base.GameEnded();
         Modes.Remove(_scoreDisplay);
-        SaveGamePlayed();
-
         _machineSwitchHandlerMode = new MachineSwitchHandlerMode(this, (PinGodGameProc)PinGodGame);
         _AttractMode = new AttractMode(this, 12, PinGodGame);
         Modes.Add(_machineSwitchHandlerMode);
         Modes.Add(_AttractMode);
     }
 
-    private void SaveGamePlayed()
-    {
-        Database.IncrementAuditValue("GAMES_PLAYED", 1);
-
-        //get game time for all players combined
-        _gamePlayed.Ended = DateTime.Now;
-        double totalTime = 0;
-        for (int i = 0; i < Players.Count; i++) totalTime += GetGameTime(i);
-        _gamePlayed.GameTime = totalTime;
-        Database.GamesPlayed.Add(_gamePlayed);
-        Database.SaveChanges();
-
-        //each of our saved players has ball stats, add these to a ball played and the total score
-        foreach (PinGodPROCPlayer p in Players)
-        {
-            var score = new Score()
-            {
-                Points = p.Score,
-                PlayerId = p.Id,
-                ExtraBallsPlayed = 0,
-                GamePlayedId = _gamePlayed.Id
-                //ExtraBallsPlayed //TODO
-            };
-
-            //add a ball played from the players ball stats
-            p.BallStats.ForEach(x =>
-            {
-                Database.BallsPlayed.Add(new BallPlayed
-                {
-                    Ball = x.Ball,
-                    Time = x.Time,
-                    PlayerId = p.Id,
-                    Points = x.Points,
-                    Score=score
-                });
-            });
-
-            Database.Scores.Add(score);
-        }
-
-        try
-        {
-            
-            Database.SaveChanges();
-        }
-        catch (Exception ex)
-        {
-            Logger.Log(nameof(PinGodProcGameController) + $" database failed to save game played: {ex.Message} - {ex.InnerException?.Message}", LogLevel.Error);
-        }
-        _dbPlayers.Clear();
-        _gamePlayed = new GamePlayed();
-    }
-
     public override void GameStarted()
     {
-        base.GameStarted();
-        _gamePlayed.Started = DateTime.Now;
-        Database.IncrementAuditValue("GAMES_STARTED", 1);
+        base.GameStarted();        
         _scoreDisplay = new ScoreDisplayProcMode(this, 2, (PinGodGameProc)PinGodGame);
         Modes.Add(_scoreDisplay);
     }
 
     /// <summary>
-    /// Creates 
+    /// 
     /// </summary>
+    /// <param name="stateCount"></param>
     /// <returns></returns>
-    private void InitDatabaseAndMachineConfig()
+    public int[] GetLedStatesArray(IEnumerable<LED> leds)
+    {
+        int[] arr = new int[_memMap.LedCount()];
+        foreach (var item in leds)
+        {
+            if (item.Number * 3 <= arr.Length)
+            {
+                var c = System.Drawing.Color.FromArgb((int)item.CurrentColor[0], (int)item.CurrentColor[1], (int)item.CurrentColor[2]);
+                arr[item.Number * 3] = item.Number;
+                arr[item.Number * 3 + 1] = 1;
+                arr[item.Number * 3 + 2] = System.Drawing.ColorTranslator.ToOle(c);
+            }
+        }
+
+        return arr;
+    }
+
+    /// <summary>
+    /// <inheritdoc/> <para/> Increments the POWERED_ON_TIMES.
+    /// </summary>
+    public override void InitializeDatabase()
     {
         var initTime = Godot.Time.GetTicksMsec();
-        //DATABASE - EF CORE SQLITE
-        Logger.Log(nameof(PinGodProcGameController) + ": init database");
-        Database = new NetProcDbContext();
-        Database.InitializeDatabase(IS_PDB_MACHINE, DELETE_DB_ON_INIT);
 
-        //MACHINE CONFIG FROM DATABASE TABLES
-        Logger.Log(nameof(PinGodProcGameController) + ": database init complete, creating" + nameof(MachineConfiguration));
-        _config = Database.GetMachineConfiguration();
-        Logger.Log(nameof(PinGodProcGameController) + ": machine config created\n",
-            $"      Machine Type: {_config.PRGame.MachineType}, Balls: {_config.PRGame.NumBalls}\n Creating ProcGame...");
-        this.LoadConfig(_config);
-
-        Database.IncrementAuditValue("POWERED_ON_TIMES", 1);
+        base.InitializeDatabase();        
 
         var endTime = Godot.Time.GetTicksMsec();
         var total = (endTime - initTime) / 1000;
-        Logger.Log(nameof(PinGodProcGameController) + $": database initialized in {total} secs. {nameof(DELETE_DB_ON_INIT)}? {DELETE_DB_ON_INIT}");
+
+        Logger.Log(nameof(PinGodProcGameController) + $": database initialized in {total} secs.");
     }
 
     /// <summary>
@@ -242,7 +167,71 @@ public class PinGodProcGameController : BaseGameController
         Modes.Add(_AttractMode);
 
         Logger.Log($"MODES RUNNING:" + Modes.Modes.Count);
-        AddPlayer();
+    }
+    public override void RunLoop(byte delay = 0, CancellationTokenSource cancellationToken = null)
+    {
+        //base.RunLoop(delay, cancellationToken);
+        //return;
+
+        if (cancellationToken == null)
+            _gameLoopCancelToken = new CancellationTokenSource();
+        else
+            _gameLoopCancelToken = cancellationToken;
+
+        _memMap = PinGodGame.GetNode<MemoryMapPROCNode>("/root/MemoryMap");
+
+        _lastCoilStates = GetStates(Coils.Values);
+        _lastLedStates = GetLedStatesArray(LEDS.Values);
+
+        _memMap?.WriteStates();
+
+        Event[] events;
+        try
+        {
+            while (!_gameLoopCancelToken.IsCancellationRequested)
+            {
+                events = GetEvents(false);
+                if (events?.Count() > 0)
+                {
+                    foreach (var evt in events) { ProcessEvent(evt);}
+                }
+
+                this.Tick();
+                //TickVirtualDrivers();                
+
+                //PinGod changed states. Used by memory mapping
+                _lastCoilStates = GetStates(Coils.Values);
+                _lastLedStates  = GetLedStatesArray(LEDS.Values);
+
+                _memMap?.WriteStates();
+
+                foreach (var coil in _coils.Values)
+                {
+                    ((IVirtualDriver)coil).Tick();
+                }
+                foreach (var led in _leds.Values)
+                {
+                    led.Tick();
+                }
+
+                //MODES: Tick
+                _modes.Tick();
+
+                //_proc?.WatchDogTickle();
+                if (delay > 0)
+                    Thread.Sleep(delay);
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.Log("RUN LOOP EXCEPTION: " + ex.ToString(), LogLevel.Error);
+        }
+        finally
+        {
+            Logger?.Log("Run loop ended", LogLevel.Info);
+            double dt = Time.GetTime() - BootTime;
+            _proc.Close();
+        }
     }
 
     public override void ShootAgain()
@@ -251,8 +240,26 @@ public class PinGodProcGameController : BaseGameController
         Logger.Log($"extra balls: {this.CurrentPlayer().ExtraBalls}", LogLevel.Debug);
     }
 
-    public override void StartGame() => base.StartGame();
     public override void StartBall() => base.StartBall();
+
+    public override void StartGame() => base.StartGame();
+
+    internal void BallSearch() => _ballSearch?.PerformSearch();
+
+    /// <summary>
+    /// Saves the database
+    /// </summary>
+    internal void ExitGame()
+    {
+        try
+        {
+            Quit();
+        }
+        catch (System.Exception ex)
+        {
+            Logger.Log(nameof(PinGodProcGameController) + $"--ERROR: {ex.Message} {ex.InnerException?.Message}", LogLevel.Error);
+        }
+    }
 
     /// <summary>
     /// After display has loaded all the 'first load' resources. This calls reset on the game.
@@ -268,13 +275,27 @@ public class PinGodProcGameController : BaseGameController
         Reset();
     }
 
+    byte[] GetStates(IEnumerable<IDriver> drivers)
+    {
+        byte[] arr = new byte[_memMap.CoilCount()];
+        foreach (var item in drivers)
+        {
+            var num = (byte)(item.Number - 40);
+            if (num * 2 <= arr.Length)
+            {
+                arr[num * 2] = num;
+                arr[num * 2 + 1] = ((IVirtualDriver)item).GetCurrentState() ? (byte)1 : (byte)0;
+            }
+        }
+        return arr;
+    }
     private void SetupBallSearch()
     {
         var coils = Config.PRCoils.Where(x => x.Search > 0)
                     .Select(n => n.Name)
                     .ToArray();
 
-        var resetDict = new System.Collections.Generic.Dictionary<string, string>();
+        var resetDict = new Dictionary<string, string>();
         var resetSw = Config.PRSwitches
             .Where(x => string.IsNullOrWhiteSpace(x.SearchReset));
         foreach (var sw in resetSw)
@@ -282,7 +303,7 @@ public class PinGodProcGameController : BaseGameController
             resetDict.Add(sw.Name, sw.SearchReset);
         }
 
-        var stopDict = new System.Collections.Generic.Dictionary<string, string>();
+        var stopDict = new Dictionary<string, string>();
         var stopSw = Config.PRSwitches
             .Where(x => string.IsNullOrWhiteSpace(x.SearchStop));
         foreach (var sw in stopSw)
@@ -292,27 +313,4 @@ public class PinGodProcGameController : BaseGameController
 
         _ballSearch = new BallSearch(this, 12, coils, resetDict, stopDict, null);
     }
-
-    internal void BallSearch()
-    {
-        _ballSearch?.PerformSearch();
-    }
-
-    internal void ExitGame()
-    {
-        if (Database != null)
-        {
-            try
-            {
-                //any changes to our lookup are tracked, this saves
-                Database.SaveChanges();
-                Database.Dispose();
-            }
-            catch (System.Exception ex)
-            {
-                Logger.Log(nameof(PinGodProcGameController) + $"--ERROR: {ex.Message} {ex.InnerException?.Message}", LogLevel.Error);
-            }
-        }
-    }
-
 }

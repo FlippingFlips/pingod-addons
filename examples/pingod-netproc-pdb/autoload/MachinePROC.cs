@@ -2,6 +2,7 @@ using NetProc.Domain;
 using NetProc.Domain.PinProc;
 using PinGod.Core;
 using PinGod.Core.Service;
+using System.Diagnostics;
 
 /// <summary>
 /// This script is loaded with the `res://autoload/Machine.tscn` which inherits a PinGod-MachineNode. <para/>
@@ -46,6 +47,16 @@ public partial class MachinePROC : MachineNode
         _switches.Clear();
     }
 
+    public override void OnSwitchCommand(string name, int index, byte value)
+    {
+        Logger.Verbose("MACHINE_PROC: Switch:" + index);
+        //base.OnSwitchCommand(name, index, value);
+        if (_pinGodGameProc != null)
+        { 
+            SetSwitchFakeProc(_pinGodGameProc.PinGodProcGame, (ushort)index, value > 0 ? true : false);
+        }        
+    }
+
     /// <summary>
     /// Calls base set switch but will set fake p-roc switch first
     /// </summary>
@@ -82,5 +93,22 @@ public partial class MachinePROC : MachineNode
             var evtT = enabled ? EventType.SwitchClosedDebounced : EventType.SwitchOpenDebounced;
             proc.AddSwitchEvent(sw.Number, evtT);
         }
-    }   
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="gc"></param>
+    /// <param name="name"></param>
+    /// <param name="enabled"></param>
+    internal void SetSwitchFakeProc(IGameController gc, ushort number, bool enabled)
+    {
+        var proc = gc?.PROC as IFakeProcDevice;
+        if (proc != null)
+        {
+            var sw = gc.Switches[number];
+            var evtT = enabled ? EventType.SwitchClosedDebounced : EventType.SwitchOpenDebounced;
+            proc.AddSwitchEvent(sw.Number, evtT);
+        }
+    }
 }

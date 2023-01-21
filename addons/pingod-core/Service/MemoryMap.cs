@@ -19,9 +19,10 @@ namespace PinGod.Core.Service
         internal static System.Threading.Mutex mutex;
         private readonly int readStates;
         private readonly int writeStates;
-        private int _offsetLamps;
-        private int _offsetLeds;
-        private int _offsetSwitches;
+        protected int _offsetLamps;
+        protected int _offsetLeds;
+        protected int _offsetSwitches;        
+        protected MemoryMappedViewAccessor _gameStateAccess;
         private MemoryMappedViewAccessor _switchMapping;
         private MemoryMappedViewAccessor _switchWriteMapping;
         private Task _readStatesTask;
@@ -34,7 +35,7 @@ namespace PinGod.Core.Service
         public readonly int TOTAL_LAMP;
         public readonly int TOTAL_LED; //Led 3 = Num, State, Color (ole)
         public readonly int TOTAL_SWITCH;
-        private MemoryMappedViewAccessor viewAccessor;
+        protected MemoryMappedViewAccessor viewAccessor;
 
         public delegate void MemorySwitchHandler(object sender, SwitchEventArgs sw);
         public event MemorySwitchHandler MemorySwitchEventHandler;
@@ -64,10 +65,13 @@ namespace PinGod.Core.Service
             this.writeStates = writeStates;
             this.readStates = readStates;
             VpCommandSwitch = vpCommandSwitch;
-            _offsetLamps = TOTAL_COIL;
-            _offsetLeds = TOTAL_COIL + TOTAL_LAMP;
+
+            int offset = 1;
+            //get offset position after coils and initial offset
+            _offsetLamps = offset + TOTAL_COIL;
+            _offsetLeds = _offsetLamps + TOTAL_LAMP;
             //normal count to _offseLeds then 
-            _offsetSwitches = _offsetLeds + TOTAL_LED * sizeof(int);
+            _offsetSwitches = _offsetLeds + (TOTAL_LED * sizeof(int));
 
             CreateMutexAndMapping();
         }
@@ -99,7 +103,6 @@ namespace PinGod.Core.Service
             {
                 _writeStatesTask = Task.Run(async () =>
                 {
-                    Logger.Info(nameof(MemoryMap), ":running Write States Task");
                     while (!tokenSource.IsCancellationRequested)
                     {
                         WriteStates();
@@ -113,6 +116,8 @@ namespace PinGod.Core.Service
             //read states from memory
             if (readStates > -1)
             {
+                _gameStateAccess.Write(0, (byte)1);
+
                 _readStatesTask = Task.Run(async () =>
                 {
                     Logger.Info(nameof(MemoryMap), ":running Read States Task");
@@ -121,6 +126,9 @@ namespace PinGod.Core.Service
                         ReadStates();
                         await Task.Delay(readStates);
                     }
+
+                    //write the memory game state zero
+                    _gameStateAccess.Write(0, (byte)0);
 
                     //await Task.Delay(1000);
                     Logger.Info(nameof(MemoryMap), ":read states stopped");
@@ -163,11 +171,12 @@ namespace PinGod.Core.Service
         /// It is overidden if a VpCommand found. <para/>
         /// Switch 0 changed will process game states, switch zero used with <see cref="GameSyncState"/>.
         /// </summary>
-        private void ReadStates()
+        protected virtual void ReadStates()
         {
+            //get switches from memory
+            //not the same as in the buffer check which switches have changed and push them onto handlers
             byte[] buffer = new byte[TOTAL_SWITCH];
-            _switchMapping.ReadArray(0, buffer, 0, buffer.Length);
-
+            _switchMapping.ReadArray(0, buffer, 0, buffer.Length);            
             if (switchBuffer != buffer)
             {
                 for (int i = 0; i < buffer.Length; i++)
@@ -175,17 +184,8 @@ namespace PinGod.Core.Service
                     //last state in buffer changed
                     if (buffer[i] != switchBuffer[i])
                     {
-                        if (i > 0)
-                        {
-                            //event to anyone listening for incoming memory maps
-                            MemorySwitchEventHandler?.Invoke(this, new SwitchEventArgs(i, buffer[i]));
-                        }
-                        else // Use Switch 0 for game GameSyncState
-                        {
-                            var syncState = (GameSyncState)buffer[i];
-                            var action = ProcessGameState(syncState);
-                            Logger.Debug(nameof(MemoryMap), ": processed GameSyncState action=", action);
-                        }
+                        //event to anyone listening for incoming memory maps
+                        MemorySwitchEventHandler?.Invoke(this, new SwitchEventArgs(i, buffer[i]));
                     }
                 }
             }
@@ -248,6 +248,7 @@ namespace PinGod.Core.Service
                 mmf = MemoryMappedFile.CreateOrOpen(MapName, MAP_SIZE);
 
                 viewAccessor = mmf.CreateViewAccessor(0, MAP_SIZE, MemoryMappedFileAccess.ReadWrite);
+                _gameStateAccess = mmf.CreateViewAccessor(0,1,MemoryMappedFileAccess.ReadWrite);
                 _switchMapping = mmf.CreateViewAccessor(_offsetSwitches, TOTAL_SWITCH * 2, MemoryMappedFileAccess.Read);
                 _switchWriteMapping = mmf.CreateViewAccessor(_offsetSwitches, TOTAL_SWITCH * 2, MemoryMappedFileAccess.Write);
                 //GD.Print("offset for switches: ", _offsetSwitches);
@@ -259,9 +260,9 @@ namespace PinGod.Core.Service
         }
 
         /// <summary>
-        /// Writes coils, lamps and leds
+        /// Writes coils, lamps and leds to the mapping
         /// </summary>
-        void WriteStates()
+        public virtual void WriteStates()
         {
             //var start = OS.GetTicksMsec();        
             //GD.Print("write states");
@@ -271,8 +272,8 @@ namespace PinGod.Core.Service
             var lampsBytes = Machine.Lamps.GetStatesArray(TOTAL_LAMP);
             var ledArray = Machine.Leds.GetLedStatesArray(TOTAL_LED);
 
-            //write states
-            viewAccessor.WriteArray(0, coilBytes, 0, coilBytes.Length);
+            //write states. Add offset of 1. Game State on Zero
+            viewAccessor.WriteArray(1, coilBytes, 0, coilBytes.Length);
             viewAccessor.WriteArray(_offsetLamps, lampsBytes, 0, lampsBytes.Length);
             viewAccessor.WriteArray(_offsetLeds, ledArray, 0, ledArray.Length);
 
@@ -308,6 +309,10 @@ namespace PinGod.Core.Service
             /// No state
             /// </summary>
             None,
+            /// <summary>
+            /// Game started let . GameRunning
+            /// </summary>
+            started,
             /// <summary>
             /// quit godot
             /// </summary>

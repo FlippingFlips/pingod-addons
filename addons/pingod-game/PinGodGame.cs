@@ -72,7 +72,7 @@ namespace PinGod.Game
         public bool GameInPlay { get; set; }
         public virtual ulong GetElapsedGameTime => gameEndTime - gameStartTime;
         public virtual long GetTopScorePoints => Audits?.HighScores?
-                .OrderByDescending(x => x.Scores).FirstOrDefault().Scores ?? 0;
+                .OrderByDescending(x => x.Points).FirstOrDefault().Points ?? 0;
         public bool InBonusMode { get; set; } = false;
         public bool IsMultiballRunning { get; set; } = false;
         public bool IsPlayerEnteringHighscore { get; set; }
@@ -189,9 +189,6 @@ namespace PinGod.Game
             }
 
             _resources = GetResources();
-
-            LogInfo(nameof(PinGodGame), ":sent pingod game ready coil: alive 1");
-            Machine.SetCoil("alive", 1);
         }
         #endregion
 
@@ -348,10 +345,6 @@ namespace PinGod.Game
         public virtual void PlayVoice(string name, string bus = "Voice") => AudioManager?.PlayVoice(name, bus);
         public virtual void Quit(bool saveData = true)
         {
-            //send game window ended, not alive        
-            Machine.SetCoil("alive", 0);
-            Logger.Info(nameof(PinGodGame), ":sent game ended coil: alive 0");
-
             //return if we've already quit
             if (this.QuitRequested) return;
             this.QuitRequested = true;

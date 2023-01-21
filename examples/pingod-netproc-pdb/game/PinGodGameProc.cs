@@ -22,11 +22,7 @@ public partial class PinGodGameProc : PinGodGame
     /// <summary>
     /// P-ROC version of the <see cref="MachineNode"/>. Get to the database throgh this
     /// </summary>
-    public MachinePROC MachinePROC;
-    /// <summary>
-    /// Resources if found in root when the plug-in is enabled
-    /// </summary>
-    private Resources _resources;
+    public MachinePROC MachinePROC;    
     /// <summary>
     /// To cancel the PROC loop
     /// </summary>
@@ -79,8 +75,6 @@ public partial class PinGodGameProc : PinGodGame
         MachinePROC = this.MachineNode as MachinePROC;
         if (MachinePROC != null)
         {
-            _resources = GetResources();
-
             //CREATE AND SETUP PROC MACHINE
             CreateProcGame();
             Logger.Info(nameof(PinGodGameProc), ": ProcGame created. Setting up MachineNode from ProcGame.");
@@ -101,7 +95,7 @@ public partial class PinGodGameProc : PinGodGame
     public override void AddCredits(byte amt)
     {        
         Credits += amt;
-        PinGodProcGame.Database.IncrementAuditValue("CREDITS", amt);
+        PinGodProcGame.IncrementAudit("CREDITS", amt);
         EmitSignal(nameof(CreditAdded), Credits);
     }
 
@@ -120,13 +114,15 @@ public partial class PinGodGameProc : PinGodGame
     /// <param name="machineConfig"></param>
     private void CreateProcGame()
     {
-        PinGodProcGame = new PinGodProcGameController(MachineType.PDB, 
-            new PinGodProcLogger() { LogLevel = NetProc.Domain.PinProc.LogLevel.Verbose}, true, null, this);
+        var pinGodLogger = new PinGodProcLogger() { LogLevel = NetProc.Domain.PinProc.LogLevel.Verbose };
+        PinGodProcGame = new PinGodProcGameController(MachineType.PDB, false, pinGodLogger, true, this);
+
         //don't need to use LoadConfig anymore with this controller
         //PinGodProcGame.LoadConfig(machineConfig);
     }
 
     /// <summary>
+    /// Runs the P-ROC game loop  <para/>
     /// The Resources node has loaded all resources. Now we can get any packed scenes and use in modes <para/>
     /// </summary>
     private void OnResourcesLoaded()
@@ -136,13 +132,13 @@ public partial class PinGodGameProc : PinGodGame
         {
             try
             {
-                StartProcGameLoop();
+                StartProcGameLoop();                
             }
             catch (System.Exception ex) { Logger.Error(nameof(MachinePROC), nameof(_Ready), $"{ex.Message} - {ex.InnerException?.Message}"); }
 
             PinGodProcGame.MachineResourcesReady();
         }
-        else { Logger.WarningRich(nameof(PinGodGameProc), "[color=yellow] no ProcScene found."); }
+        else { Logger.WarningRich(nameof(PinGodGameProc), "[color=yellow] no ProcScene found.[/color]"); }
     }
     /// <summary>
     /// Adds machine items from <see cref="PinGodProcGame"/> into this Machine node <para/>
@@ -195,15 +191,13 @@ public partial class PinGodGameProc : PinGodGame
     /// </summary>
     private void WindowLoadSettings()
     {
-        if (PinGodProcGame?.Database == null) return;
-
-        DisplayServer.WindowSetMode((DisplayServer.WindowMode)PinGodProcGame.Database.GetAdjustmentValue("DISP_MODE"));
-        Display.SetContentScale(this, (Window.ContentScaleModeEnum)PinGodProcGame.Database.GetAdjustmentValue("DISP_CONT_SCALE_MODE"));
-        Display.SetAspectOption(this, (Window.ContentScaleAspectEnum)PinGodProcGame.Database.GetAdjustmentValue("DISP_CONT_SCALE_ASPECT"));
+        DisplayServer.WindowSetMode((DisplayServer.WindowMode)PinGodProcGame.GetAdjustment("DISP_MODE"));
+        Display.SetContentScale(this, (Window.ContentScaleModeEnum)PinGodProcGame.GetAdjustment("DISP_CONT_SCALE_MODE"));
+        Display.SetAspectOption(this, (Window.ContentScaleAspectEnum)PinGodProcGame.GetAdjustment("DISP_CONT_SCALE_ASPECT"));
         //get display size + pos from database values
-        Display.SetSize(PinGodProcGame.Database.GetAdjustmentValue("DISP_W"), PinGodProcGame.Database.GetAdjustmentValue("DISP_H"));
-        Display.SetPosition(PinGodProcGame.Database.GetAdjustmentValue("DISP_X"), PinGodProcGame.Database.GetAdjustmentValue("DISP_Y"));
-        Display.SetAlwaysOnTop(PinGodProcGame.Database.GetAdjustmentValue("DISP_TOP") > 0 ? true : false);
+        Display.SetSize(PinGodProcGame.GetAdjustment("DISP_W"), PinGodProcGame.GetAdjustment("DISP_H"));
+        Display.SetPosition(PinGodProcGame.GetAdjustment("DISP_X"), PinGodProcGame.GetAdjustment("DISP_Y"));
+        Display.SetAlwaysOnTop(PinGodProcGame.GetAdjustment("DISP_TOP") > 0 ? true : false);
     }
 
     /// <summary>
@@ -211,16 +205,13 @@ public partial class PinGodGameProc : PinGodGame
     /// </summary>
     private void WindowSaveSettings()
     {
-        if(PinGodProcGame?.Database != null)
-        {
-            var winSize = DisplayServer.WindowGetSize(0);
-            var winPos = DisplayServer.WindowGetPosition(0);
-            PinGodProcGame.Database.SetAdjustmentValue("DISP_W", winSize.x); PinGodProcGame.Database.SetAdjustmentValue("DISP_H", winSize.y);
-            PinGodProcGame.Database.SetAdjustmentValue("DISP_X", winPos.x); PinGodProcGame.Database.SetAdjustmentValue("DISP_Y", winPos.y);
-            PinGodProcGame.Database.SetAdjustmentValue("DISP_TOP", DisplayServer.WindowGetFlag(DisplayServer.WindowFlags.AlwaysOnTop) ? 1 : 0);
-            PinGodProcGame.Database.SetAdjustmentValue("DISP_MODE", (int)DisplayServer.WindowGetMode());
-            PinGodProcGame.Database.SetAdjustmentValue("DISP_CONT_SCALE_MODE", (int)Display.GetContentScale(this));
-            PinGodProcGame.Database.SetAdjustmentValue("DISP_CONT_SCALE_ASPECT", (int)Display.GetAspectOption(this));
-        }        
+        var winSize = DisplayServer.WindowGetSize(0);
+        var winPos = DisplayServer.WindowGetPosition(0);
+        PinGodProcGame.SetAdjustment("DISP_W", winSize.x); PinGodProcGame.SetAdjustment("DISP_H", winSize.y);
+        PinGodProcGame.SetAdjustment("DISP_X", winPos.x); PinGodProcGame.SetAdjustment("DISP_Y", winPos.y);
+        PinGodProcGame.SetAdjustment("DISP_TOP", DisplayServer.WindowGetFlag(DisplayServer.WindowFlags.AlwaysOnTop) ? 1 : 0);
+        PinGodProcGame.SetAdjustment("DISP_MODE", (int)DisplayServer.WindowGetMode());
+        PinGodProcGame.SetAdjustment("DISP_CONT_SCALE_MODE", (int)Display.GetContentScale(this));
+        PinGodProcGame.SetAdjustment("DISP_CONT_SCALE_ASPECT", (int)Display.GetAspectOption(this));
     }
 }

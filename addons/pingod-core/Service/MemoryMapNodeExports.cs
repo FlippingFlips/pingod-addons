@@ -11,34 +11,34 @@ namespace PinGod.Core.Service
         #region Exports
         [Export]
         [ExportGroup("Enable")]
-        bool IsEnabled = false;
+        protected bool IsEnabled = false;
         /// <summary>
         /// 10 = low cpu
         /// </summary>
+        [Export(PropertyHint.Range, "-1,10000")]
+        [ExportGroup("Enable")]
+        protected int WriteDelay = 10;
         [Export(PropertyHint.Range, "-1,1000")]
         [ExportGroup("Enable")]
-        int WriteDelay = 10;
-        [Export(PropertyHint.Range, "-1,1000")]
-        [ExportGroup("Enable")]
-        int ReadDelay = 10;
+        protected int ReadDelay = 10;
         [Export]
         [ExportGroup("Map")]
-        string MapName = "pingod_vp";
+        protected string MapName = "pingod_vp";
         [Export(PropertyHint.Range, "32,128")]
         [ExportGroup("Map")]
-        byte CoilTotal = 32;
+        protected byte CoilTotal = 32;
         [Export(PropertyHint.Range, "64,256")]
         [ExportGroup("Map")]
-        byte LampTotal = 64;
+        protected byte LampTotal = 64;
         [Export(PropertyHint.Range, "64,256")]
         [ExportGroup("Map")]
-        byte LedTotal = 64;
+        protected byte LedTotal = 64;
         [Export(PropertyHint.Range, "64,256")]
         [ExportGroup("Map")]
-        byte SwitchTotal = 128;
+        protected byte SwitchTotal = 128;
         [Export]
         [ExportGroup("Mutex")]
-        string MutexName = "pingod_vp_mutex";
+        protected string MutexName = "pingod_vp_mutex";
         #endregion
     }
 }

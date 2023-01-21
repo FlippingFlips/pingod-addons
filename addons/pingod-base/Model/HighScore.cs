@@ -19,7 +19,7 @@ namespace PinGod.Base
         /// <summary>
         ///
         /// </summary>
-        public long Scores { get; set; }
+        public long Points { get; set; }
         /// <summary>
         /// 
         /// </summary>

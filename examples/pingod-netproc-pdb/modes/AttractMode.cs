@@ -12,7 +12,7 @@ internal class AttractMode : PinGodProcMode
     /// <summary>
     /// attract scene to load when mode starts. The scene is already loaded in the resources, it just gets instantiated and added to the tree.
     /// </summary>
-    const string ATTRACT_SCENE = "res://addons/modes/attract/Attract.tscn";
+    const string ATTRACT_SCENE = "res://scenes/AttractMode/AttractProc.tscn";
 
     private PackedScene _attractScene;
     private Node _attractInstance;
@@ -32,6 +32,13 @@ internal class AttractMode : PinGodProcMode
         _attractScene = _resources?.GetResource(ATTRACT_SCENE.GetBaseName()) as PackedScene;
         _attractInstance = _attractScene.Instantiate();
         AddChildSceneToCanvasLayer(_attractInstance);
+
+        _game.LEDS["start"].Script(
+            new NetProc.Domain.Pdb.LEDScript[]{
+                new NetProc.Domain.Pdb.LEDScript { Colour = new uint[] { 0xFF, 0x00, 0x00 }, Duration = 500},
+                new NetProc.Domain.Pdb.LEDScript { Colour = new uint[] { 0x00, 0x00, 0x00 }, Duration = 500}
+            }
+        );
     }
 
     /// <summary>
@@ -57,7 +64,7 @@ internal class AttractMode : PinGodProcMode
     public bool sw_start_active(NetProc.Domain.Switch sw)
     {
         //no credits
-        if (_pingod.Credits <= 0) return SWITCH_CONTINUE;
+        if (_pingod.Credits <= 0) return SWITCH_CONTINUE;        
 
         Game.Logger?.Log("start button active");
         if (_game.Trough?.IsFull() ?? false) //todo: credit check?
@@ -65,11 +72,12 @@ internal class AttractMode : PinGodProcMode
             Game.Logger.Log("start button, trough full");
             Game.StartGame();
             Game.AddPlayer();
-            Game.StartBall();
-            Game.Modes.Remove(this);
-            _pingod.PinGodProcGame.Database.IncrementAuditValue("CREDITS_TOTAL", 1);
-            _pingod.PinGodProcGame.Database.IncrementAuditValue("CREDITS", -1);
+            Game.StartBall();            
+            _pingod.PinGodProcGame.IncrementAudit("CREDITS_TOTAL", 1);
+            _pingod.PinGodProcGame.IncrementAudit("CREDITS", -1);
             _pingod.Credits--;
+            Game.Modes.Remove(this);
+            _game.LEDS["start"].Disable();
         }
         else
         {

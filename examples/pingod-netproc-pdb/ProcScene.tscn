@@ -3,3 +3,4 @@
 [node name="ProcScene" type="Node2D"]
 
 [node name="Modes" type="CanvasLayer" parent="."]
+process_mode = 1

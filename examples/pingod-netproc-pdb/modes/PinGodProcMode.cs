@@ -95,5 +95,9 @@ public abstract class PinGodProcMode : Mode
         base.ModeStopped();
     }
 
-    public virtual void RemoveChildSceneFromCanvasLayer(Node node) => CanvasLayer?.RemoveChild(node);
+    public virtual void RemoveChildSceneFromCanvasLayer(Node node)
+    {
+        if(!node?.IsQueuedForDeletion() ?? false)
+            CanvasLayer?.RemoveChild(node);
+    }
 }
