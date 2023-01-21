@@ -77,7 +77,7 @@ public partial class PinGodGameProc : PinGodGame
         {
             //CREATE AND SETUP PROC MACHINE
             CreateProcGame();
-            Logger.Info(nameof(PinGodGameProc), ": ProcGame created. Setting up MachineNode from ProcGame.");
+            Logger.Info(nameof(PinGodGameProc), ": ProcGame created. Setting up MachineNode from ProcGame.");            
 
             //PinGodProcGame.Logger. = NetProc.Domain.PinProc.LogLevel.Verbose;
             Logger.LogLevel = PinGod.Base.LogLevel.Verbose;
@@ -192,8 +192,8 @@ public partial class PinGodGameProc : PinGodGame
     private void WindowLoadSettings()
     {
         DisplayServer.WindowSetMode((DisplayServer.WindowMode)PinGodProcGame.GetAdjustment("DISP_MODE"));
-        Display.SetContentScale(this, (Window.ContentScaleModeEnum)PinGodProcGame.GetAdjustment("DISP_CONT_SCALE_MODE"));
-        Display.SetAspectOption(this, (Window.ContentScaleAspectEnum)PinGodProcGame.GetAdjustment("DISP_CONT_SCALE_ASPECT"));
+        Display.SetContentScale(GetTree().Root, (Window.ContentScaleModeEnum)PinGodProcGame.GetAdjustment("DISP_CONT_SCALE_MODE"));
+        Display.SetAspectOption(GetTree().Root, (Window.ContentScaleAspectEnum)PinGodProcGame.GetAdjustment("DISP_CONT_SCALE_ASPECT"));
         //get display size + pos from database values
         Display.SetSize(PinGodProcGame.GetAdjustment("DISP_W"), PinGodProcGame.GetAdjustment("DISP_H"));
         Display.SetPosition(PinGodProcGame.GetAdjustment("DISP_X"), PinGodProcGame.GetAdjustment("DISP_Y"));
@@ -211,7 +211,7 @@ public partial class PinGodGameProc : PinGodGame
         PinGodProcGame.SetAdjustment("DISP_X", winPos.x); PinGodProcGame.SetAdjustment("DISP_Y", winPos.y);
         PinGodProcGame.SetAdjustment("DISP_TOP", DisplayServer.WindowGetFlag(DisplayServer.WindowFlags.AlwaysOnTop) ? 1 : 0);
         PinGodProcGame.SetAdjustment("DISP_MODE", (int)DisplayServer.WindowGetMode());
-        PinGodProcGame.SetAdjustment("DISP_CONT_SCALE_MODE", (int)Display.GetContentScale(this));
-        PinGodProcGame.SetAdjustment("DISP_CONT_SCALE_ASPECT", (int)Display.GetAspectOption(this));
+        PinGodProcGame.SetAdjustment("DISP_CONT_SCALE_MODE", (int)Display.GetContentScale(GetTree().Root));
+        PinGodProcGame.SetAdjustment("DISP_CONT_SCALE_ASPECT", (int)Display.GetAspectOption(GetTree().Root));
     }
 }

@@ -4,17 +4,16 @@ BEGIN TRANSACTION;
 INSERT INTO Machine (Id, MachineType, NumBalls, DisplayMonitor) VALUES (1, 7, 4, 0);
 
 -- Table: Coils
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-0', 'alive', 30, '', 0, 0, ''); -- simulation
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-1', 'flipperLwRMain', 30, '', 0, 0, '');
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-2', 'flipperLwRHold', 30, '', 0, 0, '');
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-3', 'flipperLwLMain', 30, '', 0, 0, '');
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-4', 'flipperLwLHold', 30, '', 0, 0, '');
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-5', 'trough', 30, '', 0, 0, 'trough');
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-6', 'sling_l', 30, '', 0, 20, 'sling');
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-7', 'sling_r', 30, '', 0, 20, 'sling');
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-8', 'bumper_1', 30, '', 0, 20, 'bumper');
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-9', 'bumper_2', 30, '', 0, 20, 'bumper');
-INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-10', 'bumper_3', 30, '', 0, 20, 'bumper');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-0', 'flipperLwRMain', 30, '', 0, 0, '');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-1', 'flipperLwRHold', 30, '', 0, 0, '');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-2', 'flipperLwLMain', 30, '', 0, 0, '');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-3', 'flipperLwLHold', 30, '', 0, 0, '');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-4', 'trough', 30, '', 0, 0, 'trough');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-5', 'sling_l', 30, '', 0, 20, 'sling');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-6', 'sling_r', 30, '', 0, 20, 'sling');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-7', 'bumper_1', 30, '', 0, 20, 'bumper');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-8', 'bumper_2', 30, '', 0, 20, 'bumper');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-9', 'bumper_3', 30, '', 0, 20, 'bumper');
 
 -- Table: Leds
 INSERT INTO Leds (Number, Name, Bus, Polarity, Tags) VALUES 
@@ -108,26 +107,26 @@ INSERT INTO Players (Id, Initials, Name, [Default]) VALUES (1, 'NETPROC', 'Defau
 
 -- Option Types 0=Range, 1=Array, 2= Enum
 INSERT INTO Adjustments (Id, Name, Description, Options, OptionType, ValueDefault, Value, MenuName, SubMenuName) VALUES
-('ALLOW_RESTART', 'Allow Restart','Allow game restart from holding start.', '[0,1]', 1, 1, 1, 'STANDARD_ADJ', 'GENERAL'),
-('ATTRACT_MUSIC', 'Attract Music','Allow music to play in attract', '[0-1]', 0, 1, 1, 'STANDARD_ADJ', 'GENERAL'),
-('BALLS_PER_GAME', 'Balls Per Game','Number of balls per game 1-10', '[1-10]', 0, 3, 3, 'STANDARD_ADJ', 'GENERAL'),
-('BALL_SAVE_TIME', 'Ball Save Time','Ball saver time', '[0-25]', 0, 8, 8, 'STANDARD_ADJ', 'GENERAL'),
-('BALL_SEARCH_TIME', 'Ball Search Time','Timeout to search for balls and pulse coils', '[8-30]', 0, 10, 10, 'STANDARD_ADJ', 'GENERAL'),
+('ALLOW_RESTART', 'Allow Restart','Allow game restart from holding start.', '[NO,YES]', 2, 1, 1, 'STANDARD_ADJ', 'GENERAL'),
+('ATTRACT_MUSIC', 'Attract Music','Allow music to play in attract', '[NO,YES]', 2, 1, 1, 'STANDARD_ADJ', 'GENERAL'),
+('BALLS_PER_GAME', 'Balls Per Game','Number of balls per game 1-10', '[1,10]', 0, 3, 3, 'STANDARD_ADJ', 'GENERAL'),
+('BALL_SAVE_TIME', 'Ball Save Time','Ball saver time', '[0,25]', 0, 8, 8, 'STANDARD_ADJ', 'GENERAL'),
+('BALL_SEARCH_TIME', 'Ball Search Time','Timeout to search for balls and pulse coils', '[8,30]', 0, 10, 10, 'STANDARD_ADJ', 'GENERAL'),
 ('IDLE_SHOOTER_TIMEOUT', 'Idle Shooter Timeout','Auto launch ball if idle in plunger lane, 0 disabled', '[0,30,60,90,120,150]', 1, 60, 60, 'STANDARD_ADJ', 'GENERAL'),
-('MASTER_VOL', 'Master Volume','','[0--30]', 0, -6, -6, 'STANDARD_ADJ', 'AUDIO'),
-('MUSIC_VOL', 'Music Volume','','[0--30]', 0, -6, -6, 'STANDARD_ADJ', 'AUDIO'),
-('VOICE_VOL', 'Voice Volume','','[0--30]', 0, -6, -6, 'STANDARD_ADJ', 'AUDIO'),
-('FX_VOL', 'Sound FX Volume','','[0--30]', 0, -6, -6, 'STANDARD_ADJ', 'AUDIO'),
-('MATCH_PERCENT', 'Match Percent','Match percent, 0 off', '[0-20]', 0, 5, 5, 'STANDARD_ADJ', 'GENERAL'),
-('DISP_W', 'Display Width','','[100-1920]', 0, 1920, 800, 'STANDARD_ADJ', 'DISPLAY'),
-('DISP_H', 'Display Height','','[100-1080]', 0, 1080, 600, 'STANDARD_ADJ', 'DISPLAY'),
-('DISP_X', 'Display X','','[0-1920]', 0, 0, 0, 'STANDARD_ADJ', 'DISPLAY'),
-('DISP_Y', 'Display Y','','[0-1080]', 0, 0, 0, 'STANDARD_ADJ', 'DISPLAY'),
-('DISP_MODE', 'Display Mode','Defaults to 0 = window','[0-4]', 0, 0, 0, 'STANDARD_ADJ', 'DISPLAY'),
-('DISP_CONT_SCALE_MODE', 'Content Scale Mode','','[Disabled,CanvasItems,Viewport]', 2, 0, 0, 'STANDARD_ADJ', 'DISPLAY'),
-('DISP_CONT_SCALE_ASPECT', 'Content Scale Aspect','','[Ignore, Keep, KeepWidth, KeepHeight, Expand]', 2, 0, 0, 'STANDARD_ADJ', 'DISPLAY'),
-('DISP_TOP', 'Display On Top','','[0-1]', 0, 1, 1, 'STANDARD_ADJ', 'DISPLAY'),
-('TILT_WARNINGS', 'Tilt Warnings','Number of tilt warnings before tilt', '[0-20]', 0, 3, 3, 'STANDARD_ADJ', 'GENERAL');
+('MASTER_VOL', 'Master Volume','','[0,-30]', 0, -6, -6, 'STANDARD_ADJ', 'AUDIO'),
+('MUSIC_VOL', 'Music Volume','','[0-,30]', 0, -6, -6, 'STANDARD_ADJ', 'AUDIO'),
+('VOICE_VOL', 'Voice Volume','','[0,-30]', 0, -6, -6, 'STANDARD_ADJ', 'AUDIO'),
+('FX_VOL', 'Sound FX Volume','','[0,-30]', 0, -6, -6, 'STANDARD_ADJ', 'AUDIO'),
+('MATCH_PERCENT', 'Match Percent','Match percent, 0 off', '[0,20]', 0, 5, 5, 'STANDARD_ADJ', 'GENERAL'),
+('DISP_W', 'Display Width','','[100,1920]', 0, 1920, 800, 'STANDARD_ADJ', 'DISPLAY'),
+('DISP_H', 'Display Height','','[100,1080]', 0, 1080, 600, 'STANDARD_ADJ', 'DISPLAY'),
+('DISP_X', 'Display X','','[0,1920]', 0, 0, 0, 'STANDARD_ADJ', 'DISPLAY'),
+('DISP_Y', 'Display Y','','[0,1080]', 0, 0, 0, 'STANDARD_ADJ', 'DISPLAY'),
+('DISP_MODE', 'Display Mode','Defaults to 0 = window','[WIN,MIN,MAX,FS,FS_EXCLUSIVE]', 2, 0, 0, 'STANDARD_ADJ', 'DISPLAY'),
+('DISP_CONT_SCALE_MODE', 'Content Scale Mode','','[Disabled,CanvasItems,Viewport]', 2, 1, 1, 'STANDARD_ADJ', 'DISPLAY'),
+('DISP_CONT_SCALE_ASPECT', 'Content Scale Aspect','','[Ignore, Keep, KeepWidth, KeepHeight, Expand]', 2, 0, 4, 'STANDARD_ADJ', 'DISPLAY'),
+('DISP_TOP', 'Display On Top','','[OFF,ON]', 2, 1, 1, 'STANDARD_ADJ', 'DISPLAY'),
+('TILT_WARNINGS', 'Tilt Warnings','Number of tilt warnings before tilt', '[0,20]', 0, 3, 3, 'STANDARD_ADJ', 'GENERAL');
 --('XB_RESERVE', '0', 4, 'GENERAL', '[0, 1]', 'If enabled and in multiplayer the rounds continue with xb given at the end'),
 -- todo: chase ball for ball search
 --('XB_GAME_MAX', '-1', 4, 'EXTRA BALLS', '[-1,0,1,2,3,4,5,6]', 'Max extra balls, -1 unlimited'),
