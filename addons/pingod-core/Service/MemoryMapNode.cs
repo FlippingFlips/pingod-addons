@@ -65,10 +65,18 @@ namespace PinGod.Core.Service
                 //todo vp command switch
                 CreateMemoryMap();
 
-                Logger.Debug(nameof(MemoryMapNode), $@": MappingFile Created. mutex:{MutexName}, map:{MapName}");
-                Logger.Debug(nameof(MemoryMapNode), $@": Read:{ReadDelay},write:{WriteDelay}. showing count-total bytes");
-                Logger.Debug(nameof(MemoryMapNode), $@": coils:{CoilTotal}-{mMap.TOTAL_COIL},sw:{SwitchTotal}-{mMap.TOTAL_SWITCH},lamps:{LampTotal}-{mMap.TOTAL_LAMP},led:{LedTotal}-{mMap.TOTAL_LED}");
-                //Logger.Debug(nameof(PinGodMemoryMapNode), $":offsets:coils:0,lamps:{mMap.},leds:{_offsetLeds},switches:{_offsetSwitches}");
+                if(mMap != null)
+                {
+                    Logger.Debug(nameof(MemoryMapNode), $@": MappingFile Created. mutex:{MutexName}, map:{MapName}");
+                    Logger.Debug(nameof(MemoryMapNode), $@": Read:{ReadDelay},write:{WriteDelay}. showing count-total bytes");
+                    Logger.Debug(nameof(MemoryMapNode), $@": coils:{CoilTotal}-{mMap.TOTAL_COIL},sw:{SwitchTotal}-{mMap.TOTAL_SWITCH},lamps:{LampTotal}-{mMap.TOTAL_LAMP},led:{LedTotal}-{mMap.TOTAL_LED}");
+                    //Logger.Debug(nameof(PinGodMemoryMapNode), $":offsets:coils:0,lamps:{mMap.},leds:{_offsetLeds},switches:{_offsetSwitches}");
+                }
+                else
+                {
+                    Logger.Warning(nameof(MemoryMapNode), "$:WARN:No Memory Map created");
+                    this.QueueFree();
+                }
             }
             else
             {

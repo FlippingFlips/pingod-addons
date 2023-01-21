@@ -302,7 +302,7 @@ namespace PinGod.Core.Service
         /// </summary>
         /// <param name="swNum"></param>
         /// <param name="value"></param>
-        public void SetSwitch(string name, byte value, bool fromAction = true)
+        public virtual void SetSwitch(string name, byte value, bool fromAction = true)
         {
             var sw = Machine.Switches[name];
             SetSwitch(sw, value, fromAction);

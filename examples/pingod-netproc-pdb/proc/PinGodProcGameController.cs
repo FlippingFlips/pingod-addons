@@ -114,6 +114,7 @@ public class PinGodProcGameController : NetProcDataGameController
     /// <returns></returns>
     public int[] GetLedStatesArray(IEnumerable<LED> leds)
     {
+        if (_memMap == null) return null;
         int[] arr = new int[_memMap.LedCount()];
         foreach (var item in leds)
         {
@@ -180,7 +181,7 @@ public class PinGodProcGameController : NetProcDataGameController
         else
             _gameLoopCancelToken = cancellationToken;
 
-        _memMap = PinGodGame.GetNode<MemoryMapPROCNode>("/root/MemoryMap");
+        _memMap = PinGodGame.GetNodeOrNull<MemoryMapPROCNode>("/root/MemoryMap");
 
         _lastCoilStates = GetStates(Coils.Values);
         _lastLedStates = GetLedStatesArray(LEDS.Values);
@@ -279,6 +280,8 @@ public class PinGodProcGameController : NetProcDataGameController
 
     byte[] GetStates(IEnumerable<IDriver> drivers)
     {
+        if (_memMap == null) return null;
+
         byte[] arr = new byte[_memMap.CoilCount()];
         foreach (var item in drivers)
         {

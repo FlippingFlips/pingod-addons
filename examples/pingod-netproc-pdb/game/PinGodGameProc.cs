@@ -82,8 +82,8 @@ public partial class PinGodGameProc : PinGodGame
             //PinGodProcGame.Logger. = NetProc.Domain.PinProc.LogLevel.Verbose;
             Logger.LogLevel = PinGod.Base.LogLevel.Verbose;
 
-            //SET MACHINE ITEMS FROM PROC TO PINGOD
-            SetupPinGodotFromProcGame();
+            //SET MACHINE ITEMS FROM PROC TO PINGOD            
+            //SetupPinGodotFromProcGame();
             Logger.Info(nameof(MachinePROC), ": ProcGame and database setup complete.");
 
             WindowLoadSettings();

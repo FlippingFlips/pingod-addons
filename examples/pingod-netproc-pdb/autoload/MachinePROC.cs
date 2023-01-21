@@ -1,3 +1,5 @@
+using Godot;
+using Godot.Collections;
 using NetProc.Domain;
 using NetProc.Domain.PinProc;
 using PinGod.Core;
@@ -13,12 +15,13 @@ public partial class MachinePROC : MachineNode
 {           
     private PinGodGameProc _pinGodGameProc;
 
+    #region Godot overrides
     /// <summary> and machine configuration. Machine config is held public here
     /// Creates database
     /// </summary>
     public override void _EnterTree()
     {
-        base._EnterTree();        
+        base._EnterTree();
     }
 
     /// <summary>
@@ -30,11 +33,15 @@ public partial class MachinePROC : MachineNode
         base._ExitTree();
     }
 
+    /// <summary>
+    /// Gets a PinGodGame
+    /// </summary>
     public override void _Ready()
     {
         base._Ready();
-        _pinGodGameProc = GetNodeOrNull<PinGodGameProc>("/root/PinGodGame");        
-    }
+        _pinGodGameProc = GetNodeOrNull<PinGodGameProc>("/root/PinGodGame");
+    } 
+    #endregion
 
     /// <summary>
     /// Clear any items from the machines collections 
@@ -71,6 +78,29 @@ public partial class MachinePROC : MachineNode
             SetSwitchFakeProc(_pinGodGameProc.PinGodProcGame, @switch.Name, value > 0 ? true : false);
         }
         base.SetSwitch(@switch, value, fromAction);
+    }
+
+    public override void SetSwitch(string name, byte value, bool fromAction = true)
+    {
+        if(_pinGodGameProc != null)
+        {
+            SetSwitchFakeProc(_pinGodGameProc.PinGodProcGame, name, value > 0 ? true : false);
+        }
+    }
+
+    /// <summary>
+    /// override godot actions to the machine
+    /// </summary>
+    /// <param name="swName"></param>
+    /// <param name="inputEvent"></param>
+    /// <returns></returns>
+    public override bool SwitchActionOn(string swName, InputEvent inputEvent) => false;
+    public override bool SwitchActionOff(string swName, InputEvent inputEvent) => false;
+
+    protected override void AddCustomMachineItems(Dictionary<string, byte> coils, Dictionary<string, byte> switches, Dictionary<string, byte> lamps, Dictionary<string, byte> leds)
+    {
+        //base.AddCustomMachineItems(coils, switches, lamps, leds);
+        Logger.Info(nameof(MachinePROC), ": P-ROC overriding ", nameof(AddCustomMachineItems));
     }
 
     internal void AddCoil(string name, byte number) => _coils.Add(name, number);
