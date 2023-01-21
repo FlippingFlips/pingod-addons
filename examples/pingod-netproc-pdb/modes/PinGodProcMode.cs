@@ -25,7 +25,7 @@ public abstract class PinGodProcMode : Mode
     public CanvasLayer CanvasLayer { get; private set; }
 
     protected Resources _resources { get; private set; }
-
+    public string Name { get; }
     public IPinGodGame PinGod { get; }    
 
     /// <summary>
@@ -44,10 +44,11 @@ public abstract class PinGodProcMode : Mode
     /// <param name="pinGod">Need this to grab the root</param>
     /// <param name="defaultScene">path to default scene</param>
     /// <param name="loadDefaultScene">Load deefault scene when the object is create?</param>
-    public PinGodProcMode(IGameController game, int priority, IPinGodGame pinGod, string defaultScene = null, bool loadDefaultScene = true) : base(game, priority)
+    public PinGodProcMode(IGameController game, string name, int priority, IPinGodGame pinGod, string defaultScene = null, bool loadDefaultScene = true) : base(game, priority)
     {
+        Name = name;
         PinGod = pinGod;
-        GetAndCreateCanvasLayers(priority);
+        GetAndCreateCanvasLayers(name, priority);
     }
 
     public virtual void AddChildSceneToCanvasLayer(Node node) => CanvasLayer.CallDeferred("add_child", node);
@@ -56,13 +57,13 @@ public abstract class PinGodProcMode : Mode
     /// Gets the Modes canvas layer from the scene, creates a CanvasLayer for this mode to display. <para/>
     /// Uses the <see cref="Resources"/> root singleton to load packed scenes, but it's probably better that it is used and done by the mode inheriting this and then using the <see cref="AddChildSceneToCanvasLayer(Node)"/>
     /// </summary>
-    public virtual void GetAndCreateCanvasLayers(int priority)
+    public virtual void GetAndCreateCanvasLayers(string name, int priority)
     {
         var pg = PinGod as PinGodGame;
         _modesCanvas = pg.GetNodeOrNull<CanvasLayer>(modesRootPath);
         if (_modesCanvas != null)
         {
-            CanvasLayer = new CanvasLayer() { Layer = priority };
+            CanvasLayer = new CanvasLayer() { Layer = priority, Name = name };
             _modesCanvas?.AddChild(CanvasLayer);
 
             _resources = pg.GetResources();

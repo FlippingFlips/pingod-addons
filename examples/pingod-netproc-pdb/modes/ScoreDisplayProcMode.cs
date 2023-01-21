@@ -23,7 +23,8 @@ public class ScoreDisplayProcMode : PinGodProcMode
     /// <param name="pinGod"></param>
     /// <param name="defaultScene"></param>
     /// <param name="loadDefaultScene"></param>
-    public ScoreDisplayProcMode(IGameController game, int priority, PinGodGame pinGod, string defaultScene = null, bool loadDefaultScene = true) : base(game, priority, pinGod, defaultScene, loadDefaultScene)
+    public ScoreDisplayProcMode(IGameController game, PinGodGame pinGod, string name = nameof(ScoreDisplayProcMode), int priority = 1, string defaultScene = null, bool loadDefaultScene = true) 
+        : base(game, name, priority, pinGod, defaultScene, loadDefaultScene)
     {
         var res = _resources?.GetResource(SCORE_MODE_SCENE.GetBaseName()) as PackedScene;
         if(res != null)

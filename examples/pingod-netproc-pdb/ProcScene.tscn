@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://p788sxf1kmcg"]
 
-[node name="ProcScene" type="Node2D"]
+[node name="ProcScene" type="Node"]
 
 [node name="Modes" type="CanvasLayer" parent="."]
 process_mode = 1
+
+[node name="Overlay" type="CanvasLayer" parent="."]
+layer = 5

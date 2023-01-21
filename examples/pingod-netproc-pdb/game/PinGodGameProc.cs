@@ -127,7 +127,7 @@ public partial class PinGodGameProc : PinGodGame
     /// </summary>
     private void OnResourcesLoaded()
     {
-        var ms = GetNodeOrNull<Node2D>("/root/ProcScene");
+        var ms = GetNodeOrNull<Node>("/root/ProcScene");
         if (ms != null)
         {
             try

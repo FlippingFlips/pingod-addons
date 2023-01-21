@@ -1,6 +1,7 @@
 ﻿using NetProc.Domain;
 using PinGod.Core;
 using PinGod.EditorPlugins;
+using System;
 
 /// <summary>
 /// P-ROC Mode that handles all the door switches and coins in the machine.
@@ -9,10 +10,10 @@ public class MachineSwitchHandlerMode : PinGodProcMode
 {
     private string[] _doorSwitches;
     private PinGodGameProc _pinGodProc;    
-    private CreditsLabel _creditsLabel;
+    private Godot.Label _creditsLabel;
 
-    public MachineSwitchHandlerMode(IGameController game, IPinGodGame pinGod, int priority = 80, string defaultScene = null, bool loadDefaultScene = true) : 
-        base(game, priority, pinGod, defaultScene, loadDefaultScene)
+    public MachineSwitchHandlerMode(IGameController game, IPinGodGame pinGod, string name = nameof(MachineSwitchHandlerMode), int priority = 80, string defaultScene = null, bool loadDefaultScene = true) : 
+        base(game, name, priority, pinGod, defaultScene, loadDefaultScene)
     {
         //get all switches tagged as 'door' and add a AddSwitchHandler to invoke HandleDoorSwitch
         _doorSwitches = Game.Config.GetNamesFromTag("door", MachineItemType.Switch);
@@ -24,17 +25,19 @@ public class MachineSwitchHandlerMode : PinGodProcMode
         else { Game.Logger.Log("WARN: no door switches found.", NetProc.Domain.PinProc.LogLevel.Warning); }
 
         //PingodGame p-roc, use to get hold of the machine so we can add credits.
-        _pinGodProc = pinGod as PinGodGameProc;
-        if(_pinGodProc != null)
-        {            
-            //get the procscene
-            var pScene = _pinGodProc.GetTree().Root.GetNodeOrNull("ProcScene");
-            if (pScene != null)
-            {
-                _creditsLabel = pScene.GetNodeOrNull<CreditsLabel>("Control/Credits");
-            }
-        }
-    }    
+        _pinGodProc = pinGod as PinGodGameProc;        
+    }
+
+    public override void ModeStarted()
+    {
+        base.ModeStarted();
+        Delay(nameof(UpdateCredits), NetProc.Domain.PinProc.EventType.None, 0.3, new AnonDelayedHandler(UpdateCredits));
+    }
+
+    internal void UpdateCredits()
+    {
+        UpdateCredits(0);
+    }
 
     bool HandleDoorSwitch(NetProc.Domain.Switch sw)
     {        
@@ -74,9 +77,29 @@ public class MachineSwitchHandlerMode : PinGodProcMode
     /// Increment the local <see cref="Credits"/>, update the database lookup, then update the view <see cref="CreditsLabel"/>
     /// </summary>
     /// <param name="amt"></param>
-    private void UpdateCredits(int amt)
+    private void UpdateCredits(int amt = 0)
     {
-        _pinGodProc.AddCredits((byte)amt);
-        //_creditsLabel?.UpdateCredits(_pinGodProc.Credits);
+        _pinGodProc?.AddCredits((byte)amt);
+
+        //Update the attract layer credits, no game is in play
+        if (!_pinGodProc.GameInPlay)
+        {
+            if (_creditsLabel == null)
+            {
+                if (_pinGodProc != null)
+                {
+                    //The modes are added to a CanvasLayer (Modes), then the mode is a new CanvasLayer named by the P-ROC mode.
+                    //Then access the controls name. In this case Attract is a control in the scene and AttactMode was added by P-ROC
+                    var attract = _pinGodProc.GetNodeOrNull("/root/ProcScene/Modes/AttractMode/Attract");
+                    if (attract != null)
+                    {
+                        _creditsLabel = attract.GetNodeOrNull<Godot.Label>("Credits");
+                    }
+                }
+                else return;
+            }
+
+            _creditsLabel?.Set("text", $"CREDITS: {_pinGodProc.Credits}"); //TODO: use the Tr function from Godot to translate
+        }        
     }
 }

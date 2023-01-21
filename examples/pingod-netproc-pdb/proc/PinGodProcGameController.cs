@@ -91,17 +91,19 @@ public class PinGodProcGameController : NetProcDataGameController
     public override void GameEnded()
     {
         base.GameEnded();
-        Modes.Remove(_scoreDisplay);
-        _machineSwitchHandlerMode = new MachineSwitchHandlerMode(this, (PinGodGameProc)PinGodGame);
+        Modes.Remove(_scoreDisplay);        
         _AttractMode = new AttractMode(this, 12, PinGodGame);
-        Modes.Add(_machineSwitchHandlerMode);
+        _machineSwitchHandlerMode = new MachineSwitchHandlerMode(this, (PinGodGameProc)PinGodGame);
+        
+        //add attract before machine, credits..
         Modes.Add(_AttractMode);
+        Modes.Add(_machineSwitchHandlerMode);
     }
 
     public override void GameStarted()
     {
         base.GameStarted();        
-        _scoreDisplay = new ScoreDisplayProcMode(this, 2, (PinGodGameProc)PinGodGame);
+        _scoreDisplay = new ScoreDisplayProcMode(this, (PinGodGameProc)PinGodGame);
         Modes.Add(_scoreDisplay);
     }
 
@@ -161,10 +163,10 @@ public class PinGodProcGameController : NetProcDataGameController
         Trough.NumBallsToSaveCallback = new GetNumBallsToSaveHandler(_ballSave.GetNumBallsToSave);
         _ballSave.TroughEnableBallSave = new BallSaveEnable(Trough.EnableBallSave);
 
+        Modes.Add(_AttractMode);
         Modes.Add(_machineSwitchHandlerMode);
         Modes.Add(_ballSave);
         Modes.Add(_ballSearch);
-        Modes.Add(_AttractMode);
 
         Logger.Log($"MODES RUNNING:" + Modes.Modes.Count);
     }
@@ -268,7 +270,7 @@ public class PinGodProcGameController : NetProcDataGameController
     internal void MachineResourcesReady()
     {
         _AttractMode = new AttractMode(this, 12, PinGodGame);
-        _scoreDisplay = new ScoreDisplayProcMode(this, 2, (PinGodGameProc)PinGodGame);
+        _scoreDisplay = new ScoreDisplayProcMode(this, (PinGodGameProc)PinGodGame, priority: 2);
         _machineSwitchHandlerMode = new MachineSwitchHandlerMode(this, (PinGodGameProc)PinGodGame);
         _ballSave = new BallSave(this, "shootAgain", "plungerLane") { AllowMultipleSaves = false, Priority = 25 };
         SetupBallSearch();

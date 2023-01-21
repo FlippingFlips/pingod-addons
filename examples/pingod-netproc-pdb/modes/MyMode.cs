@@ -5,7 +5,7 @@ using Switch = NetProc.Domain.Switch;
 
 public partial class MyMode : PinGodProcMode
 {
-    public MyMode(IGameController game, int priority, PinGodGame pinGod) : base(game, priority, pinGod) { }
+    public MyMode(IGameController game, int priority, PinGodGame pinGod, string name = nameof(MyMode)) : base(game, name, priority, pinGod) { }
 
     public override void ModeStarted()
     {

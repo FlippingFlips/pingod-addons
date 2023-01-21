@@ -19,7 +19,7 @@ internal class AttractMode : PinGodProcMode
     private PinGodProcGameController _game;
     private PinGodGameProc _pingod;
 
-    public AttractMode(IGameController game, int priority, IPinGodGame pinGod) : base(game, priority, pinGod) 
+    public AttractMode(IGameController game, int priority, IPinGodGame pinGod, string name = nameof(AttractMode)) : base(game, name, priority, pinGod) 
     {
         _game = Game as PinGodProcGameController;
         _pingod = pinGod as PinGodGameProc;
