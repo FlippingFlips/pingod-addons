@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=4 format=3 uid="uid://d1jr3tq8dufx7"]
 
 [ext_resource type="Script" path="res://addons/pingod-core/Service/Resources.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://daqe6by1e4dm7" path="res://scenes/AttractMode/AttractProc.tscn" id="2_v2x46"]

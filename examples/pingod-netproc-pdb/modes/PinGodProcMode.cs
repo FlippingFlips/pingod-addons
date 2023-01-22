@@ -37,7 +37,7 @@ public abstract class PinGodProcMode : Mode
     /// Default scene to load
     /// </summary>
     /// <summary>
-    /// Initializes a base P-ROC mode for PinGod. <para/> <see cref="GetAndCreateCanvasLayers"/>
+    /// Initializes a base P-ROC mode for PinGod. <para/> <see cref="CreateCanvasLayer"/>
     /// </summary>
     /// <param name="game"></param>
     /// <param name="priority">Layer on the canvas is a priority</param>
@@ -48,25 +48,35 @@ public abstract class PinGodProcMode : Mode
     {
         Name = name;
         PinGod = pinGod;
-        GetAndCreateCanvasLayers(name, priority);
-    }
 
-    public virtual void AddChildSceneToCanvasLayer(Node node) => CanvasLayer.CallDeferred("add_child", node);
-
-    /// <summary>
-    /// Gets the Modes canvas layer from the scene, creates a CanvasLayer for this mode to display. <para/>
-    /// Uses the <see cref="Resources"/> root singleton to load packed scenes, but it's probably better that it is used and done by the mode inheriting this and then using the <see cref="AddChildSceneToCanvasLayer(Node)"/>
-    /// </summary>
-    public virtual void GetAndCreateCanvasLayers(string name, int priority)
-    {
         var pg = PinGod as PinGodGame;
         _modesCanvas = pg.GetNodeOrNull<CanvasLayer>(modesRootPath);
+        _resources = pg.GetResources();
+    }
+
+    public virtual void AddChildSceneToCanvasLayer(Node node)
+    {
+        if(CanvasLayer == null)
+        {
+            CreateCanvasLayer(Name, Priority);
+        }
+
+        CanvasLayer.CallDeferred("add_child", node);
+    }
+
+    /// <summary>
+    /// Creates a CanvasLayer to hold this mode in Godot scenes
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="priority"></param>
+    /// <param name="addAsChild">add the canvaslayer to the modes canvas layer</param>
+    public virtual void CreateCanvasLayer(string name, int priority, bool addAsChild = true)
+    {
         if (_modesCanvas != null)
         {
             CanvasLayer = new CanvasLayer() { Layer = priority, Name = name };
-            _modesCanvas?.AddChild(CanvasLayer);
-
-            _resources = pg.GetResources();
+            if(addAsChild)
+                _modesCanvas?.AddChild(CanvasLayer);
         }
         else { Logger.Warning(nameof(PinGodGameMode), ": no Modes canvas found"); }
     }
@@ -91,8 +101,11 @@ public abstract class PinGodProcMode : Mode
     /// </summary>
     public override void ModeStopped()
     {
-        _modesCanvas?.RemoveChild(CanvasLayer);
-        CanvasLayer?.QueueFree();
+        if(CanvasLayer != null)
+        {
+            _modesCanvas?.RemoveChild(CanvasLayer);
+            CanvasLayer?.QueueFree();
+        }        
         base.ModeStopped();
     }
 

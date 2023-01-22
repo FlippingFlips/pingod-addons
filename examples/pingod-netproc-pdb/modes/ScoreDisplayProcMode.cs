@@ -1,5 +1,6 @@
 ﻿using Godot;
 using NetProc.Domain;
+using PinGod.Core;
 using PinGod.Game;
 using PinGod.Modes;
 
@@ -26,15 +27,6 @@ public class ScoreDisplayProcMode : PinGodProcMode
     public ScoreDisplayProcMode(IGameController game, PinGodGame pinGod, string name = nameof(ScoreDisplayProcMode), int priority = 1, string defaultScene = null, bool loadDefaultScene = true) 
         : base(game, name, priority, pinGod, defaultScene, loadDefaultScene)
     {
-        var res = _resources?.GetResource(SCORE_MODE_SCENE.GetBaseName()) as PackedScene;
-        if(res != null)
-        {
-            _scoreDisplay = res.Instantiate() as ScoreModePROC;
-            if (_scoreDisplay != null)
-            {
-                AddChildSceneToCanvasLayer(_scoreDisplay);
-            }
-        }
     }
 
     /// <summary>
@@ -50,7 +42,18 @@ public class ScoreDisplayProcMode : PinGodProcMode
         }
     }
 
-    public override void ModeStarted() => base.ModeStarted();
+    public override void ModeStarted()
+    {
+        if(_resources != null)
+        {
+            var scene = _resources?.GetResource(SCORE_MODE_SCENE.GetBaseName()) as PackedScene;
+            _scoreDisplay = scene?.Instantiate() as ScoreModePROC;
+            AddChildSceneToCanvasLayer(_scoreDisplay);
+        }
+        else { Logger.WarningRich(nameof(ScoreDisplayProcMode), nameof(ModeStarted), ": [color=yellow]no resources found, can't create attract scene[/color]"); }
+
+        base.ModeStarted();
+    }
 
     /// <summary>
     /// Updates the scores in the ScoreMode canvas

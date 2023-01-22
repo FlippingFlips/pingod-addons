@@ -28,17 +28,21 @@ internal class AttractMode : PinGodProcMode
     public override void ModeStarted()
     {
         base.ModeStarted();
-        //get the pre loaded resource, create instance and add to base mode canvas
-        _attractScene = _resources?.GetResource(ATTRACT_SCENE.GetBaseName()) as PackedScene;
-        _attractInstance = _attractScene.Instantiate();
-        AddChildSceneToCanvasLayer(_attractInstance);
+        if(_resources != null)
+        {
+            //get the pre loaded resource, create instance and add to base mode canvas
+            _attractScene = _resources?.GetResource(ATTRACT_SCENE.GetBaseName()) as PackedScene;
+            _attractInstance = _attractScene.Instantiate();
+            AddChildSceneToCanvasLayer(_attractInstance);
 
-        _game.LEDS["start"].Script(
-            new NetProc.Domain.Pdb.LEDScript[]{
+            _game.LEDS["start"].Script(
+                new NetProc.Domain.Pdb.LEDScript[]{
                 new NetProc.Domain.Pdb.LEDScript { Colour = new uint[] { 0xFF, 0x00, 0x00 }, Duration = 500},
                 new NetProc.Domain.Pdb.LEDScript { Colour = new uint[] { 0x00, 0x00, 0x00 }, Duration = 500}
-            }
-        );
+                }
+            );
+        }
+        else { Logger.WarningRich(nameof(AttractMode), nameof(ModeStarted), ": [color=yellow]no resources found, can't create attract scene[/color]"); }
     }
 
     /// <summary>
