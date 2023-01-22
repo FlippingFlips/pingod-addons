@@ -48,7 +48,6 @@ _switches = {
 "up": 6
 }
 _switchWindow = ExtResource("2_ef2qi")
-_switchWindowEnabled = true
 
 [node name="RecordingStatusLabel" type="Label" parent="."]
 anchors_preset = 1

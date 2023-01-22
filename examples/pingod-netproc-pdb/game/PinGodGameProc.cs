@@ -12,7 +12,10 @@ using NetProc.Domain.PinProc;
 /// </summary>
 public partial class PinGodGameProc : PinGodGame
 {        
-    const int PROC_DELAY = 1;
+    /// <summary>
+    /// This delay set to 10 for the simulator. Trough won't work 100% without this. Hacks...
+    /// </summary>
+    const int PROC_DELAY = 10;
 
     /// <summary>
     /// Procgame <see cref="IGameController"/>
@@ -88,7 +91,6 @@ public partial class PinGodGameProc : PinGodGame
 
             WindowLoadSettings();
         }
-
     }
     #endregion
 
@@ -96,14 +98,12 @@ public partial class PinGodGameProc : PinGodGame
     {        
         Credits += amt;
         PinGodProcGame.IncrementAudit("CREDITS", amt);
-        EmitSignal(nameof(CreditAdded), Credits);
     }
 
     /// <summary>
     /// Override the default window setup
     /// </summary>
-    public override void SetupWindow()
-    {
+    public override void SetupWindow() {
         //base.SetupWindow();        
     }
 
