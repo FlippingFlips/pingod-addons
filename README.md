@@ -8,9 +8,9 @@ BasicGame Example addons linked:
 
 ## pingod-basicgame
 
-🕹 [basicgame repo](https://github.com/FlippingFlips/pingod-basicgame) - Basic Game
+🕹 [basicgame example](./examples/pingod-basicgame) - Basic Game for creating games to run with simulator
 
-🕹 [moonstation repo](https://github.com/FlippingFlips/pingod-moonstation) - Moon Station
+🕹 [basicgame p-roc example](./examples/pingod-netproc-pdb) - Basic Game using the P-ROC interface for real machines.
 
 In simulator:
 
