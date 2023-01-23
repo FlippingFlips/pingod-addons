@@ -24,4 +24,4 @@ Load projects into Editor by adding `--path`:
 
 | file  | what it does |
 | ------------- | ------------- |
-| _link_addons.bat  | Links the `pingod-addons` repository `addons` directory into `BasicGameGodot` |
+| _link_addons.bat  | Links the `pingod-addons` the epositories `addons` directory into the `BasicGameGodot` project |
