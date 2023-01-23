@@ -2,7 +2,7 @@
 title: "Game Scene"
 date: 2022-12-26T15:26:15Z
 draft: false
-weight: 40
+weight: 4
 ---
 
 This scene is loaded from the attract mode. (Add to favorites for quick access)

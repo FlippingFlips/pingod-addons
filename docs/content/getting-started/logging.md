@@ -5,7 +5,9 @@ draft: false
 weight: 25
 ---
 
-[Game logging Class Reference](/pingod-addons/html/interfaceIPinballLogger.html)
+In the appdata directory under the game name. `%AppData%\Godot\app_userdata\BasicGameGodot\Logs`.
+
+Rolling logs, with the `godot.log` is always being the latest.
 
 ---
 ## Log location
@@ -13,7 +15,7 @@ weight: 25
 
 In the appdata directory under the game name, logs `.log` are created. Use the `open_app_data.bat` to open directory to open the data directory.
 
-![image](../../images/basicgame-userdata-sublime.jpg)
+![image](../../images/basicgame/basicgame-userdata-sublime.jpg)
 
 The image above has the users game directory open with Sublime Text.
 
@@ -51,6 +53,8 @@ PinGodGame:looking for game patches. res://patch/patch_{patchNum}.pck . From 1. 
 ---
 ## Script Usage
 ---
+
+[Game logging Class Reference](/pingod-addons/html/interfaceIPinballLogger.html)
 
 Use from a pinGod reference or the static Logger in script like Logger.Debug
 

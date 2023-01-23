@@ -6,8 +6,6 @@ The addons directory in this repository should be symbolically linked into a gam
 
 BasicGame Example addons linked:
 
-![image](https://github.com/FlippingFlips/pingod-addons/blob/main/docs/static/images/basicgame-project-files.jpg)
-
 ## pingod-basicgame
 
 🕹 [basicgame repo](https://github.com/FlippingFlips/pingod-basicgame) - Basic Game
@@ -16,11 +14,15 @@ BasicGame Example addons linked:
 
 In simulator:
 
-![image](https://github.com/FlippingFlips/pingod-addons/blob/main/docs/static/images/pingod-vp.jpg)
+![image](./docs/static/images/pingod-vp.jpg)
 
 Scene Editor
 
-![image](https://github.com/FlippingFlips/pingod-addons/blob/main/docs/static/images/basicgame-initialrun.jpg)
+![image](./docs/static/images/basicgame-initialrun.jpg)
+
+Godot 4 - Simulator + Playfield Switch Window
+
+![image](./docs/static/images/screens/simulator-and-playfieldswitch-window.jpg)
 
 ## Docs
 

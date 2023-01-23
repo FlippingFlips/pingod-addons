@@ -5,4 +5,4 @@ draft: false
 weight: 90
 ---
 
-How to setup localization
+How to setup localization to have any language in your game.

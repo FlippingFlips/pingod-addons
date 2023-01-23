@@ -1,0 +1,34 @@
+﻿<Project Sdk="Godot.NET.Sdk/4.0.0-beta.10">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+  </PropertyGroup>  
+  <ItemGroup>
+    <None Include="addons\autoload\Adjustments\plugin.cfg" />
+    <None Include="addons\autoload\Adjustments\README.md" />
+    <None Include="addons\autoload\AudioManager\plugin.cfg" />
+    <None Include="addons\autoload\Machine\plugin.cfg" />
+    <None Include="addons\autoload\Machine\README.md" />
+    <None Include="addons\autoload\MemoryMap\plugin.cfg" />
+    <None Include="addons\autoload\MemoryMap\README.md" />
+    <None Include="addons\autoload\PinGodGame\plugin.cfg" />
+    <None Include="addons\autoload\PinGodGame\README.md" />
+    <None Include="addons\autoload\Resources\plugin.cfg" />
+    <None Include="addons\autoload\Resources\README.md" />
+    <None Include="addons\autoload\WindowActions\plugin.cfg" />
+    <None Include="addons\autoload\WindowActions\README.md" />
+    <None Include="addons\editor-plugin\machine-plugins\switches\SwitchOverlay.tscn" />
+    <None Include="addons\editor-plugin\machine-plugins\switches\SwitchPanel.tscn" />
+    <None Include="autoload\AudioManager.tscn" />
+    <None Include="autoload\Machine.tscn" />
+    <None Include="autoload\MemoryMap.tscn" />
+    <None Include="autoload\PinGodGame.tscn" />
+    <None Include="autoload\README.md" />
+    <None Include="autoload\Resources.tscn" />
+    <None Include="autoload\WindowActions.tscn" />
+    <None Include="project.godot" />
+    <None Include="scenes\BaseMode.tscn" />
+  </ItemGroup>
+</Project>

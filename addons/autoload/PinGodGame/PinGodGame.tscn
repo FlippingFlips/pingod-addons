@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://blqcputfixful"]
+
+[ext_resource type="Script" path="res://addons/pingod-game/PinGodGame.cs" id="1_7d45p"]
+
+[node name="PinGodGame" type="Node"]
+process_priority = -1
+script = ExtResource("1_7d45p")

@@ -1,0 +1,85 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6ct3px8majn7"]
+
+[ext_resource type="Script" path="res://addons/editor-plugin/display-plugins/layers/SimpleModeScene.cs" id="1_5l4sv"]
+[ext_resource type="Texture2D" uid="uid://bqoy2fxucjyu4" path="res://addons/assets/img/dummy_scene.svg" id="4_oegew"]
+[ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="6_3qd8s"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yyw6x"]
+animations = [{
+"frames": [ExtResource("4_oegew")],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Control" type="Control"]
+editor_description = "The default setup consists of:
+
+- A Background, Foreground and two text labels. `LabelLg` and `LabelSm`
+- A timer that will clear the display if set to
+- An animated sprite which can go under your BG and FG layers.
+
+In the inspector properties is an added `Animations`. Select a saved animated sprite scene.
+
+These scenes would be a single AnimatedSprite2D but with multiple animation with names that you can set."
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5l4sv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+editor_description = "Replace this with custom sprites and position it"
+position = Vector2(342, 193)
+frames = SubResource("SpriteFrames_yyw6x")
+
+[node name="BgTextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FgTextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+
+[node name="LabelLg" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -105.0
+offset_top = -84.0
+offset_right = 105.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("6_3qd8s")
+theme_override_font_sizes/font_size = 64
+text = "BASEMODE"
+
+[node name="LabelSm" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -2.5
+offset_top = -29.0
+offset_right = 2.5
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("6_3qd8s")
+theme_override_font_sizes/font_size = 28
+text = "BASEMODE"
+
+[node name="ClearDisplayTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true

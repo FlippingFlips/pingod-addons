@@ -1,0 +1,14 @@
+<Project Sdk="Godot.NET.Sdk/4.0.0-beta.10">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="machine-plugins\bumpers\Bumper.tscn" />
+    <None Include="machine-plugins\lamps\Lamp.tscn" />
+    <None Include="machine-plugins\lamps\LampMatrix.tscn" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\pingod-core\PinGod.Core.csproj" />
+  </ItemGroup>
+</Project>

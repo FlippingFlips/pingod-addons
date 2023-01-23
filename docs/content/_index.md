@@ -50,4 +50,4 @@ More to be added when comes to mind..
 
 ## Class Reference Documentation
 
-[Class References](/pingod-addons/html)
+[Class References - Script Documentation](/pingod-addons/html)

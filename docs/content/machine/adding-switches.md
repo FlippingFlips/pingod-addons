@@ -1,47 +1,48 @@
 ---
-title: "Adding Switches - PinGodGame.tscn"
+title: "Adding Switches"
 date: 2022-12-26T15:26:15Z
 draft: false
 weight: 10
 ---
 
-The following are the default switches in the `BasicGameGodot\PinGodGame.tscn` file.
+The following are the default switches in the `autoload\Machine.tscn` file.
 
-When created in the Godot interface, they are saved in this scene file.
-
-You can add your switches here.
+When created in the Godot interface, they are saved in this scene file. You can add your switches here from text editor which is faster.
 
 ```
 _switches = {
-"coin": 2,
-"down": 5,
-"enter": 7,
+"coin1": 0,
+"coin2": 1,
+"coin3": 2,
+"coin4": 3,
 "exit": 4,
-"flipper_l": 11,
-"flipper_r": 9,
-"inlane_l": 22,
-"inlane_r": 23,
-"mball_saucer": 27,
-"outlane_l": 21,
-"outlane_r": 24,
-"plunger_lane": 20,
-"slam_tilt": 16,
-"sling_l": 25,
-"sling_r": 26,
-"start": 19,
+"down": 5,
+"up": 6,
+"enter": 7,
+"coinDoor": 8,
+"flipperLwL": 9,
+"flipperLwR": 11,
+"flipperUpL": 13,
+"flipperUpR": 15,
+"slamTilt": 16,
 "tilt": 17,
-"trough_1": 81,
-"trough_2": 82,
-"trough_3": 83,
-"trough_4": 84,
-"up": 6
+"ballShooter": 18,
+"start": 19,
+"trough0": 21,
+"trough1": 22,
+"trough2": 23,
+"trough3": 24,
+"plungerLane": 25,
+"inlaneL": 26,
+"inlaneR": 27,
+"outlaneL": 28,
+"outlaneR": 29,
+"slingL": 30,
+"slingR": 31,
+"bumper0": 32,
+"bumper1": 33,
+"bumper2": 34,
+"mballSaucer": 35
 }
 ```
-
-It can be faster than the Godot inspector and adding, especially when your switch collection builds up. Names must be unique.
-
----
-
-This is all you need to do to add a switch.
-
-See 
+![image](../../images/pingodgame-machine-items.jpg)

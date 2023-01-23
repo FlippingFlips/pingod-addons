@@ -5,7 +5,9 @@ draft: false
 weight: 25
 ---
 
-In the appdata directory under the game name. Use the `open_app_data.bat` to open directory to open the data directory.
+In the appdata directory under the game name. `%AppData%\Godot\app_userdata\BasicGameGodot\settings.save` 
+
+You can open this directory with the `_godot_appdata_dir.bat` file
 
 ---
 ## settings.save and gamedata.save
@@ -20,8 +22,14 @@ This stores
 - audio settings
 - memory map options
 
-![image](../../images/basicgame-settings-save.jpg)
+![image](../../images/basicgame/basicgame-settings-save.jpg)
+
+
+- You don't need to edit these by hand.
+- Any of your added settings will go in this file.
 
 ---
 ## Recordings
 ---
+
+See [Recordings / Playback](../../pingodgame/recordings-playback)

@@ -29,13 +29,3 @@ Hit `F5` to run the game. You can use `F2` on the window to show border.
 ---
 
 `ESC` to exit the window
-
----
-#### PinGodAddOns.cs plugin disabled on first load
----
-
-This warning can be skipped. 
-
-![image](../../images/basicgame-pingodaddons-a.jpg)
-
-This plugin addon is for adding some custom controls for the Godot UI. `BlinkingLabel` is one example.

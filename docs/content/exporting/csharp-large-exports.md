@@ -11,6 +11,10 @@ This doesn't apply if you decide to have a single executable and pck, so you can
 
 {{% /panel %}}
 
+*Note: This could have changed in Godot 4, untested*
+
+---
+
 When a project uses mono C# it includes mono assembilies which are around 29mb.
 
 If you try to export the assets only from this project, then you will always have the c# files.

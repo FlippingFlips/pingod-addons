@@ -1,0 +1,13 @@
+<Project Sdk="Godot.NET.Sdk/4.0.0-beta.10">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="Game.tscn" />
+    <None Include="PinGodGame.tscn" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\modes\PinGod.Modes.csproj" />
+  </ItemGroup>
+</Project>

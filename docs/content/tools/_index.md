@@ -5,8 +5,6 @@ draft: false
 weight: 31
 ---
 
-Tools are custom add on objects in Godot.
+Tools are custom add on objects in Godot. You can use the attribute [Tool] and turn a script into a tool.
 
-There are a few provided to see how they're accomplished, some are built so they appear in Godot menus. 
-
-PinGodAddOns class initiliazes them as tools. `addons/PinGodAddOns/`
+They will be available to search and select from in Godot so you can add to your scenes.

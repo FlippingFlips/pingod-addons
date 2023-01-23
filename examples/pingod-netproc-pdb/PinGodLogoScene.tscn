@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://phue4fin2gjy"]
+
+[ext_resource type="Texture2D" uid="uid://cfy7fd5ef1bdl" path="res://addons/assets/img/pingod-logo.png" id="1_af37a"]
+
+[node name="Control" type="CanvasLayer"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 522.0
+offset_top = 53.0
+offset_right = 972.0
+offset_bottom = 542.0
+scale = Vector2(1.95514, 1.95514)
+texture = ExtResource("1_af37a")

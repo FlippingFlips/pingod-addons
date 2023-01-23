@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://bovytl2p8u031"]
+
+[ext_resource type="Script" path="res://autoload/MachinePROC.cs" id="1_8kvyb"]
+[ext_resource type="PackedScene" uid="uid://c1i3xe5c0i1n0" path="res://addons/editor-plugin/windows/PlayfieldWindow.tscn" id="2_ef2qi"]
+[ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="5_7isp6"]
+
+[node name="Machine" type="Node"]
+editor_description = "P-ROC PinGodMachine"
+script = ExtResource("1_8kvyb")
+_ball_search_stop_switches = PackedStringArray("mballSaucer", "trough0", "trough1", "trough2", "trough3")
+_coils = {
+"alive": 0,
+"auto_plunger": 3,
+"disable_shows": 33,
+"flippers": 2,
+"lampshow_1": 34,
+"lampshow_2": 35,
+"mballSaucer": 4,
+"trough": 1
+}
+_leds = {
+"shoot_again": 1
+}
+_switches = {
+"coin1": 0,
+"coin2": 1,
+"coin3": 2,
+"coinDoor": 3,
+"down": 5,
+"enter": 7,
+"exit": 4,
+"flipperLwL": 8,
+"flipperLwR": 9,
+"inlaneL": 17,
+"inlaneR": 18,
+"outlaneL": 19,
+"outlaneR": 20,
+"plungerLane": 16,
+"slamTilt": 16,
+"slingL": 21,
+"slingR": 22,
+"start": 10,
+"tilt": 23,
+"trough0": 12,
+"trough1": 13,
+"trough2": 14,
+"trough3": 15,
+"up": 6
+}
+_switchWindow = ExtResource("2_ef2qi")
+
+[node name="RecordingStatusLabel" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -104.0
+offset_bottom = 23.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("5_7isp6")
+theme_override_font_sizes/font_size = 32
+text = "Machine: RECORDING"

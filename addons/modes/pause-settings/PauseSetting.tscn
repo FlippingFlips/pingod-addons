@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://d314cxixgd6su"]
+
+[ext_resource type="Script" path="res://addons/modes/pause-settings/PauseAndSettingsScript.cs" id="1_4uisj"]
+[ext_resource type="PackedScene" uid="uid://bwajb2wl2fxk8" path="res://addons/modes/pause-settings/PauseLayer.tscn" id="1_j3byt"]
+[ext_resource type="PackedScene" uid="uid://bd1safd20jt3u" path="res://addons/pingod-core/Settings/SettingsDisplay.tscn" id="2_wfyh3"]
+
+[node name="PauseAndSettings" type="Control"]
+process_mode = 3
+editor_description = "Transform > Size set on the top layer to fill the screen"
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4uisj")
+
+[node name="SettingsDisplay" parent="." instance=ExtResource("2_wfyh3")]
+process_mode = 2
+editor_description = "Set to process \"When Paused\""
+visible = false
+top_level = true
+
+[node name="PauseControl" parent="." instance=ExtResource("1_j3byt")]
+editor_description = "Set to process \"When Paused\""
+visible = false
