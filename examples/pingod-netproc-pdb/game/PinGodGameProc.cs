@@ -6,16 +6,21 @@ using System.Threading;
 using Godot;
 using PinGod.Core.Service;
 using NetProc.Domain.PinProc;
+using PinGod.Core.Game;
 
 /// <summary>
 /// Inheriting PinGodGame to take over with a P-ROC.
 /// </summary>
 public partial class PinGodGameProc : PinGodGame
-{        
+{              
+    [ExportCategory("P-ROC Options")]
     /// <summary>
     /// This delay set to 10 for the simulator. Trough won't work 100% without this. Hacks...
     /// </summary>
-    const int PROC_DELAY = 10;
+    [Export] byte PROC_DELAY = 10;
+    [Export] bool DELETE_DB_ON_INIT = false;
+    [Export] bool SIMULATED = true;
+    [Export(PropertyHint.Enum)] LogLevel LOG_LEVEL =  NetProc.Domain.PinProc.LogLevel.Verbose;
 
     /// <summary>
     /// Procgame <see cref="IGameController"/>
@@ -29,9 +34,15 @@ public partial class PinGodGameProc : PinGodGame
     /// <summary>
     /// To cancel the PROC loop
     /// </summary>
-    private CancellationTokenSource tokenSource;    
+    private CancellationTokenSource tokenSource;
 
     #region Godot Overrides
+
+    public override void _EnterTree()
+    {
+        Logger.LogLevel = (PinGod.Base.LogLevel)(LOG_LEVEL);
+        base._EnterTree();
+    }
 
     /// <summary>
     /// Quit the P-ROC game loop
@@ -80,10 +91,11 @@ public partial class PinGodGameProc : PinGodGame
         {
             //CREATE AND SETUP PROC MACHINE
             CreateProcGame();
-            Logger.Info(nameof(PinGodGameProc), ": ProcGame created. Setting up MachineNode from ProcGame.");            
+            Logger.Info(nameof(PinGodGameProc), ": ProcGame created. Setting up MachineNode from ProcGame.");
 
             //PinGodProcGame.Logger. = NetProc.Domain.PinProc.LogLevel.Verbose;
-            Logger.LogLevel = PinGod.Base.LogLevel.Verbose;
+            var lvl = (int)LOG_LEVEL;
+            Logger.LogLevel = (PinGod.Base.LogLevel)lvl;
 
             //SET MACHINE ITEMS FROM PROC TO PINGOD            
             //SetupPinGodotFromProcGame();
@@ -114,8 +126,8 @@ public partial class PinGodGameProc : PinGodGame
     /// <param name="machineConfig"></param>
     private void CreateProcGame()
     {
-        var pinGodLogger = new PinGodProcLogger() { LogLevel = NetProc.Domain.PinProc.LogLevel.Verbose };
-        PinGodProcGame = new PinGodProcGameController(MachineType.PDB, false, pinGodLogger, true, this);
+        var pinGodLogger = new PinGodProcLogger() { LogLevel = LOG_LEVEL };
+        PinGodProcGame = new PinGodProcGameController(MachineType.PDB, DELETE_DB_ON_INIT, pinGodLogger, SIMULATED, this);
 
         //don't need to use LoadConfig anymore with this controller
         //PinGodProcGame.LoadConfig(machineConfig);
@@ -176,12 +188,17 @@ public partial class PinGodGameProc : PinGodGame
 
             //run proc game loop delay 1 save CPU //TODO: maybe this run loop needs to re-throw exception if any caught
             PinGodProcGame.RunLoop(PROC_DELAY, tokenSource);
-
-            Logger.Info(nameof(MachinePROC), ":ending proc game loop");
-            PinGodProcGame.EndRunLoop();
-            Logger.Info(nameof(MachinePROC), ":proc game loop stopped");
-
-            //this?.GetTree()?.Quit(0);
+            //means the proc loop threw exception
+            if (!tokenSource.IsCancellationRequested)
+            {
+                this?.GetTree()?.Quit(0);
+            }
+            else
+            {
+                Logger.Info(nameof(MachinePROC), ":ending proc game loop");
+                PinGodProcGame.EndRunLoop();
+                Logger.Info(nameof(MachinePROC), ":proc game loop stopped");
+            }            
 
         }, tokenSource.Token);
     }
