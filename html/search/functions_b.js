@@ -1,13 +1,16 @@
 var searchData=
 [
-  ['pausemusic_680',['PauseMusic',['../classAudioManager.html#a8061e54e07964779bec04b917d4c867b',1,'AudioManager']]],
-  ['pingodgame_681',['PinGodGame',['../classPinGodGame.html#a912149a4ba2e470b9796ea02b45c6899',1,'PinGodGame']]],
-  ['pinstateobject_682',['PinStateObject',['../classPinStateObject.html#a7b74510df27627959b10ab09a9bc00dc',1,'PinStateObject']]],
-  ['playbackevent_683',['PlaybackEvent',['../classPlaybackEvent.html#a0a9abafe57682aed15adf487c7226edd',1,'PlaybackEvent']]],
-  ['playeradded_684',['PlayerAdded',['../classPinGodBase.html#a9ac7df78797318a706f83ff43afb8d62',1,'PinGodBase']]],
-  ['playmusic_685',['PlayMusic',['../classAudioManager.html#a2320fa44b07ee98f9da57880cb9abeb8',1,'AudioManager.PlayMusic(string name, float pos=0f)'],['../classAudioManager.html#a08cce19a329125d4e11096d2d7fe0cc7',1,'AudioManager.PlayMusic(AudioStream audio, float pos=0f)'],['../classPinGodGame.html#a3fa2975afaba4fe4b190a29ae89b890c',1,'PinGodGame.PlayMusic()']]],
-  ['playsfx_686',['PlaySfx',['../classAudioManager.html#a1a771f92571f0f829b901b11e8e17daf',1,'AudioManager.PlaySfx()'],['../classPinGodGame.html#a003db5fc2b78ba9d764623febd5549da',1,'PinGodGame.PlaySfx()']]],
-  ['playvoice_687',['PlayVoice',['../classAudioManager.html#ab6e426619170a6b75f4e8451838246c4',1,'AudioManager.PlayVoice(string name, string bus=&quot;Voice&quot;)'],['../classAudioManager.html#a06f2240cab31110854fb87cad4c217aa',1,'AudioManager.PlayVoice(AudioStream voice, string bus=&quot;Voice&quot;)'],['../classPinGodGame.html#ac38c22eb5432b48c66ef5cfab803d68b',1,'PinGodGame.PlayVoice(string name, string bus=&quot;Voice&quot;)']]],
-  ['processswitch_688',['ProcessSwitch',['../classPinGodGame.html#a623d70582f6f75ebc38552fbd8fdfaef',1,'PinGodGame']]],
-  ['pulsetrough_689',['PulseTrough',['../classTrough.html#a4f61baf7a322e2bb80817330b104ebfb',1,'Trough']]]
+  ['machineswitchhandlermode_1076',['MachineSwitchHandlerMode',['../classMachineSwitchHandlerMode.html#a4eb3f73de0b3b22407630514a5c5b706',1,'MachineSwitchHandlerMode']]],
+  ['memorymap_1077',['MemoryMap',['../classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#a6d336e04269e8ec0d54e98b716f8109e',1,'PinGod::Core::Service::MemoryMap']]],
+  ['memorymapproc_1078',['MemoryMapPROC',['../classMemoryMapPROC.html#af07d656fe111166f95c84217ac29e21d',1,'MemoryMapPROC']]],
+  ['memoryswitchhandler_1079',['MemorySwitchHandler',['../classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#a7f744192a0e56e8f1f6cd2b18795829d',1,'PinGod::Core::Service::MemoryMap']]],
+  ['memoryswitchsignaleventhandler_1080',['MemorySwitchSignalEventHandler',['../classPinGod_1_1Core_1_1Service_1_1MemoryMapNode.html#a3289d2718378ea0a67e7fbad8562940b',1,'PinGod::Core::Service::MemoryMapNode']]],
+  ['modestarted_1081',['ModeStarted',['../classMachineSwitchHandlerMode.html#a466e3fe6c51b2a28db1087e0942450b2',1,'MachineSwitchHandlerMode.ModeStarted()'],['../classMyMode.html#a932c9967a4ab4cf478e1d1bb2a1f4ab7',1,'MyMode.ModeStarted()'],['../classScoreDisplayProcMode.html#a917b72461de9583c82f3075f19592a0e',1,'ScoreDisplayProcMode.ModeStarted()']]],
+  ['modestopped_1082',['ModeStopped',['../classPinGodProcMode.html#a8dcc5ec816a3455283ef59cb87eec7cf',1,'PinGodProcMode.ModeStopped()'],['../classScoreDisplayProcMode.html#ab876f98a3b39b25ea4ef4187192c744b',1,'ScoreDisplayProcMode.ModeStopped()'],['../classMyMode.html#ab137c1318062b695e78067dddd9de08c',1,'MyMode.ModeStopped()']]],
+  ['modetimedouteventhandler_1083',['ModeTimedOutEventHandler',['../classPinGod_1_1Core_1_1Game_1_1PinGodBase.html#aead7687bf89f68bce6cebc6293ea7198',1,'PinGod.Core.Game.PinGodBase.ModeTimedOutEventHandler()'],['../classPinGod_1_1Core_1_1addons_1_1ModeTimer_1_1ModeTimer.html#a3280f29e2de7c141d6aefe36fb9ad1ff',1,'PinGod.Core.addons.ModeTimer.ModeTimer.ModeTimedOutEventHandler()']]],
+  ['movenextplayer_1084',['MoveNextPlayer',['../classPinGod_1_1Modes_1_1ScoreEntry.html#a4608db941193fca1dd040dd29c3fb9ba',1,'PinGod::Modes::ScoreEntry']]],
+  ['multiballendedeventhandler_1085',['MultiBallEndedEventHandler',['../classPinGod_1_1Core_1_1Game_1_1PinGodBase.html#a067cc4ab4fd8d3149dc381cfd121d65c',1,'PinGod::Core::Game::PinGodBase']]],
+  ['multiballstartedeventhandler_1086',['MultiballStartedEventHandler',['../classPinGod_1_1Core_1_1Game_1_1PinGodBase.html#afb88410e15dd070e4325c3d52ced2f22',1,'PinGod::Core::Game::PinGodBase']]],
+  ['musicplayer_5ffinished_1087',['MusicPlayer_finished',['../interfacePinGod_1_1Core_1_1Interface_1_1IAudioManager.html#a9668b40b90aca01c72d46f99fda08fce',1,'PinGod.Core.Interface.IAudioManager.MusicPlayer_finished()'],['../classPinGod_1_1Core_1_1Service_1_1AudioManager.html#a484aac47fd0b61cd10d591ba3feee7be',1,'PinGod.Core.Service.AudioManager.MusicPlayer_finished()']]],
+  ['mymode_1088',['MyMode',['../classMyMode.html#af99e9dc20e6e44598efaca5c8c08c66e',1,'MyMode']]]
 ];

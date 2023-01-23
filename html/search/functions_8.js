@@ -1,16 +1,16 @@
 var searchData=
 [
-  ['lanecompleted_638',['LaneCompleted',['../classPinballLanesNode.html#af5888abf422b1126d00b2741badae8dd',1,'PinballLanesNode']]],
-  ['lanescompleted_639',['LanesCompleted',['../classPinballLanesNode.html#abfaa87e4beaaec822a3edc0a74cf7c00',1,'PinballLanesNode']]],
-  ['laneswitchactivated_640',['LaneSwitchActivated',['../classPinballLanesNode.html#a184fde82d8f35c8a1dc25bd59a227073',1,'PinballLanesNode']]],
-  ['load_641',['Load',['../classGameData.html#a321b90543ef51eb85021656aff2422bf',1,'GameData.Load()'],['../classGameSettings.html#ab338d7c04143d9727cd75a371cee60b3',1,'GameSettings.Load()']]],
-  ['load_3c_20t_20_3e_642',['Load&lt; T &gt;',['../classGameData.html#ad189d958ba4480734b0a3122edb764f1',1,'GameData.Load&lt; T &gt;()'],['../classGameSettings.html#af312e4460edc3a30b6df88574c751771',1,'GameSettings.Load&lt; T &gt;()']]],
-  ['loaddatafile_643',['LoadDataFile',['../classPinGodGame.html#a74c9cfe84034395b91b3962fd576b6c1',1,'PinGodGame']]],
-  ['loadpatches_644',['LoadPatches',['../classPinGodGame.html#af956da416a53a3d32e240e7f38f51bb4',1,'PinGodGame']]],
-  ['loadsettingsanddata_645',['LoadSettingsAndData',['../classPinGodGame.html#a912e8c0fd6e32436403c1aacce827526',1,'PinGodGame']]],
-  ['loadsettingsfile_646',['LoadSettingsFile',['../classPinGodGame.html#ae13a6f571302cc1786caf0876884056c',1,'PinGodGame']]],
-  ['logdebug_647',['LogDebug',['../interfaceIPinballLogger.html#a1a108041d8eb792ef67ad226aca2254a',1,'IPinballLogger.LogDebug()'],['../classPinGodGame.html#a16355d3ae732586f630a10064aeb1d79',1,'PinGodGame.LogDebug()']]],
-  ['logerror_648',['LogError',['../interfaceIPinballLogger.html#a6e88ffc15791be0374c2ab5ad93480f1',1,'IPinballLogger.LogError()'],['../classPinGodGame.html#ab26f85cdac2663b3fd2e29bd5c37bda6',1,'PinGodGame.LogError()']]],
-  ['loginfo_649',['LogInfo',['../interfaceIPinballLogger.html#adb719263098a15907419f0b162d58514',1,'IPinballLogger.LogInfo()'],['../classPinGodGame.html#ae3a912f01cab5725a17fcc11f57ce5af',1,'PinGodGame.LogInfo()']]],
-  ['logwarning_650',['LogWarning',['../interfaceIPinballLogger.html#a8f22ef8464aa69a0059f90e50fe9ee0f',1,'IPinballLogger.LogWarning()'],['../classPinGodGame.html#acae82020e82af4b75803fd874eea85ee',1,'PinGodGame.LogWarning()']]]
+  ['info_1045',['Info',['../interfacePinGod_1_1Core_1_1IPinGodLogger.html#a5baad3b91e648a211a54a167592799d2',1,'PinGod::Core::IPinGodLogger']]],
+  ['initializedatabase_1046',['InitializeDatabase',['../classPinGodProcGameController.html#a2912427b83f736f5a555a1d7327b41b9',1,'PinGodProcGameController']]],
+  ['initpackedscene_1047',['InitPackedScene',['../classPinGod_1_1EditorPlugins_1_1WindowPinGod.html#ad22679d9029b7728b2f343c2a784a116',1,'PinGod::EditorPlugins::WindowPinGod']]],
+  ['isactionoff_1048',['IsActionOff',['../classPinGod_1_1Core_1_1Switch.html#af56a15be1c704ca5649b08de95ba22db',1,'PinGod::Core::Switch']]],
+  ['isactionon_1049',['IsActionOn',['../classPinGod_1_1Core_1_1Switch.html#af895dec4fcd2e92101a2904331d38131',1,'PinGod.Core.Switch.IsActionOn(InputEvent input)'],['../classPinGod_1_1Core_1_1Switch.html#a4b60567d0ccbd351f3ba339488846587',1,'PinGod.Core.Switch.IsActionOn()']]],
+  ['isballsaveactive_1050',['IsBallSaveActive',['../classPinGod_1_1Core_1_1BallSaver.html#af267086b7aba1b1ae08e07a7ccc06465',1,'PinGod.Core.BallSaver.IsBallSaveActive()'],['../classPinGod_1_1Core_1_1Service_1_1MachineNode.html#a1894f8408e60dc27ad3ce73e62ece272',1,'PinGod.Core.Service.MachineNode.IsBallSaveActive()']]],
+  ['isenabled_1051',['IsEnabled',['../classPinGod_1_1Core_1_1Switch.html#a4cd8bc307be892abcdcb6c6b22ab713b',1,'PinGod::Core::Switch']]],
+  ['isstopped_1052',['IsStopped',['../classPinGod_1_1EditorPlugins_1_1SimpleModeScene.html#aa437d270d7601fd7d26462ed60011b21',1,'PinGod::EditorPlugins::SimpleModeScene']]],
+  ['isswitchaction_1053',['IsSwitchAction',['../interfacePinGod_1_1Core_1_1IPinGodGame.html#a5f498abf1ebb9fda6199adf7e6977ab4',1,'PinGod.Core.IPinGodGame.IsSwitchAction()'],['../classPinGod_1_1Game_1_1PinGodGame.html#a6f438873d48f35b70404fa1ee7757281',1,'PinGod.Game.PinGodGame.IsSwitchAction()']]],
+  ['isswitchactive_1054',['IsSwitchActive',['../classPinGod_1_1Core_1_1Nodes_1_1PlungerLane_1_1PlungerLane.html#adaeb13aae66070f3e4d5f31884bdf8df',1,'PinGod::Core::Nodes::PlungerLane::PlungerLane']]],
+  ['isswitchenabled_1055',['IsSwitchEnabled',['../interfacePinGod_1_1Core_1_1IPinGodGame.html#a40f1bc220590e92745dadefa29607dcb',1,'PinGod.Core.IPinGodGame.IsSwitchEnabled()'],['../classPinGod_1_1Game_1_1PinGodGame.html#ab86ef0e3f7acc8b7b01c096aa28ee482',1,'PinGod.Game.PinGodGame.IsSwitchEnabled()']]],
+  ['istroughfull_1056',['IsTroughFull',['../classPinGod_1_1Core_1_1BallStacks_1_1Trough.html#a96b40ac9cef9ffef694020291d905699',1,'PinGod::Core::BallStacks::Trough']]],
+  ['isvisible_1057',['IsVisible',['../classPinGod_1_1Core_1_1addons_1_1ModeTimer_1_1ModeTimer.html#aaf27c0dab376c78141f6e38a1041c8ca',1,'PinGod::Core::addons::ModeTimer::ModeTimer']]]
 ];

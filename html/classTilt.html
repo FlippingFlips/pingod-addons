@@ -91,7 +91,7 @@ $(document).ready(function(){initNavTree('classTilt.html',''); initResizable(); 
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classTilt.html" title="Tilt. &quot;slam_tilt&quot; or &quot;tilt&quot; switches.">Tilt</a>. "slam_tilt" or "tilt" switches.  
+<p><a class="el" href="classTilt.html" title="Tilt. &quot;slamTilt&quot; or &quot;tilt&quot; switches.">Tilt</a>. "slamTilt" or "tilt" switches.  
  <a href="classTilt.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for Tilt:</div>
@@ -102,6 +102,14 @@ Inheritance diagram for Tilt:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a92abe928b650852444384298eb85ed10"><td class="memItemLeft" align="right" valign="top">delegate void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTilt.html#a92abe928b650852444384298eb85ed10">GameTiltedEventHandler</a> ()</td></tr>
+<tr class="memdesc:a92abe928b650852444384298eb85ed10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted signal when game is tilted  <a href="classTilt.html#a92abe928b650852444384298eb85ed10">More...</a><br /></td></tr>
+<tr class="separator:a92abe928b650852444384298eb85ed10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a475ca671aba5419388a4a30b1cdbe6fc"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTilt.html#a475ca671aba5419388a4a30b1cdbe6fc">_ExitTree</a> ()</td></tr>
+<tr class="separator:a475ca671aba5419388a4a30b1cdbe6fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab23cb938ed175ab672d62ae16bbf1e82"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTilt.html#ab23cb938ed175ab672d62ae16bbf1e82">_on_Timer_timeout</a> ()</td></tr>
+<tr class="memdesc:ab23cb938ed175ab672d62ae16bbf1e82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets Visible to false  <a href="classTilt.html#ab23cb938ed175ab672d62ae16bbf1e82">More...</a><br /></td></tr>
+<tr class="separator:ab23cb938ed175ab672d62ae16bbf1e82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4a543f844c329c9774fb7dd386aee82"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTilt.html#aa4a543f844c329c9774fb7dd386aee82">_Ready</a> ()</td></tr>
 <tr class="memdesc:aa4a543f844c329c9774fb7dd386aee82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets access to the game and the trough. Gets the timer and label to show if tilted  <a href="classTilt.html#aa4a543f844c329c9774fb7dd386aee82">More...</a><br /></td></tr>
 <tr class="separator:aa4a543f844c329c9774fb7dd386aee82"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -112,10 +120,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a69b76fcc4bc1914ea4d9ee36162a5353"><td class="mdescLeft">&#160;</td><td class="mdescRight">Slam tilt game. Disable flippers. TODO: Should reset game  <a href="classTilt.html#a69b76fcc4bc1914ea4d9ee36162a5353">More...</a><br /></td></tr>
 <tr class="separator:a69b76fcc4bc1914ea4d9ee36162a5353"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5219280c30ca39b435c94ab27b724ed3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTilt.html#a5219280c30ca39b435c94ab27b724ed3">OnSwitchCommand</a> (string swName, byte index, byte value)</td></tr>
-<tr class="memdesc:a5219280c30ca39b435c94ab27b724ed3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classSwitch.html" title="Represents a Switch in a pinball machine">Switch</a> was activated so act on them here  <a href="classTilt.html#a5219280c30ca39b435c94ab27b724ed3">More...</a><br /></td></tr>
+<tr class="memdesc:a5219280c30ca39b435c94ab27b724ed3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Switch was activated so act on them here  <a href="classTilt.html#a5219280c30ca39b435c94ab27b724ed3">More...</a><br /></td></tr>
 <tr class="separator:a5219280c30ca39b435c94ab27b724ed3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28142fac8c26269f109b54e3186547ab"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTilt.html#a28142fac8c26269f109b54e3186547ab">OnTilt</a> ()</td></tr>
-<tr class="memdesc:a28142fac8c26269f109b54e3186547ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Warnings and tilts if warnings go over limit of the <a class="el" href="classPinGodGame.html#a007a2ce19c043395a2cbe1e777ad36cb">PinGodGame.Tiltwarnings</a>  <a href="classTilt.html#a28142fac8c26269f109b54e3186547ab">More...</a><br /></td></tr>
+<tr class="memdesc:a28142fac8c26269f109b54e3186547ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Warnings and tilts if warnings go over limit of the PinGodGame.Tiltwarnings  <a href="classTilt.html#a28142fac8c26269f109b54e3186547ab">More...</a><br /></td></tr>
 <tr class="separator:a28142fac8c26269f109b54e3186547ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ddf3355188724b77e9ed42f34bd4aa9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTilt.html#a6ddf3355188724b77e9ed42f34bd4aa9">SetText</a> (string text)</td></tr>
 <tr class="memdesc:a6ddf3355188724b77e9ed42f34bd4aa9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets text of the BlinkingLayer  <a href="classTilt.html#a6ddf3355188724b77e9ed42f34bd4aa9">More...</a><br /></td></tr>
@@ -126,19 +134,32 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2a577cc0908198cbdcc0c7e18e3f0333"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTilt.html#a2a577cc0908198cbdcc0c7e18e3f0333">ShowWarning</a> ()</td></tr>
 <tr class="memdesc:a2a577cc0908198cbdcc0c7e18e3f0333"><td class="mdescLeft">&#160;</td><td class="mdescRight">Show the player how many tilt warnings  <a href="classTilt.html#a2a577cc0908198cbdcc0c7e18e3f0333">More...</a><br /></td></tr>
 <tr class="separator:a2a577cc0908198cbdcc0c7e18e3f0333"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab23cb938ed175ab672d62ae16bbf1e82"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTilt.html#ab23cb938ed175ab672d62ae16bbf1e82">_on_Timer_timeout</a> ()</td></tr>
-<tr class="memdesc:ab23cb938ed175ab672d62ae16bbf1e82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets Visible to false  <a href="classTilt.html#ab23cb938ed175ab672d62ae16bbf1e82">More...</a><br /></td></tr>
-<tr class="separator:ab23cb938ed175ab672d62ae16bbf1e82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a42f22f664f959ac383e2ddc88e5e99e8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPinGodGame.html">PinGodGame</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTilt.html#a42f22f664f959ac383e2ddc88e5e99e8">pinGod</a></td></tr>
-<tr class="memdesc:a42f22f664f959ac383e2ddc88e5e99e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">singleton  <a href="classTilt.html#a42f22f664f959ac383e2ddc88e5e99e8">More...</a><br /></td></tr>
-<tr class="separator:a42f22f664f959ac383e2ddc88e5e99e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bbebe10369837f703dbc4fb57eb4f99"><td class="memItemLeft" align="right" valign="top"><a class="el" href="interfacePinGod_1_1Core_1_1IPinGodGame.html">IPinGodGame</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTilt.html#a7bbebe10369837f703dbc4fb57eb4f99">pinGod</a></td></tr>
+<tr class="separator:a7bbebe10369837f703dbc4fb57eb4f99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classTilt.html" title="Tilt. &quot;slam_tilt&quot; or &quot;tilt&quot; switches.">Tilt</a>. "slam_tilt" or "tilt" switches. </p>
+<div class="textblock"><p><a class="el" href="classTilt.html" title="Tilt. &quot;slamTilt&quot; or &quot;tilt&quot; switches.">Tilt</a>. "slamTilt" or "tilt" switches. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a475ca671aba5419388a4a30b1cdbe6fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a475ca671aba5419388a4a30b1cdbe6fc">&#9670;&nbsp;</a></span>_ExitTree()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">override void Tilt._ExitTree </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ab23cb938ed175ab672d62ae16bbf1e82"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab23cb938ed175ab672d62ae16bbf1e82">&#9670;&nbsp;</a></span>_on_Timer_timeout()</h2>
 
@@ -182,6 +203,25 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Gets access to the game and the trough. Gets the timer and label to show if tilted </p>
+
+</div>
+</div>
+<a id="a92abe928b650852444384298eb85ed10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92abe928b650852444384298eb85ed10">&#9670;&nbsp;</a></span>GameTiltedEventHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">delegate void Tilt.GameTiltedEventHandler </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Emitted signal when game is tilted </p>
 
 </div>
 </div>
@@ -279,7 +319,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classSwitch.html" title="Represents a Switch in a pinball machine">Switch</a> was activated so act on them here </p>
+<p>Switch was activated so act on them here </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">swName</td><td></td></tr>
@@ -314,7 +354,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Warnings and tilts if warnings go over limit of the <a class="el" href="classPinGodGame.html#a007a2ce19c043395a2cbe1e777ad36cb">PinGodGame.Tiltwarnings</a> </p>
+<p>Warnings and tilts if warnings go over limit of the PinGodGame.Tiltwarnings </p>
 
 </div>
 </div>
@@ -407,8 +447,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a42f22f664f959ac383e2ddc88e5e99e8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a42f22f664f959ac383e2ddc88e5e99e8">&#9670;&nbsp;</a></span>pinGod</h2>
+<a id="a7bbebe10369837f703dbc4fb57eb4f99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bbebe10369837f703dbc4fb57eb4f99">&#9670;&nbsp;</a></span>pinGod</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -417,7 +457,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classPinGodGame.html">PinGodGame</a> Tilt.pinGod</td>
+          <td class="memname"><a class="el" href="interfacePinGod_1_1Core_1_1IPinGodGame.html">IPinGodGame</a> Tilt.pinGod</td>
         </tr>
       </table>
   </td>
@@ -427,12 +467,10 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>singleton </p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>addons/PinGodGame/Modes/<a class="el" href="Tilt_8cs.html">Tilt.cs</a></li>
+<li>addons/modes/tilt/<a class="el" href="Tilt_8cs.html">Tilt.cs</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -2,7 +2,7 @@
 <head><meta charset=utf-8>
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>PinGodGame - PinGod AddOns</title>
+<title>Plugin - PinGodGame - PinGod AddOns</title>
 <meta name=description content="Source">
 <meta name=generator content="Hugo 0.91.2">
 <link href=https://FlippingFlips.github.io/pingod-addons/index.xml rel=alternate type=application/rss+xml>
@@ -14,18 +14,18 @@
 <script src=https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin=anonymous></script>
 <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin=anonymous></script>
 <script src=https://FlippingFlips.github.io/pingod-addons/js/bundle.js></script><style>:root{--custom-font-color:#FFFFFF;--custom-background-color:#003300}</style>
-<link rel=stylesheet href=https://FlippingFlips.github.io/pingod-addons/css/pingod.css><meta property="og:title" content="PinGodGame">
+<link rel=stylesheet href=https://FlippingFlips.github.io/pingod-addons/css/pingod.css><meta property="og:title" content="Plugin - PinGodGame">
 <meta property="og:description" content="Source">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://FlippingFlips.github.io/pingod-addons/pingodgame/"><meta property="og:image" content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png"><meta property="og:site_name" content="Hugo Techdoc Theme">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
-<meta name=twitter:title content="PinGodGame">
+<meta name=twitter:title content="Plugin - PinGodGame">
 <meta name=twitter:description content="Source">
-<meta itemprop=name content="PinGodGame">
+<meta itemprop=name content="Plugin - PinGodGame">
 <meta itemprop=description content="Source"></head>
 <body><div class=container><header>
-<h1>PinGod AddOns</h1><span class=version>Version 4.3.0</span><a href=https://github.com/FlippingFlips/pingod-addons class=github><i class="fab fa-github"></i></a>
+<h1>PinGod AddOns</h1><span class=version>Version 0.96</span><a href=https://github.com/FlippingFlips/pingod-addons class=github><i class="fab fa-github"></i></a>
 <p class=description>Source</p>
 </header>
 <div class=global-menu>
@@ -37,17 +37,12 @@
 </nav>
 </div>
 <div class=content-container>
-<main><h1>PinGodGame</h1><div class="panel panel-primary"><div class=panel-header>
-<h3><i class="far fa-lightbulb"></i>&nbsp;Note</h3>
-</div><div class=panel-body>
-<p>This scene is autoloaded with a game and you can add this scene as a favorite in Godot by right clicking adding as a favorite.</p>
-</div>
-</div>
-<p><img src=../images/godot-pingodgame-tscn.jpg alt=image></p>
-<hr>
+<main><h1>Plugin - PinGodGame</h1><hr>
 <h2 id=scenes-using-this>Scenes using this</h2>
 <hr>
 <p>Most modes rely on this being loaded by using <code>GetNode&lt;PinGodGame>("/root/PinGodGame")</code> from the script.</p>
+<p>This scene doesn&rsquo;t house any other scenes, it&rsquo;s autoloaded with the game and you can add your own and override its script if need to.</p>
+<p>The BasicGame uses its own script based on PinGodGame named <code>CustomPinGodGame</code> which is autoloaded with the plugin.</p>
 <h2 id=pingodgametscn>PinGodGame.tscn</h2>
 <h2 id=scene-guidepingodgametscn><a href=./pingodgame.tscn>Scene Guide</a></h2>
 <h2 id=pingodgamecs>PinGodGame.cs</h2>
@@ -56,7 +51,7 @@
 Last updated on 26 Dec 2022
 <br>
 Published on 26 Dec 2022
-<br><a href=https://github.com/FlippingFlips/pingod-addons/edit/main/docs/content/pingodgame/_index.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-script-editing/ title="BasicGame - Script Editing Setup"><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - BasicGame - Script Editing Setup</a>
+<br><a href=https://github.com/FlippingFlips/pingod-addons/edit/main/docs/content/pingodgame/_index.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://FlippingFlips.github.io/pingod-addons/machine/recordings-playback/ title="Recording / Playback"><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - Recording / Playback</a>
 <a class="nav nav-next" href=https://FlippingFlips.github.io/pingod-addons/pingodgame/pingodgame.tscn/ title="PinGodGame.tscn - Scene">Next - PinGodGame.tscn - Scene <i class="fas fa-arrow-right" aria-hidden=true></i></a>
 </nav><footer><p class=powered>Powered by <a href=https://gohugo.io>Hugo</a>. Theme by <a href=https://themes.gohugo.io/hugo-theme-techdoc/>TechDoc</a>. Designed by <a href=https://github.com/thingsym/hugo-theme-techdoc>Thingsym</a>.</p>
 </footer>
@@ -80,47 +75,47 @@ Published on 26 Dec 2022
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-vp/>BasicGame - Visual Pinball</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-vp-script/>BasicGame - Visual Pinball Script</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-exporting/>BasicGame - Exporting</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-resources/>BasicGame - Adding Resources and Resource packs</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-game-assets-and-packs/>BasicGame - Assets and Pcks</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-create-asset-scene/>BasicGame - Create first asset scene</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/getting-started/basicgame-script-editing/>BasicGame - Script Editing Setup</a></li>
 </ul>
 </li>
-<li class="parent active has-sub-menu"><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/>PinGodGame<span class="mark opened">-</span></a>
-<ul class=sub-menu>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/pingodgame.tscn/>PinGodGame.tscn - Scene</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/items/>MachineConfig (Items)</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/trough/>Ball Trough (Scene)</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/audiomanager/>AudioManager</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/devoverlays/>Overlays (Developing)</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/pingodgame.cs/>PinGodGame.cs - Script</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/recordings-playback/>Recording / Playback</a></li>
-</ul>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/plugins/>Plugins - Autoload</a>
 </li>
-<li class=has-sub-menu><a href=https://FlippingFlips.github.io/pingod-addons/machine/>Machine<span class="mark closed">+</span></a>
+<li class=has-sub-menu><a href=https://FlippingFlips.github.io/pingod-addons/machine/>Plugin - Machine<span class="mark closed">+</span></a>
 <ul class=sub-menu>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/machine/adding-switches/>Adding Switches - PinGodGame.tscn</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/machine/adding-switches/>Adding Switches</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/machine/adding-godot-actions/>Adding Actions - Project Settings</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/machine/trough/>Ball Trough (Scene)</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/machine/usingswitches/>Using Switches C#</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/machine/usingswitchescontroller/>Using Switches (Controller)</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/machine/usingcoils/>Using Coils (C#)</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/machine/usingcoilscontroller/>Using Coils (Controller)</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/machine/recordings-playback/>Recording / Playback</a></li>
 </ul>
 </li>
-<li class=has-sub-menu><a href=https://FlippingFlips.github.io/pingod-addons/base-scenes/>Scenes Used<span class="mark closed">+</span></a>
+<li class="parent active has-sub-menu"><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/>Plugin - PinGodGame<span class="mark opened">-</span></a>
+<ul class=sub-menu>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/pingodgame.tscn/>PinGodGame.tscn - Scene</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodgame/pingodgame.cs/>PinGodGame.cs - Script</a></li>
+</ul>
+</li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/resources/>Plugin - Resources</a>
+</li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/audiomanager/>Plugin - AudioManager</a>
+</li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/memorymap/>Plugin - MemoryMap</a>
+</li>
+<li class=has-sub-menu><a href=https://FlippingFlips.github.io/pingod-addons/base-scenes/>BasicGame - Scenes Overview<span class="mark closed">+</span></a>
 <ul class=sub-menu>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/base-scenes/mainscene/>Main Scene</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/base-scenes/attractscene/>Attract Scene</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/base-scenes/gamescene/>Game Scene</a></li>
-</ul>
-</li>
-<li class=has-sub-menu><a href=https://FlippingFlips.github.io/pingod-addons/modes/>Base Game Modes (Scenes)<span class="mark closed">+</span></a>
-<ul class=sub-menu>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/modes/score-mode/>ScoreMode - Scene</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/modes/bonus-mode/>Bonus</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/modes/score-entry-mode/>Score Entry</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/modes/tilt-mode/>Tilt Mode Scene</a></li>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/modes/base-mode/>BaseMode (BasicGame)</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/base-scenes/score-mode/>ScoreMode - Scene</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/base-scenes/base-mode/>BaseMode (BasicGame)</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/base-scenes/bonus-mode/>Bonus</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/base-scenes/score-entry-mode/>Score Entry</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/base-scenes/tilt-mode/>Tilt Mode Scene</a></li>
 </ul>
 </li>
 <li class=has-sub-menu><a href=https://FlippingFlips.github.io/pingod-addons/tools/>Tools / Controls<span class="mark closed">+</span></a>
@@ -130,17 +125,27 @@ Published on 26 Dec 2022
 <li><a href=https://FlippingFlips.github.io/pingod-addons/tools/pinballlanesnode/>PinballLanesNode (PinGodGameMode:Node)</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/tools/pinballtargetsbank/>PinballTargetsBank (Node)</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/tools/videoplayerpinball/>VideoPlayerPinball (VideoPlayer)</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/tools/playfield-switch-window/>Creating custom playfield switch window</a></li>
+</ul>
+</li>
+<li class=has-sub-menu><a href=https://FlippingFlips.github.io/pingod-addons/tips-guides/>Tip / Guides / Notes<span class="mark closed">+</span></a>
+<ul class=sub-menu>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/tips-guides/custom-score-mode/>Creating custom score mode scene</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/tips-guides/new-project-pingodgame-template/>PinGodGame Projects - Create Template</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/tips-guides/new-project/>Blank Empty Projects</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/tips-guides/create-pingodgame-template/>PinGodGame Projects - New From Template</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/tips-guides/create-pingodgame-template-script/>PinGodGame Projects - Add a C# Script</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/tips-guides/updating-godot4/>PinGodGame - Godot 4</a></li>
 </ul>
 </li>
 <li class=has-sub-menu><a href=https://FlippingFlips.github.io/pingod-addons/game-assets/>Game Assets<span class="mark closed">+</span></a>
 <ul class=sub-menu>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/game-assets/audiomanager/>Assets - Audio Manager</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/game-assets/video/>Assets - Video</a></li>
 </ul>
 </li>
 <li class=has-sub-menu><a href=https://FlippingFlips.github.io/pingod-addons/languages/>Languages<span class="mark closed">+</span></a>
 <ul class=sub-menu>
-<li><a href=https://FlippingFlips.github.io/pingod-addons/languages/attractscene/>Language files</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/languages/lang-files/>Language files</a></li>
 </ul>
 </li>
 <li class=has-sub-menu><a href=https://FlippingFlips.github.io/pingod-addons/exporting/>Exporting / Publishing<span class="mark closed">+</span></a>
@@ -151,6 +156,24 @@ Published on 26 Dec 2022
 <li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/export-windows-icon/>Export Windows Icons</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/csharp-large-exports/>C# Pcks Are Large...</a></li>
 <li><a href=https://FlippingFlips.github.io/pingod-addons/exporting/link-separate-assets-project/>Link assets into separate assets project</a></li>
+</ul>
+</li>
+<li class=has-sub-menu><a href=https://FlippingFlips.github.io/pingod-addons/pingodnetproc/>P-ROC - PinGod NetProc<span class="mark closed">+</span></a>
+<ul class=sub-menu>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodnetproc/getting-started/>Getting Started</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodnetproc/building-running/>Building / Debug</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodnetproc/autoloads/>Autoloads</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodnetproc/procscene/>ProcScene - Main Scene</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodnetproc/pingodprocmode/>Mode - PinGodProcMode:IMode</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodnetproc/database-sql/>Database - Sql</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodnetproc/pingodgame.tscn/>PinGodGamePROC</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodnetproc/pingod-procgame-controller/>PinGodProc GameController</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodnetproc/proc-basemodes/>Mode - Base Modes</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodnetproc/attractmode/>Mode - AttractMode</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodnetproc/scoredisplayprocmode/>Mode - ScoreDisplayProcMode</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodnetproc/mymode/>Mode - MyMode</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodnetproc/simulator-window/>Simulator - Switch Window</a></li>
+<li><a href=https://FlippingFlips.github.io/pingod-addons/pingodnetproc/simulator-vp/>Simulator - Visual Pinball</a></li>
 </ul>
 </li>
 </ul>

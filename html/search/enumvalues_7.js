@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['off_824',['Off',['../BallSearchSignalOption_8cs.html#a218e80e0d23d6a08a11ab8f45d46f0fcad15305d7a4e34e02489c74a5ef542f36',1,'Off():&#160;BallSearchSignalOption.cs'],['../Light_8cs.html#a6e89b3acace2d19c3aa70885f761343cad15305d7a4e34e02489c74a5ef542f36',1,'Off():&#160;Light.cs'],['../RecordPlaybackOption_8cs.html#a1721508a09d0aa0c06fc50cd057b3160ad15305d7a4e34e02489c74a5ef542f36',1,'Off():&#160;RecordPlaybackOption.cs']]],
-  ['on_825',['On',['../BallSearchSignalOption_8cs.html#a218e80e0d23d6a08a11ab8f45d46f0fca521c36a31c2762741cf0f8890cbe05e3',1,'On():&#160;BallSearchSignalOption.cs'],['../Light_8cs.html#a6e89b3acace2d19c3aa70885f761343ca521c36a31c2762741cf0f8890cbe05e3',1,'On():&#160;Light.cs']]]
+  ['off_1354',['Off',['../namespacePinGod_1_1Base.html#ac64dd1c61e37cbe67dbd0e006ea38046ad15305d7a4e34e02489c74a5ef542f36',1,'PinGod.Base.Off()'],['../namespacePinGod_1_1Base.html#ab1c632a6bc4f04ed95d7576151322326ad15305d7a4e34e02489c74a5ef542f36',1,'PinGod.Base.Off()'],['../namespacePinGod_1_1Base.html#ab8f9d04a9525783bbb09626ad9ccf137ad15305d7a4e34e02489c74a5ef542f36',1,'PinGod.Base.Off()']]],
+  ['on_1355',['On',['../namespacePinGod_1_1Base.html#ac64dd1c61e37cbe67dbd0e006ea38046a521c36a31c2762741cf0f8890cbe05e3',1,'PinGod.Base.On()'],['../namespacePinGod_1_1Base.html#ab1c632a6bc4f04ed95d7576151322326a521c36a31c2762741cf0f8890cbe05e3',1,'PinGod.Base.On()']]]
 ];

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['keep_819',['keep',['../PinGodStrecthAspect_8cs.html#a30e639572ea001d4145ce4e97a209a14a18ccf61d533b600bbf5a963359223fe4',1,'PinGodStrecthAspect.cs']]],
-  ['keep_5fheight_820',['keep_height',['../PinGodStrecthAspect_8cs.html#a30e639572ea001d4145ce4e97a209a14a49ac9b97b1a0cb12383bc95cf9b1ce94',1,'PinGodStrecthAspect.cs']]],
-  ['keep_5fwidth_821',['keep_width',['../PinGodStrecthAspect_8cs.html#a30e639572ea001d4145ce4e97a209a14a36f53221a01a15bbbd99e6de90efc00b',1,'PinGodStrecthAspect.cs']]]
+  ['keep_1348',['keep',['../namespacePinGod_1_1Base.html#adc53fde9e75a8bf4d772a287022e7cc5a18ccf61d533b600bbf5a963359223fe4',1,'PinGod::Base']]],
+  ['keep_5fheight_1349',['keep_height',['../namespacePinGod_1_1Base.html#adc53fde9e75a8bf4d772a287022e7cc5a49ac9b97b1a0cb12383bc95cf9b1ce94',1,'PinGod::Base']]],
+  ['keep_5fwidth_1350',['keep_width',['../namespacePinGod_1_1Base.html#adc53fde9e75a8bf4d772a287022e7cc5a36f53221a01a15bbbd99e6de90efc00b',1,'PinGod::Base']]]
 ];

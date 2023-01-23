@@ -1,15 +1,6 @@
 var searchData=
 [
-  ['machinestatesread_892',['MachineStatesRead',['../classGameSettings.html#a3c3bed4afe7821c3dea5ea2f4418264b',1,'GameSettings']]],
-  ['machinestateswrite_893',['MachineStatesWrite',['../classGameSettings.html#a2612fe50301a0d6b49b204dcc42e4a06',1,'GameSettings']]],
-  ['machinestateswritedelay_894',['MachineStatesWriteDelay',['../classGameSettings.html#a6f6fb9253e7cd4e66aebe2e0b9bb370e',1,'GameSettings']]],
-  ['mastervolume_895',['MasterVolume',['../classGameSettings.html#a6085ffd636c2f0c51dd5c9ae84c717ba',1,'GameSettings']]],
-  ['maxextraballs_896',['MaxExtraBalls',['../classGameSettings.html#a8b980b83a63c7aa4e9e6b2f774c3e43c',1,'GameSettings']]],
-  ['maxhiscorescount_897',['MaxHiScoresCount',['../classGameSettings.html#a00521b49cb42fb7dc5732ea7806142b5',1,'GameSettings']]],
-  ['mballsaveseconds_898',['MballSaveSeconds',['../classTroughOptions.html#aff6797330deef2c0a24e9331468f6027',1,'TroughOptions']]],
-  ['music_899',['Music',['../classAudioManager.html#a9a9ebdc58bd3ca5d4693940f15036d5c',1,'AudioManager']]],
-  ['musicassets_900',['MusicAssets',['../classAudioManager.html#a0202050136bb43d11283a68398f98796',1,'AudioManager']]],
-  ['musicenabled_901',['MusicEnabled',['../classAudioManager.html#acb04c398cadc44c2536e4a7b691243fc',1,'AudioManager.MusicEnabled()'],['../classGameSettings.html#a5bda96443709f3561710537637894dc2',1,'GameSettings.MusicEnabled()']]],
-  ['musicplayer_902',['MusicPlayer',['../classAudioManager.html#ae150b67eee371c8f7543849add9ea811',1,'AudioManager']]],
-  ['musicvolume_903',['MusicVolume',['../classGameSettings.html#a0ce2d724fedec06abc1cfa61307c8e3f',1,'GameSettings']]]
+  ['language_1429',['Language',['../classPinGod_1_1Core_1_1Adjustments.html#a221a58eb5c763d853a98f31196910565',1,'PinGod.Core.Adjustments.Language()'],['../classPinGod_1_1Core_1_1Service_1_1AdjustmentsNode.html#aa6506bf258884368189e17a1d66787ed',1,'PinGod.Core.Service.AdjustmentsNode.Language()']]],
+  ['loglevel_1430',['LogLevel',['../interfacePinGod_1_1Core_1_1IPinGodLogger.html#a5ed12de0d12c451635a42e4a4bd7549b',1,'PinGod.Core.IPinGodLogger.LogLevel()'],['../interfacePinGod_1_1Core_1_1IPinGodGame.html#a55e0e30f418ba01f9336db2217e9f54a',1,'PinGod.Core.IPinGodGame.LogLevel()'],['../classPinGod_1_1Core_1_1Adjustments.html#a9c41885d67c20ddfd2f5903cca3b0260',1,'PinGod.Core.Adjustments.LogLevel()'],['../classPinGod_1_1Core_1_1Service_1_1AdjustmentsNode.html#acc27c1d2ff37cbd025dc76335ec9ddff',1,'PinGod.Core.Service.AdjustmentsNode.LogLevel()'],['../classPinGod_1_1Game_1_1PinGodGame.html#a0e4338b581e6571fb59219a68e0cfc5b',1,'PinGod.Game.PinGodGame.LogLevel()']]],
+  ['lowdpi_1431',['LowDpi',['../classPinGod_1_1Base_1_1DisplaySettings.html#a76a1997b4a0f6e1cd4ddab3216939071',1,'PinGod.Base.DisplaySettings.LowDpi()'],['../classDisplaySettings.html#a0b0a6d91b42504580cefb9a7067dba8a',1,'DisplaySettings.LowDpi()']]]
 ];

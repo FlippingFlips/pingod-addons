@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['debug_813',['Debug',['../PinGodLogLevel_8cs.html#a5ae4665e4785eba8ee58343a51406bbfaa603905470e2a5b8c13e96b579ef0dba',1,'PinGodLogLevel.cs']]]
+  ['debug_1341',['Debug',['../namespacePinGod_1_1Base.html#a4c965c23cbdb7db38eccc29c480434d2aa603905470e2a5b8c13e96b579ef0dba',1,'PinGod::Base']]]
 ];

@@ -1,17 +1,6 @@
 var searchData=
 [
-  ['randomnumber_341',['RandomNumber',['../classPinGodGame.html#a5bfb8f1fc5bdf69577513cddd8c5ecbf',1,'PinGodGame']]],
-  ['record_342',['Record',['../RecordPlaybackOption_8cs.html#a1721508a09d0aa0c06fc50cd057b3160a6a0d9eaee314c567fd72fb97ee707a36',1,'RecordPlaybackOption.cs']]],
-  ['recordplaybackoption_343',['RecordPlaybackOption',['../RecordPlaybackOption_8cs.html#a1721508a09d0aa0c06fc50cd057b3160',1,'RecordPlaybackOption.cs']]],
-  ['recordplaybackoption_2ecs_344',['RecordPlaybackOption.cs',['../RecordPlaybackOption_8cs.html',1,'']]],
-  ['reset_345',['Reset',['../BallSearchSignalOption_8cs.html#a218e80e0d23d6a08a11ab8f45d46f0fca526d688f37a86d3c3f27d0c5016eb71d',1,'BallSearchSignalOption.cs']]],
-  ['resetlanescompleted_346',['ResetLanesCompleted',['../classPinballLanesNode.html#a87e08196aea49de1d4bcef40ce172d78',1,'PinballLanesNode']]],
-  ['resettargets_347',['ResetTargets',['../classPinballTargetsBank.html#a1d90d01ba7b6fe99002435e2fe76337a',1,'PinballTargetsBank']]],
-  ['resettilt_348',['ResetTilt',['../classPinGodGame.html#a8c0c6478d65b785ac6499e327ac54d63',1,'PinGodGame']]],
-  ['resolve_349',['Resolve',['../classResources.html#acb60889278847d84daa5f0a363c227ac',1,'Resources']]],
-  ['resources_350',['Resources',['../classResources.html',1,'']]],
-  ['resources_2ecs_351',['Resources.cs',['../Resources_8cs.html',1,'']]],
-  ['resume_352',['resume',['../GameSyncState_8cs.html#ad2c8ab5cd5e8f896f213e0e033727672a69f2afc2390cec954f7c208b07212d39',1,'GameSyncState.cs']]],
-  ['rotatelanesleft_353',['RotateLanesLeft',['../classPinballLanesNode.html#aae12449e1223d993bb6925ab8a354584',1,'PinballLanesNode']]],
-  ['rotatelanesright_354',['RotateLanesRight',['../classPinballLanesNode.html#a8c6f2dfc95c3fb8820e76ec7ba785f94',1,'PinballLanesNode']]]
+  ['quit_517',['Quit',['../interfacePinGod_1_1Core_1_1IPinGodGame.html#ae0b752cdb0921c548564c4fbe3e7e3e8',1,'PinGod.Core.IPinGodGame.Quit()'],['../classPinGod_1_1Game_1_1PinGodGame.html#a884c955bda557e3ec248bf488ddb3977',1,'PinGod.Game.PinGodGame.Quit()']]],
+  ['quit_518',['quit',['../classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#a283e06eaa5104fc8f2cdb32126832c9dadbd73c2b545209688ed794c0d5413d5a',1,'PinGod.Core.Service.MemoryMap.quit()'],['../namespacePinGod_1_1Base.html#a3bfac1e5e3163ea4141ba43d6c8e42dfadbd73c2b545209688ed794c0d5413d5a',1,'PinGod.Base.quit()']]],
+  ['quitrequested_519',['QuitRequested',['../interfacePinGod_1_1Core_1_1IPinGodGame.html#a41deee0a0fe9471e816f780a0a0d6d46',1,'PinGod.Core.IPinGodGame.QuitRequested()'],['../classPinGod_1_1Game_1_1PinGodGame.html#a5775cdf1251cb201ffd4e60393940d2d',1,'PinGod.Game.PinGodGame.QuitRequested()']]]
 ];

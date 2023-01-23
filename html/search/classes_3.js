@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['displaysettings_475',['DisplaySettings',['../classDisplaySettings.html',1,'']]],
-  ['displaysettingsscene_476',['DisplaySettingsScene',['../classDisplaySettingsScene.html',1,'']]]
+  ['displaysettings_756',['DisplaySettings',['../classDisplaySettings.html',1,'DisplaySettings'],['../classPinGod_1_1Base_1_1DisplaySettings.html',1,'PinGod.Base.DisplaySettings']]],
+  ['displaysettingsscene_757',['DisplaySettingsScene',['../classDisplaySettingsScene.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['warning_834',['Warning',['../PinGodLogLevel_8cs.html#a5ae4665e4785eba8ee58343a51406bbfa0eaadb4fcb48a0a0ed7bc9868be9fbaa',1,'PinGodLogLevel.cs']]]
+  ['verbose_1366',['Verbose',['../namespacePinGod_1_1Base.html#a4c965c23cbdb7db38eccc29c480434d2ad4a9fa383ab700c5bdd6f31cf7df0faf',1,'PinGod::Base']]]
 ];

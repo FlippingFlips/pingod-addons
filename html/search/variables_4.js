@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['maxplayers_794',['MaxPlayers',['../classPinGodGame.html#a2aceefb2f82b244c0ce33b0bf3ad0acd',1,'PinGodGame']]],
-  ['memmapping_795',['memMapping',['../classPinGodGame.html#a1f21941362e99fbe7530007099077770',1,'PinGodGame']]],
-  ['menunamelabel_796',['menuNameLabel',['../classServiceMenu.html#a35bcb50ce04836aa2dc848864ba3aa63',1,'ServiceMenu']]],
-  ['multiball_5fscene_797',['MULTIBALL_SCENE',['../classGame.html#a988eefd32f8ce0b11d18e9e02530a882',1,'Game']]]
+  ['isenabled_1298',['IsEnabled',['../classPinGod_1_1Core_1_1Service_1_1MemoryMapNode.html#a5d8642c042d8ec91e5b5b6685051fc1b',1,'PinGod::Core::Service::MemoryMapNode']]]
 ];

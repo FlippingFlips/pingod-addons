@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['inbonusmode_792',['InBonusMode',['../classPinGodGame.html#a7ac476c50e6d6b24ce7d924f7c4e179b',1,'PinGodGame']]],
-  ['ismultiballrunning_793',['IsMultiballRunning',['../classPinGodGame.html#adbca937e8a0daa12d283217d9f656651',1,'PinGodGame']]]
+  ['coiltotal_1297',['CoilTotal',['../classPinGod_1_1Core_1_1Service_1_1MemoryMapNode.html#ad7b29f2b997c5bcf0ce484d44d3fb8be',1,'PinGod::Core::Service::MemoryMapNode']]]
 ];

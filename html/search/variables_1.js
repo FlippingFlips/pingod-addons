@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ballinfolabel_790',['ballInfolabel',['../classScoreMode.html#a00f99a3db4abc3d4fceb846c87a55ec6',1,'ScoreMode']]]
+  ['adjustments_1294',['Adjustments',['../classAudioSettings.html#a238dcaf8e75f98344dc579997bacb336',1,'AudioSettings']]]
 ];

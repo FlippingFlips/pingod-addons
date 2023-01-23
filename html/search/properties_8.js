@@ -1,9 +1,6 @@
 var searchData=
 [
-  ['initials_883',['Initials',['../interfaceIPlayer.html#ae83a0be56a28886a2282e64f27df5069',1,'IPlayer.Initials()'],['../classPinGodPlayer.html#acffa1f352bbd5004661813abcfd48d57',1,'PinGodPlayer.Initials()']]],
-  ['inservicemenu_884',['InServiceMenu',['../classMainScene.html#a5b4d25d92a5baca0e224bb80729135a9',1,'MainScene']]],
-  ['isballstarted_885',['IsBallStarted',['../classPinGodGame.html#abdc73ec0da7552cf0dd2747cfa3505fa',1,'PinGodGame']]],
-  ['isenabled_886',['IsEnabled',['../classSwitch.html#a787e4cb484fa1c7f0cc554eb39ae66d9',1,'Switch']]],
-  ['issearchenabled_887',['IsSearchEnabled',['../classBallSearchOptions.html#af59ffbce654a906b4e4ee097a0f79947',1,'BallSearchOptions']]],
-  ['istilted_888',['IsTilted',['../classPinGodGame.html#a48191709f6cb21169c38f3927c448982',1,'PinGodGame']]]
+  ['height_1419',['Height',['../classPinGod_1_1Base_1_1DisplaySettings.html#af4ac4296ddf727bdee7a65b27db00060',1,'PinGod.Base.DisplaySettings.Height()'],['../classDisplaySettings.html#a810bc5c61c581e353e4cda325bfe5ce2',1,'DisplaySettings.Height()']]],
+  ['heightdefault_1420',['HeightDefault',['../classPinGod_1_1Base_1_1DisplaySettings.html#a8e749d75b7b8bf68296c895ae13fad84',1,'PinGod.Base.DisplaySettings.HeightDefault()'],['../classDisplaySettings.html#ab25ab15011a42e45eda1a23fdcc79de5',1,'DisplaySettings.HeightDefault()']]],
+  ['highscores_1421',['HighScores',['../classPinGod_1_1Core_1_1Service_1_1Audits.html#a9ccf2af42b6397494bd9bdad0f99fe8b',1,'PinGod::Core::Service::Audits']]]
 ];
