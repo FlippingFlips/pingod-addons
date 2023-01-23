@@ -30,13 +30,7 @@ public partial class BasicGame : Game
         _window.QueueFree();
      */
 
-    public void OnBallSaveDisabled()
-    {
-        Logger.Log(LogLevel.Info, Logger.BBColor.green, nameof(BasicGame), ":"+nameof(OnBallSaveDisabled));
-    }
+    public void OnBallSaveDisabled() => Logger.Log(LogLevel.Info, Logger.BBColor.green, nameof(BasicGame), ":" + nameof(OnBallSaveDisabled));
 
-    public void OnBallSaveEnabled()
-    {
-        Logger.Log(LogLevel.Info, Logger.BBColor.green, nameof(BasicGame), ":" + nameof(OnBallSaveEnabled));
-    }
+    public void OnBallSaveEnabled() => Logger.Log(LogLevel.Info, Logger.BBColor.green, nameof(BasicGame), ":" + nameof(OnBallSaveEnabled));
 }

@@ -1,51 +1,59 @@
+'#########################################################################################
+' PinGod NetProc (P-ROC) by HorsePin
+' Demo game running dotnet (netproc) p-roc software through a simulator
+'#########################################################################################
 Option Explicit
 On Error Resume Next
 	ExecuteGlobal GetTextFile("controller.vbs") ' Std Controller for DOF etc.
 	If Err Then MsgBox "You need the Controller.vbs file in order to run this table (installed with the VPX package in the scripts folder)"
 On Error Goto 0
-
-'*****************************
-' Controller scripts
-' PinGod.Vp.Controller. Requires modded Core Vbs for different switches csharp
-'*****************************
-LoadPinGoVpController 
-Sub LoadPinGoVpController
+' ----------------------------------------------------------------------------------------
+' SET DEBUG OR RELEASE
+' ----------------------------------------------------------------------------------------
+'PinGod Debug
+Const IsDebug = True
+Const GameDirectory = "..\" ' Loads the godot pingod game project
+'PinGod Release
+'Const IsDebug = False ' set false to load an export
+'Const GameDirectory = ".\PinGod.BasicGame.exe" 'exported game
+' ----------------------------------------------------------------------------------------
+' LoadPinGoVpController = Requires modded Core Vbs for different switches csharp. PinGod.vbs, core_csharp.vbs
+' https://github.com/FlippingFlips/pingod-controller-com/releases
+' ----------------------------------------------------------------------------------------
+LoadPinGodVpController 
+Sub LoadPinGodVpController
 	'On Error Resume Next
 		If ScriptEngineMajorVersion<5 Then MsgBox "VB Script Engine 5.0 or higher required"
 		ExecuteGlobal GetTextFile("PinGod.vbs")
 		If Err Then MsgBox "Unable to open " & VBSfile & ". Ensure that it is in the same folder as this table. " & vbNewLine & Err.Description
 		Set Controller=CreateObject("PinGod.VP.Controller")		
-		If Err Then MsgBox "Failed to initialize PinGod.VP controller, is it registered?" : Exit Sub
+		If Err Then MsgBox "Failed to initialize PinGod.VP controller, is it registered?" : Exit Sub		
 	On Error Goto 0
 End Sub
-
-'Release
-'Const IsDebug = False ' set false to load an export
-'Const GameDirectory = ".\PinGod.BasicGame.exe" 'exported game
-
-'Debug
-Const IsDebug = True
-Const GameDirectory = "..\" ' Loads the godot pingod game project
+' ----------------------------------------------------------------------------------------
+' CONTROLLER OPTIONS - This game is using leds, not lamps, that can be changed here
+' ----------------------------------------------------------------------------------------
 Const UseSolenoids = 1 ' Check for solenoid states?
 Const UsePdbLeds = 1  ' use led (color)
+Const PdbOffColor = 3815994 ' Led off state color 
 Const UseLamps = 0  ' Check for lamp states?
-Dim bsSaucer, plungerIM, swSaucer : swSaucer = 27
-
-' Set trough switch numbers. BasicGame 81,82,83,84
-Dim TroughSwitches,bsTrough:TroughSwitches = Array(81,82,83,84)
-
-
-'**********************
-' VP table display / controller events
-'**********************
+' ----------------------------------------------------------------------------------------
+' TABLE OBJECT SWITCH LINKING
+' ----------------------------------------------------------------------------------------
+Dim bsSaucer, plungerIM, swSaucer : swSaucer = 35
+Dim slingL, slingR : slingL = 30 : slingR = 31
+' Set trough switch numbers.
+Dim TroughSwitches,bsTrough:TroughSwitches = Array(21,22,23,24)
+' ----------------------------------------------------------------------------------------
+' VP MAIN TABLE CONTROL - Exit, Pause
+' ----------------------------------------------------------------------------------------
 Sub Table1_Exit : Controller.Stop : End Sub ' Closes the display window, sends the quit action
-Sub Table1_Paused: Controller.Pause 1 :  Controller.Pause 0 : End Sub
-Sub Table1_UnPaused: Controller.Pause 1 : End Sub
-
-'**********************
-' VP init
-' Inits the controller then waits for the display to fully load into initial scene.
-'**********************
+Sub Table1_Paused: Controller.Pause 1 : End Sub
+Sub Table1_UnPaused: Controller.Pause 0 : End Sub
+' ----------------------------------------------------------------------------------------
+' VP TABLE INIT = Inits the controller then waits for the display to fully load into initial scene.
+' * This wait is done by a timer on the LeftFlipper. 
+' ----------------------------------------------------------------------------------------
 Sub Table1_Init	
 	With Controller
 		.DisplayNoWindow 	= False
@@ -58,10 +66,9 @@ Sub Table1_Init
 	If Err Then MsgBox Err.Description : Exit Sub
 	End With
     On Error Goto 0	
-
 	If Err Then MsgBox Err.Description : Exit Sub
 
-	LeftFlipper.TimerInterval = 200
+	LeftFlipper.TimerInterval = 500
 	LeftFlipper.TimerEnabled = 1
 End Sub
 'Game ready checker from flipper timer
@@ -70,36 +77,25 @@ Sub LeftFlipper_Timer
 	if not Controller.GameRunning Then LeftFlipper.TimerEnabled = 1 : Exit Sub
 	InitGame
 End Sub
-
-'**********************
+' ----------------------------------------------------------------------------------------
 ' GAME / VP init
-' When the display is ready initialize VPM controller scripts and table objects
-'**********************
+' ** When the display is ready initialize VPM controller scripts and table objects **
+' ----------------------------------------------------------------------------------------
 Dim initialized : initialized = 0
 Sub InitGame
 	if initialized then exit sub ' prevent any chance of init twice if author decides to use LFlipper Timers
-
 	initialized=1
-	'init core vbs, vpm
+
+	' INIT CORE VBS - SETUP SWITCHES AND LAMPS
 	vpmInit me
 	vpmMapLights AllLamps		'Auto lamps collection, lamp id in timerinterval
 	vpmCreateEvents AllSwitches 'Auto Switches collection from the swNum in timerInterval
 
-	'Init timers for updates
+	' INIT PINMAME TIMERS
 	pulsetimer.Enabled=1
-	PinMAMETimer.Enabled=1		
-		
-	Set bsTrough = New cvpmTrough
-	bsTrough.Size = UBound(TroughSwitches)+1
-	bsTrough.Balls = UBound(TroughSwitches)+1
-	bsTrough.InitSwitches TroughSwitches ' trough switches
-	bsTrough.InitExit BallRelease, 90, 8	
-	bsTrough.CreateEvents "bsTrough",  Drain
-	bsTrough.InitEntrySounds "Drain", "", ""
-	bsTrough.InitExitSounds "BallRelease", ""	
-    bsTrough.Reset	
+	PinMAMETimer.Enabled=1				
 
-  ' Auto Plunger
+    ' AUTO PLUNGER
     Const IMPowerSetting = 50 ' Plunger Power
     Const IMTime = 0.6        ' Time in seconds for Full Plunge
     Set plungerIM = New cvpmImpulseP
@@ -110,137 +106,103 @@ Sub InitGame
 		'.InitExitSnd "plunger2", "plunger"
     End With
 
+	' TROUGH
+	Set bsTrough = New cvpmTrough
+	bsTrough.Size = UBound(TroughSwitches)+1 ' calc size and balls from switch count
+	bsTrough.Balls = UBound(TroughSwitches)+1
+	bsTrough.InitSwitches TroughSwitches ' trough switches
+	bsTrough.InitExit BallRelease, 90, 8	
+	bsTrough.CreateEvents "bsTrough",  Drain
+	bsTrough.InitEntrySounds "Drain", "", ""
+	bsTrough.InitExitSounds "BallRelease", ""	
+	bsTrough.Reset
+
+	' SAUCER
 	Set bsSaucer = New cvpmSaucer
 	bsSaucer.InitKicker Kicker001, swSaucer, 165, 10, 0
 	bsSaucer.CreateEvents "bsSaucer", Kicker001
 	'bsSaucer.InitSounds "sp76-kick-enter", "", "sp76-kick-exit"
 
-'    ' ### Nudging ###
+	' NUDGING
     vpmNudge.TiltSwitch = swTilt
     vpmNudge.Sensitivity = 0.8
 	vpmNudge.TiltObj = Array(LSling,RSling)
 
-
+	' LOADING SCREEN
 	If Err Then MsgBox Err.Description
 	LoadingText.Visible = false ' Hide the overlay (loading screen)	
-	On Error Goto 0	
-	
+	On Error Goto 0		
 End Sub
-
-'****************************
-' Keyboard / Machine
-'****************************
+' ----------------------------------------------------------------------------------------
+' KEY / INPUT HANDLING = PLAYER CAN'T USE UNTIL CONTROLLER.GAMERUNNING = TRUE
+' ----------------------------------------------------------------------------------------
 Sub Table1_KeyDown(ByVal keycode)
-
+	' GAME RUNNING CHECK
 	if Controller.GameRunning = 0 then Exit Sub 'exit because no display is available
-
-	If keycode = PlungerKey Then
-		Plunger.PullBack : PlaySoundAt "plungerpull", Plunger		
-	End If
-
-	If keycode = LeftFlipperKey and FlippersOn Then
-		LeftFlipper.RotateToEnd : PlaySoundAt "fx_flipperup", LeftFlipper
-	End If
-
-	If keycode = RightFlipperKey and FlippersOn Then
-		RightFlipper.RotateToEnd : PlaySoundAt "fx_flipperup", RightFlipper
-	End If
-
-	If vpmKeyDown(keycode) Then Exit Sub  ' This will handle machine switches and flippers etc
+	' MANUAL PLUNGER 
+	If keycode = PlungerKey Then Plunger.PullBack : PlaySoundAt "plungerpull", Plunger : End If
+	' FLIPPERS
+	If keycode = LeftFlipperKey and FlippersOn Then : SolLFlipper(1) End If
+	If keycode = RightFlipperKey and FlippersOn Then : SolRFlipper(1) End If
+	' MACHINE SWITCHES = This will handle machine switches and flippers etc
+	If vpmKeyDown(keycode) Then Exit Sub 
 
 End Sub
-
 Sub Table1_KeyUp(ByVal keycode)
-
+	' GAME RUNNING CHECK
 	if Controller.GameRunning = 0 then Exit Sub 'exit because no display is available
-
-	If keycode = PlungerKey Then
-		Plunger.Fire : PlaySoundAt "plunger", Plunger
-	End If
-
-	If keycode = LeftFlipperKey and FlippersOn Then
-		LeftFlipper.RotateToStart : PlaySoundAt "fx_flipperdown", LeftFlipper
-	End If
-
-	If keycode = RightFlipperKey and FlippersOn Then		
-		RightFlipper.RotateToStart : PlaySoundAt "fx_flipperdown", RightFlipper
-	End If
-
-	If vpmKeyUp(keycode) Then Exit Sub ' This will handle machine switches and flippers etc
+	' MANUAL PLUNGER 
+	If keycode = PlungerKey Then Plunger.Fire : PlaySoundAt "plunger", Plunger :End If
+	' FLIPPERS
+	If keycode = LeftFlipperKey and FlippersOn Then : SolLFlipper(0) End If
+	If keycode = RightFlipperKey and FlippersOn Then : SolRFlipper(0) End If
+	' MACHINE SWITCHES = This will handle machine switches and flippers etc
+	If vpmKeyUp(keycode) Then Exit Sub
 End Sub
-'****************************
-
-'****************************
+' ----------------------------------------------------------------------------------------
 ' Solenoids / Coils / Callbacks
-'****************************
-SolCallback(0) = "PinGodAlive"
-SolCallback(1) = "bsTrough.solOut" ' This exit is setup in the init
-SolCallback(2) = "FlippersEnabled"
-SolCallback(3) = "AutoPlunger"
-SolCallback(4) = "bsSaucer.solOut" ' This exit is setup in the init
-' Lampshows (coils, fake innit)
-SolCallback(33) = "DisableLampShows"
-SolCallback(34) = "Lampshow1"
-SolCallback(35) = "Lampshow2"
-
-Sub PinGodAlive(Enabled)
-	'on error resume next	
-	If enabled = 1 then
-		Debug.Print "Game window ready"
-		'bsTrough.Reset	= trough not created yet
-	Else
-		Debug.Print "Game window lost."
-		MsgBox "Game window lost."
-	End if
-	
-End Sub
-
-'Do it like this as one on/off, will make it faster
-Dim FlippersOn : FlippersOn = 0
-Sub FlippersEnabled(Enabled)
-	'Debug.Print "flippers on coil " & Enabled
-	FlippersOn = Enabled
-	If not FlippersOn then LeftFlipper.RotateToStart : RightFlipper.RotateToStart : PlaySoundAt "fx_flipperdown", LeftFlipper
-End Sub
+' ----------------------------------------------------------------------------------------
+SolCallback(4)  = "bsTrough.solOut" ' Trough Eject Coil
+SolCallback(10) = "FlippersEnabled" ' Flipper Relay (Hack) Wouldn't use in real machine
+SolCallback(11) = "bsSaucer.solOut" ' Saucer Eject Coil
+SolCallback(12) = "AutoPlunger" '	' Auto plunger ball saves
 
 Sub AutoPlunger(Enabled)
-  If Enabled Then
-    PlungerIM.AutoFire
-  End If
+  If Enabled Then PlungerIM.AutoFire : End If
 End Sub
+ ' ----------------------------------------------------------------------------------------
+' FLIPPERS - THESE ARE ENABLED THROUGH A RELAY IN GAME
+' ----------------------------------------------------------------------------------------
+Dim FlippersOn : FlippersOn = 0
+Sub FlippersEnabled(Enabled) : FlippersOn = Enabled : End Sub
 
-Sub Lampshow1(Enabled)
-	if Enabled then : LightSeq001.StopPlay : LightSeq001.Play SeqUpOff, 10, 2 : Debug.print "lampshow1"	
+Sub SolLFlipper(Enabled)
+    If Enabled Then
+        PlaySoundAt SoundFX("flipperup",DOFFlippers),LeftFlipper:LeftFlipper.RotateToEnd
+    Else
+        PlaySoundAt SoundFX("flipperdown",DOFFlippers),LeftFlipper:LeftFlipper.RotateToStart
+    End If
 End Sub
-
-Sub Lampshow2(Enabled)		
-	if Enabled then : LightSeq001.StopPlay : LightSeq001.Play SeqDownOff, 10, 2 : Debug.print "lampshow2"	
+ 
+Sub SolRFlipper(Enabled)
+    If Enabled Then
+        PlaySoundAt SoundFX("flipperup",DOFFlippers),RightFlipper:RightFlipper.RotateToEnd
+    Else
+        PlaySoundAt SoundFX("flipperdown",DOFFlippers),RightFlipper:RightFlipper.RotateToStart
+    End If
 End Sub
-
-Sub DisableLampShows(Enabled)		
-	if Enabled then : LightSeq001.StopPlay : Debug.print "stopping lampshows"	
-End Sub
-
-'*****GI Lights On
-dim xx
-For each xx in GI:xx.State = 1: Next
-
-'**********Sling Shot Animations
-' Rstep and Lstep  are the variables that increment the animation
-'****************
+' ----------------------------------------------------------------------------------------
+' SLINGSHOTS - SWITCH NUMBERS SET TOP OF SCRIPT
+' ----------------------------------------------------------------------------------------
 Dim RStep, Lstep
-
 Sub RightSlingShot_Slingshot
-	vpmTimer.PulseSw 26 ' pulse switch same Controller.Switch 26, 1/0
+	vpmTimer.PulseSw slingR ' slingR top script
     PlaySoundAt "right_slingshot", RightFlipper
-    RSling.Visible = 0
-    RSling1.Visible = 1
-    sling1.rotx = 20
-    RStep = 0
+    RSling.Visible = 0 : RSling1.Visible = 1
+    sling1.rotx = 20 : RStep = 0
     RightSlingShot.TimerEnabled = 1
 	gi1.State = 0:Gi2.State = 0
 End Sub
-
 Sub RightSlingShot_Timer
     Select Case RStep
         Case 3:RSLing1.Visible = 0:RSLing2.Visible = 1:sling1.rotx = 10
@@ -248,18 +210,14 @@ Sub RightSlingShot_Timer
     End Select
     RStep = RStep + 1
 End Sub
-
 Sub LeftSlingShot_Slingshot
-	vpmTimer.PulseSw 25
+	vpmTimer.PulseSw slingL ' slingR top script
     PlaySoundAt "left_slingshot", LeftFlipper
-    LSling.Visible = 0
-    LSling1.Visible = 1
-    sling2.rotx = 20
-    LStep = 0
+    LSling.Visible = 0 : LSling1.Visible = 1
+    sling2.rotx = 20 : LStep = 0
     LeftSlingShot.TimerEnabled = 1
 	gi3.State = 0:Gi4.State = 0
 End Sub
-
 Sub LeftSlingShot_Timer
     Select Case LStep
         Case 3:LSLing1.Visible = 0:LSLing2.Visible = 1:sling2.rotx = 10
@@ -268,8 +226,14 @@ Sub LeftSlingShot_Timer
     LStep = LStep + 1
 End Sub
 
-' PINGOD END
-'*********************************************
+' ----------------------------------------------------------------------------------------
+' GENERAL ILLUMINATION
+' ----------------------------------------------------------------------------------------
+dim xx
+For each xx in GI:xx.State = 1: Next
+' ----------------------------------------------------------------------------------------
+' PINGOD P-ROC END
+' ----------------------------------------------------------------------------------------
 
 'Table Example scripts
 Dim EnableBallControl

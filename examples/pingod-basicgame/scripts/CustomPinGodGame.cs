@@ -28,7 +28,7 @@ public partial class CustomPinGodGame : PinGodGame
     }
 
     /// <summary>
-    /// Gets the MainScene and loads the attract into it
+    /// When the resource node is fully loaded we gets the MainScene and load the attract into it
     /// </summary>
     private void OnResourcesLoaded()
     {
@@ -45,10 +45,7 @@ public partial class CustomPinGodGame : PinGodGame
     /// override to create our own player type for this game
     /// </summary>
     /// <param name="name"></param>
-    public override void CreatePlayer(string name)
-    {
-        Players.Add(new BasicGamePlayer() { Name = name, Points = 0 });
-    }
+    public override void CreatePlayer(string name) => Players.Add(new BasicGamePlayer() { Name = name, Points = 0 });
 
 
     /// <summary>
@@ -63,8 +60,5 @@ public partial class CustomPinGodGame : PinGodGame
         GetTree().Root.SizeChanged += on_size_changed;
     }
 
-    private void on_size_changed()
-    {
-        Logger.Verbose(nameof(CustomPinGodGame), ":size changed");
-    }
+    private void on_size_changed() => Logger.Verbose(nameof(CustomPinGodGame), ":size changed");
 }

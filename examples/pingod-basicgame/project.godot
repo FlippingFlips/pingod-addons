@@ -31,9 +31,9 @@ WindowActions="*res://autoload/WindowActions.tscn"
 Resources="*res://autoload/Resources.tscn"
 PinGodGame="*res://autoload/PinGodGame.tscn"
 MemoryMap="*res://autoload/MemoryMap.tscn"
-Machine="*res://autoload/Machine.tscn"
 AudioManager="*res://autoload/AudioManager.tscn"
 Adjustments="*res://addons/autoload/Adjustments/Adjustments.tscn"
+Machine="*res://autoload/Machine.tscn"
 
 [debug]
 
@@ -57,7 +57,7 @@ project/assembly_name="BasicGameGodot"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/autoload/WindowActions/plugin.cfg", "res://addons/autoload/Resources/plugin.cfg", "res://addons/autoload/PinGodGame/plugin.cfg", "res://addons/autoload/MemoryMap/plugin.cfg", "res://addons/autoload/Machine/plugin.cfg", "res://addons/autoload/AudioManager/plugin.cfg", "res://addons/autoload/Adjustments/plugin.cfg")
+enabled=PackedStringArray("res://addons/autoload/WindowActions/plugin.cfg", "res://addons/autoload/Resources/plugin.cfg", "res://addons/autoload/PinGodGame/plugin.cfg", "res://addons/autoload/MemoryMap/plugin.cfg", "res://addons/autoload/AudioManager/plugin.cfg", "res://addons/autoload/Adjustments/plugin.cfg", "res://addons/autoload/Machine/plugin.cfg")
 
 [importer_defaults]
 

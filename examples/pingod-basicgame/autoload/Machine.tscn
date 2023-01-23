@@ -12,43 +12,50 @@ script = ExtResource("1_rpe2g")
 _ball_search_coils = PackedStringArray("mballSaucer")
 _ball_search_stop_switches = PackedStringArray("mballSaucer", "trough0", "trough1", "trough2", "trough3")
 _coils = {
-"alive": 0,
-"auto_plunger": 3,
+"auto_plunger": 12,
 "disable_shows": 33,
-"flippers": 2,
+"flippers": 10,
 "lampshow_1": 34,
 "lampshow_2": 35,
-"mballSaucer": 4,
-"trough": 1
+"mballSaucer": 11,
+"trough": 4
 }
 _leds = {
 "shoot_again": 1
 }
 _switches = {
-"coin1": 1,
-"coin2": 2,
-"coin3": 3,
-"down": 5,
-"enter": 7,
+"coin1": 0,
+"coin2": 1,
+"coin3": 2,
+"coin4": 3,
 "exit": 4,
+"down": 5,
+"up": 6,
+"enter": 7,
+"coinDoor": 8,
 "flipperLwL": 9,
 "flipperLwR": 11,
-"inlaneL": 22,
-"inlaneR": 23,
-"mballSaucer": 27,
-"outlaneL": 21,
-"outlaneR": 24,
-"plungerLane": 20,
+"flipperUpL": 13,
+"flipperUpR": 15,
 "slamTilt": 16,
-"slingL": 25,
-"slingR": 26,
-"start": 19,
 "tilt": 17,
-"trough0": 81,
-"trough1": 82,
-"trough2": 83,
-"trough3": 84,
-"up": 6
+"ballShooter": 18,
+"start": 19,
+"trough0": 21,
+"trough1": 22,
+"trough2": 23,
+"trough3": 24,
+"plungerLane": 25,
+"inlaneL": 26,
+"inlaneR": 27,
+"outlaneL": 28,
+"outlaneR": 29,
+"slingL": 30,
+"slingR": 31,
+"bumper0": 32,
+"bumper1": 33,
+"bumper2": 34,
+"mballSaucer": 35
 }
 _switchWindowEnabled = true
 _switchWindow = ExtResource("2_mcwh2")
