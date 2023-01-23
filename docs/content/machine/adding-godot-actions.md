@@ -7,9 +7,7 @@ weight: 12
 
 ### Godot Actions - Window inputs
 
-Godot uses Actions and we can use the input map to map switches / actions to them.
-
-In the projects `Input Map` add switches to keys like the example below.
+Godot uses Actions and we can use the input map to map switches / actions to them. In the projects `Input Map` add switches to keys like the example below.
 
 ![image](../../images/godot-input-actions.jpg)
 
@@ -19,9 +17,7 @@ This start button action 19 (sw19) is checked states in the `PinGodGame.cs._Inpu
 
 ---
 
-This switch is in the `GameWindowSwitches` collection which is set in the `PinGodGame.tscn` options.
-
-If this switch wasn't in the `GameWindowSwitches` collection then the window switch wouldn't work, unless you overridden it yourself.
+You will need to add switches you want to use on the window in the `WindowActions.tscn` scene.
 
 ---
 

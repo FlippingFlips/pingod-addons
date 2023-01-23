@@ -2,7 +2,7 @@
 title: "BaseMode (BasicGame)"
 date: 2022-12-26T15:26:15Z
 draft: false
-weight: 40
+weight: 7
 ---
 
 This BaseMode scene is loaded in the `Game.tscn` Modes scene used in the `BasicGame` project. A basic mode which has a saucer (kicker) and starts multiball when active.

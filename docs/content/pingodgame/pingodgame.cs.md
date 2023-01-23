@@ -10,12 +10,8 @@ This script is autoloaded from the scene when the display window is launched and
 Modes and other scenes can get access to this from the `root` tree.  `GetNode<PinGodGame>("/root/PinGodGame")`.
 
 ---
-## Exports
----
-
-Scene inspector uses `[export]`s that are defined in `game\PinGodGame.cs`. You can add your own to your game from inheriting from the PinGodGame
-
 ## Godot - Overrides
+---
 
 `_EnterTree` = Gets user cmd line args, loads data and settings, creates trough, sets up ball search and audio manager
 
@@ -27,7 +23,9 @@ Scene inspector uses `[export]`s that are defined in `game\PinGodGame.cs`. You c
 
 `_Process` = Processes playback events...Processing is disabled if it isn't enabled or if playback is finished
 
+---
 ## Signals (Game Events)
+---
 
 #### Signal list
 - BallDrained
@@ -58,9 +56,11 @@ You can connect to signals from a `PinGodGame` scene reference, See `res://addon
 
 `pinGod.Connect(nameof(PinGodGame.BallDrained), this, nameof(OnBallDrained));`
 
+---
 ## Some example methods
+---
 
-Pretty much all can be overriden in this class. 
+Pretty much all can be overridden in this class. 
 
 Generate documentation from source see [Setup-Generate Docs](../wiki/01.-Setup) to view all methods in `PinGodGame`
 
@@ -88,9 +88,12 @@ Generate documentation from source see [Setup-Generate Docs](../wiki/01.-Setup) 
 
 `UpdateLamps` = Invokes UpdateLamps on all groups marked as Mode within the scene tree. scene tree CallGroup
 
+---
 ## BasicGame usage
+---
 
 ### CustomPinGodGame
+---
 
 The `BasicGameGodot`s `CustomPinGodGame` class inherits `PinGodGame` and is set as a script in the `PinGodGame.tscn`. So while the `PinGodGame.tscn` scene is set to autoload with a project, then any custom game classes can be by selecting it in the godot editor( safer) or by editing the `PinGodGame.tscn` file and changing script there.
 

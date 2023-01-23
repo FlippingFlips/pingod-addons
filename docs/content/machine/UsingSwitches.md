@@ -9,50 +9,51 @@ weight: 30
 ### Using in game scene c# scripts
 ---
 
-Connect to a SwitchCommand. Only needs to be done once in _EnterTree
+Connect to the Machines SwitchCommand. Only needs to be done once in _EnterTree or _Ready.
 
 ```
-//Godot Enter Tree Override. Get pingod and connect to a SwitchCommand signal on it
-public override void _EnterTree()
+public override void _Ready()
 {
-    pinGod = GetNode("/root/PinGodGame") as PinGodGame;		
-    pinGod.Connect(nameof(SwitchCommand), this, nameof(SwitchCommandHandler));
+    base._Ready();
+    if (HasNode("/root/PinGodGame"))
+    {
+        pinGod = GetNode("/root/PinGodGame") as IPinGodGame;
+        //use the switch command on machine through the game as we're in a game
+        pinGod.MachineNode.SwitchCommand += OnSwitchCommandHandler;
+    }
+    else { Logger.WarningRich(nameof(BaseMode), "[color=red]", ": no PinGodGame found", "[/color]"); }
 }
 ```
 
 Create handler.
 
 ```
-//do stuff on switches. this example just acts when switch is on
-private void SwitchCommandHandler(string swName, byte index, byte value)
+/// <summary>
+/// Switch handlers for lanes and slingshots
+/// </summary>
+/// <param name="name"></param>
+/// <param name="index"></param>
+/// <param name="value"></param>
+private void OnSwitchCommandHandler(string name, byte index, byte value)
 {
-    if (!pinGod.GameInPlay || pinGod.IsTilted) return;
-    if (value > 0)
+    if (value <= 0) return;
+    switch (name)
     {
-        switch (swName)
-        {
-            case "inlaneL":					
-            case "inlaneR":
-            case "bumper_l":
-            case "bumper_r":
-                AddPointsPlaySound(SMALL_SCORE);
-                break;
-            case "outlaneR":
-            case "outlaneL":
-                AddPointsPlaySound(MED_SCORE);
-                break;
-            case "slingL":
-            case "slingR":
-            case "spinner":
-                AddPointsPlaySound(MIN_SCORE);
-                break;
-            case "top_left_target":
-                AddPointsPlaySound(LARGE_SCORE);
-                break;
-            default:
-                break;
-        }
-    }		
+        case "outlaneL":
+        case "outlaneR":
+            game.AddPoints(100);
+            break;
+        case "inlaneL":
+        case "inlaneR":
+            game.AddPoints(50);
+            break;
+        case "slingL":
+        case "slingR":
+            game.AddPoints(50);
+            break;
+        default:
+            break;
+    }
 }
 ```
 

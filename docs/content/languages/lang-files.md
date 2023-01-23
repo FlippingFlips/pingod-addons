@@ -5,7 +5,7 @@ draft: false
 weight: 40
 ---
 
-Add translations for the game. There are also defaults to cover most standard pinball messages in `addons/PinGodGame/Localization`
+Add translations for the game. There are also defaults to cover most standard pinball messages in `addons\assets\Localization`
 
 The default example covers English and French in `pindog_default_lang.csv`.
 
@@ -15,7 +15,7 @@ The default example covers English and French in `pindog_default_lang.csv`.
 
 If the text doesn't update when you run the game:
 
-1. Find the CSV in Godot file explorer from `addons/PinGodGame/Localization/pindog_default_lang.csv`.
+1. Find the CSV in Godot file explorer from `addons\assets\Localization/pingod_default_lang.csv`.
 2. Select the file, then look in the `Import` tab (next to scene top left)
 3. Click Reimport making sure it's set as .csv, compressed
 
@@ -57,6 +57,6 @@ They can also be used in control scenes. See the `AudioSettings.tscn` scene wher
 ```
 [locale]
 
-translations=PoolStringArray( "res://addons/PinGodGame/Localization/pingod_default_lang.en.translation" )
+translations=PoolStringArray( "res://addons/assets/Localization/pingod_default_lang.en.translation" )
 locale_filter=[ 0, [  ] ]
 ```

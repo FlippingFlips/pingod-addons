@@ -28,7 +28,11 @@ You can get to the app_data directory for the game using app_data bat file
 ### Record Step by Step
 ---
 
-- Enable record in the `game/PinGodGame.tscn` godot inspector or direct in file
+You can enable a switch window from the inspector options when running to record switches from.
+
+---
+
+- Enable record in the `autoload/Machine.tscn` godot inspector or direct in file
 - Run the game. Hold down `Q,W,E,R` (Activate Trough switches) and push start `1`
 - *You can release the trough switches*
 - Activate all the trough switches again to end the ball.
@@ -37,7 +41,7 @@ You can get to the app_data directory for the game using app_data bat file
 
 ## Playback
 
-- Enable playback in the `PinGodGame.tscn` inspector
+- Enable playback in the `autoload/Machine.tscn` inspector
 - Add the filename in the inspector `user://recordings/recordname.record`
 - Run the game to playback the recorded events
 - Logs will display when finished

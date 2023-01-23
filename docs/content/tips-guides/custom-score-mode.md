@@ -3,7 +3,7 @@ title: "Creating custom score mode scene"
 date: 2022-12-26T15:26:15Z
 lastmod: 2022-10-26T15:26:15Z
 draft: false
-weight: 44
+weight: 1
 ---
 
 Start with duplicating the `ScoreMode.tscn` file from the addons. 
