@@ -5,3 +5,4 @@
 [node name="PinGodGame" type="Node"]
 process_priority = -1
 script = ExtResource("1_jowfi")
+LOG_LEVEL = 1

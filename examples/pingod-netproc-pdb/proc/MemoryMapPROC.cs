@@ -1,8 +1,6 @@
 using Godot;
 using NetProc.Domain;
-using PinGod.Core;
 using PinGod.Core.Service;
-using System.Linq;
 
 /// <summary>
 /// This should only be for simulating. When running a real board the leds, coils, lamps are taken care of. Here 
@@ -19,11 +17,16 @@ public class MemoryMapPROC : MemoryMap
         _game = game as PinGodProcGameController;
 
         if (_coilBuffer == null) _coilBuffer = new byte[TOTAL_COIL];
+        if (_lampBuffer == null) _lampBuffer = new byte[TOTAL_LAMP];
         if (_ledBuffer == null) _ledBuffer = new int[TOTAL_LED];
     }
 
     byte[] _coilBuffer;
+    byte[] _lampBuffer;
     int[] _ledBuffer;
+    /// <summary>
+    /// TODO: add lamps
+    /// </summary>
     public void WriteProcStates() 
     {
         ////CHECK IF COIL STATES ARE CHANGING
@@ -78,41 +81,12 @@ public class MemoryMapPROC : MemoryMap
         }        
     }
 
+    /// <summary>
+    /// Dummy to stop base doing nothing on write states. States written in game loop.
+    /// </summary>
     public override void WriteStates()
     {
         //base.WriteStates();
         return;
-        var coilBytes = _game._lastCoilStates;
-        if (_coilBuffer == null)
-        {
-            _coilBuffer = new byte[TOTAL_COIL];
-            coilBytes.CopyTo(_coilBuffer, 0);
-            viewAccessor.WriteArray(1, coilBytes, 0, coilBytes.Length);
-        }
-        else if (!Enumerable.SequenceEqual(coilBytes, _coilBuffer))
-        {
-            //really we only want to get the changed coils,
-            coilBytes.CopyTo(_coilBuffer, 0);
-            viewAccessor.WriteArray(1, coilBytes, 0, coilBytes.Length);
-            Logger.Debug("coil states changed");
-        }
-        else
-        {
-            //_game.TickVirtualDrivers();
-            //_game.PROC.WatchDogTickle();
-        }
-        //
-        
-        //else
-        //{
-        //    coilBytes.CopyTo(_coilBuffer, 0);
-        //    viewAccessor.WriteArray(0, coilBytes, 0, coilBytes.Length);
-        //}
-
-        //var lampBytes = GetStates(_lampDrivers);
-        //var coils = _game.Coils;
-
-        //viewAccessor.WriteArray(_offsetLamps, lampBytes, 0, lampBytes.Length);
-        //viewAccessor.WriteArray(_offsetLeds, ledArray, 0, ledArray.Length);
     }
 }
