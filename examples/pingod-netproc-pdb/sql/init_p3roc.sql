@@ -14,17 +14,20 @@ INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES 
 INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-7', 'bumper_1', 30, '', 0, 20, 'bumper');
 INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-8', 'bumper_2', 30, '', 0, 20, 'bumper');
 INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-9', 'bumper_3', 30, '', 0, 20, 'bumper');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-10', 'flippersRelay', 30, '', 0, 0, '');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-11', 'saucerEject', 30, '', 0, 40, '');
+INSERT INTO Coils (Number, Name, PulseTime, Bus, Polarity, Search, Tags) VALUES ('A0-B0-12', 'autoPlunger', 30, '', 0, 0, '');
 
 -- Table: Leds
 INSERT INTO Leds (Number, Name, Bus, Polarity, Tags) VALUES 
 ('A0-R0-G1-B2', 'start', '', 0,  'start'),
 ('A0-R3-G4-B5', 'shooter', '', 0,  ''),
 ('A0-R6-G7-B8', 'shootAgain', '', 0,  'shootAgain'),
-('A0-R9-G10-B11', 'unused_1', '', 0,''),
-('A0-R12-G13-B14', 'unused_2', '', 0,''),
-('A0-R15-G16-B17', 'unused_4', '', 0,''),
-('A0-R18-G19-B20', 'unused_5', '', 0,''),
-('A0-R21-G22-B23', 'unused_6', '', 0,'');
+('A0-R9-G10-B11', 'target0', '', 0,'targetBank'),
+('A0-R12-G13-B14', 'target1', '', 0,'targetBank'),
+('A0-R15-G16-B17', 'target2', '', 0,'targetBank'),
+('A0-R18-G19-B20', 'target3', '', 0,'targetBank'),
+('A0-R21-G22-B23', 'saucer', '', 0,'');
 
 -- Table: Switches
 INSERT INTO Switches (Number, Name, Type, Tags, SearchReset, SearchStop) VALUES 
@@ -33,49 +36,46 @@ INSERT INTO Switches (Number, Name, Type, Tags, SearchReset, SearchStop) VALUES
 ('00', 'coin1', 0, 'door', '', ''),
 ('01', 'coin2', 0, 'door', '', ''),
 ('02', 'coin3', 0, 'door', '', ''),
-('03', 'coinDoor', 1, 'door', '', 'open'),
+('03', 'coin4', 0, 'door', '', ''),
 ('04', 'exit', 0, 'door', '', ''),
 ('05', 'down', 0, 'door', '', ''),
 ('06', 'up', 0, 'door', '', ''),
 ('07', 'enter', 0, 'door', '', ''),
 -- board 0/B
-('08', 'flipperLwL', 0, '', '', 'closed'),
-('09', 'flipperLwR', 0, '', '', 'closed'),
-('10', 'start', 0, '', '', ''), 
-('11', 'plungerLane', 0, 'shooterLane', '', 'closed'),
-('12', 'trough0', 0, 'trough', '', 'closed'),
-('13', 'trough1', 0, 'trough', '', 'closed'),
-('14', 'trough2', 0, 'trough', '', 'closed'),
-('15', 'trough3', 0, 'trough,troughEject', '', 'closed'),
--- board 1/A
+('08', 'coinDoor', 1, 'door', '', 'open'),
+('09', 'flipperLwL', 0, '', '', 'closed'),
+('11', 'flipperLwR', 0, '', '', 'closed'),
+('13', 'flipperUpL', 0, '', '', 'closed'),
+('15', 'flipperUpR', 0, '', '', 'closed'),
 ('16', 'slamTilt', 0, '', '', 'closed'),
-('17', 'inlaneL', 0, '', '', ''),
-('18', 'inlaneR', 0, '', '', ''),
-('19', 'outlaneL', 0, 'early', '', ''),
-('20', 'outlaneR', 0, 'early', '', ''),
-('21', 'slingL', 0, 'sling', 'open', ''),
-('22', 'slingR', 0, 'sling', 'open', ''),
-('23', 'tilt', 0, '', '', 'closed'),
+-- board 1/A
+('17', 'tilt', 0, '', '', 'closed'),
+('18', 'ballShooter', 0, '', '', 'closed'),
+('19', 'start', 0, '', '', ''),
+('20', 'not_used_20', 0, '', '', ''),
+('21', 'trough0', 0, 'trough', '', 'closed'),
+('22', 'trough1', 0, 'trough', '', 'closed'),
+('23', 'trough2', 0, 'trough', '', 'closed'),
+('24', 'trough3', 0, 'trough,troughEject', '', 'closed'),
 -- board 1/B
-('24', 'bumper0', 0, 'bumper', 'open', ''),
-('25', 'bumper1',0, 'bumper', 'open', ''),
-('26', 'bumper2', 0, 'bumper', 'open', ''),
-('27', 'not_used_27', 0, '', '', ''),
-('28', 'not_used_28', 0, '', '', ''),
-('29', 'not_used_29', 0, '', '', ''),
-('30', 'not_used_30', 0, '', '', ''),
-('31', 'not_used_31', 0, '', '', ''),
+('25', 'plungerLane', 0, 'shooterLane', '', 'closed'),
+('26', 'inlaneL', 0, '', 'open', ''),
+('27', 'inlaneR', 0, '', 'open', ''),
+('28', 'outlaneL', 0, 'early', 'open', ''),
+('29', 'outlaneR', 0, 'early', 'open', ''),
+('30', 'slingL', 0, 'sling', 'open', ''),
+('31', 'slingR', 0, 'sling', 'open', ''),
+('32', 'bumper0', 0, 'bumper', 'open', ''),
 -- board 2/A
-('32', 'not_used_32', 0, '', '', ''),
-('33', 'not_used_33', 0, '', '', ''),
-('34', 'not_used_34', 0, '', '', ''),
-('35', 'not_used_35', 0, '', '', ''),
-('36', 'not_used_36', 0, '', '', ''),
-('37', 'not_used_37', 0, '', '', ''),
-('38', 'not_used_38', 0, '', '', ''),
-('39', 'not_used_39', 0, '', '', ''),
--- board 2/B
+('33', 'bumper1',0, 'bumper', 'open', ''),
+('34', 'bumper2', 0, 'bumper', 'open', ''),
+('35', 'saucer', 0, '', 'open', 'closed'),
+('36', 'target0', 0, 'targetBank', 'open', ''),
+('37', 'target1', 0, 'targetBank', 'open', ''),
+('38', 'target2', 0, 'targetBank', 'open', ''),
+('39', 'target3', 0, 'targetBank', 'open', ''),
 ('40', 'not_used_40', 0, '', '', ''),
+-- board 2/B
 ('41', 'not_used_41', 0, '', '', ''),
 ('42', 'not_used_42', 0, '', '', ''),
 ('43', 'not_used_43', 0, '', '', ''),
@@ -83,8 +83,8 @@ INSERT INTO Switches (Number, Name, Type, Tags, SearchReset, SearchStop) VALUES
 ('45', 'not_used_45', 0, '', '', ''),
 ('46', 'not_used_46', 0, '', '', ''),
 ('47', 'not_used_47', 0, '', '', ''),
--- board 3/A
 ('48', 'not_used_48', 0, '', '', ''),
+-- board 3/A
 ('49', 'not_used_49', 0, '', '', ''),
 ('50', 'not_used_50', 0, '', '', ''),
 ('51', 'not_used_51', 0, '', '', ''),
@@ -92,8 +92,8 @@ INSERT INTO Switches (Number, Name, Type, Tags, SearchReset, SearchStop) VALUES
 ('53', 'not_used_53', 0, '', '', ''),
 ('54', 'not_used_54', 0, '', '', ''),
 ('55', 'not_used_55', 0, '', '', ''),
--- board 3/B
 ('56', 'not_used_56', 0, '', '', ''),
+-- board 3/B
 ('57', 'not_used_57', 0, '', '', ''),
 ('58', 'not_used_58', 0, '', '', ''),
 ('59', 'not_used_59', 0, '', '', ''),
@@ -118,8 +118,8 @@ INSERT INTO Adjustments (Id, Name, Description, Options, OptionType, ValueDefaul
 ('VOICE_VOL', 'Voice Volume','','-30,0', 0, -6, -6, 'STANDARD_ADJ', 'AUDIO'),
 ('FX_VOL', 'Sound FX Volume','','-30,0', 0, -6, -6, 'STANDARD_ADJ', 'AUDIO'),
 ('MATCH_PERCENT', 'Match Percent','Match percent, 0 off', '0,20', 0, 5, 5, 'STANDARD_ADJ', 'GENERAL'),
-('DISP_W', 'Display Width','','100,1920', 0, 1920, 800, 'STANDARD_ADJ', 'DISPLAY'),
-('DISP_H', 'Display Height','','100,1080', 0, 1080, 600, 'STANDARD_ADJ', 'DISPLAY'),
+('DISP_W', 'Display Width','','100,1920', 0, 1920, 480, 'STANDARD_ADJ', 'DISPLAY'),
+('DISP_H', 'Display Height','','100,1080', 0, 1080, 270, 'STANDARD_ADJ', 'DISPLAY'),
 ('DISP_X', 'Display X','','0,1920', 0, 0, 0, 'STANDARD_ADJ', 'DISPLAY'),
 ('DISP_Y', 'Display Y','','0,1080', 0, 0, 0, 'STANDARD_ADJ', 'DISPLAY'),
 ('DISP_MODE', 'Display Mode','Defaults to 0 = window','WIN,MIN,MAX,FS,FS_EXCLUSIVE', 2, 0, 0, 'STANDARD_ADJ', 'DISPLAY'),
@@ -152,8 +152,8 @@ INSERT INTO Audits (Id, Value, Type, Description) VALUES
 ('CREDITS', 0, 0, 'Credits in machine'), 
 ('CREDITS_TOTAL', 0, 0, 'Total credits used'), 
 ('GAMES_STARTED', 0, 0, 'Games started log'), 
-('GAMES_PLAYED', '0', 0, 'Games completed log'), 
-('XB_AWARDED', '0', 0, 'Total extra balls awarded'),
+('GAMES_PLAYED', 0, 0, 'Games completed log'), 
+('XB_AWARDED', 0, 0, 'Total extra balls awarded'),
 ('REPLAYS', 0, 0, 'Total replays awarded'), 
 ('MATCHES', 0, 0, 'Total Matches Awarded'),
 ('POWERED_ON_TIMES', 0, 0, 'Times machine powered on'),
