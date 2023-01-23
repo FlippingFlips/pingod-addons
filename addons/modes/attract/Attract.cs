@@ -2,6 +2,7 @@ using Godot;
 using PinGod.Base;
 using PinGod.Core;
 using PinGod.Core.Game;
+using PinGod.Game;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
@@ -182,6 +183,9 @@ namespace PinGod.Modes
             {
                 switch (index)
                 {
+                    case 19: //"start"
+                        (pinGod as PinGodGame)?.CallDeferred("StartGame");
+                        break;
                     case 9: //l flipper
                         CallDeferred("ChangeLayer", true);
                         break;

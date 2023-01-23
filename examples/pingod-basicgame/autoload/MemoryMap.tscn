@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://d1fmpha2cm14a"]
 
 [ext_resource type="Script" path="res://addons/pingod-core/Service/MemoryMapNode.cs" id="1_5dc7h"]
 

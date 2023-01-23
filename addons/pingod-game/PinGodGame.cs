@@ -465,6 +465,8 @@ namespace PinGod.Game
         }
         public virtual bool StartGame()
         {
+            if (IsPlayerEnteringHighscore) return false;
+
             LogInfo(nameof(PinGodGame), $":start game. BIP:{BallInPlay}, players/max:{Players.Count}/{MaxPlayers}, credits: {Audits.Credits}, inPlay:{GameInPlay}");
             if (IsTilted)
             {
@@ -681,16 +683,13 @@ namespace PinGod.Game
             {
                 switch (index)
                 {
+                    case 0:
                     case 1:
                     case 2:
                     case 3: //Coin buttons. See PinGod.vbs for Standard switches
                         AudioManager?.PlaySfx("credit");
                         AddCredits((byte)(1 * index));
-                        break;
-                    case 19://start or add player
-                        if(!IsTilted && !IsPlayerEnteringHighscore)
-                            CallDeferred(nameof(StartGame));
-                        break;
+                        break;                   
                     default:
                         break;
                 }
