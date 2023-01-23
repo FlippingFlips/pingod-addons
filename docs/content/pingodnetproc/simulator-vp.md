@@ -35,7 +35,7 @@ This helps you keep inside a single file at the same size. All the plastics, lig
 
 To export, show what you need from the layers, then use the `Export PNG image`. If you did the `Playfield and Wood` layers then export the image `Page` size and replace the `playfield.png` provided.
 
-In Visual Pinball use `Reimport from` and select the `playfield.png`, the next time you export you can just use `Reimport`.
+Visual Pinball `ImageManager` using `F3`. The images in here are named `decals_inserts` and `decals_lamps` you can replace these. First changes you can `Reimport From`, but any changes after that you can just `Reimport`.
 
 ---
 
