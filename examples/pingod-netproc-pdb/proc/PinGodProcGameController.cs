@@ -37,6 +37,7 @@ public class PinGodProcGameController : NetProcDataGameController
     private MemoryMapPROCNode _memMap;
     private MyMode _myMode;
     private ScoreDisplayProcMode _scoreDisplay;
+    private bool _isSimulated;
 
     public PinGodProcGameController(MachineType machineType, bool deleteOnInit = false, ILogger logger = null, bool simulated = false,
         IPinGodGame pinGodGame = null, MachineConfiguration configuration = null) 
@@ -45,12 +46,14 @@ public class PinGodProcGameController : NetProcDataGameController
         ProcFake = PROC as IFakeProcDevice;
         PinGodGame = pinGodGame as PinGodGameProc;
         PinGodGame.Credits = GetAudit("CREDITS");
+        _isSimulated = simulated;
     }
 
     public override IPlayer AddPlayer()
     {
         //todo: name the player when need to change from eg: Player 1
         var p = base.AddPlayer();
+        p = new CustomPlayer(p.Name);
         _scoreDisplay?.UpdateScores();
         return p;
     }
@@ -68,7 +71,10 @@ public class PinGodProcGameController : NetProcDataGameController
     public override void BallEnded()
     {
         base.BallEnded();
-        
+
+        FlippersEnabled = false;
+        if (_isSimulated) Coils["flippersRelay"].Disable();
+
         //TODO: remove modes on ball starting, these modes remove when a new ball ends
         Modes.Remove(_myMode);
         _scoreDisplay?.UpdateScores();
@@ -82,6 +88,9 @@ public class PinGodProcGameController : NetProcDataGameController
     {
         base.BallStarting();
         //TODO: add modes on ball starting, these modes start when a new ball does
+        FlippersEnabled = true;
+        if(_isSimulated) Coils["flippersRelay"].Enable();
+
         _myMode = new MyMode(this, 10, (PinGodGameProc)PinGodGame);
         Modes.Add(_myMode);
         _scoreDisplay?.UpdateScores();
@@ -108,7 +117,7 @@ public class PinGodProcGameController : NetProcDataGameController
     }
 
     /// <summary>
-    /// 
+    /// Used by simulators. Returns the led colors / states as int array. Used with memory mapping in loop
     /// </summary>
     /// <param name="stateCount"></param>
     /// <returns></returns>
@@ -171,6 +180,7 @@ public class PinGodProcGameController : NetProcDataGameController
 
         Logger.Log($"MODES RUNNING:" + Modes.Modes.Count);
     }
+
     public override void RunLoop(byte delay = 0, CancellationTokenSource cancellationToken = null)
     {
         //base.RunLoop(delay, cancellationToken);
@@ -181,12 +191,15 @@ public class PinGodProcGameController : NetProcDataGameController
         else
             _gameLoopCancelToken = cancellationToken;
 
-        _memMap = PinGodGame.GetNodeOrNull<MemoryMapPROCNode>("/root/MemoryMap");
-
-        _lastCoilStates = GetStates(Coils.Values);
-        _lastLedStates = GetLedStatesArray(LEDS.Values);
-
-        _memMap?.WriteStates();
+        if (_isSimulated)
+        {
+            _memMap = PinGodGame.GetNodeOrNull<MemoryMapPROCNode>("/root/MemoryMap");
+            if (_memMap == null)
+                Logger.Log(nameof(PinGodProcGameController), $": WARN: no {nameof(MemoryMapPROC)} found in root/MemoryMap");
+            _lastCoilStates = GetStates(Coils.Values);
+            _lastLedStates = GetLedStatesArray(LEDS.Values);
+            _memMap?.WriteStates();
+        }        
 
         Event[] events;
         try
@@ -203,10 +216,12 @@ public class PinGodProcGameController : NetProcDataGameController
                 //TickVirtualDrivers();                
 
                 //PinGod changed states. Used by memory mapping
-                _lastCoilStates = GetStates(Coils.Values);
-                _lastLedStates  = GetLedStatesArray(LEDS.Values);
-
-                _memMap?.WriteStates();
+                if (_isSimulated)
+                {
+                    _lastCoilStates = GetStates(Coils.Values);
+                    _lastLedStates = GetLedStatesArray(LEDS.Values);
+                    _memMap?.WriteStates();
+                }
 
                 foreach (var coil in _coils.Values)
                 {
