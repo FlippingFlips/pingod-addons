@@ -26,7 +26,9 @@ public abstract class PinGodProcMode : Mode
 
     protected Resources _resources { get; private set; }
     public string Name { get; }
-    public IPinGodGame PinGod { get; }    
+    public IPinGodGame PinGod { get; }
+
+    protected readonly PinGodProcGameController _game;
 
     /// <summary>
     /// The node where we had our CanvasLayer
@@ -48,6 +50,8 @@ public abstract class PinGodProcMode : Mode
     {
         Name = name;
         PinGod = pinGod;
+
+        _game = game as PinGodProcGameController;
 
         var pg = PinGod as PinGodGame;
         _modesCanvas = pg.GetNodeOrNull<CanvasLayer>(modesRootPath);
