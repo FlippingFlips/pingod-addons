@@ -201,7 +201,7 @@ namespace PinGod.Game
             }
         }
         /// <summary>
-        /// Adds credits if using Adjustments
+        /// Adds credits if using Adjustments to the <see cref="Audits.Credits"/>
         /// </summary>
         /// <param name="amt"></param>
         public virtual void AddCredits(byte amt)
@@ -210,7 +210,7 @@ namespace PinGod.Game
             {
                 Audits.Credits += amt;
                 EmitSignal(nameof(CreditAdded), Audits.Credits);
-            }            
+            }         
         }
         public virtual long AddPoints(long points, bool emitUpdateSignal = true)
         {

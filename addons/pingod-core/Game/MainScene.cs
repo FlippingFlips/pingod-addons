@@ -8,7 +8,7 @@ using static Godot.GD;
 namespace PinGod.Core.Game
 {
     /// <summary>
-    /// Main Scene. The Entry point
+    /// Main Scene. The Entry point for a normal PinGodGame.
     /// </summary>
     public partial class MainScene : Node
     {
@@ -233,29 +233,52 @@ namespace PinGod.Core.Game
         private void OnSwitchCommandHandler(string name, byte index, byte value)
         {
             if (value <= 0) return;
-            if ((!pinGod?.IsTilted ?? true) && name == "enter")
+            if ((!pinGod?.IsTilted ?? true))
             {
-                if (!InServiceMenu)
+                if(name == "enter")
                 {
-                    if (!string.IsNullOrWhiteSpace(_service_menu_scene_path))
+                    if (!InServiceMenu)
                     {
-                        //enter service menu					
-                        InServiceMenu = true;
-
-                        Task.Run(() =>
+                        if (!string.IsNullOrWhiteSpace(_service_menu_scene_path))
                         {
-                            if (pinGod.GameInPlay)
-                                GetNodeOrNull("Modes/Game")?.QueueFree();
-                            else
-                                GetNodeOrNull("Modes/Attract")?.QueueFree();
+                            //enter service menu					
+                            InServiceMenu = true;
 
-                            //load service menu into modes
-                            CallDeferred("_loaded", _resources?.GetResource(_service_menu_scene_path.GetBaseName()));
+                            Task.Run(() =>
+                            {
+                                if (pinGod.GameInPlay)
+                                    GetNodeOrNull("Modes/Game")?.QueueFree();
+                                else
+                                    GetNodeOrNull("Modes/Attract")?.QueueFree();
 
-                            pinGod.EmitSignal("ServiceMenuEnter");
-                        });
+                                //load service menu into modes
+                                CallDeferred("_loaded", _resources?.GetResource(_service_menu_scene_path.GetBaseName()));
+
+                                pinGod.EmitSignal("ServiceMenuEnter");
+                            });
+                        }
+                        else { Logger.WarningRich(nameof(MainScene), ":", nameof(OnSwitchCommandHandler), ":[color=yellow]", " A Service menu scene wasn't provided", "[/color]"); }
                     }
-                    else { Logger.WarningRich(nameof(MainScene), ":", nameof(OnSwitchCommandHandler), ":[color=yellow]", " A Service menu scene wasn't provided", "[/color]"); }
+                }
+                else
+                {
+                    switch (index)
+                    {
+                        case 0:
+                            pinGod?.AddCredits(1);
+                            break;
+                        case 1:
+                            pinGod?.AddCredits(2);
+                            break;
+                        case 2:
+                            pinGod?.AddCredits(3);
+                            break;
+                        case 3:
+                            pinGod?.AddCredits(4);
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }

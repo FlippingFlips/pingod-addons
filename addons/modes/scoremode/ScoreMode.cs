@@ -2,6 +2,7 @@ using Godot;
 using Godot.Collections;
 using PinGod.Base;
 using PinGod.Core;
+using PinGod.Core.Game;
 
 namespace PinGod.Modes
 {
@@ -65,6 +66,9 @@ namespace PinGod.Modes
                 pinGod.Connect("GameStarted", new Callable(this, nameof(OnScoresUpdated)));
                 pinGod.Connect("ScoresUpdated", new Callable(this, nameof(OnScoresUpdated)));
                 pinGod.Connect("PlayerAdded", new Callable(this, nameof(OnScoresUpdated)));
+
+                (pinGod as PinGodBase).CreditAdded += UpdateCredits;
+                UpdateCredits(pinGod?.Audits?.Credits ?? 0);
             }
             else
             {
@@ -210,6 +214,8 @@ namespace PinGod.Modes
                 ballInfolabel.Text = Tr("BALL") + " " + pinGod.BallInPlay.ToString();
             if (playerInfoLabel != null) 
                 playerInfoLabel.Text = $"{Tr("PLAYER")}: {pinGod.CurrentPlayerIndex + 1}";
+
+            GetNode<Label>("%CreditsLabel").Text = $"CREDITS: {pinGod?.Audits?.Credits}";
         }
 
         private void SetupDebugMode()
@@ -221,5 +227,7 @@ namespace PinGod.Modes
             Players[2].Points = 240000;
             Players[3].Points = 220000;
         }
+
+        void UpdateCredits(int credits) => GetNode<Label>("%CreditsLabel").Text = $"CREDITS: {credits}";
     }
 }

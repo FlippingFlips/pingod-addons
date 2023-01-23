@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=4 format=3 uid="uid://w8xlcskhhtuw"]
 
 [ext_resource type="Script" path="res://addons/modes/scoremode/ScoreMode.cs" id="1"]
 [ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="3_abej1"]
-[ext_resource type="Script" path="res://addons/editor-plugin/display-plugins/labels/CreditsLabel.cs" id="4_hwnjx"]
 [ext_resource type="Texture2D" uid="uid://cfy7fd5ef1bdl" path="res://addons/assets/img/pingod-logo.png" id="5"]
 
 [node name="ScoreMode" type="Node" groups=["Mode"]]
@@ -35,18 +34,12 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="pingod-logo" type="TextureRect" parent="CenterContainer"]
-offset_left = 287.0
-offset_top = 55.0
-offset_right = 737.0
-offset_bottom = 544.0
+layout_mode = 2
 texture = ExtResource("5")
 stretch_mode = 5
 
 [node name="ScoreMain" type="Label" parent="CenterContainer"]
-offset_left = 478.0
-offset_top = 213.0
-offset_right = 545.0
-offset_bottom = 386.0
+layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 16
 theme_override_fonts/font = ExtResource("3_abej1")
@@ -142,20 +135,20 @@ theme_override_fonts/font = ExtResource("3_abej1")
 theme_override_font_sizes/font_size = 36
 text = "BALL: "
 
-[node name="PinGodCreditsLabel" type="Label" parent="."]
+[node name="CreditsLabel" type="Label" parent="."]
+unique_name_in_owner = true
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -34.0
-offset_top = -26.0
-offset_right = 34.0
+offset_left = -44.5
+offset_top = -40.0
+offset_right = 44.5
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("3_abej1")
 theme_override_font_sizes/font_size = 36
-text = "CREDITS "
-script = ExtResource("4_hwnjx")
+text = "CREDITS"

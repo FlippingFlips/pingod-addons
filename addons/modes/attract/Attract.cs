@@ -1,8 +1,10 @@
 using Godot;
 using PinGod.Base;
 using PinGod.Core;
+using PinGod.Core.Game;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 
 namespace PinGod.Modes
 {
@@ -22,6 +24,8 @@ namespace PinGod.Modes
         [Export] float[] _sceneTimes = null;
 
         #region Fields
+        protected List<HighScore> _highScoresList;
+
         /// <summary>
         /// access to the <see cref="PinGodGame"/> singleton
         /// </summary>
@@ -29,7 +33,6 @@ namespace PinGod.Modes
 
         const byte SceneChangeTime = 5;
         int _currentScene = 0;
-        protected List<HighScore> _highScoresList;
         int _lastScene = 0;
         /// <summary>
         /// Scenes to cycle through
@@ -64,7 +67,10 @@ namespace PinGod.Modes
             timer?.Stop();
             Logger.Debug(nameof(Attract), ":", nameof(_ExitTree));
             if (pinGod?.MachineNode != null)
+            {
                 pinGod.MachineNode.SwitchCommand -= OnPinGodSwitchCommand;
+                (pinGod as PinGodBase).CreditAdded -= UpdateCredits;
+            }                
         }
 
         /// <summary>
@@ -76,9 +82,9 @@ namespace PinGod.Modes
 
             if (pinGod == null && HasNode("/root/PinGodGame"))
             {
-                pinGod = (GetNode("/root/PinGodGame") as IPinGodGame);
-                //update any credits labels
-                pinGod.EmitSignal("CreditAdded", pinGod.Credits);
+                pinGod = (GetNode("/root/PinGodGame") as IPinGodGame);                
+                (pinGod as PinGodBase).CreditAdded += UpdateCredits;
+                UpdateCredits(pinGod?.Audits?.Credits ?? 0);
             }
 
             if (pinGod?.MachineNode != null)
@@ -89,7 +95,7 @@ namespace PinGod.Modes
             pinGod?.MachineNode?.SetBallSearchStop();
 
             timer = (GetNode("AttractLayerChangeTimer") as Timer);
-            timer.WaitTime = _scene_change_secs;
+            timer.WaitTime = _scene_change_secs;            
 
             GetHighScores();
             UpdateHighScores();
@@ -194,7 +200,7 @@ namespace PinGod.Modes
         public virtual void UpdateHighScores()
         {
             if (!HasNode("%HighScores")) return;
-            if(_highScoresList?.Count > 0)
+            if (_highScoresList?.Count > 0)
             {
                 foreach (var score in _highScoresList)
                 {
@@ -204,6 +210,14 @@ namespace PinGod.Modes
             }
             else { Logger.WarningRich(nameof(Attract), ": [color=yellow]No high scores were found to display in high scores scene.[/color]"); }
         }
+
+        void AddCredits(byte amt)
+        {
+            pinGod?.AddCredits(amt);
+            
+        }
+
+        void UpdateCredits(int credits) => GetNode<Label>("%CreditsLabel").Text = $"CREDITS: {credits}";
 
         private void StartGame()
         {
