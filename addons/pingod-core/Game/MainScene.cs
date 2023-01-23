@@ -41,12 +41,6 @@ namespace PinGod.Core.Game
         /// </summary>
         public override void _EnterTree()
         {
-            //not working..
-            AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionHandler;
-
-            //PauseMode = PauseModeEnum.Process; //new Godot4 ProcessModeEnum.Always
-            //this.ProcessMode = ProcessModeEnum.Always;
-
             //connect to a switch command. the switches can come from actions or ReadStates
             if (!HasNode("/root/Machine")) 
                 Logger.WarningRich(nameof(MainScene), ":[color=yellow]", "/root/Machine node not found. To use switch handling enable pingod-machine plugin[/color]");
@@ -73,6 +67,9 @@ namespace PinGod.Core.Game
             }
         }
 
+        /// <summary>
+        /// Gets resources from root and hooks up to resources loaded. Hooks up to PinGodGame events
+        /// </summary>
         public override void _Ready()
         {
             base._Ready();            
