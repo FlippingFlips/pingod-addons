@@ -17,6 +17,14 @@ In Godot with your project open:
 7. You can load the game but the playfield is missing. Add a texture to `playfield_control_mygamename.tscn` in the `PlayfieldTextureRect`
 8. The texture size should be 400x900 but you can adjust the control and window if you need larger or smaller.
 
+Quick Create Playfield:
+
+1. Open the game in VP and take a screenshot of the editor with the playfield in view. You can do this with `Alt` + `PrtScn`.
+2. Open `Microsoft Paint` and paste in you screenshot of the editor. *Get there with windows key and typing paint*
+3. Select the outer playfield and crop it in MsPaint
+4. Click resize by pixels, uncheck Maintain aspect ratio and set to `400 x 900`
+5. Save this image into your game folder so Godot picks it up and you can assign this to window image. `res://assets/img` is a good place to put it.
+
 ## New Buttons
 
 ![image](../../images/screens/playfieldswitch-window-edit.jpg)
