@@ -13,6 +13,11 @@ namespace PinGod.Core.Game
     public partial class MainScene : Node
     {
         /// <summary>
+        /// Path to your Attract.tscn. 
+        /// </summary>
+        [Export(PropertyHint.File)] protected string _attract_scene_path;
+
+        /// <summary>
         /// Path to the Game.tscn. 
         /// </summary>
         [Export(PropertyHint.File)] protected string _game_scene_path;
@@ -96,15 +101,15 @@ namespace PinGod.Core.Game
             if (!InputMap.HasAction("reset")) SetProcessInput(false);
         }
 
-        public void AddAttract(string path = "res://addons/modes/attract/Attract.tscn")
+        public void AddAttract()
         {
-            var scene = _resources.GetResource(path.GetBaseName()) as PackedScene;            
+            var scene = _resources.GetResource(_attract_scene_path?.GetBaseName()) as PackedScene;            
             if(scene != null)
             {
                 attractnode = scene.Instantiate<Attract>();
                 GetNode("Modes").AddChild(attractnode);
             }
-            else { Logger.WarningRich(nameof(MainScene), ":[color=yellow] No attract sene found at " + path + "[/color]"); }
+            else { Logger.WarningRich(nameof(MainScene), ":[color=yellow] No attract sene found at " + _attract_scene_path + "[/color]"); }
         }
 
         /// <summary>
