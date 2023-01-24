@@ -94,6 +94,12 @@ namespace PinGod.Modes
             CallDeferred(nameof(OnScoresUpdated));
         }
 
+        public override void _ExitTree()
+        {
+            base._ExitTree();
+            (pinGod as PinGodBase).CreditAdded -= UpdateCredits;
+        }
+
         /// <summary>
         /// Assigns the given node paths to Labels. Ball, Player, Main Score
         /// </summary>
