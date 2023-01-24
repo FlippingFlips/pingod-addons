@@ -251,10 +251,9 @@ namespace PinGod.Core
         /// <param name="bus">Plays on bus name</param>
         void PlayVoice(string name, string bus = "Voice");
         /// <summary>
-        /// Quits the game, saves data / settings and cleans up
+        /// Quits the game. cleans up
         /// </summary>
-        /// <param name="saveData">save game on exit?</param>
-        void Quit(bool saveData = true);
+        void Quit();
         /// <summary>
         /// Use random number generator from range
         /// </summary>

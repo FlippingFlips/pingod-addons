@@ -343,7 +343,7 @@ namespace PinGod.Game
         public virtual void PlayMusic(string name, float pos = 0) => AudioManager?.PlayMusic(name, pos);
         public virtual void PlaySfx(string name, string bus = "Sfx") => AudioManager?.PlaySfx(name, bus);
         public virtual void PlayVoice(string name, string bus = "Voice") => AudioManager?.PlayVoice(name, bus);
-        public virtual void Quit(bool saveData = true)
+        public virtual void Quit()
         {
             //return if we've already quit
             if (this.QuitRequested) return;
