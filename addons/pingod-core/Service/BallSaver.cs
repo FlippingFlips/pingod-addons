@@ -30,7 +30,7 @@ namespace PinGod.Core
         /// <summary>
         /// The led name to cycle for Ball saves
         /// </summary>
-        [Export] public string _ball_save_led = "shoot_again";
+        [Export] public string _ball_save_led = "shootAgain";
         /// <summary>
         /// default Ball save in multi-Ball
         /// </summary>
