@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://804kbpej0t3i"]
+
+[ext_resource type="Script" path="res://addons/pingod-core/Service/WindowActionsNode.cs" id="1_uvoch"]
+
+[node name="WindowActions" type="Node"]
+process_mode = 3
+editor_description = "Standard Input Handling = quit, pause, toggleborder
+PinGod Machine Switches = Listen for Game Window Switches
+
+Game Window Switches = Switches on the machine that you want to send keys to window."
+script = ExtResource("1_uvoch")
+_gameWindowSwitches = PackedStringArray("coin1", "coin2", "coin3", "start", "trough0", "trough1", "trough2", "trough3", "plungerLane", "enter", "exit", "up", "down", "inlaneL", "tilt", "slamTilt", "flipperLwL", "flipperLwR")

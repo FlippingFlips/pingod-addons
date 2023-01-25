@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://brqgk2sq84rl5"]
+
+[ext_resource type="Script" path="res://addons/modes/pause-settings/PauseAndSettingsScript.cs" id="1_j0p8j"]
+[ext_resource type="PackedScene" uid="uid://dkrfqpekt5c4u" path="res://autoload/SettingsDisplay.tscn" id="2_xxpv2"]
+[ext_resource type="PackedScene" uid="uid://bwajb2wl2fxk8" path="res://addons/modes/pause-settings/PauseLayer.tscn" id="3_sg75a"]
+
+[node name="PauseAndSettings" type="CanvasLayer"]
+process_mode = 3
+editor_description = "Transform > Size set on the top layer to fill the screen"
+layer = 25
+script = ExtResource("1_j0p8j")
+
+[node name="SettingsDisplay" parent="." instance=ExtResource("2_xxpv2")]
+process_mode = 2
+visible = false
+
+[node name="PauseControl" parent="." instance=ExtResource("3_sg75a")]
+editor_description = "Set to process \"When Paused\""
+visible = false

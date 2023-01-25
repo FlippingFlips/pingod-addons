@@ -69,12 +69,9 @@ namespace PinGod.Core.Service
             if (!Engine.IsEditorHint())
             {
                 //create players and add to tree
-                MusicPlayer = new();
-                SfxPlayer = new();
-                VoicePlayer = new();
-                AddChild(MusicPlayer);
-                AddChild(SfxPlayer);
-                AddChild(VoicePlayer);
+                MusicPlayer = GetNode<AudioStreamPlayer>("MusicPlayer");
+                SfxPlayer = GetNode<AudioStreamPlayer>("SfxPlayer");
+                VoicePlayer = GetNode<AudioStreamPlayer>("VoicePlayer");
 
                 Music = new Dictionary<string, AudioStream>();
                 Sfx = new Dictionary<string, AudioStream>();

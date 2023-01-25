@@ -164,6 +164,7 @@ namespace PinGod.Core.Service
             GC.SuppressFinalize(this);
         }
 
+        GameSyncState _lastGameState = GameSyncState.started;
         /// <summary>
         /// Reads the buffer size <see cref="TOTAL_SWITCH"/> switch states from the memory map buffer at position 0. <para/>
         /// Acts on any new switch events found. <para/>
@@ -191,6 +192,13 @@ namespace PinGod.Core.Service
             }
 
             switchBuffer = buffer;
+
+            //process game state from the memory only if it's not the saved state and state higher than started, for quit, pause, resume
+            _gameStateAccess.Read(0, out byte gameState);
+            GameSyncState state = (GameSyncState)gameState;
+            if (state != _lastGameState && state > GameSyncState.started)
+                ProcessGameState(state);
+            _lastGameState = state;
         }
 
         /// <summary>
@@ -301,34 +309,6 @@ namespace PinGod.Core.Service
             arr[swNum - 1] = (byte)(swNum - 1); arr[swNum] = swValue;
             //write the switches to memory map.
             _switchWriteMapping.WriteArray(0, arr, 0, arr.Length);
-        }
-
-        public enum GameSyncState
-        {
-            /// <summary>
-            /// No state
-            /// </summary>
-            None,
-            /// <summary>
-            /// Game started let . GameRunning
-            /// </summary>
-            started,
-            /// <summary>
-            /// quit godot
-            /// </summary>
-            quit,
-            /// <summary>
-            /// pause godot
-            /// </summary>
-            pause,
-            /// <summary>
-            /// resume godot
-            /// </summary>
-            resume,
-            /// <summary>
-            /// resume godot
-            /// </summary>
-            reset
         }
     }
 }

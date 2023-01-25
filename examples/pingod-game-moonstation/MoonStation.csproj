@@ -1,0 +1,55 @@
+﻿<Project Sdk="Godot.NET.Sdk/4.0.0-beta.10">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="addons\pingod-memorymap\**" />
+    <Compile Remove="addons\pingod-window-commands\**" />
+    <EmbeddedResource Remove="addons\pingod-memorymap\**" />
+    <EmbeddedResource Remove="addons\pingod-window-commands\**" />
+  </ItemGroup>
+     <ItemGroup>
+    <Content Include="Properties\launchSettings.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="6.0.7" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="autoload\Adjustments.tscn" />
+    <None Include="autoload\AudioManager.tscn" />
+    <None Include="autoload\Machine.tscn" />
+    <None Include="autoload\MemoryMap.tscn" />
+    <None Include="autoload\PauseSetting.tscn" />
+    <None Include="autoload\PinGodGame.tscn" />
+    <None Include="autoload\PlayfieldWindowMoonStation.tscn" />
+    <None Include="autoload\playfield_control_moonstation.tscn" />
+    <None Include="autoload\Resources.tscn" />
+    <None Include="autoload\SettingsDisplay.tscn" />
+    <None Include="autoload\WindowActions.tscn" />
+    <None Include="export_presets.cfg" />
+    <None Include="local\ms_lang.csv" />
+    <None Include="modes\BaseMode.tscn" />
+    <None Include="modes\Bonus.tscn" />
+    <None Include="modes\Crater.tscn" />
+    <None Include="modes\HighScores.tscn" />
+    <None Include="modes\MoonStationSettingsDisplay.tscn" />
+    <None Include="modes\MsAttract.tscn" />
+    <None Include="modes\MsScoreMode.tscn" />
+    <None Include="modes\MsServiceMenu.tscn" />
+    <None Include="modes\Targets.tscn" />
+    <None Include="moonstation_lander\flag.tscn" />
+    <None Include="moonstation_lander\MoonLander.tscn" />
+    <None Include="moonstation_lander\PlayerShip.tscn" />
+    <None Include="project.godot" />
+    <None Include="README.md" />
+    <None Include="recordings\drain_3_balls.record" />
+    <None Include="recordings\enter_crater.record" />
+    <None Include="screens\.gdignore" />
+    <None Include="switch_overlay_theme.tres" />
+    <None Include="temp\.gdignore" />
+    <None Include="temp\readme.md" />
+  </ItemGroup>
+</Project>

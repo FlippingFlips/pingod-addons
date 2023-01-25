@@ -1,5 +1,6 @@
 using Godot;
 using PinGod.Core.Service;
+using PinGod.Game;
 using PinGod.Modes;
 using System;
 using System.Threading.Tasks;
@@ -8,10 +9,15 @@ using static Godot.GD;
 namespace PinGod.Core.Game
 {
     /// <summary>
-    /// Main Scene. The Entry point
+    /// Main Scene. The Entry point for a normal PinGodGame.
     /// </summary>
     public partial class MainScene : Node
     {
+        /// <summary>
+        /// Path to your Attract.tscn. 
+        /// </summary>
+        [Export(PropertyHint.File)] protected string _attract_scene_path;
+
         /// <summary>
         /// Path to the Game.tscn. 
         /// </summary>
@@ -96,15 +102,15 @@ namespace PinGod.Core.Game
             if (!InputMap.HasAction("reset")) SetProcessInput(false);
         }
 
-        public void AddAttract(string path = "res://addons/modes/attract/Attract.tscn")
+        public void AddAttract()
         {
-            var scene = _resources.GetResource(path.GetBaseName()) as PackedScene;            
+            var scene = _resources.GetResource(_attract_scene_path?.GetBaseName()) as PackedScene;            
             if(scene != null)
             {
                 attractnode = scene.Instantiate<Attract>();
                 GetNode("Modes").AddChild(attractnode);
             }
-            else { Logger.WarningRich(nameof(MainScene), ":[color=yellow] No attract sene found at " + path + "[/color]"); }
+            else { Logger.WarningRich(nameof(MainScene), ":[color=yellow] No attract sene found at " + _attract_scene_path + "[/color]"); }
         }
 
         /// <summary>
@@ -233,29 +239,69 @@ namespace PinGod.Core.Game
         private void OnSwitchCommandHandler(string name, byte index, byte value)
         {
             if (value <= 0) return;
-            if ((!pinGod?.IsTilted ?? true) && name == "enter")
+            if ((!pinGod?.IsTilted ?? true))
             {
-                if (!InServiceMenu)
+                if(name == "enter")
                 {
-                    if (!string.IsNullOrWhiteSpace(_service_menu_scene_path))
+                    if (!InServiceMenu)
                     {
-                        //enter service menu					
-                        InServiceMenu = true;
-
-                        Task.Run(() =>
+                        if (!string.IsNullOrWhiteSpace(_service_menu_scene_path))
                         {
-                            if (pinGod.GameInPlay)
-                                GetNodeOrNull("Modes/Game")?.QueueFree();
-                            else
-                                GetNodeOrNull("Modes/Attract")?.QueueFree();
+                            //enter service menu					
+                            InServiceMenu = true;
 
-                            //load service menu into modes
-                            CallDeferred("_loaded", _resources?.GetResource(_service_menu_scene_path.GetBaseName()));
+                            Task.Run(() =>
+                            {
+                                if (pinGod.GameInPlay)
+                                    GetNodeOrNull("Modes/Game")?.QueueFree();
+                                else
+                                    GetNodeOrNull("Modes/Attract")?.QueueFree();
 
-                            pinGod.EmitSignal("ServiceMenuEnter");
-                        });
+                                //load service menu into modes
+                                CallDeferred("_loaded", _resources?.GetResource(_service_menu_scene_path.GetBaseName()));
+
+                                pinGod.EmitSignal("ServiceMenuEnter");
+                            });
+                        }
+                        else { Logger.WarningRich(nameof(MainScene), ":", nameof(OnSwitchCommandHandler), ":[color=yellow]", " A Service menu scene wasn't provided", "[/color]"); }
                     }
-                    else { Logger.WarningRich(nameof(MainScene), ":", nameof(OnSwitchCommandHandler), ":[color=yellow]", " A Service menu scene wasn't provided", "[/color]"); }
+                }
+                else if(name == "start")
+                {
+                    if(!InServiceMenu)
+                    {
+                        if (HasNode("Modes/Attract"))
+                        {
+                            (pinGod as PinGodGame)?.CallDeferred("StartGame");
+                        }
+                        else if (HasNode("Modes/Game"))
+                        {
+                            if(!pinGod.IsTilted && pinGod.GameInPlay && pinGod.BallInPlay == 1)
+                            {
+                                (pinGod as PinGodGame)?.CallDeferred("StartGame");
+                            }                            
+                        }
+                    }
+                }
+                else
+                {
+                    switch (index)
+                    {
+                        case 0:
+                            pinGod?.AddCredits(1);
+                            break;
+                        case 1:
+                            pinGod?.AddCredits(2);
+                            break;
+                        case 2:
+                            pinGod?.AddCredits(3);
+                            break;
+                        case 3:
+                            pinGod?.AddCredits(4);
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }

@@ -50,6 +50,7 @@ public partial class AudioSettings : MarginContainer
     {
         _volMasterSlider = GetNode<HSlider>("VBoxContainer/MasterContainer/HSlider");
         _volMasterSlider.Value = Adjustments?.MasterVolume ?? 0;
+        AudioServer.SetBusVolumeDb(0, Adjustments.MasterVolume);
 
         _volMasterLabel = GetNode<Label>("VBoxContainer/MasterContainer/Label");
         _volMasterLabel.Text = $"{Adjustments?.MasterVolume}";
@@ -62,6 +63,7 @@ public partial class AudioSettings : MarginContainer
 
         _volVoiceLabel = GetNode<Label>("VBoxContainer/VoiceContainer/Label");
         _volVoiceLabel.Text = $"{Adjustments.VoiceVolume}";
+        AudioServer.SetBusVolumeDb(3, Adjustments.VoiceVolume);
 
         _voiceCheck = GetNode<CheckButton>("VBoxContainer/VoiceContainer/CheckButton");
         _voiceCheck.SetPressedNoSignal(Adjustments?.VoiceEnabled ?? false);
@@ -74,6 +76,7 @@ public partial class AudioSettings : MarginContainer
 
         _volSfxLabel = GetNode<Label>("VBoxContainer/SfxContainer/Label");
         _volSfxLabel.Text = $"{Adjustments?.SfxVolume ?? 0}";
+        AudioServer.SetBusVolumeDb(2, Adjustments.SfxVolume);
 
         sfxCheck = GetNode<CheckButton>("VBoxContainer/SfxContainer/CheckButton");
         sfxCheck.SetPressedNoSignal(Adjustments?.SfxEnabled ?? false);
@@ -86,6 +89,7 @@ public partial class AudioSettings : MarginContainer
 
         _volMusLabel = GetNode<Label>("VBoxContainer/MusicContainer/Label");
         _volMusLabel.Text = $"{Adjustments.MusicVolume}";
+        AudioServer.SetBusVolumeDb(1, Adjustments.MusicVolume);
 
         _musicCheck = GetNode<CheckButton>("VBoxContainer/MusicContainer/CheckButton");
         _musicCheck.SetPressedNoSignal(Adjustments?.MusicEnabled ?? false);
@@ -118,8 +122,11 @@ public partial class AudioSettings : MarginContainer
     void _on_VolumeSliderVoice_value_changed(float val)
     {
         if (Adjustments != null) Adjustments.VoiceVolume = val;
-        _volVoiceLabel.Text = val > 0 ? $"+{val}" : val.ToString();
         AudioServer.SetBusVolumeDb(3, val);
+        if (_volVoiceLabel != null)
+        {
+            _volVoiceLabel.Text = val > 0 ? $"+{val}" : val.ToString();
+        }
     }
 
     void _on_CheckButtonMusic_toggled(bool pressed) 

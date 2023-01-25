@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://cl3gt40k1gcgu"]
+
+[ext_resource type="Script" path="res://game/MsGame.cs" id="1_mqlsf"]
+[ext_resource type="PackedScene" uid="uid://bxowd0bn01l3x" path="res://modes/MsScoreMode.tscn" id="2_ai2i5"]
+[ext_resource type="PackedScene" uid="uid://452oeqo5a5f6" path="res://modes/BaseMode.tscn" id="3_bl003"]
+[ext_resource type="PackedScene" uid="uid://bs4si1w1e86rp" path="res://modes/Targets.tscn" id="4_wdsut"]
+[ext_resource type="PackedScene" path="res://modes/Crater.tscn" id="5_i64dg"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_mqlsf")
+BONUS_SCENE = "res://modes/Bonus.tscn"
+MULTIBALL_SCENE = "res://addons/modes/multiball/Multiball.tscn"
+SCORE_ENTRY_SCENE = "res://autoload/ScoreEntry.tscn"
+TILT_SCENE = "res://addons/modes/tilt/Tilt.tscn"
+
+[node name="Modes" type="CanvasLayer" parent="."]
+
+[node name="ScoreMode" parent="Modes" instance=ExtResource("2_ai2i5")]
+
+[node name="BaseMode" parent="Modes" instance=ExtResource("3_bl003")]
+
+[node name="DropTargets" parent="Modes" instance=ExtResource("4_wdsut")]
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Crater" parent="Modes" instance=ExtResource("5_i64dg")]
+visible = false
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Modes-Upper" type="CanvasLayer" parent="."]
+layer = 20

@@ -10,6 +10,10 @@
         /// </summary>
         None,
         /// <summary>
+        /// Game started let . GameRunning
+        /// </summary>
+        started,
+        /// <summary>
         /// quit godot
         /// </summary>
         quit,
@@ -20,6 +24,10 @@
         /// <summary>
         /// resume godot
         /// </summary>
-        resume
+        resume,
+        /// <summary>
+        /// resume godot
+        /// </summary>
+        reset
     }
 }

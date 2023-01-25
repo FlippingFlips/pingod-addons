@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7bve2cuepcqn"]
+
+[ext_resource type="Script" path="res://addons/pingod-core/Service/AudioManager.cs" id="1_07ks3"]
+
+[node name="AudioManager" type="Node"]
+script = ExtResource("1_07ks3")
+MusicAssets = {
+"dnb": "res://assets/audio/music/ms-music-dnb.ogg",
+"techno": "res://assets/audio/music/ms-music-techno.ogg"
+}
+SfxAssets = {
+"crater": "res://assets/audio/sfx/craterhit-horsepin.wav",
+"credit": "res://addons/assets/audio/sfx/credit.wav",
+"drops": "res://assets/audio/sfx/dropT-horsepin.wav",
+"drops_complete": "res://assets/audio/sfx/dropTComplete-horsepin.wav",
+"spinner": "res://assets/audio/sfx/Laser_Shoot3-horsepin.wav",
+"tilt": "res://addons/assets/audio/sfx/tilt.wav",
+"warning": "res://addons/assets/audio/sfx/tilt_warning.wav"
+}
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Music"
+
+[node name="SfxPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Sfx"
+
+[node name="VoicePlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Voice"
+
+[connection signal="finished" from="MusicPlayer" to="." method="MusicPlayer_finished"]

@@ -412,3 +412,9 @@ FodyWeavers.xsd
 /examples/pingod-netproc-pdb/visual_pinball/decals_inserts.png
 /examples/pingod-netproc-pdb/visual_pinball/crash.txt
 /examples/pingod-netproc-pdb/netproc.db
+/examples/pingod-game-moonstation/assets/img
+/examples/pingod-game-moonstation/assets/audio
+/examples/pingod-game-moonstation/visual_pinball/vp-playfield.png
+/examples/pingod-game-moonstation/visual_pinball/vp-plastics.png
+/examples/pingod-game-moonstation/addons
+/examples/pingod-game-moonstation/local/ms_lang.en.translation

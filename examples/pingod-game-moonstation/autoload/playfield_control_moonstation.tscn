@@ -1,0 +1,393 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvs04m131d7a6"]
+
+[ext_resource type="Theme" uid="uid://bcbhvghnhmgd7" path="res://addons/editor-plugin/machine-plugins/playfield/playfield_button_theme.tres" id="1_rv72o"]
+[ext_resource type="Script" path="res://addons/editor-plugin/machine-plugins/playfield/playfield_control.gd" id="2_8ij2s"]
+[ext_resource type="Texture2D" uid="uid://dydi554xr8324" path="res://assets/img/Untitled.jpg" id="3_d0tsh"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -624.0
+offset_bottom = 308.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_rv72o")
+script = ExtResource("2_8ij2s")
+
+[node name="PlayfieldTextureRect" type="TextureRect" parent="."]
+texture_repeat = 1
+layout_direction = 1
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 908.0
+texture = ExtResource("3_d0tsh")
+stretch_mode = 6
+
+[node name="Buttons" type="Control" parent="."]
+editor_description = "Most buttons are toggles, but some you want not to toggle, like targets, coin + start buttons. Duplicate a button give it a name that matches your switch."
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="coin1" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 252.0
+offset_top = 872.0
+offset_right = 306.0
+offset_bottom = 899.0
+scale = Vector2(0.736438, 0.736438)
+text = "COIN1"
+
+[node name="start" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 293.0
+offset_top = 872.0
+offset_right = 345.0
+offset_bottom = 899.0
+scale = Vector2(0.751852, 0.751852)
+text = "START"
+
+[node name="exit" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 875.0
+offset_right = 132.0
+offset_bottom = 902.0
+scale = Vector2(0.659074, 0.742996)
+text = "exit
+"
+
+[node name="down" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 875.0
+offset_right = 168.0
+offset_bottom = 902.0
+scale = Vector2(0.659074, 0.742996)
+text = "down"
+
+[node name="up" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 151.0
+offset_top = 875.0
+offset_right = 205.0
+offset_bottom = 902.0
+scale = Vector2(0.659074, 0.742996)
+text = "up"
+
+[node name="enter" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 188.0
+offset_top = 875.0
+offset_right = 242.0
+offset_bottom = 902.0
+scale = Vector2(0.659074, 0.742996)
+text = "enter"
+
+[node name="tilt" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 843.0
+offset_right = 67.0
+offset_bottom = 870.0
+scale = Vector2(0.659074, 0.742996)
+text = "tilt"
+
+[node name="slamTilt" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 843.0
+offset_right = 107.0
+offset_bottom = 870.0
+scale = Vector2(0.659074, 0.742996)
+text = "slamTilt"
+
+[node name="plungerLane" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 354.0
+offset_top = 787.0
+offset_right = 378.0
+offset_bottom = 808.0
+rotation = -1.57079
+toggle_mode = true
+
+[node name="outlaneL" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 672.0
+offset_right = 44.0
+offset_bottom = 693.0
+rotation = -1.57079
+toggle_mode = true
+
+[node name="inlaneL" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 671.0
+offset_right = 76.0
+offset_bottom = 692.0
+rotation = -1.57079
+toggle_mode = true
+
+[node name="inlaneR" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 293.0
+offset_top = 671.0
+offset_right = 317.0
+offset_bottom = 692.0
+rotation = -1.57079
+toggle_mode = true
+
+[node name="outlaneR" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 324.0
+offset_top = 672.0
+offset_right = 348.0
+offset_bottom = 693.0
+rotation = -1.57079
+toggle_mode = true
+
+[node name="slingL" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 87.0
+offset_top = 646.0
+offset_right = 141.0
+offset_bottom = 673.0
+scale = Vector2(0.319999, 0.56)
+
+[node name="flipperLwL" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 750.0
+offset_right = 162.0
+offset_bottom = 777.0
+scale = Vector2(0.319999, 0.56)
+
+[node name="flipperLwR" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 242.0
+offset_top = 749.0
+offset_right = 296.0
+offset_bottom = 776.0
+scale = Vector2(0.319999, 0.56)
+
+[node name="slingR" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 265.0
+offset_top = 647.0
+offset_right = 319.0
+offset_bottom = 674.0
+scale = Vector2(0.319999, 0.56)
+
+[node name="crater_saucer" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 185.0
+offset_top = 259.0
+offset_right = 209.0
+offset_bottom = 280.0
+rotation = -1.57079
+toggle_mode = true
+
+[node name="trough0" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 257.537
+offset_top = 799.0
+offset_right = 281.537
+offset_bottom = 820.0
+rotation = 0.988307
+toggle_mode = true
+
+[node name="trough1" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 279.537
+offset_top = 785.0
+offset_right = 303.537
+offset_bottom = 806.0
+rotation = 0.988307
+toggle_mode = true
+
+[node name="trough2" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 301.537
+offset_top = 772.0
+offset_right = 325.537
+offset_bottom = 793.0
+rotation = 0.988307
+toggle_mode = true
+
+[node name="trough3" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 321.537
+offset_top = 760.0
+offset_right = 345.537
+offset_bottom = 781.0
+rotation = 0.988307
+toggle_mode = true
+
+[node name="Moon" type="Button" parent="Buttons"]
+layout_mode = 1
+offset_left = 19.0
+offset_top = 495.0
+offset_right = 73.0
+offset_bottom = 522.0
+rotation = -1.04462
+scale = Vector2(0.319999, 0.56)
+
+[node name="mOon" type="Button" parent="Buttons"]
+layout_mode = 1
+offset_left = 29.0
+offset_top = 477.0
+offset_right = 83.0
+offset_bottom = 504.0
+rotation = -1.04462
+scale = Vector2(0.319999, 0.56)
+
+[node name="moOn" type="Button" parent="Buttons"]
+layout_mode = 1
+offset_left = 39.0
+offset_top = 459.0
+offset_right = 93.0
+offset_bottom = 486.0
+rotation = -1.04462
+scale = Vector2(0.319999, 0.56)
+
+[node name="mooN" type="Button" parent="Buttons"]
+layout_mode = 1
+offset_left = 49.0
+offset_top = 442.0
+offset_right = 103.0
+offset_bottom = 469.0
+rotation = -1.04462
+scale = Vector2(0.319999, 0.56)
+
+[node name="top_left_target" type="Button" parent="Buttons"]
+layout_mode = 1
+offset_left = 49.0
+offset_top = 107.0
+offset_right = 103.0
+offset_bottom = 134.0
+rotation = -1.04462
+scale = Vector2(0.319999, 0.56)
+
+[node name="bumper0" type="Button" parent="Buttons"]
+layout_mode = 1
+offset_left = 100.0
+offset_top = 238.0
+offset_right = 154.0
+offset_bottom = 265.0
+rotation = -1.04462
+scale = Vector2(0.319999, 0.56)
+
+[node name="bumper1" type="Button" parent="Buttons"]
+layout_mode = 1
+offset_left = 269.0
+offset_top = 241.0
+offset_right = 323.0
+offset_bottom = 268.0
+rotation = -1.04462
+scale = Vector2(0.319999, 0.56)
+
+[node name="Station" type="Button" parent="Buttons"]
+layout_mode = 1
+offset_left = 334.0
+offset_top = 378.0
+offset_right = 388.0
+offset_bottom = 405.0
+rotation = -3.13909
+scale = Vector2(0.319999, 0.56)
+
+[node name="sTation" type="Button" parent="Buttons"]
+layout_mode = 1
+offset_left = 334.0
+offset_top = 397.0
+offset_right = 388.0
+offset_bottom = 424.0
+rotation = -3.13909
+scale = Vector2(0.319999, 0.56)
+
+[node name="stAtion" type="Button" parent="Buttons"]
+layout_mode = 1
+offset_left = 334.0
+offset_top = 415.0
+offset_right = 388.0
+offset_bottom = 442.0
+rotation = -3.13909
+scale = Vector2(0.319999, 0.56)
+
+[node name="staTion" type="Button" parent="Buttons"]
+layout_mode = 1
+offset_left = 334.0
+offset_top = 435.0
+offset_right = 388.0
+offset_bottom = 462.0
+rotation = -3.13909
+scale = Vector2(0.319999, 0.56)
+
+[node name="statIon" type="Button" parent="Buttons"]
+layout_mode = 1
+offset_left = 334.0
+offset_top = 454.0
+offset_right = 388.0
+offset_bottom = 481.0
+rotation = -3.13909
+scale = Vector2(0.319999, 0.56)
+
+[node name="statiOn" type="Button" parent="Buttons"]
+layout_mode = 1
+offset_left = 334.0
+offset_top = 476.0
+offset_right = 388.0
+offset_bottom = 503.0
+rotation = -3.13909
+scale = Vector2(0.319999, 0.56)
+
+[node name="statioN" type="Button" parent="Buttons"]
+layout_mode = 1
+offset_left = 334.0
+offset_top = 495.0
+offset_right = 388.0
+offset_bottom = 522.0
+rotation = -3.13909
+scale = Vector2(0.319999, 0.56)
+
+[node name="AllTroughButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 254.0
+offset_top = 835.0
+offset_right = 452.0
+offset_bottom = 862.0
+rotation = -0.557953
+scale = Vector2(0.482606, 0.723905)
+text = "Activate Trough Switches"
+
+[node name="ResetGameButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 873.0
+offset_right = 209.0
+offset_bottom = 908.0
+rotation = 0.00191092
+scale = Vector2(0.261378, 0.66501)
+theme_override_font_sizes/font_size = 22
+text = "reset"
+
+[node name="RecordingOptionButton" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 807.0
+offset_right = 99.0
+offset_bottom = 834.0
+item_count = 3
+popup/item_0/text = "Off"
+popup/item_0/id = 0
+popup/item_1/text = "On"
+popup/item_1/id = 1
+popup/item_2/text = "playback"
+popup/item_2/id = 2

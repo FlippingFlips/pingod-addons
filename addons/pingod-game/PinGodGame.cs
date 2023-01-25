@@ -201,7 +201,7 @@ namespace PinGod.Game
             }
         }
         /// <summary>
-        /// Adds credits if using Adjustments
+        /// Adds credits if using Adjustments to the <see cref="Audits.Credits"/>
         /// </summary>
         /// <param name="amt"></param>
         public virtual void AddCredits(byte amt)
@@ -210,7 +210,7 @@ namespace PinGod.Game
             {
                 Audits.Credits += amt;
                 EmitSignal(nameof(CreditAdded), Audits.Credits);
-            }            
+            }         
         }
         public virtual long AddPoints(long points, bool emitUpdateSignal = true)
         {
@@ -343,7 +343,7 @@ namespace PinGod.Game
         public virtual void PlayMusic(string name, float pos = 0) => AudioManager?.PlayMusic(name, pos);
         public virtual void PlaySfx(string name, string bus = "Sfx") => AudioManager?.PlaySfx(name, bus);
         public virtual void PlayVoice(string name, string bus = "Voice") => AudioManager?.PlayVoice(name, bus);
-        public virtual void Quit(bool saveData = true)
+        public virtual void Quit()
         {
             //return if we've already quit
             if (this.QuitRequested) return;
@@ -465,6 +465,8 @@ namespace PinGod.Game
         }
         public virtual bool StartGame()
         {
+            if (IsPlayerEnteringHighscore) return false;
+
             LogInfo(nameof(PinGodGame), $":start game. BIP:{BallInPlay}, players/max:{Players.Count}/{MaxPlayers}, credits: {Audits.Credits}, inPlay:{GameInPlay}");
             if (IsTilted)
             {
@@ -681,16 +683,13 @@ namespace PinGod.Game
             {
                 switch (index)
                 {
+                    case 0:
                     case 1:
                     case 2:
                     case 3: //Coin buttons. See PinGod.vbs for Standard switches
                         AudioManager?.PlaySfx("credit");
                         AddCredits((byte)(1 * index));
-                        break;
-                    case 19://start or add player
-                        if(!IsTilted && !IsPlayerEnteringHighscore)
-                            CallDeferred(nameof(StartGame));
-                        break;
+                        break;                   
                     default:
                         break;
                 }

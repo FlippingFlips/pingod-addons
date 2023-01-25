@@ -1,0 +1,102 @@
+[gd_scene load_steps=6 format=3 uid="uid://bw7bpyjcoytmk"]
+
+[ext_resource type="PackedScene" uid="uid://bjks53ccc6xq2" path="res://addons/pingod-core/Settings/GameSettingsScene.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://b0u5aybd0kn4b" path="res://addons/pingod-core/Settings/AudioSettings.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://dx4rgg70gg3r2" path="res://addons/pingod-core/Settings/DisplaySettings.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://cisoqcmdu0r8u" path="res://addons/pingod-core/Settings/PingodSettingsScene.tscn" id="5"]
+[ext_resource type="Script" path="res://modes/SongOptionButton.cs" id="6"]
+
+[node name="SettingsDisplay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabContainer" type="TabContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Game" type="TabBar" parent="TabContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 31.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Game"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameSettingsScene" parent="TabContainer/Game/ScrollContainer" instance=ExtResource("1")]
+offset_right = 512.0
+offset_bottom = 143.0
+
+[node name="Audio" type="TabBar" parent="TabContainer"]
+visible = false
+
+[node name="AudioSettings" parent="TabContainer/Audio" instance=ExtResource("3")]
+
+[node name="OptionButton" type="OptionButton" parent="TabContainer/Audio"]
+offset_left = 11.0
+offset_top = 188.0
+offset_right = 108.0
+offset_bottom = 219.0
+size_flags_horizontal = 3
+item_count = 3
+popup/item_0/text = "off"
+popup/item_0/id = 0
+popup/item_1/text = "dnb"
+popup/item_1/id = 1
+popup/item_2/text = "techno"
+popup/item_2/id = 2
+script = ExtResource("6")
+
+[node name="Display" type="TabBar" parent="TabContainer"]
+visible = false
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Display"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DisplaySettings" parent="TabContainer/Display/ScrollContainer" instance=ExtResource("4")]
+offset_right = 238.0
+offset_bottom = 268.0
+
+[node name="Pingod" type="TabBar" parent="TabContainer"]
+visible = false
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Pingod"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameSettingsScene" parent="TabContainer/Pingod/ScrollContainer" instance=ExtResource("5")]
+offset_right = 269.0
+offset_bottom = 187.0
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+grow_vertical = 2
+
+[node name="VSlider" type="VSlider" parent="Panel"]
+min_value = -72.0
+max_value = 6.0
+value = -6.0
+tick_count = 78
+
+[connection signal="item_selected" from="TabContainer/Audio/OptionButton" to="TabContainer/Audio/OptionButton" method="_on_OptionButton_item_selected"]

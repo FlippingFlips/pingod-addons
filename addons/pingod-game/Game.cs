@@ -272,9 +272,8 @@ namespace PinGod.Game
         /// </summary>
         public virtual void OnScoreEntryEnded()
         {
-            Logger.Debug(nameof(Game), " ", nameof(OnScoreEntryEnded));
-            pinGod.IsPlayerEnteringHighscore = false;
-            pinGod.EndOfGame();
+            Logger.Debug(nameof(Game), " ", nameof(OnScoreEntryEnded));            
+            pinGod.EndOfGame();            
         }
 
         /// <summary>
