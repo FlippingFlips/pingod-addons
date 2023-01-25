@@ -42,10 +42,12 @@ var NAVTREEINDEX0 =
 "GameSettingsScene_8cs.html":[19,0,0,4,6,3],
 "GameSyncState_8cs.html":[19,0,0,3,0,2],
 "GameSyncState_8cs.html#a3bfac1e5e3163ea4141ba43d6c8e42df":[19,0,0,3,0,2,0],
-"GameSyncState_8cs.html#a3bfac1e5e3163ea4141ba43d6c8e42dfa69f2afc2390cec954f7c208b07212d39":[19,0,0,3,0,2,0,3],
+"GameSyncState_8cs.html#a3bfac1e5e3163ea4141ba43d6c8e42dfa3bebb2f89180b03fa5ae736665f648d9":[19,0,0,3,0,2,0,1],
+"GameSyncState_8cs.html#a3bfac1e5e3163ea4141ba43d6c8e42dfa69f2afc2390cec954f7c208b07212d39":[19,0,0,3,0,2,0,4],
 "GameSyncState_8cs.html#a3bfac1e5e3163ea4141ba43d6c8e42dfa6adf97f83acf6453d4a6a4b1070f3754":[19,0,0,3,0,2,0,0],
-"GameSyncState_8cs.html#a3bfac1e5e3163ea4141ba43d6c8e42dfadbd73c2b545209688ed794c0d5413d5a":[19,0,0,3,0,2,0,1],
-"GameSyncState_8cs.html#a3bfac1e5e3163ea4141ba43d6c8e42dfaec1b81965109165de6b38cd92c1e39f9":[19,0,0,3,0,2,0,2],
+"GameSyncState_8cs.html#a3bfac1e5e3163ea4141ba43d6c8e42dfa86266ee937d97f812a8e57d22b62ee29":[19,0,0,3,0,2,0,5],
+"GameSyncState_8cs.html#a3bfac1e5e3163ea4141ba43d6c8e42dfadbd73c2b545209688ed794c0d5413d5a":[19,0,0,3,0,2,0,2],
+"GameSyncState_8cs.html#a3bfac1e5e3163ea4141ba43d6c8e42dfaec1b81965109165de6b38cd92c1e39f9":[19,0,0,3,0,2,0,3],
 "Game_8cs.html":[19,0,0,5,0],
 "HighScore_8cs.html":[19,0,0,3,2,2],
 "HighScores_8cs.html":[19,0,0,2,3,0],
@@ -247,7 +249,5 @@ var NAVTREEINDEX0 =
 "classPinGodProcGameController.html":[18,0,18],
 "classPinGodProcGameController.html#a1b074fbf189404bf4fbf91acb14c2979":[18,0,18,18],
 "classPinGodProcGameController.html#a2564cceae03a19681ed72fe770304b8a":[18,0,18,17],
-"classPinGodProcGameController.html#a2912427b83f736f5a555a1d7327b41b9":[18,0,18,8],
-"classPinGodProcGameController.html#a2bdf4d9d1488b852197c85c6837dacd4":[18,0,18,7],
-"classPinGodProcGameController.html#a3233aaa0ec52d4e14adec6cb9dc595ae":[18,0,18,13]
+"classPinGodProcGameController.html#a2912427b83f736f5a555a1d7327b41b9":[18,0,18,8]
 };

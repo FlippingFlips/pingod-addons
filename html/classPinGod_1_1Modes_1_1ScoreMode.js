@@ -1,6 +1,7 @@
 var classPinGod_1_1Modes_1_1ScoreMode =
 [
     [ "_EnterTree", "classPinGod_1_1Modes_1_1ScoreMode.html#a691a5eb3c8644c9bc08cc77348418b80", null ],
+    [ "_ExitTree", "classPinGod_1_1Modes_1_1ScoreMode.html#a9629857eab71a15f13b9592749a4d694", null ],
     [ "_Ready", "classPinGod_1_1Modes_1_1ScoreMode.html#aeea844cfa4b86bc76c4ef75162b154b6", null ],
     [ "GetBallPlayerInfoLabels", "classPinGod_1_1Modes_1_1ScoreMode.html#ac963d0e36f439fa94be5430711bab807", null ],
     [ "GetPlayerScoreLabels", "classPinGod_1_1Modes_1_1ScoreMode.html#accbe32d28b3d724bb13e4f2a96e8bb4f", null ],

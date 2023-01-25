@@ -80,7 +80,6 @@ var NAVTREE =
         [ "All", "functions.html", "functions_dup" ],
         [ "Functions", "functions_func.html", "functions_func" ],
         [ "Variables", "functions_vars.html", null ],
-        [ "Enumerations", "functions_enum.html", null ],
         [ "Properties", "functions_prop.html", "functions_prop" ],
         [ "Events", "functions_evnt.html", null ]
       ] ]
@@ -98,11 +97,11 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "AdjustmentsNodeExports_8cs.html",
-"classPinGodProcGameController.html#a34c7d67337256bda01c50d135829dea7",
-"classPinGod_1_1Core_1_1Service_1_1AdjustmentsNode.html#ae408b56e40ad2d7363a4f161ba19819d",
-"classPinGod_1_1EditorPlugins_1_1SwitchOverlay.html#aceba616c7a250563f737b6a6eb5e0769",
-"dir_0b144002c78597e91255d3c34ee0f0cd.html",
-"interfacePinGod_1_1Core_1_1Interface_1_1IAudioManager.html#a3ae9696224e459214608f646c1484053"
+"classPinGodProcGameController.html#a2bdf4d9d1488b852197c85c6837dacd4",
+"classPinGod_1_1Core_1_1Service_1_1AdjustmentsNode.html#ac125cc5e4582a7044b11d4d437c165fa",
+"classPinGod_1_1EditorPlugins_1_1TargetsBank.html#a12dd5db3b36f5da2e27678a1acb8d86e",
+"dir_1264c0297c1de403ef5adbc174038bfa.html",
+"interfacePinGod_1_1Core_1_1Interface_1_1IAudioManager.html#a70e82187850fc38a9ee0efbed31bdf2f"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

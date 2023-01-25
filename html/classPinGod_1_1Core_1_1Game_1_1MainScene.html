@@ -92,7 +92,7 @@ $(document).ready(function(){initNavTree('classPinGod_1_1Core_1_1Game_1_1MainSce
 </div><!--header-->
 <div class="contents">
 
-<p>Main Scene. The Entry point  
+<p>Main Scene. The Entry point for a normal PinGodGame.  
  <a href="classPinGod_1_1Core_1_1Game_1_1MainScene.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for PinGod.Core.Game.MainScene:</div>
@@ -111,8 +111,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad28985469100699af6b3d3670ecfd188"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGod_1_1Core_1_1Game_1_1MainScene.html#ad28985469100699af6b3d3670ecfd188">_Ready</a> ()</td></tr>
 <tr class="memdesc:ad28985469100699af6b3d3670ecfd188"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets resources from root and hooks up to resources loaded. Hooks up to PinGodGame events  <a href="classPinGod_1_1Core_1_1Game_1_1MainScene.html#ad28985469100699af6b3d3670ecfd188">More...</a><br /></td></tr>
 <tr class="separator:ad28985469100699af6b3d3670ecfd188"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05f3feea0a5be3ef7fc188ef273d49d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGod_1_1Core_1_1Game_1_1MainScene.html#a05f3feea0a5be3ef7fc188ef273d49d1">AddAttract</a> (string path=&quot;res://addons/modes/attract/Attract.tscn&quot;)</td></tr>
-<tr class="separator:a05f3feea0a5be3ef7fc188ef273d49d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1951819b522f4fe9c35992f7cda7ca74"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGod_1_1Core_1_1Game_1_1MainScene.html#a1951819b522f4fe9c35992f7cda7ca74">AddAttract</a> ()</td></tr>
+<tr class="separator:a1951819b522f4fe9c35992f7cda7ca74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abcfb6e4756980a8e317fbcceac3af78f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGod_1_1Core_1_1Game_1_1MainScene.html#abcfb6e4756980a8e317fbcceac3af78f">OnGameEnded</a> ()</td></tr>
 <tr class="memdesc:abcfb6e4756980a8e317fbcceac3af78f"><td class="mdescLeft">&#160;</td><td class="mdescRight">End game, reloads the original scene, removing anything added. This could be used as a reset from VP with F3.  <a href="classPinGod_1_1Core_1_1Game_1_1MainScene.html#abcfb6e4756980a8e317fbcceac3af78f">More...</a><br /></td></tr>
 <tr class="separator:abcfb6e4756980a8e317fbcceac3af78f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,6 +125,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a1b5e502c5f445bb8e76b8a5e9eddbd2a"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGod_1_1Core_1_1Game_1_1MainScene.html#a1b5e502c5f445bb8e76b8a5e9eddbd2a">_attract_scene_path</a></td></tr>
+<tr class="memdesc:a1b5e502c5f445bb8e76b8a5e9eddbd2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Path to your Attract.tscn.  <a href="classPinGod_1_1Core_1_1Game_1_1MainScene.html#a1b5e502c5f445bb8e76b8a5e9eddbd2a">More...</a><br /></td></tr>
+<tr class="separator:a1b5e502c5f445bb8e76b8a5e9eddbd2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59579a6e8672323565057b8ca541e29f"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGod_1_1Core_1_1Game_1_1MainScene.html#a59579a6e8672323565057b8ca541e29f">_game_scene_path</a></td></tr>
 <tr class="memdesc:a59579a6e8672323565057b8ca541e29f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Path to the Game.tscn.  <a href="classPinGod_1_1Core_1_1Game_1_1MainScene.html#a59579a6e8672323565057b8ca541e29f">More...</a><br /></td></tr>
 <tr class="separator:a59579a6e8672323565057b8ca541e29f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,7 +145,7 @@ Properties</h2></td></tr>
 <tr class="separator:a4985706994e9a37ec668008a1f2f4485"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Main Scene. The Entry point </p>
+<div class="textblock"><p>Main Scene. The Entry point for a normal PinGodGame. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="af696f1e23c6ed0855a51ab7de6e9e28f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af696f1e23c6ed0855a51ab7de6e9e28f">&#9670;&nbsp;</a></span>_EnterTree()</h2>
@@ -200,8 +203,8 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a id="a05f3feea0a5be3ef7fc188ef273d49d1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05f3feea0a5be3ef7fc188ef273d49d1">&#9670;&nbsp;</a></span>AddAttract()</h2>
+<a id="a1951819b522f4fe9c35992f7cda7ca74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1951819b522f4fe9c35992f7cda7ca74">&#9670;&nbsp;</a></span>AddAttract()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -209,8 +212,7 @@ Properties</h2></td></tr>
         <tr>
           <td class="memname">void PinGod.Core.Game.MainScene.AddAttract </td>
           <td>(</td>
-          <td class="paramtype">string&#160;</td>
-          <td class="paramname"><em>path</em> = <code>&quot;res://addons/modes/attract/Attract.tscn&quot;</code></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -300,6 +302,30 @@ Properties</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a1b5e502c5f445bb8e76b8a5e9eddbd2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b5e502c5f445bb8e76b8a5e9eddbd2a">&#9670;&nbsp;</a></span>_attract_scene_path</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string PinGod.Core.Game.MainScene._attract_scene_path</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Path to your Attract.tscn. </p>
+
+</div>
+</div>
 <a id="a59579a6e8672323565057b8ca541e29f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a59579a6e8672323565057b8ca541e29f">&#9670;&nbsp;</a></span>_game_scene_path</h2>
 

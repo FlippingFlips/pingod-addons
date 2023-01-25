@@ -83,7 +83,6 @@ $(document).ready(function(){initNavTree('classPinGod_1_1Core_1_1Service_1_1Memo
 
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
@@ -108,20 +107,6 @@ Inheritance diagram for PinGod.Core.Service.MemoryMap:</div>
   </map>
 </div></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr class="memitem:a283e06eaa5104fc8f2cdb32126832c9d"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#a283e06eaa5104fc8f2cdb32126832c9d">GameSyncState</a> { <br />
-&#160;&#160;<a class="el" href="classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#a283e06eaa5104fc8f2cdb32126832c9da6adf97f83acf6453d4a6a4b1070f3754">None</a>
-, <a class="el" href="classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#a283e06eaa5104fc8f2cdb32126832c9da3bebb2f89180b03fa5ae736665f648d9">started</a>
-, <a class="el" href="classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#a283e06eaa5104fc8f2cdb32126832c9dadbd73c2b545209688ed794c0d5413d5a">quit</a>
-, <a class="el" href="classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#a283e06eaa5104fc8f2cdb32126832c9daec1b81965109165de6b38cd92c1e39f9">pause</a>
-, <br />
-&#160;&#160;<a class="el" href="classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#a283e06eaa5104fc8f2cdb32126832c9da69f2afc2390cec954f7c208b07212d39">resume</a>
-, <a class="el" href="classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#a283e06eaa5104fc8f2cdb32126832c9da86266ee937d97f812a8e57d22b62ee29">reset</a>
-<br />
- }</td></tr>
-<tr class="separator:a283e06eaa5104fc8f2cdb32126832c9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a7f744192a0e56e8f1f6cd2b18795829d"><td class="memItemLeft" align="right" valign="top">delegate void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#a7f744192a0e56e8f1f6cd2b18795829d">MemorySwitchHandler</a> (object sender, <a class="el" href="classPinGod_1_1Base_1_1SwitchEventArgs.html">SwitchEventArgs</a> sw)</td></tr>
@@ -159,7 +144,7 @@ Protected Member Functions</h2></td></tr>
 <tr class="memdesc:adadd515d77452230043593583019b6d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disposes of the memory map and mutex  <a href="classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#adadd515d77452230043593583019b6d2">More...</a><br /></td></tr>
 <tr class="separator:adadd515d77452230043593583019b6d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8abedd5b2bbbaf8a4614174e45ae599e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#a8abedd5b2bbbaf8a4614174e45ae599e">ReadStates</a> ()</td></tr>
-<tr class="memdesc:a8abedd5b2bbbaf8a4614174e45ae599e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the buffer size <a class="el" href="classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#a2277e040e77a33fc0e22bd7747687456">TOTAL_SWITCH</a> switch states from the memory map buffer at position 0. Acts on any new switch events found. The switch state gets converted to a Godot InputEventAction with the name sw{Num} and fed into the gameIt is overidden if a VpCommand found. <a class="el" href="classPinGod_1_1Core_1_1Switch.html" title="Represents a Switch in a pinball machine">Switch</a> 0 changed will process game states, switch zero used with <a class="el" href="classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#a283e06eaa5104fc8f2cdb32126832c9d">GameSyncState</a>.  <a href="classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#a8abedd5b2bbbaf8a4614174e45ae599e">More...</a><br /></td></tr>
+<tr class="memdesc:a8abedd5b2bbbaf8a4614174e45ae599e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the buffer size <a class="el" href="classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#a2277e040e77a33fc0e22bd7747687456">TOTAL_SWITCH</a> switch states from the memory map buffer at position 0. Acts on any new switch events found. The switch state gets converted to a Godot InputEventAction with the name sw{Num} and fed into the gameIt is overidden if a VpCommand found. <a class="el" href="classPinGod_1_1Core_1_1Switch.html" title="Represents a Switch in a pinball machine">Switch</a> 0 changed will process game states, switch zero used with GameSyncState.  <a href="classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#a8abedd5b2bbbaf8a4614174e45ae599e">More...</a><br /></td></tr>
 <tr class="separator:a8abedd5b2bbbaf8a4614174e45ae599e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
@@ -193,44 +178,7 @@ Events</h2></td></tr>
 <div class="textblock"><p>Memory Mapping file (windows) which the COM controller also has access to. </p>
 <p>Saves events, states of switches, coils, lamps + leds </p>
 <p>Mutex=pingod_vp_mutex | MapName=pingod_vp </p>
-</div><h2 class="groupheader">Member Enumeration Documentation</h2>
-<a id="a283e06eaa5104fc8f2cdb32126832c9d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a283e06eaa5104fc8f2cdb32126832c9d">&#9670;&nbsp;</a></span>GameSyncState</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#a283e06eaa5104fc8f2cdb32126832c9d">PinGod.Core.Service.MemoryMap.GameSyncState</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a283e06eaa5104fc8f2cdb32126832c9da6adf97f83acf6453d4a6a4b1070f3754"></a>None&#160;</td><td class="fielddoc"><p>No state </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a283e06eaa5104fc8f2cdb32126832c9da3bebb2f89180b03fa5ae736665f648d9"></a>started&#160;</td><td class="fielddoc"><p><a class="el" href="namespacePinGod_1_1Core_1_1Game.html">Game</a> started let . GameRunning </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a283e06eaa5104fc8f2cdb32126832c9dadbd73c2b545209688ed794c0d5413d5a"></a>quit&#160;</td><td class="fielddoc"><p>quit godot </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a283e06eaa5104fc8f2cdb32126832c9daec1b81965109165de6b38cd92c1e39f9"></a>pause&#160;</td><td class="fielddoc"><p>pause godot </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a283e06eaa5104fc8f2cdb32126832c9da69f2afc2390cec954f7c208b07212d39"></a>resume&#160;</td><td class="fielddoc"><p>resume godot </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a283e06eaa5104fc8f2cdb32126832c9da86266ee937d97f812a8e57d22b62ee29"></a>reset&#160;</td><td class="fielddoc"><p>resume godot </p>
-</td></tr>
-</table>
-
-</div>
-</div>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a6d336e04269e8ec0d54e98b716f8109e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6d336e04269e8ec0d54e98b716f8109e">&#9670;&nbsp;</a></span>MemoryMap()</h2>
 
@@ -419,7 +367,7 @@ Events</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reads the buffer size <a class="el" href="classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#a2277e040e77a33fc0e22bd7747687456">TOTAL_SWITCH</a> switch states from the memory map buffer at position 0. Acts on any new switch events found. The switch state gets converted to a Godot InputEventAction with the name sw{Num} and fed into the gameIt is overidden if a VpCommand found. <a class="el" href="classPinGod_1_1Core_1_1Switch.html" title="Represents a Switch in a pinball machine">Switch</a> 0 changed will process game states, switch zero used with <a class="el" href="classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#a283e06eaa5104fc8f2cdb32126832c9d">GameSyncState</a>. </p>
+<p>Reads the buffer size <a class="el" href="classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#a2277e040e77a33fc0e22bd7747687456">TOTAL_SWITCH</a> switch states from the memory map buffer at position 0. Acts on any new switch events found. The switch state gets converted to a Godot InputEventAction with the name sw{Num} and fed into the gameIt is overidden if a VpCommand found. <a class="el" href="classPinGod_1_1Core_1_1Switch.html" title="Represents a Switch in a pinball machine">Switch</a> 0 changed will process game states, switch zero used with GameSyncState. </p>
 
 <p>Reimplemented in <a class="el" href="classMemoryMapPROC.html#af71ad438c8f0a7ff4d911ec111cb6b00">MemoryMapPROC</a>.</p>
 

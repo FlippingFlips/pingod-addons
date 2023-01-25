@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['addattract_962',['AddAttract',['../classPinGod_1_1Core_1_1Game_1_1MainScene.html#a05f3feea0a5be3ef7fc188ef273d49d1',1,'PinGod::Core::Game::MainScene']]],
+  ['addattract_962',['AddAttract',['../classPinGod_1_1Core_1_1Game_1_1MainScene.html#a1951819b522f4fe9c35992f7cda7ca74',1,'PinGod::Core::Game::MainScene']]],
   ['addbonus_963',['AddBonus',['../interfacePinGod_1_1Core_1_1IPinGodGame.html#a48054f2640ab6de527fa56925612fcde',1,'PinGod.Core.IPinGodGame.AddBonus()'],['../classPinGod_1_1Game_1_1PinGodGame.html#a7f612398c81217ca3028cd5ded1bc993',1,'PinGod.Game.PinGodGame.AddBonus()']]],
   ['addchildscenetocanvaslayer_964',['AddChildSceneToCanvasLayer',['../classPinGodProcMode.html#a7986a82f300f2a746fdf3eb6eee4414a',1,'PinGodProcMode']]],
   ['addcredits_965',['AddCredits',['../interfacePinGod_1_1Core_1_1IPinGodGame.html#a34ea5f8da6691313a11c36354d144bbe',1,'PinGod.Core.IPinGodGame.AddCredits()'],['../classPinGod_1_1Game_1_1PinGodGame.html#aeacf2e3b2219ddc750f9fe891e36d146',1,'PinGod.Game.PinGodGame.AddCredits()'],['../classPinGodGameProc.html#a8974232755df4bc7cd8f10178175a706',1,'PinGodGameProc.AddCredits()']]],

@@ -1,13 +1,5 @@
 var classPinGod_1_1Core_1_1Service_1_1MemoryMap =
 [
-    [ "GameSyncState", "classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#a283e06eaa5104fc8f2cdb32126832c9d", [
-      [ "None", "classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#a283e06eaa5104fc8f2cdb32126832c9da6adf97f83acf6453d4a6a4b1070f3754", null ],
-      [ "started", "classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#a283e06eaa5104fc8f2cdb32126832c9da3bebb2f89180b03fa5ae736665f648d9", null ],
-      [ "quit", "classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#a283e06eaa5104fc8f2cdb32126832c9dadbd73c2b545209688ed794c0d5413d5a", null ],
-      [ "pause", "classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#a283e06eaa5104fc8f2cdb32126832c9daec1b81965109165de6b38cd92c1e39f9", null ],
-      [ "resume", "classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#a283e06eaa5104fc8f2cdb32126832c9da69f2afc2390cec954f7c208b07212d39", null ],
-      [ "reset", "classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#a283e06eaa5104fc8f2cdb32126832c9da86266ee937d97f812a8e57d22b62ee29", null ]
-    ] ],
     [ "MemoryMap", "classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#a6d336e04269e8ec0d54e98b716f8109e", null ],
     [ "Dispose", "classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#aa1c4c0745b8bf4477cabfb5a34e3bdd6", null ],
     [ "Dispose", "classPinGod_1_1Core_1_1Service_1_1MemoryMap.html#adadd515d77452230043593583019b6d2", null ],

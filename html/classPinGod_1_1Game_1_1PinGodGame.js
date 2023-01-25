@@ -29,7 +29,7 @@ var classPinGod_1_1Game_1_1PinGodGame =
     [ "PlayMusic", "classPinGod_1_1Game_1_1PinGodGame.html#ac2b9aa22515bd14eb0d33de015781a4b", null ],
     [ "PlaySfx", "classPinGod_1_1Game_1_1PinGodGame.html#af86d20003744131e576c79c3ffad7f17", null ],
     [ "PlayVoice", "classPinGod_1_1Game_1_1PinGodGame.html#a9b5b8bba27d1af4c9a8d2cd78de8a3ed", null ],
-    [ "Quit", "classPinGod_1_1Game_1_1PinGodGame.html#a884c955bda557e3ec248bf488ddb3977", null ],
+    [ "Quit", "classPinGod_1_1Game_1_1PinGodGame.html#afec3321ed05ae2738aa94623ee068c11", null ],
     [ "RandomNumber", "classPinGod_1_1Game_1_1PinGodGame.html#a403158d447362698071baf22f8a774a5", null ],
     [ "ResetGame", "classPinGod_1_1Game_1_1PinGodGame.html#ad38c941b84fbe786d7b1acc0d2b54953", null ],
     [ "ResetTilt", "classPinGod_1_1Game_1_1PinGodGame.html#af9a3a651cb2f3cd6f70332c63b25c268", null ],

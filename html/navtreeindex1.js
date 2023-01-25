@@ -1,5 +1,7 @@
 var NAVTREEINDEX1 =
 {
+"classPinGodProcGameController.html#a2bdf4d9d1488b852197c85c6837dacd4":[18,0,18,7],
+"classPinGodProcGameController.html#a3233aaa0ec52d4e14adec6cb9dc595ae":[18,0,18,13],
 "classPinGodProcGameController.html#a34c7d67337256bda01c50d135829dea7":[18,0,18,9],
 "classPinGodProcGameController.html#a3c16a7596150b566b86682b375c34cff":[18,0,18,11],
 "classPinGodProcGameController.html#a40228bcc8578cb37b15f25c7931e8b9c":[18,0,18,3],
@@ -182,17 +184,18 @@ var NAVTREEINDEX1 =
 "classPinGod_1_1Core_1_1EventRecordFile.html#ad73e86c9ce801a7e0fd934e424c923c7":[18,0,0,2,7,0],
 "classPinGod_1_1Core_1_1EventRecordFile.html#ae26ea52150e5af6441fcfe10ac374a8e":[18,0,0,2,7,5],
 "classPinGod_1_1Core_1_1Game_1_1MainScene.html":[18,0,0,2,2,0],
-"classPinGod_1_1Core_1_1Game_1_1MainScene.html#a05f3feea0a5be3ef7fc188ef273d49d1":[18,0,0,2,2,0,3],
+"classPinGod_1_1Core_1_1Game_1_1MainScene.html#a1951819b522f4fe9c35992f7cda7ca74":[18,0,0,2,2,0,3],
+"classPinGod_1_1Core_1_1Game_1_1MainScene.html#a1b5e502c5f445bb8e76b8a5e9eddbd2a":[18,0,0,2,2,0,7],
 "classPinGod_1_1Core_1_1Game_1_1MainScene.html#a1c31eb6c74b915acb0d5969a4ac28b21":[18,0,0,2,2,0,1],
-"classPinGod_1_1Core_1_1Game_1_1MainScene.html#a4985706994e9a37ec668008a1f2f4485":[18,0,0,2,2,0,10],
-"classPinGod_1_1Core_1_1Game_1_1MainScene.html#a59579a6e8672323565057b8ca541e29f":[18,0,0,2,2,0,7],
-"classPinGod_1_1Core_1_1Game_1_1MainScene.html#a8b0e83d97e24925d244d89d5ac604512":[18,0,0,2,2,0,8],
+"classPinGod_1_1Core_1_1Game_1_1MainScene.html#a4985706994e9a37ec668008a1f2f4485":[18,0,0,2,2,0,11],
+"classPinGod_1_1Core_1_1Game_1_1MainScene.html#a59579a6e8672323565057b8ca541e29f":[18,0,0,2,2,0,8],
+"classPinGod_1_1Core_1_1Game_1_1MainScene.html#a8b0e83d97e24925d244d89d5ac604512":[18,0,0,2,2,0,9],
 "classPinGod_1_1Core_1_1Game_1_1MainScene.html#a8fa610829d40d65bcbfcfc0cddeb55aa":[18,0,0,2,2,0,5],
 "classPinGod_1_1Core_1_1Game_1_1MainScene.html#abcfb6e4756980a8e317fbcceac3af78f":[18,0,0,2,2,0,4],
 "classPinGod_1_1Core_1_1Game_1_1MainScene.html#ad28985469100699af6b3d3670ecfd188":[18,0,0,2,2,0,2],
 "classPinGod_1_1Core_1_1Game_1_1MainScene.html#adefc7da94c6099457cdc18a1dd54fe59":[18,0,0,2,2,0,6],
 "classPinGod_1_1Core_1_1Game_1_1MainScene.html#af696f1e23c6ed0855a51ab7de6e9e28f":[18,0,0,2,2,0,0],
-"classPinGod_1_1Core_1_1Game_1_1MainScene.html#afeb8fa9fe994abe1c2bc555b0581a0c7":[18,0,0,2,2,0,9],
+"classPinGod_1_1Core_1_1Game_1_1MainScene.html#afeb8fa9fe994abe1c2bc555b0581a0c7":[18,0,0,2,2,0,10],
 "classPinGod_1_1Core_1_1Game_1_1PinGodBase.html":[18,0,0,2,2,1],
 "classPinGod_1_1Core_1_1Game_1_1PinGodBase.html#a0261088f83225471f054965694a87b49":[18,0,0,2,2,1,14],
 "classPinGod_1_1Core_1_1Game_1_1PinGodBase.html#a067cc4ab4fd8d3149dc381cfd121d65c":[18,0,0,2,2,1,9],
@@ -246,8 +249,5 @@ var NAVTREEINDEX1 =
 "classPinGod_1_1Core_1_1Service_1_1AdjustmentsNode.html#aa3253d54d2b1cfbea06672b4a08f6256":[18,0,0,2,5,0,6],
 "classPinGod_1_1Core_1_1Service_1_1AdjustmentsNode.html#aa6506bf258884368189e17a1d66787ed":[18,0,0,2,5,0,9],
 "classPinGod_1_1Core_1_1Service_1_1AdjustmentsNode.html#aa6b2715115575d19a499ee8930509cf3":[18,0,0,2,5,0,12],
-"classPinGod_1_1Core_1_1Service_1_1AdjustmentsNode.html#ac094b50155e4d03f31d80f0653edc13a":[18,0,0,2,5,0,27],
-"classPinGod_1_1Core_1_1Service_1_1AdjustmentsNode.html#ac125cc5e4582a7044b11d4d437c165fa":[18,0,0,2,5,0,16],
-"classPinGod_1_1Core_1_1Service_1_1AdjustmentsNode.html#ac382b77f4e0c00224133d71585f649b1":[18,0,0,2,5,0,30],
-"classPinGod_1_1Core_1_1Service_1_1AdjustmentsNode.html#acc27c1d2ff37cbd025dc76335ec9ddff":[18,0,0,2,5,0,10]
+"classPinGod_1_1Core_1_1Service_1_1AdjustmentsNode.html#ac094b50155e4d03f31d80f0653edc13a":[18,0,0,2,5,0,27]
 };

@@ -31,7 +31,7 @@ var interfacePinGod_1_1Core_1_1IPinGodGame =
     [ "PlayMusic", "interfacePinGod_1_1Core_1_1IPinGodGame.html#a948c5cd5bd5f1280e5ea1746e77f30b5", null ],
     [ "PlaySfx", "interfacePinGod_1_1Core_1_1IPinGodGame.html#a76afdefe1738ca223754c2df8658bf93", null ],
     [ "PlayVoice", "interfacePinGod_1_1Core_1_1IPinGodGame.html#a3294cccd6ed46e217da272ab1c2ee2ce", null ],
-    [ "Quit", "interfacePinGod_1_1Core_1_1IPinGodGame.html#ae0b752cdb0921c548564c4fbe3e7e3e8", null ],
+    [ "Quit", "interfacePinGod_1_1Core_1_1IPinGodGame.html#a31e3ff0dbbbda1f1d08b2a6f598820f9", null ],
     [ "RandomNumber", "interfacePinGod_1_1Core_1_1IPinGodGame.html#a749d2bb88d07e725efc8f538e50dbfa4", null ],
     [ "ResetGame", "interfacePinGod_1_1Core_1_1IPinGodGame.html#ae5661c8d54919af2f4e1b46894ec64f7", null ],
     [ "ResetTilt", "interfacePinGod_1_1Core_1_1IPinGodGame.html#a8050cb77f5f990f83cb4279d473883d5", null ],
