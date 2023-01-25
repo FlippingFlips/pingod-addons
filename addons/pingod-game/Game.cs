@@ -67,7 +67,6 @@ namespace PinGod.Game
                 pg.BallSaved -= OnBallSaved;
                 pg.BonusEnded -= OnBonusEnded;
                 pg.MultiBallEnded -= EndMultiball;
-                pg.MachineNode.SwitchCommand -= MachineNode_SwitchCommand;
             }
             _modesUpper.GetNodeOrNull<Tilt>(nameof(Tilt))?.QueueFree();
             if (_scoreEntry != null) _scoreEntry.ScoreEntryEnded -= OnScoreEntryEnded;
@@ -95,7 +94,6 @@ namespace PinGod.Game
                 pg.BonusEnded += OnBonusEnded;
                 pg.MultiBallEnded += EndMultiball;
                 //pinGod.PlayerAdded += OnPlayerAdded;
-                pg.MachineNode.SwitchCommand += MachineNode_SwitchCommand;
             }                        
 
             //TILT
@@ -104,24 +102,6 @@ namespace PinGod.Game
             //start new ball
             pinGod.BallInPlay = 1;
             StartNewBall();
-        }
-
-        /// <summary>
-        /// handles the start button. if the ball in play is one then it can add players to the current game
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="index"></param>
-        /// <param name="value"></param>
-        public virtual void MachineNode_SwitchCommand(string name, byte index, byte value)
-        {
-            if(!pinGod.IsTilted && pinGod.BallInPlay == 1)
-            {
-                if (name == "start")
-                {
-                    Logger.Info(nameof(PinGodGame), ": start switch, starting game");
-                    (pinGod as PinGodGame).CallDeferred("StartGame");
-                }
-            }            
         }
 
         /// <summary>

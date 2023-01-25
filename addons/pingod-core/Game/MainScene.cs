@@ -1,5 +1,6 @@
 using Godot;
 using PinGod.Core.Service;
+using PinGod.Game;
 using PinGod.Modes;
 using System;
 using System.Threading.Tasks;
@@ -263,6 +264,23 @@ namespace PinGod.Core.Game
                             });
                         }
                         else { Logger.WarningRich(nameof(MainScene), ":", nameof(OnSwitchCommandHandler), ":[color=yellow]", " A Service menu scene wasn't provided", "[/color]"); }
+                    }
+                }
+                else if(name == "start")
+                {
+                    if(!InServiceMenu)
+                    {
+                        if (HasNode("Modes/Attract"))
+                        {
+                            (pinGod as PinGodGame)?.CallDeferred("StartGame");
+                        }
+                        else if (HasNode("Modes/Game"))
+                        {
+                            if(!pinGod.IsTilted && pinGod.GameInPlay && pinGod.BallInPlay == 1)
+                            {
+                                (pinGod as PinGodGame)?.CallDeferred("StartGame");
+                            }                            
+                        }
                     }
                 }
                 else

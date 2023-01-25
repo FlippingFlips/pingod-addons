@@ -183,9 +183,6 @@ namespace PinGod.Modes
             {
                 switch (index)
                 {
-                    case 19: //"start"
-                        (pinGod as PinGodGame)?.CallDeferred("StartGame");
-                        break;
                     case 9: //l flipper
                         CallDeferred("ChangeLayer", true);
                         break;
