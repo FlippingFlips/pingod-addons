@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://addons/pingod-core/BallStacks/Saucer.cs" id="1"]
+[ext_resource type="Script" path="res://modes/Crater.cs" id="3"]
+[ext_resource type="AudioStream" uid="uid://dup1msn6dk28q" path="res://assets/audio/sfx/craterhit-horsepin.wav" id="4"]
+
+[sub_resource type="CompressedTexture2D" id="1"]
+
+[node name="Crater" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("3")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+color = Color(0.52549, 0.52549, 0.52549, 1)
+
+[node name="crater" type="Sprite2D" parent="."]
+position = Vector2(252.478, 192.54)
+scale = Vector2(0.75, 0.75)
+texture = SubResource("1")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4")
+volume_db = -5.42
+bus = &"Sfx"
+
+[node name="CraterSaucer" type="Timer" parent="."]
+one_shot = true
+script = ExtResource("1")
+_coil = "crater_saucer"
+_switch = "crater_saucer"
+
+[connection signal="SwitchActive" from="CraterSaucer" to="." method="OnCraterSaucerSwitchActive"]
+[connection signal="timeout" from="CraterSaucer" to="." method="OnCraterSaucer_timeout"]

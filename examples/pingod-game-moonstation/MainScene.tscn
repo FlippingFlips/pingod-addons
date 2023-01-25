@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://vsqk81g8wnht"]
+
+[ext_resource type="PackedScene" uid="uid://brqgk2sq84rl5" path="res://autoload/PauseSetting.tscn" id="2_d5uw6"]
+[ext_resource type="Script" path="res://addons/pingod-core/Game/MainScene.cs" id="6"]
+
+[node name="MainScene" type="Node2D"]
+script = ExtResource("6")
+_attract_scene_path = "res://modes/MsAttract.tscn"
+_game_scene_path = "res://Game.tscn"
+_service_menu_scene_path = "res://modes/MsServiceMenu.tscn"
+
+[node name="Modes" type="CanvasLayer" parent="."]
+process_mode = 1
+layer = -1
+
+[node name="PauseAndSettings" parent="." instance=ExtResource("2_d5uw6")]

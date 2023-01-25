@@ -1,0 +1,131 @@
+[gd_scene load_steps=8 format=3 uid="uid://dkrfqpekt5c4u"]
+
+[ext_resource type="Theme" uid="uid://cmgeh2fryvurv" path="res://themes/score_mode_theme.tres" id="1_mjhv1"]
+[ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="2_f5ti6"]
+[ext_resource type="PackedScene" uid="uid://dx4rgg70gg3r2" path="res://addons/pingod-core/Settings/DisplaySettings.tscn" id="3_irpv1"]
+[ext_resource type="PackedScene" uid="uid://b0u5aybd0kn4b" path="res://addons/pingod-core/Settings/AudioSettings.tscn" id="4_bkkk7"]
+[ext_resource type="Script" path="res://modes/SongOptionButton.cs" id="5_kmh5d"]
+[ext_resource type="PackedScene" uid="uid://bjks53ccc6xq2" path="res://addons/pingod-core/Settings/GameSettingsScene.tscn" id="5_tj66e"]
+[ext_resource type="PackedScene" uid="uid://cisoqcmdu0r8u" path="res://addons/pingod-core/Settings/PingodSettingsScene.tscn" id="6_4dtc2"]
+
+[node name="SettingsDisplay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_mjhv1")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_f5ti6")
+theme_override_font_sizes/font_size = 18
+
+[node name="Display" type="Label" parent="TabContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Display"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DisplaySettings" parent="TabContainer/Display/ScrollContainer" instance=ExtResource("3_irpv1")]
+offset_right = 384.0
+offset_bottom = 388.0
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+
+[node name="Audio" type="Label" parent="TabContainer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AudioSettings" parent="TabContainer/Audio" instance=ExtResource("4_bkkk7")]
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+
+[node name="OptionButton" type="OptionButton" parent="TabContainer/Audio"]
+z_index = 10
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -149.0
+offset_right = 114.0
+offset_bottom = -118.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+flat = true
+alignment = 1
+script = ExtResource("5_kmh5d")
+
+[node name="Game" type="Label" parent="TabContainer"]
+visible = false
+offset_right = 1.0
+offset_bottom = 17.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Game"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameSettingsScene" parent="TabContainer/Game/ScrollContainer" instance=ExtResource("5_tj66e")]
+offset_right = 150.0
+offset_bottom = 193.0
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+
+[node name="Pingod" type="Label" parent="TabContainer"]
+visible = false
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Pingod"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameSettingsScene" parent="TabContainer/Pingod/ScrollContainer" instance=ExtResource("6_4dtc2")]
+offset_right = 319.0
+offset_bottom = 237.0
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+grow_vertical = 2
+
+[node name="VSlider" type="VSlider" parent="Panel"]
+min_value = -72.0
+max_value = 6.0
+value = -6.0
+tick_count = 78
+
+[connection signal="item_selected" from="TabContainer/Audio/OptionButton" to="TabContainer/Audio/OptionButton" method="_on_OptionButton_item_selected"]
