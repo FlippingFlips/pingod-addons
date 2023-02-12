@@ -3,12 +3,14 @@ var hierarchy =
     [ "PinGod.Core.Adjustments", "classPinGod_1_1Core_1_1Adjustments.html", null ],
     [ "PinGod.Core.Service.Audits", "classPinGod_1_1Core_1_1Service_1_1Audits.html", null ],
     [ "PinGod.Base.BallSearchOptions", "classPinGod_1_1Base_1_1BallSearchOptions.html", null ],
+    [ "CanvasLayer", null, [
+      [ "PauseAndSettingsScript", "classPauseAndSettingsScript.html", null ]
+    ] ],
     [ "ColorRect", null, [
       [ "PinGod.EditorPlugins.Lamp", "classPinGod_1_1EditorPlugins_1_1Lamp.html", null ]
     ] ],
     [ "Control", null, [
       [ "BaseMode", "classBaseMode.html", null ],
-      [ "PauseAndSettingsScript", "classPauseAndSettingsScript.html", null ],
       [ "PinGod.AutoLoad.PinGodBottomPanel", "classPinGod_1_1AutoLoad_1_1PinGodBottomPanel.html", null ],
       [ "PinGod.EditorPlugins.ScreenLayerSlideTweener", "classPinGod_1_1EditorPlugins_1_1ScreenLayerSlideTweener.html", null ],
       [ "PinGod.EditorPlugins.SimpleModeScene", "classPinGod_1_1EditorPlugins_1_1SimpleModeScene.html", null ],
