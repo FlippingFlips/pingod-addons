@@ -6,6 +6,7 @@
 [node name="MainScene" type="Node"]
 process_mode = 3
 script = ExtResource("6")
+_attract_scene_path = "res://addons/modes/attract/Attract.tscn"
 _game_scene_path = "res://Game.tscn"
 _service_menu_scene_path = "res://addons/modes/servicemenu/ServiceMenu.tscn"
 
@@ -20,4 +21,3 @@ grow_vertical = 2
 
 [node name="PauseAndSettings" parent="." instance=ExtResource("3_yrup2")]
 editor_description = ""
-z_index = 10

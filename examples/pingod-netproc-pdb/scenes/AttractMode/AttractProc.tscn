@@ -16,6 +16,7 @@ grow_vertical = 2
 script = ExtResource("1_mndvh")
 
 [node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -24,7 +25,7 @@ grow_vertical = 2
 color = Color(0.317647, 0.317647, 0.317647, 1)
 
 [node name="AttractLayers" type="Control" parent="."]
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -32,6 +33,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PushStart" type="CenterContainer" parent="AttractLayers"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -39,10 +41,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PushStart" type="Label" parent="AttractLayers/PushStart"]
-offset_left = 516.0
-offset_top = 460.0
-offset_right = 1403.0
-offset_bottom = 620.0
+layout_mode = 2
 theme_override_fonts/font = ExtResource("2_00bbc")
 theme_override_font_sizes/font_size = 156
 text = "ATTRACT_TITLE_1"
@@ -52,12 +51,15 @@ _blinking = 0.5
 [node name="HighScores" parent="AttractLayers" instance=ExtResource("4_aksgx")]
 unique_name_in_owner = true
 visible = false
+layout_mode = 1
 
 [node name="AttractLayerChangeTimer" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
 
-[node name="Credits" type="Label" parent="."]
+[node name="CreditsLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0

@@ -21,45 +21,45 @@ _coils = {
 "trough": 4
 }
 _leds = {
-"shoot_again": 1
+"shootAgain": 1
 }
 _switches = {
+"ballShooter": 18,
+"bumper0": 32,
+"bumper1": 33,
+"bumper2": 34,
 "coin1": 0,
 "coin2": 1,
 "coin3": 2,
 "coin4": 3,
-"exit": 4,
-"down": 5,
-"up": 6,
-"enter": 7,
 "coinDoor": 8,
+"down": 5,
+"enter": 7,
+"exit": 4,
 "flipperLwL": 9,
 "flipperLwR": 11,
 "flipperUpL": 13,
 "flipperUpR": 15,
+"inlaneL": 26,
+"inlaneR": 27,
+"mballSaucer": 35,
+"outlaneL": 28,
+"outlaneR": 29,
+"plungerLane": 25,
 "slamTilt": 16,
-"tilt": 17,
-"ballShooter": 18,
+"slingL": 30,
+"slingR": 31,
 "start": 19,
+"tilt": 17,
 "trough0": 21,
 "trough1": 22,
 "trough2": 23,
 "trough3": 24,
-"plungerLane": 25,
-"inlaneL": 26,
-"inlaneR": 27,
-"outlaneL": 28,
-"outlaneR": 29,
-"slingL": 30,
-"slingR": 31,
-"bumper0": 32,
-"bumper1": 33,
-"bumper2": 34,
-"mballSaucer": 35
+"up": 6
 }
-_switchWindowEnabled = true
-_switchWindow = ExtResource("2_mcwh2")
 _playbackfile = "user://recordings/my_test_record.record"
+_switchWindow = ExtResource("2_mcwh2")
+_switchWindowEnabled = true
 
 [node name="Trough" type="Node" parent="."]
 script = ExtResource("2_o66u1")
