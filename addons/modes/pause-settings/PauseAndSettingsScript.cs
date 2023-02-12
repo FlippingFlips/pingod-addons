@@ -6,7 +6,7 @@ using PinGod.Core.Service;
 /// Handles actions pause and quit. This is usually in the main scene but be used on it's own <para/>
 /// TODO: this should really be parent with as many controls. Then this could be an overlay to the MainScene for this kind of thing. Maybe even move the service menu here
 /// </summary>
-public partial class PauseAndSettingsScript : Control
+public partial class PauseAndSettingsScript : CanvasLayer
 {
     private AdjustmentsNode _adjustments;
     private Control pauseLayer;
