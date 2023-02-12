@@ -1,5 +1,6 @@
 using Godot;
 using NetProc.Domain;
+using PinGod.Base;
 using PinGod.Core.Service;
 
 /// <summary>
