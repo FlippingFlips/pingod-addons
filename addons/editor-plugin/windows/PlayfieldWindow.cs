@@ -46,7 +46,7 @@ public partial class PlayfieldWindow : WindowPinGod
         {
             using var settingsSave = FileAccess.Open(WIN_SAVE, FileAccess.ModeFlags.Read);
             var obj = JsonSerializer.Deserialize<PlayfieldWindowSave>(settingsSave.GetLine());
-            this.Position = new Vector2i(obj.X, obj.Y);
+            this.Position = new Vector2I(obj.X, obj.Y);
         }
     }
 
@@ -75,7 +75,7 @@ public partial class PlayfieldWindow : WindowPinGod
     {
         //save the window position
         using var saveGame = FileAccess.Open(WIN_SAVE, FileAccess.ModeFlags.Write);
-        var winSave = new PlayfieldWindowSave { X = Position.x, Y = Position.y };
+        var winSave = new PlayfieldWindowSave { X = Position.X, Y = Position.Y };
         saveGame.StoreLine(JsonSerializer.Serialize<PlayfieldWindowSave>(winSave));
     }
 

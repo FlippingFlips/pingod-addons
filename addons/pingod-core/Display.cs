@@ -27,18 +27,18 @@ namespace PinGod.Core
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public static void SetPosition(int x, int y) => WindowSetPosition(new Vector2i(x, y));
+        public static void SetPosition(int x, int y) => WindowSetPosition(new Vector2I(x, y));
 
         /// <summary>
         /// Sets main window size
         /// </summary>
         /// <param name="w"></param>
         /// <param name="h"></param>
-        public static void SetSize(int w, int h) => WindowSetSize(new Vector2i(w, h));
+        public static void SetSize(int w, int h) => WindowSetSize(new Vector2I(w, h));
 
-        public static Godot.Vector2i WinGetPos(this IPinGodGame pinGod) => WindowGetPosition();
+        public static Godot.Vector2I WinGetPos(this IPinGodGame pinGod) => WindowGetPosition();
 
-        public static Godot.Vector2i WinGetSize(this IPinGodGame pinGod) => WindowGetSize();
+        public static Godot.Vector2I WinGetSize(this IPinGodGame pinGod) => WindowGetSize();
 
         /// <summary>
         /// Set windows flags like border less

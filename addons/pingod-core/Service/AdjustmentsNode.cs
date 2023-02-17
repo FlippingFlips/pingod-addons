@@ -39,10 +39,10 @@ namespace PinGod.Core.Service
 
                 if (_adjustments?.Display != null)
                 {
-                    _adjustments.Display.X = pos.x;
-                    _adjustments.Display.Y = pos.y;
-                    _adjustments.Display.Width = size.x;
-                    _adjustments.Display.Height = size.y;
+                    _adjustments.Display.X = pos.X;
+                    _adjustments.Display.Y = pos.Y;
+                    _adjustments.Display.Width = size.X;
+                    _adjustments.Display.Height = size.Y;
                 }
 
                 Adjustments.Save(_adjustments);
