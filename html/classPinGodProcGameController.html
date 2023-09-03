@@ -104,6 +104,12 @@ Inheritance diagram for PinGodProcGameController:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a5d72feba6447099115fbf81360419345"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodProcGameController.html#a5d72feba6447099115fbf81360419345">PinGodProcGameController</a> (MachineType machineType, bool deleteOnInit=false, ILogger logger=null, bool simulated=false, <a class="el" href="interfacePinGod_1_1Core_1_1IPinGodGame.html">IPinGodGame</a> pinGodGame=null, MachineConfiguration configuration=null)</td></tr>
 <tr class="separator:a5d72feba6447099115fbf81360419345"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d9788f55a9dce9edbdaa7b7cfeebe55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodProcGameController.html#a1d9788f55a9dce9edbdaa7b7cfeebe55">AddMode</a> (string modeName)</td></tr>
+<tr class="memdesc:a1d9788f55a9dce9edbdaa7b7cfeebe55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use the godot call deffered to use this  <a href="classPinGodProcGameController.html#a1d9788f55a9dce9edbdaa7b7cfeebe55">More...</a><br /></td></tr>
+<tr class="separator:a1d9788f55a9dce9edbdaa7b7cfeebe55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89b2769bdad40e6aeb9ab696a2794730"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodProcGameController.html#a89b2769bdad40e6aeb9ab696a2794730">RemoveMode</a> (string modeName)</td></tr>
+<tr class="memdesc:a89b2769bdad40e6aeb9ab696a2794730"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use the godot call deffered to use this  <a href="classPinGodProcGameController.html#a89b2769bdad40e6aeb9ab696a2794730">More...</a><br /></td></tr>
+<tr class="separator:a89b2769bdad40e6aeb9ab696a2794730"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf883f8773933f53fd8e1ac0cffb7ab5"><td class="memItemLeft" align="right" valign="top">override IPlayer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodProcGameController.html#adf883f8773933f53fd8e1ac0cffb7ab5">AddPlayer</a> ()</td></tr>
 <tr class="separator:adf883f8773933f53fd8e1ac0cffb7ab5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8fa665ccde4d7ca5b71487f5127ce17a"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodProcGameController.html#a8fa665ccde4d7ca5b71487f5127ce17a">AddPoints</a> (long p)</td></tr>
@@ -148,6 +154,9 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a567e26c541d8d6dc4efce800feb5bc69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a886fd15d1983c81f2b25cfb69daa4129"><td class="memItemLeft" align="right" valign="top">int[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodProcGameController.html#a886fd15d1983c81f2b25cfb69daa4129">_lastLedStates</a></td></tr>
 <tr class="separator:a886fd15d1983c81f2b25cfb69daa4129"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9196c5a777f67ee8ce391f97dac6e6a1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classAttractMode.html">AttractMode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodProcGameController.html#a9196c5a777f67ee8ce391f97dac6e6a1">_AttractMode</a></td></tr>
+<tr class="memdesc:a9196c5a777f67ee8ce391f97dac6e6a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">A P-ROC based IMode  <a href="classPinGodProcGameController.html#a9196c5a777f67ee8ce391f97dac6e6a1">More...</a><br /></td></tr>
+<tr class="separator:a9196c5a777f67ee8ce391f97dac6e6a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A <a class="el" href="namespacePinGod.html">PinGod</a> P-ROC Game controller. This overrides methods from the P-ROC BaseGameController. </p>
@@ -209,6 +218,32 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a1d9788f55a9dce9edbdaa7b7cfeebe55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d9788f55a9dce9edbdaa7b7cfeebe55">&#9670;&nbsp;</a></span>AddMode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PinGodProcGameController.AddMode </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>modeName</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Use the godot call deffered to use this </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">modeName</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="adf883f8773933f53fd8e1ac0cffb7ab5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adf883f8773933f53fd8e1ac0cffb7ab5">&#9670;&nbsp;</a></span>AddPlayer()</h2>
 
@@ -385,6 +420,32 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a89b2769bdad40e6aeb9ab696a2794730"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89b2769bdad40e6aeb9ab696a2794730">&#9670;&nbsp;</a></span>RemoveMode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PinGodProcGameController.RemoveMode </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>modeName</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Use the godot call deffered to use this </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">modeName</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a79d607c89945ad747a3c6d57d5ac76ea"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a79d607c89945ad747a3c6d57d5ac76ea">&#9670;&nbsp;</a></span>Reset()</h2>
 
@@ -484,6 +545,22 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a9196c5a777f67ee8ce391f97dac6e6a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9196c5a777f67ee8ce391f97dac6e6a1">&#9670;&nbsp;</a></span>_AttractMode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classAttractMode.html">AttractMode</a> PinGodProcGameController._AttractMode</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A P-ROC based IMode </p>
+
+</div>
+</div>
 <a id="a567e26c541d8d6dc4efce800feb5bc69"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a567e26c541d8d6dc4efce800feb5bc69">&#9670;&nbsp;</a></span>_lastCoilStates</h2>
 

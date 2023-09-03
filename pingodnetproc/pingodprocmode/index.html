@@ -39,7 +39,7 @@ When a mode is created it gets access to the Resources pingod plugin and gets th
 The default modes node path, string modesRootPath = &#34;/root/ProcScene/Modes&#34;;
  About P-ROC Modes  The p-roc modes have some methods to override."><meta itemprop=datePublished content="2022-12-26T15:26:15+00:00">
 <meta itemprop=dateModified content="2022-12-26T15:26:15+00:00">
-<meta itemprop=wordCount content="270"><meta itemprop=image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
+<meta itemprop=wordCount content="285"><meta itemprop=image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
 <meta itemprop=keywords content></head>
 <body><div class=container><header>
 <h1>PinGod AddOns</h1><span class=version>Version 0.96</span><a href=https://github.com/FlippingFlips/pingod-addons class=github><i class="fab fa-github"></i></a>
@@ -59,6 +59,7 @@ The default modes node path, string modesRootPath = &#34;/root/ProcScene/Modes&#
 <p>These modes have access to the P-ROC game controller and can be used for your game logic and switch handling.</p>
 <p>When a mode is created it gets access to the <code>Resources</code> pingod plugin and gets the <code>Modes</code> canvas from the <code>ProcScene</code>.</p>
 <p>The default modes node path, <code>string modesRootPath = "/root/ProcScene/Modes";</code></p>
+<p><img src=../../images/p-roc/mode_pingodprocmode.jpg alt=image></p>
 <hr>
 <h2 id=about-p-roc-modes>About P-ROC Modes</h2>
 <hr>
@@ -119,6 +120,9 @@ The default modes node path, string modesRootPath = &#34;/root/ProcScene/Modes&#
 <p>When a mode is removed from the <code>IGameController.Modes</code> it will invoke <code>ModeStopped</code> and here we remove our CanvasLayer from the tree.</p>
 <hr>
 <p>Note: <em>Use the Godot scene view when game is running and click <code>Remote</code> to see the tree sructure after modes are added.</em></p>
+<hr>
+<p>Switch handler mode example of handling switches and invoking methods like adding credits for coins:</p>
+<p><img src=../../images/p-roc/mode_switchhandlebase.jpg alt=image></p>
 <div class=edit-meta>
 Last updated on 26 Dec 2022
 <br>

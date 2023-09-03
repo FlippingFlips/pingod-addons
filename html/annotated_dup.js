@@ -2,11 +2,7 @@ var annotated_dup =
 [
     [ "PinGod", "namespacePinGod.html", [
       [ "AutoLoad", "namespacePinGod_1_1AutoLoad.html", [
-        [ "AudioManagerPlugin", "classPinGod_1_1AutoLoad_1_1AudioManagerPlugin.html", "classPinGod_1_1AutoLoad_1_1AudioManagerPlugin" ],
-        [ "PinGodBottomPanel", "classPinGod_1_1AutoLoad_1_1PinGodBottomPanel.html", "classPinGod_1_1AutoLoad_1_1PinGodBottomPanel" ],
-        [ "MemoryMapPlugin", "classPinGod_1_1AutoLoad_1_1MemoryMapPlugin.html", "classPinGod_1_1AutoLoad_1_1MemoryMapPlugin" ],
-        [ "PinGodGamePlugin", "classPinGod_1_1AutoLoad_1_1PinGodGamePlugin.html", "classPinGod_1_1AutoLoad_1_1PinGodGamePlugin" ],
-        [ "WindowActionsPlugin", "classPinGod_1_1AutoLoad_1_1WindowActionsPlugin.html", "classPinGod_1_1AutoLoad_1_1WindowActionsPlugin" ]
+        [ "PinGodBottomPanel", "classPinGod_1_1AutoLoad_1_1PinGodBottomPanel.html", "classPinGod_1_1AutoLoad_1_1PinGodBottomPanel" ]
       ] ],
       [ "Base", "namespacePinGod_1_1Base.html", [
         [ "BallSearchOptions", "classPinGod_1_1Base_1_1BallSearchOptions.html", "classPinGod_1_1Base_1_1BallSearchOptions" ],
@@ -98,6 +94,7 @@ var annotated_dup =
         [ "ServiceMenu", "classPinGod_1_1Modes_1_1ServiceMenu.html", "classPinGod_1_1Modes_1_1ServiceMenu" ]
       ] ]
     ] ],
+    [ "AttractMode", "classAttractMode.html", "classAttractMode" ],
     [ "AttractProc", "classAttractProc.html", "classAttractProc" ],
     [ "AudioSettings", "classAudioSettings.html", "classAudioSettings" ],
     [ "BaseMode", "classBaseMode.html", "classBaseMode" ],
@@ -121,9 +118,9 @@ var annotated_dup =
     [ "PlayfieldWindow", "classPlayfieldWindow.html", "classPlayfieldWindow" ],
     [ "PlayfieldWindowSave", "classPlayfieldWindowSave.html", "classPlayfieldWindowSave" ],
     [ "PulseTimer", "classPulseTimer.html", "classPulseTimer" ],
-    [ "ResourcesPlugin", "classResourcesPlugin.html", "classResourcesPlugin" ],
     [ "ScoreDisplayProcMode", "classScoreDisplayProcMode.html", "classScoreDisplayProcMode" ],
     [ "ScoreModePROC", "classScoreModePROC.html", "classScoreModePROC" ],
+    [ "ServiceMode", "classServiceMode.html", "classServiceMode" ],
     [ "SwitchPanel", "classSwitchPanel.html", "classSwitchPanel" ],
     [ "Tilt", "classTilt.html", "classTilt" ]
 ];

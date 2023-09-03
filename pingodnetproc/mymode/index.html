@@ -15,9 +15,10 @@
 <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin=anonymous></script>
 <script src=https://FlippingFlips.github.io/pingod-addons/js/bundle.js></script><style>:root{--custom-font-color:#FFFFFF;--custom-background-color:#003300}</style>
 <link rel=stylesheet href=https://FlippingFlips.github.io/pingod-addons/css/pingod.css><meta property="og:title" content="Mode - MyMode">
-<meta property="og:description" content="In the modes directory you&rsquo;ll find MyMode.cs. This is a P-ROC mode script using the base PinGodProcMode, it doesn&rsquo;t use a scene but access the game controller.
+<meta property="og:description" content="In the modes directory you&rsquo;ll find MyMode.cs. This will be loaded when the default game is run.
+It&rsquo;s is a P-ROC mode script using the base PinGodProcMode but this mode doesn&rsquo;t dislay any scene, it runs as mode to and just access game controller.
  P-ROC Mode Start / Stop  When this mode starts it uses the Trough to launch a ball in play.
- P-ROC Switch Handlers     switch Description     start adds more players if ball=1 , credits and players < 4   slingL add 100 points   slingR add 100 points   inlaneL add 100 points   inlaneR add 100 points   outlaneL add 100 points   outlaneR add 100 points   saucer when active for 1 second it will add 250 then eject the ball   bumperHit All bumpers call this for 150 points   targetHit All targets tagged with targetBank add 200 points    ">
+ P-ROC Switch Handlers     switch Description     start adds more players if ball=1 , credits and players < 4   slingL add 100 points   slingR add 100 points   inlaneL add 100 points   inlaneR add 100 points   outlaneL add 100 points   outlaneR add 100 points   saucer when active for 1 second it will add 250 then eject the ball   bumperHit All bumpers call this for 150 points   targetHit All targets tagged with targetBank add 200 points    Creating Modes  ">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://FlippingFlips.github.io/pingod-addons/pingodnetproc/mymode/"><meta property="og:image" content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png"><meta property="article:section" content="pingodnetproc">
 <meta property="article:published_time" content="2022-12-26T15:26:15+00:00">
@@ -25,15 +26,17 @@
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
 <meta name=twitter:title content="Mode - MyMode">
-<meta name=twitter:description content="In the modes directory you&rsquo;ll find MyMode.cs. This is a P-ROC mode script using the base PinGodProcMode, it doesn&rsquo;t use a scene but access the game controller.
+<meta name=twitter:description content="In the modes directory you&rsquo;ll find MyMode.cs. This will be loaded when the default game is run.
+It&rsquo;s is a P-ROC mode script using the base PinGodProcMode but this mode doesn&rsquo;t dislay any scene, it runs as mode to and just access game controller.
  P-ROC Mode Start / Stop  When this mode starts it uses the Trough to launch a ball in play.
- P-ROC Switch Handlers     switch Description     start adds more players if ball=1 , credits and players < 4   slingL add 100 points   slingR add 100 points   inlaneL add 100 points   inlaneR add 100 points   outlaneL add 100 points   outlaneR add 100 points   saucer when active for 1 second it will add 250 then eject the ball   bumperHit All bumpers call this for 150 points   targetHit All targets tagged with targetBank add 200 points    ">
+ P-ROC Switch Handlers     switch Description     start adds more players if ball=1 , credits and players < 4   slingL add 100 points   slingR add 100 points   inlaneL add 100 points   inlaneR add 100 points   outlaneL add 100 points   outlaneR add 100 points   saucer when active for 1 second it will add 250 then eject the ball   bumperHit All bumpers call this for 150 points   targetHit All targets tagged with targetBank add 200 points    Creating Modes  ">
 <meta itemprop=name content="Mode - MyMode">
-<meta itemprop=description content="In the modes directory you&rsquo;ll find MyMode.cs. This is a P-ROC mode script using the base PinGodProcMode, it doesn&rsquo;t use a scene but access the game controller.
+<meta itemprop=description content="In the modes directory you&rsquo;ll find MyMode.cs. This will be loaded when the default game is run.
+It&rsquo;s is a P-ROC mode script using the base PinGodProcMode but this mode doesn&rsquo;t dislay any scene, it runs as mode to and just access game controller.
  P-ROC Mode Start / Stop  When this mode starts it uses the Trough to launch a ball in play.
- P-ROC Switch Handlers     switch Description     start adds more players if ball=1 , credits and players < 4   slingL add 100 points   slingR add 100 points   inlaneL add 100 points   inlaneR add 100 points   outlaneL add 100 points   outlaneR add 100 points   saucer when active for 1 second it will add 250 then eject the ball   bumperHit All bumpers call this for 150 points   targetHit All targets tagged with targetBank add 200 points    "><meta itemprop=datePublished content="2022-12-26T15:26:15+00:00">
+ P-ROC Switch Handlers     switch Description     start adds more players if ball=1 , credits and players < 4   slingL add 100 points   slingR add 100 points   inlaneL add 100 points   inlaneR add 100 points   outlaneL add 100 points   outlaneR add 100 points   saucer when active for 1 second it will add 250 then eject the ball   bumperHit All bumpers call this for 150 points   targetHit All targets tagged with targetBank add 200 points    Creating Modes  "><meta itemprop=datePublished content="2022-12-26T15:26:15+00:00">
 <meta itemprop=dateModified content="2022-12-26T15:26:15+00:00">
-<meta itemprop=wordCount content="118"><meta itemprop=image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
+<meta itemprop=wordCount content="137"><meta itemprop=image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
 <meta itemprop=keywords content></head>
 <body><div class=container><header>
 <h1>PinGod AddOns</h1><span class=version>Version 0.96</span><a href=https://github.com/FlippingFlips/pingod-addons class=github><i class="fab fa-github"></i></a>
@@ -49,7 +52,8 @@
 </div>
 <div class=content-container>
 <main><h1>Mode - MyMode</h1>
-<p>In the <code>modes</code> directory you&rsquo;ll find <code>MyMode.cs</code>. This is a P-ROC mode script using the base <code>PinGodProcMode</code>, it doesn&rsquo;t use a scene but access the game controller.</p>
+<p>In the <code>modes</code> directory you&rsquo;ll find <code>MyMode.cs</code>. This will be loaded when the default game is run.</p>
+<p>It&rsquo;s is a P-ROC mode script using the base <code>PinGodProcMode</code> but this mode doesn&rsquo;t dislay any scene, it runs as mode to and just access game controller.</p>
 <hr>
 <h3 id=p-roc-mode-start--stop>P-ROC Mode Start / Stop</h3>
 <hr>
@@ -107,6 +111,8 @@
 </tr>
 </tbody>
 </table>
+<h3 id=creating-modes>Creating Modes</h3>
+<hr>
 <div class=edit-meta>
 Last updated on 26 Dec 2022
 <br>

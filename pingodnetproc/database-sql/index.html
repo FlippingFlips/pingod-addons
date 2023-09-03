@@ -17,7 +17,7 @@
 <link rel=stylesheet href=https://FlippingFlips.github.io/pingod-addons/css/pingod.css><meta property="og:title" content="Database - Sql">
 <meta property="og:description" content="The nuget package NetProc.Data will provide you with .sql files to seed database data.
 This creates a sqlite database and saves everything here from the game, from machine items to game audits and adjustments.
- Switches Coils LEDS Lamps Audits Adjustments GamesPlayed BallsPlayed Players Scores   You will edit one of the files depending on the machine type, but before you edit, copy the file and create your own into the sql directory.">
+ Adjustments Switches Coils LEDS Lamps Audits GamesPlayed BallsPlayed Players Scores   You will edit one of the files depending on the machine type, but before you edit, copy the file and create your own into the sql directory.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://FlippingFlips.github.io/pingod-addons/pingodnetproc/database-sql/"><meta property="og:image" content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png"><meta property="article:section" content="pingodnetproc">
 <meta property="article:published_time" content="2022-12-26T15:26:15+00:00">
@@ -27,13 +27,13 @@ This creates a sqlite database and saves everything here from the game, from mac
 <meta name=twitter:title content="Database - Sql">
 <meta name=twitter:description content="The nuget package NetProc.Data will provide you with .sql files to seed database data.
 This creates a sqlite database and saves everything here from the game, from machine items to game audits and adjustments.
- Switches Coils LEDS Lamps Audits Adjustments GamesPlayed BallsPlayed Players Scores   You will edit one of the files depending on the machine type, but before you edit, copy the file and create your own into the sql directory.">
+ Adjustments Switches Coils LEDS Lamps Audits GamesPlayed BallsPlayed Players Scores   You will edit one of the files depending on the machine type, but before you edit, copy the file and create your own into the sql directory.">
 <meta itemprop=name content="Database - Sql">
 <meta itemprop=description content="The nuget package NetProc.Data will provide you with .sql files to seed database data.
 This creates a sqlite database and saves everything here from the game, from machine items to game audits and adjustments.
- Switches Coils LEDS Lamps Audits Adjustments GamesPlayed BallsPlayed Players Scores   You will edit one of the files depending on the machine type, but before you edit, copy the file and create your own into the sql directory."><meta itemprop=datePublished content="2022-12-26T15:26:15+00:00">
+ Adjustments Switches Coils LEDS Lamps Audits GamesPlayed BallsPlayed Players Scores   You will edit one of the files depending on the machine type, but before you edit, copy the file and create your own into the sql directory."><meta itemprop=datePublished content="2022-12-26T15:26:15+00:00">
 <meta itemprop=dateModified content="2022-12-26T15:26:15+00:00">
-<meta itemprop=wordCount content="153"><meta itemprop=image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
+<meta itemprop=wordCount content="447"><meta itemprop=image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
 <meta itemprop=keywords content></head>
 <body><div class=container><header>
 <h1>PinGod AddOns</h1><span class=version>Version 0.96</span><a href=https://github.com/FlippingFlips/pingod-addons class=github><i class="fab fa-github"></i></a>
@@ -52,12 +52,12 @@ This creates a sqlite database and saves everything here from the game, from mac
 <p>The nuget package <code>NetProc.Data</code> will provide you with <code>.sql</code> files to seed database data.</p>
 <p>This creates a <code>sqlite</code> database and saves everything here from the game, from machine items to game audits and adjustments.</p>
 <ul>
+<li>Adjustments</li>
 <li>Switches</li>
 <li>Coils</li>
 <li>LEDS</li>
 <li>Lamps</li>
 <li>Audits</li>
-<li>Adjustments</li>
 <li>GamesPlayed</li>
 <li>BallsPlayed</li>
 <li>Players</li>
@@ -65,11 +65,42 @@ This creates a sqlite database and saves everything here from the game, from mac
 </ul>
 <hr>
 <p>You will edit one of the files depending on the machine type, but before you edit, copy the file and create your own into the <code>sql</code> directory. So usually you edit this file outside of Visual Studio.</p>
-<p><em>If you try and edit the file from the package it will never save it, so create your own</em></p>
+<p><em>If you try and edit the file from the package it will never save it, so create your own in same directory by copying the sql directory from the package</em></p>
 <p><img src=../../images/p-roc/database-sql.jpg alt=image></p>
-<p>If you&rsquo;re using a p3-roc or intend to just for simulating then the one we&rsquo;ve used in this project is a good starter.</p>
-<hr>
+<p>If you&rsquo;re using a p3-roc or intend to just for simulating then the sql file we&rsquo;ve used in this project is a good starter. (subject to change)</p>
 <p>You can adjust everything in this template then create the database. This can easily be done from the <code>PinGodGame.tscn / PinGodGamePROC</code> by enabling delete on init and running the game.</p>
+<h3 id=development-settings>Development settings</h3>
+<hr>
+<p>To change the display settings in the database use the tool like <code>sqlitestudio</code> to edit rows in the <code>Adjustments</code> table under SubMenuName <code>DISPLAY</code> by loading the <code>netproc.db</code> into the application. Helpful when you want to run in a window and other settings.</p>
+<h3 id=quick-overiew-of-tables>Quick overiew of tables</h3>
+<hr>
+<p>Besides the common <code>Switches, Coils, Leds, Lamps</code> some need a bit more explanation.</p>
+<h2 id=machine>Machine</h2>
+<hr>
+<p>Settings for the machine and the type of machine it is where the default is set to <code>7</code> for a PDB machine. Balls per machine for the trough and display monitor game runs on.</p>
+<h4 id=adjustments>Adjustments</h4>
+<hr>
+<p>Game adjustments table with means to be shown in a UI.</p>
+<p>Rows should have unique keys with their <code>MenuName</code> and <code>SubMenuName</code> to be used for service menus and the like. A default example would be a parent / child <code>STANDARD_ADJ</code> / <code>GENERAL</code>.</p>
+<p>Value must be integer. <code>OptionType</code> is the type of options display in a UI.</p>
+<ul>
+<li>0 = A range of ints like <code>8,30</code> or <code>0,15</code></li>
+<li>1 = List ints like <code>0,1,2,3</code> or <code>10,20,75</code></li>
+<li>2 = Enum like <code>NO,YES</code> which would be <code>0,1</code> to display text for option</li>
+</ul>
+<h4 id=players>Players</h4>
+<hr>
+<p>There is a player named <code>default</code> with initials (display name) set to <code>NETPROC</code>. Players should have a unique login name but display name (initials) could be the same as another player.</p>
+<p>Players are used in the <code>BallsPlayed</code> and <code>Scores</code> tables.</p>
+<h4 id=scores>Scores</h4>
+<hr>
+<p>Scores stored here against he <code>GamePlayedId</code> and <code>PlayerId</code> are storing the total points scored in that game.</p>
+<h4 id=games-played>Games Played</h4>
+<hr>
+<p>Games played just stored the start and end time of the game with the duration and the adjustments that were set.</p>
+<h4 id=balls-played>Balls Played</h4>
+<hr>
+<p>Saves every balls score for each player and the duration.</p>
 <div class=edit-meta>
 Last updated on 26 Dec 2022
 <br>

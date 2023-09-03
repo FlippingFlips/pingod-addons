@@ -1,5 +1,8 @@
 var NAVTREEINDEX2 =
 {
+"classPinGod_1_1Core_1_1Service_1_1AdjustmentsNode.html#aa6506bf258884368189e17a1d66787ed":[18,0,0,2,5,0,9],
+"classPinGod_1_1Core_1_1Service_1_1AdjustmentsNode.html#aa6b2715115575d19a499ee8930509cf3":[18,0,0,2,5,0,12],
+"classPinGod_1_1Core_1_1Service_1_1AdjustmentsNode.html#ac094b50155e4d03f31d80f0653edc13a":[18,0,0,2,5,0,27],
 "classPinGod_1_1Core_1_1Service_1_1AdjustmentsNode.html#ac125cc5e4582a7044b11d4d437c165fa":[18,0,0,2,5,0,16],
 "classPinGod_1_1Core_1_1Service_1_1AdjustmentsNode.html#ac382b77f4e0c00224133d71585f649b1":[18,0,0,2,5,0,30],
 "classPinGod_1_1Core_1_1Service_1_1AdjustmentsNode.html#acc27c1d2ff37cbd025dc76335ec9ddff":[18,0,0,2,5,0,10],
@@ -246,8 +249,5 @@ var NAVTREEINDEX2 =
 "classPinGod_1_1EditorPlugins_1_1SwitchOverlay.html":[18,0,0,3,8],
 "classPinGod_1_1EditorPlugins_1_1SwitchOverlay.html#a51e1a01a8a2fdf45e090dd7907fc1d22":[18,0,0,3,8,1],
 "classPinGod_1_1EditorPlugins_1_1SwitchOverlay.html#a91114f9c964d57543fcb9f2b599eceae":[18,0,0,3,8,2],
-"classPinGod_1_1EditorPlugins_1_1SwitchOverlay.html#aceba616c7a250563f737b6a6eb5e0769":[18,0,0,3,8,3],
-"classPinGod_1_1EditorPlugins_1_1SwitchOverlay.html#af8110e286c2a00a36771a50566f2dcc7":[18,0,0,3,8,4],
-"classPinGod_1_1EditorPlugins_1_1SwitchOverlay.html#afeba6bf97910baa18db63b3c8b440447":[18,0,0,3,8,0],
-"classPinGod_1_1EditorPlugins_1_1TargetsBank.html":[18,0,0,3,9]
+"classPinGod_1_1EditorPlugins_1_1SwitchOverlay.html#aceba616c7a250563f737b6a6eb5e0769":[18,0,0,3,8,3]
 };

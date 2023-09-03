@@ -1,6 +1,7 @@
 var classPinGodProcGameController =
 [
     [ "PinGodProcGameController", "classPinGodProcGameController.html#a5d72feba6447099115fbf81360419345", null ],
+    [ "AddMode", "classPinGodProcGameController.html#a1d9788f55a9dce9edbdaa7b7cfeebe55", null ],
     [ "AddPlayer", "classPinGodProcGameController.html#adf883f8773933f53fd8e1ac0cffb7ab5", null ],
     [ "AddPoints", "classPinGodProcGameController.html#a8fa665ccde4d7ca5b71487f5127ce17a", null ],
     [ "BallEnded", "classPinGodProcGameController.html#a40228bcc8578cb37b15f25c7931e8b9c", null ],
@@ -10,11 +11,13 @@ var classPinGodProcGameController =
     [ "GetLedStatesArray", "classPinGodProcGameController.html#a2bdf4d9d1488b852197c85c6837dacd4", null ],
     [ "InitializeDatabase", "classPinGodProcGameController.html#a2912427b83f736f5a555a1d7327b41b9", null ],
     [ "OnBallDrainedTrough", "classPinGodProcGameController.html#a34c7d67337256bda01c50d135829dea7", null ],
+    [ "RemoveMode", "classPinGodProcGameController.html#a89b2769bdad40e6aeb9ab696a2794730", null ],
     [ "Reset", "classPinGodProcGameController.html#a79d607c89945ad747a3c6d57d5ac76ea", null ],
     [ "RunLoop", "classPinGodProcGameController.html#a3c16a7596150b566b86682b375c34cff", null ],
     [ "ShootAgain", "classPinGodProcGameController.html#aea04230964e4203d8b6866ca7e81b965", null ],
     [ "StartBall", "classPinGodProcGameController.html#a3233aaa0ec52d4e14adec6cb9dc595ae", null ],
     [ "StartGame", "classPinGodProcGameController.html#a75c277b6c6031fbb0523af757b8a3838", null ],
+    [ "_AttractMode", "classPinGodProcGameController.html#a9196c5a777f67ee8ce391f97dac6e6a1", null ],
     [ "_lastCoilStates", "classPinGodProcGameController.html#a567e26c541d8d6dc4efce800feb5bc69", null ],
     [ "_lastLedStates", "classPinGodProcGameController.html#a886fd15d1983c81f2b25cfb69daa4129", null ],
     [ "PinGodGame", "classPinGodProcGameController.html#a2564cceae03a19681ed72fe770304b8a", null ],

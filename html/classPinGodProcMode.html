@@ -100,15 +100,17 @@ Inheritance diagram for PinGodProcMode:</div>
  <div class="center">
   <img src="classPinGodProcMode.png" usemap="#PinGodProcMode_map" alt=""/>
   <map id="PinGodProcMode_map" name="PinGodProcMode_map">
-<area href="classMachineSwitchHandlerMode.html" title="P-ROC Mode that handles all the door switches and coins in the machine." alt="MachineSwitchHandlerMode" shape="rect" coords="0,112,175,136"/>
-<area href="classMyMode.html" alt="MyMode" shape="rect" coords="185,112,360,136"/>
-<area href="classScoreDisplayProcMode.html" title="A P-ROC (PinGodProcMode) but reusing the default PinGod ScoreDisplay" alt="ScoreDisplayProcMode" shape="rect" coords="370,112,545,136"/>
+<area href="classAttractMode.html" title="A P-ROC (PinGodProcMode) but reusing the default PinGod Attract.tscn. When the mode starts the ATTRAC..." alt="AttractMode" shape="rect" coords="0,112,175,136"/>
+<area href="classMachineSwitchHandlerMode.html" title="P-ROC Mode that handles all the door switches and coins in the machine." alt="MachineSwitchHandlerMode" shape="rect" coords="185,112,360,136"/>
+<area href="classMyMode.html" alt="MyMode" shape="rect" coords="370,112,545,136"/>
+<area href="classScoreDisplayProcMode.html" title="A P-ROC (PinGodProcMode) but reusing the default PinGod ScoreDisplay" alt="ScoreDisplayProcMode" shape="rect" coords="555,112,730,136"/>
+<area href="classServiceMode.html" title="P-ROC Mode that runs the service mode scenes" alt="ServiceMode" shape="rect" coords="740,112,915,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9d306552ccb2c47d714d28e622916853"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodProcMode.html#a9d306552ccb2c47d714d28e622916853">PinGodProcMode</a> (IGameController game, string name, int priority, <a class="el" href="interfacePinGod_1_1Core_1_1IPinGodGame.html">IPinGodGame</a> pinGod, string defaultScene=null, bool loadDefaultScene=true)</td></tr>
+<tr class="memitem:a9d306552ccb2c47d714d28e622916853"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodProcMode.html#a9d306552ccb2c47d714d28e622916853">PinGodProcMode</a> (IGameController game, string name, int priority, <a class="el" href="interfacePinGod_1_1Core_1_1IPinGodGame.html">IPinGodGame</a> pinGod, string <a class="el" href="classPinGodProcMode.html#a1e731b64b604be18615acfa1729a90c0">defaultScene</a>=null, bool <a class="el" href="classPinGodProcMode.html#a61f54f4a53187bd1f59321697ff9de25">loadDefaultScene</a>=true)</td></tr>
 <tr class="memdesc:a9d306552ccb2c47d714d28e622916853"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default scene to load  <a href="classPinGodProcMode.html#a9d306552ccb2c47d714d28e622916853">More...</a><br /></td></tr>
 <tr class="separator:a9d306552ccb2c47d714d28e622916853"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7986a82f300f2a746fdf3eb6eee4414a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodProcMode.html#a7986a82f300f2a746fdf3eb6eee4414a">AddChildSceneToCanvasLayer</a> (Node node)</td></tr>
@@ -127,6 +129,10 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a1e731b64b604be18615acfa1729a90c0"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodProcMode.html#a1e731b64b604be18615acfa1729a90c0">defaultScene</a> = &quot;res://PinGodLogoScene.tscn&quot;</td></tr>
+<tr class="separator:a1e731b64b604be18615acfa1729a90c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61f54f4a53187bd1f59321697ff9de25"><td class="memItemLeft" align="right" valign="top">readonly bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodProcMode.html#a61f54f4a53187bd1f59321697ff9de25">loadDefaultScene</a></td></tr>
+<tr class="separator:a61f54f4a53187bd1f59321697ff9de25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7093d98e943ed01cf905b82e06a47fad"><td class="memItemLeft" align="right" valign="top">readonly <a class="el" href="classPinGodProcGameController.html">PinGodProcGameController</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGodProcMode.html#a7093d98e943ed01cf905b82e06a47fad">_game</a></td></tr>
 <tr class="separator:a7093d98e943ed01cf905b82e06a47fad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -328,6 +334,8 @@ Properties</h2></td></tr>
   </dd>
 </dl>
 
+<p>Reimplemented in <a class="el" href="classServiceMode.html#abb81a9bbe84b47f4952104361e6f926e">ServiceMode</a>.</p>
+
 </div>
 </div>
 <a id="a8dcc5ec816a3455283ef59cb87eec7cf"></a>
@@ -387,6 +395,50 @@ Properties</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">readonly <a class="el" href="classPinGodProcGameController.html">PinGodProcGameController</a> PinGodProcMode._game</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1e731b64b604be18615acfa1729a90c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e731b64b604be18615acfa1729a90c0">&#9670;&nbsp;</a></span>defaultScene</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string PinGodProcMode.defaultScene = &quot;res://PinGodLogoScene.tscn&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a61f54f4a53187bd1f59321697ff9de25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61f54f4a53187bd1f59321697ff9de25">&#9670;&nbsp;</a></span>loadDefaultScene</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">readonly bool PinGodProcMode.loadDefaultScene</td>
         </tr>
       </table>
   </td>

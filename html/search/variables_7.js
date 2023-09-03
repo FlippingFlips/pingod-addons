@@ -1,8 +1,11 @@
 var searchData=
 [
-  ['pingod_1310',['pinGod',['../classPinGod_1_1Modes_1_1Attract.html#a988e76b3f4b0d53691b55a3a16291448',1,'PinGod.Modes.Attract.pinGod()'],['../classPinGod_1_1Modes_1_1Bonus.html#a092898fa9cffc579637b21cc4a7b1711',1,'PinGod.Modes.Bonus.pinGod()'],['../classPinGod_1_1Modes_1_1ScoreEntry.html#a999da61d1603647791db3fdf12c70f02',1,'PinGod.Modes.ScoreEntry.pinGod()'],['../classPinGod_1_1Modes_1_1ScoreMode.html#adb7e35b92b8c2b9aff14005ad2d3f326',1,'PinGod.Modes.ScoreMode.pinGod()'],['../classPinGod_1_1Modes_1_1ServiceMenu.html#a7b845b86ad1fc865d6674c165540f503',1,'PinGod.Modes.ServiceMenu.pinGod()'],['../classTilt.html#a7bbebe10369837f703dbc4fb57eb4f99',1,'Tilt.pinGod()'],['../classPinGod_1_1Core_1_1Service_1_1PinGodGameNode.html#ae9ed739e33482f7c05ad47468d3adec1',1,'PinGod.Core.Service.PinGodGameNode.pinGod()']]],
-  ['pingodgame_1311',['PinGodGame',['../classPinGodProcGameController.html#a2564cceae03a19681ed72fe770304b8a',1,'PinGodProcGameController']]],
-  ['pingodprocgame_1312',['PinGodProcGame',['../classPinGodGameProc.html#a1ea09d865ee8a6da6d7defdfae41c508',1,'PinGodGameProc']]],
-  ['playerinfolabel_1313',['playerInfoLabel',['../classPinGod_1_1Modes_1_1ScoreMode.html#af534b0d2097026f005b02eb01e4844d5',1,'PinGod::Modes::ScoreMode']]],
-  ['procfake_1314',['ProcFake',['../classPinGodProcGameController.html#a1b074fbf189404bf4fbf91acb14c2979',1,'PinGodProcGameController']]]
+  ['machineproc_1318',['MachinePROC',['../classPinGodGameProc.html#afc132ab8d79a93a65f960006c8d557bf',1,'PinGodGameProc']]],
+  ['mapname_1319',['MapName',['../classPinGod_1_1Core_1_1Service_1_1MemoryMapNode.html#a8ad6ce6f5727ef0c2b831c9463e63c39',1,'PinGod::Core::Service::MemoryMapNode']]],
+  ['maxplayers_1320',['MaxPlayers',['../classPinGod_1_1Game_1_1PinGodGame.html#ac7858ebca13b74f9324978c82e3435ab',1,'PinGod::Game::PinGodGame']]],
+  ['memmapping_1321',['memMapping',['../classPinGod_1_1Game_1_1PinGodGame.html#a3cd43bba9c21dd5f6c52b21be6686b48',1,'PinGod::Game::PinGodGame']]],
+  ['menunamelabel_1322',['menuNameLabel',['../classPinGod_1_1Modes_1_1ServiceMenu.html#aff281a272c995393d0c38a8fcecfdbcd',1,'PinGod::Modes::ServiceMenu']]],
+  ['mmap_1323',['mMap',['../classPinGod_1_1Core_1_1Service_1_1MemoryMapNode.html#a2d2f9760ad2ea5957a0cc252781de5c5',1,'PinGod::Core::Service::MemoryMapNode']]],
+  ['multiball_5fscene_1324',['MULTIBALL_SCENE',['../classPinGod_1_1Game_1_1Game.html#ac0617f9973eddf3958fd590ea8b5c89f',1,'PinGod::Game::Game']]],
+  ['mutexname_1325',['MutexName',['../classPinGod_1_1Core_1_1Service_1_1MemoryMapNode.html#a059c974fabcacfdd49c77fc2e701b5d2',1,'PinGod::Core::Service::MemoryMapNode']]]
 ];

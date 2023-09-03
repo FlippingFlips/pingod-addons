@@ -32,13 +32,6 @@ var hierarchy =
     ] ],
     [ "DisplaySettings", "classDisplaySettings.html", null ],
     [ "PinGod.Base.DisplaySettings", "classPinGod_1_1Base_1_1DisplaySettings.html", null ],
-    [ "EditorPlugin", null, [
-      [ "PinGod.AutoLoad.AudioManagerPlugin", "classPinGod_1_1AutoLoad_1_1AudioManagerPlugin.html", null ],
-      [ "PinGod.AutoLoad.MemoryMapPlugin", "classPinGod_1_1AutoLoad_1_1MemoryMapPlugin.html", null ],
-      [ "PinGod.AutoLoad.PinGodGamePlugin", "classPinGod_1_1AutoLoad_1_1PinGodGamePlugin.html", null ],
-      [ "PinGod.AutoLoad.WindowActionsPlugin", "classPinGod_1_1AutoLoad_1_1WindowActionsPlugin.html", null ],
-      [ "ResourcesPlugin", "classResourcesPlugin.html", null ]
-    ] ],
     [ "EventArgs", null, [
       [ "PinGod.Base.SwitchEventArgs", "classPinGod_1_1Base_1_1SwitchEventArgs.html", null ]
     ] ],
@@ -85,9 +78,11 @@ var hierarchy =
     ] ],
     [ "Mode", null, [
       [ "PinGodProcMode", "classPinGodProcMode.html", [
+        [ "AttractMode", "classAttractMode.html", null ],
         [ "MachineSwitchHandlerMode", "classMachineSwitchHandlerMode.html", null ],
         [ "MyMode", "classMyMode.html", null ],
-        [ "ScoreDisplayProcMode", "classScoreDisplayProcMode.html", null ]
+        [ "ScoreDisplayProcMode", "classScoreDisplayProcMode.html", null ],
+        [ "ServiceMode", "classServiceMode.html", null ]
       ] ]
     ] ],
     [ "NetProcDataGameController", null, [

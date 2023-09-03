@@ -15,9 +15,9 @@
 <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin=anonymous></script>
 <script src=https://FlippingFlips.github.io/pingod-addons/js/bundle.js></script><style>:root{--custom-font-color:#FFFFFF;--custom-background-color:#003300}</style>
 <link rel=stylesheet href=https://FlippingFlips.github.io/pingod-addons/css/pingod.css><meta property="og:title" content="PinGodGamePROC">
-<meta property="og:description" content="This scene overrides the normal PinGodGame.tscn from autoload/PinGodGame.tscn.
-In Godots scene inspector there are some developer options that can be set:
-   Option Default Description     Proc Delay 10 Delays the proc loop, setting 10 here helps with simulation   Delete Db On Init off Deletes the database when the game is run. This is useful if you add switches to the .sql import file   Simulated on Game is simulated and will use a FakePinProc   LogLevel Verbose Log level setting for PinGodGame and NetProc.">
+<meta property="og:description" content="This scene overrides from the default PinGodGame.tscn from autoload/PinGodGame.tscn.
+In Godots scene inspector there are some developer debugging options that can be set:
+   Option Default Description     Proc Delay 10 Delays the proc loop, setting 10 here helps with simulation   Delete Db On Init off Deletes the database when the game is run. This is useful if you add switches to the .">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://FlippingFlips.github.io/pingod-addons/pingodnetproc/pingodgame.tscn/"><meta property="og:image" content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png"><meta property="article:section" content="pingodnetproc">
 <meta property="article:published_time" content="2022-12-26T15:26:15+00:00">
@@ -25,15 +25,15 @@ In Godots scene inspector there are some developer options that can be set:
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
 <meta name=twitter:title content="PinGodGamePROC">
-<meta name=twitter:description content="This scene overrides the normal PinGodGame.tscn from autoload/PinGodGame.tscn.
-In Godots scene inspector there are some developer options that can be set:
-   Option Default Description     Proc Delay 10 Delays the proc loop, setting 10 here helps with simulation   Delete Db On Init off Deletes the database when the game is run. This is useful if you add switches to the .sql import file   Simulated on Game is simulated and will use a FakePinProc   LogLevel Verbose Log level setting for PinGodGame and NetProc.">
+<meta name=twitter:description content="This scene overrides from the default PinGodGame.tscn from autoload/PinGodGame.tscn.
+In Godots scene inspector there are some developer debugging options that can be set:
+   Option Default Description     Proc Delay 10 Delays the proc loop, setting 10 here helps with simulation   Delete Db On Init off Deletes the database when the game is run. This is useful if you add switches to the .">
 <meta itemprop=name content="PinGodGamePROC">
-<meta itemprop=description content="This scene overrides the normal PinGodGame.tscn from autoload/PinGodGame.tscn.
-In Godots scene inspector there are some developer options that can be set:
-   Option Default Description     Proc Delay 10 Delays the proc loop, setting 10 here helps with simulation   Delete Db On Init off Deletes the database when the game is run. This is useful if you add switches to the .sql import file   Simulated on Game is simulated and will use a FakePinProc   LogLevel Verbose Log level setting for PinGodGame and NetProc."><meta itemprop=datePublished content="2022-12-26T15:26:15+00:00">
+<meta itemprop=description content="This scene overrides from the default PinGodGame.tscn from autoload/PinGodGame.tscn.
+In Godots scene inspector there are some developer debugging options that can be set:
+   Option Default Description     Proc Delay 10 Delays the proc loop, setting 10 here helps with simulation   Delete Db On Init off Deletes the database when the game is run. This is useful if you add switches to the ."><meta itemprop=datePublished content="2022-12-26T15:26:15+00:00">
 <meta itemprop=dateModified content="2022-12-26T15:26:15+00:00">
-<meta itemprop=wordCount content="208"><meta itemprop=image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
+<meta itemprop=wordCount content="301"><meta itemprop=image content="https://FlippingFlips.github.io/pingod-addons/images/og-image.png">
 <meta itemprop=keywords content></head>
 <body><div class=container><header>
 <h1>PinGod AddOns</h1><span class=version>Version 0.96</span><a href=https://github.com/FlippingFlips/pingod-addons class=github><i class="fab fa-github"></i></a>
@@ -49,8 +49,8 @@ In Godots scene inspector there are some developer options that can be set:
 </div>
 <div class=content-container>
 <main><h1>PinGodGamePROC</h1>
-<p>This scene overrides the normal <code>PinGodGame.tscn</code> from <code>autoload/PinGodGame.tscn</code>.</p>
-<p>In Godots scene inspector there are some developer options that can be set:</p>
+<p>This scene overrides from the default <code>PinGodGame.tscn</code> from <code>autoload/PinGodGame.tscn</code>.</p>
+<p>In Godots scene inspector there are some developer debugging options that can be set:</p>
 <table>
 <thead>
 <tr>
@@ -68,7 +68,7 @@ In Godots scene inspector there are some developer options that can be set:
 <tr>
 <td>Delete Db On Init</td>
 <td>off</td>
-<td>Deletes the database when the game is run. This is useful if you add switches to the .sql import file</td>
+<td>Deletes the database when the game is run. This is useful if you add switches to the .sql import file when developing</td>
 </tr>
 <tr>
 <td>Simulated</td>
@@ -82,16 +82,29 @@ In Godots scene inspector there are some developer options that can be set:
 </tr>
 </tbody>
 </table>
-<p>This will only be run when the plugin is enabled in the <code>ProjectSettings</code>, so in some cases you want to turn all plugins off and develop scenes on their own.</p>
-<p>I would usually leave the window actions plugin enabled though to close the window with <code>ESC</code>.</p>
+<h3 id=autoload>Autoload</h3>
+<hr>
+<p>This scene will only be run when the pingodgame plugin is enabled in the <code>ProjectSettings</code>. If disabled you should see a message in the logging window like <code>"PinGodGameProc no ProcScene found."</code></p>
+<p>In some cases you may want to turn all plugins off and develop scenes on their own. For instance if you disable this from the autoload plugins menu you will still see the attract mode. We would usually leave the window actions plugin enabled though to be able to quickly close the window with the <code>ESC</code> key.</p>
+<p>You can also run scenes on their own without the attract from the scene you&rsquo;re on by running with <code>F6</code> in godot.</p>
 <hr>
 <h3 id=script>Script</h3>
 <hr>
-<p>The scene uses a new script based on the <code>PinGodGame.cs</code> named <code>game/PinGodGameProc.cs</code>.</p>
-<p>The script creates the P-ROC device and GameController. This is created as <code>PinGodProcGame</code> in the script.</p>
-<p>It also applies window settings saved in the database, you can set your display defaults in the SQL file.</p>
-<p>The script is <code>AutoLoaded</code> and can be retrieved from <code>/root/PinGodGame</code> the same as a normal PinGodGame.</p>
-<p>This script waits for all resources to load from the game then will it start the <code>PinGodProcGameController</code>.</p>
+<p>The scene uses a new script based on the <code>PinGodGame.cs</code> named <code>game/PinGodGameProc.cs</code>. Some notes on what this main script does.</p>
+<ul>
+<li>
+<p>The script creates the P-ROC device and GameController created as a <code>PinGodProcGame</code> in the script.</p>
+</li>
+<li>
+<p>Applies window settings that are saved in the database (you can set your display defaults in the SQL file)</p>
+</li>
+<li>
+<p><code>AutoLoaded</code> and can be retrieved from <code>/root/PinGodGame</code> the same as a normal PinGodGame. To access the <code>PROCGame</code> from here to access the PROC from a scene would be like so, <code>_pinGodProc.PinGodProcGame</code></p>
+</li>
+<li>
+<p>Waits for all resources to load from the game you have set and then will it start the <code>PinGodProcGameController</code>.</p>
+</li>
+</ul>
 <div class=edit-meta>
 Last updated on 26 Dec 2022
 <br>

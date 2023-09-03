@@ -1,5 +1,8 @@
 var NAVTREEINDEX5 =
 {
+"interfacePinGod_1_1Core_1_1Interface_1_1IAudioManager.html#a43d91e38fad13bd189d3f3af4767a6cd":[18,0,0,2,3,0,14],
+"interfacePinGod_1_1Core_1_1Interface_1_1IAudioManager.html#a4a67f5f40a4346b368f01ff34ccedc7e":[18,0,0,2,3,0,25],
+"interfacePinGod_1_1Core_1_1Interface_1_1IAudioManager.html#a4acba2cf559bbdc15b38f49ea232553a":[18,0,0,2,3,0,5],
 "interfacePinGod_1_1Core_1_1Interface_1_1IAudioManager.html#a70e82187850fc38a9ee0efbed31bdf2f":[18,0,0,2,3,0,1],
 "interfacePinGod_1_1Core_1_1Interface_1_1IAudioManager.html#a728b7eb8e206dc08d09ba360c45bc805":[18,0,0,2,3,0,23],
 "interfacePinGod_1_1Core_1_1Interface_1_1IAudioManager.html#a72e899abd6ae4388cbfc5a5fcae5f70c":[18,0,0,2,3,0,12],
