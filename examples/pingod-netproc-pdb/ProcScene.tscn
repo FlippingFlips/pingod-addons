@@ -1,6 +1,11 @@
 [gd_scene format=3 uid="uid://p788sxf1kmcg"]
 
 [node name="ProcScene" type="Node"]
+editor_description = "This scene is the first scene to load. Placeholders for Mode Scenes and an Overlay.
+
+When the game is running, any modes that need to be visible can be added to the Modes CanvasLayer.
+
+CanvasLayers have a priority, so that covers mode priority layers in a similar fashion to DMD layers, high priority being drawn to Modes layer."
 
 [node name="Modes" type="CanvasLayer" parent="."]
 process_mode = 1

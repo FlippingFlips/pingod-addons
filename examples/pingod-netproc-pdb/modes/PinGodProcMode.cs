@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using NetProc.Domain;
 using PinGod.Core.Service;
 using PinGod.Game;
@@ -12,110 +12,117 @@ using PinGod.Core;
 /// </summary>
 public abstract class PinGodProcMode : Mode
 {
-    [Export(PropertyHint.File)] string defaultScene = "res://PinGodLogoScene.tscn";
+	[Export(PropertyHint.File)] protected string defaultScene = "res://PinGodLogoScene.tscn";
+
+    protected readonly bool loadDefaultScene;
 
     /// <summary>
     /// The Scene should contain a Modes node
     /// </summary>
     public CanvasLayer _modesCanvas { get; private set; }
 
-    /// <summary>
-    /// This modes Layer. Add scenes to this layer. The Godot CanvasLayer has a Layer property for priority.
-    /// </summary>
-    public CanvasLayer CanvasLayer { get; private set; }
+	/// <summary>
+	/// This modes Layer. Add scenes to this layer. The Godot CanvasLayer has a Layer property for priority.
+	/// </summary>
+	public CanvasLayer CanvasLayer { get; private set; }
 
-    protected Resources _resources { get; private set; }
-    public string Name { get; }
-    public IPinGodGame PinGod { get; }
+	protected Resources _resources { get; private set; }
+	public string Name { get; }
+	public IPinGodGame PinGod { get; }
 
-    protected readonly PinGodProcGameController _game;
+	protected readonly PinGodProcGameController _game;
 
-    /// <summary>
-    /// The node where we had our CanvasLayer
-    /// </summary>
-    [Export] string modesRootPath = "/root/ProcScene/Modes";
+	/// <summary>
+	/// The node where we had our CanvasLayer
+	/// </summary>
+	[Export] string modesRootPath = "/root/ProcScene/Modes";
 
-    /// <summary>
-    /// Default scene to load
-    /// </summary>
-    /// <summary>
-    /// Initializes a base P-ROC mode for PinGod. <para/> <see cref="CreateCanvasLayer"/>
-    /// </summary>
-    /// <param name="game"></param>
-    /// <param name="priority">Layer on the canvas is a priority</param>
-    /// <param name="pinGod">Need this to grab the root</param>
-    /// <param name="defaultScene">path to default scene</param>
-    /// <param name="loadDefaultScene">Load deefault scene when the object is create?</param>
-    public PinGodProcMode(IGameController game, string name, int priority, IPinGodGame pinGod, string defaultScene = null, bool loadDefaultScene = true) : base(game, priority)
-    {
-        Name = name;
-        PinGod = pinGod;
-
+	/// <summary>
+	/// Default scene to load
+	/// </summary>
+	/// <summary>
+	/// Initializes a base P-ROC mode for PinGod. <para/> <see cref="CreateCanvasLayer"/>
+	/// </summary>
+	/// <param name="game"></param>
+	/// <param name="priority">Layer on the canvas is a priority</param>
+	/// <param name="pinGod">Need this to grab the root</param>
+	/// <param name="defaultScene">path to default scene</param>
+	/// <param name="loadDefaultScene">Load deefault scene when the object is create?</param>
+	public PinGodProcMode(IGameController game, string name, int priority, IPinGodGame pinGod, string defaultScene = null, bool loadDefaultScene = true) : base(game, priority)
+	{
+		Name = name;
+		PinGod = pinGod;
+        this.defaultScene = defaultScene;
+        this.loadDefaultScene = loadDefaultScene;
         _game = game as PinGodProcGameController;
 
-        var pg = PinGod as PinGodGame;
-        _modesCanvas = pg.GetNodeOrNull<CanvasLayer>(modesRootPath);
-        _resources = pg.GetResources();
+		var pg = PinGod as PinGodGameProc;
+		_modesCanvas = pg._modesCanvas;
+        _resources = pg._resources;
+
     }
 
-    public virtual void AddChildSceneToCanvasLayer(Node node)
-    {
-        if(CanvasLayer == null)
-        {
-            CreateCanvasLayer(Name, Priority);
-        }
+	public virtual void AddChildSceneToCanvasLayer(Node node)
+	{
+		if(CanvasLayer == null)
+		{
+			CreateCanvasLayer(Name, Priority);
+		}
 
-        CanvasLayer.CallDeferred("add_child", node);
-    }
+		CanvasLayer.CallDeferred("add_child", node);
+	}
 
-    /// <summary>
-    /// Creates a CanvasLayer to hold this mode in Godot scenes
-    /// </summary>
-    /// <param name="name"></param>
-    /// <param name="priority"></param>
-    /// <param name="addAsChild">add the canvaslayer to the modes canvas layer</param>
-    public virtual void CreateCanvasLayer(string name, int priority, bool addAsChild = true)
-    {
-        if (_modesCanvas != null)
-        {
-            CanvasLayer = new CanvasLayer() { Layer = priority, Name = name };
-            if(addAsChild)
-                _modesCanvas?.AddChild(CanvasLayer);
-        }
-        else { Logger.Warning(nameof(PinGodGameMode), ": no Modes canvas found"); }
-    }
+	/// <summary>
+	/// Creates a CanvasLayer to hold this mode in Godot scenes
+	/// </summary>
+	/// <param name="name"></param>
+	/// <param name="priority"></param>
+	/// <param name="addAsChild">add the canvaslayer to the modes canvas layer</param>
+	public virtual void CreateCanvasLayer(string name, int priority, bool addAsChild = true)
+	{
+		if (_modesCanvas != null)
+		{
+			CanvasLayer = new CanvasLayer() { Layer = priority, Name = name };
+			if(addAsChild)
+				_modesCanvas?.AddChild(CanvasLayer);
+		}
+		else { Logger.Warning(nameof(PinGodGameMode), ": no Modes canvas found"); }
+	}
 
-    /// <summary>
-    /// Loads a packed scene and adds child
-    /// </summary>
-    /// <param name="scenePath"></param>
-    public virtual void LoadDefaultSceneToCanvas(string scenePath)
-    {
-        if (_modesCanvas != null)
-        {
-            var res = GD.Load<PackedScene>(scenePath);
-            var inst = res.Instantiate();
-            CanvasLayer?.AddChild(inst);
-            _modesCanvas.AddChild(CanvasLayer);
-        }
-    }
+	/// <summary>
+	/// Loads a packed scene and adds child
+	/// </summary>
+	/// <param name="scenePath"></param>
+	public virtual void LoadDefaultSceneToCanvas(string scenePath)
+	{
+		if (_modesCanvas != null)
+		{
+			var res = GD.Load<PackedScene>(scenePath);
+			var inst = res.Instantiate();
+			CanvasLayer?.AddChild(inst);
+			_modesCanvas.AddChild(CanvasLayer);
+		}
+	}
 
-    /// <summary>
-    /// Removes the <see cref="CanvasLayer"/> from the Modes
-    /// </summary>
-    public override void ModeStopped()
-    {
-        if(CanvasLayer != null)
-        {
-            _modesCanvas?.RemoveChild(CanvasLayer);
-            CanvasLayer?.QueueFree();
-        }        
-        base.ModeStopped();
-    }
+	/// <summary>
+	/// Removes the <see cref="CanvasLayer"/> from the Modes
+	/// </summary>
+	public override void ModeStopped()
+	{
+		if(CanvasLayer != null)
+		{
+			_modesCanvas?.RemoveChild(CanvasLayer);
+			CanvasLayer?.QueueFree();
+		}        
+		base.ModeStopped();
+	}
 
-    public virtual void RemoveChildSceneFromCanvasLayer(Node node)
-    {
-        if(!node?.IsQueuedForDeletion() ?? false)
+	public virtual void RemoveChildSceneFromCanvasLayer(Node node)
+	{
+		if(!node?.IsQueuedForDeletion() ?? false)
+		{
             CanvasLayer?.RemoveChild(node);
-    }
+			node.QueueFree();
+        }			
+	}
 }

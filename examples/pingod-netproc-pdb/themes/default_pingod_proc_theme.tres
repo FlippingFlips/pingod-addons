@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://cwf34c8d4tn1j"]
 
-[ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="1_g2uc2"]
+[ext_resource type="FontFile" uid="uid://ciofwob416hd1" path="res://addons/assets/fonts/BebasNeue.ttf" id="1_g2uc2"]
 
 [resource]
 default_font = ExtResource("1_g2uc2")

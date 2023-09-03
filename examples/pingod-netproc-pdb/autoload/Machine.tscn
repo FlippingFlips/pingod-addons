@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://autoload/MachinePROC.cs" id="1_8kvyb"]
 [ext_resource type="PackedScene" uid="uid://c1i3xe5c0i1n0" path="res://addons/editor-plugin/windows/PlayfieldWindow.tscn" id="2_ef2qi"]
-[ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="5_7isp6"]
+[ext_resource type="FontFile" uid="uid://ciofwob416hd1" path="res://addons/assets/fonts/BebasNeue.ttf" id="5_7isp6"]
 
 [node name="Machine" type="Node"]
 editor_description = "P-ROC PinGodMachine"
@@ -48,6 +48,7 @@ _switches = {
 "up": 6
 }
 _switchWindow = ExtResource("2_ef2qi")
+_switchWindowEnabled = true
 
 [node name="RecordingStatusLabel" type="Label" parent="."]
 anchors_preset = 1

@@ -1,0 +1,83 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1l60t3pwhfbc"]
+
+[ext_resource type="Theme" uid="uid://cu6tqdbsw05ts" path="res://themes/service/ServiceMenuTheme.tres" id="1_wavcq"]
+[ext_resource type="Theme" uid="uid://i8ycokmeeysd" path="res://themes/service/ServiceMenuBarsTheme.tres" id="2_bm4em"]
+[ext_resource type="FontFile" uid="uid://cma858wxwc3df" path="res://addons/assets/fonts/dejavu-sans-mono/DejaVuSansMono.ttf" id="3_fg0n0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6n0w0"]
+bg_color = Color(0.00392157, 0.12549, 0.203922, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color(0.184314, 0.513726, 0.917647, 0.6)
+shadow_size = 2
+
+[node name="ServiceModePROC" type="Node"]
+editor_description = "The base service mode starting scene. "
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(1920, 1080)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_wavcq")
+
+[node name="TopPanel" type="Panel" parent="Panel"]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 145.0
+theme = ExtResource("2_bm4em")
+
+[node name="BottomPanel" type="Panel" parent="Panel"]
+custom_minimum_size = Vector2(1920, 75)
+layout_mode = 0
+offset_top = 1005.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme = ExtResource("2_bm4em")
+
+[node name="InfoPanel" type="Panel" parent="Panel/BottomPanel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 279.0
+offset_top = 5.0
+offset_right = 1879.0
+offset_bottom = 70.0
+theme = ExtResource("1_wavcq")
+theme_override_styles/panel = SubResource("StyleBoxFlat_6n0w0")
+
+[node name="DateLabel" type="Label" parent="Panel/BottomPanel/InfoPanel"]
+layout_mode = 0
+offset_left = 1437.0
+offset_top = 7.0
+offset_right = 1550.0
+offset_bottom = 41.0
+theme_override_font_sizes/font_size = 22
+text = "DATE-TIME"
+
+[node name="EnterLabel" type="Label" parent="Panel/BottomPanel/InfoPanel"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 3.0
+offset_right = 549.0
+offset_bottom = 64.0
+theme_override_fonts/font = ExtResource("3_fg0n0")
+theme_override_font_sizes/font_size = 42
+text = "Press ENTER to select item"
+vertical_alignment = 1
+
+[node name="LeftPanel" type="Panel" parent="Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 1080.0
+theme = ExtResource("2_bm4em")
+
+[node name="RightPanel" type="Panel" parent="Panel"]
+layout_mode = 0
+offset_left = 1880.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme = ExtResource("2_bm4em")

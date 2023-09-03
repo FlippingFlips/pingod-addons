@@ -1,19 +1,18 @@
-﻿<Project Sdk="Godot.NET.Sdk/4.0.0-beta.10">
+﻿<Project Sdk="Godot.NET.Sdk/4.1.1">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <Platforms>AnyCPU</Platforms>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>   
-	<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
-	<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-	<GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
-	<UpdateAssemblyInfo>true</UpdateAssemblyInfo>
-	<!--<IncludeSymbols>False</IncludeSymbols>-->
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <UpdateAssemblyInfo>true</UpdateAssemblyInfo>
+    <!--<IncludeSymbols>False</IncludeSymbols>-->
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Properties\launchSettings.json" />
   </ItemGroup>
- 
   <ItemGroup>
     <None Include=".editorconfig" />
     <None Include="autoload\Adjustments.tscn" />
@@ -29,15 +28,12 @@
     <None Include="README.md" />
     <None Include="visual_pinball\README.md" />
   </ItemGroup>
- 
   <ItemGroup>
     <Folder Include="scenes\AttractMode\" />
+    <Folder Include="scenes\ServiceMode\" />
   </ItemGroup>
- 
   <ItemGroup>
     <PackageReference Include="NetProc.Data" Version="1.0.28" />
     <!--<PackageReference Include="NetProc.Game" Version="1.0.25" />-->
-  </ItemGroup>  
- 
-
+  </ItemGroup>
 </Project>

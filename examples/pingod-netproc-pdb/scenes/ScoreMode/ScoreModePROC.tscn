@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bkkshxp0osqj6"]
+[gd_scene load_steps=3 format=3 uid="uid://bkkshxp0osqj6"]
 
 [ext_resource type="Script" path="res://scenes/ScoreMode/ScoreModePROC.cs" id="1_xrl8s"]
-[ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="3_abej1"]
-[ext_resource type="Texture2D" uid="uid://cfy7fd5ef1bdl" path="res://addons/assets/img/pingod-logo.png" id="5"]
+[ext_resource type="FontFile" uid="uid://ciofwob416hd1" path="res://addons/assets/fonts/BebasNeue.ttf" id="2_pxomq"]
 
 [node name="ScoreMode" type="Node" groups=["Mode"]]
 editor_description = "- Create any scene with script as base
@@ -32,7 +31,6 @@ offset_top = 100.0
 offset_right = 1027.0
 offset_bottom = 589.0
 scale = Vector2(1.75727, 1.75727)
-texture = ExtResource("5")
 stretch_mode = 5
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
@@ -47,11 +45,12 @@ metadata/_edit_lock_ = true
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 16
-theme_override_fonts/font = ExtResource("3_abej1")
+theme_override_fonts/font = ExtResource("2_pxomq")
 theme_override_font_sizes/font_size = 256
 text = "1,00,000,000"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_lock_ = true
 
 [node name="ScoreP1" type="Label" parent="."]
 anchors_preset = -1
@@ -63,7 +62,7 @@ offset_right = 49.0
 offset_bottom = 129.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("3_abej1")
+theme_override_fonts/font = ExtResource("2_pxomq")
 theme_override_font_sizes/font_size = 112
 text = "0"
 metadata/_edit_lock_ = true
@@ -81,7 +80,7 @@ offset_bottom = 129.0
 grow_horizontal = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("3_abej1")
+theme_override_fonts/font = ExtResource("2_pxomq")
 theme_override_font_sizes/font_size = 112
 text = "0"
 metadata/_edit_lock_ = true
@@ -93,7 +92,7 @@ anchor_bottom = 0.757
 offset_left = 20.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("3_abej1")
+theme_override_fonts/font = ExtResource("2_pxomq")
 theme_override_font_sizes/font_size = 112
 text = "0"
 metadata/_edit_lock_ = true
@@ -108,7 +107,7 @@ offset_right = -20.0
 grow_horizontal = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("3_abej1")
+theme_override_fonts/font = ExtResource("2_pxomq")
 theme_override_font_sizes/font_size = 112
 text = "0"
 metadata/_edit_lock_ = true
@@ -124,9 +123,10 @@ offset_bottom = -31.0
 grow_vertical = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("3_abej1")
+theme_override_fonts/font = ExtResource("2_pxomq")
 theme_override_font_sizes/font_size = 56
 text = "Player: "
+metadata/_edit_lock_ = true
 
 [node name="BallInfo" type="Label" parent="."]
 anchors_preset = 3
@@ -142,6 +142,22 @@ grow_horizontal = 0
 grow_vertical = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("3_abej1")
+theme_override_fonts/font = ExtResource("2_pxomq")
 theme_override_font_sizes/font_size = 56
 text = "BALL: "
+metadata/_edit_lock_ = true
+
+[node name="CreditsLabel" type="Label" parent="."]
+unique_name_in_owner = true
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 64
+text = "CREDITS"

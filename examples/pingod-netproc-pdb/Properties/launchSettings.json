@@ -2,8 +2,8 @@
   "profiles": {
     "Godot4 (Debug with Console)": {
       "commandName": "Executable",
-      "executablePath": "C:\\Godot4\\godot_console.exe",
-      "commandLineArgs": "--path .",
+      "executablePath": "godot",
+      "commandLineArgs": "--path . --verbose",
       "workingDirectory": ".",
       "environmentVariables": {
         "VisualBasicDesignTimeTargetsPath": "$(VisualStudioXamlRulesDir)Microsoft.VisualBasic.DesignTime.targets",

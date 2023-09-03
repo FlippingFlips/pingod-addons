@@ -10,6 +10,8 @@ using PinGod.Modes;
 public class ScoreDisplayProcMode : PinGodProcMode
 {
     private ScoreModePROC _scoreDisplay;
+    private PinGodGameProc _pingod;
+    private Node _sceneInstance;
 
     /// <summary>
     /// Custom class of <see cref="ScoreMode"/>. This needs to be custom so we can use the P-ROC game controller players.
@@ -27,6 +29,7 @@ public class ScoreDisplayProcMode : PinGodProcMode
     public ScoreDisplayProcMode(IGameController game, PinGodGame pinGod, string name = nameof(ScoreDisplayProcMode), int priority = 1, string defaultScene = null, bool loadDefaultScene = true) 
         : base(game, name, priority, pinGod, defaultScene, loadDefaultScene)
     {
+        _pingod = pinGod as PinGodGameProc;
     }
 
     /// <summary>
@@ -35,28 +38,33 @@ public class ScoreDisplayProcMode : PinGodProcMode
     public override void ModeStopped()
     {
         base.ModeStopped();
-        if (_scoreDisplay != null)
+        if (_sceneInstance != null)
         {
-            RemoveChildSceneFromCanvasLayer(_scoreDisplay);
-            _scoreDisplay.QueueFree();            
+            RemoveChildSceneFromCanvasLayer(_sceneInstance);         
         }
     }
-
+    
     public override void ModeStarted()
     {
-        if(_resources != null)
-        {
-            var scene = _resources?.GetResource(SCORE_MODE_SCENE.GetBaseName()) as PackedScene;
-            _scoreDisplay = scene?.Instantiate() as ScoreModePROC;
-            AddChildSceneToCanvasLayer(_scoreDisplay);
-        }
-        else { Logger.WarningRich(nameof(ScoreDisplayProcMode), nameof(ModeStarted), ": [color=yellow]no resources found, can't create attract scene[/color]"); }
-
         base.ModeStarted();
+
+        var variant = _pingod.CallDeferred("AddModeScene", SCORE_MODE_SCENE);
+
+        _sceneInstance = variant.As<Node>();
+
+        if(_sceneInstance == null) {
+            Game.Logger.Log("SCORE MODE SCENE NOT INSTANCED", NetProc.Domain.PinProc.LogLevel.Error);
+        }
     }
 
     /// <summary>
     /// Updates the scores in the ScoreMode canvas
     /// </summary>
-    internal void UpdateScores() => _scoreDisplay?.OnScoresUpdated();
+    internal void UpdateScores()
+    {
+        //_sceneInstance?
+        //.CallDeferred("OnScoresUpdated");
+
+        _pingod.CallDeferred("emit_signal", "ScoresUpdated");
+    }
 }
