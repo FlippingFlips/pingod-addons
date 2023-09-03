@@ -1,0 +1,16 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://bx7hvpn0m2rxl"
+path="res://.godot/imported/bebas-bitmapfont.fnt-0bc3442a6590b9c0aeed704c274786fa.fontdata"
+
+[deps]
+
+source_file="res://addons/assets/fonts/bebas-bitmapfont.fnt"
+dest_files=["res://.godot/imported/bebas-bitmapfont.fnt-0bc3442a6590b9c0aeed704c274786fa.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true

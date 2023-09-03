@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/editor-plugin/display-plugins/labels/BlinkingLabel.cs" id="1"]
 [ext_resource type="Script" path="res://addons/modes/tilt/Tilt.cs" id="2"]
-[ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="2_hb2h6"]
+[ext_resource type="FontFile" uid="uid://ciofwob416hd1" path="res://addons/assets/fonts/BebasNeue.ttf" id="2_hb2h6"]
 
 [node name="Tilt" type="Control" groups=["Mode"]]
 layout_mode = 3

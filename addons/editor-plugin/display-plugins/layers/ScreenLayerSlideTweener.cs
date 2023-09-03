@@ -56,21 +56,21 @@ namespace PinGod.EditorPlugins
         /// </summary>
         public override void _Ready()
         {
-            float startX = Position.x;
-            float startY = Position.y;
+            float startX = Position.X;
+            float startY = Position.Y;
             switch (_inDirection)
             {
                 case Direction.North:
-                    startY = Position.y - Size.y;
+                    startY = Position.Y - Size.Y;
                     break;
                 case Direction.South:
-                    startY = Position.y + Size.y;
+                    startY = Position.Y + Size.Y;
                     break;
                 case Direction.East:
-                    startX = Position.x + Size.x; //start end of screen
+                    startX = Position.X + Size.X; //start end of screen
                     break;
                 case Direction.West:
-                    startX = Position.x - Size.x; //start left of screen
+                    startX = Position.X - Size.X; //start left of screen
                     break;
             }
 
@@ -78,20 +78,20 @@ namespace PinGod.EditorPlugins
             SetPosition(new Vector2(startX, startY));
 
             //we are moving to 0,0 full screen slides, then pause, then the out direction
-            float endX = Position.x; float endY = Position.y;
+            float endX = Position.X; float endY = Position.Y;
             switch (_outDirection)
             {
                 case Direction.North:
-                    endY = (0 - Size.y);
+                    endY = (0 - Size.Y);
                     break;
                 case Direction.South:
-                    endY = (0 + Size.y);
+                    endY = (0 + Size.Y);
                     break;
                 case Direction.East:
-                    endX = (0 + Size.x);
+                    endX = (0 + Size.X);
                     break;
                 case Direction.West:
-                    endX = (0 - this.Size.x);
+                    endX = (0 - this.Size.X);
                     break;
             }
 

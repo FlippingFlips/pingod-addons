@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://dclgnhbdvtpv1"
+
+[deps]
+
+files=["res://addons/assets/Localization/pingod_default_lang.en.translation", "res://addons/assets/Localization/pingod_default_lang.fr.translation"]
+
+source_file="res://addons/assets/Localization/pingod_default_lang.csv"
+dest_files=["res://addons/assets/Localization/pingod_default_lang.en.translation", "res://addons/assets/Localization/pingod_default_lang.fr.translation"]
+
+[params]
+
+compress=true
+delimiter=0

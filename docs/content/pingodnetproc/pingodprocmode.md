@@ -13,6 +13,8 @@ When a mode is created it gets access to the `Resources` pingod plugin and gets 
 
 The default modes node path,  `string modesRootPath = "/root/ProcScene/Modes";`
 
+![image](../../images/p-roc/mode_pingodprocmode.jpg)
+
 ---
 ## About P-ROC Modes
 ---
@@ -50,3 +52,9 @@ When a mode is removed from the `IGameController.Modes` it will invoke `ModeStop
 ---
 
 Note: *Use the Godot scene view when game is running and click `Remote` to see the tree sructure after modes are added.*
+
+---
+
+Switch handler mode example of handling switches and invoking methods like adding credits for coins:
+
+![image](../../images/p-roc/mode_switchhandlebase.jpg)

@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=7 format=3 uid="uid://cmi2c3y67jlsa"]
 
-[ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="1_olvoo"]
+[ext_resource type="FontFile" uid="uid://ciofwob416hd1" path="res://addons/assets/fonts/BebasNeue.ttf" id="1_olvoo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ck6lt"]
 bg_color = Color(0.117647, 0.278431, 0.392157, 1)

@@ -119,15 +119,15 @@ public partial class DisplaySettingsScene : MarginContainer
 
     void _on_ResetDefaultButton_button_up()
     {
-        Vector2i wH = new Vector2i(1024,600);
+        Vector2I wH = new Vector2I(1024,600);
         if(_displaySettings == null)
         {
             var ps = Display.GetDisplayProjectSettings();
-            wH = new Vector2i(ps.Width, ps.Height);
+            wH = new Vector2I(ps.Width, ps.Height);
         }
         else
         {
-            wH = new Vector2i(_displaySettings.WidthDefault, _displaySettings.HeightDefault);
+            wH = new Vector2I(_displaySettings.WidthDefault, _displaySettings.HeightDefault);
         }
 
         DisplayServer.WindowSetSize(wH);

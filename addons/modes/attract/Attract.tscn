@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://addons/editor-plugin/display-plugins/labels/BlinkingLabel.cs" id="1"]
 [ext_resource type="Script" path="res://addons/modes/attract/Attract.cs" id="4"]
 [ext_resource type="PackedScene" uid="uid://c0sso4ls4xf57" path="res://addons/modes/highscores/HighScores.tscn" id="5"]
-[ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="5_s6yfo"]
+[ext_resource type="FontFile" uid="uid://ciofwob416hd1" path="res://addons/assets/fonts/BebasNeue.ttf" id="5_s6yfo"]
 
 [node name="Attract" type="Control"]
 editor_description = "Simple attract scene that will cycle through the scenes in AttractLayers. These layers can be cycled with flippers."

@@ -1,6 +1,6 @@
 # pingod-addons
 
-Godot addons for creating a PinGod game. 
+Godot 4.1.1 addons for creating a PinGod game.
 
 The addons directory in this repository should be symbolically linked into a games directory or just copied to a game.
 

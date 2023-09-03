@@ -5,10 +5,11 @@ draft: false
 weight: 48
 ---
 
-If you need to change the icon
+If you need to change the icon, which by default PinGod does then you will need `RCEdit`.
 
 - Make icon with all size in one file
-- Download [RCEdit (Github)](https://github.com/electron/rcedit/releases) and add the path in Godots `Editor Settings\RCedit`
+- A. Download [RCEdit (Github)](https://github.com/electron/rcedit/releases) and add the path in Godots `Editor Settings\RCedit`
+- B. Or use chocolatey `choco install rcedit`
 - Change icon in the Godots `Project Settings/Application/Config`
 
 ![image](../../images/exports-icons-rcedit.jpg)

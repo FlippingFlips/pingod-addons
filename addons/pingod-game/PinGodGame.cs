@@ -39,7 +39,7 @@ namespace PinGod.Game
         private ulong gameLoadTimeMsec;
         private ulong gameStartTime;
         private MainScene mainScene;
-        private RandomNumberGenerator randomNumGenerator = new RandomNumberGenerator();
+        private RandomNumberGenerator randomNumGenerator = new ();
         #endregion
 
         /// <summary>
@@ -293,7 +293,7 @@ namespace PinGod.Game
             Audits.TimePlayed = gameEndTime - gameStartTime;
             if (_trough != null)
                 _trough.BallsLocked = 0;
-            this.EmitSignal(nameof(GameEnded));
+            this.CallDeferred("emit_signal", nameof(GameEnded));
         }
         public virtual ulong GetLastSwitchChangedTime(string sw) => Machine.Switches[sw].TimeSinceChange();
         /// <summary>
@@ -381,7 +381,7 @@ namespace PinGod.Game
         public virtual void SetLampState(string name, byte state)
         {
             var lamp = Machine.SetLamp(name, state);
-            if (_lampMatrixOverlay != null) { _lampMatrixOverlay.SetState(lamp.Num, state); }
+            _lampMatrixOverlay?.SetState(lamp.Num, state);
         }
         public virtual void SetLedState(string name, byte state, int color = 0)
         {
@@ -389,7 +389,7 @@ namespace PinGod.Game
             var led = Machine.Leds[name];
             led.State = state;
             led.Color = color > 0 ? color : led.Color;
-            if (_lampMatrixOverlay != null) { _lampMatrixOverlay.SetState(led.Num, state); }
+            _lampMatrixOverlay?.SetState(led.Num, state);
         }
         public virtual void SetLedState(string name, byte state, System.Drawing.Color? colour = null)
         {
@@ -402,7 +402,7 @@ namespace PinGod.Game
         {
             if (!LedExists(name)) return;
             var c = colour.HasValue ?
-                System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(colour.Value.r8, colour.Value.g8, colour.Value.b8))
+                System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(colour.Value.R8, colour.Value.G8, colour.Value.B8))
                 : Machine.Leds[name].Color;
             SetLedState(name, state, c);
         }
@@ -530,11 +530,7 @@ namespace PinGod.Game
         }
         public virtual void StartMultiBall(byte numOfBalls, byte ballSaveTime = 20, float pulseTime = 0)
         {
-            if (_trough != null)
-            {
-                _trough.StartMultiball(numOfBalls, ballSaveTime, pulseTime);
-            }
-
+            _trough?.StartMultiball(numOfBalls, ballSaveTime, pulseTime);
             IsMultiballRunning = true;
             EmitSignal(nameof(MultiballStarted));
         }
@@ -612,11 +608,11 @@ namespace PinGod.Game
         {
             var cmd = OS.GetCmdlineArgs();
             LogInfo(nameof(PinGodGame), ":cmd line available: ", cmd?.Length);
-            Dictionary<string, string> _args = new Dictionary<string, string>();
+            Dictionary<string, string> _args = new();
             _args.Add("base_path", OS.GetExecutablePath());
             foreach (var arg in cmd)
             {
-                if (arg.Contains("="))
+                if (arg.Contains('='))
                 {
                     var keyValue = arg.Split("=");
                     if (keyValue.Length == 2)
@@ -720,7 +716,7 @@ namespace PinGod.Game
 
             var size = DisplayServer.WindowGetSize();
             var pos = DisplayServer.WindowGetPosition();
-            LogInfo(nameof(PinGodGame), $":window: size:{size.x}x{size.y} pos:{pos.x},{pos.y}, onTop: {Adjustments.Display.AlwaysOnTop}");
+            LogInfo(nameof(PinGodGame), $":window: size:{size.X}x{size.Y} pos:{pos.X},{pos.Y}, onTop: {Adjustments.Display.AlwaysOnTop}");
 
 
             //full screen        

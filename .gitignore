@@ -5,7 +5,7 @@
 
 # PinGod - Godot
 # import files that are built, no need to be in source
-*.import
+.import
 *.godot
 Exported
 .mono
@@ -418,3 +418,5 @@ FodyWeavers.xsd
 /examples/pingod-game-moonstation/visual_pinball/vp-plastics.png
 /examples/pingod-game-moonstation/addons
 /examples/pingod-game-moonstation/local/ms_lang.en.translation
+/examples/pingod-netproc-pdb/netproc.db-wal
+/examples/pingod-netproc-pdb/netproc.db-shm

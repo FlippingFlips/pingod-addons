@@ -1,4 +1,5 @@
-﻿using NetProc.Data;
+﻿using Godot;
+using NetProc.Data;
 using NetProc.Data.Model;
 using NetProc.Domain;
 using NetProc.Domain.Modes;
@@ -29,9 +30,10 @@ public class PinGodProcGameController : NetProcDataGameController
     /// <summary>
     /// A P-ROC based <see cref="IMode"/>
     /// </summary>
-    private AttractMode _AttractMode;
+    public AttractMode _AttractMode;
     private BallSave _ballSave;
     private BallSearch _ballSearch;
+    private ServiceMode _serviceMode;
     private CancellationTokenSource _gameLoopCancelToken;
     private MachineSwitchHandlerMode _machineSwitchHandlerMode;
     private MemoryMapPROCNode _memMap;
@@ -49,12 +51,53 @@ public class PinGodProcGameController : NetProcDataGameController
         _isSimulated = simulated;
     }
 
+    /// <summary>
+    /// Use the godot call deffered to use this
+    /// </summary>
+    /// <param name="modeName"></param>
+    public void AddMode(string modeName)
+    {
+        switch (modeName)
+        {
+            case "service":
+                Modes.Add(_serviceMode);
+                Modes.Remove(_AttractMode);
+                break;
+            case "attract":                
+                Modes.Remove(_serviceMode);
+                MachineResourcesReady();
+                break;
+            default:
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Use the godot call deffered to use this
+    /// </summary>
+    /// <param name="modeName"></param>
+    public void RemoveMode(string modeName)
+    {
+        switch (modeName)
+        {
+            case "service":
+                Modes.Add(_serviceMode);
+                Modes.Remove(_AttractMode);
+                break;
+            case "attract":
+                Modes.Remove(_AttractMode);
+                break;
+            default:
+                break;
+        }
+    }
+
     public override IPlayer AddPlayer()
     {
         //todo: name the player when need to change from eg: Player 1
         var p = base.AddPlayer();
         p = new CustomPlayer(p.Name);
-        _scoreDisplay?.UpdateScores();
+        _scoreDisplay?.UpdateScores();        
         return p;
     }
 
@@ -99,20 +142,17 @@ public class PinGodProcGameController : NetProcDataGameController
 
     public override void GameEnded()
     {
+        //this.EmitSignal(nameof(GameEnded));
+
         base.GameEnded();
-        Modes.Remove(_scoreDisplay);        
-        _AttractMode = new AttractMode(this, 12, PinGodGame);
-        _machineSwitchHandlerMode = new MachineSwitchHandlerMode(this, (PinGodGameProc)PinGodGame);
-        
-        //add attract before machine, credits..
-        Modes.Add(_AttractMode);
-        Modes.Add(_machineSwitchHandlerMode);
+        Modes.Remove(_scoreDisplay);
+        this.MachineResourcesReady();
     }
 
     public override void GameStarted()
     {
         base.GameStarted();        
-        _scoreDisplay = new ScoreDisplayProcMode(this, (PinGodGameProc)PinGodGame);
+        //_scoreDisplay = new ScoreDisplayProcMode(this, (PinGodGameProc)PinGodGame);
         Modes.Add(_scoreDisplay);
     }
 
@@ -193,7 +233,10 @@ public class PinGodProcGameController : NetProcDataGameController
 
         if (_isSimulated)
         {
-            _memMap = PinGodGame.GetNodeOrNull<MemoryMapPROCNode>("/root/MemoryMap");
+            var node = PinGodGame.CallDeferred("get_node", "/root/MemoryMap");
+
+            _memMap = node.As<MemoryMapPROCNode>();
+
             if (_memMap == null)
                 Logger.Log(nameof(PinGodProcGameController), $": WARN: no {nameof(MemoryMapPROC)} found in root/MemoryMap");
             _lastCoilStates = GetStates(Coils.Values);
@@ -233,7 +276,7 @@ public class PinGodProcGameController : NetProcDataGameController
                 }
 
                 //MODES: Tick
-                _modes.Tick();
+                _modes?.Tick();
 
                 //_proc?.WatchDogTickle();
                 if (delay > 0)
@@ -247,7 +290,7 @@ public class PinGodProcGameController : NetProcDataGameController
         finally
         {
             Logger?.Log("Run loop ended", LogLevel.Info);
-            double dt = Time.GetTime() - BootTime;
+            double dt = NetProc.Domain.Time.GetTime() - BootTime;
             _proc.Close();
         }
     }
@@ -277,7 +320,7 @@ public class PinGodProcGameController : NetProcDataGameController
         {
             Logger.Log(nameof(PinGodProcGameController) + $"--ERROR: {ex.Message} {ex.InnerException?.Message}", LogLevel.Error);
         }
-    }
+    }    
 
     /// <summary>
     /// After display has loaded all the 'first load' resources. This calls reset on the game.
@@ -286,6 +329,7 @@ public class PinGodProcGameController : NetProcDataGameController
     internal void MachineResourcesReady()
     {
         _AttractMode = new AttractMode(this, 12, PinGodGame);
+        _serviceMode = new ServiceMode(this, PinGodGame, priority: 10, defaultScene: "res://scenes/ServiceMode/ServiceModePROC.tscn".GetBaseName());
         _scoreDisplay = new ScoreDisplayProcMode(this, (PinGodGameProc)PinGodGame, priority: 2);
         _machineSwitchHandlerMode = new MachineSwitchHandlerMode(this, (PinGodGameProc)PinGodGame);
         _ballSave = new BallSave(this, "shootAgain", "plungerLane") { AllowMultipleSaves = false, Priority = 25 };
@@ -309,6 +353,7 @@ public class PinGodProcGameController : NetProcDataGameController
         }
         return arr;
     }
+
     private void SetupBallSearch()
     {
         var coils = Config.PRCoils.Where(x => x.Search > 0)

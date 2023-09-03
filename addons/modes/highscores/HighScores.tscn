@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c0sso4ls4xf57"]
 
 [ext_resource type="Script" path="res://addons/modes/highscores/HighScores.cs" id="1"]
-[ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="2_82sx4"]
+[ext_resource type="FontFile" uid="uid://ciofwob416hd1" path="res://addons/assets/fonts/BebasNeue.ttf" id="2_82sx4"]
 
 [node name="HighScores" type="Control"]
 editor_description = " Display high scores using BBCode table. This is an attempt to loose couple the scenes as this relies on the parent using AddHighscore and UpdateScoresText.

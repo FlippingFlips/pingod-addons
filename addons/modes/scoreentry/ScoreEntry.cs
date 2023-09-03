@@ -105,7 +105,7 @@ namespace PinGod.Modes
             if (HasNode("/root/Adjustments")) _adjustments = GetNodeOrNull<AdjustmentsNode>("/root/Adjustments");
 
             IsPlayerEnteringScore = true;
-            selectedCharLabelStartPos = new Vector2(selectedCharLabel?.Position.x ?? 0, selectedCharLabel?.Position.y ?? 0);
+            selectedCharLabelStartPos = new Vector2(selectedCharLabel?.Position.X ?? 0, selectedCharLabel?.Position.Y ?? 0);
         }
 
         /// <summary>
@@ -237,11 +237,11 @@ namespace PinGod.Modes
             {
                 selectedIndex = allowedChars.Length - 1;
 
-                selectedCharLabel.SetPosition(new Vector2(selectedCharLabel.Position.x - (_selectCharMargin * allowedChars.Length - _selectCharMargin), selectedCharLabel.Position.y));
+                selectedCharLabel.SetPosition(new Vector2(selectedCharLabel.Position.X - (_selectCharMargin * allowedChars.Length - _selectCharMargin), selectedCharLabel.Position.Y));
             }
             else
             {
-                selectedCharLabel.SetPosition(new Vector2(selectedCharLabel.Position.x + _selectCharMargin, selectedCharLabel.Position.y));
+                selectedCharLabel.SetPosition(new Vector2(selectedCharLabel.Position.X + _selectCharMargin, selectedCharLabel.Position.Y));
             }
 
             _entry[currentEntryIndex] = (char)allowedChars[selectedIndex];
@@ -255,14 +255,14 @@ namespace PinGod.Modes
             if (selectedIndex > allowedChars.Length - 1)
             {
                 selectedIndex = 0;
-                selectedCharLabel.SetPosition(new Vector2(selectedCharLabel.Position.x + (_selectCharMargin * allowedChars.Length - _selectCharMargin), selectedCharLabel.Position.y));
+                selectedCharLabel.SetPosition(new Vector2(selectedCharLabel.Position.X + (_selectCharMargin * allowedChars.Length - _selectCharMargin), selectedCharLabel.Position.Y));
                 Logger.Debug(nameof(ScoreEntry), ":set flip r start");
             }
             else if (selectedIndex == 0)
             {
                 selectedCharLabel.SetPosition(selectedCharLabelStartPos);
             }
-            else { selectedCharLabel.SetPosition(new Vector2(selectedCharLabel.Position.x - _selectCharMargin, selectedCharLabel.Position.y)); }
+            else { selectedCharLabel.SetPosition(new Vector2(selectedCharLabel.Position.X - _selectCharMargin, selectedCharLabel.Position.Y)); }
 
             _entry[currentEntryIndex] = (char)allowedChars[selectedIndex];
             selectedName.Text = new string(_entry);
@@ -300,7 +300,7 @@ namespace PinGod.Modes
                     //todo: move to last char
                     selectedIndex = allowedChars.Length - 1;
 
-                    selectedCharLabel.SetPosition(new Vector2(selectedCharLabelStartPos.x + (_selectCharMargin * allowedChars.Length - 1), selectedCharLabelStartPos.y));
+                    selectedCharLabel.SetPosition(new Vector2(selectedCharLabelStartPos.X + (_selectCharMargin * allowedChars.Length - 1), selectedCharLabelStartPos.Y));
                     selectedName.Text = new string(_entry);
                 }
             }

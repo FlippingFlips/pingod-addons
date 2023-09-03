@@ -40,3 +40,11 @@ Overview of what we get from using NetProc:
 
 
 ![img](https://www.multimorphic.com/content/uploads/2019/09/Sample_P3-ROC_configuration.jpg)
+
+Newer setup with power module distributing power:
+
+![image](../../images/example_setup_powermodule.jpg)
+
+Basic setup of sw-16 board with a single switch:
+
+![image](../../images/basic-sw16-setup.jpg)

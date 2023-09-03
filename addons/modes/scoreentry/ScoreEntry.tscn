@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b46rdcwxkw0gu"]
 
 [ext_resource type="Script" path="res://addons/modes/scoreentry/ScoreEntry.cs" id="2"]
-[ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="2_hvvna"]
+[ext_resource type="FontFile" uid="uid://ciofwob416hd1" path="res://addons/assets/fonts/BebasNeue.ttf" id="2_hvvna"]
 
 [node name="ScoreEntry" type="Control"]
 layout_mode = 3

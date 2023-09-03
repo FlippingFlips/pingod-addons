@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://addons/pingod-core/BallStacks/Trough.cs" id="2_y2nw4"]
 [ext_resource type="Script" path="res://addons/pingod-core/PlungerLane/PlungerLane.cs" id="3_nwj2m"]
 [ext_resource type="Script" path="res://addons/pingod-core/Service/BallSaver.cs" id="4_yl6xf"]
-[ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="5_7isp6"]
+[ext_resource type="FontFile" uid="uid://ciofwob416hd1" path="res://addons/assets/fonts/BebasNeue.ttf" id="5_7isp6"]
 
 [node name="Machine" type="Node"]
 editor_description = "PinGodMachine
@@ -54,8 +54,8 @@ _switches = {
 "trough3": 84,
 "up": 6
 }
-_switchWindowEnabled = true
 _switchWindow = ExtResource("2_qm5vr")
+_switchWindowEnabled = true
 
 [node name="Trough" type="Node" parent="."]
 script = ExtResource("2_y2nw4")
