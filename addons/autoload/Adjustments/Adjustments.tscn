@@ -2,5 +2,6 @@
 
 [ext_resource type="Script" path="res://addons/pingod-core/Service/AdjustmentsNode.cs" id="1_hhh5h"]
 
+
 [node name="Adjustments" type="Node"]
 script = ExtResource("1_hhh5h")

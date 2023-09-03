@@ -293,7 +293,7 @@ namespace PinGod.Game
             Audits.TimePlayed = gameEndTime - gameStartTime;
             if (_trough != null)
                 _trough.BallsLocked = 0;
-            this.EmitSignal(nameof(GameEnded));
+            this.CallDeferred("emit_signal", nameof(GameEnded));
         }
         public virtual ulong GetLastSwitchChangedTime(string sw) => Machine.Switches[sw].TimeSinceChange();
         /// <summary>
