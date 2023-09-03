@@ -11,3 +11,4 @@ When the game is running, any modes that need to be visible can be added to the 
 
 The CanvasLayers have a priority, so that covers mode priority in a similar fashion to DMD layers / modes from the original P-ROC.
 
+![image](../../images/p-roc/ProcScene.jpg)

@@ -7,6 +7,8 @@ weight: 7
 
 Autoloads are scenes that we are overriding from the `res://autoload` directory. These are plugins that can be disabled in the Godot Project Settings. Parts of your game should be able to run without these plugins but in some cases they will need each other to work fully in a game.
 
+![image](../../images/p-roc/autoloads.jpg)
+
 |Scene|Description|
 |---|---|---|
 |Adjustments.tscn|Not used. Our adjustments come from the database through P-ROC not PinGod|
@@ -17,6 +19,8 @@ Autoloads are scenes that we are overriding from the `res://autoload` directory.
 |Resources.tscn|In the inspector we are pre loading the AttractMode and ScoreDisplay|
 |WindowActions.tscn|Nothing changed|
 
+
+![image](../../images/p-roc/autoload_overrides.jpg)
 
 ---
 ## autoload/MachinePROC.cs

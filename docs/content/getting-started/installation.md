@@ -8,18 +8,29 @@ weight: 10
 ### Download Godot 4 editor
 ---
 
-PinGod will be using Godot4 beta. Beta 14, is current as of writing this document.
+PinGod is using Godot4 Mono (C#). Godot is portable (no installation required) just the download.
 
-Godot4 plays better with C# and uses dotnet 6.0. After doing some testing this is the version we prefer.
+On windows the easiest way is to install through `chocolatey` package manager using the command `choco install godot-mono`.
 
+This particular package installs both `x86` and `x64` versions but uses `x64` by default. This becomes an issue when you are wanting to run P-ROC because there's currently no dll for `x64` pinproc. Most users are on the `x86` build of visual pinball and if the game was made specifically for that use in a simulator then it's easier to set a flag when installing from chocalatey with the following in an admin powershell or terminal to force default x86:
 
-* Download the beta editor at https://downloads.tuxfamily.org/godotengine/4.0//
-* Godot is portable (no installation required)
-* It's up to you where you extract the files to but for simplicity sake `C:\Godot\`
+`choco install godot-mono --forceX86 --version=4.0.1` = 4.0.3 32bit is usable on x64 systems, 20/8/2023 later versions do not work, subject to change
 
-You should rename the Godot executable to `godot.exe` and add to the environment.
+When download is complete it will extract the 32 bit version. `Extracting 32-bit ....`
 
-After you've added to environment then you can just run `godot` from the environment or from debugger.
+Now when you run `godot` anywhere then it will use this 32bit mono version.
+
+#### Setup chocolatey godot console
+---
+
+Godot Console debug window was removed by default so it has to be launched with a godot console executable. Make a shim to this from the choco tools directory: `C:\ProgramData\Chocolatey\tools`
+
+```.\shimgen.exe -o ..\bin\godot_console.exe -p ..\lib\godot-mono\tools\Godot_v4.0.3-stable_mono_win32\Godot_v4.0.3-stable_mono_win32_console.exe -i C:\ProgramData\chocolatey\bin\readelf.exe```
+
+### Uninstall
+---
+
+It can be uninstalled with `choco uninstall godot-mono`
 
 ---
 ### Dotnet SDK
