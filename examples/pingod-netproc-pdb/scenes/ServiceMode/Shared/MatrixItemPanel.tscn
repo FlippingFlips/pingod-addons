@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Theme" path="res://Themes/service/MatrixButtonPanel.tres" id="1_t0pee"]
+[ext_resource type="Script" path="res://Scenes/ServiceMode/Shared/MatrixItemPanel.cs" id="2_s1wpo"]
+
+[node name="MatrixItemPanel" type="Panel"]
+editor_description = "This panel should be used in a grid container to be viewable in a pinball switch / lamp etc matrix"
+custom_minimum_size = Vector2(112, 88)
+theme = ExtResource("1_t0pee")
+script = ExtResource("2_s1wpo")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NameLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "
+Name"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="NumLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "11 "
+horizontal_alignment = 2
+vertical_alignment = 2

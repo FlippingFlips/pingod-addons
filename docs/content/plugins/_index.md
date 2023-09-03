@@ -27,9 +27,9 @@ These should work in any order you enable them. When you enable one then this is
 ## Overriding the autoload scenes
 ---
 
-The autoload folder is used when you want to override the AutoLoad scenes. 
+The autoload folder in the game directory is used when you want to override the AutoLoad scenes. 
 
-If you wanted more switches to the  plugin then you would want your own Machine.tscn.
+If you wanted edit and add more switches to the plugin then you would want to have your own copy of `Machine.tscn`.
 
 ---
 
@@ -48,7 +48,7 @@ In Godot you can duplicate the default `Machine.tscn` like so:
 
 6. Now you can open the `res://Machine.tscn` and change some settings, add items.
 
-#### 7. Disable then Enable the plugin in ProjectSettings for the plugin to pick up your AutoLoad scene
+7. Disable, then Enable the plugin in ProjectSettings/Autoload for the plugin to pick up your AutoLoad scene
 
 ---
 ## Extra info

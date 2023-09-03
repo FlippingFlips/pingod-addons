@@ -12,9 +12,7 @@ Now that the game is building and running it can be launched with Visual Pinball
 
 - The controller will load the game when the vp player is launched.
 
-{{% panel status="primary" title="Tip" icon="far fa-lightbulb" %}}
 Use the `_vp_edit.bat` or `_vp_play.bat` to open the table easier
-{{% /panel %}}
 
 Provided you have the controller setup and have built the godot project this will play.
 

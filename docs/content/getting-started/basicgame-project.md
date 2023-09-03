@@ -6,15 +6,11 @@ draft: false
 weight: 24
 ---
 
-{{% panel status="primary" title="Tip" icon="far fa-lightbulb" %}}
 Use `Alt+D` in the project directory, type `godot -e` then enter to load project
-{{% /panel %}}
 
 ![image](../../images/basicgame/basicgame-project-files.jpg)
 
-{{% panel status="primary" title="Tip" icon="far fa-lightbulb" %}}
 You can use the `.bat` files in the projects root directory to load a project with . `_godot_editor.bat` 
-{{% /panel %}}
 
 Load projects into Editor by adding `--path`:
 

@@ -43,8 +43,8 @@ Overview of what we get from using NetProc:
 
 Newer setup with power module distributing power:
 
-![image](../../images/example_setup_powermodule.jpg)
+![image](../images/p-roc/example_setup_powermodule.jpg)
 
 Basic setup of sw-16 board with a single switch:
 
-![image](../../images/basic-sw16-setup.jpg)
+![image](../images/p-roc/basic-sw16-setup.jpg)
