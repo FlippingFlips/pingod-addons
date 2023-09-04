@@ -61,10 +61,8 @@ public class PinGodProcGameController : NetProcDataGameController
         {
             case "service":
                 Modes.Add(_serviceMode);
-                Modes.Remove(_AttractMode);
                 break;
             case "attract":                
-                Modes.Remove(_serviceMode);
                 MachineResourcesReady();
                 break;
             default:
@@ -81,8 +79,7 @@ public class PinGodProcGameController : NetProcDataGameController
         switch (modeName)
         {
             case "service":
-                Modes.Add(_serviceMode);
-                Modes.Remove(_AttractMode);
+                Modes.Remove(_serviceMode);
                 break;
             case "attract":
                 Modes.Remove(_AttractMode);
@@ -233,8 +230,7 @@ public class PinGodProcGameController : NetProcDataGameController
 
         if (_isSimulated)
         {
-            var node = PinGodGame.CallDeferred("get_node", "/root/MemoryMap");
-
+            var node = PinGodGame.CallDeferred("get_node_or_null", "/root/MemoryMap");
             _memMap = node.As<MemoryMapPROCNode>();
 
             if (_memMap == null)

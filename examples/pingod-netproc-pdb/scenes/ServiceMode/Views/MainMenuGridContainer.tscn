@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=3 uid="uid://st5ysr4efywa"]
+
+[ext_resource type="Script" path="res://scenes/ServiceMode/Views/MainMenuGridContainer.cs" id="1_4clf5"]
+[ext_resource type="PackedScene" uid="uid://srx7l013vpl4" path="res://scenes/ServiceMode/Shared/PgMenuButton.tscn" id="1_11ens"]
+
+[node name="MainMenuGridContainer" type="GridContainer"]
+theme_override_constants/h_separation = 60
+theme_override_constants/v_separation = 50
+columns = 4
+script = ExtResource("1_4clf5")
+
+[node name="PgMenuButton1" parent="." instance=ExtResource("1_11ens")]
+editor_description = "Main menu buttons. Can be controlled by service menu buttons to select, enter and esc. This will send a signal when item is selected and send the name back to the parent hooked onto the signal, the parent can then change the content in the main view.
+
+Need the hard code buttons for now, easier for selecting left & right and setting focus."
+layout_mode = 2
+focus_neighbor_left = NodePath("../PgMenuButton9")
+text = "tests"
+
+[node name="PgMenuButton2" parent="." instance=ExtResource("1_11ens")]
+layout_mode = 2
+text = "settings"
+
+[node name="PgMenuButton3" parent="." instance=ExtResource("1_11ens")]
+layout_mode = 2
+text = "audits"
+
+[node name="PgMenuButton4" parent="." instance=ExtResource("1_11ens")]
+layout_mode = 2
+focus_neighbor_right = NodePath("../PgMenuButton5")
+text = "utils"
+
+[node name="PgMenuButton5" parent="." instance=ExtResource("1_11ens")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../PgMenuButton4")
+text = "reports"
+
+[node name="PgMenuButton6" parent="." instance=ExtResource("1_11ens")]
+layout_mode = 2
+
+[node name="PgMenuButton7" parent="." instance=ExtResource("1_11ens")]
+layout_mode = 2
+
+[node name="PgMenuButton8" parent="." instance=ExtResource("1_11ens")]
+layout_mode = 2
+focus_neighbor_right = NodePath("../PgMenuButton9")
+
+[node name="PgMenuButton9" parent="." instance=ExtResource("1_11ens")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../PgMenuButton8")
+focus_neighbor_right = NodePath("../PgMenuButton1")
+
+[connection signal="gui_input" from="PgMenuButton1" to="." method="_on_pg_menu_button_gui_input"]

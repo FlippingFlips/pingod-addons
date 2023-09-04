@@ -1,0 +1,205 @@
+[gd_scene load_steps=5 format=3 uid="uid://bomkwr2mi3y0q"]
+
+[ext_resource type="PackedScene" uid="uid://cuamq07kbkg62" path="res://scenes/ServiceMode/Views/MatrixSwitchesGridContainer.tscn" id="1_2ymkv"]
+[ext_resource type="PackedScene" uid="uid://dk507qssr8dam" path="res://scenes/ServiceMode/Shared/MatrixItemPanel.tscn" id="1_uw80c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mb2x5"]
+bg_color = Color(0.0117647, 0.2, 0.27451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ry5pr"]
+bg_color = Color(0.380392, 0.152941, 0, 1)
+
+[node name="SwitchMatrixView" type="Control"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+offset_right = 1920.0
+offset_bottom = 75.0
+columns = 17
+
+[node name="MatrixItemPanel" parent="GridContainer" instance=ExtResource("1_uw80c")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mb2x5")
+Name = "-"
+
+[node name="MatrixItemPanel2" parent="GridContainer" instance=ExtResource("1_uw80c")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mb2x5")
+Name = "BANK A"
+Number = 1
+
+[node name="MatrixItemPanel3" parent="GridContainer" instance=ExtResource("1_uw80c")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mb2x5")
+Name = "BANK A"
+Number = 2
+
+[node name="MatrixItemPanel4" parent="GridContainer" instance=ExtResource("1_uw80c")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mb2x5")
+Name = "BANK A"
+Number = 3
+
+[node name="MatrixItemPanel5" parent="GridContainer" instance=ExtResource("1_uw80c")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mb2x5")
+Name = "BANK A"
+Number = 4
+
+[node name="MatrixItemPanel6" parent="GridContainer" instance=ExtResource("1_uw80c")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mb2x5")
+Name = "BANK A"
+Number = 5
+
+[node name="MatrixItemPanel7" parent="GridContainer" instance=ExtResource("1_uw80c")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mb2x5")
+Name = "BANK A"
+Number = 6
+
+[node name="MatrixItemPanel8" parent="GridContainer" instance=ExtResource("1_uw80c")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mb2x5")
+Name = "BANK A"
+Number = 7
+
+[node name="MatrixItemPanel9" parent="GridContainer" instance=ExtResource("1_uw80c")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mb2x5")
+Name = "BANK A"
+Number = 8
+
+[node name="MatrixItemPanel10" parent="GridContainer" instance=ExtResource("1_uw80c")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mb2x5")
+Name = "BANK B"
+Number = 1
+
+[node name="MatrixItemPanel11" parent="GridContainer" instance=ExtResource("1_uw80c")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mb2x5")
+Name = "BANK B"
+Number = 2
+
+[node name="MatrixItemPanel12" parent="GridContainer" instance=ExtResource("1_uw80c")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mb2x5")
+Name = "BANK B"
+Number = 3
+
+[node name="MatrixItemPanel13" parent="GridContainer" instance=ExtResource("1_uw80c")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mb2x5")
+Name = "BANK B"
+Number = 4
+
+[node name="MatrixItemPanel14" parent="GridContainer" instance=ExtResource("1_uw80c")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mb2x5")
+Name = "BANK B"
+Number = 5
+
+[node name="MatrixItemPanel15" parent="GridContainer" instance=ExtResource("1_uw80c")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mb2x5")
+Name = "BANK B"
+Number = 6
+
+[node name="MatrixItemPanel16" parent="GridContainer" instance=ExtResource("1_uw80c")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mb2x5")
+Name = "BANK B"
+Number = 7
+
+[node name="MatrixItemPanel17" parent="GridContainer" instance=ExtResource("1_uw80c")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mb2x5")
+Name = "BANK B"
+Number = 8
+
+[node name="GridContainer2" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 79.0
+offset_bottom = 79.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MatrixItemPanel" parent="GridContainer2" instance=ExtResource("1_uw80c")]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_ry5pr")
+Name = "BOARD"
+
+[node name="MatrixItemPanel2" parent="GridContainer2" instance=ExtResource("1_uw80c")]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_ry5pr")
+Name = "BOARD"
+Number = 1
+
+[node name="MatrixItemPanel3" parent="GridContainer2" instance=ExtResource("1_uw80c")]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_ry5pr")
+Name = "BOARD"
+Number = 2
+
+[node name="MatrixItemPanel4" parent="GridContainer2" instance=ExtResource("1_uw80c")]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_ry5pr")
+Name = "BOARD"
+Number = 3
+
+[node name="MatrixItemPanel5" parent="GridContainer2" instance=ExtResource("1_uw80c")]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_ry5pr")
+Name = "BOARD"
+Number = 4
+
+[node name="MatrixItemPanel6" parent="GridContainer2" instance=ExtResource("1_uw80c")]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_ry5pr")
+Name = "BOARD"
+Number = 5
+
+[node name="MatrixItemPanel7" parent="GridContainer2" instance=ExtResource("1_uw80c")]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_ry5pr")
+Name = "BOARD"
+Number = 6
+
+[node name="MatrixItemPanel8" parent="GridContainer2" instance=ExtResource("1_uw80c")]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_ry5pr")
+Name = "BOARD"
+Number = 7
+
+[node name="MatrixSwitchesGridContainer" parent="." instance=ExtResource("1_2ymkv")]
+custom_minimum_size = Vector2(1800, 899)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -856.0
+offset_top = -461.0
+offset_right = 944.0
+offset_bottom = 438.0
+columns = 16

@@ -1,13 +1,17 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://dk507qssr8dam"]
 
-[ext_resource type="Theme" path="res://Themes/service/MatrixButtonPanel.tres" id="1_t0pee"]
-[ext_resource type="Script" path="res://Scenes/ServiceMode/Shared/MatrixItemPanel.cs" id="2_s1wpo"]
+[ext_resource type="Theme" uid="uid://cjquxoxub6knh" path="res://themes/service/MatrixButtonPanel.tres" id="1_t0pee"]
+[ext_resource type="Script" path="res://scenes/ServiceMode/Shared/MatrixItemPanel.cs" id="2_g6yoc"]
 
 [node name="MatrixItemPanel" type="Panel"]
 editor_description = "This panel should be used in a grid container to be viewable in a pinball switch / lamp etc matrix"
-custom_minimum_size = Vector2(112, 88)
+custom_minimum_size = Vector2(100, 75)
+offset_right = 105.0
+offset_bottom = 75.0
 theme = ExtResource("1_t0pee")
-script = ExtResource("2_s1wpo")
+script = ExtResource("2_g6yoc")
+Name = null
+Number = null
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -19,15 +23,19 @@ grow_vertical = 2
 
 [node name="NameLabel" type="Label" parent="VBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 15
 text = "
 Name"
 horizontal_alignment = 1
-autowrap_mode = 2
+autowrap_mode = 1
 
 [node name="NumLabel" type="Label" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "11 "
-horizontal_alignment = 2
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
 vertical_alignment = 2

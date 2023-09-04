@@ -16,20 +16,15 @@ public static class PinballMatrixConstants
 			{ "switch_nc", "00003e"},
 			{ "unused", "404040"},
 		};
-
-	public static MatrixSwitch[] switches;
-}
-
-public class MatrixSwitch
-{
-	public string Name { get; set; }
-	public int Number { get; set; }	
 }
 
 public partial class MatrixItemPanel : Panel
 {
 	private Label _nameLbl;
 	private Label _numLbl;
+
+	[Export] public string Name { get; set; }
+	[Export] public int Number { get; set; } = -1;
 
 	private StyleBoxFlat _defaultStyle;
 
@@ -39,6 +34,12 @@ public partial class MatrixItemPanel : Panel
 		//get labels from scene tree
 		_nameLbl = GetNode<Label>("%NameLabel");
 		_numLbl  = GetNode<Label>("%NumLabel");
+
+		if(!string.IsNullOrWhiteSpace(Name))
+			SetName(Name);
+
+		if (Number > -1)
+			SetNum(Number);
 	}
 
 	public void SetName(string name) => _nameLbl.Text = name;

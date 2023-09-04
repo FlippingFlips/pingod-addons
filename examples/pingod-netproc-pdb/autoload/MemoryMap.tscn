@@ -5,5 +5,12 @@
 [node name="MemoryMap" type="Node"]
 editor_description = "**NOTE** : P-ROC states are written in the game loop so the delay can be high"
 script = ExtResource("1_jjqio")
-IsEnabled = true
+IsEnabled = null
 WriteDelay = 10000
+ReadDelay = null
+MapName = null
+CoilTotal = null
+LampTotal = null
+LedTotal = null
+SwitchTotal = null
+MutexName = null

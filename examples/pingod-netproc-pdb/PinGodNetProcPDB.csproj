@@ -30,7 +30,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="scenes\AttractMode\" />
-    <Folder Include="scenes\ServiceMode\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NetProc.Data" Version="1.0.28" />
