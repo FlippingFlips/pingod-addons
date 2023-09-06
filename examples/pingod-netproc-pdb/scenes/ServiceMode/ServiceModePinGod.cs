@@ -1,30 +1,39 @@
 using Godot;
+using Godot.Collections;
+using System;
 using System.Linq;
 
 public partial class ServiceModePinGod : Node
-{
-	private CenterContainer _centerContainer;
-	private ButtonGridGontainer _mainMenugridContainer;
-	private PackedScene _pgServiceButtonScene;
+{	
+	//private ButtonGridGontainer _mainMenugridContainer;
+	//private PackedScene _pgServiceButtonScene;	
+ //   private ButtonGridGontainer _testsMenugridContainer;
+	//private Control _SwitchMatrixView;
+
+	string MAIN_CONTENT_NODE = "%ServiceModeCenterContainer";
 
 	private PinGodGameProc _pinGodProcGame;
-	private ButtonGridGontainer _testsMenugridContainer;
-	private Control _SwitchMatrixView;
+	private CenterContainer _mainContentNode;
+
+	[Export] public Godot.Collections.Dictionary<string, string> _menuScenes;
+
+	private string _previousMenu = "MainMenu";
+	private string _currentMenu = "MainMenu";
 
 	public override void _EnterTree()
 	{
 		base._EnterTree();
+
+		//get the pingodgame to interact with
 		_pinGodProcGame = GetNodeOrNull<PinGodGameProc>("/root/PinGodGame");
+
+		//get the main content to show views in
+		_mainContentNode = GetNode<CenterContainer>(MAIN_CONTENT_NODE);
 	}
 
 	public override void _Ready()
 	{
-		_centerContainer = GetNodeOrNull<CenterContainer>("%ServiceModeCenterContainer");
-		_mainMenugridContainer = _centerContainer.GetNodeOrNull<ButtonGridGontainer>("VBoxContainer/MainMenuGridContainer");
-		_mainMenugridContainer.FocusMode = Control.FocusModeEnum.All;
-
-		_testsMenugridContainer = _centerContainer.GetNodeOrNull<ButtonGridGontainer>("VBoxContainer/TestsMenuGridContainer");
-		_SwitchMatrixView = _centerContainer.GetNodeOrNull<MarginContainer>("VBoxContainer/MarginContainer");
+		LoadMenu(_currentMenu);		
 	}
 
 	private void _on_pg_menu_button_pressed()
@@ -35,25 +44,16 @@ public partial class ServiceModePinGod : Node
 
 	private void OnMenuItemSelected(string name)
 	{
-		GD.Print("menu item selected " + name);
-		
-		if (!string.IsNullOrWhiteSpace(name))
+		GD.Print("menu item selected: " + name);
+
+		if(!_menuScenes.ContainsKey(name))
 		{
-			if(name == "tests")
-			{
-				_mainMenugridContainer.Visible = false;
-				_testsMenugridContainer.Visible = true;
-				_testsMenugridContainer.SelectFirstChild();
-			}
-			else if(name == "switches")
-			{
-				_mainMenugridContainer.Visible = false;
-				_testsMenugridContainer.Visible = false;
-				_SwitchMatrixView.Visible=true;
-			}
-			
-			if(_mainMenugridContainer.Visible) _mainMenugridContainer.GrabClickFocus();
-		}			
+			GD.PushError("no scene found for: " + name);
+		}
+		else
+		{
+			LoadMenu(name);			
+		}	
 	}
 
 	/// <summary>
@@ -62,7 +62,8 @@ public partial class ServiceModePinGod : Node
 	/// <param name="swName"></param>
 	public void OnSwitchPressed(string swName, ushort swNum, bool isClosed)
 	{
-		GetTree().CallGroup("switch_views", "OnSwitch", swName, swNum, isClosed);        
+		if(!this.IsQueuedForDeletion())
+			GetTree().CallGroup("switch_views", "OnSwitch", swName, swNum, isClosed);        
 	}
 
 	/// <summary>
@@ -72,14 +73,13 @@ public partial class ServiceModePinGod : Node
 	public void OnServiceButtonPressed(string swName)
 	{
 		
-
 		//_gridContainer.CallDeferred("grab_focus");
 
 		var evt = new InputEventAction() { Action = "ui_right", Pressed = true };
 		switch (swName)
 		{
 			case "exit":
-				if (_mainMenugridContainer.Visible)
+				if (_currentMenu == "MainMenu")
 				{
 					_pinGodProcGame.RemoveMode("service");
 					_pinGodProcGame.AddMode("attract");
@@ -87,10 +87,7 @@ public partial class ServiceModePinGod : Node
 				}
 				else
 				{
-					_SwitchMatrixView.Visible = false;
-					_testsMenugridContainer.Visible = false;
-					_mainMenugridContainer.Visible = true;
-					_mainMenugridContainer.SelectFirstChild();
+					LoadMenu(_previousMenu);
 				}
 				break;
 			case "enter":
@@ -107,6 +104,32 @@ public partial class ServiceModePinGod : Node
 		
 		Input.ParseInputEvent(evt);
 	}
-}
 
+	private void LoadMenu(string sceneName)
+	{
+		//remove previous menu
+		var child = _mainContentNode.GetChild(0);
+		if(child != null)
+		{
+			_mainContentNode.RemoveChild(child);
+			child.QueueFree();
+		}
+
+		//add scene
+		var scene = ResourceLoader.Load(_menuScenes[sceneName]) as PackedScene;
+		var menuGridContainer = scene.Instantiate();
+		_mainContentNode.AddChild(menuGridContainer);
+
+		GetNode<Label>("%TitleLabel").Text = $"Pingod Service Menu - " + sceneName;
+
+
+		if (menuGridContainer as ButtonGridGontainer != null)
+		{
+			menuGridContainer.Connect("MenuItemSelected", Callable.From<string>(OnMenuItemSelected));
+			
+			_previousMenu = _currentMenu;
+			_currentMenu = sceneName;
+		}
+	}
+}
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cuamq07kbkg62"]
 
-[ext_resource type="Script" path="res://scenes/ServiceMode/Views/MatrixSwitchesGridContainer.cs" id="1_h6std"]
+[ext_resource type="Script" path="res://scenes/ServiceMode/Tests/Switches/MatrixSwitchesGridContainer.cs" id="1_h6std"]
 
 [node name="MatrixSwitchesGridContainer" type="GridContainer" groups=["switch_views"]]
 clip_contents = true

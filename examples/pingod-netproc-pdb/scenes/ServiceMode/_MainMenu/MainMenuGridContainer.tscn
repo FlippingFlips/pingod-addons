@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://st5ysr4efywa"]
 
-[ext_resource type="Script" path="res://scenes/ServiceMode/Views/MainMenuGridContainer.cs" id="1_4clf5"]
+[ext_resource type="Script" path="res://scenes/ServiceMode/_MainMenu/MainMenuGridContainer.cs" id="1_4clf5"]
 [ext_resource type="PackedScene" uid="uid://srx7l013vpl4" path="res://scenes/ServiceMode/Shared/PgMenuButton.tscn" id="1_11ens"]
 
 [node name="MainMenuGridContainer" type="GridContainer"]
@@ -49,5 +49,3 @@ focus_neighbor_right = NodePath("../PgMenuButton9")
 layout_mode = 2
 focus_neighbor_left = NodePath("../PgMenuButton8")
 focus_neighbor_right = NodePath("../PgMenuButton1")
-
-[connection signal="gui_input" from="PgMenuButton1" to="." method="_on_pg_menu_button_gui_input"]

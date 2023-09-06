@@ -76,8 +76,10 @@ public class MachineSwitchHandlerMode : PinGodProcMode
                 if (Game.Switches["coinDoor"].IsOpen() && !Game.Modes.Modes.Any(x => x.GetType() == typeof(ServiceMode)))
                 {
                     //adds the service mode and remove attract
-                    _pinGodProc.CallDeferred("RemoveMode", "attract");
-                    _pinGodProc.CallDeferred("AddMode", "service");
+                    //_pinGodProc.CallDeferred("RemoveMode", "attract");
+
+                    _pinGodProc.PinGodProcGame.RemoveMode("attract");
+                    _pinGodProc.CallDeferred("AddMode", "service");                    
 
                     //Game.Modes.Remove(_pinGodProc.PinGodProcGame.);
                 }

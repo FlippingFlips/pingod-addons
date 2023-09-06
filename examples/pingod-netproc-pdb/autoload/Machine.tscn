@@ -7,8 +7,6 @@
 [node name="Machine" type="Node"]
 editor_description = "P-ROC PinGodMachine"
 script = ExtResource("1_8kvyb")
-_ball_search_coils = null
-_ball_search_enabled = null
 _ball_search_stop_switches = PackedStringArray("mballSaucer", "trough0", "trough1", "trough2", "trough3")
 _coils = {
 "alive": 0,
@@ -20,7 +18,6 @@ _coils = {
 "mballSaucer": 4,
 "trough": 1
 }
-_lamps = null
 _leds = {
 "shoot_again": 1
 }
@@ -50,11 +47,8 @@ _switches = {
 "trough3": 15,
 "up": 6
 }
-_ball_search_wait_time_secs = null
-_playbackfile = null
 _switchWindow = ExtResource("2_ef2qi")
 _switchWindowEnabled = true
-recordPlayback = null
 
 [node name="RecordingStatusLabel" type="Label" parent="."]
 anchors_preset = 1

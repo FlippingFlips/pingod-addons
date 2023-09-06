@@ -1,13 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://c1l60t3pwhfbc"]
+[gd_scene load_steps=10 format=3 uid="uid://c1l60t3pwhfbc"]
 
 [ext_resource type="Theme" uid="uid://cu6tqdbsw05ts" path="res://themes/service/ServiceMenuTheme.tres" id="1_wavcq"]
 [ext_resource type="Theme" uid="uid://i8ycokmeeysd" path="res://themes/service/ServiceMenuBarsTheme.tres" id="2_bm4em"]
 [ext_resource type="FontFile" uid="uid://cma858wxwc3df" path="res://addons/assets/fonts/dejavu-sans-mono/DejaVuSansMono.ttf" id="3_fg0n0"]
 [ext_resource type="Texture2D" uid="uid://cmykdd1cjihij" path="res://addons/assets/img/pinball.svg" id="4_njb21"]
-[ext_resource type="PackedScene" uid="uid://st5ysr4efywa" path="res://scenes/ServiceMode/Views/MainMenuGridContainer.tscn" id="5_g8s10"]
 [ext_resource type="Script" path="res://scenes/ServiceMode/ServiceModePinGod.cs" id="5_icrhk"]
-[ext_resource type="PackedScene" uid="uid://budfnuhfurv5n" path="res://scenes/ServiceMode/Views/TestsMenuGridContainer.tscn" id="6_mou7c"]
-[ext_resource type="PackedScene" uid="uid://bomkwr2mi3y0q" path="res://scenes/ServiceMode/Views/SwitchMatrixView.tscn" id="8_di7rn"]
+[ext_resource type="Texture2D" uid="uid://dex1ftbg8fsk1" path="res://game_assets/img/service_buttons.jpg" id="6_x84wc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8js7n"]
 bg_color = Color(0, 0.207843, 0.345098, 1)
@@ -30,10 +28,24 @@ shadow_color = Color(0.184314, 0.513726, 0.917647, 0.6)
 shadow_size = 2
 
 [node name="ServiceModePROC" type="Node"]
-editor_description = "The base service mode starting scene. "
+editor_description = "The base ServiceMode starting scene. 
+
+How this currently works is injecting scenes into the \"ServiceModeCenterContainer\".
+
+Scenes can be added into the _menuScenes in the inspector, key and path. So for the tests menu: \"tests\", \"res://scenes/ServiceMode/Tests/TestsMenuGridContainer.tscn\"
+
+The MainMenu contains a test button. When this menu is entered it will be posted back to this view to act on it. Usually to add the next menu or a view.
+
+These views will be created as and when, so each new view is created on entry leaving it all free aside from this."
 script = ExtResource("5_icrhk")
+_menuScenes = {
+"MainMenu": "res://scenes/ServiceMode/_MainMenu/MainMenuGridContainer.tscn",
+"switches": "res://scenes/ServiceMode/Tests/Switches/SwitchMatrixView.tscn",
+"tests": "res://scenes/ServiceMode/Tests/TestsMenuGridContainer.tscn"
+}
 
 [node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -65,7 +77,8 @@ offset_right = 1917.0
 offset_bottom = 68.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_8js7n")
 
-[node name="Label" type="Label" parent="Control/Panel/TopPanel/Panel"]
+[node name="TitleLabel" type="Label" parent="Control/Panel/TopPanel/Panel"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 69.0
 offset_top = 5.0
@@ -75,10 +88,13 @@ theme_override_font_sizes/font_size = 66
 text = "pingod service mode"
 
 [node name="IconPanel" type="Panel" parent="Control/Panel/TopPanel"]
+visible = false
 z_index = 2
 layout_mode = 0
-offset_right = 150.0
-offset_bottom = 140.0
+offset_left = 9.0
+offset_top = 2.0
+offset_right = 159.0
+offset_bottom = 142.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_e6kvt")
 
 [node name="CenterContainer" type="CenterContainer" parent="Control/Panel/TopPanel/IconPanel"]
@@ -193,25 +209,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/ServiceModeCenterContainer"]
-layout_mode = 2
-
-[node name="MainMenuGridContainer" parent="Control/Panel/ServiceModeCenterContainer/VBoxContainer" instance=ExtResource("5_g8s10")]
-layout_mode = 2
-
-[node name="TestsMenuGridContainer" parent="Control/Panel/ServiceModeCenterContainer/VBoxContainer" instance=ExtResource("6_mou7c")]
-visible = false
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="Control/Panel/ServiceModeCenterContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-theme_override_constants/margin_left = 110
-theme_override_constants/margin_top = 350
-
-[node name="SwitchMatrixView" parent="Control/Panel/ServiceModeCenterContainer/VBoxContainer/MarginContainer" instance=ExtResource("8_di7rn")]
-layout_mode = 2
-size_flags_horizontal = 4
-
-[connection signal="MenuItemSelected" from="Control/Panel/ServiceModeCenterContainer/VBoxContainer/MainMenuGridContainer" to="." method="OnMenuItemSelected"]
-[connection signal="MenuItemSelected" from="Control/Panel/ServiceModeCenterContainer/VBoxContainer/TestsMenuGridContainer" to="." method="OnMenuItemSelected"]
+[node name="ServiceButtons" type="Sprite2D" parent="."]
+position = Vector2(135, 1039)
+scale = Vector2(0.31037, 0.364956)
+texture = ExtResource("6_x84wc")

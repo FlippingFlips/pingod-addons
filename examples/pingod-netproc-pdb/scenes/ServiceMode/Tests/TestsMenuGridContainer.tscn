@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://budfnuhfurv5n"]
 
-[ext_resource type="Script" path="res://scenes/ServiceMode/Views/TestsMenuGridContainer.cs" id="1_u7u8h"]
+[ext_resource type="Script" path="res://scenes/ServiceMode/Tests/TestsMenuGridContainer.cs" id="1_u7u8h"]
 [ext_resource type="PackedScene" uid="uid://srx7l013vpl4" path="res://scenes/ServiceMode/Shared/PgMenuButton.tscn" id="2_g55vn"]
 
 [node name="TestsMenuGridContainer" type="GridContainer"]
@@ -38,5 +38,3 @@ text = "sound"
 layout_mode = 2
 focus_neighbor_right = NodePath("../PgMenuButton1")
 text = "devices"
-
-[connection signal="gui_input" from="PgMenuButton1" to="." method="_on_pg_menu_button_gui_input"]

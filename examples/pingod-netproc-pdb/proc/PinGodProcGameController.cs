@@ -121,7 +121,7 @@ public class PinGodProcGameController : NetProcDataGameController
 
         //add ball stats for the player
         var player = CurrentPlayer() as PlayerDb;
-        player.BallStats.Add(new BallPlayed { Ball = (byte)this.Ball, Points = player.Score, Time = this.GetBallTime() });        
+        player.BallsPlayed.Add(new BallPlayed { Ball = (byte)this.Ball, Points = player.Score, Time = this.GetBallTime() });        
     }
 
     public override void BallStarting()

@@ -44,12 +44,16 @@ public class AttractMode : PinGodProcMode
     {
         base.ModeStopped();
         Logger.Debug(nameof(AttractMode), nameof(ModeStopped));
-        if (_attractInstance != null)
-        {
-            RemoveChildSceneFromCanvasLayer(_attractInstance);
-            _attractInstance?.Free();
-            _attractInstance = null;
-        }
+
+        //remove the scene from the modes canvas layer
+        _pingod.CallDeferred("RemoveModeScene", "Attract");
+
+        //if (_attractInstance != null)
+        //{
+        //    RemoveChildSceneFromCanvasLayer(_attractInstance);
+        //    _attractInstance?.Free();
+        //    _attractInstance = null;
+        //}
     }
 
     /// <summary>

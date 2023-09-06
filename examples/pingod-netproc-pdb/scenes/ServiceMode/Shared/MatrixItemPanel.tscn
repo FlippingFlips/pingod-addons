@@ -5,32 +5,59 @@
 
 [node name="MatrixItemPanel" type="Panel"]
 editor_description = "This panel should be used in a grid container to be viewable in a pinball switch / lamp etc matrix"
-custom_minimum_size = Vector2(100, 75)
-offset_right = 105.0
+custom_minimum_size = Vector2(102, 75)
+offset_right = 107.0
 offset_bottom = 75.0
 theme = ExtResource("1_t0pee")
 script = ExtResource("2_g6yoc")
-Name = null
-Number = null
+WireColorL = Color(0.776471, 0, 0, 1)
+WireColorR = Color(0, 0, 0, 1)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(30, 10)
+layout_mode = 2
+offset_left = 5.0
+offset_top = 60.0
+offset_right = 45.0
+offset_bottom = 70.0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(30, 10)
+layout_mode = 2
+offset_left = 57.0
+offset_top = 60.0
+offset_right = 97.0
+offset_bottom = 70.0
+size_flags_horizontal = 0
+size_flags_vertical = 8
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(100, 75)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.5
+offset_top = -35.5
+offset_right = 50.5
+offset_bottom = 39.5
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="NameLabel" type="Label" parent="VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 50)
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 15
-text = "
-Name"
+text = "Name"
 horizontal_alignment = 1
+vertical_alignment = 1
 autowrap_mode = 1
 
 [node name="NumLabel" type="Label" parent="VBoxContainer"]
@@ -38,4 +65,3 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 horizontal_alignment = 1
-vertical_alignment = 2

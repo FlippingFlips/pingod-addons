@@ -10,10 +10,10 @@ public static class PinballMatrixConstants
 			{ "column", "00000000"},
 			{ "active", "017f01"},
 			{ "error", "bd0000"},
-			{ "opto_no", "404104"},
-			{ "opto_nc", "404104"},
-			{ "switch_no", "150065"},
-			{ "switch_nc", "00003e"},
+			{ "opto_no", "f4c200"},
+			{ "opto_nc", "866500"},
+			{ "switch_no", "1c00c5"},
+			{ "switch_nc", "0c0075"},
 			{ "unused", "404040"},
 		};
 }
@@ -25,6 +25,10 @@ public partial class MatrixItemPanel : Panel
 
 	[Export] public string Name { get; set; }
 	[Export] public int Number { get; set; } = -1;
+	[Export] public Color WireColorL { get; set; }
+	[Export] public string WireNameL { get; set; }
+	[Export] public Color WireColorR { get; set; }
+	[Export] public string WireNameR { get; set; }
 
 	private StyleBoxFlat _defaultStyle;
 
@@ -40,6 +44,8 @@ public partial class MatrixItemPanel : Panel
 
 		if (Number > -1)
 			SetNum(Number);
+
+		//GetNode<ColorRect>("ColorRect").Color = WireColorL;
 	}
 
 	public void SetName(string name) => _nameLbl.Text = name;
@@ -65,5 +71,15 @@ public partial class MatrixItemPanel : Panel
 
 		//add the override
 		this.AddThemeStyleboxOverride("panel", styleBox);
+	}
+
+	public void SetWireL(string colour, string name)
+	{
+		GetNode<ColorRect>("ColorRect").Color = Color.FromHtml(colour);
+	}
+
+	public void SetWireR(string colour, string name)
+	{
+		GetNode<ColorRect>("ColorRect2").Color = Color.FromHtml(colour);
 	}
 }

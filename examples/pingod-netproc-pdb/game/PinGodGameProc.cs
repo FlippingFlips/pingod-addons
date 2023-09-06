@@ -6,25 +6,22 @@ using System.Threading;
 using Godot;
 using PinGod.Core.Service;
 using NetProc.Domain.PinProc;
-using PinGod.Core.Game;
-using Microsoft.EntityFrameworkCore.Internal;
 using System;
+
+public class PinGodProcConfig
+{
+	public bool Simulated { get; set; } = true;
+	public byte Delay { get; set; } = 10;
+	public bool IgnoreDbDisplay { get; set; }
+	public bool DeleteDbOnInit { get; set; }
+	public LogLevel LogLevel { get; set; } = LogLevel.Verbose;
+}
 
 /// <summary>
 /// Inheriting PinGodGame to take over with a P-ROC.
 /// </summary>
 public partial class PinGodGameProc : PinGodGame
 {              
-	[ExportCategory("P-ROC Options")]
-	/// <summary>
-	/// This delay set to 10 for the simulator. Trough won't work 100% without this. Hacks...
-	/// </summary>
-	[Export] byte PROC_DELAY = 10;
-	[Export] bool DELETE_DB_ON_INIT = false;
-	[Export] bool SIMULATED = true;
-	[Export] bool IGNORE_DB_DISPLAY_SETTINGS = false;
-	[Export(PropertyHint.Enum)] LogLevel LOG_LEVEL =  NetProc.Domain.PinProc.LogLevel.Verbose;
-
 	/// <summary>
 	/// Procgame <see cref="IGameController"/>
 	/// </summary>
@@ -43,12 +40,48 @@ public partial class PinGodGameProc : PinGodGame
 	public CanvasLayer _modesCanvas;
 	private Label _creditsLabel;
 
+	public PinGodProcConfig PinGodProcConfig { get; private set; } = new();
+
 	#region Godot Overrides
 
 	public override void _EnterTree()
 	{
-		Logger.LogLevel = (PinGod.Base.LogLevel)(LOG_LEVEL);
+		LoadLocalProcConfig();
+
+		Logger.LogLevel = (PinGod.Base.LogLevel)((int)PinGodProcConfig.LogLevel);
+
 		base._EnterTree();
+	}
+
+	/// <summary>
+	/// Create a P-ROC config file for config that cannot be in the database. <para/>
+	/// This way we can easy make changes to it for simulated and delays in the directory
+	/// </summary>
+	private void LoadLocalProcConfig()
+	{
+		var config = new ConfigFile();
+		Error err = config.Load("res://proc.cfg");
+		if (err != Error.Ok)
+		{
+			//create config
+			config.SetValue("DEV", "simulated", PinGodProcConfig.Simulated);
+			config.SetValue("DEV", "delete_db_on_init", PinGodProcConfig.DeleteDbOnInit);
+			config.SetValue("DEV", "ignore_db_display", PinGodProcConfig.IgnoreDbDisplay);
+			config.SetValue("PROC", "delay", PinGodProcConfig.Delay);
+			config.SetValue("DEV", "log_level", (int)PinGodProcConfig.LogLevel);
+
+			config.Save("res://proc.cfg");
+		}
+		else
+		{
+			PinGodProcConfig.Delay = (byte)config.GetValue("PROC", "delay");
+			PinGodProcConfig.IgnoreDbDisplay = (bool)config.GetValue("DEV", "ignore_db_display");
+			PinGodProcConfig.DeleteDbOnInit = (bool)config.GetValue("DEV", "delete_db_on_init");
+			PinGodProcConfig.Simulated = (bool)config.GetValue("DEV", "simulated");
+			PinGodProcConfig.LogLevel = (NetProc.Domain.PinProc.LogLevel)((int)config.GetValue("DEV", "log_level"));
+		}
+
+		GD.Print("log level: " + PinGodProcConfig.LogLevel);
 	}
 
 	/// <summary>
@@ -99,18 +132,38 @@ public partial class PinGodGameProc : PinGodGame
 		if (MachinePROC != null)
 		{
 			//CREATE AND SETUP PROC MACHINE
-			CreateProcGame();
-			Logger.Info(nameof(PinGodGameProc), ": ProcGame created. Setting up MachineNode from ProcGame.");
+			try
+			{
+				CreateProcGame();
 
-			//PinGodProcGame.Logger. = NetProc.Domain.PinProc.LogLevel.Verbose;
-			var lvl = (int)LOG_LEVEL;
-			Logger.LogLevel = (PinGod.Base.LogLevel)lvl;
+				Logger.Info(nameof(PinGodGameProc), ": ProcGame created. Setting up MachineNode from ProcGame.");
 
-			//SET MACHINE ITEMS FROM PROC TO PINGOD            
-			//SetupPinGodotFromProcGame();
-			Logger.Info(nameof(MachinePROC), ": ProcGame and database setup complete.");
+				//PinGodProcGame.Logger. = NetProc.Domain.PinProc.LogLevel.Verbose;
+				var lvl = (int)LogLevel;
+				Logger.LogLevel = (PinGod.Base.LogLevel)lvl;
 
-			WindowLoadSettings();
+				if (PinGodProcGame == null)
+				{
+					throw new NullReferenceException("P-ROC game couldn't be created. Simulated: " + PinGodProcConfig.Simulated);
+				}					
+
+				//SET MACHINE ITEMS FROM PROC TO PINGOD            
+				//SetupPinGodotFromProcGame();
+				Logger.Info(nameof(MachinePROC), ": ProcGame and database setup complete.");
+
+				WindowLoadSettings();
+			}
+			catch (System.DllNotFoundException dllEx)
+			{
+				LogError(dllEx.Message + ". Application should be built with 32bit to use PinProc libraries when not simualted.");
+				this.GetTree().Quit();
+				
+			}
+			catch (System.Exception ex)
+			{
+				LogError(ex.Message);
+				this.GetTree().Quit();
+			}            
 		}
 	}
 	#endregion
@@ -146,17 +199,14 @@ public partial class PinGodGameProc : PinGodGame
 	}
 
 	/// <summary>
-	/// Must set solution / project to x86 if running real p-roc board
-	/// true here is simulated and can get away with running with FakePinProc            
+	/// Must set solution / project to x86 if running real p-roc board. <para/>
+	/// Use the <see cref="PinGodProcConfig.Simulated"/> flag from the PROC.cfg in game directory
 	/// </summary>
 	/// <param name="machineConfig"></param>
 	private void CreateProcGame()
 	{
-		var pinGodLogger = new PinGodProcLogger() { LogLevel = LOG_LEVEL };
-		PinGodProcGame = new PinGodProcGameController(MachineType.PDB, DELETE_DB_ON_INIT, pinGodLogger, SIMULATED, this);
-
-		//don't need to use LoadConfig anymore with this controller
-		//PinGodProcGame.LoadConfig(machineConfig);
+		var pinGodLogger = new PinGodProcLogger() { LogLevel = PinGodProcConfig.LogLevel };
+		PinGodProcGame = new PinGodProcGameController(MachineType.PDB, PinGodProcConfig.DeleteDbOnInit, pinGodLogger, PinGodProcConfig.Simulated, this);        
 	}
 
 	/// <summary>
@@ -213,7 +263,7 @@ public partial class PinGodGameProc : PinGodGame
 			Logger.Info(nameof(MachinePROC), ":running game loop");
 
 			//run proc game loop delay 1 save CPU //TODO: maybe this run loop needs to re-throw exception if any caught
-			PinGodProcGame.RunLoop(PROC_DELAY, tokenSource);
+			PinGodProcGame.RunLoop(PinGodProcConfig.Delay, tokenSource);
 			//means the proc loop threw exception
 			if (!tokenSource.IsCancellationRequested)
 			{
@@ -247,7 +297,9 @@ public partial class PinGodGameProc : PinGodGame
 	/// </summary>
 	private void WindowLoadSettings()
 	{
-		if (IGNORE_DB_DISPLAY_SETTINGS) return;
+		if (PinGodProcGame == null) return;
+		
+		if (PinGodProcConfig.IgnoreDbDisplay) return;        
 
 		DisplayServer.WindowSetMode((DisplayServer.WindowMode)PinGodProcGame.GetAdjustment("DISP_MODE"));
 		Display.SetContentScale(GetTree().Root, (Window.ContentScaleModeEnum)PinGodProcGame.GetAdjustment("DISP_CONT_SCALE_MODE"));
@@ -263,7 +315,9 @@ public partial class PinGodGameProc : PinGodGame
 	/// </summary>
 	private void WindowSaveSettings()
 	{
-		if (IGNORE_DB_DISPLAY_SETTINGS) return;
+		if (PinGodProcGame == null) return;
+		
+		if (PinGodProcConfig.IgnoreDbDisplay) return;		
 
 		var winSize = DisplayServer.WindowGetSize(0);
 		var winPos = DisplayServer.WindowGetPosition(0);
@@ -306,6 +360,7 @@ public partial class PinGodGameProc : PinGodGame
 		if(node != null)
 		{
 			_modesCanvas.RemoveChild(node);
+			node.QueueFree();
 		}
 	}
 }

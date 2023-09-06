@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://srx7l013vpl4"]
+[gd_scene load_steps=4 format=3 uid="uid://srx7l013vpl4"]
 
 [ext_resource type="Texture2D" uid="uid://cmykdd1cjihij" path="res://addons/assets/img/pinball.svg" id="1_737nv"]
+[ext_resource type="Script" path="res://scenes/ServiceMode/Shared/PgMenuButton.cs" id="2_3f22v"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_36uyo"]
 bg_color = Color(0.211765, 0.458824, 0.466667, 1)
@@ -35,3 +36,6 @@ text = "NAME"
 icon = ExtResource("1_737nv")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("2_3f22v")
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

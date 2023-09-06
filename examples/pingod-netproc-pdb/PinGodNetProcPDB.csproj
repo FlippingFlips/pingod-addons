@@ -26,13 +26,16 @@
     <None Include="nuget.config" />
     <None Include="nuget\.gdignore" />
     <None Include="README.md" />
+    <None Include="scenes\ServiceMode\README.md" />
     <None Include="visual_pinball\README.md" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="scenes\AttractMode\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="NetProc.Data" Version="1.0.28" />
+	  
+	 <!--TO UPDATE NET PROC PACKAGES JUST PUT IN NUGET DIRECTORY AND CHANGE VERSION-->	  
+    <PackageReference Include="NetProc.Data" Version="1.0.33" />
     <!--<PackageReference Include="NetProc.Game" Version="1.0.25" />-->
   </ItemGroup>
 </Project>

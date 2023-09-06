@@ -4,5 +4,5 @@
 
 [node name="PinGodGame" type="Node"]
 process_priority = -1
+editor_description = "see the proc.cfg"
 script = ExtResource("1_jowfi")
-LOG_LEVEL = 1
