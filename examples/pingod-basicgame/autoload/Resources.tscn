@@ -1,12 +1,13 @@
 [gd_scene load_steps=8 format=3 uid="uid://cykvufg16bv30"]
 
 [ext_resource type="Script" path="res://addons/pingod-core/Service/Resources.cs" id="1_wa3d4"]
-[ext_resource type="FontFile" uid="uid://ds20ym7rgmho3" path="res://addons/assets/fonts/BebasNeue.ttf" id="2_3nh6v"]
+[ext_resource type="FontFile" uid="uid://ciofwob416hd1" path="res://addons/assets/fonts/BebasNeue.ttf" id="2_3nh6v"]
 [ext_resource type="PackedScene" uid="uid://cm3hf1m8bn1nl" path="res://addons/modes/bonus/Bonus.tscn" id="2_dlvif"]
 [ext_resource type="PackedScene" uid="uid://b46rdcwxkw0gu" path="res://addons/modes/scoreentry/ScoreEntry.tscn" id="3_tpnnr"]
 [ext_resource type="PackedScene" uid="uid://cukmt8esxykqv" path="res://addons/modes/tilt/Tilt.tscn" id="4_w83kh"]
 [ext_resource type="PackedScene" path="res://addons/modes/multiball/Multiball.tscn" id="5_5nywg"]
 [ext_resource type="PackedScene" uid="uid://dlcv2a2q12prb" path="res://addons/modes/attract/Attract.tscn" id="6_56w7k"]
+
 
 [node name="Resources" type="Node"]
 script = ExtResource("1_wa3d4")

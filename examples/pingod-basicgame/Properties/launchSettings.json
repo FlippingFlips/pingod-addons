@@ -2,7 +2,7 @@
   "profiles": {
     "Godot4 (Debug with Console)": {
       "commandName": "Executable",
-      "executablePath": "C:\\Godot4\\godot_console.exe",
+      "executablePath": "godot_console",
       "commandLineArgs": "--path .",
       "workingDirectory": ".",
       "environmentVariables": {
@@ -16,7 +16,7 @@
     },
     "Godot4 (Verbose with Console)": {
       "commandName": "Executable",
-      "executablePath": "C:\\Godot4\\godot_console.exe",
+      "executablePath": "godot_console",
       "commandLineArgs": "--path . --verbose",
       "workingDirectory": ".",
       "environmentVariables": {
@@ -30,7 +30,7 @@
     },
     "Godot (Debug)": {
       "commandName": "Executable",
-      "executablePath": "C:\\Godot4\\godot.exe",
+      "executablePath": "godot",
       "commandLineArgs": "--path .",
       "workingDirectory": ".",
       "environmentVariables": {
@@ -44,7 +44,7 @@
     },
     "Godot Editor'": {
       "commandName": "Executable",
-      "executablePath": "C:\\Godot4\\godot.exe",
+      "executablePath": "godot",
       "commandLineArgs": "-e --path .",
       "workingDirectory": ".",
       "environmentVariables": {
@@ -58,7 +58,7 @@
     },
     "Export Release (Windows Desktop)'": {
       "commandName": "Executable",
-      "executablePath": "C:\\Godot4\\godot.exe",
+      "executablePath": "godot",
       "commandLineArgs": "--export-release \"Windows Desktop\"",
       "workingDirectory": ".",
       "nativeDebugging": true

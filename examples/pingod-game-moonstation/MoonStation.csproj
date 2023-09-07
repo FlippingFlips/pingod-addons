@@ -1,9 +1,9 @@
-﻿<Project Sdk="Godot.NET.Sdk/4.0.0-beta.10">
+﻿<Project Sdk="Godot.NET.Sdk/4.1.1">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
-	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-	<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="addons\pingod-memorymap\**" />
@@ -11,7 +11,7 @@
     <EmbeddedResource Remove="addons\pingod-memorymap\**" />
     <EmbeddedResource Remove="addons\pingod-window-commands\**" />
   </ItemGroup>
-     <ItemGroup>
+  <ItemGroup>
     <Content Include="Properties\launchSettings.json" />
   </ItemGroup>
   <ItemGroup>

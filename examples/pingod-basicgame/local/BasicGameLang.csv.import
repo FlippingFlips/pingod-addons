@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://cb8jg6j0a154t"
+
+[deps]
+
+files=["res://local/BasicGameLang.en.translation"]
+
+source_file="res://local/BasicGameLang.csv"
+dest_files=["res://local/BasicGameLang.en.translation"]
+
+[params]
+
+compress=true
+delimiter=0
