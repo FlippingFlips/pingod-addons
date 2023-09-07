@@ -59,10 +59,16 @@ var NAVTREE =
     [ "# BasicGame-PinGod.vpx", "md_examples_pingod_basicgame_visual_pinball_readme.html", [
       [ "About Table", "md_examples_pingod_basicgame_visual_pinball_readme.html#autotoc_md29", null ]
     ] ],
-    [ "Modes - P-ROC", "md_examples_pingod_netproc_pdb_modes_README.html", null ],
+    [ "Modes - P-ROC", "md_examples_pingod_netproc_pdb_modes_README.html", [
+      [ "### Mode Scenes", "md_examples_pingod_netproc_pdb_modes_README.html#autotoc_md31", null ],
+      [ "### Default Modes", "md_examples_pingod_netproc_pdb_modes_README.html#autotoc_md32", null ]
+    ] ],
     [ "pingod-netproc-pdb", "md_examples_pingod_netproc_pdb_README.html", [
-      [ "About", "md_examples_pingod_netproc_pdb_README.html#autotoc_md32", null ],
-      [ "Pingod Addon Plugins", "md_examples_pingod_netproc_pdb_README.html#autotoc_md33", null ]
+      [ "About", "md_examples_pingod_netproc_pdb_README.html#autotoc_md34", null ],
+      [ "Pingod Addon Plugins", "md_examples_pingod_netproc_pdb_README.html#autotoc_md35", null ]
+    ] ],
+    [ "PinGod - P3-ROC - Service mode Menus", "md_examples_pingod_netproc_pdb_scenes_ServiceMode_README.html", [
+      [ "## PROC Mode", "md_examples_pingod_netproc_pdb_scenes_ServiceMode_README.html#autotoc_md37", null ]
     ] ],
     [ "# BasicGame-PinGod-P-ROC.vpx", "md_examples_pingod_netproc_pdb_visual_pinball_README.html", null ],
     [ "Packages", "namespaces.html", [
@@ -97,11 +103,11 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "AdjustmentsNodeExports_8cs.html",
-"classPinGodGameProc.html#a70084d4eb2111f6f14b9c2e08431e908",
-"classPinGod_1_1Core_1_1Service_1_1AdjustmentsNode.html#aa6506bf258884368189e17a1d66787ed",
-"classPinGod_1_1EditorPlugins_1_1SwitchOverlay.html#af8110e286c2a00a36771a50566f2dcc7",
-"dir_0b144002c78597e91255d3c34ee0f0cd.html",
-"interfacePinGod_1_1Core_1_1Interface_1_1IAudioManager.html#a43d91e38fad13bd189d3f3af4767a6cd"
+"classMemoryMapPROCNode.html",
+"classPinGod_1_1Core_1_1Game_1_1PinGodBase.html#aea03e0a6453abbc6e46848295932994b",
+"classPinGod_1_1EditorPlugins_1_1Lamp.html",
+"classPlayfieldWindowSave.html#a1c96aaf0d8da4b09728554f0008fb8c7",
+"interfacePinGod_1_1Core_1_1IPinGodGame.html#a79ac8dfe3cb9d5cdfa3f61f736660823"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

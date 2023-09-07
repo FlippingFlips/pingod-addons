@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tools on PinGod AddOns</title><link>https://FlippingFlips.github.io/pingod-addons/game-assets/tools/index.html</link><description>Recent content in Tools on PinGod AddOns</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 26 Dec 2022 15:26:15 +0000</lastBuildDate><atom:link href="https://FlippingFlips.github.io/pingod-addons/game-assets/tools/index.xml" rel="self" type="application/rss+xml"/><item><title>Image Tools</title><link>https://FlippingFlips.github.io/pingod-addons/game-assets/tools/image-tools/index.html</link><pubDate>Mon, 26 Dec 2022 15:26:15 +0000</pubDate><guid>https://FlippingFlips.github.io/pingod-addons/game-assets/tools/image-tools/index.html</guid><description>Image edit Tools Here are some tools we use a lot and have been used when making games for pinball.
+A quick way to install anything is through chocolatey.
+Inkscape (scalable vector) choco install inkscape
+🔗 Inkscape (chocolatey)
+ImageMagick (converting webp) choco install imagemagick.app
+🔗 ImageMagick (chocolatey)
+Gimp (Image editing) choco install gimp
+🔗 Gimp (chocolatey)</description></item></channel></rss>

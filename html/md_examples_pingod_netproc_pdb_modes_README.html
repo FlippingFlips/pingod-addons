@@ -86,7 +86,18 @@ $(document).ready(function(){initNavTree('md_examples_pingod_netproc_pdb_modes_R
 <div class="title">Modes - P-ROC </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>NetProc GameController modes</p>
+<div class="textblock"><p>NetProc GameController modes that are added to the NetProc Games Mode Queue.</p>
+<p>Scenes for the game belong in <code>res://scenes</code>, for example <code>res://scenes/AttractMode</code></p>
+<h1><a class="anchor" id="autotoc_md31"></a>
+### Mode Scenes</h1>
+<p>Scenes are not required for P-ROC modes but they can be added when the mode starts in <code>"ModeStarted"</code> and removed in <code>"ModeEnded"</code>.</p>
+<p>The scene you send should be the full game path. For the attract it is <code>"res://scenes/AttractMode/AttractProc.tscn"</code></p>
+<p>To add a scene on UI thread:</p>
+<p><code>_pingod.CallDeferred("AddModeScene", ATTRACT_SCENE);</code></p>
+<p>To remove a scene on UI thread:</p>
+<p><code>_pingod.CallDeferred("RemoveModeScene", ATTRACT_SCENE);</code></p>
+<h1><a class="anchor" id="autotoc_md32"></a>
+### Default Modes</h1>
 <ul>
 <li><a class="el" href="classMachineSwitchHandlerMode.html" title="P-ROC Mode that handles all the door switches and coins in the machine.">MachineSwitchHandlerMode</a></li>
 <li><a class="el" href="classAttractMode.html" title="A P-ROC (PinGodProcMode) but reusing the default PinGod Attract.tscn. When the mode starts the ATTRAC...">AttractMode</a></li>

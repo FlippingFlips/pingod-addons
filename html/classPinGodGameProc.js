@@ -15,5 +15,6 @@ var classPinGodGameProc =
     [ "StartProcGame", "classPinGodGameProc.html#a96443cd4d6b35fe93de8c2410741b585", null ],
     [ "_modesCanvas", "classPinGodGameProc.html#a70084d4eb2111f6f14b9c2e08431e908", null ],
     [ "MachinePROC", "classPinGodGameProc.html#afc132ab8d79a93a65f960006c8d557bf", null ],
-    [ "PinGodProcGame", "classPinGodGameProc.html#a1ea09d865ee8a6da6d7defdfae41c508", null ]
+    [ "PinGodProcGame", "classPinGodGameProc.html#a1ea09d865ee8a6da6d7defdfae41c508", null ],
+    [ "PinGodProcConfig", "classPinGodGameProc.html#a87af8a648448719be53f59678760bcde", null ]
 ];
