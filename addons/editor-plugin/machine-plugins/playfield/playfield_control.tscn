@@ -61,6 +61,7 @@ offset_top = 875.0
 offset_right = 132.0
 offset_bottom = 902.0
 scale = Vector2(0.659074, 0.742996)
+toggle_mode = true
 text = "exit
 "
 
@@ -71,6 +72,7 @@ offset_top = 875.0
 offset_right = 168.0
 offset_bottom = 902.0
 scale = Vector2(0.659074, 0.742996)
+toggle_mode = true
 text = "down"
 
 [node name="up" type="Button" parent="Buttons"]
@@ -80,6 +82,7 @@ offset_top = 875.0
 offset_right = 205.0
 offset_bottom = 902.0
 scale = Vector2(0.659074, 0.742996)
+toggle_mode = true
 text = "up"
 
 [node name="enter" type="Button" parent="Buttons"]
@@ -89,6 +92,7 @@ offset_top = 875.0
 offset_right = 242.0
 offset_bottom = 902.0
 scale = Vector2(0.659074, 0.742996)
+toggle_mode = true
 text = "enter"
 
 [node name="coinDoor" type="Button" parent="Buttons"]

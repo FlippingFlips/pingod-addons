@@ -3,7 +3,7 @@ baseURL = "https://FlippingFlips.github.io/pingod-addons"
 languageCode = "en-us"
 DefaultContentLanguage = "en"
 title = "PinGod AddOns"
-theme = "hugo-theme-techdoc"
+theme = "hugo-theme-relearn"
 
 hasCJKLanguage = true
 metaDataFormat = "yaml"
@@ -12,17 +12,29 @@ defaultContentLanguage = "en"
 defaultContentLanguageInSubdir= false
 enableMissingTranslationPlaceholders = false
 
+
+# For search functionality
+[outputs]
+home = [ "HTML", "RSS", "SEARCH"]
+
 [params]
 
-    # Source Code repository section
-    description = "Source"
-    github_repository = "https://github.com/FlippingFlips/pingod-addons"
-    version = "0.96"
+    # This controls whether submenus will be expanded (true), or collapsed (false) in the
+    # menu; if no setting is given, the first menu level is set to false, all others to true;
+    # this can be overridden in the pages frontmatter
+    alwaysopen = false
 
-    # Documentation repository section
-    # documentation repository (set edit link to documentation repository)
-    github_doc_repository = "https://github.com/FlippingFlips/pingod-addons"
-    github_doc_repository_path = "main/docs/content/"
+    disableOpenapi = true
+    showVisitedLinks = true
+
+    author = ""    
+    disableSearch = false
+    disableSeoHiddenPages = true
+
+    # Source Code repository section
+    description = "Documentation for PinGod"
+    editURL = "https://github.com/FlippingFlips/pingod-addons/main/docs/content/"
+    version = "0.96"
 
     # Analytic section
     google_analytics_id = "" # Your Google Analytics tracking id
@@ -97,9 +109,6 @@ enableMissingTranslationPlaceholders = false
         startLevel = 2
         endLevel = 6
         ordered = false
-
-[outputs]
-    home = ["HTML", "RSS", "Algolia"]
 
 # Algolia Search configure section
 [outputFormats.Algolia]

@@ -1,10 +1,12 @@
 ---
-title: "Godot - Environment Configuration"
+title: "Godot - Configuration"
 date: 2022-12-26T15:26:15Z
 lastmod: 2022-10-26T15:26:15Z
 draft: false
 weight: 20
 ---
+
+You can ignore this if you have installed with `chocolatey` as this will be added for you on install. You should be able to run `godot` in any terminal.
 
 ### Set Environment path to Godot
 ---

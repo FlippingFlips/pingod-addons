@@ -1,10 +1,13 @@
-﻿<Project Sdk="Godot.NET.Sdk/4.0.0-beta.10">
+﻿<Project Sdk="Godot.NET.Sdk/4.1.1">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
-	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-	<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
-  </PropertyGroup>  
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Properties\launchSettings.json" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="addons\autoload\Adjustments\plugin.cfg" />
     <None Include="addons\autoload\Adjustments\README.md" />
@@ -31,6 +34,7 @@
     <None Include="Game.tscn" />
     <None Include="MainScene.tscn" />
     <None Include="project.godot" />
+    <None Include="Properties\.gdignore" />
     <None Include="scenes\BaseMode.tscn" />
     <None Include="visual_pinball\BasicGame-PinGod.vbs" />
     <None Include="visual_pinball\readme.md" />

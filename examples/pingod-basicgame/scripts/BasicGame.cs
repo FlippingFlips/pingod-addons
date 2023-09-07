@@ -1,4 +1,4 @@
-﻿
+
 using Godot;
 using PinGod.Base;
 using PinGod.Core;
@@ -9,28 +9,28 @@ using PinGod.Game;
 /// </summary>
 public partial class BasicGame : Game
 {
-    //private void gui_focus_changed(Node node)
-    //{
-    //    Logger.Info(nameof(BasicGame), ":gui focus changed:" + node?.ToString());
-    //}
+	//private void gui_focus_changed(Node node)
+	//{
+	//    Logger.Info(nameof(BasicGame), ":gui focus changed:" + node?.ToString());
+	//}
 
-    //TODO: Test OS.MoveWindowToForeground();
-    //OS.Alert
-    //Godot.PCKPacker p = new Godot.PCKPacker();
-    //p.PckStart("test.pck");
-    //p.AddFile("res://")
+	//TODO: Test OS.MoveWindowToForeground();
+	//OS.Alert
+	//Godot.PCKPacker p = new Godot.PCKPacker();
+	//p.PckStart("test.pck");
+	//p.AddFile("res://")
 
-    /*
-     * Create window inside the game
-     private Window _window;
-            _window = new Godot.Window() { Size = new Vector2i(300, 200) };
-        AddChild(_window);
-        _window.Show();
-            _window.Hide();
-        _window.QueueFree();
-     */
+	/*
+	 * Create window inside the game
+	 private Window _window;
+			_window = new Godot.Window() { Size = new Vector2i(300, 200) };
+		AddChild(_window);
+		_window.Show();
+			_window.Hide();
+		_window.QueueFree();
+	 */
 
-    public void OnBallSaveDisabled() => Logger.Log(LogLevel.Info, Logger.BBColor.green, nameof(BasicGame), ":" + nameof(OnBallSaveDisabled));
+	public void OnBallSaveDisabled() => Logger.Log(LogLevel.Info, Logger.BBColor.green, nameof(BasicGame), ":" + nameof(OnBallSaveDisabled));
 
-    public void OnBallSaveEnabled() => Logger.Log(LogLevel.Info, Logger.BBColor.green, nameof(BasicGame), ":" + nameof(OnBallSaveEnabled));
+	public void OnBallSaveEnabled() => Logger.Log(LogLevel.Info, Logger.BBColor.green, nameof(BasicGame), ":" + nameof(OnBallSaveEnabled));
 }

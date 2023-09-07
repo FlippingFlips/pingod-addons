@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/pingod-core/Service/WindowActionsNode.cs" id="1_wtwty"]
 
+
 [node name="WindowActions" type="Node"]
 process_mode = 3
 editor_description = "Standard Input Handling = quit, pause, toggleborder

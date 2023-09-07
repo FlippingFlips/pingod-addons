@@ -5,11 +5,7 @@ draft: false
 weight: 50
 ---
 
-{{% panel status="primary" title="" icon="far fa-lightbulb" %}}
-
 This doesn't apply if you decide to have a single executable and pck, so you can skip this
-
-{{% /panel %}}
 
 *Note: This could have changed in Godot 4, untested*
 

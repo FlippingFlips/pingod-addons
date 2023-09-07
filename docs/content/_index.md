@@ -9,7 +9,7 @@ images:
 - images/pexels-photo-196666.jpeg
 ---
 
-{{< figure src="images/pingod-logo.png" title="" >}}
+{{< figure src="images/pingod-logo-sm.png" title="" >}}
 
 ## What is it?
 ---

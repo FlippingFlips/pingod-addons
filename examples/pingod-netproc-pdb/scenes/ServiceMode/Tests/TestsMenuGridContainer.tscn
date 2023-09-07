@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://budfnuhfurv5n"]
+
+[ext_resource type="Script" path="res://scenes/ServiceMode/Tests/TestsMenuGridContainer.cs" id="1_u7u8h"]
+[ext_resource type="PackedScene" uid="uid://srx7l013vpl4" path="res://scenes/ServiceMode/Shared/PgMenuButton.tscn" id="2_g55vn"]
+
+[node name="TestsMenuGridContainer" type="GridContainer"]
+theme_override_constants/h_separation = 60
+theme_override_constants/v_separation = 50
+columns = 4
+script = ExtResource("1_u7u8h")
+
+[node name="PgMenuButton1" parent="." instance=ExtResource("2_g55vn")]
+editor_description = "Main menu buttons. Can be controlled by service menu buttons to select, enter and esc. This will send a signal when item is selected and send the name back to the parent hooked onto the signal, the parent can then change the content in the main view.
+
+Need the hard code buttons for now, easier for selecting left & right and setting focus."
+layout_mode = 2
+text = "switches"
+
+[node name="PgMenuButton2" parent="." instance=ExtResource("2_g55vn")]
+layout_mode = 2
+text = "coils"
+
+[node name="PgMenuButton3" parent="." instance=ExtResource("2_g55vn")]
+layout_mode = 2
+text = "leds"
+
+[node name="PgMenuButton4" parent="." instance=ExtResource("2_g55vn")]
+layout_mode = 2
+focus_neighbor_right = NodePath("../PgMenuButton5")
+text = "lamps"
+
+[node name="PgMenuButton5" parent="." instance=ExtResource("2_g55vn")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../PgMenuButton4")
+text = "sound"
+
+[node name="PgMenuButton6" parent="." instance=ExtResource("2_g55vn")]
+layout_mode = 2
+focus_neighbor_right = NodePath("../PgMenuButton1")
+text = "devices"

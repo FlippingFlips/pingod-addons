@@ -254,14 +254,20 @@ namespace PinGod.Core.Game
 							Task.Run(() =>
 							{
 								if (pinGod.GameInPlay)
-									GetNodeOrNull("Modes/Game")?.QueueFree();
+								{
+									var gameNode = CallDeferred("get_node_or_null", "Modes/Game").As<Node>();
+									gameNode?.QueueFree();
+								}
 								else
-									GetNodeOrNull("Modes/Attract")?.QueueFree();
+								{
+									var attractNode = CallDeferred("get_node_or_null", "Modes/Attract").As<Node>();
+									attractNode?.QueueFree();
+								}									
 
 								//load service menu into modes
 								CallDeferred("_loaded", _resources?.GetResource(_service_menu_scene_path.GetBaseName()));
 
-								pinGod.EmitSignal("ServiceMenuEnter");
+								((PinGodGame)pinGod).CallDeferred("emit_signal", "ServiceMenuEnter");
 							});
 						}
 						else { Logger.WarningRich(nameof(MainScene), ":", nameof(OnSwitchCommandHandler), ":[color=yellow]", " A Service menu scene wasn't provided", "[/color]"); }

@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://d0sti812noses"]
 
+[ext_resource type="Script" path="res://addons/pingod-core/Game/MainScene.cs" id="1_0ye6o"]
 [ext_resource type="PackedScene" uid="uid://d314cxixgd6su" path="res://addons/modes/pause-settings/PauseSetting.tscn" id="3_yrup2"]
-[ext_resource type="Script" path="res://addons/pingod-core/Game/MainScene.cs" id="6"]
 
 [node name="MainScene" type="Node"]
 process_mode = 3
-script = ExtResource("6")
+script = ExtResource("1_0ye6o")
 _attract_scene_path = "res://addons/modes/attract/Attract.tscn"
 _game_scene_path = "res://Game.tscn"
 _service_menu_scene_path = "res://addons/modes/servicemenu/ServiceMenu.tscn"

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cnsqcuww2ka6d"]
 
 [ext_resource type="Script" path="res://scripts/BasicGame.cs" id="1_nd4pf"]
-[ext_resource type="PackedScene" path="res://addons/modes/scoremode/ScoreMode.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://w8xlcskhhtuw" path="res://addons/modes/scoremode/ScoreMode.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/BaseMode.tscn" id="3_si2dd"]
 
 [node name="Game" type="Node2D"]

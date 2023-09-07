@@ -20,7 +20,9 @@ public partial class MemoryMapPROCNode : MemoryMapNode
 		//todo: get proc gamecontroller
 		if(_pinGodProc?.PinGodProcGame != null)
 		{            
-			mMap = new MemoryMapPROC(_pinGodProc.PinGodProcGame, this.MutexName, MapName, WriteDelay, ReadDelay, CoilTotal, LampTotal, LedTotal, SwitchTotal);            
+			if(this.IsEnabled)
+				mMap = new MemoryMapPROC(_pinGodProc.PinGodProcGame, this.MutexName, MapName, WriteDelay, ReadDelay, CoilTotal, LampTotal, LedTotal, SwitchTotal);
+			else { Logger.WarningRich(nameof(MemoryMapPROC), ": [color=yellow]memory map disabled exiting memory mapping[/color]"); }
 		}
 		else
 		{

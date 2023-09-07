@@ -13,9 +13,7 @@ Export option "embed pck" does not work on 32-bit x86 [GodotIssues](https://gith
 
 ![image](../../images/basicgame-project-export-exe.jpg) - Feb 2020
 
-{{% panel status="danger" title="Godot Naming" icon="far fa-lightbulb" %}}
 The names here have to be consistent which each other. The exe and the pack.
-{{% /panel %}}
 
 The BasicGame project for `Windows Desktop Pack` shows that it's exporting to `..Build/PinGod.BasicGame.pck`
 
