@@ -25,7 +25,7 @@ jobs:
     - name: copy add-ons
       run: |
         mkdir -p ./examples/pingod-netproc-pdb/addons
-        cp -R ./addons ./examples/pingod-netproc-pdb
+        cp -R ./addons ./examples/pingod-netproc-pdb/addons
   
     - name: export game
       id: export
