@@ -110,6 +110,8 @@ var annotated_dup =
     [ "BasicGame", "classBasicGame.html", "classBasicGame" ],
     [ "BasicGamePlayer", "classBasicGamePlayer.html", null ],
     [ "ButtonGridGontainer", "classButtonGridGontainer.html", "classButtonGridGontainer" ],
+    [ "CoilsTestView", "classCoilsTestView.html", "classCoilsTestView" ],
+    [ "CoilTestItem", "classCoilTestItem.html", "classCoilTestItem" ],
     [ "CustomPinGodGame", "classCustomPinGodGame.html", "classCustomPinGodGame" ],
     [ "CustomPlayer", "classCustomPlayer.html", "classCustomPlayer" ],
     [ "DisplaySettings", "classDisplaySettings.html", "classDisplaySettings" ],
