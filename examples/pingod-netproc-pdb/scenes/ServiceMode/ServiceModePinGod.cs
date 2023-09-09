@@ -10,7 +10,7 @@ public partial class ServiceModePinGod : Node
 	private PinGodGameProc _pinGodProcGame;
 	private CenterContainer _mainContentNode;
 
-	[Export] public Godot.Collections.Dictionary<string, string> _menuScenes;
+	[Export(PropertyHint.File)] public Godot.Collections.Dictionary<string, string> _menuScenes;
 
 	private string _previousMenu = "MainMenu";
 	private string _currentMenu = "MainMenu";
@@ -90,10 +90,8 @@ public partial class ServiceModePinGod : Node
 	/// </summary>
 	/// <param name="swName"></param>
 	public void OnServiceButtonPressed(string swName)
-	{
-		
+	{		
 		//_gridContainer.CallDeferred("grab_focus");
-
 		var evt = new InputEventAction() { Action = "ui_right", Pressed = true };
 		switch (swName)
 		{
@@ -154,4 +152,3 @@ public partial class ServiceModePinGod : Node
 		}
 	}
 }
-

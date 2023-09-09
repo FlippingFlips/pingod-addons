@@ -40,6 +40,7 @@ These views will be created as and when, so each new view is created on entry le
 script = ExtResource("5_icrhk")
 _menuScenes = {
 "MainMenu": "res://scenes/ServiceMode/_MainMenu/MainMenuGridContainer.tscn",
+"coils": "res://scenes/ServiceMode/Tests/Coils/CoilsTestView.tscn",
 "switches": "res://scenes/ServiceMode/Tests/Switches/SwitchMatrixView.tscn",
 "tests": "res://scenes/ServiceMode/Tests/TestsMenuGridContainer.tscn"
 }
