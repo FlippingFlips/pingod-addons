@@ -143,6 +143,7 @@ var hierarchy =
     ] ],
     [ "PlayfieldWindowSave", "classPlayfieldWindowSave.html", null ],
     [ "PinGod.Core.ProjectSettingsDisplay", "classPinGod_1_1Core_1_1ProjectSettingsDisplay.html", null ],
+    [ "PinGodNetProcPDB.scenes.ServiceMode.Shared.ServiceColourSet", "classPinGodNetProcPDB_1_1scenes_1_1ServiceMode_1_1Shared_1_1ServiceColourSet.html", null ],
     [ "PinGod.Core.Switch", "classPinGod_1_1Core_1_1Switch.html", null ],
     [ "Timer", null, [
       [ "PinGod.Core.BallSaver", "classPinGod_1_1Core_1_1BallSaver.html", null ],

@@ -1,5 +1,16 @@
 var NAVTREEINDEX3 =
 {
+"classPinGod_1_1EditorPlugins_1_1BlinkingLabel.html#a839d29e47bbbe3af81f319bc1b67db1f":[19,0,0,3,0,1],
+"classPinGod_1_1EditorPlugins_1_1BlinkingLabel.html#acb63603f227180e690cbd32868010134":[19,0,0,3,0,4],
+"classPinGod_1_1EditorPlugins_1_1BlinkingLabel.html#adf69195cf269b37d429321957f333f33":[19,0,0,3,0,3],
+"classPinGod_1_1EditorPlugins_1_1BlinkingLabel.html#aedf7402e2d6c38409759926279e4bd98":[19,0,0,3,0,0],
+"classPinGod_1_1EditorPlugins_1_1Bumper.html":[19,0,0,3,4],
+"classPinGod_1_1EditorPlugins_1_1Bumper.html#a3f9123571ef7c0c09d8f7614464ef9c7":[19,0,0,3,4,1],
+"classPinGod_1_1EditorPlugins_1_1Bumper.html#ad7a6e5de3eaf956dba9f6a557225a599":[19,0,0,3,4,0],
+"classPinGod_1_1EditorPlugins_1_1CreditsLabel.html":[19,0,0,3,1],
+"classPinGod_1_1EditorPlugins_1_1CreditsLabel.html#a0051350083c8f264893148ff2d4e6900":[19,0,0,3,1,2],
+"classPinGod_1_1EditorPlugins_1_1CreditsLabel.html#abeba81fddd519c3ba8726743a8f28259":[19,0,0,3,1,0],
+"classPinGod_1_1EditorPlugins_1_1CreditsLabel.html#adb824a629444c23aebb46c4bb8ac66f5":[19,0,0,3,1,1],
 "classPinGod_1_1EditorPlugins_1_1Lamp.html":[19,0,0,3,5],
 "classPinGod_1_1EditorPlugins_1_1Lamp.html#a44b0fd2859597810f23e8f1299393882":[19,0,0,3,5,0],
 "classPinGod_1_1EditorPlugins_1_1Lamp.html#a95470cf3487527ca8799496dbc999f02":[19,0,0,3,5,1],
@@ -238,16 +249,5 @@ var NAVTREEINDEX3 =
 "classPinGod_1_1Modes_1_1ServiceMenu.html#a132e62bc43705fc0ef23cda7bbfd6567":[19,0,0,5,7,5],
 "classPinGod_1_1Modes_1_1ServiceMenu.html#a7b845b86ad1fc865d6674c165540f503":[19,0,0,5,7,7],
 "classPinGod_1_1Modes_1_1ServiceMenu.html#a87505f3df0968045073c230a54e6a747":[19,0,0,5,7,2],
-"classPinGod_1_1Modes_1_1ServiceMenu.html#a9170b55da1096fd148d150c11464b098":[19,0,0,5,7,1],
-"classPinGod_1_1Modes_1_1ServiceMenu.html#a97cebd6e617fc7f3ec7c71f0976ebea5":[19,0,0,5,7,3],
-"classPinGod_1_1Modes_1_1ServiceMenu.html#ac9938cbf35cc610798abd6beef74e8dd":[19,0,0,5,7,4],
-"classPinGod_1_1Modes_1_1ServiceMenu.html#af11e4fb5d98c06654a91cce8698597b1":[19,0,0,5,7,0],
-"classPinGod_1_1Modes_1_1ServiceMenu.html#aff281a272c995393d0c38a8fcecfdbcd":[19,0,0,5,7,6],
-"classPingodSettingsScene.html":[19,0,27],
-"classPingodSettingsScene.html#ac55dfe2cae7b564e6bbad68d9a254921":[19,0,27,1],
-"classPingodSettingsScene.html#ad0cff120b8771febc6d8e0bdee89d760":[19,0,27,0],
-"classPlayfieldWindow.html":[19,0,28],
-"classPlayfieldWindow.html#a2c0f540930ae42475be21cfe6c999bd3":[19,0,28,0],
-"classPlayfieldWindow.html#a72e1807fd04a5822f5e67b445c492e43":[19,0,28,1],
-"classPlayfieldWindowSave.html":[19,0,29]
+"classPinGod_1_1Modes_1_1ServiceMenu.html#a9170b55da1096fd148d150c11464b098":[19,0,0,5,7,1]
 };

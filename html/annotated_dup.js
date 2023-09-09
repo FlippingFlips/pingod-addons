@@ -94,6 +94,15 @@ var annotated_dup =
         [ "ServiceMenu", "classPinGod_1_1Modes_1_1ServiceMenu.html", "classPinGod_1_1Modes_1_1ServiceMenu" ]
       ] ]
     ] ],
+    [ "PinGodNetProcPDB", "namespacePinGodNetProcPDB.html", [
+      [ "scenes", "namespacePinGodNetProcPDB_1_1scenes.html", [
+        [ "ServiceMode", "namespacePinGodNetProcPDB_1_1scenes_1_1ServiceMode.html", [
+          [ "Shared", "namespacePinGodNetProcPDB_1_1scenes_1_1ServiceMode_1_1Shared.html", [
+            [ "ServiceColourSet", "classPinGodNetProcPDB_1_1scenes_1_1ServiceMode_1_1Shared_1_1ServiceColourSet.html", "classPinGodNetProcPDB_1_1scenes_1_1ServiceMode_1_1Shared_1_1ServiceColourSet" ]
+          ] ]
+        ] ]
+      ] ]
+    ] ],
     [ "AttractMode", "classAttractMode.html", "classAttractMode" ],
     [ "AttractProc", "classAttractProc.html", "classAttractProc" ],
     [ "AudioSettings", "classAudioSettings.html", "classAudioSettings" ],

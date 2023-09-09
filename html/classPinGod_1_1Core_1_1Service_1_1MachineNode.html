@@ -156,6 +156,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a78f4e97379a9dfb6908f543727f3769a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets Machine switch value and Emits SwitchCommand. Games and plug-ins can hook up to this signal when a switch changes  <a href="classPinGod_1_1Core_1_1Service_1_1MachineNode.html#a78f4e97379a9dfb6908f543727f3769a">More...</a><br /></td></tr>
 <tr class="separator:a78f4e97379a9dfb6908f543727f3769a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ce8c87dc0a82134124324bae252f1ff"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGod_1_1Core_1_1Service_1_1MachineNode.html#a0ce8c87dc0a82134124324bae252f1ff">SetUpRecordingsOrPlayback</a> (<a class="el" href="namespacePinGod_1_1Base.html#ab8f9d04a9525783bbb09626ad9ccf137">RecordPlaybackOption</a> playbackOption, string playbackfile)</td></tr>
+<tr class="memdesc:a0ce8c87dc0a82134124324bae252f1ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up recording and playback for capturing switch events.  <a href="classPinGod_1_1Core_1_1Service_1_1MachineNode.html#a0ce8c87dc0a82134124324bae252f1ff">More...</a><br /></td></tr>
 <tr class="separator:a0ce8c87dc0a82134124324bae252f1ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a8d90cc8e5634642df3cbb7ce32b710"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGod_1_1Core_1_1Service_1_1MachineNode.html#a3a8d90cc8e5634642df3cbb7ce32b710">SwitchActionOff</a> (string swName, InputEvent inputEvent)</td></tr>
 <tr class="memdesc:a3a8d90cc8e5634642df3cbb7ce32b710"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks a switches input event by friendly name that is in the <a class="el" href="classPinGod_1_1Core_1_1Switches.html" title="Collection of string, PinStateObject">Switches</a> "coin", @event  <a href="classPinGod_1_1Core_1_1Service_1_1MachineNode.html#a3a8d90cc8e5634642df3cbb7ce32b710">More...</a><br /></td></tr>
@@ -195,6 +196,14 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a1f2ba3fa36f33ae27b681e0957c90e1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e43efc92d696225034079dd0f8b04f9"><td class="memItemLeft" align="right" valign="top">Dictionary&lt; string, byte &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGod_1_1Core_1_1Service_1_1MachineNode.html#a9e43efc92d696225034079dd0f8b04f9">_switches</a> = new()</td></tr>
 <tr class="separator:a9e43efc92d696225034079dd0f8b04f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a955302afe77eefab2fc225fb30fba480"><td class="memItemLeft" align="right" valign="top">ulong&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGod_1_1Core_1_1Service_1_1MachineNode.html#a955302afe77eefab2fc225fb30fba480">_machineLoadTime</a></td></tr>
+<tr class="separator:a955302afe77eefab2fc225fb30fba480"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad56420846dc8738ee029b999f0b79b7c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPinGod_1_1Core_1_1EventRecordFile.html">EventRecordFile</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGod_1_1Core_1_1Service_1_1MachineNode.html#ad56420846dc8738ee029b999f0b79b7c">_recordFile</a></td></tr>
+<tr class="separator:ad56420846dc8738ee029b999f0b79b7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bc8a2700389d3dae1a0742aa63901c3"><td class="memItemLeft" align="right" valign="top">Label&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGod_1_1Core_1_1Service_1_1MachineNode.html#a3bc8a2700389d3dae1a0742aa63901c3">_recordingStatusLabel</a></td></tr>
+<tr class="separator:a3bc8a2700389d3dae1a0742aa63901c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bbb63e6891bebfdd36acea0c99c04ea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacePinGod_1_1Base.html#ab8f9d04a9525783bbb09626ad9ccf137">RecordPlaybackOption</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinGod_1_1Core_1_1Service_1_1MachineNode.html#a6bbb63e6891bebfdd36acea0c99c04ea">_recordPlayback</a></td></tr>
+<tr class="separator:a6bbb63e6891bebfdd36acea0c99c04ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
@@ -520,7 +529,7 @@ Properties</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classMachinePROC.html#ab0259aca9633f3517c343f2299048ce4">MachinePROC</a>.</p>
+<p>Reimplemented in <a class="el" href="classMachinePROC.html#a78acb9e5945cad63ed43efe162da5ac1">MachinePROC</a>.</p>
 
 </div>
 </div>
@@ -804,6 +813,15 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Sets up recording and playback for capturing switch events. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">playbackOption</td><td></td></tr>
+    <tr><td class="paramname">playbackfile</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a3a8d90cc8e5634642df3cbb7ce32b710"></a>
@@ -1075,6 +1093,28 @@ Properties</h2></td></tr>
 
 </div>
 </div>
+<a id="a955302afe77eefab2fc225fb30fba480"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a955302afe77eefab2fc225fb30fba480">&#9670;&nbsp;</a></span>_machineLoadTime</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ulong PinGod.Core.Service.MachineNode._machineLoadTime</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a26877414abc98e075fb25229018979e4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a26877414abc98e075fb25229018979e4">&#9670;&nbsp;</a></span>_plungerLane</h2>
 
@@ -1085,6 +1125,72 @@ Properties</h2></td></tr>
           <td class="memname"><a class="el" href="classPinGod_1_1Core_1_1Nodes_1_1PlungerLane_1_1PlungerLane.html">PlungerLane</a> PinGod.Core.Service.MachineNode._plungerLane</td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad56420846dc8738ee029b999f0b79b7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad56420846dc8738ee029b999f0b79b7c">&#9670;&nbsp;</a></span>_recordFile</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classPinGod_1_1Core_1_1EventRecordFile.html">EventRecordFile</a> PinGod.Core.Service.MachineNode._recordFile</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3bc8a2700389d3dae1a0742aa63901c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bc8a2700389d3dae1a0742aa63901c3">&#9670;&nbsp;</a></span>_recordingStatusLabel</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Label PinGod.Core.Service.MachineNode._recordingStatusLabel</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6bbb63e6891bebfdd36acea0c99c04ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6bbb63e6891bebfdd36acea0c99c04ea">&#9670;&nbsp;</a></span>_recordPlayback</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacePinGod_1_1Base.html#ab8f9d04a9525783bbb09626ad9ccf137">RecordPlaybackOption</a> PinGod.Core.Service.MachineNode._recordPlayback</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
