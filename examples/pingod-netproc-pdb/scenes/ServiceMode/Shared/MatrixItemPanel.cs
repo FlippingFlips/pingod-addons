@@ -1,27 +1,15 @@
 using Godot;
-using Godot.Collections;
-using System.Security;
 
-public static class PinballMatrixConstants
-{
-	public static readonly Dictionary<string, string> BackgroundColours = 
-		new Dictionary<string, string> 
-		{
-			{ "column", "00000000"},
-			{ "active", "017f01"},
-			{ "error", "bd0000"},
-			{ "opto_no", "f4c200"},
-			{ "opto_nc", "866500"},
-			{ "switch_no", "1c00c5"},
-			{ "switch_nc", "0c0075"},
-			{ "unused", "404040"},
-		};
-}
-
+/// <summary>
+/// This panel belongs to the scene MatrixItemPanel. This is to display a machine item with Name, Number and wire colours. <para/>
+/// When in a switch matrix or similar then the background can be changed to show pushed switches.
+/// </summary>
 public partial class MatrixItemPanel : Panel
 {
 	private Label _nameLbl;
 	private Label _numLbl;
+	private ColorRect _wireL;
+	private ColorRect _wireR;
 
 	[Export] public string Name { get; set; }
 	[Export] public int Number { get; set; } = -1;
@@ -32,14 +20,20 @@ public partial class MatrixItemPanel : Panel
 
 	private StyleBoxFlat _defaultStyle;
 
-	// Called when the node enters the scene tree for the first time.
+	/// <summary>
+	/// When scene enters first time
+	/// </summary>
 	public override void _Ready()
 	{
 		//get labels from scene tree
 		_nameLbl = GetNode<Label>("%NameLabel");
 		_numLbl  = GetNode<Label>("%NumLabel");
 
-		if(!string.IsNullOrWhiteSpace(Name))
+		//wire color boxes that contain a label
+		_wireL = GetNode<ColorRect>("%WireLColorRect");
+		_wireR = GetNode<ColorRect>("%WireRColorRect");
+
+		if (!string.IsNullOrWhiteSpace(Name))
 			SetName(Name);
 
 		if (Number > -1)
@@ -73,13 +67,45 @@ public partial class MatrixItemPanel : Panel
 		this.AddThemeStyleboxOverride("panel", styleBox);
 	}
 
-	public void SetWireL(string colour, string name)
+	public void SetWireL(string[] colours)
 	{
-		GetNode<ColorRect>("ColorRect").Color = Color.FromHtml(colour);
+		if (colours?.Length <= 0) return;
+
+		//get first colour and set the colour
+		var color = colours[0];
+		_wireL.Color = ServiceModePinGod.ServiceModeColours[color].Color;
+		_wireL.GetNode<Label>("Label").Text = color;
+		_wireL.Visible = true;
+
+		//add extra wire colour for a 2 colour wire
+		if (colours.Length == 2)
+		{
+			var color2 = colours[1];
+			var cRect = _wireL.GetNode<ColorRect>("ColorRect");
+			_wireL.GetNode<Label>("Label").Text += $",{color2}";
+			cRect.Visible = true;
+			cRect.Color = ServiceModePinGod.ServiceModeColours[color2].Color;			
+		}
 	}
 
-	public void SetWireR(string colour, string name)
+	public void SetWireR(string[] colours)
 	{
-		GetNode<ColorRect>("ColorRect2").Color = Color.FromHtml(colour);
+		if (colours?.Length <= 0) return;
+
+		//get first colour and set the colour
+		var color = colours[0];
+		_wireR.Color = ServiceModePinGod.ServiceModeColours[color].Color;
+		_wireR.GetNode<Label>("Label").Text = color;
+		_wireR.Visible = true;
+
+		//add extra wire colour for a 2 colour wire
+		if (colours.Length == 2)
+		{
+			var color2 = colours[1];
+			var cRect = _wireR.GetNode<ColorRect>("ColorRect");
+			cRect.Color = ServiceModePinGod.ServiceModeColours[color2].Color;
+			_wireR.GetNode<Label>("Label").Text += $",{color2}";
+			cRect.Visible = true;
+		}
 	}
 }

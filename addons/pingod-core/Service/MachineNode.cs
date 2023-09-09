@@ -67,11 +67,11 @@ namespace PinGod.Core.Service
 		public PlungerLane _plungerLane;
 
 		static bool _instanceLoaded = false;
-		ulong _machineLoadTime;
+        protected ulong _machineLoadTime;
 		private MemoryMapNode _pinGodMemoryMapNode;
-		private EventRecordFile _recordFile;
-		private Label _recordingStatusLabel;
-		private RecordPlaybackOption _recordPlayback;
+        protected EventRecordFile _recordFile;
+		protected Label _recordingStatusLabel;
+		protected RecordPlaybackOption _recordPlayback;
 		private Trough _trough;
 		/// <summary>
 		/// 
@@ -101,18 +101,23 @@ namespace PinGod.Core.Service
 
 				//ball search
 				SetupBallSearch();
+
 				//adds machine items and actions
 				AddCustomMachineItems(_coils, _switches, _lamps, _leds);
-				//memory map
+
+				//memory map (windows)
 				if (GetParent().HasNode("MemoryMap")) { _pinGodMemoryMapNode = GetParent().GetNode<MemoryMapNode>("MemoryMap"); }
+
 				//hook up to the ball saved event
 				if (HasNode("BallSaver"))
 				{                    
 					_ballSaver = GetNode<BallSaver>("BallSaver");
 					_ballSaver.BallSaved += _ballSaver_BallSaved;
 				}
+
 				//plunger lane
 				if (HasNode("PlungerLane")) { _plungerLane = GetNode<PlungerLane>("PlungerLane"); }
+
 				//display status of recordings
 				_recordFile = new EventRecordFile();
 				_recordingStatusLabel = GetNodeOrNull<Label>("RecordingStatusLabel");
@@ -128,6 +133,8 @@ namespace PinGod.Core.Service
 			if (_recordPlayback == RecordPlaybackOption.Record)
 			{
 				Logger.Info(nameof(MachineNode), ":_ExitTree, saving recordings");
+				_recordFile.SaveRecording();
+				
 			}
 			else Logger.Info(nameof(MachineNode), ":_ExitTree");
 		}
@@ -192,7 +199,7 @@ namespace PinGod.Core.Service
 			//set start time
 			_machineLoadTime = Godot.Time.GetTicksMsec();
 			//set up recording / playback from [export] properties
-			SetUpRecordingsOrPlayback(recordPlayback, _playbackfile);
+			SetUpRecordingsOrPlayback(recordPlayback, $"user://recordings/"+ _playbackfile);
 		}
 
 		/// <summary>
@@ -316,8 +323,8 @@ namespace PinGod.Core.Service
 		/// <param name="swNum"></param>
 		/// <param name="value"></param>
 		public void SetSwitch(int swNum, byte value, bool fromAction = true)
-		{
-			var sw = Machine.Switches.Values.FirstOrDefault(x => x.Num == swNum);
+		{            
+            var sw = Machine.Switches.Values.FirstOrDefault(x => x.Num == swNum);
 			if (sw != null)
 			{
 				SetSwitch(sw, value, fromAction);
@@ -347,11 +354,17 @@ namespace PinGod.Core.Service
 			EmitSignal(nameof(SwitchCommand), @switch.Name, @switch.Num, value);
 		}
 
+		/// <summary>
+		/// Sets up recording and playback for capturing switch events.
+		/// </summary>
+		/// <param name="playbackOption"></param>
+		/// <param name="playbackfile"></param>
 		public virtual void SetUpRecordingsOrPlayback(RecordPlaybackOption playbackOption, string playbackfile)
 		{
 			_recordPlayback = playbackOption;
 
-			Logger.Debug(nameof(MachineNode), ":setup playback?: ", _recordPlayback.ToString());
+			Logger.Info(nameof(MachineNode), ":setup playback?: ", _recordPlayback.ToString());
+
 			if (_recordPlayback == RecordPlaybackOption.Playback)
 			{
 				if (string.IsNullOrWhiteSpace(playbackfile))

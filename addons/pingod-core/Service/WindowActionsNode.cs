@@ -145,7 +145,7 @@ namespace PinGod.Core.Service
 
 		private void Quit()
 		{
-			Logger.Debug(nameof(WindowActionsNode), ":quit action request. quitting tree.");
+			Logger.Info(nameof(WindowActionsNode), ":quit action request. quitting tree.");
 			//free here to make sure the _exit method is invoked on the scripts
 			foreach (var item in GetTree().Root.GetChildren())
 			{

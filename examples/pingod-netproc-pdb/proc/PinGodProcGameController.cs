@@ -112,7 +112,7 @@ public class PinGodProcGameController : NetProcDataGameController
     {
         base.BallEnded();
 
-        FlippersEnabled = false;
+        EnableFlippers(false);
         if (_isSimulated) Coils["flippersRelay"].Disable();
 
         //TODO: remove modes on ball starting, these modes remove when a new ball ends
@@ -128,8 +128,8 @@ public class PinGodProcGameController : NetProcDataGameController
     {
         base.BallStarting();
         //TODO: add modes on ball starting, these modes start when a new ball does
-        FlippersEnabled = true;
-        if(_isSimulated) Coils["flippersRelay"].Enable();
+        EnableFlippers(true);
+        if (_isSimulated) Coils["flippersRelay"].Enable();
 
         _myMode = new MyMode(this, 10, (PinGodGameProc)PinGodGame);
         Modes.Add(_myMode);

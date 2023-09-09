@@ -2,6 +2,7 @@ using Godot;
 using Godot.Collections;
 using NetProc.Domain;
 using NetProc.Domain.PinProc;
+using PinGod.Base;
 using PinGod.Core;
 using PinGod.Core.Service;
 using System.Diagnostics;
@@ -40,7 +41,43 @@ public partial class MachinePROC : MachineNode
 	{
 		base._Ready();
 		_pinGodGameProc = GetNodeOrNull<PinGodGameProc>("/root/PinGodGame");
-	} 
+	}
+
+	/// <summary>
+	/// Process playback events. Turns off if playback is switched off.
+	/// </summary>
+	/// <param name="delta"></param>
+	public override void _Process(double delta)
+	{
+		if (!_pinGodGameProc.GameReady) return;
+
+		if (_recordPlayback != RecordPlaybackOption.Playback)
+		{
+			SetProcess(false);
+			Logger.Info(nameof(MachineNode), ": Playback _Process loop stopped. No recordings are being played back.");
+			return;
+		}
+		else
+		{
+			var cnt = _recordFile.GetQueueCount();
+			if (cnt <= 0)
+			{
+				Logger.Info(nameof(MachineNode), ": playback events ended, RecordPlayback is off.");
+				_recordPlayback = RecordPlaybackOption.Off;
+				_recordFile.SaveRecording();
+				if (_recordingStatusLabel != null) _recordingStatusLabel.Text = "Machine:Playback ended";
+				return;
+			}
+
+			var evt = _recordFile.ProcessQueue(_machineLoadTime);
+			if (evt != null)
+			{
+				var sw = _pinGodGameProc.PinGodProcGame.Switches[evt.EvtName];
+				OnSwitchCommand(sw.Name, sw.Number, evt.State);
+			}
+		}
+	}
+
 	#endregion
 
 	/// <summary>
@@ -54,13 +91,19 @@ public partial class MachinePROC : MachineNode
 		_switches.Clear();
 	}
 
-	public override void OnSwitchCommand(string name, int index, byte value)
+	/// <summary>
+	/// Name not used?
+	/// </summary>
+	/// <param name="name"></param>
+	/// <param name="num"></param>
+	/// <param name="value"></param>
+	public override void OnSwitchCommand(string name, int num, byte value)
 	{
-		Logger.Verbose("MACHINE_PROC: Switch:" + index);
+		Logger.Info("MACHINE_PROC: Switch:" + num);
 		//base.OnSwitchCommand(name, index, value);
-		if (_pinGodGameProc != null)
-		{ 
-			SetSwitchFakeProc(_pinGodGameProc.PinGodProcGame, (ushort)index, value > 0 ? true : false);
+		if (_pinGodGameProc != null && _pinGodGameProc.PinGodProcConfig.Simulated)
+		{
+			SetSwitchFakeProc(_pinGodGameProc.PinGodProcGame, (ushort)num, value > 0 ? true : false);
 		}        
 	}
 
@@ -116,12 +159,34 @@ public partial class MachinePROC : MachineNode
 	/// <param name="enabled"></param>
 	internal void SetSwitchFakeProc(IGameController gc, string name, bool enabled)
 	{
-		var proc = gc?.PROC as IFakeProcDevice;
-		if (proc != null)
+		if(_pinGodGameProc != null)
 		{
-			var sw = gc.Switches[name];
-			var evtT = enabled ? EventType.SwitchClosedDebounced : EventType.SwitchOpenDebounced;
-			proc.AddSwitchEvent(sw.Number, evtT);
+			if (_pinGodGameProc.PinGodProcConfig.Simulated)
+			{
+				var proc = gc?.PROC as IFakeProcDevice;
+				var sw = gc.Switches[name];
+				var evtT = enabled ? EventType.SwitchClosedDebounced : EventType.SwitchOpenDebounced;
+				proc.AddSwitchEvent(sw.Number, evtT);
+
+				RecordSwitch(name, sw);
+			}
+		}		
+	}
+
+	/// <summary>
+	/// Records a switch if the game is recording
+	/// </summary>
+	/// <param name="name"></param>
+	/// <param name="sw"></param>
+	private void RecordSwitch(string name, NetProc.Domain.Switch sw)
+	{		
+		if (_recordPlayback == RecordPlaybackOption.Record)
+		{						
+			byte state = sw.StateString() == "closed" ? (byte)0 : (byte)1;
+
+			_recordFile.RecordSwitchEvent(name, state, _machineLoadTime);
+
+			Logger.Verbose($"recorded switch: {name} | {state}");
 		}
 	}
 
@@ -139,6 +204,8 @@ public partial class MachinePROC : MachineNode
 			var sw = gc.Switches[number];
 			var evtT = enabled ? EventType.SwitchClosedDebounced : EventType.SwitchOpenDebounced;
 			proc.AddSwitchEvent(sw.Number, evtT);
+
+			RecordSwitch(sw.Name, sw);
 		}
 	}
 }

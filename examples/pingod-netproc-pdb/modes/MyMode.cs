@@ -16,16 +16,21 @@ public partial class MyMode : PinGodProcMode
         //_player = game.CurrentPlayer();
     }
 
+    /// <summary>
+    /// Launches a ball from the trough
+    /// </summary>
     public override void ModeStarted()
     {
         Game.Logger.Log(GetType().Name+":"+nameof(ModeStarted), LogLevel.Debug);
         _game.Trough.LaunchBalls(1, null, false);
     }
+
     public override void ModeStopped()
     {
         Game.Logger.Log(GetType().Name + ":" + nameof(ModeStopped), LogLevel.Debug);
         base.ModeStopped();
     }
+
     public override void UpdateLamps() => Game.Logger.Log(GetType().Name + ":" + nameof(UpdateLamps), LogLevel.Debug);
 
     /// <summary>

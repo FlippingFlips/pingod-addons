@@ -2,8 +2,8 @@
   "profiles": {
     "Godot4 (Debug with Console)": {
       "commandName": "Executable",
-      "executablePath": "godot",
-      "commandLineArgs": "--path . --verbose",
+      "executablePath": "C:\\ProgramData\\chocolatey\\lib\\godot-mono\\tools\\Godot_v4.1.1-stable_mono_win64\\Godot_v4.1.1-stable_mono_win64.exe",
+      "commandLineArgs": "--path .",
       "workingDirectory": ".",
       "environmentVariables": {
         "VisualBasicDesignTimeTargetsPath": "$(VisualStudioXamlRulesDir)Microsoft.VisualBasic.DesignTime.targets",
@@ -16,7 +16,7 @@
     },
     "Godot4 (Verbose with Console)": {
       "commandName": "Executable",
-      "executablePath": "C:\\Godot4\\godot_console.exe",
+      "executablePath": "C:\\ProgramData\\chocolatey\\bin\\godot.exe",
       "commandLineArgs": "--path . --verbose",
       "workingDirectory": ".",
       "environmentVariables": {
@@ -30,7 +30,7 @@
     },
     "Godot (Debug)": {
       "commandName": "Executable",
-      "executablePath": "C:\\Godot4\\godot.exe",
+      "executablePath": "C:\\ProgramData\\chocolatey\\bin\\godot.exe",
       "commandLineArgs": "--path .",
       "workingDirectory": ".",
       "environmentVariables": {
@@ -44,7 +44,7 @@
     },
     "Godot Editor'": {
       "commandName": "Executable",
-      "executablePath": "C:\\Godot4\\godot.exe",
+      "executablePath": "C:\\ProgramData\\chocolatey\\bin\\godot.exe",
       "commandLineArgs": "-e --path .",
       "workingDirectory": ".",
       "environmentVariables": {
@@ -58,7 +58,7 @@
     },
     "Export Release (Windows Desktop)'": {
       "commandName": "Executable",
-      "executablePath": "C:\\Godot4\\godot.exe",
+      "executablePath": "C:\\ProgramData\\chocolatey\\bin\\godot.exe",
       "commandLineArgs": "--export-release \"Windows Desktop\"",
       "workingDirectory": ".",
       "nativeDebugging": true

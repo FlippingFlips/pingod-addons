@@ -11,11 +11,12 @@ public partial class MatrixSwitchesGridContainer : GridContainer
 	{
 		_pinGodProcGame = GetNodeOrNull<PinGodGameProc>("/root/PinGodGame");
 		
-		var scene =
-			ResourceLoader.Load<PackedScene>("res://scenes/ServiceMode/Shared/MatrixItemPanel.tscn");
+		var scene = ResourceLoader
+			.Load<PackedScene>("res://scenes/ServiceMode/Shared/MatrixItemPanel.tscn");
 
 		byte boardNum = 0;
 		int switchCount = _pinGodProcGame.PinGodProcGame.Switches.Count;
+
 		//draw top column rows
 		for (int i = 0; i < (8 * 16); i++)
 		{
@@ -28,17 +29,28 @@ public partial class MatrixSwitchesGridContainer : GridContainer
 			this.AddChild(newScene);
 
 			if (i < switchCount && (_pinGodProcGame?.PinGodProcGame.Switches.ContainsKey((ushort)switchNum) ?? false))
-			{
-				
-				//game switch
+			{				
+				//game switch and set the MatrixPanel name
 				var sw = _pinGodProcGame.PinGodProcGame.Switches[(ushort)switchNum];
 				newScene.SetName(sw.Name);
 
 				//config switch with more values
-				var cfgSwitch = _pinGodProcGame.PinGodProcGame.Config.PRSwitches.FirstOrDefault(x => x.Name == sw.Name);
+				var cfgSwitch = _pinGodProcGame.PinGodProcGame.Config
+					.PRSwitches.FirstOrDefault(x => x.Name == sw.Name);
 
-				//set switch state depending on the type. TODO: opto switches
-				if (sw.Type == NetProc.Domain.PinProc.SwitchType.NO)
+				//set up displaying any wire colous set on switches
+				if (!string.IsNullOrWhiteSpace(cfgSwitch.InputWire) && !string.IsNullOrWhiteSpace(cfgSwitch.GroundWire))
+				{
+                    //get the wire colour names from database config
+                    var inputWireColours = cfgSwitch.InputWire.Split(",");
+                    var groundWireColours = cfgSwitch.GroundWire.Split(",");
+
+                    newScene.SetWireL(inputWireColours);
+                    newScene.SetWireR(groundWireColours);
+                }				
+
+                //set switch state depending on the type. TODO: opto switches
+                if (sw.Type == NetProc.Domain.PinProc.SwitchType.NO)
 				{
 					if(sw.IsClosed())
 						newScene.ChangePanelBackgroundColour(PinballMatrixConstants.BackgroundColours["active"]);

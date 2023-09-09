@@ -18,6 +18,7 @@ namespace PinGod.Core
         private FileAccess _recordFile;
 
         private RecordPlaybackOption _recordPlayback;
+
         /// <summary>
         /// Creates the recordings directory in the users folder
         /// </summary>
@@ -27,12 +28,14 @@ namespace PinGod.Core
             var userDir = OS.GetUserDataDir();
             var dir = userDir + $"/recordings/";
 
-            if (!System.IO.Directory.Exists(userDir))
+            Logger.Info("recordings path: " + dir);
+
+            if (!System.IO.Directory.Exists(dir))
                 System.IO.Directory.CreateDirectory(dir);
 
             return dir;
         }
-        public int GetQueueCount() => _playbackQueue.Count;
+        public int GetQueueCount() => _playbackQueue?.Count ?? 0;
 
         /// <summary>
         /// Opens a record file a parses the lines into a queue
@@ -91,20 +94,24 @@ namespace PinGod.Core
         /// flushes the record file
         /// </summary>
         public virtual void SaveRecording()
-
         {
-            if (_recordPlayback == RecordPlaybackOption.Record)
+            if (_recordFile !=null)
             {
                 _recordFile?.Flush();
                 _recordFile?.Free();
                 Logger.Info(nameof(EventRecordFile), ":recording file flushed, saved. ", _fileName);
             }
         }
+
+        /// <summary>
+        /// Requires just the name of the file. MyRecord.recording
+        /// </summary>
+        /// <param name="fileName"></param>
         public virtual void StartRecording(string fileName)
         {
             var userDir = CreateRecordingsDirectory();
             _fileName = fileName;
-            _recordFile = FileAccess.Open(fileName, FileAccess.ModeFlags.WriteRead);
+            _recordFile = FileAccess.Open(fileName, FileAccess.ModeFlags.Write);
             Logger.Info(nameof(IPinGodGame), ":started recording to file: " + fileName);
         }
 
@@ -113,13 +120,21 @@ namespace PinGod.Core
             var switchTime = Time.GetTicksMsec() - machineLoadTime;
             var recordLine = $"sw{@switch.Num}|{@switch.State}|{switchTime}";
             _recordFile?.StoreLine(recordLine);
+            Logger.Debug($"switch recorded: ", recordLine);
         }
 
         internal void RecordEventByName(Switch @switch, ulong machineLoadTime)
         {
+            RecordSwitchEvent(@switch.Name, @switch.State, machineLoadTime);
+        }
+
+        internal void RecordSwitchEvent(string name, byte state, ulong machineLoadTime)
+        {
             var switchTime = Time.GetTicksMsec() - machineLoadTime;
-            var recordLine = $"{@switch.Name}|{@switch.State}|{switchTime}";
-            _recordFile?.StoreLine(recordLine);
+            var recordLine = $"{name}|{state}|{switchTime}";
+            
+            _recordFile.CallDeferred("store_line", recordLine);
+            Logger.Debug($"switch recorded: ", recordLine);
         }
 
         internal void RecordEventAction(string action, byte pressed, ulong machineLoadTime)
@@ -127,6 +142,7 @@ namespace PinGod.Core
             var switchTime = Time.GetTicksMsec() - machineLoadTime;
             var recordLine = $"action_{action}|{pressed}|{switchTime}";
             _recordFile?.StoreLine(recordLine);
+            Logger.Debug($"action recorded: ", recordLine);
         }        
     }
 }

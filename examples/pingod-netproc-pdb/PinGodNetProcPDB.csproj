@@ -31,12 +31,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="scenes\AttractMode\" />
-    <Folder Include="scenes\ServiceMode\" />
   </ItemGroup>
   <ItemGroup>
-	  
-	 <!--TO UPDATE NET PROC PACKAGES JUST PUT IN NUGET DIRECTORY AND CHANGE VERSION-->	  
-    <PackageReference Include="NetProc.Data" Version="1.0.35" />
+    <!--TO UPDATE NET PROC PACKAGES JUST PUT IN NUGET DIRECTORY AND CHANGE VERSION-->
+    <PackageReference Include="NetProc.Data" Version="1.0.38" />
     <!--<PackageReference Include="NetProc.Game" Version="1.0.25" />-->
   </ItemGroup>
 </Project>

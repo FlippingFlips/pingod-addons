@@ -1,16 +1,11 @@
 using Godot;
-using Godot.Collections;
-using System;
+using NetProc.Data;
+using PinGodNetProcPDB.scenes.ServiceMode.Shared;
 using System.Linq;
 
 public partial class ServiceModePinGod : Node
 {	
-	//private ButtonGridGontainer _mainMenugridContainer;
-	//private PackedScene _pgServiceButtonScene;	
- //   private ButtonGridGontainer _testsMenugridContainer;
-	//private Control _SwitchMatrixView;
-
-	string MAIN_CONTENT_NODE = "%ServiceModeCenterContainer";
+	const string MAIN_CONTENT_NODE = "%ServiceModeCenterContainer";
 
 	private PinGodGameProc _pinGodProcGame;
 	private CenterContainer _mainContentNode;
@@ -20,6 +15,10 @@ public partial class ServiceModePinGod : Node
 	private string _previousMenu = "MainMenu";
 	private string _currentMenu = "MainMenu";
 
+	public static System.Collections.Generic.Dictionary<string, ServiceColourSet> ServiceModeColours { get; set; }
+
+	#region Godot Overrides
+
 	public override void _EnterTree()
 	{
 		base._EnterTree();
@@ -27,13 +26,33 @@ public partial class ServiceModePinGod : Node
 		//get the pingodgame to interact with
 		_pinGodProcGame = GetNodeOrNull<PinGodGameProc>("/root/PinGodGame");
 
+		//create color dictionary
+		GetDatabaseColorSets();
+
 		//get the main content to show views in
 		_mainContentNode = GetNode<CenterContainer>(MAIN_CONTENT_NODE);
 	}
 
 	public override void _Ready()
 	{
-		LoadMenu(_currentMenu);		
+		LoadMenu(_currentMenu);
+	}
+
+	#endregion
+
+
+	/// <summary>
+	/// Populates the <see cref="ServiceModeColours"/> from database sets.
+	/// </summary>
+	private void GetDatabaseColorSets()
+	{
+		var serviceMappedColours = NetProcDataGameController.Database.Colors.Select(x => new ServiceColourSet
+		{
+			Name = x.Name,
+			Color = Color.FromHtml(x.HtmlCode)
+		});
+
+		ServiceModeColours = serviceMappedColours.ToDictionary(x => x.Name);
 	}
 
 	private void _on_pg_menu_button_pressed()
@@ -105,6 +124,10 @@ public partial class ServiceModePinGod : Node
 		Input.ParseInputEvent(evt);
 	}
 
+	/// <summary>
+	/// Removes the current loaded scene from the MainContentNode and adds a scene from the <see cref="_menuScenes"/> dictionary
+	/// </summary>
+	/// <param name="sceneName"></param>
 	private void LoadMenu(string sceneName)
 	{
 		//remove previous menu
@@ -121,7 +144,6 @@ public partial class ServiceModePinGod : Node
 		_mainContentNode.AddChild(menuGridContainer);
 
 		GetNode<Label>("%TitleLabel").Text = $"Pingod Service Menu - " + sceneName;
-
 
 		if (menuGridContainer as ButtonGridGontainer != null)
 		{

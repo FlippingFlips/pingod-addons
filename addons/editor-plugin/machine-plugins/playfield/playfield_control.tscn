@@ -43,6 +43,7 @@ offset_top = 875.0
 offset_right = 341.0
 offset_bottom = 902.0
 scale = Vector2(0.736438, 0.736438)
+toggle_mode = true
 text = "COIN1"
 
 [node name="start" type="Button" parent="Buttons"]
@@ -52,6 +53,7 @@ offset_top = 875.0
 offset_right = 380.0
 offset_bottom = 902.0
 scale = Vector2(0.751852, 0.751852)
+toggle_mode = true
 text = "START"
 
 [node name="exit" type="Button" parent="Buttons"]
@@ -112,6 +114,7 @@ offset_top = 843.0
 offset_right = 67.0
 offset_bottom = 870.0
 scale = Vector2(0.659074, 0.742996)
+toggle_mode = true
 text = "tilt"
 
 [node name="slamTilt" type="Button" parent="Buttons"]
@@ -121,6 +124,7 @@ offset_top = 843.0
 offset_right = 107.0
 offset_bottom = 870.0
 scale = Vector2(0.659074, 0.742996)
+toggle_mode = true
 text = "slamTilt"
 
 [node name="plungerLane" type="Button" parent="Buttons"]
@@ -175,6 +179,7 @@ offset_top = 646.0
 offset_right = 141.0
 offset_bottom = 673.0
 scale = Vector2(0.319999, 0.56)
+toggle_mode = true
 
 [node name="flipperLwL" type="Button" parent="Buttons"]
 layout_mode = 0
@@ -183,6 +188,7 @@ offset_top = 750.0
 offset_right = 162.0
 offset_bottom = 777.0
 scale = Vector2(0.319999, 0.56)
+toggle_mode = true
 
 [node name="flipperLwR" type="Button" parent="Buttons"]
 layout_mode = 0
@@ -191,6 +197,7 @@ offset_top = 749.0
 offset_right = 296.0
 offset_bottom = 776.0
 scale = Vector2(0.319999, 0.56)
+toggle_mode = true
 
 [node name="slingR" type="Button" parent="Buttons"]
 layout_mode = 0
@@ -199,6 +206,7 @@ offset_top = 647.0
 offset_right = 319.0
 offset_bottom = 674.0
 scale = Vector2(0.319999, 0.56)
+toggle_mode = true
 
 [node name="mballSaucer" type="Button" parent="Buttons"]
 layout_mode = 0

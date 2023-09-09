@@ -5,7 +5,7 @@
 [ext_resource type="FontFile" uid="uid://ciofwob416hd1" path="res://addons/assets/fonts/BebasNeue.ttf" id="5_7isp6"]
 
 [node name="Machine" type="Node"]
-editor_description = "P-ROC PinGodMachine"
+editor_description = "P-ROC PinGodMachine. Same as the original PinGod game but uses the MachinePROC.cs script to extend it."
 script = ExtResource("1_8kvyb")
 _ball_search_stop_switches = PackedStringArray("mballSaucer", "trough0", "trough1", "trough2", "trough3")
 _coils = {
@@ -47,6 +47,7 @@ _switches = {
 "trough3": 15,
 "up": 6
 }
+_playbackfile = "record.record"
 _switchWindow = ExtResource("2_ef2qi")
 _switchWindowEnabled = true
 

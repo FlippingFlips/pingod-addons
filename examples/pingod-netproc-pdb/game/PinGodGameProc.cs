@@ -41,10 +41,11 @@ public partial class PinGodGameProc : PinGodGame
 	private Label _creditsLabel;
 
 	public PinGodProcConfig PinGodProcConfig { get; private set; } = new();
+    public bool GameReady { get; private set; }
 
-	#region Godot Overrides
+    #region Godot Overrides
 
-	public override void _EnterTree()
+    public override void _EnterTree()
 	{
 		LoadLocalProcConfig();
 
@@ -223,6 +224,8 @@ public partial class PinGodGameProc : PinGodGame
 				StartProcGameLoop();
 
 				PinGodProcGame.MachineResourcesReady();
+
+				GameReady = true;
 			}
 			catch (System.Exception ex) { Logger.Error(nameof(MachinePROC), nameof(_Ready), $"{ex.Message} - {ex.InnerException?.Message}"); }			
 		}
