@@ -39,8 +39,14 @@ public partial class MachinePROC : MachineNode
 	/// </summary>
 	public override void _Ready()
 	{
-		base._Ready();
 		_pinGodGameProc = GetNodeOrNull<PinGodGameProc>("/root/PinGodGame");
+
+		if (_pinGodGameProc != null)
+		{
+			_switchWindowEnabled = PinGodGameProc.PinGodProcConfig.SwitchWindowEnabled;
+		}
+		
+		base._Ready();		
 	}
 
 	/// <summary>
@@ -101,7 +107,7 @@ public partial class MachinePROC : MachineNode
 	{
 		Logger.Info("MACHINE_PROC: Switch:" + num);
 		//base.OnSwitchCommand(name, index, value);
-		if (_pinGodGameProc != null && _pinGodGameProc.PinGodProcConfig.Simulated)
+		if (_pinGodGameProc != null && PinGodGameProc.PinGodProcConfig.Simulated)
 		{
 			SetSwitchFakeProc(_pinGodGameProc.PinGodProcGame, (ushort)num, value > 0 ? true : false);
 		}        
@@ -161,7 +167,7 @@ public partial class MachinePROC : MachineNode
 	{
 		if(_pinGodGameProc != null)
 		{
-			if (_pinGodGameProc.PinGodProcConfig.Simulated)
+			if (PinGodGameProc.PinGodProcConfig.Simulated)
 			{
 				var proc = gc?.PROC as IFakeProcDevice;
 				var sw = gc.Switches[name];

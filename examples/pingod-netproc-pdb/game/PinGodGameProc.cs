@@ -7,15 +7,7 @@ using Godot;
 using PinGod.Core.Service;
 using NetProc.Domain.PinProc;
 using System;
-
-public class PinGodProcConfig
-{
-	public bool Simulated { get; set; } = true;
-	public byte Delay { get; set; } = 10;
-	public bool IgnoreDbDisplay { get; set; }
-	public bool DeleteDbOnInit { get; set; }
-	public LogLevel LogLevel { get; set; } = LogLevel.Verbose;
-}
+using NetProc.Domain.Pdb;
 
 /// <summary>
 /// Inheriting PinGodGame to take over with a P-ROC.
@@ -40,12 +32,15 @@ public partial class PinGodGameProc : PinGodGame
 	public CanvasLayer _modesCanvas;
 	private Label _creditsLabel;
 
-	public PinGodProcConfig PinGodProcConfig { get; private set; } = new();
-    public bool GameReady { get; private set; }
+	/// <summary>
+	/// Developer config
+	/// </summary>
+	public static PinGodGameProcConfig PinGodProcConfig { get; private set; } = new();
+	public bool GameReady { get; private set; }
 
-    #region Godot Overrides
+	#region Godot Overrides
 
-    public override void _EnterTree()
+	public override void _EnterTree()
 	{
 		LoadLocalProcConfig();
 
@@ -70,6 +65,10 @@ public partial class PinGodGameProc : PinGodGame
 			config.SetValue("DEV", "ignore_db_display", PinGodProcConfig.IgnoreDbDisplay);
 			config.SetValue("PROC", "delay", PinGodProcConfig.Delay);
 			config.SetValue("DEV", "log_level", (int)PinGodProcConfig.LogLevel);
+			config.SetValue("DEV", "switch_window", PinGodProcConfig.SwitchWindowEnabled);
+			config.SetValue("MEMORYMAP", "enabled", PinGodProcConfig.MemoryMapEnabled);
+			config.SetValue("MEMORYMAP", "write", PinGodProcConfig.MemoryMapWriteDelay);
+			config.SetValue("MEMORYMAP", "read", PinGodProcConfig.MemoryMapReadDelay);
 
 			config.Save("res://proc.cfg");
 		}
@@ -80,6 +79,11 @@ public partial class PinGodGameProc : PinGodGame
 			PinGodProcConfig.DeleteDbOnInit = (bool)config.GetValue("DEV", "delete_db_on_init");
 			PinGodProcConfig.Simulated = (bool)config.GetValue("DEV", "simulated");
 			PinGodProcConfig.LogLevel = (NetProc.Domain.PinProc.LogLevel)((int)config.GetValue("DEV", "log_level"));
+			PinGodProcConfig.SwitchWindowEnabled = (bool)config.GetValue("DEV", "switch_window");
+
+			PinGodProcConfig.MemoryMapEnabled = (bool)config.GetValue("MEMORYMAP", "enabled");
+			PinGodProcConfig.MemoryMapWriteDelay = (int)config.GetValue("MEMORYMAP", "write");
+			PinGodProcConfig.MemoryMapReadDelay = (int)config.GetValue("MEMORYMAP", "read");
 		}
 
 		GD.Print("log level: " + PinGodProcConfig.LogLevel);
@@ -201,7 +205,7 @@ public partial class PinGodGameProc : PinGodGame
 
 	/// <summary>
 	/// Must set solution / project to x86 if running real p-roc board. <para/>
-	/// Use the <see cref="PinGodProcConfig.Simulated"/> flag from the PROC.cfg in game directory
+	/// Use the <see cref="PinGodGameProcConfig.Simulated"/> flag from the PROC.cfg in game directory
 	/// </summary>
 	/// <param name="machineConfig"></param>
 	private void CreateProcGame()
@@ -260,23 +264,40 @@ public partial class PinGodGameProc : PinGodGame
 	{
 		if (_procGameLoop?.Status == TaskStatus.Running) { return; }
 
+		if (PinGodProcConfig.Simulated)
+		{
+			PinGodProcGame._memMap = GetNodeOrNull<MemoryMapPROCNode>("/root/MemoryMap");			
+
+			if (PinGodProcGame._memMap == null)
+				Logger.Warning(nameof(PinGodGameProc), $": WARN: no {nameof(MemoryMapPROCNode)} found in root/MemoryMap");
+
+			PinGodProcGame.InitSimStates();
+
+			PinGodProcGame._memMap?.WriteStates();
+		}
+
 		tokenSource = new CancellationTokenSource();
 		_procGameLoop = Task.Run(() =>
 		{
-			Logger.Info(nameof(MachinePROC), ":running game loop");
+			Logger.Info(nameof(PinGodGameProc), ":running game loop");
 
 			//run proc game loop delay 1 save CPU //TODO: maybe this run loop needs to re-throw exception if any caught
 			PinGodProcGame.RunLoop(PinGodProcConfig.Delay, tokenSource);
+
 			//means the proc loop threw exception
-			if (!tokenSource.IsCancellationRequested)
+			if (tokenSource.IsCancellationRequested)
 			{
-				this?.GetTree()?.Quit(0);
+				try
+				{
+					this?.GetTree()?.Quit(0);
+				}
+				catch { }
 			}
 			else
 			{
-				Logger.Info(nameof(MachinePROC), ":ending proc game loop");
+				Logger.Info(nameof(PinGodGameProc), ":ending proc game loop");
 				PinGodProcGame.EndRunLoop();
-				Logger.Info(nameof(MachinePROC), ":proc game loop stopped");
+				Logger.Info(nameof(PinGodGameProc), ":proc game loop stopped");
 			}            
 
 		}, tokenSource.Token);

@@ -160,9 +160,12 @@ namespace PinGod.Game
                 var node = GetNodeOrNull<AdjustmentsNode>("/root/Adjustments");
                 if (node != null)
                 {
-                    Logger.LogLevel = node._adjustments.LogLevel;
-                    LogDebug(nameof(PinGodGame), nameof(_EnterTree), ": adjustments and audits module found...");
-                    Adjustments = node._adjustments;
+                    if(node._adjustments != null)
+                    {
+                        Logger.LogLevel = node._adjustments.LogLevel;
+                        LogDebug(nameof(PinGodGame), nameof(_EnterTree), ": adjustments and audits module found...");
+                        Adjustments = node._adjustments;
+                    }
                     Audits = node._audits;
                 }
             }

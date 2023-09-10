@@ -46,7 +46,8 @@ namespace PinGod.Core.Service
 		[Export] PackedScene _switchWindow;
 
 		[ExportCategory("Switch Window")]
-		[Export] bool _switchWindowEnabled = false;
+		[Export] protected bool _switchWindowEnabled = false;
+
 		[ExportCategory("Record / Playback")]
 		[Export] RecordPlaybackOption recordPlayback = RecordPlaybackOption.Off;
 		#endregion
@@ -67,9 +68,9 @@ namespace PinGod.Core.Service
 		public PlungerLane _plungerLane;
 
 		static bool _instanceLoaded = false;
-        protected ulong _machineLoadTime;
+		protected ulong _machineLoadTime;
 		private MemoryMapNode _pinGodMemoryMapNode;
-        protected EventRecordFile _recordFile;
+		protected EventRecordFile _recordFile;
 		protected Label _recordingStatusLabel;
 		protected RecordPlaybackOption _recordPlayback;
 		private Trough _trough;
@@ -324,7 +325,7 @@ namespace PinGod.Core.Service
 		/// <param name="value"></param>
 		public void SetSwitch(int swNum, byte value, bool fromAction = true)
 		{            
-            var sw = Machine.Switches.Values.FirstOrDefault(x => x.Num == swNum);
+			var sw = Machine.Switches.Values.FirstOrDefault(x => x.Num == swNum);
 			if (sw != null)
 			{
 				SetSwitch(sw, value, fromAction);

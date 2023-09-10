@@ -66,6 +66,7 @@ namespace PinGod.Core.Service
             this.readStates = readStates;
             VpCommandSwitch = vpCommandSwitch;
 
+            //offset for game statr
             int offset = 1;
             //get offset position after coils and initial offset
             _offsetLamps = offset + TOTAL_COIL;
@@ -255,8 +256,11 @@ namespace PinGod.Core.Service
                 //todo: can't make this cross platform
                 mmf = MemoryMappedFile.CreateOrOpen(MapName, MAP_SIZE);
 
+                //simulator game state. TODO: Better check this is right after all is said and done 
+                _gameStateAccess = mmf.CreateViewAccessor(0, 1, MemoryMappedFileAccess.ReadWrite);
+
                 viewAccessor = mmf.CreateViewAccessor(0, MAP_SIZE, MemoryMappedFileAccess.ReadWrite);
-                _gameStateAccess = mmf.CreateViewAccessor(0,1,MemoryMappedFileAccess.ReadWrite);
+                
                 _switchMapping = mmf.CreateViewAccessor(_offsetSwitches, TOTAL_SWITCH * 2, MemoryMappedFileAccess.Read);
                 _switchWriteMapping = mmf.CreateViewAccessor(_offsetSwitches, TOTAL_SWITCH * 2, MemoryMappedFileAccess.Write);
                 //GD.Print("offset for switches: ", _offsetSwitches);

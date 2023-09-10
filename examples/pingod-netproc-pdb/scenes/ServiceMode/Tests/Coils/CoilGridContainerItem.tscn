@@ -131,5 +131,5 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 10)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_xwl5d")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 18
 text = "Coil #"

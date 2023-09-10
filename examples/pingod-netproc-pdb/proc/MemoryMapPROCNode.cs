@@ -19,9 +19,17 @@ public partial class MemoryMapPROCNode : MemoryMapNode
 	{
 		//todo: get proc gamecontroller
 		if(_pinGodProc?.PinGodProcGame != null)
-		{            
-			if(this.IsEnabled)
+		{
+			//get enabled from the proc.cfg for convience of changing it. When live we don't want this
+			this.IsEnabled = PinGodGameProc.PinGodProcConfig.MemoryMapEnabled;
+
+			if (this.IsEnabled)
+			{
+				var write = PinGodGameProc.PinGodProcConfig.MemoryMapWriteDelay;
+				var read = PinGodGameProc.PinGodProcConfig.MemoryMapReadDelay;
+
 				mMap = new MemoryMapPROC(_pinGodProc.PinGodProcGame, this.MutexName, MapName, WriteDelay, ReadDelay, CoilTotal, LampTotal, LedTotal, SwitchTotal);
+			}				
 			else { Logger.WarningRich(nameof(MemoryMapPROC), ": [color=yellow]memory map disabled exiting memory mapping[/color]"); }
 		}
 		else

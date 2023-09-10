@@ -36,7 +36,7 @@ public class PinGodProcGameController : NetProcDataGameController
     private ServiceMode _serviceMode;
     private CancellationTokenSource _gameLoopCancelToken;
     private MachineSwitchHandlerMode _machineSwitchHandlerMode;
-    private MemoryMapPROCNode _memMap;
+    public MemoryMapPROCNode _memMap;
     private MyMode _myMode;
     private ScoreDisplayProcMode _scoreDisplay;
     private bool _isSimulated;
@@ -228,31 +228,22 @@ public class PinGodProcGameController : NetProcDataGameController
         else
             _gameLoopCancelToken = cancellationToken;
 
-        if (_isSimulated)
-        {
-            var node = PinGodGame.CallDeferred("get_node_or_null", "/root/MemoryMap");
-            _memMap = node.As<MemoryMapPROCNode>();
-
-            if (_memMap == null)
-                Logger.Log(nameof(PinGodProcGameController), $": WARN: no {nameof(MemoryMapPROC)} found in root/MemoryMap");
-            _lastCoilStates = GetStates(Coils.Values);
-            _lastLedStates = GetLedStatesArray(LEDS.Values);
-            _memMap?.WriteStates();
-        }        
-
         Event[] events;
         try
         {
             while (!_gameLoopCancelToken.IsCancellationRequested)
             {
                 events = GetEvents(false);
-                if (events?.Count() > 0)
+                if (events?.Any() ?? false)
                 {
-                    foreach (var evt in events) { ProcessEvent(evt);}
+                    foreach (Event evt in events)
+                    {
+                        ProcessEvent(evt);
+                    }
                 }
 
                 this.Tick();
-                //TickVirtualDrivers();                
+                             
 
                 //PinGod changed states. Used by memory mapping
                 if (_isSimulated)
@@ -262,19 +253,12 @@ public class PinGodProcGameController : NetProcDataGameController
                     _memMap?.WriteStates();
                 }
 
-                foreach (var coil in _coils.Values)
-                {
-                    ((IVirtualDriver)coil).Tick();
-                }
-                foreach (var led in _leds.Values)
-                {
-                    led.Tick();
-                }
+                TickVirtualDrivers();
 
                 //MODES: Tick
                 _modes?.Tick();
 
-                //_proc?.WatchDogTickle();
+                _proc?.WatchDogTickle();
                 if (delay > 0)
                     Thread.Sleep(delay);
             }
@@ -333,7 +317,7 @@ public class PinGodProcGameController : NetProcDataGameController
         Reset();
     }
 
-    byte[] GetStates(IEnumerable<IDriver> drivers)
+    public byte[] GetStates(IEnumerable<IDriver> drivers)
     {
         if (_memMap == null) return null;
 
@@ -373,5 +357,11 @@ public class PinGodProcGameController : NetProcDataGameController
         }
 
         _ballSearch = new BallSearch(this, 12, coils, resetDict, stopDict, null);
+    }
+
+    internal void InitSimStates()
+    {
+        _lastCoilStates = GetStates(Coils.Values);
+        _lastLedStates = GetLedStatesArray(LEDS.Values);
     }
 }
