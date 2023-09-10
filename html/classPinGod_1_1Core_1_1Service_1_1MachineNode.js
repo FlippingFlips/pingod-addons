@@ -34,6 +34,7 @@ var classPinGod_1_1Core_1_1Service_1_1MachineNode =
     [ "_recordingStatusLabel", "classPinGod_1_1Core_1_1Service_1_1MachineNode.html#a3bc8a2700389d3dae1a0742aa63901c3", null ],
     [ "_recordPlayback", "classPinGod_1_1Core_1_1Service_1_1MachineNode.html#a6bbb63e6891bebfdd36acea0c99c04ea", null ],
     [ "_switches", "classPinGod_1_1Core_1_1Service_1_1MachineNode.html#a9e43efc92d696225034079dd0f8b04f9", null ],
+    [ "_switchWindowEnabled", "classPinGod_1_1Core_1_1Service_1_1MachineNode.html#a28235477c1221996848c369e3b193301", null ],
     [ "BallSearchOptions", "classPinGod_1_1Core_1_1Service_1_1MachineNode.html#aca11027584c14cb1c73af2fa13b6d8c4", null ],
     [ "BallSearchTimer", "classPinGod_1_1Core_1_1Service_1_1MachineNode.html#aa9fb5c8e5ff445426bdb1979f4617e9b", null ],
     [ "GameInPlay", "classPinGod_1_1Core_1_1Service_1_1MachineNode.html#aa702b2650160f117eef1f2111a2c7c54", null ]

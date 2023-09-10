@@ -9,6 +9,7 @@ var classPinGodProcGameController =
     [ "GameEnded", "classPinGodProcGameController.html#af2ae6defdacb8c1866301b7333dcf378", null ],
     [ "GameStarted", "classPinGodProcGameController.html#a7f0d15759fb9f4ae75342b9a8a90f4c1", null ],
     [ "GetLedStatesArray", "classPinGodProcGameController.html#a2bdf4d9d1488b852197c85c6837dacd4", null ],
+    [ "GetStates", "classPinGodProcGameController.html#aa22a1e3f98d7554135db13da71a8d0d4", null ],
     [ "InitializeDatabase", "classPinGodProcGameController.html#a2912427b83f736f5a555a1d7327b41b9", null ],
     [ "OnBallDrainedTrough", "classPinGodProcGameController.html#a34c7d67337256bda01c50d135829dea7", null ],
     [ "RemoveMode", "classPinGodProcGameController.html#a89b2769bdad40e6aeb9ab696a2794730", null ],
@@ -20,6 +21,7 @@ var classPinGodProcGameController =
     [ "_AttractMode", "classPinGodProcGameController.html#a9196c5a777f67ee8ce391f97dac6e6a1", null ],
     [ "_lastCoilStates", "classPinGodProcGameController.html#a567e26c541d8d6dc4efce800feb5bc69", null ],
     [ "_lastLedStates", "classPinGodProcGameController.html#a886fd15d1983c81f2b25cfb69daa4129", null ],
+    [ "_memMap", "classPinGodProcGameController.html#a404f9ff24367575d8023de84e91c94a0", null ],
     [ "PinGodGame", "classPinGodProcGameController.html#a2564cceae03a19681ed72fe770304b8a", null ],
     [ "ProcFake", "classPinGodProcGameController.html#a1b074fbf189404bf4fbf91acb14c2979", null ]
 ];

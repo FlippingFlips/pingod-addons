@@ -1,5 +1,12 @@
 var NAVTREEINDEX3 =
 {
+"classPinGod_1_1Core_1_1TroughOptions.html#adc8a28187a141a64a35897f55fd87f39":[19,0,0,2,18,8],
+"classPinGod_1_1Core_1_1TroughOptions.html#ae969c316aa0b1640d161f57d1fab03b8":[19,0,0,2,18,0],
+"classPinGod_1_1Core_1_1TroughOptions.html#af462638253bb7e55c90eb0622fd630fe":[19,0,0,2,18,10],
+"classPinGod_1_1Core_1_1TroughOptions.html#af72e6acb6f0cb2bfa2b299078293e4f6":[19,0,0,2,18,1],
+"classPinGod_1_1Core_1_1addons_1_1ModeTimer_1_1ModeTimer.html":[19,0,0,2,0,0,0],
+"classPinGod_1_1Core_1_1addons_1_1ModeTimer_1_1ModeTimer.html#a3280f29e2de7c141d6aefe36fb9ad1ff":[19,0,0,2,0,0,0,2],
+"classPinGod_1_1Core_1_1addons_1_1ModeTimer_1_1ModeTimer.html#a4be079fd44928119a137744a233bf278":[19,0,0,2,0,0,0,5],
 "classPinGod_1_1Core_1_1addons_1_1ModeTimer_1_1ModeTimer.html#a6886e0284db0aa369f72abe161d775e9":[19,0,0,2,0,0,0,3],
 "classPinGod_1_1Core_1_1addons_1_1ModeTimer_1_1ModeTimer.html#a98953061dbd7f7d7c88a0707a34a178e":[19,0,0,2,0,0,0,4],
 "classPinGod_1_1Core_1_1addons_1_1ModeTimer_1_1ModeTimer.html#aaf27c0dab376c78141f6e38a1041c8ca":[19,0,0,2,0,0,0,1],
@@ -242,12 +249,5 @@ var NAVTREEINDEX3 =
 "classPinGod_1_1Modes_1_1ScoreMode.html#a691a5eb3c8644c9bc08cc77348418b80":[19,0,0,5,6,0],
 "classPinGod_1_1Modes_1_1ScoreMode.html#a6979f9bd44cf53816eb3b2a161313c8b":[19,0,0,5,6,5],
 "classPinGod_1_1Modes_1_1ScoreMode.html#a74f9d90daf8e91c10683831a83162ae4":[19,0,0,5,6,15],
-"classPinGod_1_1Modes_1_1ScoreMode.html#a86ac999f77300cf0cf1ab1147228cb33":[19,0,0,5,6,6],
-"classPinGod_1_1Modes_1_1ScoreMode.html#a9162b48c68d3c9c68dbf03304154d63f":[19,0,0,5,6,17],
-"classPinGod_1_1Modes_1_1ScoreMode.html#a95fa5fc04403da835f36bfb4273265d1":[19,0,0,5,6,7],
-"classPinGod_1_1Modes_1_1ScoreMode.html#a9629857eab71a15f13b9592749a4d694":[19,0,0,5,6,1],
-"classPinGod_1_1Modes_1_1ScoreMode.html#ac963d0e36f439fa94be5430711bab807":[19,0,0,5,6,3],
-"classPinGod_1_1Modes_1_1ScoreMode.html#accbe32d28b3d724bb13e4f2a96e8bb4f":[19,0,0,5,6,4],
-"classPinGod_1_1Modes_1_1ScoreMode.html#ad83022cc9516587b8852b97663a71d6e":[19,0,0,5,6,11],
-"classPinGod_1_1Modes_1_1ScoreMode.html#adb7e35b92b8c2b9aff14005ad2d3f326":[19,0,0,5,6,13]
+"classPinGod_1_1Modes_1_1ScoreMode.html#a86ac999f77300cf0cf1ab1147228cb33":[19,0,0,5,6,6]
 };

@@ -106,6 +106,7 @@ var NAVTREEINDEX0 =
 "PinGodGameMode_8cs.html":[20,0,0,4,5,10],
 "PinGodGameNode_8cs.html":[20,0,0,4,5,11],
 "PinGodGamePlugin_8cs.html":[20,0,0,0,4,0],
+"PinGodGameProcConfig_8cs.html":[20,0,1,1,1,1],
 "PinGodGameProc_8cs.html":[20,0,1,1,1,0],
 "PinGodGame_8cs.html":[20,0,0,5,1],
 "PinGodPlayer_8cs.html":[20,0,0,3,2,4],
@@ -248,6 +249,5 @@ var NAVTREEINDEX0 =
 "classMatrixItemPanel.html#a46230c61c60ac7021d6052b0643e298b":[19,0,19,4],
 "classMatrixItemPanel.html#a593a8338991d8cca1a5c3edd4c123b0b":[19,0,19,7],
 "classMatrixItemPanel.html#a6856d8a6532b65b3e909f46c52a8cc81":[19,0,19,11],
-"classMatrixItemPanel.html#a90830de27bed78b30ccd6bf899b07d6a":[19,0,19,10],
-"classMatrixItemPanel.html#a9e620d60a496078caf8df58d641673bf":[19,0,19,0]
+"classMatrixItemPanel.html#a90830de27bed78b30ccd6bf899b07d6a":[19,0,19,10]
 };

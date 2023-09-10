@@ -137,7 +137,7 @@ var hierarchy =
     [ "Panel", null, [
       [ "MatrixItemPanel", "classMatrixItemPanel.html", null ]
     ] ],
-    [ "PinGodProcConfig", "classPinGodProcConfig.html", null ],
+    [ "PinGodGameProcConfig", "classPinGodGameProcConfig.html", null ],
     [ "PinGod.Base.PinStateObject", "classPinGod_1_1Base_1_1PinStateObject.html", null ],
     [ "PinGod.Base.PlaybackEvent", "classPinGod_1_1Base_1_1PlaybackEvent.html", null ],
     [ "Player", null, [

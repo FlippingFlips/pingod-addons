@@ -128,7 +128,7 @@ var annotated_dup =
     [ "PauseAndSettingsScript", "classPauseAndSettingsScript.html", "classPauseAndSettingsScript" ],
     [ "PgMenuButton", "classPgMenuButton.html", "classPgMenuButton" ],
     [ "PinGodGameProc", "classPinGodGameProc.html", "classPinGodGameProc" ],
-    [ "PinGodProcConfig", "classPinGodProcConfig.html", "classPinGodProcConfig" ],
+    [ "PinGodGameProcConfig", "classPinGodGameProcConfig.html", "classPinGodGameProcConfig" ],
     [ "PinGodProcGameController", "classPinGodProcGameController.html", "classPinGodProcGameController" ],
     [ "PinGodProcMode", "classPinGodProcMode.html", "classPinGodProcMode" ],
     [ "PingodSettingsScene", "classPingodSettingsScene.html", "classPingodSettingsScene" ],

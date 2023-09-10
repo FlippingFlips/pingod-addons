@@ -1,5 +1,12 @@
 var NAVTREEINDEX5 =
 {
+"interfacePinGod_1_1Core_1_1IPinGodGame.html#a29e618c2600e3ccdb1feca6d19daf5c3":[19,0,0,2,10,26],
+"interfacePinGod_1_1Core_1_1IPinGodGame.html#a2a4e96dec949c4616708970461f913bb":[19,0,0,2,10,74],
+"interfacePinGod_1_1Core_1_1IPinGodGame.html#a2ce3e832131e45ddbbf2d75eef37795a":[19,0,0,2,10,50],
+"interfacePinGod_1_1Core_1_1IPinGodGame.html#a2cef7231cc5914a2dc1c659037fdc8b8":[19,0,0,2,10,20],
+"interfacePinGod_1_1Core_1_1IPinGodGame.html#a2de270826e257812d00720f8b4f6da44":[19,0,0,2,10,10],
+"interfacePinGod_1_1Core_1_1IPinGodGame.html#a31e3ff0dbbbda1f1d08b2a6f598820f9":[19,0,0,2,10,31],
+"interfacePinGod_1_1Core_1_1IPinGodGame.html#a3294cccd6ed46e217da272ab1c2ee2ce":[19,0,0,2,10,30],
 "interfacePinGod_1_1Core_1_1IPinGodGame.html#a34ea5f8da6691313a11c36354d144bbe":[19,0,0,2,10,5],
 "interfacePinGod_1_1Core_1_1IPinGodGame.html#a35fb141afe31fb0614e7aa953f4ecb9e":[19,0,0,2,10,68],
 "interfacePinGod_1_1Core_1_1IPinGodGame.html#a3b31d2eef26e371bd13c686f0f0f5ca1":[19,0,0,2,10,23],

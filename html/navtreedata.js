@@ -103,11 +103,11 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "AdjustmentsNodeExports_8cs.html",
-"classMatrixItemPanel.html#ad960329b6f4a153ac16935a122f3fad4",
-"classPinGod_1_1Core_1_1Game_1_1MainScene.html#adefc7da94c6099457cdc18a1dd54fe59",
-"classPinGod_1_1Core_1_1addons_1_1ModeTimer_1_1ModeTimer.html#a6886e0284db0aa369f72abe161d775e9",
-"classPinGod_1_1Modes_1_1ScoreMode.html#aea5ccb4b346e9edce03a44c5ecd4352b",
-"interfacePinGod_1_1Core_1_1IPinGodGame.html#a34ea5f8da6691313a11c36354d144bbe"
+"classMatrixItemPanel.html#a9e620d60a496078caf8df58d641673bf",
+"classPinGod_1_1Core_1_1Game_1_1MainScene.html#a4985706994e9a37ec668008a1f2f4485",
+"classPinGod_1_1Core_1_1TroughOptions.html#adc8a28187a141a64a35897f55fd87f39",
+"classPinGod_1_1Modes_1_1ScoreMode.html#a9162b48c68d3c9c68dbf03304154d63f",
+"interfacePinGod_1_1Core_1_1IPinGodGame.html#a29e618c2600e3ccdb1feca6d19daf5c3"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
