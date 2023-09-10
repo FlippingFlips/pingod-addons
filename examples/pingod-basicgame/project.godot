@@ -30,10 +30,10 @@ default_bus_layout="res://assets/audio/audio_bus_layout.tres"
 WindowActions="*res://autoload/WindowActions.tscn"
 Resources="*res://autoload/Resources.tscn"
 PinGodGame="*res://autoload/PinGodGame.tscn"
-MemoryMap="*res://autoload/MemoryMap.tscn"
 AudioManager="*res://autoload/AudioManager.tscn"
 Adjustments="*res://addons/autoload/Adjustments/Adjustments.tscn"
 Machine="*res://autoload/Machine.tscn"
+MemoryMap="*res://autoload/MemoryMap.tscn"
 
 [debug]
 

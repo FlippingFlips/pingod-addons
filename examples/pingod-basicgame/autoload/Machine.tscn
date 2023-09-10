@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://addons/pingod-core/Service/BallSaver.cs" id="3_fmtvq"]
 [ext_resource type="FontFile" uid="uid://ciofwob416hd1" path="res://addons/assets/fonts/BebasNeue.ttf" id="6_tng8n"]
 
-
 [node name="Machine" type="Node"]
 script = ExtResource("1_rpe2g")
 _ball_search_coils = PackedStringArray("mballSaucer")
