@@ -2,7 +2,7 @@
 # push a tag to build
 on: 
   push:
-   branches: [godot-4.1.1]
+   #branches: [godot-4.1.1]
    tags:
       - "v*"
 jobs:
@@ -19,7 +19,7 @@ jobs:
 
     - name: zip addons
       run: |
-        7z a -tzip ""pingod-addons-${{ github.ref_name }}.zip" "addons"
+        7z a -tzip ""pingod-addons-(${{ github.ref_name }}).zip" "addons"
   
     #- name: export game
     #  id: export
@@ -40,4 +40,4 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}        
         generateReleaseNotes: false
         tag: ${{ github.ref_name }}
-        artifacts: ${{ steps.export.outputs.archive_directory }}/*, pingod-addons-${{ github.ref_name }}.zip
+        artifacts: ${{ steps.export.outputs.archive_directory }}/*, pingod-addons-(${{ github.ref_name }}).zip
