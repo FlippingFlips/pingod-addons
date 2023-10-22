@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=3 uid="uid://cblilu6qubmxa"]
+
+[ext_resource type="Script" path="res://addons/pingod-machine/MachineNode.cs" id="1_6vah2"]
+[ext_resource type="Script" path="res://addons/pingod-modes/trough/Trough.cs" id="2_y2nw4"]
+[ext_resource type="Script" path="res://addons/pingod-modes/plunger-lane/PlungerLane.cs" id="3_nwj2m"]
+[ext_resource type="Script" path="res://addons/pingod-modes/ballsave/BallSaver.cs" id="4_yl6xf"]
+[ext_resource type="PackedScene" uid="uid://dyl4xxfclu6se" path="res://addons/pingod-machine/RecordingNode.tscn" id="5_r1rm1"]
+
+[node name="Machine" type="Node"]
+editor_description = "PinGodMachine
+
+Trough			= manages ball trough
+PlungerLane	= detects switch, auto plunges if ball saver
+BallSaver		= ball saver + multiball"
+script = ExtResource("1_6vah2")
+_ball_search_stop_switches = PackedStringArray("mballSaucer", "trough0", "trough1", "trough2", "trough3")
+_coils = {
+"auto_plunger": 3,
+"flippers": 31,
+"mballSaucer": 4,
+"trough": 0
+}
+_leds = {
+"shoot_again": 1
+}
+_switches = {
+"coin1": 0,
+"coin2": 1,
+"coin3": 2,
+"coinDoor": 3,
+"down": 5,
+"enter": 4,
+"exit": 7,
+"flipperLwL": 16,
+"flipperLwR": 18,
+"inlaneL": 21,
+"inlaneR": 23,
+"mballSaucer": 31,
+"outlaneL": 20,
+"outlaneR": 25,
+"plungerLane": 26,
+"slamTilt": 10,
+"slingL": 22,
+"slingR": 24,
+"start": 8,
+"tilt": 9,
+"trough0": 27,
+"trough1": 28,
+"trough2": 29,
+"trough3": 30,
+"up": 6
+}
+
+[node name="Trough" type="Node" parent="."]
+script = ExtResource("2_y2nw4")
+
+[node name="PlungerLane" type="Node" parent="."]
+script = ExtResource("3_nwj2m")
+
+[node name="BallSaver" type="Timer" parent="."]
+script = ExtResource("4_yl6xf")
+
+[node name="RecordingNode" parent="." instance=ExtResource("5_r1rm1")]
+_playbackfile = "user://recordings/test.record"

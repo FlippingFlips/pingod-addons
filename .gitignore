@@ -423,3 +423,6 @@ FodyWeavers.xsd
 /examples/pingod-netproc-pdb/builds/win
 /examples/pingod-netproc-pdb/proc.cfg
 /examples/pingod-netproc-pdb/visual_pinball/crash.dmp
+/builds
+/addons/pingod-assets/Localization/pingod_default_lang.fr.translation
+/addons/pingod-assets/Localization/pingod_default_lang.en.translation

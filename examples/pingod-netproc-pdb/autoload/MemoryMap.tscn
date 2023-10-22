@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bw1f7cgnv1d7w"]
-
-[ext_resource type="Script" path="res://proc/MemoryMapPROCNode.cs" id="1_jjqio"]
-
-[node name="MemoryMap" type="Node"]
-editor_description = "**NOTE** : P-ROC states are written in the game loop so the delay can be high"
-script = ExtResource("1_jjqio")
-IsEnabled = true

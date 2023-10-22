@@ -117,15 +117,19 @@ namespace PinGod.Core
 
         internal void RecordEventPrefixed(Switch @switch, ulong machineLoadTime)
         {
-            var switchTime = Time.GetTicksMsec() - machineLoadTime;
-            var recordLine = $"sw{@switch.Num}|{@switch.State}|{switchTime}";
-            _recordFile?.StoreLine(recordLine);
-            Logger.Debug($"switch recorded: ", recordLine);
+            if (_recordFile != null)
+            {
+                var switchTime = Time.GetTicksMsec() - machineLoadTime;
+                var recordLine = $"sw{@switch.Num}|{@switch.State}|{switchTime}";
+                _recordFile?.StoreLine(recordLine);
+                Logger.Debug($"switch recorded: ", recordLine);
+            }                
         }
 
         internal void RecordEventByName(Switch @switch, ulong machineLoadTime)
         {
-            RecordSwitchEvent(@switch.Name, @switch.State, machineLoadTime);
+            if( _recordFile != null )
+                RecordSwitchEvent(@switch.Name, @switch.State, machineLoadTime);
         }
 
         internal void RecordSwitchEvent(string name, byte state, ulong machineLoadTime)
@@ -139,10 +143,13 @@ namespace PinGod.Core
 
         internal void RecordEventAction(string action, byte pressed, ulong machineLoadTime)
         {
-            var switchTime = Time.GetTicksMsec() - machineLoadTime;
-            var recordLine = $"action_{action}|{pressed}|{switchTime}";
-            _recordFile?.StoreLine(recordLine);
-            Logger.Debug($"action recorded: ", recordLine);
+            if(_recordFile != null)
+            {
+                var switchTime = Time.GetTicksMsec() - machineLoadTime;
+                var recordLine = $"action_{action}|{pressed}|{switchTime}";
+                _recordFile?.StoreLine(recordLine);
+                Logger.Debug($"action recorded: ", recordLine);
+            }
         }        
     }
 }

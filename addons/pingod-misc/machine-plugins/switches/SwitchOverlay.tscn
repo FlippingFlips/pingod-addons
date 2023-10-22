@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://78x2n0cuiwel"]
+
+[ext_resource type="Script" path="res://addons/pingod-misc/machine-plugins/switches/SwitchOverlay.cs" id="1"]
+[ext_resource type="Theme" uid="uid://cpqovrw1o0dw3" path="res://addons/pingod-assets/Themes/switch_overlay_theme.tres" id="2"]
+
+[node name="SwitchOverlay" type="GridContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -283.0
+offset_top = -264.5
+offset_right = 283.0
+offset_bottom = 264.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2")
+columns = 5
+script = ExtResource("1")
+_machine = null

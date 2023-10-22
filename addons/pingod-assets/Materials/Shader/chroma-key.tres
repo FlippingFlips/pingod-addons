@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b5lt23tkcmjjx"]
+
+[ext_resource type="Shader" path="res://addons/pingod-assets/Shaders/chroma-key.gdshader" id="1"]
+
+[resource]
+shader = ExtResource("1")
+shader_parameter/use_mult = false
+shader_parameter/key_distance = 0.599
+shader_parameter/chroma_key = Color(1, 0, 0.894118, 1)
+shader_parameter/color = Color(0.921569, 0.909804, 0.776471, 0)

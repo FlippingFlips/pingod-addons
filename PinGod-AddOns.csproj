@@ -1,0 +1,44 @@
+﻿<Project Sdk="Godot.NET.Sdk/4.1.1">
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<EnableDynamicLoading>true</EnableDynamicLoading>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+		<RootNamespace>PinGodAddOns</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="addons\pingod-audio\audio_bus_layout.tres" />
+		<None Include="README.md" />		
+		<!--DEBUG GODOT LAUNCH SETTINGS-->
+		<Content Include="Properties\launchSettings.json" />
+		<None Include="Properties\.gdignore" />
+		<!--INCLUDE SCENE FILES. DEMO PURPOSES-->
+		<None Include="addons\**\*.tscn" />
+		<None Include="addons\**\**\*.tscn" />
+		<!--INCLUDE PLUGIN CFG FILES. DEMO PURPOSES-->
+		<None Include="addons\**\*.cfg" />
+		<!--INCLUDE PLUGIN README FILES. DEMO PURPOSES-->
+		<None Include="addons\**\*.md" />
+		<!--INCLUDE GD SCRIPT FILES. DEMO PURPOSES-->
+		<None Include="addons\**\*.gd" />
+		<None Include="addons\**\**\*.gd" />
+		<Compile Remove="simulator\**" />
+		<EmbeddedResource Remove="simulator\**" />
+		<!--INCLUDE LOCALISATION-->
+		<None Include="addons\pingod-assets\Localization\pingod_default_lang.csv" />								
+		<!--PROJECT, EXPORT PRESETS, DEMO SCENE-->		
+		<None Include="export_presets.cfg" />
+		<None Include="project.godot" />
+		<None Include="Demo-PinGod.tscn" />
+		<None Include="simulators\visual-pinball\pingodaddons-demo.vbs" />
+		<None Include="simulators\visual-pinball\pingodaddons-demo.vpx" />
+		<None Include="simulators\visual-pinball\README.md" />
+				
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="addons\pingod-core\BallStacks\" />
+	  <Folder Include="addons\pingod-modes\trough\" />
+	</ItemGroup>
+</Project>

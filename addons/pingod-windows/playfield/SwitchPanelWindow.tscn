@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfda816jne6ks"]
+
+[ext_resource type="Script" path="res://addons/pingod-windows/WindowPinGod.cs" id="1_u3t4p"]
+[ext_resource type="PackedScene" uid="uid://nvy5ciwalxtg" path="res://addons/pingod-misc/machine-plugins/switches/SwitchPanel.tscn" id="2_7crdr"]
+
+[node name="SwitchPanelWindow" type="Window"]
+title = "Switch Window"
+position = Vector2i(50, 50)
+size = Vector2i(600, 600)
+transient = true
+max_size = Vector2i(1920, 1080)
+content_scale_mode = 1
+script = ExtResource("1_u3t4p")
+_scene = ExtResource("2_7crdr")

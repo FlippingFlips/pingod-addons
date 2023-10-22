@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=3 uid="uid://duypid7ucgcp6"]
+
+[ext_resource type="Script" path="res://addons/pingod-misc/display-plugins/layers/ScreenLayerSlideTweener.cs" id="1_0fxt3"]
+
+[node name="ColorRect" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("1_0fxt3")
+
+[node name="Points" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -452.0
+offset_top = -20.0
+offset_right = 452.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.184314, 0.647059, 0.423529, 1)
+theme_override_colors/font_outline_color = Color(1, 0.996078, 0.996078, 1)
+theme_override_constants/outline_size = 26
+theme_override_font_sizes/font_size = 200
+text = "2,000,000"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -253.5
+offset_top = -12.0
+offset_right = 253.5
+offset_bottom = 264.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.184314, 0.647059, 0.423529, 1)
+theme_override_colors/font_outline_color = Color(1, 0.996078, 0.996078, 1)
+theme_override_constants/outline_size = 26
+theme_override_font_sizes/font_size = 200
+text = "TITLE"

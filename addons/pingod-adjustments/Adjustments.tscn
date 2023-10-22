@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://pkuunln6s8ol"]
+
+[ext_resource type="Script" path="res://addons/pingod-adjustments/Node/AdjustmentsNode.cs" id="1_wd558"]
+
+[node name="Adjustments" type="Node"]
+script = ExtResource("1_wd558")
