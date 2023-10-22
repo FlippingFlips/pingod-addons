@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://70wph1ex5fy7"]
+
+[ext_resource type="Script" path="res://addons/pingod-memorymap-win/MemoryMapNode.cs" id="1_ptwrs"]
+
+[node name="MemoryMap" type="Node"]
+editor_description = "Memory map file for communication with simulators etc."
+script = ExtResource("1_ptwrs")
+IsEnabled = true

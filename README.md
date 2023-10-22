@@ -1,81 +1,68 @@
-# pingod-addons
+# PinGod-AddOns
+![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=c-sharp&logoColor=white) ![.Net](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white) ![Godot Engine](https://img.shields.io/badge/GODOT-%23FFFFFF.svg?style=for-the-badge&logo=godot-engine) 
 
-Godot 4.1.1 addons for creating a PinGod game.
+`Godot 4.1.1-Mono` engine addons, framework for creating a pinball display with logic. 
 
-The addons directory in this repository should be symbolically linked into a games directory or just copied to a game.
+## Required
 
-BasicGame Example addons linked:
+* [Godot 4.1.1](https://godotengine.org/): `choco install godot-mono --version=4.1.1`
+* [Dotnet SDK](https://dotnet.microsoft.com/en-us/download): `choco install dotnet-sdk` or 6.0 `choco install dotnet-sdk --version=6.0.415`
 
-## pingod-basicgame
+### AddOns
 
-🕹 [basicgame example](./examples/pingod-basicgame) - Basic Game for creating games to run with simulator
+_* Autoload_ = plugin has an Autoload singleton. You can access these singletons from any script from the root. The main scenes can be overrided by duplicating the main scene for the Autoload and place into `res://autoload`, eg: `res://autoload/Resources.tscn`.
 
-🕹 [basicgame p-roc example](./examples/pingod-netproc-pdb) - Basic Game using the P-ROC interface for real machines.
-
-In simulator:
-
-![image](./docs/static/images/pingod-vp.jpg)
-
-Scene Editor
-
-![image](./docs/static/images/basicgame-initialrun.jpg)
-
-Godot 4 - Simulator + Playfield Switch Window
-
-![image](./docs/static/images/screens/simulator-and-playfieldswitch-window.jpg)
-
-## Docs
-
-🌎 [pingod getting started](https://flippingflips.github.io/pingod-addons/getting-started/) - Getting Started
-
-🌎 [pingod-addons](https://FlippingFlips.github.io/pingod-addons) - Home
-
-🌎 [pingod-addons - class list](https://flippingflips.github.io/pingod-addons/html/annotated.html) - Online documentation built from this repository with DoxyGen
+| Name | Autoload *  | Description | Link 
+| --- | --- | --- |---|
+| pingod-core  | no | Base classes for the modules   | [link](./addons/pingod-core) 
+| pingod-assets  | no | Assets used by the modules. Localization for your game | [link](./addons/pingod-assets) 
+| pingod-controls  | no | Godot addin controls  | [link](./addons/pingod-controls) 
+| pingod-misc | no | Others scenes and layers | [link](./addons/pingod-misc) 
+| pingod-modes | no | Scenes and game modes, overlays | [link](./addons/pingod-modes) 
+| pingod-audio  | yes | audio manager / player   | [link](./addons/pingod-audio) 
+| pingod-game  | yes | PinGodGame, Game and Main scenes. Demo uses the Main scene, which also uses the game and modes module  | [link](./addons/pingod-game) 
+| pingod-machine | yes | Machine manager for pinball machine items, events | [link](./addons/pingod-machine) 
+| pingod-memorymap-win | yes |Sharing machine states over memory mapping (**windows only**)    | [link](./addons/pingod-memorymap-win) 
+| pingod-resources | yes | Resource loader, pre load scenes and `pck` files| [link](./addons/pingod-resources) 
+| pingod-windows | yes | Input handling and switch windows + custom windows| [link](./addons/pingod-windows) 
 
 ---
-
-## Building docs offline
-
-The site requires [Hugo](https://gohugo.io/) to build or run. The Doxygen file configuation is built to the `docs/public/html` directory
-
-The quickest way to install Hugo is through [Chocolatey](https://chocolatey.org/):
-
-`choco install hugo-extended`
-
-This site uses the [hugo-theme-techdoc](https://github.com/thingsym/hugo-theme-techdoc) as a submodule and this can be updated by running:
-
-`git submodule foreach git pull origin main`
-
-## HUGO tech docs site
+#### Running the Demo in this repository
+This demo is just an empty scene with a `MainScene.tscn` added. The main scene instanced here is the default game and attract.
+1. Clone the repo or download it
+2. Run `godot -e` in the repository to load the `project.godot` into the Godot editor.
+3. Build and Launching the game will display loading screen with resources and display an attract scene when complete.
+4. With a switch window enabled you can simulate switch presses and run through a full 3 ball game.
 ---
-
-The docs directory is a HUGO website generator. You can run this locally and make edits to the markdown.
-
-`hugo server -w` - This will run server and watch for file changes
-
-```
-Environment: "development"
-Serving pages from memory
-Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
-Web Server is available at http://localhost:59492/pingod-addons/ (bind address 127.0.0.1)
-Press Ctrl+C to stop
-```
-
-Build the hugo site into a directory named public:
-
-`hugo --minify`
-
-### Generate doxygen class references locally
+#### Quick Start (Godot already on your system)
+1. Download the `pingod-addons.zip` from release
+2. Create a new Godot project (from running Godot by itself or creating an empty `project.godot` file in a folder and loading it with `godot -e`)
+3. Open the `AssetLib` in Godot from the middle pane and import the `pingod-addons.zip`
+4. Create a new `C#` script in Godot. Godot will create you a `.csproj` and make it mono compatible, you can delete this after.
+5. A `build` button will appear top right in Godot. Build it.
+6. Enable the plugins in Godot. `Project Settings > Plugins`
+7. Create a blank scene and launch the game. `ESC` or `F8` to close window.
+8. Instance a default [MainScene.tscn](addons/pingod-game/Node/MainScene.tscn) as a child in your blank scene and launch game with attract / game.
 ---
+#### Window - Godot Project Settings
+* Window - Set your main display size
+* Window - Use the `advanced settings` to change the override width and height if you want to test lower or larger than your main resolution.
+* Window - Always on top, Resize, Borderless
+* Window - If overriding set stretch modes
 
-`doxygen Doxyfile`
+*Simulator can override display properties with godot arguments from script or properties in script on the controller*
 
-This generates documentation from the files in the `addons` directory
+---
+#### Simulator Demos
 
-#### Configuration in the DoxyFile
+[visual pinball](simulators/visual-pinball) - Table demonstration to run with this repositories [Demo-PinGod.tscn](Demo-PinGod.tscn)
 
-`PROJECT_NAME           = "PinGod (AddOns)"`
+---
+#### Debugging From Visual Studio
+You can launch the editor or launch the game with debug breakpoints, the same probably exists for `VSCode`.
 
-`INPUT                  = ./addons`
+Adjust the [launchSettings.json](Properties/launchSettings.json) for the location of the godot executable then select and run any of the modes from visual studio.
 
-`OUTPUT_DIRECTORY       = ./docs/public`
+This example is wired to a windows chocolatey install: `C:\\ProgramData\\chocolatey\\lib\\godot-mono\\tools\\godot_v4.1.1-stable_mono_win64\\Godot.exe`
+
+- You can also launch the game into the Godot editor with `(Load Godot Editor)` `Ctrl F5 no debug`

@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dqbp6yhjajeos"]
-
-[ext_resource type="Script" path="res://game/MsPinGodGame.cs" id="1_uh00y"]
-
-[node name="PinGodGame" type="Node"]
-process_priority = -1
-script = ExtResource("1_uh00y")

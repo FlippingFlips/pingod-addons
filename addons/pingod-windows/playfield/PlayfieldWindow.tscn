@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1i3xe5c0i1n0"]
+
+[ext_resource type="Script" path="res://addons/pingod-windows/playfield/PlayfieldWindow.cs" id="1_trxkw"]
+[ext_resource type="PackedScene" uid="uid://cyvdrta2totih" path="res://addons/pingod-windows/playfield/playfield_control.tscn" id="2_0aelb"]
+
+[node name="PlayfieldWindow" type="Window"]
+editor_description = "/// <summary>
+/// This window relies on a child having a Control node which contains playfield image and buttons. <para/>
+/// see \"res://addons/res://addons/pingod-windows/playfield/playfield_control.tscn\" <para/>
+/// This child control is made just with godot script for a signal when the buttons are pushed. <para/>
+/// What you would do for your game is duplicate this scene and make your own from it, replacing the image and button names to your switch names. <para/>
+/// You would want to duplicate the scene for this script too and set the switch window in the MachineNode scene.
+/// </summary>"
+sdf_oversize = 0
+sdf_scale = 0
+title = "Switch Window"
+position = Vector2i(50, 50)
+size = Vector2i(400, 900)
+transient = true
+unresizable = true
+extend_to_title = true
+min_size = Vector2i(0, 800)
+max_size = Vector2i(400, 900)
+content_scale_mode = 2
+content_scale_aspect = 4
+script = ExtResource("1_trxkw")
+_scene = ExtResource("2_0aelb")
