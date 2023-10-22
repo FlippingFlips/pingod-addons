@@ -17,10 +17,12 @@ jobs:
     - name: checkout
       uses: actions/checkout@v3.3.0
 
+    # Copy readme and zip addons directory to release
     - name: zip addons
       run: |
+        cp README.md addons/README-PINGOD.md
         7z a -tzip ""pingod-addons-(${{ github.ref_name }}).zip" "addons"
-  
+      
     #- name: export game
     #  id: export
     #  # Use latest version (see releases for all versions)
