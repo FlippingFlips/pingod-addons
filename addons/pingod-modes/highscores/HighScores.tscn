@@ -31,19 +31,18 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_82sx4")
-theme_override_font_sizes/font_size = 96
+theme_override_font_sizes/font_size = 256
 text = "HI_SCORES"
 
 [node name="ScoresTableLabel" type="RichTextLabel" parent="CenterContainer/VBoxContainer"]
 unique_name_in_owner = true
 clip_contents = false
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 42
-theme_override_font_sizes/bold_font_size = 42
+theme_override_font_sizes/normal_font_size = 128
+theme_override_font_sizes/bold_font_size = 128
 bbcode_enabled = true
 text = "[table=2]
 [cell=10]DUB	[/cell][cell=500]200,000[/cell][cell=10]CAN	[/cell][cell=500]100,000[/cell][/table]"
-fit_content_height = true
 scroll_active = false
 autowrap_mode = 0
 shortcut_keys_enabled = false
