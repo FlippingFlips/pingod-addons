@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Net.NetworkInformation;
 
 /// <summary>
-/// Resources, graphic packs. Set to AutoLoad with a Resources.tsn in autoload directory. <para/>
+/// PinGod Resources, graphic packs. Set to AutoLoad with a Resources.tsn in autoload directory. <para/>
 /// Select Packed scenes you wish to get to in the game. You can get these by full path res:// and removing the extension .GetBaseName() <para/>
 /// Then these scenes can be instantiated. <para/>
 /// A ResourcesLoaded signal will be sent when all resources have finished loading with the amount of resources loaded. <para/>
@@ -278,6 +278,9 @@ public partial class Resources : Node
             Logger.Debug("no resources found in Resources.tscn");
     }
 
+    /// <summary> Resolves a pre loaded scene </summary>
+    /// <param name="scenePath"></param>
+    /// <returns></returns>
     public virtual PackedScene GetPackedSceneFromResource(string scenePath)
     {
         if (!string.IsNullOrWhiteSpace(scenePath))
