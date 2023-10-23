@@ -1,6 +1,5 @@
 ﻿using Godot;
 using PinGod.Base;
-using PinGod.Core.BallStacks;
 using PinGod.Core.Service;
 using System.Drawing;
 using System.Linq;
@@ -30,7 +29,7 @@ namespace PinGod.Core
         /// <summary>
         /// The led name to cycle for Ball saves
         /// </summary>
-        [Export] public string _ball_save_led = "shootAgain";
+        [Export] public string _ball_save_led = "shoot_again";
         /// <summary>
         /// default Ball save in multi-Ball
         /// </summary>
@@ -145,11 +144,7 @@ namespace PinGod.Core
             EmitSignal(nameof(BallSaveDisabled));
         }
 
-        private void FireEarlySave()
-        {
-            Logger.Debug(nameof(Trough), $": {nameof(FireEarlySave)}");
-            //PulseTrough();
-        }
+        private void FireEarlySave() => Logger.Debug(nameof(BallSaver), $": {nameof(FireEarlySave)}");
 
         public virtual bool IsBallSaveActive() => _ballSaveActive;
 
