@@ -22,16 +22,16 @@ namespace PinGod.Core.Nodes.PlungerLane
                 this.QueueFree();
                 return;
             }
-            else Logger.Info(nameof(PlungerLane), nameof(_EnterTree));            
+            else Logger.Info(nameof(PlungerLane), nameof(_EnterTree));
 
             //get pingodgame and machine
             if (HasNode(Paths.ROOT_PINGODGAME)) pinGod = GetNode<IPinGodGame>(Paths.ROOT_PINGODGAME);
+            if (HasNode(Paths.ROOT_MACHINE + "/BallSaver")) ballSaver = GetNode<BallSaver>(Paths.ROOT_MACHINE + "/BallSaver");
             if (HasNode(Paths.ROOT_MACHINE))
             {
                 machine = GetNode<MachineNode>(Paths.ROOT_MACHINE);
-                ballSaver = machine._ballSaver;
                 machine.SwitchCommand += OnPlungerSwitchHandler;
-            }
+            }            
 
             Logger.Debug(nameof(PlungerLane), nameof(_EnterTree));
         }
@@ -60,7 +60,7 @@ namespace PinGod.Core.Nodes.PlungerLane
                     //start a Ball saver if game in play
                     if (pinGod.GameInPlay && !pinGod.IsTilted && !pinGod.IsMultiballRunning)
                     {
-                        if(!pinGod.BallStarted && _set_ball_started_on_plunger_lane)
+                        if (!pinGod.BallStarted && _set_ball_started_on_plunger_lane)
                             pinGod.BallStarted = true;
 
                         if (_set_ball_save_on_plunger_lane)

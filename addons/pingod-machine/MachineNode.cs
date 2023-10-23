@@ -81,6 +81,7 @@ namespace PinGod.Core.Service
 
 		public bool GameInPlay { get; set; }
 
+
 		/// <summary>
 		/// Sets up BallSearch, Machine Items, Ball Saver, plunger lane
 		/// </summary>
@@ -113,13 +114,13 @@ namespace PinGod.Core.Service
 
                 //hook up to the ball saved event
                 if (HasNode("BallSaver"))
-				{                    
-					_ballSaver = GetNode<BallSaver>("BallSaver");
-					_ballSaver.BallSaved += _ballSaver_BallSaved;
-				}
+                {
+                    _ballSaver = GetNode<BallSaver>("BallSaver");
+                    _ballSaver.BallSaved += _ballSaver_BallSaved;
+                }
 
-				//plunger lane
-				if (HasNode("PlungerLane")) { _plungerLane = GetNode<PlungerLane>("PlungerLane"); }
+                //plunger lane
+                if (HasNode("PlungerLane")) { _plungerLane = GetNode<PlungerLane>("PlungerLane"); }
 			}
 		}
 
@@ -154,24 +155,24 @@ namespace PinGod.Core.Service
 			AddChild(new PulseTimer() { Autostart = true, OneShot = true, Name = name, WaitTime = pulse });
 		}
 
-		public void DisableBallSaver() => _ballSaver?.DisableBallSave();
+        public void DisableBallSaver() => _ballSaver?.DisableBallSave();
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns>True is <see cref="BallSaver"/> is active and not null</returns>
-		public bool IsBallSaveActive() => _ballSaver?.IsBallSaveActive() ?? false;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>True is <see cref="BallSaver"/> is active and not null</returns>
+        public bool IsBallSaveActive() => _ballSaver?.IsBallSaveActive() ?? false;
 
-		/// <summary>
-		/// Pulse coils in the SearchCoils when ball search times out
-		/// </summary>
-		public void OnBallSearchTimeout()
+        /// <summary>
+        /// Pulse coils in the SearchCoils when ball search times out
+        /// </summary>
+        public void OnBallSearchTimeout()
 		{
 			if (BallSearchOptions.IsSearchEnabled)
 			{
 				if (BallSearchOptions?.SearchCoils?.Length > 0)
 				{
-					Logger.Debug(nameof(IPinGodGame), ":pulsing search coils");
+					Logger.Debug(nameof(MachineNode), ":pulsing search coils");
 					for (int i = 0; i < BallSearchOptions?.SearchCoils.Length; i++)
 					{
 						CoilPulse(BallSearchOptions?.SearchCoils[i], 255);
@@ -397,18 +398,7 @@ namespace PinGod.Core.Service
 
 			Logger.Debug(nameof(MachineNode), $":Custom items loaded...");
 			Logger.Debug(nameof(MachineNode), $":switches={Machine.Switches.Count}:coils={Machine.Coils.Count}:lamps={Machine.Lamps.Count},:leds={Machine.Leds.Count}");
-		}
-
-		private void _ballSaver_BallSaved(bool earlySwitch = false)
-		{
-			if (earlySwitch)
-				_trough.PulseTrough();
-
-			//if (_plungerLane != null)
-			//    _plungerLane.AutoFire();
-
-			Logger.Debug(nameof(MachineNode), ": ball saved");
-		}
+		}		
 
 		private void SetupBallSearch()
 		{
@@ -418,6 +408,18 @@ namespace PinGod.Core.Service
 			BallSearchTimer = new Timer() { Autostart = false, OneShot = false };
 			BallSearchTimer.Connect("timeout", new Callable(this, nameof(OnBallSearchTimeout)));
 			this.AddChild(BallSearchTimer);
-		}		
-	}
+		}
+
+        private void _ballSaver_BallSaved(bool earlySwitch = false)
+        {
+            //only pulse early switches
+            if (earlySwitch)
+            {
+                Logger.Debug(nameof(Trough), ": early ball saved, kicking ball.");
+				PulseTrough();
+            }
+        }
+
+        internal void PulseTrough() => _trough?.PulseTrough();
+    }
 }
