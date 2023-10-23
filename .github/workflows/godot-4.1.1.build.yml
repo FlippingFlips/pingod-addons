@@ -21,7 +21,7 @@ jobs:
     - name: zip addons
       run: |
         cp README.md addons/README-PINGOD.md
-        7z a -tzip ""pingod-addons-(${{ github.ref_name }}).zip" "addons"
+        7z a -tzip "pingod-addons-(${{ github.ref_name }}).zip" "addons"
       
     #- name: export game
     #  id: export
