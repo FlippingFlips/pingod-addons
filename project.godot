@@ -1,0 +1,73 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="PinGod-AddOns"
+config/description="Adds on for godot"
+run/main_scene="res://Demo-PinGod.tscn"
+config/features=PackedStringArray("4.1", "C#")
+config/icon="res://addons/pingod-assets/img/pinball.svg"
+
+[audio]
+
+buses/default_bus_layout="res://addons/pingod-audio/audio_bus_layout.tres"
+
+[autoload]
+
+Adjustments="*res://addons/pingod-adjustments/Adjustments.tscn"
+Resources="*res://addons/pingod-resources/Resources.tscn"
+WindowActions="*res://addons/pingod-windows/WindowActions.tscn"
+AudioManager="*res://addons/pingod-audio/Node/AudioManager.tscn"
+MemoryMap="*res://addons/pingod-memorymap-win/MemoryMap.tscn"
+PinGodGame="*res://addons/pingod-game/Node/PinGodGame.tscn"
+Machine="*res://addons/pingod-machine/Machine.tscn"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/window_width_override=512
+window/size/window_height_override=256
+window/stretch/mode="canvas_items"
+
+[dotnet]
+
+project/assembly_name="PinGod-AddOns"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/pingod-adjustments/plugin.cfg", "res://addons/pingod-audio/plugin.cfg", "res://addons/pingod-controls/plugin.cfg", "res://addons/pingod-game/plugin.cfg", "res://addons/pingod-machine/plugin.cfg", "res://addons/pingod-memorymap-win/plugin.cfg", "res://addons/pingod-resources/plugin.cfg", "res://addons/pingod-windows/plugin.cfg")
+
+[input]
+
+toggle_border={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194333,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+sw0={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":53,"key_label":0,"unicode":53,"echo":false,"script":null)
+]
+}
+sw8={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":49,"key_label":0,"unicode":49,"echo":false,"script":null)
+]
+}
+quit={
+"deadzone": 0.5,
+"events": []
+}
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://addons/pingod-assets/Localization/pingod_default_lang.en.translation", "res://addons/pingod-assets/Localization/pingod_default_lang.fr.translation")
