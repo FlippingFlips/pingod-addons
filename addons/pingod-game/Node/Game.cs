@@ -2,7 +2,6 @@ using Godot;
 using PinGod.Core;
 using PinGod.Core.Service;
 using PinGod.Modes;
-using System.Reflection;
 
 namespace PinGod.Game
 {
@@ -184,7 +183,8 @@ namespace PinGod.Game
         }
 
         /// <summary>
-        /// Invokes <see cref="PinGodGame.OnBallDrained(SceneTree, string, string)"/> on the whole tree
+        /// If a ball save is running, not titled then the Trough will pulse <para/>
+        /// Checks if this is the end of ball, if so a new ball is started here
         /// </summary>
         public virtual void OnBallDrained()
         {
@@ -192,16 +192,24 @@ namespace PinGod.Game
             {
                 if (pinGod != null)
                 {
-                    pinGod.OnBallDrained(GetTree());
-
-                    if (pinGod.EndBall())
+                    if (pinGod.MachineNode.IsBallSaveActive() && !pinGod.IsTilted)
                     {
-                        Logger.Info(nameof(Game), ":last ball played, game ending");
+                        Logger.Info(nameof(Game), ": Ball saved, OnBallDrained");
+                        pinGod.MachineNode.PulseTrough();
                     }
                     else
                     {
-                        Logger.Info(nameof(Game), ":new ball starting");
-                    }
+                        pinGod.OnBallDrained(GetTree());
+
+                        if (pinGod.EndBall())
+                        {
+                            Logger.Info(nameof(Game), ":last ball played, game ending");
+                        }
+                        else
+                        {
+                            Logger.Info(nameof(Game), ":new ball starting");
+                        }
+                    }                    
                 }
             }
         }
@@ -286,7 +294,7 @@ namespace PinGod.Game
         }
 
         /// <summary>
-        /// Starts new ball in PinGod and invokes OnBallStarted on all Mode groups
+        /// Disables all lamps, starts a new ball in PinGod and invokes OnBallStarted on all Mode groups
         /// </summary>
         public virtual void StartNewBall()
         {
