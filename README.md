@@ -44,6 +44,11 @@ This demo is just an empty scene with a `MainScene.tscn` added. The main scene i
 7. Create a blank scene and launch the game. `ESC` or `F8` to close window.
 8. Instance a default [MainScene.tscn](addons/pingod-game/Node/MainScene.tscn) as a child in your blank scene and launch game with attract / game.
 ---
+#### Using this repository for new game
+1. Rename the `.sln`, `.csproj`, `.csproj.user`
+2. Change the `project/assembly_name` in the [project.godot](project.godot)
+3. Change `config/name` , `config/description` in the [project.godot](project.godot)
+---
 #### Window - Godot Project Settings
 * Window - Set your main display size
 * Window - Use the `advanced settings` to change the override width and height if you want to test lower or larger than your main resolution.
