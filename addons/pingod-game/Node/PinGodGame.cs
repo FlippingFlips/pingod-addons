@@ -118,9 +118,9 @@ namespace PinGod.Game
                 LoadPatches();
 
                 //get trough from tree
-                if (HasNode("/root/Trough"))
+                if (HasNode("/root/Machine/Trough"))
                 {
-                    _trough = GetNodeOrNull<Trough>("/root/Trough");
+                    _trough = GetNodeOrNull<Trough>("/root/Machine/Trough");
                 }
 
                 SetupAudio();
@@ -137,11 +137,6 @@ namespace PinGod.Game
                     MachineNode = GetNode<MachineNode>(Paths.ROOT_MACHINE);
                     BallSearchOptions = MachineNode.BallSearchOptions;
                     MachineNode.SwitchCommand += MachineNode_SwitchCommand;
-
-                    if (_trough == null && MachineNode.HasNode("Trough"))
-                    {
-                        _trough = MachineNode.GetNode("Trough") as Trough;
-                    }
                 }
                 else { Logger.WarningRich("[color=yellow]", $"{nameof(PinGodGame)}: _Ready| MachineNode not found", "[/color]"); }
 

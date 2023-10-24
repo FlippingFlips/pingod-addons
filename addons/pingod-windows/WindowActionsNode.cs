@@ -124,13 +124,14 @@ namespace PinGod.Core.Service
 			{
 				_adjustments = GetNodeOrNull<AdjustmentsNode>("/root/Adjustments")?._adjustments;
 
-				//if (_setDisplayFromAdjustments)
-				//	SetWindowFromAdjustments();
-			}
+                //TODO: bring some display options back that cannot be done command line
+                //if (_setDisplayFromAdjustments)
+                //	SetWindowFromAdjustments();
+            }
 
             //Setup a switch developer window if enabled and exists
             if (_switchWindowEnabled && _switchWindow != null) CallDeferred(nameof(SetUpSwitchWindow));
-            else { Logger.Debug(nameof(MachineNode), ": switch window not enabled or scene isn't set"); }
+            else { Logger.Debug(nameof(WindowActionsNode), ": switch window not enabled or scene isn't set"); }
         }
 
 		#endregion

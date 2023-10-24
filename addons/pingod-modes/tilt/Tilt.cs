@@ -76,9 +76,9 @@ public partial class Tilt : Control
             _num_tilt_warnings = pinGod.Adjustments.TiltWarnings;
         }
 
-        if (HasNode("/root/Trough"))
+        if (HasNode("/root/Machine/Trough"))
         {
-            trough = GetNode<Trough>("/root/Trough");
+            trough = GetNode<Trough>("/root/Machine/Trough");
         }
 
         //switch commands
@@ -118,7 +118,6 @@ public partial class Tilt : Control
         Visible = true;
         CreateTiltTween(_inTiltedSeconds);
         _slamTilted = true;
-        _machine?.DisableBallSaver();        
     }
 
     /// <summary>
@@ -166,8 +165,7 @@ public partial class Tilt : Control
             pinGod.EnableFlippers(false);
             Visible = true;
             Logger.Info(nameof(Tilt), ":game tilted");
-            ShowTilt();
-            _machine?.DisableBallSaver();
+            ShowTilt();            
             EmitSignal(nameof(GameTilted));
         }
         //show warnings

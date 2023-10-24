@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlcv2a2q12prb"]
+[gd_scene load_steps=6 format=3 uid="uid://dlcv2a2q12prb"]
 
 [ext_resource type="Script" path="res://addons/pingod-controls/Label/BlinkingLabel.cs" id="1"]
+[ext_resource type="Texture2D" uid="uid://d4k6m2vxmui0u" path="res://addons/pingod-assets/img/pingod-logo.png" id="2_ofin0"]
 [ext_resource type="Script" path="res://addons/pingod-modes/attract/Attract.cs" id="4"]
 [ext_resource type="PackedScene" uid="uid://c0sso4ls4xf57" path="res://addons/pingod-modes/highscores/HighScores.tscn" id="5"]
 [ext_resource type="FontFile" uid="uid://ciofwob416hd1" path="res://addons/pingod-assets/fonts/BebasNeue.ttf" id="5_s6yfo"]
@@ -22,6 +23,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.317647, 0.317647, 0.317647, 1)
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 1562.0
+offset_top = 12.0
+offset_right = 2126.0
+offset_bottom = 133.0
+texture = ExtResource("2_ofin0")
+expand_mode = 3
+stretch_mode = 5
 
 [node name="AttractLayers" type="Control" parent="."]
 layout_mode = 1
@@ -30,18 +42,21 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="PushStart" type="CenterContainer" parent="AttractLayers"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="PushStart" type="Label" parent="AttractLayers/PushStart"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_s6yfo")
-theme_override_font_sizes/font_size = 156
+theme_override_font_sizes/font_size = 256
 text = "ATTRACT_TITLE_1"
 script = ExtResource("1")
 _blinking = 0.5
@@ -68,7 +83,7 @@ offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("5_s6yfo")
-theme_override_font_sizes/font_size = 42
+theme_override_font_sizes/font_size = 96
 text = "CREDITS"
 
 [connection signal="timeout" from="AttractLayerChangeTimer" to="." method="_on_Timer_timeout"]

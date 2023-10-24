@@ -1,18 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://cblilu6qubmxa"]
+[gd_scene load_steps=5 format=3 uid="uid://cblilu6qubmxa"]
 
 [ext_resource type="Script" path="res://addons/pingod-machine/MachineNode.cs" id="1_6vah2"]
-[ext_resource type="Script" path="res://addons/pingod-modes/trough/Trough.cs" id="2_y2nw4"]
-[ext_resource type="Script" path="res://addons/pingod-modes/plunger-lane/PlungerLane.cs" id="3_nwj2m"]
+[ext_resource type="Script" path="res://addons/pingod-machine/pingod-trough/Trough.cs" id="2_ateqa"]
+[ext_resource type="Script" path="res://addons/pingod-machine/pingod-plunger-lane/PlungerLane.cs" id="3_wnqtx"]
 [ext_resource type="Script" path="res://addons/pingod-modes/ballsave/BallSaver.cs" id="4_yl6xf"]
-[ext_resource type="PackedScene" uid="uid://dyl4xxfclu6se" path="res://addons/pingod-machine/RecordingNode.tscn" id="5_r1rm1"]
 
 [node name="Machine" type="Node"]
 editor_description = "PinGodMachine
 
-Trough			= manages ball trough
 PlungerLane	= detects switch, auto plunges if ball saver
 BallSaver		= ball saver + multiball"
 script = ExtResource("1_6vah2")
+_ball_search_coils = PackedStringArray("mballSaucer")
 _ball_search_stop_switches = PackedStringArray("mballSaucer", "trough0", "trough1", "trough2", "trough3")
 _coils = {
 "auto_plunger": 3,
@@ -52,13 +51,10 @@ _switches = {
 }
 
 [node name="Trough" type="Node" parent="."]
-script = ExtResource("2_y2nw4")
+script = ExtResource("2_ateqa")
 
 [node name="PlungerLane" type="Node" parent="."]
-script = ExtResource("3_nwj2m")
+script = ExtResource("3_wnqtx")
 
 [node name="BallSaver" type="Timer" parent="."]
 script = ExtResource("4_yl6xf")
-
-[node name="RecordingNode" parent="." instance=ExtResource("5_r1rm1")]
-_playbackfile = "user://recordings/test.record"

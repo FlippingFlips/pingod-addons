@@ -7,4 +7,5 @@
 editor_description = "Game Window switches can be in any order, it just uses the name. Actions must be name sw0, sw1 etc"
 script = ExtResource("1_4pts6")
 _gameWindowSwitches = PackedStringArray("coin1", "coin2", "coin3", "coinDoor", "enter", "down", "up", "exit", "start", "tilt", "slamTilt", "trough0", "trough1", "trough2", "trough3", "plungerLane", "mballSaucer", "inlaneL", "flipperLwL", "flipperLwR")
+_switchWindowEnabled = true
 _switchWindow = ExtResource("2_h7f2d")

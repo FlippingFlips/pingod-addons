@@ -34,6 +34,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="pingod-logo" type="TextureRect" parent="CenterContainer"]
+modulate = Color(1, 1, 1, 0.223529)
 layout_mode = 2
 texture = ExtResource("5")
 stretch_mode = 5
@@ -43,7 +44,7 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 16
 theme_override_fonts/font = ExtResource("3_abej1")
-theme_override_font_sizes/font_size = 170
+theme_override_font_sizes/font_size = 256
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -59,7 +60,7 @@ offset_bottom = 129.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("3_abej1")
-theme_override_font_sizes/font_size = 72
+theme_override_font_sizes/font_size = 156
 text = "0"
 
 [node name="ScoreP2" type="Label" parent="."]
@@ -76,7 +77,7 @@ grow_horizontal = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("3_abej1")
-theme_override_font_sizes/font_size = 72
+theme_override_font_sizes/font_size = 156
 text = "0"
 
 [node name="ScoreP3" type="Label" parent="."]
@@ -87,7 +88,7 @@ offset_left = 20.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("3_abej1")
-theme_override_font_sizes/font_size = 72
+theme_override_font_sizes/font_size = 156
 text = "0"
 
 [node name="ScoreP4" type="Label" parent="."]
@@ -101,7 +102,7 @@ grow_horizontal = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("3_abej1")
-theme_override_font_sizes/font_size = 72
+theme_override_font_sizes/font_size = 156
 text = "0"
 
 [node name="PlayerInfo" type="Label" parent="."]
@@ -115,7 +116,7 @@ grow_vertical = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("3_abej1")
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 56
 text = "Player: "
 
 [node name="BallInfo" type="Label" parent="."]
@@ -132,7 +133,7 @@ grow_vertical = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("3_abej1")
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 56
 text = "BALL: "
 
 [node name="CreditsLabel" type="Label" parent="."]
@@ -150,5 +151,5 @@ grow_vertical = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("3_abej1")
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 56
 text = "CREDITS"

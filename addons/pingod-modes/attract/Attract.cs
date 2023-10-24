@@ -181,10 +181,10 @@ namespace PinGod.Modes
             {
                 switch (index)
                 {
-                    case 9: //l flipper
+                    case 16: //l flipper
                         CallDeferred("ChangeLayer", true);
                         break;
-                    case 11://r flipper
+                    case 18://r flipper
                         CallDeferred("ChangeLayer", false);
                         break;
                     default:

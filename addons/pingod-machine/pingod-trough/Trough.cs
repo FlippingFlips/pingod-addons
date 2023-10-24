@@ -1,6 +1,6 @@
 using Godot;
-using PinGod.Base;
 using PinGod.Core.Service;
+using PinGod.Modes;
 
 namespace PinGod.Core.BallStacks
 {
@@ -22,6 +22,7 @@ namespace PinGod.Core.BallStacks
         private Timer ballSaverTimer;
         private IPinGodGame pinGod;
         private Timer troughPulseTimer;
+
         /// <summary>
         /// Total balls locked
         /// </summary>
@@ -48,7 +49,6 @@ namespace PinGod.Core.BallStacks
             troughPulseTimer = new Timer { Name = "TroughPulseTimer", OneShot = false, WaitTime = 1 };
             AddChild(troughPulseTimer);
             troughPulseTimer.Timeout += _trough_pulse_timeout;
-
             Logger.Debug(nameof(Trough), ":added TroughPulseTimer");
 
             //trough options
@@ -87,6 +87,12 @@ namespace PinGod.Core.BallStacks
             {
                 _machine = GetParent().GetNode<MachineNode>(Paths.ROOT_MACHINE);
                 Logger.Debug(nameof(Trough), ":Found Machine Node");
+            }
+            else
+            {
+                Logger.WarningRich(":[color=red]", $": {nameof(Trough)} Disabled, no machine plugin found in /root/Machine. [/color]");
+                this.QueueFree();
+                return;
             }
 
             if (_machine != null)
@@ -246,6 +252,7 @@ namespace PinGod.Core.BallStacks
                 OnTroughSwitchCommand(swName, index, value);
             }
         }
+
         /// <summary>
         /// Trough switch command handler
         /// </summary>
@@ -263,18 +270,9 @@ namespace PinGod.Core.BallStacks
                     var troughFull = IsTroughFull();
                     //trough full
                     if (troughFull && pinGod.BallStarted && !pinGod.IsMultiballRunning)
-                    {
-                        if (_machine?.IsBallSaveActive() ?? false && !pinGod.IsTilted)
-                        {
-                            Logger.Debug(nameof(Trough), ":ball_saved");
-                            PulseTrough();
-                            pinGod.EmitSignal("BallSaved");
-                        }
-                        else
-                        {
-                            Logger.Debug(nameof(Trough), ":ball_drained");
-                            pinGod.EmitSignal("BallDrained");
-                        }
+                    {                        
+                        Logger.Debug(nameof(Trough), ":ball_drained");
+                        pinGod.EmitSignal("BallDrained");
                     }
                     //multiball
                     else if (pinGod.IsMultiballRunning && !pinGod.BallSaveActive)

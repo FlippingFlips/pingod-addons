@@ -81,10 +81,16 @@ public static class Machine
 
     public static PinStateObject SetLed(string name, byte state, int color)
     {
-        var led = Leds[name];
-        led.State = state;
-        led.Color = color > 0 ? color : led.Color;
-        return led;
+        if (Leds.ContainsKey(name))
+        {
+            var led = Leds[name];
+            led.State = state;
+            led.Color = color > 0 ? color : led.Color;
+            return led;
+        }
+
+        Logger.Error($"No LED found for: {name}");
+        return null;
     }
 
     /// <summary>
