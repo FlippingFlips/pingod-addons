@@ -81,7 +81,6 @@ namespace PinGod.Core.Service
 
 		public bool GameInPlay { get; set; }
 
-
 		/// <summary>
 		/// Sets up BallSearch, Machine Items, Ball Saver, plunger lane
 		/// </summary>
@@ -291,16 +290,27 @@ namespace PinGod.Core.Service
 
             ProcessSwitch(@switch);
 			EmitSignal(nameof(SwitchCommand), @switch.Name, @switch.Num, value);
-		}		
+		}
 
-		/// <summary>
-		/// Checks a switches input event by friendly name that is in the <see cref="Switches"/> <para/>
-		/// "coin", @event
-		/// </summary>
-		/// <param name="swName"></param>
-		/// <param name="inputEvent"></param>
-		/// <returns></returns>
-		public virtual bool SwitchActionOff(string swName, InputEvent inputEvent)
+        /// <summary> Called when Enter Tree </summary>
+        public virtual void SetupBallSearch()
+        {
+            //ball search options
+            BallSearchOptions = new BallSearchOptions(_ball_search_coils, _ball_search_stop_switches, _ball_search_wait_time_secs, _ball_search_enabled);
+            //create and add a ball search timer
+            BallSearchTimer = new Timer() { Autostart = false, OneShot = false };
+            BallSearchTimer.Connect("timeout", new Callable(this, nameof(OnBallSearchTimeout)));
+            this.AddChild(BallSearchTimer);
+        }
+
+        /// <summary>
+        /// Checks a switches input event by friendly name that is in the <see cref="Switches"/> <para/>
+        /// "coin", @event
+        /// </summary>
+        /// <param name="swName"></param>
+        /// <param name="inputEvent"></param>
+        /// <returns></returns>
+        public virtual bool SwitchActionOff(string swName, InputEvent inputEvent)
 		{
 			var sw = Machine.Switches[swName];
 			var result = sw?.IsActionOff(inputEvent) ?? false;
@@ -329,12 +339,12 @@ namespace PinGod.Core.Service
 			return result;
 		}
 
-		/// <summary>
-		/// Record a godot normal godot action, not a switch. Recording game reset.
-		/// </summary>
-		/// <param name="action"></param>
-		/// <param name="state"></param>
-		internal void RecordAction(string action, byte state)
+        internal void PulseTrough() => _trough?.PulseTrough();
+
+        /// <summary>Record a godot normal godot action, not a switch. Recording game reset.</summary>
+        /// <param name="action"></param>
+        /// <param name="state"></param>
+        internal void RecordAction(string action, byte state)
 		{
             //record the switch
             _recordingNode?.RecordEventByAction(action, state);
@@ -400,16 +410,6 @@ namespace PinGod.Core.Service
 			Logger.Debug(nameof(MachineNode), $":switches={Machine.Switches.Count}:coils={Machine.Coils.Count}:lamps={Machine.Lamps.Count},:leds={Machine.Leds.Count}");
 		}		
 
-		private void SetupBallSearch()
-		{
-			//ball search options
-			BallSearchOptions = new BallSearchOptions(_ball_search_coils, _ball_search_stop_switches, _ball_search_wait_time_secs, _ball_search_enabled);
-			//create and add a ball search timer
-			BallSearchTimer = new Timer() { Autostart = false, OneShot = false };
-			BallSearchTimer.Connect("timeout", new Callable(this, nameof(OnBallSearchTimeout)));
-			this.AddChild(BallSearchTimer);
-		}
-
         private void _ballSaver_BallSaved(bool earlySwitch = false)
         {
             //only pulse early switches
@@ -419,7 +419,5 @@ namespace PinGod.Core.Service
 				PulseTrough();
             }
         }
-
-        internal void PulseTrough() => _trough?.PulseTrough();
     }
 }

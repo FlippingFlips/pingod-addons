@@ -104,13 +104,16 @@ namespace PinGod.Core.Game
 
 		public void AddAttract()
 		{
-			var scene = _resources.GetResource(_attract_scene_path.GetBaseName()) as PackedScene;            
-			if(scene != null)
+			if (!string.IsNullOrWhiteSpace(_attract_scene_path))
 			{
-				attractnode = scene.Instantiate<Attract>();
-				GetNode("Modes").AddChild(attractnode);
-			}
-			else { Logger.WarningRich(nameof(MainScene), ":[color=yellow] No attract sene found at " + _attract_scene_path + "[/color]"); }
+                var scene = _resources.GetResource(_attract_scene_path.GetBaseName()) as PackedScene;
+                if (scene != null)
+                {
+                    attractnode = scene.Instantiate<Attract>();
+                    GetNode("Modes").AddChild(attractnode);
+                }
+                else { Logger.WarningRich(nameof(MainScene), ":[color=yellow] No attract sene found at " + _attract_scene_path + "[/color]"); }
+            }
 		}
 
 		/// <summary>

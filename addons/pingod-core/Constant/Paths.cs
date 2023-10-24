@@ -1,4 +1,5 @@
-﻿/// <summary> Pingod paths</summary>
+﻿using Godot;
+/// <summary> Pingod paths</summary>
 public static class Paths
 {
     /// <summary> base addons path</summary>
@@ -24,4 +25,7 @@ public static class Paths
 
     /// <summary> base path to access singleton</summary>
     public const string ROOT_RESOURCES = "/root/Resources";
+
+    /// <summary> base path to access singleton</summary>
+    public const string ROOT_MAINSCENE = "/root/MainScene";
 }
