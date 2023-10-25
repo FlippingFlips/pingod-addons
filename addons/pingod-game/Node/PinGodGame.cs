@@ -600,28 +600,30 @@ namespace PinGod.Game
                 return;
             }
 
-            return;
+            //return;
 
-            var w = Adjustments.Display.Width;
-            var h = Adjustments.Display.Height;
-            LogInfo(nameof(PinGodGame), $":window: resolution from adjustments: ", $"{w}x{h}");
+            //OLD WAY CHANGING SETTINGS. TODO: STILL MAY WANT ContentScaleMode, AspectOption
 
-            //scale and aspect ratio
-            Display.SetContentScale(this, (Window.ContentScaleModeEnum)Adjustments.Display.ContentScaleMode);
-            Display.SetAspectOption(this, (Window.ContentScaleAspectEnum)Adjustments.Display.AspectOption);
+            //var w = Adjustments.Display.Width;
+            //var h = Adjustments.Display.Height;
+            //LogInfo(nameof(PinGodGame), $":window: resolution from adjustments: ", $"{w}x{h}");
 
-            //on top
-            Display.SetAlwaysOnTop(Adjustments.Display.AlwaysOnTop);
-            //OS.MoveWindowToForeground();
+            ////scale and aspect ratio
+            //Display.SetContentScale(this, (Window.ContentScaleModeEnum)Adjustments.Display.ContentScaleMode);
+            //Display.SetAspectOption(this, (Window.ContentScaleAspectEnum)Adjustments.Display.AspectOption);
 
-            var size = DisplayServer.WindowGetSize();
-            var pos = DisplayServer.WindowGetPosition();
-            LogInfo(nameof(PinGodGame), $":window: size:{size.X}x{size.Y} pos:{pos.X},{pos.Y}, onTop: {Adjustments.Display.AlwaysOnTop}");
+            ////on top
+            //Display.SetAlwaysOnTop(Adjustments.Display.AlwaysOnTop);
+            ////OS.MoveWindowToForeground();
+
+            //var size = DisplayServer.WindowGetSize();
+            //var pos = DisplayServer.WindowGetPosition();
+            //LogInfo(nameof(PinGodGame), $":window: size:{size.X}x{size.Y} pos:{pos.X},{pos.Y}, onTop: {Adjustments.Display.AlwaysOnTop}");
 
 
-            //full screen        
-            if (Adjustments.Display.FullScreen)
-                DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
+            ////full screen        
+            //if (Adjustments.Display.FullScreen)
+            //    DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
 
             //title
             //DisplayServer.WindowSetTitle
