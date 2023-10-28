@@ -1,5 +1,4 @@
-﻿using NetPinProc.Domain.PinProc;
-
+﻿using PinGod.Base;
 /// <summary> Developer options, logging options. Saved to `proc.cfg`</summary>
 public class PinGodGameConfigOverride
 {

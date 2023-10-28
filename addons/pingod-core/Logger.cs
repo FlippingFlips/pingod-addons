@@ -18,8 +18,8 @@ namespace PinGod.Core
         {
             if (LogLevel <= LogLevel.Verbose)
             {
-                Print(what);
-                //Log(PinGodLogLevel.Verbose, what);            
+                //Print(what);
+                Log(LogLevel.Verbose, BBColor.white, what);
             }
         }
 
@@ -66,8 +66,7 @@ namespace PinGod.Core
         {
             if (LogLevel <= LogLevel.Debug)
             {
-                Print(what);
-                //Log(PinGodLogLevel.Debug, what);
+                Log(LogLevel.Debug, BBColor.white, what);
             }
         }
         /// <summary>
