@@ -55,6 +55,10 @@ namespace PinGod.Modes
         /// <summary>
         /// Removes this control from the tree (Signal is emitted from Trough)
         /// </summary>
-        public virtual void EndMultiball() => this.QueueFree();
+        public virtual void EndMultiball()
+        {
+            Logger.Debug(nameof(Multiball), ":", nameof(EndMultiball));
+            this.QueueFree();
+        }
     }
 }

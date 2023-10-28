@@ -108,7 +108,11 @@ namespace PinGod.Core
             }
         }
 
-        private void BallSaver_Timeout()
+        /// <summary>
+        /// Decrements ball save TimeRemaining by 1 second <para/>
+        /// When times out adds _ball_save_grace_seconds for extension
+        /// </summary>
+        protected virtual void BallSaver_Timeout()
         {
             TimeRemaining -= 1.0f;
             //Logger.Verbose(nameof(BallSaver), $": wait time: {WaitTime}, remaining: {TimeRemaining}");
@@ -119,7 +123,7 @@ namespace PinGod.Core
                     _inGracePeriod = true;
                     UpdateLamps(LightState.Off);
                     TimeRemaining += _ball_save_grace_seconds;
-                    Logger.Debug(nameof(BallSaver), ": added grace period of " + _ball_save_grace_seconds, ", new remaining time: " + TimeRemaining);
+                    Logger.Debug(nameof(BallSaver), ": added grace period of " + _ball_save_grace_seconds, ", new remaining time: " + TimeRemaining);                    
                     return;
                 }
 
@@ -139,6 +143,10 @@ namespace PinGod.Core
             this.Stop();
             Logger.Debug(nameof(BallSaver), nameof(DisableBallSave));
             _ballSaveActive = false;
+
+            //reset number to save
+            _number_of_balls_to_save = 1;
+
             //troughPulseTimer.Stop();        
             UpdateLamps(LightState.Off);
             EmitSignal(nameof(BallSaveDisabled));

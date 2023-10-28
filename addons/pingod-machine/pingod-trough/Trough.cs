@@ -135,7 +135,7 @@ namespace PinGod.Core.BallStacks
             {
                 Logger.Verbose(nameof(Trough), ": DEBUG TROUGH IS ON, always full, switch off for simulator.");
                 return true;
-            }                
+            }
 
             if (TroughOptions?.GameSwitches?.Count <= 0)
             {
@@ -267,22 +267,34 @@ namespace PinGod.Core.BallStacks
             {
                 if (pinGod != null)
                 {
-                    var troughFull = IsTroughFull();
-                    //trough full
-                    if (troughFull && pinGod.BallStarted && !pinGod.IsMultiballRunning)
-                    {                        
-                        Logger.Debug(nameof(Trough), ":ball_drained");
-                        pinGod.EmitSignal("BallDrained");
-                    }
-                    //multiball
-                    else if (pinGod.IsMultiballRunning && !pinGod.BallSaveActive)
+                    if (pinGod.BallStarted)
                     {
-                        var balls = BallsInTrough();
-                        if (TroughOptions.Switches.Length - 1 == balls)
+                        //trough full
+                        var troughFull = IsTroughFull();
+
+                        if (!pinGod.IsMultiballRunning)
                         {
-                            pinGod.IsMultiballRunning = false;
-                            troughPulseTimer.Stop();
-                            pinGod.EmitSignal("MultiBallEnded");
+                            if (troughFull)
+                            {
+                                Logger.Debug(nameof(Trough), ":ball_drained");
+                                pinGod.EmitSignal("BallDrained");
+                                return;
+                            }
+                        }
+
+                        //multiball
+                        if (pinGod.IsMultiballRunning && !_machine._ballSaver.IsBallSaveActive())
+                        {
+                            Logger.Debug(nameof(Trough), ":ball_drained multiball");
+                            var balls = BallsInTrough();
+
+                            //just one ball left on playfield
+                            if (TroughOptions.Switches.Length - 1 == balls)
+                            {
+                                pinGod.IsMultiballRunning = false;
+                                troughPulseTimer.Stop();
+                                pinGod.EmitSignal("MultiBallEnded");
+                            }
                         }
                     }
                 }
@@ -310,21 +322,38 @@ namespace PinGod.Core.BallStacks
                 var sw = Machine.Switches[_machine._plungerLane._plunger_lane_switch];
                 //Logger.Verbose(nameof(Trough), ": plunger lane time since:", sw.TimeSinceChange(), " is on=", sw.IsEnabled(), " ball saver time=", _machine._ballSaver.TimeRemaining);
 
-                //ball isn't in plunger lane and ball saver on then put ball into lane
+                //ball isn't in plunger lane
                 if (!_machine._plungerLane.IsSwitchActive())
                 {
-                    if(_machine._ballSaver.TimeRemaining > 0)
+                    //pulse trough for ball saver
+                    if (_machine._ballSaver.TimeRemaining > 0)
                     {
                         var ballsIntTrough = BallsInTrough();
                         var b = TroughOptions.Switches.Length - ballsIntTrough;
-                        Logger.Debug(nameof(Trough), ":balls in trough=" + ballsIntTrough + $":ball={b}:numToSave:{TroughOptions.NumBallsToSave}");
-                        if (b < _machine._ballSaver._number_of_balls_to_save)
+                        Logger.Debug(nameof(Trough), ":balls in trough=" + ballsIntTrough + $":ball={b}:numToSave:{_machine._ballSaver._number_of_balls_to_save}");
+
+                        if (_machine._ballSaver._number_of_balls_to_save > 1)
                         {
-                            PulseTrough();
+                            if (b < _machine._ballSaver._number_of_balls_to_save)
+                            {
+                                PulseTrough();
+                            }
                         }
-                    }                    
+                        else
+                        {
+                            troughPulseTimer.Stop();
+                        }
+                    }
+                    else
+                    {
+                        troughPulseTimer.Stop();
+                    }
                 }
-                else { Logger.Debug(nameof(Trough), ": plunger lane is active, can't put ball in lane while active."); }
+                else
+                {
+                    _machine.CoilPulse("auto_plunger", 50);
+                    Logger.Debug(nameof(Trough), ": plunger lane is active, can't put ball in lane while active.");
+                }
             }
             else { Logger.Debug(nameof(Trough), ": No plunger lane or ball saver nodes found"); }
         }

@@ -5,6 +5,7 @@ using PinGod.Core.BallStacks;
 using PinGod.Core.Game;
 using PinGod.Core.Service;
 using PinGod.EditorPlugins;
+using PinGod.Modes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -533,6 +534,7 @@ namespace PinGod.Game
         {
             _trough?.StartMultiball(numOfBalls, ballSaveTime, pulseTime);
             IsMultiballRunning = true;
+            Logger.Debug(nameof(PinGodGame), ":", nameof(StartMultiBall));
             EmitSignal(nameof(MultiballStarted));
         }
         public virtual void StartNewBall()
