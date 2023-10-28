@@ -174,11 +174,11 @@ namespace PinGod.Core
         /// </summary>
         public static void Save<T>(T settings) where T : Adjustments
         {
-            //if (settings != null)
-            //{
-            //    using var saveGame = FileAccess.Open(GAME_SETTINGS_FILE, FileAccess.ModeFlags.Write);
-            //    saveGame.StoreLine(JsonSerializer.Serialize(settings, new JsonSerializerOptions() { IgnoreReadOnlyFields = true }));
-            //}
+            if (settings != null)
+            {
+                using var saveGame = FileAccess.Open(GAME_SETTINGS_FILE, FileAccess.ModeFlags.Write);
+                saveGame.StoreLine(JsonSerializer.Serialize(settings, new JsonSerializerOptions() { IgnoreReadOnlyFields = true }));
+            }
         }
 
         /// <summary>
