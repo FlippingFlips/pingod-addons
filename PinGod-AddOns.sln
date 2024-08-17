@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PinGod-AddOns", "PinGod-Add
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9032FA17-256B-4DD4-AA29-992FA26472D2}"
 	ProjectSection(SolutionItems) = preProject
-		.github\workflows\godot-4.1.1.build.yml = .github\workflows\godot-4.1.1.build.yml
+		.github\workflows\godot-4.3.build.yml = .github\workflows\godot-4.3.build.yml
 	EndProjectSection
 EndProject
 Global

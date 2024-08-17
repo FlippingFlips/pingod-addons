@@ -4,3 +4,4 @@
 
 [node name="Adjustments" type="Node"]
 script = ExtResource("1_wd558")
+LogLevel = 0

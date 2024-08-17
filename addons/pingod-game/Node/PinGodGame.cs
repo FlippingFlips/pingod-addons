@@ -1,7 +1,6 @@
 using Godot;
 using PinGod.Base;
 using PinGod.Core;
-using PinGod.Core.BallStacks;
 using PinGod.Core.Game;
 using PinGod.Core.Service;
 using PinGod.EditorPlugins;
@@ -27,7 +26,6 @@ namespace PinGod.Game
         /// </summary>
         public byte MaxPlayers = 4;
 
-        internal Trough _trough;
         /// <summary>
         /// Update lamps overlay. <see cref="LampMatrix"/>
         /// </summary>
@@ -56,7 +54,7 @@ namespace PinGod.Game
         public IAudioManager AudioManager { get; protected set; }
         public Audits Audits { get; internal set; }
         public byte BallInPlay { get; set; }
-        public bool BallSaveActive { get; internal set; }
+        public bool BallSaveActive { get; internal set; }        
         public BallSearchOptions BallSearchOptions { get; set; }
         public byte BallsPerGame { get; set; }
         public bool BallStarted { get; set; }
@@ -74,6 +72,7 @@ namespace PinGod.Game
         public virtual ulong GetElapsedGameTime => gameEndTime - gameStartTime;
         public virtual long GetTopScorePoints => Audits?.HighScores?
                 .OrderByDescending(x => x.Points).FirstOrDefault().Points ?? 0;
+        public bool IsBallSaveActive() => MachineNode?._ballSaver?.IsBallSaveActive() ?? false;
         public bool InBonusMode { get; set; } = false;
         public bool IsMultiballRunning { get; set; } = false;
         public bool IsPlayerEnteringHighscore { get; set; }
@@ -102,10 +101,10 @@ namespace PinGod.Game
                 {
                     AudioManager = GetNodeOrNull<AudioManager>(Paths.ROOT_AUDIOMAN);
                     if(AudioManager!=null)
-                        LogInfo(nameof(PinGodGame), ":_EnterTree. audio manager found");
+                        Logger.Info(nameof(PinGodGame), ":_EnterTree. audio manager found");
                 }
 
-                LogInfo(nameof(PinGodGame), ":_EnterTree. log level: " + Logger.LogLevel);
+                Logger.Info(nameof(PinGodGame), ":_EnterTree. log level: " + Logger.LogLevel);
                 
                 if(Adjustments != null)
                 {
@@ -116,31 +115,22 @@ namespace PinGod.Game
                 }                
                 
                 LoadPatches();
-
-                //get trough from tree
-                if (HasNode("/root/Machine/Trough"))
-                {
-                    _trough = GetNodeOrNull<Trough>("/root/Machine/Trough");
-                }
-
                 SetupAudio();
                 Setup();
 
-                LogInfo(nameof(PinGodGame), ":enter tree setup complete");
+                Logger.Info(nameof(PinGodGame), ":enter tree setup complete");
                 gameLoadTimeMsec = Godot.Time.GetTicksMsec();
 
                 //get the machine plugin. Setup ball search.
-                LogDebug($"{nameof(PinGodGame)}: _Ready|looking for {Paths.ROOT_MACHINE}");
+                Logger.Debug($"{nameof(PinGodGame)}: _Ready|looking for {Paths.ROOT_MACHINE}");
                 if (HasNode(Paths.ROOT_MACHINE))
                 {
-                    LogDebug($"{nameof(PinGodGame)}: _Ready| MachineConfig found");
+                    Logger.Debug($"{nameof(PinGodGame)}: _Ready| MachineConfig found");
                     MachineNode = GetNode<MachineNode>(Paths.ROOT_MACHINE);
                     BallSearchOptions = MachineNode.BallSearchOptions;
                     MachineNode.SwitchCommand += MachineNode_SwitchCommand;
                 }
-                else { Logger.WarningRich("[color=yellow]", $"{nameof(PinGodGame)}: _Ready| MachineNode not found", "[/color]"); }
-
-                if (_trough == null) Logger.WarningRich("[color=yellow]", nameof(PinGodGame), ": trough not found", "[/color]");
+                else { Logger.WarningRich("[color=yellow]", $"{nameof(PinGodGame)}: _Ready| MachineNode not found", "[/color]"); }                
             }
         }
 
@@ -161,28 +151,33 @@ namespace PinGod.Game
                     if(node._adjustments != null)
                     {
                         Logger.LogLevel = node._adjustments.LogLevel;
-                        LogDebug(nameof(PinGodGame), nameof(_EnterTree), ": adjustments and audits module found...");
+                        Logger.Debug(nameof(PinGodGame), nameof(_EnterTree), ": adjustments and audits module found...");
                         Adjustments = node._adjustments;
                     }
                     Audits = node._audits;
                 }
             }
-            else { LogDebug(nameof(PinGodGame), nameof(_EnterTree), ": adjustments module not found..."); }
+            else { Logger.Debug(nameof(PinGodGame), nameof(_EnterTree), ": adjustments module not found..."); }
 
             SetupWindow();
 
+            if (MachineNode?._ballSaver != null)
+            {
+                MachineNode._ballSaver.BallSaved += _ballSaver_BallSaved;
+            }
+
             //setup main scene if there is one
             var mainScenePath = $"/root/{nameof(MainScene)}";
-            LogDebug($"{nameof(PinGodGame)}: _Ready|looking for node at: " + mainScenePath);
+            Logger.Debug($"{nameof(PinGodGame)}: _Ready|looking for node at: " + mainScenePath);
             if (this.HasNode(mainScenePath))
                 mainScene = GetNodeOrNull<MainScene>(mainScenePath);
             else
-                LogDebug($"{nameof(PinGodGame)}: _Ready|node not found at " + mainScenePath);
+                Logger.Debug($"{nameof(PinGodGame)}: _Ready|node not found at " + mainScenePath);
 
             //setup lamp overlay if there is one
             if (_lampMatrixOverlay != null)
             {
-                LogDebug($"{nameof(PinGodGame)}: _Ready|setting labels for Lamp matrix overlay lamps");
+                Logger.Debug($"{nameof(PinGodGame)}: _Ready|setting labels for Lamp matrix overlay lamps");
                 foreach (var item in Machine.Lamps)
                 {
                     _lampMatrixOverlay.SetLabel(item.Value.Num, item.Key);
@@ -191,6 +186,12 @@ namespace PinGod.Game
 
             _resources = GetResources();
         }
+
+        private void _ballSaver_BallSaved(bool earlySwitch = false)
+        {
+            EmitSignal(nameof(BallSaved), earlySwitch);
+        }        
+
         #endregion
 
         #region Public_Methods
@@ -224,7 +225,7 @@ namespace PinGod.Game
 
             return points;
         }
-        public virtual int BallsInPlay() => _trough?.BallsInPlay() ?? 0;
+        public virtual int BallsInPlay() => MachineNode?.BallsInPlay() ?? 0;
         public virtual void CreatePlayer(string name) => Players.Add(new PinGodPlayer() { Name = name, Points = 0 });
         public virtual void DisableAllLamps() => Machine.DisableAllLamps();
         public virtual void DisableAllLeds() => Machine.DisableAllLeds();
@@ -237,16 +238,16 @@ namespace PinGod.Game
         {
             if (!GameInPlay) return false;
 
-            LogDebug(nameof(PinGodGame), ":EndBall. disabling flippers");
+            Logger.Debug(nameof(PinGodGame), ":EndBall. disabling flippers");
             BallStarted = false;
             EnableFlippers(false);
 
             if (Players.Count > 0)
             {
-                LogInfo(nameof(PinGodGame), ":end of ball. current ball:" + BallInPlay);
+                Logger.Info(nameof(PinGodGame), ":end of ball. current ball:" + BallInPlay);
                 if (Player.ExtraBalls > 0)
                 {
-                    LogDebug(nameof(PinGodGame), ": player has extra balls");
+                    Logger.Debug(nameof(PinGodGame), ": player has extra balls");
                     EmitSignal(nameof(BallEnded), false);
                 }
                 else
@@ -265,17 +266,17 @@ namespace PinGod.Game
                         BallInPlay++;
                     }
 
-                    LogInfo(nameof(PinGodGame), ":ball in play " + BallInPlay);
+                    Logger.Info(nameof(PinGodGame), ":ball in play " + BallInPlay);
                     Audits.BallsPlayed++;
                     if (BallInPlay > BallsPerGame)
                     {
-                        LogDebug(nameof(PinGodGame), ": sending game ended with ball ended");
+                        Logger.Debug(nameof(PinGodGame), ": sending game ended with ball ended");
                         EmitSignal(nameof(BallEnded), true);
                         return true;
                     }
                     else
                     {
-                        LogDebug(nameof(PinGodGame), ": sending ball ended");
+                        Logger.Debug(nameof(PinGodGame), ": sending ball ended");
                         EmitSignal(nameof(BallEnded), false);
                     }
                 }
@@ -292,8 +293,8 @@ namespace PinGod.Game
             ResetTilt();
             gameEndTime = Time.GetTicksMsec();
             Audits.TimePlayed = gameEndTime - gameStartTime;
-            if (_trough != null)
-                _trough.BallsLocked = 0;
+            if (MachineNode != null)
+                MachineNode.BallsLocked = 0;
             this.CallDeferred("emit_signal", nameof(GameEnded));
         }
         public virtual ulong GetLastSwitchChangedTime(string sw) => Machine.Switches[sw].TimeSinceChange();
@@ -320,24 +321,21 @@ namespace PinGod.Game
         {
             try
             {
-                LogDebug(nameof(PinGodGame), ":looking for game patches. res://patch/patch_{patchNum}.pck . From 1. patch_1.pck, patch_2.pck");
+                Logger.Debug(nameof(PinGodGame), ":looking for game patches. res://patch/patch_{patchNum}.pck . From 1. patch_1.pck, patch_2.pck");
                 int patchNum = 1;
                 bool success;
                 while (success = ProjectSettings.LoadResourcePack($"res://patch/patch_{patchNum}.pck"))
                 {
-                    LogInfo(nameof(PinGodGame), $":patch {patchNum} loaded");
+                    Logger.Info(nameof(PinGodGame), $":patch {patchNum} loaded");
                     patchNum++;
                 }
             }
             catch (Exception ex)
             {
-                LogError(ex.ToString());
+                Logger.Error(ex.ToString());
             }
         }
-        public virtual void LogDebug(params object[] what) => Logger.Debug(what);
-        public virtual void LogError(string message = null, params object[] what) => Logger.Error(message, what);
-        public virtual void LogInfo(params object[] what) => Logger.Info(what);
-        public virtual void LogWarning(string message = null, params object[] what) => Logger.Warning(message, what);
+
         public virtual void OnBallDrained(SceneTree sceneTree, string group = "Mode", string method = "OnBallDrained") => sceneTree.CallGroup(group, method);
         public virtual void OnBallSaved(SceneTree sceneTree, string group = "Mode", string method = "OnBallSaved") => sceneTree.CallGroup(group, method);
         public virtual void OnBallStarted(SceneTree sceneTree, string group = "Mode", string method = "OnBallStarted") => sceneTree.CallGroup(group, method);
@@ -350,7 +348,7 @@ namespace PinGod.Game
             if (this.QuitRequested) return;
             this.QuitRequested = true;
 
-            LogInfo(nameof(PinGodGame), ": Quit: saved game");
+            Logger.Info(nameof(PinGodGame), ": Quit: saved game");
 
             this.QueueFree();
             
@@ -434,6 +432,58 @@ namespace PinGod.Game
         {
             ServiceMenuEnter += OnServiceMenuEnter;
         }
+
+        /// <summary>
+        /// Sets up window from Adjustments if available. Sets position. Sets on top (the project should have this off in the Godot UI for this to work). Sets full screen
+        /// </summary>
+        public virtual void SetupWindow()
+        {
+            if (Adjustments?.Display == null)
+            {
+                Logger.WarningRich(nameof(PinGodGame), ":[color=yellow]", "no display settings found or Adjustments plug-in", "[/color]");
+                return;
+            }
+
+            //return;
+
+            //OLD WAY CHANGING SETTINGS. TODO: STILL MAY WANT ContentScaleMode, AspectOption
+
+            //var w = Adjustments.Display.Width;
+            //var h = Adjustments.Display.Height;
+            //LogInfo(nameof(PinGodGame), $":window: resolution from adjustments: ", $"{w}x{h}");
+
+            ////scale and aspect ratio
+            //Display.SetContentScale(this, (Window.ContentScaleModeEnum)Adjustments.Display.ContentScaleMode);
+            //Display.SetAspectOption(this, (Window.ContentScaleAspectEnum)Adjustments.Display.AspectOption);
+
+            ////on top
+            //Display.SetAlwaysOnTop(Adjustments.Display.AlwaysOnTop);
+            ////OS.MoveWindowToForeground();
+
+            //var size = DisplayServer.WindowGetSize();
+            //var pos = DisplayServer.WindowGetPosition();
+            //LogInfo(nameof(PinGodGame), $":window: size:{size.X}x{size.Y} pos:{pos.X},{pos.Y}, onTop: {Adjustments.Display.AlwaysOnTop}");
+
+
+            ////full screen        
+            //if (Adjustments.Display.FullScreen)
+            //    DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
+
+            //title
+            //DisplayServer.WindowSetTitle
+        }
+
+        protected virtual void SetupAudio()
+        {
+            Logger.Info(nameof(PinGodGame), ":setting up audio from settings.save");
+            if (AudioManager != null)
+            {
+                AudioManager.MusicEnabled = Adjustments?.MusicEnabled ?? true;
+                AudioManager.SfxEnabled = Adjustments?.SfxEnabled ?? true;
+                AudioManager.VoiceEnabled = Adjustments?.VoiceEnabled ?? true;
+            }
+            else { Logger.Warning(nameof(PinGodGame), ": AudioManager node not found. Add an AudioManager child instance to the scene"); }
+        }
         public virtual void SolenoidOn(string name, byte state) => Machine.SetCoil(name, state);
         public virtual async void SolenoidPulse(string name, byte pulse = 255)
         {
@@ -468,29 +518,22 @@ namespace PinGod.Game
         {
             if (IsPlayerEnteringHighscore) return false;
 
-            LogInfo(nameof(PinGodGame), $":start game. BIP:{BallInPlay}, players/max:{Players.Count}/{MaxPlayers}, credits: {Audits.Credits}, inPlay:{GameInPlay}");
+            Logger.Info(nameof(PinGodGame), $":start game. BIP:{BallInPlay}, players/max:{Players.Count}/{MaxPlayers}, credits: {Audits.Credits}, inPlay:{GameInPlay}");
             if (IsTilted)
             {
-                LogInfo(nameof(PinGodGame), ":Cannot start game when game is tilted");
+                Logger.Info(nameof(PinGodGame), ":Cannot start game when game is tilted");
                 return false;
             }
 
             // first player start game
             if (!GameInPlay && Audits.Credits > 0)
             {
-                LogInfo(nameof(PinGodGame), ":starting game, checking trough...");
-                if (_trough != null)
+                Logger.Info(nameof(PinGodGame), ":starting game, checking trough...");
+                if (!MachineNode.IsTroughFull()) //return if trough isn't full. TODO: needs debug option to remove check
                 {
-                    if (!_trough.IsTroughFull()) //return if trough isn't full. TODO: needs debug option to remove check
-                    {
-                        LogInfo(nameof(PinGodGame), ":Trough not ready. Can't start game with empty trough. Balls="+ _trough.BallsInTrough());
-                        MachineNode.BallSearchTimer.Start(1);
-                        return false;
-                    }
-                }
-                else
-                {
-                    Logger.Warning(nameof(PinGodGame), "start game, no trough found");
+                    Logger.Info(nameof(PinGodGame), 
+                        ":Trough not ready. Can't start game with empty trough. Balls=" + MachineNode?.BallsInTrough());
+                    MachineNode.BallSearchTimer.Start(1);
                     return false;
                 }
 
@@ -509,7 +552,7 @@ namespace PinGod.Game
                 CreatePlayer($"P{Players.Count + 1}");
                 CurrentPlayerIndex = 0;
                 Player = Players[CurrentPlayerIndex];
-                LogDebug(nameof(PinGodGame), ":signal: player 1 added");
+                Logger.Debug(nameof(PinGodGame), ":signal: player 1 added");
                 Audits.GamesStarted++;
                 gameStartTime = Time.GetTicksMsec();
                 EmitSignal(nameof(PlayerAdded));
@@ -521,24 +564,30 @@ namespace PinGod.Game
             {
                 Audits.Credits--;
                 CreatePlayer($"P{Players.Count + 1}");
-                LogDebug(nameof(PinGodGame), $":signal: player added. {Players.Count}");
+                Logger.Debug(nameof(PinGodGame), $":signal: player added. {Players.Count}");
                 EmitSignal(nameof(PlayerAdded));
                 return true;
             }
 
-            LogInfo(nameof(PinGodGame), ": start game, nothing happened, game in play?");
+            Logger.Info(nameof(PinGodGame), ": start game, nothing happened, game in play?");
             return false;
         }
-        public virtual void StartMultiBall(byte numOfBalls, byte ballSaveTime = 20, float pulseTime = 0)
+        public virtual void StartMultiBall(byte numOfBalls, byte ballSaveTime = 20, float pulseTime = 1)
         {
-            _trough?.StartMultiball(numOfBalls, ballSaveTime, pulseTime);
-            IsMultiballRunning = true;
+            var balls = numOfBalls == 0 ? 1 : numOfBalls;
+            Logger.Debug(nameof(PinGodGame), ":", nameof(StartMultiBall), $":numOfBalls:{balls}");
+
+            MachineNode.StartMultiball(numOfBalls, pulseTime);
+
+            MachineNode._ballSaver._number_of_balls_to_save = (byte)balls;
+            MachineNode._ballSaver.StartSaverMultiball(ballSaveTime);
+
+            IsMultiballRunning = true;    
             EmitSignal(nameof(MultiballStarted));
         }
         public virtual void StartNewBall()
         {
-            BallStarted = true;
-            LogInfo(nameof(PinGodGame), ":starting new ball");
+            Logger.Info(nameof(PinGodGame), ":starting new ball");
             Audits.BallsStarted++;
             ResetTilt();
             Player = Players[CurrentPlayerIndex];
@@ -546,13 +595,10 @@ namespace PinGod.Game
             {
                 Player.ExtraBalls--;
                 Player.ExtraBallsAwarded++;
-                LogInfo(nameof(PinGodGame), ": player shoot again");
+                Logger.Info(nameof(PinGodGame), ": player shoot again");
             }
 
-            if (_trough != null)
-                _trough?.PulseTrough();
-            else
-                SolenoidPulse("trough");
+            MachineNode?.PulseTrough();
 
             EnableFlippers(true);
         }
@@ -589,55 +635,6 @@ namespace PinGod.Game
         #endregion
 
         #region Private_Methods
-        /// <summary>
-        /// Sets up window from Adjustments if available. Sets position. Sets on top (the project should have this off in the Godot UI for this to work). Sets full screen
-        /// </summary>
-        public virtual void SetupWindow()
-        {
-            if (Adjustments?.Display == null)
-            {
-                Logger.WarningRich(nameof(PinGodGame), ":[color=yellow]", "no display settings found or Adjustments plug-in", "[/color]");
-                return;
-            }
-
-            return;
-
-            var w = Adjustments.Display.Width;
-            var h = Adjustments.Display.Height;
-            LogInfo(nameof(PinGodGame), $":window: resolution from adjustments: ", $"{w}x{h}");
-
-            //scale and aspect ratio
-            Display.SetContentScale(this, (Window.ContentScaleModeEnum)Adjustments.Display.ContentScaleMode);
-            Display.SetAspectOption(this, (Window.ContentScaleAspectEnum)Adjustments.Display.AspectOption);
-
-            //on top
-            Display.SetAlwaysOnTop(Adjustments.Display.AlwaysOnTop);
-            //OS.MoveWindowToForeground();
-
-            var size = DisplayServer.WindowGetSize();
-            var pos = DisplayServer.WindowGetPosition();
-            LogInfo(nameof(PinGodGame), $":window: size:{size.X}x{size.Y} pos:{pos.X},{pos.Y}, onTop: {Adjustments.Display.AlwaysOnTop}");
-
-
-            //full screen        
-            if (Adjustments.Display.FullScreen)
-                DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
-
-            //title
-            //DisplayServer.WindowSetTitle
-        }
-
-        protected virtual void SetupAudio()
-        {
-            LogInfo(nameof(PinGodGame), ":setting up audio from settings.save");
-            if (AudioManager != null)
-            {
-                AudioManager.MusicEnabled = Adjustments?.MusicEnabled ?? true;
-                AudioManager.SfxEnabled = Adjustments?.SfxEnabled ?? true;
-                AudioManager.VoiceEnabled = Adjustments?.VoiceEnabled ?? true;
-            }
-            else { LogWarning(nameof(PinGodGame), ": AudioManager node not found. Add an AudioManager child instance to the scene"); }
-        }
 
         /// <summary>
         /// Parses user command lines args in the --key=value format
@@ -646,7 +643,7 @@ namespace PinGod.Game
         private Dictionary<string, string> GetCommandLineArgs()
         {
             var cmd = OS.GetCmdlineArgs();
-            LogInfo(nameof(PinGodGame), ":cmd line available: ", cmd?.Length);
+            Logger.Info(nameof(PinGodGame), ":cmd line available: ", cmd?.Length);
             Dictionary<string, string> _args = new();
             _args.Add("base_path", OS.GetExecutablePath());
             foreach (var arg in cmd)
@@ -671,7 +668,7 @@ namespace PinGod.Game
         {
             if (!Machine.Lamps.ContainsKey(name))
             {
-                LogError($"ERROR:no lamp found for: {name}");
+                Logger.Error($"ERROR:no lamp found for: {name}");
                 return false;
             }
 
@@ -681,7 +678,7 @@ namespace PinGod.Game
         {
             if (!Machine.Leds.ContainsKey(name))
             {
-                LogError($"ERROR:no led found for: {name}");
+                Logger.Error($"ERROR:no led found for: {name}");
                 return false;
             }
 
@@ -735,7 +732,7 @@ namespace PinGod.Game
         {
             if (!Machine.Coils.ContainsKey(name))
             {
-                LogError(nameof(SolenoidExists) + $" ERROR:no solenoid found: {name} \n");
+                Logger.Error(nameof(SolenoidExists) + $" ERROR:no solenoid found: {name} \n");
                 return false;
             }
 
@@ -745,7 +742,7 @@ namespace PinGod.Game
         {
             if (!Machine.Switches.ContainsKey(name))
             {
-                LogError(nameof(SwitchExists) + $" :ERROR:no switch found: {name} \n");
+                Logger.Error(nameof(SwitchExists) + $" :ERROR:no switch found: {name} \n");
                 return false;
             }
             

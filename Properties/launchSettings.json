@@ -2,7 +2,7 @@
   "profiles": {
     "Choco - Godot4 (Debug)": {
       "commandName": "Executable",
-      "executablePath": "C:\\ProgramData\\chocolatey\\lib\\godot-mono\\tools\\godot_v4.1.1-stable_mono_win64\\Godot_v4.1.1-stable_mono_win64.exe",
+      "executablePath": "C:\\ProgramData\\chocolatey\\lib\\godot-mono\\tools\\godot_v4.3-stable_mono_win64\\Godot_v4.3-stable_mono_win64.exe",
       "commandLineArgs": "--path .",
       "workingDirectory": ".",
       "environmentVariables": {
@@ -16,7 +16,7 @@
     },
     "Choco - Godot4 (Verbose)": {
       "commandName": "Executable",
-      "executablePath": "C:\\ProgramData\\chocolatey\\lib\\godot-mono\\tools\\godot_v4.1.1-stable_mono_win64\\Godot_v4.1.1-stable_mono_win64.exe",
+      "executablePath": "C:\\ProgramData\\chocolatey\\lib\\godot-mono\\tools\\godot_v4.3-stable_mono_win64\\Godot_v4.3-stable_mono_win64.exe",
       "commandLineArgs": "--path .",
       "workingDirectory": ".",
       "environmentVariables": {
@@ -30,7 +30,7 @@
     },
     "Choco - Godot4 Console (Debug)": {
       "commandName": "Executable",
-      "executablePath": "C:\\ProgramData\\chocolatey\\lib\\godot-mono\\tools\\godot_v4.1.1-stable_mono_win64\\Godot_v4.1.1-stable_mono_win64_console.exe",
+      "executablePath": "C:\\ProgramData\\chocolatey\\lib\\godot-mono\\tools\\godot_v4.3-stable_mono_win64\\Godot_v4.3-stable_mono_win64_console.exe",
       "commandLineArgs": "--path .",
       "workingDirectory": ".",
       "environmentVariables": {
@@ -44,7 +44,7 @@
     },
     "Choco - Godot4 Console (Verbose)": {
       "commandName": "Executable",
-      "executablePath": "C:\\ProgramData\\chocolatey\\lib\\godot-mono\\tools\\godot_v4.1.1-stable_mono_win64\\Godot_v4.1.1-stable_mono_win64_console.exe",
+      "executablePath": "C:\\ProgramData\\chocolatey\\lib\\godot-mono\\tools\\godot_v4.3-stable_mono_win64\\Godot_v4.3-stable_mono_win64_console.exe",
       "commandLineArgs": "--path .",
       "workingDirectory": ".",
       "environmentVariables": {
@@ -58,7 +58,7 @@
     },
     "Load Godot Editor'": {
       "commandName": "Executable",
-      "executablePath": "C:\\ProgramData\\chocolatey\\lib\\godot-mono\\tools\\godot_v4.1.1-stable_mono_win64\\Godot_v4.1.1-stable_mono_win64.exe",
+      "executablePath": "C:\\ProgramData\\chocolatey\\lib\\godot-mono\\tools\\Godot_v4.3-stable_mono_win64\\Godot_v4.3-stable_mono_win64.exe",
       "commandLineArgs": "-e --path .",
       "workingDirectory": ".",
       "environmentVariables": {
@@ -72,7 +72,7 @@
     },
     "Export Release (Windows Desktop)'": {
       "commandName": "Executable",
-      "executablePath": "C:\\ProgramData\\chocolatey\\lib\\godot-mono\\tools\\godot_v4.1.1-stable_mono_win64\\Godot_v4.1.1-stable_mono_win64.exe",
+      "executablePath": "C:\\ProgramData\\chocolatey\\lib\\godot-mono\\tools\\godot_v4.3-stable_mono_win64\\Godot_v4.3-stable_mono_win64.exe",
       "commandLineArgs": "--export-release \"Windows Desktop\"",
       "workingDirectory": ".",
       "nativeDebugging": true

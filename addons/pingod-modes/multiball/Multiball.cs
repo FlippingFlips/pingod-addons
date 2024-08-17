@@ -49,12 +49,16 @@ namespace PinGod.Modes
                 timer.IsVisible(false);
             }
 
-            pinGod.StartMultiBall(_num_of_balls, _ball_save_time_seconds);
+            pinGod.StartMultiBall(_num_of_balls, _ball_save_time_seconds, 1);
         }
 
         /// <summary>
         /// Removes this control from the tree (Signal is emitted from Trough)
         /// </summary>
-        public virtual void EndMultiball() => this.QueueFree();
+        public virtual void EndMultiball()
+        {
+            Logger.Debug(nameof(Multiball), ":", nameof(EndMultiball));
+            this.QueueFree();
+        }
     }
 }

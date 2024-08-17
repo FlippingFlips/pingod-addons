@@ -1,7 +1,5 @@
 using Godot;
 using PinGod.Core;
-using PinGod.Core.BallStacks;
-using PinGod.Core.Service;
 
 /// <summary>
 /// Tilt. "slamTilt" or "tilt" switches.
@@ -30,9 +28,6 @@ public partial class Tilt : Control
 
     float displayForSecs = 2f;
 
-    //protected Timer timer;
-
-    private Trough trough;
     /// <summary>
     /// Emitted signal when game is tilted
     /// </summary>
@@ -74,11 +69,6 @@ public partial class Tilt : Control
         {
             pinGod = GetNode(Paths.ROOT_PINGODGAME) as IPinGodGame;
             _num_tilt_warnings = pinGod.Adjustments.TiltWarnings;
-        }
-
-        if (HasNode("/root/Machine/Trough"))
-        {
-            trough = GetNode<Trough>("/root/Machine/Trough");
         }
 
         //switch commands

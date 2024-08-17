@@ -14,3 +14,4 @@ dest_files=["res://.godot/imported/bebas-bitmapfont.fnt-17ca096f239fbd06b774a86c
 
 fallbacks=[]
 compress=true
+scaling_mode=2

@@ -16,7 +16,7 @@ namespace PinGod.Core.Service
 		[Export] bool _setDisplayFromAdjustments = true;
 
         [ExportCategory("Playfield Switch Window")]
-        [Export] protected bool _switchWindowEnabled = false;
+        [Export] public bool _switchWindowEnabled = false;
         [Export] PackedScene _switchWindow;        
 
         private Adjustments _adjustments;
