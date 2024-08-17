@@ -23,16 +23,47 @@ jobs:
         cp README.md addons/README-PINGOD.md
         7z a -tzip "pingod-addons-(${{ github.ref_name }}).zip" "addons"
       
-    #- name: export game
-    #  id: export
-    #  # Use latest version (see releases for all versions)
-    #  uses: firebelley/godot-export@v5.2.0
-    #  with:
-    #    # Defining all the required inputs
-    #    godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/4.1.1/mono/Godot_v4.1.1-stable_mono_linux_x86_64.zip
-    #    godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/4.1.1/mono/Godot_v4.1.1-stable_mono_export_templates.tpz
-    #    relative_project_path: ./
-    #    archive_output: true
+    - name: godot-export
+      id: export
+      # Use latest version (see releases for all versions)
+      uses: firebelley/godot-export@v5.2.0
+      with:        
+        cache: true # cache the Godot export templates and Godot executable
+        # Defining all the required inputs
+        godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/4.3/mono/Godot_v4.3-stable_mono_linux_x86_64.zip
+        godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/4.3/mono/Godot_v4.3-stable_mono_export_templates.tpz
+        relative_project_path: ./        
+        archive_output: false # don't archive output, we take care of it
+        #wine_path: ${{ steps.wine_install.outputs.WINE_PATH }} # Icons work without using wine - Dave
+  
+    - name: check built files
+      run: |
+        #dir /home/runner/.local/share/godot/builds/win/win.exe
+        dir /home/runner/.local/share/godot/builds
+        dir /home/runner/.local/share/godot/builds/win
+
+    # pack the executable, 70mb without
+    - name: Run UPX Pack Exe
+      uses: crazy-max/ghaction-upx@v3
+      with:
+          version: latest
+          files: |
+            /home/runner/.local/share/godot/builds/win/win.exe
+          args: -fq
+
+    # zip all needed files to run the game out of the box
+    - name: Zip windows game build
+      run: | 
+          # copy VP files
+          cp simulators/visual-pinball/pingodaddons-demo.vpx "/home/runner/.local/share/godot/builds/win/visual-pinball/pingodaddons-demo.vpx"
+          cp simulators/visual-pinball/pingodaddons-demo.vbs "/home/runner/.local/share/godot/builds/win/visual-pinball/pingodaddons-demo.vbs"
+          cp simulators/visual-pinball/README.md "/home/runner/.local/share/godot/builds/win/visual-pinball/README.md"
+
+          # zip game folder
+          7z a -tzip "pingod-addons-gamebuild--(${{ github.ref_name }}).zip" "/home/runner/.local/share/godot/builds/win/*"          
+
+          # add sql init files for NetPinproc.Game.Sqlite
+          # 7z a -tzip "pingod-inproc-game-win.zip" "sql"
 
     #  # This release action has worked well for me. However, you can most likely use any release action of your choosing.
     #  # https://github.com/ncipollo/release-action
@@ -42,4 +73,4 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}        
         generateReleaseNotes: false
         tag: ${{ github.ref_name }}
-        artifacts: ${{ steps.export.outputs.archive_directory }}/*, pingod-addons-(${{ github.ref_name }}).zip
+        artifacts: ${{ steps.export.outputs.archive_directory }}/*, pingod-addons-(${{ github.ref_name }}).zip, pingod-addons-gamebuild--(${{ github.ref_name }}).zip
