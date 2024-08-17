@@ -41,7 +41,6 @@ jobs:
         #dir /home/runner/.local/share/godot/builds/win/win.exe        
         dir /home/runner/.local/share/godot/builds
         dir /home/runner/.local/share/godot/builds/win
-        mkdir "/home/runner/.local/share/godot/builds/win/visual-pinball"
 
     # pack the executable, 70mb without
     - name: Run UPX Pack Exe
@@ -55,16 +54,14 @@ jobs:
     # zip all needed files to run the game out of the box
     - name: Zip windows game build
       run: | 
-          # copy VP files
-          cp simulators/visual-pinball/pingodaddons-demo.vpx "/home/runner/.local/share/godot/builds/win/visual-pinball/pingodaddons-demo.vpx"
-          cp simulators/visual-pinball/pingodaddons-demo.vbs "/home/runner/.local/share/godot/builds/win/visual-pinball/pingodaddons-demo.vbs"
-          cp simulators/visual-pinball/README.md "/home/runner/.local/share/godot/builds/win/visual-pinball/README.md"
-
+          
           # zip game folder
-          7z a -tzip "pingod-addons-gamebuild--(${{ github.ref_name }}).zip" "/home/runner/.local/share/godot/builds/win/*"          
-
-          # add sql init files for NetPinproc.Game.Sqlite
-          # 7z a -tzip "pingod-inproc-game-win.zip" "sql"
+          7z a -tzip "pingod-addons-gamebuild--(${{ github.ref_name }}).zip" "/home/runner/.local/share/godot/builds/win/*"
+          
+          # zip VP files
+          7z a -tzip "pingod-addons-gamebuild--(${{ github.ref_name }}).zip" "simulators/visual-pinball/pingodaddons-demo.vpx"
+          7z a -tzip "pingod-addons-gamebuild--(${{ github.ref_name }}).zip" "simulators/visual-pinball/pingodaddons-demo.vbs"
+          7z a -tzip "pingod-addons-gamebuild--(${{ github.ref_name }}).zip" "simulators/visual-pinball/README.md"
 
     #  # This release action has worked well for me. However, you can most likely use any release action of your choosing.
     #  # https://github.com/ncipollo/release-action
