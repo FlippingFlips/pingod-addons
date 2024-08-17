@@ -20,8 +20,7 @@ jobs:
     # Copy readme and zip addons directory to release
     - name: zip addons
       run: |
-        cp README.md addons/README-PINGOD.md
-        mkdir "/home/runner/.local/share/godot/builds/win/visual-pinball"
+        cp README.md addons/README-PINGOD.md        
         7z a -tzip "pingod-addons-(${{ github.ref_name }}).zip" "addons"
       
     - name: godot-export
@@ -39,9 +38,10 @@ jobs:
   
     - name: check built files
       run: |
-        #dir /home/runner/.local/share/godot/builds/win/win.exe
+        #dir /home/runner/.local/share/godot/builds/win/win.exe        
         dir /home/runner/.local/share/godot/builds
         dir /home/runner/.local/share/godot/builds/win
+        mkdir "/home/runner/.local/share/godot/builds/win/visual-pinball"
 
     # pack the executable, 70mb without
     - name: Run UPX Pack Exe
