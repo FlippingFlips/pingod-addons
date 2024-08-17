@@ -21,7 +21,7 @@ namespace PinGod.Core
         /// <summary>
         /// Allow multiple
         /// </summary>
-        [Export] public bool _allowMutlipleSaves = false;
+        [Export] public bool _allowMutlipleSaves = true;
         /// <summary>
         /// The lamp name to cycle for Ball saves
         /// </summary>
@@ -100,11 +100,15 @@ namespace PinGod.Core
         /// <param name="value"></param>
         private void _machine_SwitchCommand(string name, byte index, byte value)
         {
-            if (_ballSaveActive && _early_save_switches.Contains(name))
+            if (_ballSaveActive)
             {
-                //emit Ball saved early switch
-                EmitSignal(nameof(BallSaved), true);
-                if (!_allowMutlipleSaves) DisableBallSave();
+                if (_early_save_switches.Contains(name))
+                {
+                    //emit Ball saved early switch
+                    EmitSignal(nameof(BallSaved), true);
+
+                    if (!_allowMutlipleSaves) DisableBallSave();
+                }               
             }
         }
 
@@ -160,9 +164,9 @@ namespace PinGod.Core
         /// Activates the Ball saver if not already running. Blinks the Ball saver lamp
         /// </summary>
         /// <returns>True if the Ball saver is active</returns>
-        public bool StartSaver(float seconds = 0, bool allowMultipleSaves = false)
-        {
-            _allowMutlipleSaves = allowMultipleSaves;
+        public bool StartSaver(float seconds = 0, bool? allowMultipleSaves = null)
+        {            
+            _allowMutlipleSaves = allowMultipleSaves.HasValue ? allowMultipleSaves.Value : _allowMutlipleSaves;
             seconds = seconds > 0 ? seconds : _ball_save_seconds;
             TimeRemaining = seconds;
             _ballSaveActive = true;
@@ -189,13 +193,12 @@ namespace PinGod.Core
         private void UpdateLamps(LightState state)
         {
             if (!string.IsNullOrWhiteSpace(_ball_save_lamp))
-            {
                 Machine.SetLamp(_ball_save_lamp, (byte)state);
-            }
             else if (!string.IsNullOrWhiteSpace(_ball_save_led))
-            {
-                Machine.SetLed(_ball_save_led, (byte)state, ColorTranslator.ToOle(System.Drawing.Color.Yellow));
-            }
+                Machine.SetLed(_ball_save_led, (byte)state, ColorTranslator.ToOle(System.Drawing.Color.Green));
         }
+
+        public override string ToString() =>
+            $"MultiSave:{_allowMutlipleSaves}\nTime:{TimeRemaining}\nInGrace:{_inGracePeriod}";
     }
 }

@@ -24,6 +24,9 @@ public interface IPinGodGame
     /// </summary>
     bool BallSaveActive { get; }
 
+    /// <summary> Checks the Machine.BallSaver status</summary>
+    bool IsBallSaveActive();
+
     /// <summary>
     /// Set options for game ball search
     /// </summary>
@@ -238,18 +241,6 @@ public interface IPinGodGame
     void LoadPatches();
 
     /// <summary>
-    /// Wrapper <see cref="Logger"/>
-    /// </summary>
-    /// <param name="what"></param>
-    void LogDebug(params object[] what);
-
-    void LogError(string message = null, params object[] what);
-
-    void LogInfo(params object[] what);
-
-    void LogWarning(string message = null, params object[] what);
-
-    /// <summary>
     /// Invokes OnBallDrained on all groups marked as Mode within the scene tree.
     /// </summary>
     /// <param name="sceneTree"></param>
@@ -413,7 +404,7 @@ public interface IPinGodGame
     /// <param name="numOfBalls">Number of balls to save. A 2 ball multiball would be 2</param>
     /// <param name="ballSaveTime"></param>
     /// <param name="pulseTime">Delay for the trough in multi-ball</param>
-    void StartMultiBall(byte numOfBalls, byte ballSaveTime = 20, float pulseTime = 0);
+    void StartMultiBall(byte numOfBalls, byte ballSaveTime = 20, float pulseTime = 1);
 
     /// <summary>
     /// Starts a new ball, changing to next player, enabling flippers and ejecting trough and sending <see cref="BallStarted"/>

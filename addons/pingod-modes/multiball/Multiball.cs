@@ -49,7 +49,7 @@ namespace PinGod.Modes
                 timer.IsVisible(false);
             }
 
-            pinGod.StartMultiBall(_num_of_balls, _ball_save_time_seconds);
+            pinGod.StartMultiBall(_num_of_balls, _ball_save_time_seconds, 1);
         }
 
         /// <summary>

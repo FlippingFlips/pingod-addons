@@ -91,8 +91,8 @@ namespace PinGod.Core
         {
             if (LogLevel <= LogLevel.Info)
             {
-                Print(what);
-                //Log(PinGodLogLevel.Info, what);            
+                //Print(what);
+                Log(LogLevel.Info, BBColor.white, what);            
             }
         }
         /// <summary>
@@ -105,7 +105,7 @@ namespace PinGod.Core
             if (LogLevel <= LogLevel.Warning && what?.Length > 0)
             {
 
-                Print(what);
+                Log(LogLevel.Warning, BBColor.yellow, what);
 
                 //won't use the object here, need to wrap it
                 //PrintRich("[code][b]", what, "[/b][/code]");
