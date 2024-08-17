@@ -21,6 +21,7 @@ jobs:
     - name: zip addons
       run: |
         cp README.md addons/README-PINGOD.md
+        mkdir "/home/runner/.local/share/godot/builds/win/visual-pinball"
         7z a -tzip "pingod-addons-(${{ github.ref_name }}).zip" "addons"
       
     - name: godot-export
