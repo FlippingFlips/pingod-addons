@@ -3,6 +3,8 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+/addons/netpin*
+
 # PinGod - Godot
 # import files that are built, no need to be in source
 .import

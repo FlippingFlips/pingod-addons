@@ -10,9 +10,9 @@ namespace PinGod.Core.Service
 	/// </summary>
 	public partial class WindowActionsNode : Node
 	{        
-		[Export] string[] _gameWindowSwitches = null;        
-		[Export] bool _sendPingodMachineSwitches = true;
-		[Export] bool _standardInputHandlingOn = true;
+		[Export] protected string[] _gameWindowSwitches = null;        
+		[Export] protected bool _sendPingodMachineSwitches = true;
+		[Export] protected bool _standardInputHandlingOn = true;
 		[Export] bool _setDisplayFromAdjustments = true;
 
         [ExportCategory("Playfield Switch Window")]
@@ -20,12 +20,18 @@ namespace PinGod.Core.Service
         [Export] PackedScene _switchWindow;        
 
         private Adjustments _adjustments;
-		private MachineNode _machine;
+        protected MachineNode _machine;
 
-		#region Godot overrides
-		public override void _EnterTree()
+        #region Godot overrides
+
+        /// <summary>This attempts to retrieve the MachineNode from the path: <see cref="Paths.ROOT_MACHINE"/><para/>
+		/// The machine node is needed for interacting with game switches<para/>
+		/// This adds an event to <see cref="Root_CloseRequested"/><para/>
+		/// <see cref="Node._EnterTree"/></summary>
+        public override void _EnterTree()
 		{
 			base._EnterTree();
+
 			Logger.Log(LogLevel.Info, Logger.BBColor.green, nameof(WindowActionsNode), ":" + nameof(_EnterTree));
 
 			if (!Engine.IsEditorHint())
@@ -167,10 +173,8 @@ namespace PinGod.Core.Service
 			}
 		}
 
-		/// <summary>
-		/// Toggles the border and resize
-		/// </summary>
-		private static void ToggleBorder()
+		/// <summary>Toggles the border to borderless</summary>
+		public virtual void ToggleBorder()
 		{
 			//DisplaySettings.ToggleWinFlag(
 			//    DisplayServer.WindowFlags.ResizeDisabled |
@@ -178,7 +182,8 @@ namespace PinGod.Core.Service
 			Display.ToggleWinFlag(DisplayServer.WindowFlags.Borderless);
 		}
 
-		private void Quit()
+        /// <summary>Runs quit on the PinGodGame</summary>
+        public virtual void Quit()
 		{
 			Logger.Info(nameof(WindowActionsNode), ":quit action request. quitting tree.");
 			//free here to make sure the _exit method is invoked on the scripts
