@@ -24,9 +24,7 @@ public partial class AudioSettings : MarginContainer
 	private Label _volMasterLabel; 
 	#endregion
 
-	/// <summary>
-	/// Sets up the different types of audio for settings to be changed in a menu
-	/// </summary>
+	/// <summary>Sets up the different types of audio for settings to be changed in a menu</summary>
 	public override void _Ready()
 	{
 		base._Ready();

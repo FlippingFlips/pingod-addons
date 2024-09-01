@@ -34,7 +34,8 @@ public partial class DisplaySettingsScene : MarginContainer
             _adjustments = GetNode<AdjustmentsNode>("/root/Adjustments")._adjustments;
             _displaySettings = _adjustments?.Display;
         }
-        else { Logger.WarningRich(nameof(DisplaySettingsScene), nameof(_EnterTree), ":[color=yellow]", "AdjustmentsScript not found in /root/Adjustments. Used for saving display adjustments[/color]"); }
+        else { Logger.WarningRich(nameof(DisplaySettingsScene), nameof(_EnterTree), ":[color=yellow]", 
+                "AdjustmentsScript not found in /root/Adjustments. Used for saving display adjustments[/color]"); }
 
         if (_displaySettings != null)
         {

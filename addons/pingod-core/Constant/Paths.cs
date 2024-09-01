@@ -28,4 +28,7 @@ public static class Paths
 
     /// <summary> base path to access singleton</summary>
     public const string ROOT_MAINSCENE = "/root/MainScene";
+
+    /// <summary> base path to access modes canvas layer</summary>
+    public const string ROOT_MODES_CANVAS = ROOT_MAINSCENE + "/Modes/";
 }

@@ -1,4 +1,5 @@
 ﻿using PinGod.Base;
+using System;
 using static Godot.GD;
 
 namespace PinGod.Core
@@ -10,6 +11,11 @@ namespace PinGod.Core
     {
         /// <summary>    
         public static LogLevel LogLevel { get; set; } = 0;
+
+        public static string LogPrefix { get; set; } = "[PGOD]";
+
+        public static bool TimeStamp { get; set; } = true;
+
         /// <summary>
         /// Use for switches, or other verbose logging
         /// </summary>
@@ -40,7 +46,7 @@ namespace PinGod.Core
                 msg += $"[color={color}]";
                 endTag += "[/color]";
             }
-            msg += $"[{logLevel}]:";
+            msg += $"{LogPrefix}[{logLevel}][{DateTime.Now.TimeOfDay}]:";
             if (color > 0)
                 msg += endTag;
 
@@ -57,11 +63,7 @@ namespace PinGod.Core
             blue,
             green
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="what"></param>
+        
         public static void Debug(params object[] what)
         {
             if (LogLevel <= LogLevel.Debug)
@@ -69,6 +71,7 @@ namespace PinGod.Core
                 Log(LogLevel.Debug, BBColor.white, what);
             }
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -83,6 +86,7 @@ namespace PinGod.Core
                 //PushError(message);
             }
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -95,6 +99,7 @@ namespace PinGod.Core
                 Log(LogLevel.Info, BBColor.white, what);            
             }
         }
+
         /// <summary>
         /// Logs warnings and also pushes warnings to Godot
         /// </summary>
@@ -122,18 +127,24 @@ namespace PinGod.Core
         /// </summary>
         /// <param name="what"></param>
         public static void WarningRich(params object[] what)
-        {
+        {            
             if (LogLevel <= LogLevel.Warning && what?.Length > 0)
             {
-
-                PrintRich(what);
+                PrintRich(AppendPrefixToParams(LogLevel.Warning, what));
 
                 //PrintStack();
-
                 //todo: move somewhere else. godot push call stack but without these objects
                 //if (what[0] != null)
                 //    PushWarning(what[0].ToString());//push warning not good in Godot. Cannot see the message you push but you can see call stack
             }
+        }
+
+        private static object[] AppendPrefixToParams(LogLevel level, params object[] what)
+        {
+            var newParams = new object[what.Length+1];
+            newParams[0] = $"{LogPrefix}[{level}][{DateTime.Now.TimeOfDay}]:";
+            what.CopyTo(newParams, 1);
+            return newParams;
         }
     }
 }

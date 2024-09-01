@@ -1,10 +1,7 @@
 using Godot;
 using PinGod.Core;
 using PinGod.Game;
-using PinGod.Modes;
-using System;
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
 
 /// <summary>
 /// PinGod Resources, graphic packs. Set to AutoLoad with a Resources.tsn in autoload directory. <para/>
@@ -151,6 +148,10 @@ public partial class Resources : Node
 
     public virtual bool HasResource(string name) => _resourcePreloader.HasResource(name);
 
+    /// <summary>Loading resources with loading screen</summary>
+    /// <param name="path"></param>
+    /// <param name="subThreads"></param>
+    /// <param name="cacheMode"></param>
     public void LoadResourceThreaded(string path, bool subThreads = true, ResourceLoader.CacheMode cacheMode = ResourceLoader.CacheMode.Ignore)
     {
         if (!_resourcesLoading.Contains(path))
@@ -159,15 +160,18 @@ public partial class Resources : Node
             var error = ResourceLoader.LoadThreadedRequest(path, useSubThreads: subThreads, cacheMode: cacheMode);
             if (error == Error.Ok)
             {
-                Logger.Info(nameof(Resources), ": loading threaded resource: ", path);
+                Logger.Debug(nameof(Resources), ": loading threaded resource: ", path);
                 _resourcesLoading.Enqueue(path);
                 _isBusy = true;
                 SetProcess(true);
                 ShowLoading(true);
             }
+            else { Logger.Error(nameof(Resources), ": loading threaded resource FAILED: ", path); }
         }
     }
 
+    /// <summary>Remove a resource from the resource preloader</summary>
+    /// <param name="name"></param>
     public virtual void RemoveResource(string name) => _resourcePreloader.RemoveResource(name);
 
     /// <summary>
