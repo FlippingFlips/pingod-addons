@@ -96,14 +96,28 @@ namespace PinGod.Core.Service
 				Logger.Info(nameof(MemoryMapNode), nameof(_Ready), ": setup event handling from switches");
 				mMap.MemorySwitchEventHandler += MMap_MemorySwitchEventHandler;
 			}
-			Start();
+
+            if (HasNode("/root/Resources"))
+            {
+                var _resources = GetNode("/root/Resources") as Resources;
+                _resources.ResourcesLoaded += _resources_ResourcesLoaded; ;
+            }
+			else
+			{
+                Start();
+            }
 		}
 
-		/// <summary>
-		/// Creates the <see cref="mMap"/>, <see cref="MemoryMap"/> <para/>
-		/// Override to create your own here.
-		/// </summary>
-		public virtual void CreateMemoryMap()
+        private void _resources_ResourcesLoaded(int amt)
+        {
+			Start();
+        }
+
+        /// <summary>
+        /// Creates the <see cref="mMap"/>, <see cref="MemoryMap"/> <para/>
+        /// Override to create your own here.
+        /// </summary>
+        public virtual void CreateMemoryMap()
 		{
 			mMap = new MemoryMap(this.MutexName, MapName, WriteDelay, ReadDelay, CoilTotal, LampTotal, LedTotal, SwitchTotal, _vpSwitchCommand);
 		}
