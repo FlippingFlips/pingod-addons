@@ -187,9 +187,7 @@ public partial class MachineNode : Node
         BallSearchTimer?.Stop();
     }
 
-    /// <summary>
-    /// Memory map switch event. Coming from external, like a simulator through the memory mapping file
-    /// </summary>
+    /// <summary>Memory map switch event. Coming from external like a simulator through the memory mapping file in memory</summary>
     /// <param name="name"></param>
     /// <param name="index"></param>
     /// <param name="value"></param>
@@ -293,7 +291,7 @@ public partial class MachineNode : Node
     /// </summary>
     /// <param name="swNum"></param>
     /// <param name="value"></param>
-    public void SetSwitch(int swNum, byte value, bool fromAction = true)
+    public virtual void SetSwitch(int swNum, byte value, bool fromAction = true)
     {
         var sw = Machine.Switches.Values.FirstOrDefault(x => x.Num == swNum);
         if (sw != null)
