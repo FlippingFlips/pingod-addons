@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://cyvdrta2totih"]
 
-[ext_resource type="Theme" uid="uid://bcbhvghnhmgd7" path="res://addons/pingod-windows/playfield/playfield_button_theme.tres" id="1_3h2nl"]
+[ext_resource type="Theme" uid="uid://bcbhvghnhmgd7" path="res://addons/pingod-windows/playfield/scene/playfield_button_theme.tres" id="1_3h2nl"]
 [ext_resource type="Texture2D" uid="uid://calfbyhed8qpd" path="res://addons/pingod-assets/img/playfield_blueprint_vp.png" id="2_1kqoi"]
-[ext_resource type="Script" path="res://addons/pingod-windows/playfield/playfield_control.gd" id="2_kvqu0"]
+[ext_resource type="Script" path="res://addons/pingod-windows/playfield/scene/playfield_control.gd" id="2_kvqu0"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -282,7 +282,6 @@ offset_right = 99.0
 offset_bottom = 834.0
 item_count = 3
 popup/item_0/text = "Off"
-popup/item_0/id = 0
 popup/item_1/text = "On"
 popup/item_1/id = 1
 popup/item_2/text = "playback"

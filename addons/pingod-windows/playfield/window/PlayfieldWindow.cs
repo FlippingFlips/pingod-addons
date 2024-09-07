@@ -38,7 +38,10 @@ public partial class PlayfieldWindow : WindowPinGod
 		LoadWindowSettings();
 	}
 
-	void LoadWindowSettings()
+    /// <summary>does nothing, the base removes the window completely</summary>
+    public override void PinGodWindow_CloseRequested() { }
+
+    void LoadWindowSettings()
 	{
 		if (FileAccess.FileExists(WIN_SAVE))
 		{

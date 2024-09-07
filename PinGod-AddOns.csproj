@@ -37,5 +37,6 @@
   <ItemGroup>
     <Folder Include="addons\pingod-core\BallStacks\" />
     <Folder Include="addons\pingod-modes\trough\" />
+    <Folder Include="addons\pingod-windows\switch_panel\" />
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c1i3xe5c0i1n0"]
 
-[ext_resource type="Script" path="res://addons/pingod-windows/playfield/PlayfieldWindow.cs" id="1_trxkw"]
-[ext_resource type="PackedScene" uid="uid://cyvdrta2totih" path="res://addons/pingod-windows/playfield/playfield_control.tscn" id="2_0aelb"]
+[ext_resource type="Script" path="res://addons/pingod-windows/playfield/window/PlayfieldWindow.cs" id="1_trxkw"]
+[ext_resource type="PackedScene" uid="uid://cyvdrta2totih" path="res://addons/pingod-windows/playfield/scene/playfield_control.tscn" id="2_0aelb"]
 
 [node name="PlayfieldWindow" type="Window"]
 editor_description = "/// <summary>
@@ -13,11 +13,12 @@ editor_description = "/// <summary>
 /// </summary>"
 sdf_oversize = 0
 sdf_scale = 0
-title = "Switch Window"
-position = Vector2i(50, 50)
+title = "Playfield Window"
+position = Vector2i(50, 36)
 size = Vector2i(400, 900)
 transient = true
 unresizable = true
+popup_window = true
 extend_to_title = true
 min_size = Vector2i(0, 800)
 max_size = Vector2i(400, 900)
