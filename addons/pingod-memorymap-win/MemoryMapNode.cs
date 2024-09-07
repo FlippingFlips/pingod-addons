@@ -1,5 +1,6 @@
 using Godot;
 using PinGod.Base;
+using PinGod.Game;
 using System.Reflection.Metadata.Ecma335;
 
 namespace PinGod.Core.Service
@@ -21,35 +22,6 @@ namespace PinGod.Core.Service
 		/// <summary> Switch number to use for sending a custom value to </summary>
 		[Export] byte _vpSwitchCommand { get; set; }
 
-		/// <summary>
-		/// MemoryMapNode loaded. Needs to be enabled in options. Removes if isn't enabled and write/read delay isn't high enough.<para/>
-		/// Creates a <see cref="MemoryMap"/> for other application to access memory (windows) <para/>
-		/// 
-		/// </summary>
-		public override void _EnterTree()
-		{
-			if (!Engine.IsEditorHint())
-			{
-				if (!this.IsEnabled)
-				{
-					Logger.WarningRich(nameof(MemoryMapNode), ":[color-yellow] PinGod-Memory addon disabled. Use IsEnabled in the scene.\n**Duplicate the default MemoryMap.tscn and put in autoload directory, change settings in scene and re-enable the plugin.** [/color]");
-					this.QueueFree();
-					return;
-				}
-
-				if (this.WriteDelay < 0 && this.ReadDelay < 0)
-				{
-					Logger.WarningRich(nameof(MemoryMapNode), ":[color-yellow]removing PinGod-Memory addon. enable the read delay and write delay with values higher than 1[/color]");
-					this.QueueFree();
-					return;
-				}
-			}
-			else
-			{
-				Logger.Info(nameof(MemoryMapNode), ":script in editor, doing nothing");
-			}
-		}
-
 		public override void _ExitTree()
 		{
 			base._ExitTree();
@@ -59,11 +31,36 @@ namespace PinGod.Core.Service
 			Logger.Info(nameof(MemoryMapNode), ":memory map exited");
 		}
 
-		public override void _Ready()
+        /// <summary>
+        /// MemoryMapNode loaded. Needs to be enabled in options. Removes if isn't enabled and write/read delay isn't high enough.<para/>
+        /// Creates a <see cref="MemoryMap"/> for other application to access memory (windows) <para/>
+        /// </summary>
+        public override void _Ready()
 		{
 			base._Ready();
 
-			if (mMap == null)
+            if (!Engine.IsEditorHint())
+            {
+                if (!PinGodGame.PinGodOverrideConfig.MemoryMapEnabled)
+                {
+                    Logger.WarningRich(nameof(MemoryMapNode), ":[color-yellow] PinGod-Memory addon disabled. Use IsEnabled in the scene.\n**Duplicate the default MemoryMap.tscn and put in autoload directory, change settings in scene and re-enable the plugin.** [/color]");
+                    this.QueueFree();
+                    return;
+                }
+
+                if (PinGodGame.PinGodOverrideConfig.MemoryMapWriteDelay < 0 && PinGodGame.PinGodOverrideConfig.MemoryMapReadDelay < 0)
+                {
+                    Logger.WarningRich(nameof(MemoryMapNode), ":[color-yellow]removing PinGod-Memory addon. enable the read delay and write delay with values higher than 1[/color]");
+                    this.QueueFree();
+                    return;
+                }
+            }
+            else
+            {
+                Logger.Info(nameof(MemoryMapNode), ":script in editor, doing nothing");
+            }
+
+            if (mMap == null)
 			{
 				//todo vp command switch
 				CreateMemoryMap();
@@ -71,7 +68,7 @@ namespace PinGod.Core.Service
 				if(mMap != null)
 				{
 					Logger.Debug(nameof(MemoryMapNode), $@": MappingFile Created. mutex:{MutexName}, map:{MapName}");
-					Logger.Debug(nameof(MemoryMapNode), $@": Read:{ReadDelay},write:{WriteDelay}. showing count-total bytes");
+					Logger.Debug(nameof(MemoryMapNode), $@": Read:{PinGodGame.PinGodOverrideConfig.MemoryMapReadDelay},write:{PinGodGame.PinGodOverrideConfig.MemoryMapWriteDelay}. showing count-total bytes");
 					Logger.Debug(nameof(MemoryMapNode), $@": coils:{CoilTotal}-{mMap.TOTAL_COIL},sw:{SwitchTotal}-{mMap.TOTAL_SWITCH},lamps:{LampTotal}-{mMap.TOTAL_LAMP},led:{LedTotal}-{mMap.TOTAL_LED}");
 					//Logger.Debug(nameof(PinGodMemoryMapNode), $":offsets:coils:0,lamps:{mMap.},leds:{_offsetLeds},switches:{_offsetSwitches}");
 				}
@@ -119,7 +116,10 @@ namespace PinGod.Core.Service
         /// </summary>
         public virtual void CreateMemoryMap()
 		{
-			mMap = new MemoryMap(this.MutexName, MapName, WriteDelay, ReadDelay, CoilTotal, LampTotal, LedTotal, SwitchTotal, _vpSwitchCommand);
+			mMap = new MemoryMap(this.MutexName, MapName,
+                PinGodGame.PinGodOverrideConfig.MemoryMapWriteDelay,
+                PinGodGame.PinGodOverrideConfig.MemoryMapReadDelay,
+				CoilTotal, LampTotal, LedTotal, SwitchTotal, _vpSwitchCommand);
 		}
 
 		public int CoilCount() => mMap.TOTAL_COIL;

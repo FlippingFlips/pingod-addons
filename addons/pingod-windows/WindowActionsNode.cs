@@ -2,6 +2,7 @@ using Godot;
 using Godot.Collections;
 using PinGod.Base;
 using PinGod.EditorPlugins;
+using PinGod.Game;
 using System.Linq;
 
 namespace PinGod.Core.Service
@@ -152,6 +153,9 @@ namespace PinGod.Core.Service
                 //if (_setDisplayFromAdjustments)
                 //	SetWindowFromAdjustments();
             }
+
+			//set to view the tools panel from the static config
+			_toolsWindowEnabled = PinGodGame.PinGodOverrideConfig.ToolsPaneEnabled;
 
             //set up a tools pane so the developer can enable other windows from it.			
             if (_toolsWindowEnabled && _toolsWindow != null) CallDeferred(nameof(SetUpToolsWindow));

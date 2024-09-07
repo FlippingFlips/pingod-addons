@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://addons/pingod-memorymap-win/MemoryMapNode.cs" id="1_ptwrs"]
 
 [node name="MemoryMap" type="Node"]
-editor_description = "Memory map file for communication with simulators etc."
+editor_description = "Memory map file for communication with simulators etc.
+
+Enable in the `.cfg` with the game and set read write delays"
 script = ExtResource("1_ptwrs")
-IsEnabled = true

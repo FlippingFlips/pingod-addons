@@ -6,19 +6,7 @@ namespace PinGod.Core.Service
     /// <summary>Memory Map Settings</summary>
     public partial class MemoryMapNode
     {
-        #region Exports
-        [Export]
-        [ExportGroup("Enable")]
-        protected bool IsEnabled = false;
-        /// <summary>
-        /// 10 = low cpu
-        /// </summary>
-        [Export(PropertyHint.Range, "-1,10000")]
-        [ExportGroup("Enable")]
-        protected int WriteDelay = 10;
-        [Export(PropertyHint.Range, "-1,1000")]
-        [ExportGroup("Enable")]
-        protected int ReadDelay = 10;
+        #region Exports        
         [Export]
         [ExportGroup("Map")]
         protected string MapName = "pingod_vp";
