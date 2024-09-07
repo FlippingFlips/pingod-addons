@@ -14,6 +14,7 @@ config/name="PinGod-AddOns"
 config/description="Adds on for godot"
 run/main_scene="res://Demo-PinGod.tscn"
 config/features=PackedStringArray("4.3", "C#")
+boot_splash/image="res://addons/pingod-assets/img/pingod-logo.png"
 config/icon="res://addons/pingod-assets/img/pinball.svg"
 
 [audio]
@@ -40,6 +41,10 @@ window/stretch/mode="canvas_items"
 [dotnet]
 
 project/assembly_name="PinGod-AddOns"
+
+[editor]
+
+movie_writer/movie_file="E:/Repositories/Pinball/FlippingFlips/pingod/pingod-addons/.movies/temp.avi"
 
 [editor_plugins]
 

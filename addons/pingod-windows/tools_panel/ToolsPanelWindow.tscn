@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=3 uid="uid://pw7ihpas8uy8"]
+
+[ext_resource type="Script" path="res://addons/pingod-windows/tools_panel/ToolsPanelWindow.cs" id="1_io1dw"]
+[ext_resource type="Theme" uid="uid://bcbhvghnhmgd7" path="res://addons/pingod-windows/playfield/scene/playfield_button_theme.tres" id="2_7boe4"]
+[ext_resource type="Texture2D" uid="uid://ba3f7xwpgqrum" path="res://addons/pingod-assets/img/pinball.png" id="3_yd428"]
+
+[node name="ToolPanelWindow" type="Window"]
+transparent_bg = true
+gui_embed_subwindows = true
+title = "Tools Window"
+position = Vector2i(0, 10)
+size = Vector2i(1920, 100)
+wrap_controls = true
+transient = true
+borderless = true
+transparent = true
+max_size = Vector2i(1920, 1080)
+content_scale_mode = 1
+script = ExtResource("1_io1dw")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -420.0
+offset_right = -296.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("2_7boe4")
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "STATUS:           qqsqsqsqs"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Playfield" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+tooltip_text = "SWITCHES"
+toggle_mode = true
+text = "PLAYFIELD"
+icon = ExtResource("3_yd428")
+
+[node name="Console" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+tooltip_text = "enable switch window"
+toggle_mode = true
+text = "CONSOLE"
+icon = ExtResource("3_yd428")

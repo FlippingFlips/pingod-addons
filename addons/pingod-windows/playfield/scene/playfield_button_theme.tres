@@ -21,3 +21,4 @@ bg_color = Color(0.231373, 0.717647, 0, 1)
 Button/styles/hover = SubResource("StyleBoxFlat_0xgpv")
 Button/styles/normal = SubResource("StyleBoxFlat_bmnv2")
 Button/styles/pressed = SubResource("StyleBoxFlat_5xgd7")
+HBoxContainer/constants/separation = 4

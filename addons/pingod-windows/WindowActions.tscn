@@ -1,11 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://f5wyfo2v5cdv"]
+[gd_scene load_steps=5 format=3 uid="uid://f5wyfo2v5cdv"]
 
 [ext_resource type="Script" path="res://addons/pingod-windows/WindowActionsNode.cs" id="1_4pts6"]
-[ext_resource type="PackedScene" uid="uid://c1i3xe5c0i1n0" path="res://addons/pingod-windows/playfield/PlayfieldWindow.tscn" id="2_h7f2d"]
+[ext_resource type="PackedScene" uid="uid://pw7ihpas8uy8" path="res://addons/pingod-windows/tools_panel/ToolsPanelWindow.tscn" id="2_5vsqk"]
+[ext_resource type="PackedScene" uid="uid://c1i3xe5c0i1n0" path="res://addons/pingod-windows/playfield/window/PlayfieldWindow.tscn" id="2_h7f2d"]
+[ext_resource type="PackedScene" uid="uid://0hwmrwnnixho" path="res://addons/pingod-windows/console/window/ConsoleWindow.tscn" id="4_nrl0j"]
 
 [node name="WindowActions" type="Node"]
 editor_description = "Game Window switches can be in any order, it just uses the name. Actions must be name sw0, sw1 etc"
 script = ExtResource("1_4pts6")
 _gameWindowSwitches = PackedStringArray("coin1", "coin2", "coin3", "coinDoor", "enter", "down", "up", "exit", "start", "tilt", "slamTilt", "trough0", "trough1", "trough2", "trough3", "plungerLane", "mballSaucer", "inlaneL", "flipperLwL", "flipperLwR")
-_switchWindowEnabled = true
-_switchWindow = ExtResource("2_h7f2d")
+_toolsWindowEnabled = true
+_toolsWindow = ExtResource("2_5vsqk")
+_toolsPanewindows = {
+"Console": ExtResource("4_nrl0j"),
+"Playfield": ExtResource("2_h7f2d")
+}

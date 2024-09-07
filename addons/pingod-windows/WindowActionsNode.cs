@@ -1,33 +1,51 @@
 using Godot;
+using Godot.Collections;
 using PinGod.Base;
 using PinGod.EditorPlugins;
 using System.Linq;
 
 namespace PinGod.Core.Service
 {
-	/// <summary>
-	/// Handles input from the window. Converts actions to switches <see cref="_gameWindowSwitches"/>
-	/// </summary>
+	/// <summary>Handles input from the main window. <para/>
+	/// Converts actions to switches using the <see cref="_gameWindowSwitches"/><para/>
+	/// This also handles creating a tool pane for opening other windows, <see cref="SetUpToolsWindow"/></summary>
 	public partial class WindowActionsNode : Node
-	{        
-		[Export] protected string[] _gameWindowSwitches = null;        
+	{
+		#region Godot Scene Exports
+		/// <summary>These are switches you allow to be sent to the window</summary>
+		[Export] protected string[] _gameWindowSwitches = null;
+
 		[Export] protected bool _sendPingodMachineSwitches = true;
+
 		[Export] protected bool _standardInputHandlingOn = true;
+
 		[Export] bool _setDisplayFromAdjustments = true;
 
-        [ExportCategory("Playfield Switch Window")]
-        [Export] public bool _switchWindowEnabled = false;
-        [Export] PackedScene _switchWindow;        
+		[ExportCategory("Dev Tools Panel")]
+		[Export] public bool _toolsWindowEnabled = false;
+		[Export] PackedScene _toolsWindow;
+		/// <summary>If false the window will be separated from the main window</summary>
+		[Export] public bool _embedSubWindow = true;
+
+		[ExportCategory("Dev Windows")]
+        /// <summary>Collection of windows for the tools window to show / hide</summary>
+        [Export] Dictionary<string, PackedScene> _toolsPanewindows;
+        #endregion
 
         private Adjustments _adjustments;
         protected MachineNode _machine;
 
+        private Window _toolsWindowInstance;
+        private Window _switchWindowInstance;
+
+        private Dictionary<string, WindowPinGod> _windowsInstances = new();
+
         #region Godot overrides
 
         /// <summary>This attempts to retrieve the MachineNode from the path: <see cref="Paths.ROOT_MACHINE"/><para/>
-		/// The machine node is needed for interacting with game switches<para/>
-		/// This adds an event to <see cref="Root_CloseRequested"/><para/>
-		/// <see cref="Node._EnterTree"/></summary>
+        /// The machine node is needed for interacting with game switches<para/>
+        /// This adds an event to <see cref="Root_CloseRequested"/><para/>
+        /// <see cref="Node._EnterTree"/></summary>
         public override void _EnterTree()
 		{
 			base._EnterTree();
@@ -135,8 +153,8 @@ namespace PinGod.Core.Service
                 //	SetWindowFromAdjustments();
             }
 
-            //Setup a switch developer window if enabled and exists
-            if (_switchWindowEnabled && _switchWindow != null) CallDeferred(nameof(SetUpSwitchWindow));
+            //set up a tools pane so the developer can enable other windows from it.			
+            if (_toolsWindowEnabled && _toolsWindow != null) CallDeferred(nameof(SetUpToolsWindow));
             else { Logger.Debug(nameof(WindowActionsNode), ": switch window not enabled or scene isn't set"); }
         }
 
@@ -144,21 +162,96 @@ namespace PinGod.Core.Service
 
 		private void Root_CloseRequested() => Quit();
 
-        /// <summary> Creates the <see cref="_switchWindow"/> </summary>
+        /// <summary> Creates the <see cref="_toolsWindow"/> </summary>
+        private void SetUpToolsWindow()
+        {
+			//create tools pane, init packed scene will do nothing, the scene is in the scene
+			var toolsWinInstance = _toolsWindow.Instantiate() as WindowPinGod;
+
+			//the root of the window
+			var winActionsWin = this.GetTree().Root;
+            winActionsWin.GuiEmbedSubwindows = _embedSubWindow;
+            winActionsWin.CallDeferred("add_child", toolsWinInstance);
+            winActionsWin.GrabFocus();
+            winActionsWin.CloseRequested += RootWin_CloseRequested;
+
+            (toolsWinInstance as ToolsPanelWindow).ShowHideWindow += ToolsWindowPane_OnShowHideWindow;
+
+            //returns the scenes in this root
+            var windows = toolsWinInstance.GetChildren();//.Where(x => x.GetType() == typeof(Window));
+			Logger.Info("windows: " + string.Join(',', windows.Select(x => x.Name)));
+		}
+
+
+        /// <summary>callback event from a signal in tools window</summary>
+        /// <param name="buttonName"></param>
+        /// <param name="show"></param>
+        private void ToolsWindowPane_OnShowHideWindow(string buttonName, bool show)
+        {
+			//check if the developer has added a window under the same name as the button
+            if (_toolsPanewindows?.ContainsKey(buttonName) ?? false)
+			{
+                if (!_windowsInstances.ContainsKey(buttonName))
+                {
+					var winInstance = _toolsPanewindows[buttonName]
+						.Instantiate() as WindowPinGod;
+
+					if (winInstance == null)
+					{
+                        Logger.WarningRich($"couldn't instantiate the windows scene as a WindowPinGod Node");
+                        return;
+					}
+					else
+					{
+						//init any scenes that belong to this window
+						winInstance.InitPackedScene();
+
+                        var root = this.GetTree().Root;
+						root.CallDeferred("add_child", winInstance);
+						
+						_windowsInstances.Add(buttonName, winInstance);						
+
+                        winInstance.CloseRequested += () => winInstance.Hide();
+                    }
+                }
+				else
+				{
+					var instance = _windowsInstances[buttonName];
+					if( instance != null)
+					{
+                        if(!instance.Visible && show) instance.Show();
+						else instance.Hide();
+                    }
+                }
+            }
+			else
+			{
+				Logger.WarningRich("no windows found in the tools pane window scenes named:" + buttonName);
+			}            
+		}
+
+        /// <summary> Creates the <see cref="_toolsWindow"/> </summary>
         private void SetUpSwitchWindow()
         {
-            //create window and add scene to instance
-            var window = _switchWindow.Instantiate() as WindowPinGod;
-            window.InitPackedScene();
-            //add window to the root window
-            var rootWin = this.GetTree().Root;
-            rootWin.GuiEmbedSubwindows = false;
-            rootWin.CallDeferred("add_child", window);
+			////init the packed scene for the switch window
+			//var window = _sw.Instantiate() as WindowPinGod;
+			//window.InitPackedScene();
 
-            rootWin.GrabFocus();
-            //returns the scenes in this root
-            var windows = rootWin.GetChildren();//.Where(x => x.GetType() == typeof(Window));
-            Logger.Info("windows: " + string.Join(',', windows.Select(x => x.Name)));
+			////the root of the window
+			//_switchWindowInstance = this.GetTree().Root;
+			//_switchWindowInstance.GuiEmbedSubwindows = _embedSubWindow;
+			//_switchWindowInstance.CallDeferred("add_child", window);
+			//_switchWindowInstance.GrabFocus();
+			//_switchWindowInstance.CloseRequested += RootWin_CloseRequested;
+
+			////returns the scenes in this root
+			//var windows = _switchWindowInstance.GetChildren();//.Where(x => x.GetType() == typeof(Window));
+			//Logger.Info("windows: " + string.Join(',', windows.Select(x => x.Name)));
+		}
+
+        private void RootWin_CloseRequested()
+        {
+			Logger.Debug($"main window closing");
         }
 
         /// <summary>
@@ -173,7 +266,7 @@ namespace PinGod.Core.Service
 			}
 		}
 
-		/// <summary>Toggles the border to borderless</summary>
+		/// <summary>Toggles the border on the main game window</summary>
 		public virtual void ToggleBorder()
 		{
 			//DisplaySettings.ToggleWinFlag(

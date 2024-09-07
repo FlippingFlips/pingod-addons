@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://0hwmrwnnixho"]
+
+[ext_resource type="Script" path="res://addons/pingod-windows/console/window/ConsoleWindow.cs" id="1_4sjsy"]
+
+[node name="ConsoleWindow" type="Window"]
+title = "Log Console Window"
+position = Vector2i(50, 96)
+size = Vector2i(1460, 720)
+transient = true
+mouse_passthrough = true
+max_size = Vector2i(1920, 1080)
+content_scale_mode = 1
+script = ExtResource("1_4sjsy")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ScrollContainer"]
+layout_mode = 2
+text = "logs must be enabled user://logs/godot.log"
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -31.0
+grow_horizontal = 0
+grow_vertical = 0
+tooltip_text = "hack to get the logs or stdout reading from godot.log. , You can see the output anyway but nice in one display."
+text = "Refresh"
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]

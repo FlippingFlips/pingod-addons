@@ -150,7 +150,7 @@ namespace PinGod.Core.Service
         /// </summary>
         public void Stop()
         {
-            if (!tokenSource.IsCancellationRequested)
+            if (!tokenSource?.IsCancellationRequested ?? false)
             {
                 tokenSource?.Cancel();
             }
