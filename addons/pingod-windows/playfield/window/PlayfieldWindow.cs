@@ -62,7 +62,7 @@ public partial class PlayfieldWindow : WindowPinGod
 
 		if(name == "_record") 
 		{ 
-			
+			//TODO: doing nothing....
 		}
 		else if (state == 2)
 		{

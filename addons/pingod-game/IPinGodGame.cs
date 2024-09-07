@@ -401,7 +401,7 @@ public interface IPinGodGame
     /// <summary>
     /// Sets MultiBall running in the trough and Emits <see cref="PinGodBase.MultiballStarted"/>
     /// </summary>
-    /// <param name="numOfBalls">Number of balls to save. A 2 ball multiball would be 2</param>
+    /// <param name="numOfBalls">Num of balls to save. A 2 ball multiball would be 2</param>
     /// <param name="ballSaveTime"></param>
     /// <param name="pulseTime">Delay for the trough in multi-ball</param>
     void StartMultiBall(byte numOfBalls, byte ballSaveTime = 20, float pulseTime = 1);

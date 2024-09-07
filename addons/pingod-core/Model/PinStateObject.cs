@@ -4,7 +4,7 @@
     /// <summary> Base state object machine coil, led, lamp</summary>
     public partial class PinStateObject
     {
-        /// <summary> Number</summary>
+        /// <summary> Num</summary>
         public byte Num { get; set; }
 
         /// <summary> Light state </summary>

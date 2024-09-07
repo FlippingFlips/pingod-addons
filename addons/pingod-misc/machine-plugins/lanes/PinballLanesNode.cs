@@ -11,7 +11,7 @@ namespace PinGod.EditorPlugins
     public partial class PinballLanesNode : PinGodGameMode
     {
         bool[] _lanesCompleted;
-        private byte[] _laneSwitchNums;
+        private uint[] _laneSwitchNums;
 
         #region Exports
         [Export] bool _flipper_changes_lanes = true;
@@ -70,7 +70,7 @@ namespace PinGod.EditorPlugins
                 else
                 {
                     _lanesCompleted = new bool[_lane_switches.Length];
-                    _laneSwitchNums = new byte[_lane_switches.Length];
+                    _laneSwitchNums = new uint[_lane_switches.Length];
                     for (int i = 0; i < _lane_switches.Length; i++)
                     {
                         _laneSwitchNums[i] = Machine.Switches[_lane_switches[i]].Num;
