@@ -9,7 +9,7 @@ public class PinGodGameConfigOverride
     /// <summary>Level of output log. written logs found in userdatadir/logs/godot.log</summary>
 	public LogLevel LogLevel { get; set; } = LogLevel.Verbose;
 
-    /// <summary>Display tools panel buttons to open developer windows?</summary>
+    /// <summary>DisplayExtenstions tools panel buttons to open developer windows?</summary>
 	public bool ToolsPaneEnabled { get; set; } = false;
 
     /// <summary>WINDOWS: for sharing events with a memory map with simulators and the like</summary>

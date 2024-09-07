@@ -64,11 +64,11 @@ namespace PinGod.Core.Service
 			if (_adjustments == null)
 			{
 				_adjustments = Activator.CreateInstance<T>();
-				_projectDisplaySettings = Display.GetDisplayProjectSettings();
+				_projectDisplaySettings = DisplayExtensions.GetDisplayProjectSettings();
 				_adjustments.Display = _projectDisplaySettings;
 
-				//_adjustments.Display.WidthDefault = _adjustments.Display.Width;
-				//_adjustments.Display.HeightDefault = _adjustments.Display.Height;
+				//_adjustments.DisplayExtensions.WidthDefault = _adjustments.DisplayExtensions.Width;
+				//_adjustments.DisplayExtensions.HeightDefault = _adjustments.DisplayExtensions.Height;
 
 				Logger.Info(nameof(Adjustments), ": adjustments loaded from project settings");
 			}

@@ -457,25 +457,25 @@ namespace PinGod.Game
 
             //OLD WAY CHANGING SETTINGS. TODO: STILL MAY WANT ContentScaleMode, AspectOption
 
-            //var w = Adjustments.Display.Width;
-            //var h = Adjustments.Display.Height;
+            //var w = Adjustments.DisplayExtensions.Width;
+            //var h = Adjustments.DisplayExtensions.Height;
             //LogInfo(nameof(PinGodGame), $":window: resolution from adjustments: ", $"{w}x{h}");
 
             ////scale and aspect ratio
-            //Display.SetContentScale(this, (Window.ContentScaleModeEnum)Adjustments.Display.ContentScaleMode);
-            //Display.SetAspectOption(this, (Window.ContentScaleAspectEnum)Adjustments.Display.AspectOption);
+            //DisplayExtensions.SetContentScale(this, (Window.ContentScaleModeEnum)Adjustments.DisplayExtensions.ContentScaleMode);
+            //DisplayExtensions.SetAspectOption(this, (Window.ContentScaleAspectEnum)Adjustments.DisplayExtensions.AspectOption);
 
             ////on top
-            //Display.SetAlwaysOnTop(Adjustments.Display.AlwaysOnTop);
+            //DisplayExtensions.SetAlwaysOnTop(Adjustments.DisplayExtensions.AlwaysOnTop);
             ////OS.MoveWindowToForeground();
 
             //var size = DisplayServer.WindowGetSize();
             //var pos = DisplayServer.WindowGetPosition();
-            //LogInfo(nameof(PinGodGame), $":window: size:{size.X}x{size.Y} pos:{pos.X},{pos.Y}, onTop: {Adjustments.Display.AlwaysOnTop}");
+            //LogInfo(nameof(PinGodGame), $":window: size:{size.X}x{size.Y} pos:{pos.X},{pos.Y}, onTop: {Adjustments.DisplayExtensions.AlwaysOnTop}");
 
 
             ////full screen        
-            //if (Adjustments.Display.FullScreen)
+            //if (Adjustments.DisplayExtensions.FullScreen)
             //    DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
 
             //title
