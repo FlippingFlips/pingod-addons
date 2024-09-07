@@ -79,6 +79,8 @@ namespace PinGod.Game
         public bool IsTilted { get; set; }
         public LogLevel LogLevel { get; set; } = LogLevel.Info;
         public MachineNode MachineNode { get; private set; }
+        /// <summary>Developer config</summary>
+        public static PinGodGameConfigOverride PinGodOverrideConfig { get; internal set; }
         public IPinGodPlayer Player { get; private set; }
         public List<IPinGodPlayer> Players { get; set; }
         public List<IPinGodPlayer> PlayersLastGame { get; set; }
@@ -96,6 +98,11 @@ namespace PinGod.Game
             {
                 //LogDebug(nameof(PinGodGame), $":_EnterTree. {PinGodGameAddOn.VERSION}");
                 CmdArgs = GetCommandLineArgs();
+
+                if (PinGodOverrideConfig == null)
+                    PinGodOverrideConfig = new();
+
+                PinGodOverrideConfig?.Load();
 
                 if (HasNode(Paths.ROOT_AUDIOMAN))
                 {
@@ -344,6 +351,8 @@ namespace PinGod.Game
         public virtual void PlayVoice(string name, string bus = "Voice") => AudioManager?.PlayVoice(name, bus);
         public virtual void Quit()
         {
+            PinGodOverrideConfig.Save();
+
             //return if we've already quit
             if (this.QuitRequested) return;
             this.QuitRequested = true;
