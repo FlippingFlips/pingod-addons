@@ -2,15 +2,13 @@ using Godot;
 using PinGod.Core;
 
 #if TOOLS
-
 namespace PinGod.AutoLoad
 {
-    /// <summary> AudioManagerPlugin enabled in plugins menu </summary>
+    /// <summary> AudioManagerPlugin enabled in plug-ins menu </summary>
     [Tool]
 	public partial class AudioManagerPlugin : PinGodEditorPlugin
 	{
         public AudioManagerPlugin() : base("res://addons/pingod-audio/Node/", "AudioManager") { }
-
         public override void _EnterTree() => base._EnterTree();
         public override void _ExitTree() => base._ExitTree();
 
@@ -44,5 +42,4 @@ namespace PinGod.AutoLoad
         }
     }
 }
-
 #endif
