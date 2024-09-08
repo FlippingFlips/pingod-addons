@@ -149,6 +149,8 @@ namespace PinGod.Game
         {
             base._Ready();
 
+            LogLevel = PinGodOverrideConfig.LogLevel;
+
             //adjustments from root            
             if (HasNode(Paths.ROOT_ADJUSTMENTS))
             {
@@ -156,8 +158,8 @@ namespace PinGod.Game
                 if (node != null)
                 {
                     if(node._adjustments != null)
-                    {
-                        Logger.LogLevel = node._adjustments.LogLevel;
+                    {                        
+                        node.LogLevel = PinGodOverrideConfig.LogLevel;
                         Logger.Debug(nameof(PinGodGame), nameof(_EnterTree), ": adjustments and audits module found...");
                         Adjustments = node._adjustments;
                     }

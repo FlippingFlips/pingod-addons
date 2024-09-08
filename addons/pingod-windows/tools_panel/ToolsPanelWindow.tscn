@@ -45,12 +45,3 @@ tooltip_text = "SWITCHES"
 toggle_mode = true
 text = "PLAYFIELD"
 icon = ExtResource("3_yd428")
-
-[node name="Console" type="Button" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-tooltip_text = "enable switch window"
-toggle_mode = true
-text = "CONSOLE"
-icon = ExtResource("3_yd428")

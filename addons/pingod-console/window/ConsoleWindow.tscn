@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=3 uid="uid://0hwmrwnnixho"]
+
+[ext_resource type="Script" path="res://addons/pingod-console/window/ConsoleWindow.cs" id="1_4sjsy"]
+
+[node name="ConsoleWindow" type="Window"]
+transparent_bg = true
+title = "Log Console Window"
+position = Vector2i(50, 50)
+size = Vector2i(1300, 300)
+transient = true
+transparent = true
+max_size = Vector2i(1920, 1080)
+content_scale_mode = 1
+script = ExtResource("1_4sjsy")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+follow_focus = true
+vertical_scroll_mode = 2
+
+[node name="Label" type="RichTextLabel" parent="VBoxContainer/Control"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_mode = 2
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+fit_content = true
+scroll_following = true
+autowrap_mode = 2
+selection_enabled = true
+drag_and_drop_selection_enabled = false
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+placeholder_text = "console commands TODO:"
+virtual_keyboard_type = 1
+clear_button_enabled = true

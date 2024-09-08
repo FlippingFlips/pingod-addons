@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7bp3v75wsfar"]
+
+[ext_resource type="Script" path="res://addons/pingod-console/PinGodConsole.cs" id="1_agi1e"]
+[ext_resource type="PackedScene" uid="uid://0hwmrwnnixho" path="res://addons/pingod-console/window/ConsoleWindow.tscn" id="2_vylg2"]
+
+[node name="PinGodConsole" type="Node"]
+script = ExtResource("1_agi1e")
+_consoleWindowScene = ExtResource("2_vylg2")

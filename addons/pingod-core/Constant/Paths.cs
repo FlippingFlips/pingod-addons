@@ -21,6 +21,9 @@ public static class Paths
     public const string ROOT_MACHINE = "/root/Machine";
 
     /// <summary> base path to access singleton</summary>
+    public const string ROOT_CONSOLE = "/root/PinGodConsole";
+
+    /// <summary> base path to access singleton</summary>
     public const string ROOT_PINGODGAME = "/root/PinGodGame";
 
     /// <summary> base path to access singleton</summary>
