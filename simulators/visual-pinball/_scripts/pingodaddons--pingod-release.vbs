@@ -11,12 +11,13 @@ On Error Goto 0
 ' SET DEBUG OR RELEASE
 ' ----------------------------------------------------------------------------------------
 'PinGod Debug
-Const IsDebug = True
-Const GameDirectory = "..\..\" ' Loads the `project.godot` from the addons demo
+'Const IsDebug = True
+'Const GameDirectory = "..\..\" ' Loads the `project.godot` from the addons demo or your project
 
 'PinGod Release - Use these for release versions
-'Const IsDebug = False ' set false to load an export
-'Const GameDirectory = ".\PinGod.Demo.exe" 'exported game
+Const IsDebug = False ' set false to load an export
+Const GameDirectory = "..\..\win.exe" 'exported game from Github. Providing controller installed this will run out of the box
+
 ' ----------------------------------------------------------------------------------------
 ' LoadPinGoVpController = Requires modded Core Vbs for different switches csharp. PinGod.vbs, core_csharp.vbs
 ' https://github.com/FlippingFlips/pingod-controller-com/releases
