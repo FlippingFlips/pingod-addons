@@ -1,0 +1,79 @@
+[gd_scene load_steps=5 format=3 uid="uid://dhri4i8aeruj0"]
+
+[ext_resource type="Theme" uid="uid://bcbhvghnhmgd7" path="res://addons/pingod-windows/playfield/scene/playfield_button_theme.tres" id="1_1atur"]
+[ext_resource type="Script" path="res://addons/pingod-windows/playfield/scene/PlayfieldControl.cs" id="2_q55or"]
+[ext_resource type="JSON" path="res://machine.json" id="3_houxr"]
+[ext_resource type="Texture2D" uid="uid://bpc1yms62oy32" path="res://addons/pingod-assets/img/pingodaddons-demo-blueprint.png" id="4_2ex5s"]
+
+[node name="Control" type="Control"]
+custom_minimum_size = Vector2(400, 908)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1520.0
+offset_bottom = -172.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_1atur")
+script = ExtResource("2_q55or")
+machinejson = ExtResource("3_houxr")
+
+[node name="PlayfieldTextureRect" type="TextureRect" parent="."]
+texture_repeat = 1
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_2ex5s")
+expand_mode = 1
+
+[node name="Buttons" type="Control" parent="."]
+editor_description = "Most buttons are toggles, but some you want not to toggle, like targets, coin + start buttons. Duplicate a button give it a name that matches your switch."
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_1atur")
+
+[node name="AllTroughButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 264.0
+offset_top = 874.0
+offset_right = 462.0
+offset_bottom = 901.0
+rotation = -0.557953
+scale = Vector2(0.482606, 0.723905)
+toggle_mode = true
+text = "Activate Trough Switches"
+
+[node name="ResetGameButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 13.0445
+offset_top = 876.592
+offset_right = 211.044
+offset_bottom = 911.592
+rotation = 0.00191092
+scale = Vector2(0.261378, 0.66501)
+theme_override_font_sizes/font_size = 22
+text = "reset"
+
+[node name="RecordingOptionButton" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 25.0445
+offset_top = 810.592
+offset_right = 114.044
+offset_bottom = 837.592
+item_count = 3
+popup/item_0/text = "Off"
+popup/item_1/text = "On"
+popup/item_1/id = 1
+popup/item_2/text = "playback"
+popup/item_2/id = 2
