@@ -9,8 +9,8 @@ _ball_search_coils = PackedStringArray("mballSaucer")
 _ball_search_stop_switches = PackedStringArray("mballSaucer", "trough0", "trough1", "trough2", "trough3")
 machinejson = ExtResource("2_iadmk")
 _coils = {
-"auto_plunger": 3,
-"flippers": 31,
+"autoPlunger": 3,
+"flippersRelay": 31,
 "mballSaucer": 4,
 "trough": 0
 }
@@ -44,3 +44,4 @@ _switches = {
 "trough3": 30,
 "up": 6
 }
+_auto_plunge_solenoid = "autoPlunger"

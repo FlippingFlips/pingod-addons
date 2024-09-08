@@ -440,6 +440,7 @@ public partial class MachineNode : Node
                     foreach (var driver in MachineProcJson.PRCoils)
                     {
                         driver.Num = (byte)driver.NumberPROC;
+
                         coils.Add(driver.Name, driver.Num);
                     }
                 }
