@@ -57,7 +57,7 @@ public partial class MachineNode : Node
     public bool GameInPlay { get; set; }
 
     /// <summary>loaded machine configuration from a PROC json file</summary>
-    public MachineProcJson MachineProcJson { get; private set; }
+    public MachineProcJson MachineProcJson { get; protected set; }
 
     #region Godot Overrides
     /// <summary>

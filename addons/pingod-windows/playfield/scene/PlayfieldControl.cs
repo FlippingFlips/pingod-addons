@@ -47,15 +47,14 @@ public partial class PlayfieldControl : Control
                                 Size = buttonSize
                             };
 
+                            _buttonsCanvas.AddChild(btn);
                             if (item.XPos.HasValue && item.YPos.HasValue)
                             {
                                 var posX = Mathf.Remap(item.XPos.Value, 0, playfieldSizeMm.X, 0, this.Size.X);
                                 var posY = Mathf.Remap(item.YPos.Value, 0, playfieldSizeMm.Y, 0, this.Size.Y);
 
                                 btn.Position = new Vector2(posX + (btn.Size.X / 2), posY + (btn.Size.Y));
-                            }
-
-                            _buttonsCanvas.AddChild(btn);
+                            }                            
 
                             btn.Connect("pressed", Callable.From(() => _on_pressed(btn)));
 
