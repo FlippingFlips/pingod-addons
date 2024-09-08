@@ -150,8 +150,8 @@ namespace PinGod.Core.Service
 				_adjustments = GetNodeOrNull<AdjustmentsNode>("/root/Adjustments")?._adjustments;
 
                 //TODO: bring some display options back that cannot be done command line
-                //if (_setDisplayFromAdjustments)
-                //	SetWindowFromAdjustments();
+                if (_setDisplayFromAdjustments)
+					SetWindowFromAdjustments();
             }
 
 			//set to view the tools panel from the static config
@@ -174,6 +174,11 @@ namespace PinGod.Core.Service
 
 			//the root of the window
 			var winActionsWin = this.GetTree().Root;
+			var subWindows = winActionsWin.GetEmbeddedSubwindows();
+			foreach (var item in subWindows)
+			{
+				item.Hide();
+			}
             winActionsWin.GuiEmbedSubwindows = PinGodGameConfigOverride.EmbedSubWindows;
             winActionsWin.CallDeferred("add_child", toolsWinInstance);
             winActionsWin.GrabFocus();
@@ -246,6 +251,7 @@ namespace PinGod.Core.Service
 		{
 			if (_adjustments != null)
 			{
+				//DisplayExtensions.ToggleWinFlag(DisplayServer.WindowFlags.ResizeDisabled);
 				DisplayExtensions.SetSize(_adjustments.Display.Width, _adjustments.Display.Height);
                 DisplayExtensions.SetPosition(_adjustments.Display.X, _adjustments.Display.Y);
 			}

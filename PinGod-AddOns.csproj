@@ -23,8 +23,11 @@
     <!--INCLUDE GD SCRIPT FILES. DEMO PURPOSES-->
     <None Include="addons\**\*.gd" />
     <None Include="addons\**\**\*.gd" />
+    <Compile Remove="addons\pingod-modes\trough\**" />
     <Compile Remove="simulator\**" />
+    <EmbeddedResource Remove="addons\pingod-modes\trough\**" />
     <EmbeddedResource Remove="simulator\**" />
+    <None Remove="addons\pingod-modes\trough\**" />
     <!--INCLUDE LOCALISATION-->
     <None Include="addons\pingod-assets\Localization\pingod_default_lang.csv" />
     <!--PROJECT, EXPORT PRESETS, DEMO SCENE-->
@@ -37,7 +40,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="addons\pingod-core\BallStacks\" />
-    <Folder Include="addons\pingod-modes\trough\" />
     <Folder Include="addons\pingod-windows\switch_panel\" />
   </ItemGroup>
 </Project>
