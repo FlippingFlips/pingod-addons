@@ -1,11 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://cblilu6qubmxa"]
+[gd_scene load_steps=3 format=3 uid="uid://cblilu6qubmxa"]
 
 [ext_resource type="Script" path="res://addons/pingod-machine/MachineNode.cs" id="1_6vah2"]
+[ext_resource type="JSON" path="res://machine.json" id="2_iadmk"]
 
 [node name="Machine" type="Node"]
 script = ExtResource("1_6vah2")
 _ball_search_coils = PackedStringArray("mballSaucer")
 _ball_search_stop_switches = PackedStringArray("mballSaucer", "trough0", "trough1", "trough2", "trough3")
+machinejson = ExtResource("2_iadmk")
 _coils = {
 "auto_plunger": 3,
 "flippers": 31,

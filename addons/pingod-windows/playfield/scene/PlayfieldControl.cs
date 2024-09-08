@@ -1,80 +1,75 @@
 using Godot;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
 
 public partial class PlayfieldControl : Control
 {
-	[Export] Json machinejson;
-
+    [ExportGroup("Playfield")]
     /// <summary>20.25x42" default</summary>
     [Export] Vector2 playfieldSizeMm = new Vector2(514.350f, 1066.800f);
+    [Export] Vector2 buttonSize = new Vector2(15, 15);
+    [Export] bool skipNotUsedSwitches = true;
 
     [Signal] public delegate void switch_activeEventHandler(string name, byte state);
 
     List<Button> _troughBtns;
-
-    [Export] bool skipNotUsedSwitches = true;
-
     Control _buttonsCanvas;
-    ProcMachineSwitches SwitchConfig;    
 
-    // Called when the node enters the scene tree for the first time.
+    /// <summary>Will auto layout switches providing the you have imported from machine.json.<para/>
+    /// Loading of the machine.json is optional in the <see cref="MachineNode"/></summary>
     public override void _Ready()
 	{
-		if(machinejson != null)
-		{
-			var json = Json.Stringify(machinejson.Data);
-            SwitchConfig = JsonSerializer.Deserialize<ProcMachineSwitches>(json);
+        var machine = GetNodeOrNull<MachineNode>(Paths.ROOT_MACHINE);
+        {
+            if (machine?.MachineProcJson != null)
+            {
+                _troughBtns = new List<Button>();
 
-            _troughBtns = new List<Button>();
+                if (machine.MachineProcJson.PRSwitches?.Any() ?? false)
+                {
+                    _buttonsCanvas = GetNode<Control>("Buttons");
 
-			if(SwitchConfig?.PRSwitches?.Any() ?? false )
-			{
-				_buttonsCanvas = GetNode<Control>("Buttons");
+                    var troughButton = GetNode<Button>("AllTroughButton");
+                    troughButton.Pressed += _on_trough_pressed;
 
-                var troughButton = GetNode<Button>("AllTroughButton");
-                troughButton.Pressed += _on_trough_pressed;
-
-                try
-				{
-                    foreach (var item in SwitchConfig.PRSwitches)
+                    try
                     {
-                        if (skipNotUsedSwitches && item.Name.Contains("not_used"))
-                            continue;
-
-                        var btn = new Button()
+                        foreach (var item in machine.MachineProcJson.PRSwitches)
                         {
-                            Name = item.Name,
-                            ToggleMode = true,
-                            TooltipText = item.Name,
-                            Size = new Vector2(15, 15)
-                        };
+                            if (skipNotUsedSwitches && item.Name.Contains("not_used"))
+                                continue;
 
-                        if (item.XPos.HasValue && item.YPos.HasValue)
-                        {
-                            var posX = Mathf.Remap(item.XPos.Value, 0, playfieldSizeMm.X, 0, this.Size.X);
-                            var posY = Mathf.Remap(item.YPos.Value, 0, playfieldSizeMm.Y, 0, this.Size.Y);
+                            var btn = new Button()
+                            {
+                                Name = item.Name,
+                                ToggleMode = true,
+                                TooltipText = item.Name,
+                                Size = buttonSize
+                            };
 
-                            btn.Position = new Vector2(posX + (btn.Size.X / 2), posY + (btn.Size.Y));
+                            if (item.XPos.HasValue && item.YPos.HasValue)
+                            {
+                                var posX = Mathf.Remap(item.XPos.Value, 0, playfieldSizeMm.X, 0, this.Size.X);
+                                var posY = Mathf.Remap(item.YPos.Value, 0, playfieldSizeMm.Y, 0, this.Size.Y);
+
+                                btn.Position = new Vector2(posX + (btn.Size.X / 2), posY + (btn.Size.Y));
+                            }
+
+                            _buttonsCanvas.AddChild(btn);
+
+                            btn.Connect("pressed", Callable.From(() => _on_pressed(btn)));
+
+                            var name = btn.Name.ToString();
+                            if (name.StartsWith("trough"))
+                                _troughBtns.Add(btn);
                         }
-                        
-                        _buttonsCanvas.AddChild(btn);
-
-                        btn.Connect("pressed", Callable.From(() => _on_pressed(btn)));
-
-                        var name = btn.Name.ToString();
-                        if (name.StartsWith("trough"))
-                            _troughBtns.Add(btn);                            
-
-
+                    }
+                    catch (System.Exception ex)
+                    {
+                        Logger.Error(ex.ToString());
                     }
                 }
-				catch (System.Exception ex)
-				{
-                    Logger.Error(ex.ToString());    
-				}
-			}
+            }
         }
 	}
 
