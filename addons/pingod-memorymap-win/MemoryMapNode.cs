@@ -120,7 +120,10 @@ namespace PinGod.Core.Service
                 PinGodGame.PinGodOverrideConfig.MemoryMapWriteDelay,
                 PinGodGame.PinGodOverrideConfig.MemoryMapReadDelay,
 				CoilTotal, LampTotal, LedTotal, SwitchTotal, _vpSwitchCommand);
-		}
+
+			//add a ref to the mapper pointing to this node
+			mMap._mMapNodeRef = this;
+        }
 
 		public int CoilCount() => mMap.TOTAL_COIL;
 		internal int LampCount() => mMap.TOTAL_LAMP;
@@ -162,6 +165,37 @@ namespace PinGod.Core.Service
 		/// Starts the memory map tasks
 		/// </summary>
 		public virtual void Start() => mMap?.Start();
+
+		public virtual void ProcessGameState(int syncState)
+		{
+            var ev = new InputEventAction() { Action = "", Pressed = true };
+            switch ((GameSyncState)syncState)
+            {
+                case GameSyncState.quit:
+                    ev.Action = "quit";
+                    var game = GetNodeOrNull("/root/WindowActions") as WindowActionsNode;
+					game?.Quit();
+                    break;
+                case GameSyncState.pause: //pause / resume on a toggle, not held down
+                case GameSyncState.resume:
+                case GameSyncState.reset:
+                    ev.Action = syncState.ToString();
+                    ev.Pressed = true;
+                    break;
+                case GameSyncState.None:
+                case GameSyncState.started:
+                default:
+                    break;
+            }
+
+            if (!string.IsNullOrWhiteSpace(ev.Action))
+            {
+                //Input.ParseInputEvent(ev);
+
+
+				Logger.Verbose(nameof(MemoryMapNode), $": processed game state {ev.Action}");
+            }
+        }
 
 		/// <summary>
 		/// stops tasks and disposes of memory mapping
