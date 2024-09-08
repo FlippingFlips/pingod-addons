@@ -45,6 +45,7 @@ public partial class PauseAndSettingsScript : CanvasLayer
 		{
 			if (InputMap.HasAction("pause") && @event.IsActionPressed("pause"))
 			{
+				Logger.Verbose(nameof(PauseAndSettingsScript), "pause requested");
 				if (settingsDisplay?.Visible ?? false) return;
 				SetPaused(!_isPaused);
 				if (_isPaused) pauseLayer.Visible = true;
@@ -55,7 +56,8 @@ public partial class PauseAndSettingsScript : CanvasLayer
 		{
 			if (InputMap.HasAction("settings") && @event.IsActionPressed("settings"))
 			{
-				if (pauseLayer?.Visible ?? false) return;                
+                Logger.Verbose(nameof(PauseAndSettingsScript), "settings requested");
+                if (pauseLayer?.Visible ?? false) return;                
 				SetPaused(!_isPaused);
 				if (_isPaused) settingsDisplay.Visible = true;
 			}

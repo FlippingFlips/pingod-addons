@@ -12,7 +12,7 @@ namespace PinGod.EditorPlugins
         private Label _label;
 
         /// <summary>
-        /// Number of the lamp
+        /// Num of the lamp
         /// </summary>
         public int Number { get; set; }
 

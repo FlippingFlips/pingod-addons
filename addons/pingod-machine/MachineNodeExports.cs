@@ -13,6 +13,10 @@ public partial class MachineNode : Node
     /// <summary>How long to wait for ball searching and reset</summary>
     [Export] private int _ball_search_wait_time_secs = 10;
 
+    [ExportCategory("Machine Json Import")]
+    /// <summary>Machine json will override any Machine items added</summary>    
+    [Export] internal Json machinejson;
+
     [ExportCategory("Machine Items")]
     [Export] protected Dictionary<string, byte> _coils = new();
     [Export] protected Dictionary<string, byte> _lamps = new();

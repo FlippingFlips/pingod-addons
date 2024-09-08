@@ -5,9 +5,8 @@ using Godot.Collections;
 using PinGodAddOns.addons.pingod_machine;
 using PinGod.Core.Service;
 using PinGod.Core;
-using System.Reflection.PortableExecutable;
-using PinGod.Modes;
 using PinGod.Game;
+using System.Text.Json;
 
 /// <summary>
 /// Machine Godot Node. Holds all machine items before runtime in the scene file. <para/>
@@ -56,6 +55,9 @@ public partial class MachineNode : Node
     public int BallsLocked { get; set; }
 
     public bool GameInPlay { get; set; }
+
+    /// <summary>loaded machine configuration from a PROC json file</summary>
+    public MachineProcJson MachineProcJson { get; protected set; }
 
     #region Godot Overrides
     /// <summary>
@@ -326,7 +328,7 @@ public partial class MachineNode : Node
     public virtual void SetupBallSearch()
     {
         //ball search options
-        BallSearchOptions = new BallSearchOptions(_ball_search_coils, _ball_search_stop_switches, _ball_search_wait_time_secs, _ball_search_enabled);
+        BallSearchOptions = new BallSearchOptions(_ball_search_coils, _ball_search_stop_switches, null, _ball_search_wait_time_secs, _ball_search_enabled);
         //create and add a ball search timer
         BallSearchTimer = new Timer() { Autostart = false, OneShot = false };
         BallSearchTimer.Connect("timeout", new Callable(this, nameof(OnBallSearchTimeout)));
@@ -392,16 +394,71 @@ public partial class MachineNode : Node
         _recordingNode?.RecordEventByAction(action, state);
     }
 
-    /// <summary>
-    /// Adds custom machine items. Actions are created for switches if they do not exist
-    /// </summary>
+    /// <summary>Adds custom machine items to the Machine. Actions are created for switches if they do not exist</summary>
     /// <param name="coils"></param>
     /// <param name="switches"></param>
     /// <param name="lamps"></param>
     /// <param name="leds"></param>
-    protected virtual void AddCustomMachineItems(Dictionary<string, byte> coils,
-        Dictionary<string, byte> switches, Dictionary<string, byte> lamps, Dictionary<string, byte> leds)
+    protected virtual void AddCustomMachineItems(
+        Dictionary<string, byte> coils,
+        Dictionary<string, byte> switches,
+        Dictionary<string, byte> lamps,
+        Dictionary<string, byte> leds)
     {
+        //override the scene setup with a machine.json
+        //repopulate the collections from the json
+        if (this.machinejson != null)
+        {
+            var json = Json.Stringify(machinejson.Data);
+            MachineProcJson = JsonSerializer.Deserialize<MachineProcJson>(json);
+
+            Logger.Info(nameof(MachineNode), ": machine.json found, populating machine from the items found.");
+            
+            if (MachineProcJson.PRSwitches?.Any() ?? false)
+            {
+                //clear and add all switches found
+                switches.Clear();
+                foreach (var item in MachineProcJson.PRSwitches)
+                {
+                    item.Num = uint.Parse(item.Number);
+                    switches.Add(item.Name, (byte)item.Num);
+                }
+
+                //create new ball search options from the json
+                //sets all the reset, stop for ball searching on the switch
+                if (MachineProcJson.PRBallSearch != null)
+                {
+                    BallSearchOptions = new BallSearchOptions(
+                        MachineProcJson.PRBallSearch.PulseCoils.ToArray(),
+                        MachineProcJson.PRBallSearch.StopSwitches.Select(x => x.Key).ToArray(),
+                        MachineProcJson.PRBallSearch.ResetSwitches.Select(x => x.Key).ToArray());
+                }
+
+                if(MachineProcJson.PRCoils?.Any() ?? false)
+                {
+                    coils.Clear();
+                    foreach (var driver in MachineProcJson.PRCoils)
+                    {
+                        driver.Num = (byte)driver.NumberPROC;
+
+                        coils.Add(driver.Name, driver.Num);
+                    }
+                }
+
+                if(MachineProcJson.PRLeds?.Any() ?? false)
+                {
+                    leds.Clear();
+                    foreach (var led in MachineProcJson.PRLeds)
+                    {
+                        led.Num = (byte)led.NumberPROC;
+                        leds.Add(led.Name, led.Num);
+                    }
+                }
+            }
+        }
+
+        //Set up switches / coils from the scene
+        //ADD DRIVERS
         foreach (var coil in coils.Keys)
         {
             Machine.Coils.Add(coil, new PinStateObject(coils[coil]));
@@ -410,29 +467,23 @@ public partial class MachineNode : Node
         Logger.Debug(nameof(MachineNode), $":added coils {itemAddResult}");
         coils.Clear();
 
+        //ADD SWITCHES
         foreach (var sw in switches.Keys)
         {
             //create an action for the switch if it doesn't exist.
             var swVal = switches[sw];
             if (!InputMap.HasAction("sw" + swVal))
-            {
                 InputMap.AddAction("sw" + swVal);
-            }
 
             if (BallSearchOptions.StopSearchSwitches?.Any(x => x == sw) ?? false)
-            {
-                Machine.Switches.Add(sw, new PinGod.Core.Switch(sw, swVal, BallSearchSignalOption.Off));
-            }
+                Machine.Switches.Add(sw, new Switch(sw, swVal, BallSearchSignalOption.Off));
+            else if (BallSearchOptions.ResetSearchSwitches?.Any(x => x == sw) ?? false)
+                Machine.Switches.Add(sw, new Switch(sw, swVal, BallSearchSignalOption.Reset));
             else
-            {
-                Machine.Switches.Add(sw, new PinGod.Core.Switch(sw, swVal, BallSearchSignalOption.Reset));
-            }
+                Machine.Switches.Add(sw, new Switch(sw, swVal, BallSearchSignalOption.None));
         }
 
-        itemAddResult = string.Join(", ", switches.Keys);
-        //LogDebug($"pingod: added switches {itemAddResult}");
-        //switches.Clear();
-
+        //ADD LAMPS
         foreach (var lamp in lamps.Keys)
         {
             Machine.Lamps.Add(lamp, new PinStateObject(lamps[lamp]));
@@ -441,6 +492,7 @@ public partial class MachineNode : Node
         //LogDebug($"pingod: added lamps {itemAddResult}");
         lamps.Clear();
 
+        //ADD LEDS
         foreach (var led in leds.Keys)
         {
             Machine.Leds.Add(led, new PinStateObject(leds[led]));
@@ -557,14 +609,16 @@ public partial class MachineNode : Node
             {
                 _isNewBall = true;
                 _pingod.BallStarted = true;
-                Logger.Debug(nameof(MachineNode), ": ball started");
+                Logger.Debug(nameof(MachineNode), ": ball started. is set to start on lane.");
             }
             else if (_pingod.BallStarted)
             {
                 if (_ballSaver.IsBallSaveActive())
                 {
+                    Logger.Debug(nameof(MachineNode), ": ball saved, pulsing auto plunge");
                     PulseAutoPlunger();
                 }
+                else { Logger.Debug(nameof(MachineNode), ": plunger lane active"); }
             }
         }
         else
@@ -582,7 +636,6 @@ public partial class MachineNode : Node
         }
     }
 
-
     private void _trough_TroughSwitchActive(string name, byte value)
     {
         Logger.Debug(nameof(_trough_TroughSwitchActive), ":", name, "=", value);
@@ -593,7 +646,7 @@ public partial class MachineNode : Node
                 if (_ballSaver?.IsBallSaveActive() ?? false)
                 {
                     PulseTrough();
-                    _pingod.EmitSignal("BallSaved");
+                    _ballSaver.EmitSignal("BallSaved");
                 }
                 else
                 {

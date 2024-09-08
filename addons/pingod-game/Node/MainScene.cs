@@ -255,27 +255,37 @@ namespace PinGod.Core.Game
 					{
 						if (!string.IsNullOrWhiteSpace(_service_menu_scene_path))
 						{
-							//enter service menu					
-							InServiceMenu = true;
-
-							Task.Run(() =>
+							if(_resources?.HasResource(_service_menu_scene_path?.GetBaseName()) ?? false)
 							{
-								if (pinGod.GameInPlay)
-								{
-									var gameNode = CallDeferred("get_node_or_null", "Modes/Game").As<Node>();
-									gameNode?.QueueFree();
-								}
-								else
-								{
-									var attractNode = CallDeferred("get_node_or_null", "Modes/Attract").As<Node>();
-									attractNode?.QueueFree();
-								}									
+								//why was this here? from older godot?
+                                //Task.Run(() =>
+                                //{
 
-								//load service menu into modes
-								CallDeferred("_loaded", _resources?.GetResource(_service_menu_scene_path.GetBaseName()));
+                                //});
 
-								((PinGodGame)pinGod).CallDeferred("emit_signal", "ServiceMenuEnter");
-							});
+                                //enter service menu					
+                                InServiceMenu = true;
+
+                                if (pinGod.GameInPlay)
+                                {
+                                    var gameNode = CallDeferred("get_node_or_null", "Modes/Game").As<Node>();
+                                    gameNode?.QueueFree();
+                                }
+                                else
+                                {
+                                    var attractNode = CallDeferred("get_node_or_null", "Modes/Attract").As<Node>();
+                                    attractNode?.QueueFree();
+                                }
+
+                                //load service menu into modes
+                                CallDeferred("_loaded", _resources?.GetResource(_service_menu_scene_path?.GetBaseName()));
+
+                                ((PinGodGame)pinGod).CallDeferred("emit_signal", "ServiceMenuEnter");
+							}
+							else
+							{
+                                Logger.WarningRich(nameof(MainScene), ":", nameof(OnSwitchCommandHandler), ":[color=yellow]", " A Service menu scene wasn't provided in the Resources", "[/color]");
+                            }
 						}
 						else { Logger.WarningRich(nameof(MainScene), ":", nameof(OnSwitchCommandHandler), ":[color=yellow]", " A Service menu scene wasn't provided", "[/color]"); }
 					}
@@ -327,7 +337,7 @@ namespace PinGod.Core.Game
 
 		private void UnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
 		{
-			Logger.Error($"Unhandled exception {e.ExceptionObject}");
+			Logger.Error($"UnHandled exception {e.ExceptionObject}");
 		}
 	}
 

@@ -12,7 +12,7 @@ public abstract partial class PinGodEditorPlugin : EditorPlugin
 
     /// <summary> Base editorPlugin helper </summary>
     /// <param name="directory">path to plugin files</param>
-    /// <param name="name">name should match name of scene eg: Resources</param>
+    /// <param name="name">name should match name of scene eg: Resources. Base Name</param>
     public PinGodEditorPlugin(string directory, string name)
     {
         BaseName = name;
@@ -23,8 +23,8 @@ public abstract partial class PinGodEditorPlugin : EditorPlugin
     /// <returns></returns>
     public string AutoLoadScenePath() => ROOT_DIR + BaseName + ".tscn";
 
-    /// <summary> Create path name for overridable autoload scenes <para/>
-    /// </summary>
+    /// <summary> Create path name for over-ridable auto-load scenes <para/>
+    /// res://autoload/name.tscn </summary>
     /// <returns></returns>
     public string AutoLoadSceneOverridePath() => $"res://autoload/" + BaseName + ".tscn";
 

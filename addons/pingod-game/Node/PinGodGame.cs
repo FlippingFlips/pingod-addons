@@ -79,6 +79,8 @@ namespace PinGod.Game
         public bool IsTilted { get; set; }
         public LogLevel LogLevel { get; set; } = LogLevel.Info;
         public MachineNode MachineNode { get; private set; }
+        /// <summary>Developer config</summary>
+        public static PinGodGameConfigOverride PinGodOverrideConfig { get; internal set; }
         public IPinGodPlayer Player { get; private set; }
         public List<IPinGodPlayer> Players { get; set; }
         public List<IPinGodPlayer> PlayersLastGame { get; set; }
@@ -96,6 +98,11 @@ namespace PinGod.Game
             {
                 //LogDebug(nameof(PinGodGame), $":_EnterTree. {PinGodGameAddOn.VERSION}");
                 CmdArgs = GetCommandLineArgs();
+
+                if (PinGodOverrideConfig == null)
+                    PinGodOverrideConfig = new();
+
+                PinGodOverrideConfig?.Load();
 
                 if (HasNode(Paths.ROOT_AUDIOMAN))
                 {
@@ -142,6 +149,8 @@ namespace PinGod.Game
         {
             base._Ready();
 
+            LogLevel = PinGodOverrideConfig.LogLevel;
+
             //adjustments from root            
             if (HasNode(Paths.ROOT_ADJUSTMENTS))
             {
@@ -149,8 +158,8 @@ namespace PinGod.Game
                 if (node != null)
                 {
                     if(node._adjustments != null)
-                    {
-                        Logger.LogLevel = node._adjustments.LogLevel;
+                    {                        
+                        node.LogLevel = PinGodOverrideConfig.LogLevel;
                         Logger.Debug(nameof(PinGodGame), nameof(_EnterTree), ": adjustments and audits module found...");
                         Adjustments = node._adjustments;
                     }
@@ -232,7 +241,7 @@ namespace PinGod.Game
         public virtual void EnableFlippers(bool enabled)
         {
             FlippersEnabled = enabled;
-            Machine.SetCoil("flippers", enabled);
+            Machine.SetCoil("flippersRelay", enabled);
         }
         public virtual bool EndBall()
         {
@@ -344,6 +353,8 @@ namespace PinGod.Game
         public virtual void PlayVoice(string name, string bus = "Voice") => AudioManager?.PlayVoice(name, bus);
         public virtual void Quit()
         {
+            PinGodOverrideConfig.Save();
+
             //return if we've already quit
             if (this.QuitRequested) return;
             this.QuitRequested = true;
@@ -448,25 +459,25 @@ namespace PinGod.Game
 
             //OLD WAY CHANGING SETTINGS. TODO: STILL MAY WANT ContentScaleMode, AspectOption
 
-            //var w = Adjustments.Display.Width;
-            //var h = Adjustments.Display.Height;
+            //var w = Adjustments.DisplayExtensions.Width;
+            //var h = Adjustments.DisplayExtensions.Height;
             //LogInfo(nameof(PinGodGame), $":window: resolution from adjustments: ", $"{w}x{h}");
 
             ////scale and aspect ratio
-            //Display.SetContentScale(this, (Window.ContentScaleModeEnum)Adjustments.Display.ContentScaleMode);
-            //Display.SetAspectOption(this, (Window.ContentScaleAspectEnum)Adjustments.Display.AspectOption);
+            //DisplayExtensions.SetContentScale(this, (Window.ContentScaleModeEnum)Adjustments.DisplayExtensions.ContentScaleMode);
+            //DisplayExtensions.SetAspectOption(this, (Window.ContentScaleAspectEnum)Adjustments.DisplayExtensions.AspectOption);
 
             ////on top
-            //Display.SetAlwaysOnTop(Adjustments.Display.AlwaysOnTop);
+            //DisplayExtensions.SetAlwaysOnTop(Adjustments.DisplayExtensions.AlwaysOnTop);
             ////OS.MoveWindowToForeground();
 
             //var size = DisplayServer.WindowGetSize();
             //var pos = DisplayServer.WindowGetPosition();
-            //LogInfo(nameof(PinGodGame), $":window: size:{size.X}x{size.Y} pos:{pos.X},{pos.Y}, onTop: {Adjustments.Display.AlwaysOnTop}");
+            //LogInfo(nameof(PinGodGame), $":window: size:{size.X}x{size.Y} pos:{pos.X},{pos.Y}, onTop: {Adjustments.DisplayExtensions.AlwaysOnTop}");
 
 
             ////full screen        
-            //if (Adjustments.Display.FullScreen)
+            //if (Adjustments.DisplayExtensions.FullScreen)
             //    DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
 
             //title

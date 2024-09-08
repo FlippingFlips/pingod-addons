@@ -174,6 +174,9 @@ namespace PinGod.Core.Service
         }
 
         GameSyncState _lastGameState = GameSyncState.None;
+
+        internal MemoryMapNode _mMapNodeRef;
+
         /// <summary>
         /// Reads the buffer size <see cref="TOTAL_SWITCH"/> switch states from the memory map buffer at position 0. <para/>
         /// Acts on any new switch events found. <para/>
@@ -202,13 +205,19 @@ namespace PinGod.Core.Service
 
             switchBuffer = buffer;
 
-            //process game state from the memory only if it's not the saved state and state higher than started, for quit, pause, resume
+            //get the game state from first index
             _gameStateAccess.Read(0, out byte gameState);
             GameSyncState state = (GameSyncState)gameState;
+
+            //game state changed
             if (state != _lastGameState)
             {
                 Logger.Verbose(nameof(MemoryMap), $" game state changed:{state}");
+
+                //process the state, push the key onto the UI
+                //TODO: this used to work
                 ProcessGameState(state);
+
                 _lastGameState = state;
             }                            
         }
@@ -218,31 +227,11 @@ namespace PinGod.Core.Service
         /// </summary>
         /// <param name="syncState"></param>
         /// <returns></returns>
-        private string ProcessGameState(GameSyncState syncState)
+        private void ProcessGameState(GameSyncState syncState)
         {
-            var ev = new InputEventAction() { Action = "", Pressed = true };
-            switch (syncState)
-            {
-                case GameSyncState.quit:
-                    ev.Action = "ui_cancel";
-                    break;
-                case GameSyncState.pause: //pause / resume on a toggle, not held down
-                case GameSyncState.resume:
-                case GameSyncState.reset:
-                    ev.Action = syncState.ToString();
-                    ev.Pressed = true;
-                    break;
-                case GameSyncState.None:
-                case GameSyncState.started:
-                default:
-                    break;
-            }
-
-            if (!string.IsNullOrWhiteSpace(ev.Action))
-            {
-                Input.ParseInputEvent(ev);
-            }
-            return ev.Action;
+            _mMapNodeRef.CallDeferred(
+                nameof(MemoryMapNode.ProcessGameState),
+                (int)syncState);            
         }
 
         /// <summary>

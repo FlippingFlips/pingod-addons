@@ -82,7 +82,7 @@ public partial class DisplaySettingsScene : MarginContainer
     void _on_CheckButtonAlwaysOnTop_toggled(bool pressed)
     {
         Logger.Debug(nameof(DisplaySettingsScene), ":on top pressed " + pressed);
-        Display.SetAlwaysOnTop(pressed);
+        DisplayExtensions.SetAlwaysOnTop(pressed);
         ProjectSettings.SetSetting(SettingPaths.DisplaySetPaths.ALWAYS_ON_TOP, pressed);
         _displaySettings.AlwaysOnTop= pressed;
     }
@@ -123,7 +123,7 @@ public partial class DisplaySettingsScene : MarginContainer
         Vector2I wH = new Vector2I(1024,600);
         if(_displaySettings == null)
         {
-            var ps = Display.GetDisplayProjectSettings();
+            var ps = DisplayExtensions.GetDisplayProjectSettings();
             wH = new Vector2I(ps.Width, ps.Height);
         }
         else
@@ -131,7 +131,9 @@ public partial class DisplaySettingsScene : MarginContainer
             wH = new Vector2I(_displaySettings.WidthDefault, _displaySettings.HeightDefault);
         }
 
-        DisplayServer.WindowSetSize(wH);
+        var win = GetNode("/root") as Window;
+        win.Size = wH;
+        //DisplayServer.WindowSetSize(wH, 0);
     }
 
     void _on_StretchAspectOptionButton_item_selected(int index)

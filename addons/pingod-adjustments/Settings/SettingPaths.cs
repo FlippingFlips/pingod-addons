@@ -53,6 +53,8 @@ public static class SettingPaths
         /// </summary>
         public const string CONTENT_SCALE = "display/window/stretch/scale";
 
+        public const string EMBEDSUBWINDOWS = "display/window/subwindows/embed_subwindows";
+
         //display/window/size/mode
         //display/window/size/resizable
         //display/window/size/borderless
@@ -61,7 +63,6 @@ public static class SettingPaths
         //display/window/stretch/mode
         //display/window/stretch/aspect
         //display/window/stretch/scale
-        //display/window/subwindows/embed_subwindows
 
         //editor
         //run/window_placement/rect_custom_position
