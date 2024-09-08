@@ -57,8 +57,9 @@ jobs:
           
           # copy machine json to use the positions and machine config
           cp "machine.json" "/home/runner/.local/share/godot/builds/win/machine.json"
-          # default relase cfg, no extra windows, log level high
+          # default relase cfg, no extra windows, log level high. This also needs copying with the table
           cp "PinGod-AddOns.cfg" "/home/runner/.local/share/godot/builds/win/PinGod-AddOns.cfg"
+          cp "PinGod-AddOns.cfg" "simulators/visual-pinball/PinGod-AddOns.cfg"
 
           # zip game folder
           7z a -tzip "pingod-addons-gamebuild--(${{ github.ref_name }}).zip" "/home/runner/.local/share/godot/builds/win/*"
@@ -67,6 +68,7 @@ jobs:
           7z a -tzip "pingod-addons-gamebuild--(${{ github.ref_name }}).zip" "simulators/visual-pinball/_scripts"
           7z a -tzip "pingod-addons-gamebuild--(${{ github.ref_name }}).zip" "simulators/visual-pinball/pingodaddons-demo.vpx"
           7z a -tzip "pingod-addons-gamebuild--(${{ github.ref_name }}).zip" "simulators/visual-pinball/README.md"
+          7z a -tzip "pingod-addons-gamebuild--(${{ github.ref_name }}).zip" "simulators/visual-pinball/PinGod-Addons.cfg"
 
           # remove default and copy the release vbs script so it can run out of the box with the executable
           rm "simulators/visual-pinball/pingodaddons-demo.vbs"
