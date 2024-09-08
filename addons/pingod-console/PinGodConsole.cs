@@ -17,6 +17,13 @@ public partial class PinGodConsole : Node
         base._EnterTree();        
     }
 
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+        Logger.Verbose(nameof(PinGodConsole), ": closing");
+        _label = null;
+    }
+
     public override void _Ready()
     {
         base._Ready();

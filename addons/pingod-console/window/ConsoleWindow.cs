@@ -28,7 +28,7 @@ public partial class ConsoleWindow : WindowPinGod
         _lineEdit.TextSubmitted += _lineEdit_TextSubmitted;
     }
 
-    public override void PinGodWindow_CloseRequested() => this.Hide();
+    public override void PinGodWindow_CloseRequested() => this.Visible = false;
 
     private void _lineEdit_TextSubmitted(string newText)
     {
