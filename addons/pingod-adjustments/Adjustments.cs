@@ -147,13 +147,14 @@ namespace PinGod.Core
         /// </summary>
         public static T DeserializeSettings<T>(string gameSettingsJson) where T : Adjustments => JsonSerializer.Deserialize<T>(gameSettingsJson);
 
-        /// <summary>
-        /// Loads game settings file from the user directory. Creates a new save file if there isn't one available
-        /// </summary>
+        /// <summary>Loads game settings file from the user directory. <see cref="GAME_SETTINGS_FILE"/> <para/>
+        /// A new save file will be created if there isn't one available</summary>
         public static T Load<T>() where T : Adjustments
         {
             T gS = Activator.CreateInstance<T>();
+
             using var settingsSave = FileAccess.Open(GAME_SETTINGS_FILE, FileAccess.ModeFlags.Read);
+
             if (FileAccess.GetOpenError() != Error.FileNotFound)
             {
                 gS = DeserializeSettings<T>(settingsSave.GetLine());
