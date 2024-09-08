@@ -66,6 +66,7 @@ Sub Table1_Init
 		.DisplayX	 		= 0
 		.DisplayY	 		= 0
 		.DisplayAlwaysOnTop	= True
+	    '.CoilCount			= 64 ' add more coils, * must match the memory map in the godot scene *
 
 	On Error Resume Next
 		if isDebug Then '
@@ -179,9 +180,9 @@ End Sub
 ' Solenoids / Coils / Callbacks
 ' ----------------------------------------------------------------------------------------
 SolCallback(0)  = "bsTrough.solOut" ' Trough Eject Coil
-SolCallback(4) = "bsSaucer.solOut" ' Saucer Eject Coil
-SolCallback(3) = "AutoPlunger" '	' Auto plunger ball saves
-SolCallback(31) = "FlippersEnabled" ' Flipper Relay (Hack) to enable flippers
+SolCallback(10) = "bsSaucer.solOut" ' Saucer Eject Coil
+SolCallback(11) = "AutoPlunger" '	' Auto plunger ball saves
+SolCallback(12) = "FlippersEnabled" ' Flipper Relay (Hack) to enable flippers
 
 Sub AutoPlunger(Enabled)
   If Enabled Then PlungerIM.AutoFire : End If
