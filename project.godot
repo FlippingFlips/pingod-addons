@@ -24,8 +24,8 @@ buses/default_bus_layout="res://addons/pingod-audio/audio_bus_layout.tres"
 [autoload]
 
 PinGodConsole="*res://addons/pingod-console/PinGodConsole.tscn"
-WindowActions="*res://addons/pingod-windows/WindowActions.tscn"
 Adjustments="*res://addons/pingod-adjustments/Adjustments.tscn"
+WindowActions="*res://addons/pingod-windows/WindowActions.tscn"
 Resources="*res://addons/pingod-resources/Resources.tscn"
 PinGodGame="*res://addons/pingod-game/Node/PinGodGame.tscn"
 AudioManager="*res://addons/pingod-audio/Node/AudioManager.tscn"
@@ -36,8 +36,7 @@ MemoryMap="*res://addons/pingod-memorymap-win/MemoryMap.tscn"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=2
-window/size/initial_position_type=0
+window/size/initial_position_type=2
 window/stretch/mode="viewport"
 window/stretch/aspect="ignore"
 

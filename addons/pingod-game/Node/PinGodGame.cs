@@ -241,7 +241,7 @@ namespace PinGod.Game
         public virtual void EnableFlippers(bool enabled)
         {
             FlippersEnabled = enabled;
-            Machine.SetCoil("flippers", enabled);
+            Machine.SetCoil("flippersRelay", enabled);
         }
         public virtual bool EndBall()
         {

@@ -131,7 +131,9 @@ public partial class DisplaySettingsScene : MarginContainer
             wH = new Vector2I(_displaySettings.WidthDefault, _displaySettings.HeightDefault);
         }
 
-        DisplayServer.WindowSetSize(wH);
+        var win = GetNode("/root") as Window;
+        win.Size = wH;
+        //DisplayServer.WindowSetSize(wH, 0);
     }
 
     void _on_StretchAspectOptionButton_item_selected(int index)
