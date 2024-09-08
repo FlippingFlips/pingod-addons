@@ -57,7 +57,7 @@ namespace PinGod.Core.Service
 			{
 				if (_sendPingodMachineSwitches)
 				{
-					if (HasNode(Paths.ROOT_MACHINE))
+                    if (HasNode(Paths.ROOT_MACHINE))
 					{
 						Logger.Debug(nameof(WindowActionsNode), $": {nameof(MachineNode)} found in Tree");
 						_machine = GetNode<MachineNode>(Paths.ROOT_MACHINE);
@@ -85,9 +85,9 @@ namespace PinGod.Core.Service
 			if (_standardInputHandlingOn)
 			{
 				//quits the game. ESC
-				if (InputMap.HasAction("ui_cancel"))
+				if (InputMap.HasAction("quit"))
 				{
-					if (@event.IsActionPressed("ui_cancel"))
+					if (@event.IsActionPressed("quit"))
 					{
 						Quit();
 					}
@@ -174,7 +174,7 @@ namespace PinGod.Core.Service
 
 			//the root of the window
 			var winActionsWin = this.GetTree().Root;
-            winActionsWin.GuiEmbedSubwindows = _embedSubWindow;
+            winActionsWin.GuiEmbedSubwindows = PinGodGameConfigOverride.EmbedSubWindows;
             winActionsWin.CallDeferred("add_child", toolsWinInstance);
             winActionsWin.GrabFocus();
             winActionsWin.CloseRequested += RootWin_CloseRequested;
@@ -234,25 +234,6 @@ namespace PinGod.Core.Service
 			}            
 		}
 
-        /// <summary> Creates the <see cref="_toolsWindow"/> </summary>
-        private void SetUpSwitchWindow()
-        {
-			////init the packed scene for the switch window
-			//var window = _sw.Instantiate() as WindowPinGod;
-			//window.InitPackedScene();
-
-			////the root of the window
-			//_switchWindowInstance = this.GetTree().Root;
-			//_switchWindowInstance.GuiEmbedSubwindows = _embedSubWindow;
-			//_switchWindowInstance.CallDeferred("add_child", window);
-			//_switchWindowInstance.GrabFocus();
-			//_switchWindowInstance.CloseRequested += RootWin_CloseRequested;
-
-			////returns the scenes in this root
-			//var windows = _switchWindowInstance.GetChildren();//.Where(x => x.GetType() == typeof(Window));
-			//Logger.Info("windows: " + string.Join(',', windows.Select(x => x.Name)));
-		}
-
         private void RootWin_CloseRequested()
         {
 			Logger.Debug($"main window closing");
@@ -265,18 +246,18 @@ namespace PinGod.Core.Service
 		{
 			if (_adjustments != null)
 			{
-				Display.SetSize(_adjustments.Display.Width, _adjustments.Display.Height);
-				Display.SetPosition(_adjustments.Display.X, _adjustments.Display.Y);
+				DisplayExtensions.SetSize(_adjustments.Display.Width, _adjustments.Display.Height);
+                DisplayExtensions.SetPosition(_adjustments.Display.X, _adjustments.Display.Y);
 			}
 		}
 
 		/// <summary>Toggles the border on the main game window</summary>
 		public virtual void ToggleBorder()
 		{
-			//DisplaySettings.ToggleWinFlag(
-			//    DisplayServer.WindowFlags.ResizeDisabled |
-			//    DisplayServer.WindowFlags.Borderless);
-			Display.ToggleWinFlag(DisplayServer.WindowFlags.Borderless);
+            //DisplaySettings.ToggleWinFlag(
+            //    DisplayServer.WindowFlags.ResizeDisabled |
+            //    DisplayServer.WindowFlags.Borderless);
+            DisplayExtensions.ToggleWinFlag(DisplayServer.WindowFlags.Borderless);
 		}
 
         /// <summary>Runs quit on the PinGodGame</summary>

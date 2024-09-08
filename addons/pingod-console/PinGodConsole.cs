@@ -14,17 +14,23 @@ public partial class PinGodConsole : Node
 
     public override void _EnterTree()
     {
-        base._EnterTree();
+        base._EnterTree();        
+    }
+
+    public override void _Ready()
+    {
+        base._Ready();
+        if (!PinGodGameConfigOverride.ConsoleEnabled)
+        {
+            this.QueueFree();
+            return;
+        }
 
         Window = _consoleWindowScene?.InstantiateOrNull<WindowPinGod>();
         var root = this.GetTree().Root;
         root.CallDeferred("add_child", Window);
         Window?.Show();
-    }
 
-    public override void _Ready()
-    {
-        base._Ready();        
         Logger.LoggedMessage += Logger_LoggedMessage;
     }
 
