@@ -42,20 +42,26 @@ namespace PinGod.Modes
         {
             Logger.Debug(nameof(Multiball), ": _ready: secs/balls", _ball_save_time_seconds, _num_of_balls);
 
-            //hide timer
-            if (!_showModeTimer)
-            {
-                var timer = GetNode("ModeTimer") as ModeTimer;
-                timer.IsVisible(false);
-            }
+            //get the mode timer from the scene
+            var timer = GetNode("ModeTimer") as ModeTimer;
 
-            pinGod.StartMultiBall(_num_of_balls, _ball_save_time_seconds, 1);
+            //hide the timer display ?
+            if (!_showModeTimer)
+                timer.IsVisible(false);
+
+            //run the multi-ball, kick balls every 2 secs
+            pinGod.StartMultiBall(_num_of_balls, _ball_save_time_seconds, 2);
+
+            //connect to the mode timer for when it times out
+            //we can end the multiball
+            timer.Connect(
+                nameof(ModeTimer.ModeTimedOut),
+                Callable.From<string>(EndMultiball));
         }
 
-        /// <summary>
-        /// Removes this control from the tree (Signal is emitted from Trough)
-        /// </summary>
-        public virtual void EndMultiball()
+        /// <summary>Removes this control from the tree<para/>
+        /// The mode time when complete will invoke this callback</summary>
+        public virtual void EndMultiball(string g)
         {
             Logger.Debug(nameof(Multiball), ":", nameof(EndMultiball));
             this.QueueFree();
