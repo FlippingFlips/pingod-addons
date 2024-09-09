@@ -1,5 +1,4 @@
 using Godot;
-using PinGod.Core;
 using PinGod.Core.addons.ModeTimer;
 
 namespace PinGod.Modes
@@ -64,6 +63,7 @@ namespace PinGod.Modes
         public virtual void EndMultiball(string g)
         {
             Logger.Debug(nameof(Multiball), ":", nameof(EndMultiball));
+            pinGod.IsMultiballRunning = false;
             this.QueueFree();
         }
     }

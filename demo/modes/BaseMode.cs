@@ -128,6 +128,7 @@ public partial class BaseMode : PinGodGameModeControl
         {
             Logger.Log(LogLevel.Warning, Logger.BBColor.green,
             nameof(OnSaucerSwitchActive), ": multi-ball is already running!");
+            _ballSaucer.Start(2);
         }
     }
 

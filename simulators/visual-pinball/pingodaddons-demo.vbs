@@ -180,7 +180,7 @@ End Sub
 ' Solenoids / Coils / Callbacks
 ' ----------------------------------------------------------------------------------------
 SolCallback(0)  = "bsTrough.solOut" ' Trough Eject Coil
-SolCallback(10) = "bsSaucer.solOut" ' Saucer Eject Coil
+SolCallback(13) = "bsSaucer.solOut" ' Saucer Eject Coil
 SolCallback(11) = "AutoPlunger" '	' Auto plunger ball saves
 SolCallback(12) = "FlippersEnabled" ' Flipper Relay (Hack) to enable flippers
 
