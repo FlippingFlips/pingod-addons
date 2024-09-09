@@ -198,6 +198,7 @@ namespace PinGod.Game
 
         private void _ballSaver_BallSaved(bool earlySwitch = false)
         {
+            Logger.Log(LogLevel.Info, Logger.BBColor.green, nameof(_ballSaver_BallSaved));
             EmitSignal(nameof(BallSaved), earlySwitch);
         }        
 
