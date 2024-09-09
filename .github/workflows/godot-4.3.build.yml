@@ -29,7 +29,7 @@ jobs:
           7z a -tzip "pingod-addons-gamebuild--(${{ github.ref_name }}).zip" "simulators/visual-pinball/_scripts"
           7z a -tzip "pingod-addons-gamebuild--(${{ github.ref_name }}).zip" "simulators/visual-pinball/pingodaddons-demo.vpx"
           7z a -tzip "pingod-addons-gamebuild--(${{ github.ref_name }}).zip" "simulators/visual-pinball/README.md"
-          7z a -tzip "pingod-addons-gamebuild--(${{ github.ref_name }}).zip" "simulators/visual-pinball/PinGod-Addons.cfg"          
+          7z a -tzip "pingod-addons-gamebuild--(${{ github.ref_name }}).zip" "simulators/visual-pinball/PinGod-AddOns.cfg"
 
           # remove the default table script.
           # copy the release vbs script in its place
