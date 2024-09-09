@@ -15,7 +15,7 @@ _coils = {
 "trough": 0
 }
 _leds = {
-"shoot_again": 1
+"shootAgain": 1
 }
 _switches = {
 "coin1": 0,

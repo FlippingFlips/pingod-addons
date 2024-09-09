@@ -126,7 +126,12 @@ public partial class MachineNode : Node
     public virtual void CoilPulse(string name, int pulse = 255)
     {
         Logger.Debug(nameof(MachineNode), $":coil:{name} pulse timer:{pulse}");
-        AddChild(new PulseTimer() { Autostart = true, OneShot = true, Name = name, WaitTime = pulse });
+        var exist = GetNodeOrNull<Timer>(name);
+        if (exist == null)
+        {
+            var pt = new PulseTimer() { Autostart = true, OneShot = true, Name = name, WaitTime = pulse };
+            AddChild(pt);
+        }
     }
 
     public void DisableBallSaver() => _ballSaver?.DisableBallSave();
@@ -247,7 +252,7 @@ public partial class MachineNode : Node
             Logger.Debug(nameof(MachineNode), ":auto plunging ball");
             CoilPulse(_auto_plunge_solenoid);
         }
-        else { Logger.Debug(nameof(MachineNode), ": can't plunging when plunger lane is inactive."); }
+        else { Logger.Debug(nameof(MachineNode), ": can't plunge when plunger lane is inactive."); }
     }
 
     /// <summary>Pulse trough if plunger switch not active</summary>
@@ -514,7 +519,7 @@ public partial class MachineNode : Node
             Logger.Debug(nameof(MachineNode), ": early ball saved, kicking ball.");
         }
 
-        PulseTrough();
+        //PulseTrough();
 
         //_pingod.OnBallSaved(((PinGodGame)_pingod).GetTree());
         _pingod.EmitSignal("BallSaved");
