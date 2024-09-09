@@ -1,6 +1,5 @@
 # PinGod-AddOns
 ![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=c-sharp&logoColor=white) ![.Net](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white) ![Godot Engine](https://img.shields.io/badge/GODOT-%23FFFFFF.svg?style=for-the-badge&logo=godot-engine) 
-
 `Godot 4.3-Mono` engine addons, framework for creating a pinball display with logic. 
 
 ### AddOns
@@ -27,8 +26,9 @@ _* Autoload_ = plugin has an Autoload singleton. You can access these singletons
 3. Add coins with key `5` or use the switch window.
 4. Fill the ball trough with the big switch and click `start` and drain each ball to finish the game.
 ![](.img/default_windows_2.jpg)
-5. You can build games from this by installing the `addons.zip` to your game.
-The BasicGame project builds on from this for an example.
+5. You can build games from this by installing the `addons.zip` to your game or making a new folder like the `demo` project
+6. This demo will run in visual pinball providing you have the `pingod-controller`
+![](.img/default_windows_3.jpg)
 
 ### Godot install
 * [Godot 4.3](https://godotengine.org/): `choco install godot-mono`
