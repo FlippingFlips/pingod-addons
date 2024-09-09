@@ -292,6 +292,25 @@
 	  "XPos": 61.61039733886719,
 	  "YPos": 175.99630737304688,
 	  "ItemType": null
+	},
+	{
+	  "Number": "A0-B0-13",
+	  "NumberPROC": 13,
+	  "PulseTime": 30,
+	  "Bus": null,
+	  "Polarity": true,
+	  "Tags": null,
+	  "Search": 0,
+	  "ReturnWire": "BLK",
+	  "VoltageWire": "BLU VIO",
+	  "Voltage": 48,
+	  "Name": "mballSaucer",
+	  "DisplayName": "Multiball Saucer",
+	  "Conn": null,
+	  "Location": null,
+	  "XPos": null,
+	  "YPos": null,
+	  "ItemType": null
 	}
   ],
   "PRDriverAliases": [],

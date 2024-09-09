@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://d3nmkysyblcgu"]
 
-[ext_resource type="Script" path="res://demo/DemoGame.cs" id="1_nqtip"]
+[ext_resource type="Script" path="res://demo/game/DemoGameNode.cs" id="1_nqtip"]
 [ext_resource type="PackedScene" uid="uid://w8xlcskhhtuw" path="res://addons/pingod-modes/scoremode/ScoreMode.tscn" id="2_m53x2"]
 [ext_resource type="PackedScene" uid="uid://bruj6rfwiylw1" path="res://demo/modes/BaseMode.tscn" id="3_8y0pl"]
 

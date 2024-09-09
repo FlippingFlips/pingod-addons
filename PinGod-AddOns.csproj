@@ -8,8 +8,9 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="addons\pingod-audio\audio_bus_layout.tres" />
+    <None Include="autoload\PinGodGame.tscn" />
     <None Include="autoload\Resources.tscn" />
-    <None Include="demo\Game.tscn" />
+    <None Include="demo\game\DemoGame.tscn" />
     <None Include="demo\MainScene.tscn" />
     <None Include="demo\modes\BaseMode.tscn" />
     <None Include="demo\README.md" />

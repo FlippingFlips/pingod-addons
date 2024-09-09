@@ -12,6 +12,7 @@ public partial class BaseMode : PinGodGameModeControl
     #region Fields
     private PackedScene _ballSaveScene;
     private IGame _demoGame;
+    private Saucer _ballSaucer;
     #endregion
 
     #region Godot Overrides
@@ -24,7 +25,7 @@ public partial class BaseMode : PinGodGameModeControl
 
         //get a reference to the game, above the modes control
         //use this to add points with our method on the DemoGame
-        _demoGame = GetParent().GetParent() as DemoGame;
+        _demoGame = GetParent().GetParent() as DemoGameNode;
 
         //add a ball save scene to instance if available in resources
         if (!string.IsNullOrEmpty(BALL_SAVE_SCENE))
@@ -43,9 +44,14 @@ public partial class BaseMode : PinGodGameModeControl
     public override void _Ready()
     {
         base._Ready();
+
+        //hook up the switch handler from the machine
         if (_pinGod != null)
             _pinGod.MachineNode.SwitchCommand += OnSwitchCommandHandler;
         else { Logger.Log(LogLevel.Error, Logger.BBColor.red, nameof(BaseMode), "[color=red]", ": no PinGodGame found", "[/color]"); }
+
+        //get the ball saucer from the scene
+        _ballSaucer = GetNodeOrNull<Saucer>(nameof(Saucer));
     }
 
     #endregion
@@ -94,5 +100,42 @@ public partial class BaseMode : PinGodGameModeControl
             default:
                 break;
         }
+    }
+
+    /// <summary>Start a multi-ball when player hits the saucer if it's not already running</summary>
+    void OnSaucerSwitchActive()
+    {
+        if(!_pinGod?.IsMultiballRunning ?? false && _pinGod?.BallsInPlay() == 1)
+        {
+            _pinGod.AddPoints(1000);
+            _pinGod.AddBonus(500);
+
+            //start the timer on the saucer to kick the ball
+            _ballSaucer?.Start();
+
+            Logger.Log(LogLevel.Warning, Logger.BBColor.green,
+            nameof(OnSaucerSwitchActive), ": starting multi-ball");
+
+            //get the DemoGame node, not the PinGodGame
+            var demogame = _demoGame as DemoGameNode;
+
+            //run the add multi-ball scene on the game
+            demogame.CallDeferred(nameof(demogame.AddMultiballSceneToTree));
+
+            return;
+        }
+        else 
+        {
+            Logger.Log(LogLevel.Warning, Logger.BBColor.green,
+            nameof(OnSaucerSwitchActive), ": multi-ball is already running!");
+        }
+    }
+
+    /// <summary>Kicks a ball on time out</summary>
+    void OnSaucerTimeOut()
+    {
+        Logger.Debug(nameof(BaseMode), ":saucer timed out, kicking ball...");
+
+        _ballSaucer?.Kick();
     }
 }
