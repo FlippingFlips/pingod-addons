@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3nmkysyblcgu"]
+
+[ext_resource type="Script" path="res://demo/DemoGame.cs" id="1_nqtip"]
+[ext_resource type="PackedScene" uid="uid://w8xlcskhhtuw" path="res://addons/pingod-modes/scoremode/ScoreMode.tscn" id="2_m53x2"]
+[ext_resource type="PackedScene" uid="uid://bruj6rfwiylw1" path="res://demo/modes/BaseMode.tscn" id="3_8y0pl"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_nqtip")
+BONUS_SCENE = "res://addons/pingod-modes/bonus/Bonus.tscn"
+MULTIBALL_SCENE = "res://addons/pingod-modes/multiball/Multiball.tscn"
+SCORE_ENTRY_SCENE = "res://addons/pingod-modes/scoreentry/ScoreEntry.tscn"
+TILT_SCENE = "res://addons/pingod-modes/tilt/Tilt.tscn"
+
+[node name="Modes" type="CanvasLayer" parent="."]
+layer = -2
+
+[node name="ScoreMode" parent="Modes" instance=ExtResource("2_m53x2")]
+
+[node name="BaseMode" parent="Modes" instance=ExtResource("3_8y0pl")]
+offset_left = 0.0
+offset_right = 0.0
+
+[node name="Modes-Upper" type="CanvasLayer" parent="."]
+layer = -1
