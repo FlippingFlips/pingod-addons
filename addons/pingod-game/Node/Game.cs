@@ -3,7 +3,9 @@ using PinGod.Core.Service;
 using PinGod.Game;
 using PinGod.Modes;
 
-/// <summary>Custom Game class for Basic Game</summary>
+/// <summary>A <see cref="PinGodGameNode"/>. A Godot Node<para/>
+/// A game glass with common scenes. Bonus, Multiball, Score Entry, Tilt<para/>
+/// Game should have a modes layer in the scene</summary>
 public partial class Game : PinGodGameNode, IGame
 {
     public Tilt tilt;
