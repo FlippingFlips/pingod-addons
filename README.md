@@ -29,6 +29,7 @@ _* Autoload_ = plugin has an Autoload singleton. You can access these singletons
 5. You can build games from this by installing the `addons.zip` to your game or making a new folder like the `demo` project
 6. This demo will run in visual pinball providing you have the `pingod-controller`
 ![](.img/default_windows_3.jpg)
+See the demo files and readme > [simulators/visual-pinball](simulators/visual-pinball)
 
 ### Godot install
 * [Godot 4.3](https://godotengine.org/): `choco install godot-mono`
