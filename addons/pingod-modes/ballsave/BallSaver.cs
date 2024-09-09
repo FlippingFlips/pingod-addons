@@ -28,7 +28,7 @@ namespace PinGod.Core
         /// <summary>
         /// The led name to cycle for Ball saves
         /// </summary>
-        [Export] public string _ball_save_led = "shoot_again";
+        [Export] public string _ball_save_led = "shootAgain";
         /// <summary>
         /// default Ball save in multi-Ball
         /// </summary>
@@ -44,8 +44,7 @@ namespace PinGod.Core
         #endregion
 
         #region Signals
-        /// <summary>
-        /// Ball save disabled, timed out
+        /// <summary>Ball save disabled, timed out</summary>
         [Signal] public delegate void BallSaveDisabledEventHandler();
         [Signal] public delegate void BallSaveEnabledEventHandler();
         [Signal] public delegate void BallSavedEventHandler(bool earlySwitch = false);
@@ -108,6 +107,10 @@ namespace PinGod.Core
 
                     if (!_allowMutlipleSaves) DisableBallSave();
                 }               
+                else if (name.Contains("trough"))
+                {
+                    EmitSignal(nameof(BallSaved), false);
+                }
             }
         }
 
@@ -138,13 +141,11 @@ namespace PinGod.Core
             }
         }
 
-        /// <summary>
-        /// Disable Ball saves and turns off lamps
-        /// </summary>
+        /// <summary>Disable Ball saves and turns off lamps</summary>
         public void DisableBallSave()
         {
             this.Stop();
-            Logger.Debug(nameof(BallSaver), nameof(DisableBallSave));
+            Logger.Debug(nameof(BallSaver), ":", nameof(DisableBallSave));
             _ballSaveActive = false;
 
             //reset number to save
@@ -168,11 +169,12 @@ namespace PinGod.Core
             _allowMutlipleSaves = allowMultipleSaves.HasValue ? allowMultipleSaves.Value : _allowMutlipleSaves;
             seconds = seconds > 0 ? seconds : _ball_save_seconds;
             TimeRemaining = seconds;
-            _ballSaveActive = true;
-            Logger.Debug(nameof(BallSaver), $":Start. Remaining:" + seconds, " secs. Starting timer and lights.");
+            _ballSaveActive = true;            
             this.Stop();
             this.Start(1); //this object is a timer
             UpdateLamps(LightState.Blink);
+
+            Logger.Debug(nameof(BallSaver), $":Start. Remaining:" + seconds, " secs. Starting timer and lights.");
             EmitSignal(nameof(BallSaveEnabled));
             return true;
         }

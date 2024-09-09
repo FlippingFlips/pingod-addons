@@ -12,7 +12,7 @@ config_version=5
 
 config/name="PinGod-AddOns"
 config/description="Adds on for godot"
-run/main_scene="res://Demo-PinGod.tscn"
+run/main_scene="res://demo/MainScene.tscn"
 config/features=PackedStringArray("4.3", "C#")
 boot_splash/image="res://addons/pingod-assets/img/pingod-logo.png"
 config/icon="res://addons/pingod-assets/img/pinball.svg"
@@ -26,11 +26,11 @@ buses/default_bus_layout="res://addons/pingod-audio/audio_bus_layout.tres"
 PinGodConsole="*res://addons/pingod-console/PinGodConsole.tscn"
 Adjustments="*res://addons/pingod-adjustments/Adjustments.tscn"
 WindowActions="*res://addons/pingod-windows/WindowActions.tscn"
-Resources="*res://addons/pingod-resources/Resources.tscn"
 PinGodGame="*res://addons/pingod-game/Node/PinGodGame.tscn"
 AudioManager="*res://addons/pingod-audio/Node/AudioManager.tscn"
 Machine="*res://addons/pingod-machine/Machine.tscn"
 MemoryMap="*res://addons/pingod-memorymap-win/MemoryMap.tscn"
+Resources="*res://autoload/Resources.tscn"
 
 [display]
 

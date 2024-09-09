@@ -8,6 +8,11 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="addons\pingod-audio\audio_bus_layout.tres" />
+    <None Include="autoload\Resources.tscn" />
+    <None Include="demo\Game.tscn" />
+    <None Include="demo\MainScene.tscn" />
+    <None Include="demo\modes\BaseMode.tscn" />
+    <None Include="demo\README.md" />
     <None Include="PinGod-AddOns.cfg" />
     <None Include="README.md" />
     <Content Include="machine.json" />
@@ -34,7 +39,7 @@
     <!--PROJECT, EXPORT PRESETS, DEMO SCENE-->
     <None Include="export_presets.cfg" />
     <None Include="project.godot" />
-    <None Include="Demo-PinGod.tscn" />
+    <None Include="simulators\visual-pinball\PinGod-AddOns.cfg" />
     <None Include="simulators\visual-pinball\pingodaddons-demo.vbs" />
     <None Include="simulators\visual-pinball\pingodaddons-demo.vpx" />
     <None Include="simulators\visual-pinball\README.md" />

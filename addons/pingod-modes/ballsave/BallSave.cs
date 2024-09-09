@@ -33,8 +33,11 @@ namespace PinGod.Modes
         /// <param name="text"></param>
         public void SetDebugLabelText(string text)
         {
-            _debugLabel.Text = text;
-            _debugLabel.Visible = true;            
+            if(_debugLabel != null)
+            {
+                _debugLabel.Text = text;
+                _debugLabel.Visible = true;
+            }            
         }
     }
 }
