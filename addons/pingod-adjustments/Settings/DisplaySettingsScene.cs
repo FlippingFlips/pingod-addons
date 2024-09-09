@@ -114,7 +114,7 @@ public partial class DisplaySettingsScene : MarginContainer
     {        
         Engine.MaxFps = (int)value;
         Logger.Debug(nameof(DisplaySettingsScene), ":fps changed (0 = no limit):", Engine.MaxFps);
-        ProjectSettings.SetSetting(SettingPaths.DisplaySetPaths.FORCE_FPS, Engine.MaxFps);
+        ProjectSettings.SetSetting(SettingPaths.DisplaySetPaths.MAX_FPS, Engine.MaxFps);
         _displaySettings.FPS = (int)value;
     }
 
