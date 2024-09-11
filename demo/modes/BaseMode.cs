@@ -7,12 +7,14 @@ public partial class BaseMode : PinGodGameModeControl
     #region Exports
     /// <summary> Scene to play when ball save becomes active </summary>
     [Export(PropertyHint.File)] string BALL_SAVE_SCENE;
+    [Export(PropertyHint.File)] string DISPLAY_MSG_SCENE;
     #endregion
 
     #region Fields
     private PackedScene _ballSaveScene;
     private IGame _demoGame;
     private Saucer _ballSaucer;
+    private PackedScene _displayMsgScene;
     #endregion
 
     #region Godot Overrides
@@ -38,6 +40,18 @@ public partial class BaseMode : PinGodGameModeControl
             else { Logger.Warning(nameof(BaseMode), ": no resources found."); }
         }
         else { Logger.Warning(nameof(BaseMode), ": no ball save scene set..."); }
+
+        //add a display message to instance if available in resources
+        if (!string.IsNullOrWhiteSpace(DISPLAY_MSG_SCENE))
+        {
+            if (_resources != null)
+            {
+                _displayMsgScene = _resources.GetPackedSceneFromResource(DISPLAY_MSG_SCENE);
+
+                if (_displayMsgScene == null) { Logger.Error(nameof(BaseMode), $":{DISPLAY_MSG_SCENE}: the scene hasn't been added to the resources."); }
+            }
+            else { Logger.Warning(nameof(BaseMode), ": no resources found."); }
+        }
     }
 
     /// <summary> Hooks onto the PinGodGame.Machine switch handler where we process our switches</summary>
@@ -138,5 +152,36 @@ public partial class BaseMode : PinGodGameModeControl
         Logger.Debug(nameof(BaseMode), ":saucer timed out, kicking ball...");
 
         _ballSaucer?.Kick();
+    }
+
+    /// <summary>This is hooked up to the TargetsBank node in the scene<para/>
+    /// When the target switches are all completed this will be fired</summary>
+    void OnTargetsBankCompleted()
+    {
+        Logger.Debug(nameof(BaseMode), ":TARGETS COMPLETED");
+
+        _pinGod.PlaySfx("warning");
+        _pinGod.AddPoints(1000);
+        _pinGod.AddBonus(500);
+
+        //create an instance of message layer
+        var scene = _displayMsgScene?.Instantiate() as DisplayMessageControl;
+
+        //show targets complete
+        scene.SetText("TARGETS\nCOMPLETED");
+
+        //time to show the scene for
+        scene.SetTime(2);
+        this.AddChild(scene);
+    }
+
+    void OnTargetSwitchActive(string name, bool complete)
+    {
+        Logger.Debug(nameof(BaseMode), $":{nameof(OnTargetSwitchActive)}: {name}-{complete}");
+        if(complete)
+        {
+            _pinGod.AddPoints(150);
+            _pinGod.AddBonus(50);
+        }        
     }
 }

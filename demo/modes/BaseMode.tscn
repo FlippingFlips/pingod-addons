@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bruj6rfwiylw1"]
+[gd_scene load_steps=4 format=3 uid="uid://bruj6rfwiylw1"]
 
 [ext_resource type="Script" path="res://demo/modes/BaseMode.cs" id="1_c6i7f"]
 [ext_resource type="Script" path="res://addons/pingod-controls/Timer/Saucer.cs" id="2_s0cvt"]
+[ext_resource type="Script" path="res://addons/pingod-controls/Node/TargetsBank.cs" id="3_him8f"]
 
 [node name="BaseMode" type="Control" groups=["Mode"]]
 layout_mode = 3
@@ -14,6 +15,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_c6i7f")
 BALL_SAVE_SCENE = "res://addons/pingod-modes/ballsave/BallSave.tscn"
+DISPLAY_MSG_SCENE = "res://addons/pingod-misc/display-plugins/Messages/DisplayMessageControl.tscn"
 
 [node name="Saucer" type="Timer" parent="."]
 wait_time = 2.0
@@ -22,5 +24,11 @@ script = ExtResource("2_s0cvt")
 _coil = "mballSaucer"
 _switch = "mballSaucer"
 
+[node name="TargetsBank" type="Node" parent="."]
+script = ExtResource("3_him8f")
+_target_switches = PackedStringArray("target0", "target1", "target2", "target3")
+
 [connection signal="SwitchActive" from="Saucer" to="." method="OnSaucerSwitchActive"]
 [connection signal="timeout" from="Saucer" to="." method="OnSaucerTimeOut"]
+[connection signal="OnTargetActivated" from="TargetsBank" to="." method="OnTargetSwitchActive"]
+[connection signal="OnTargetsCompleted" from="TargetsBank" to="." method="OnTargetsBankCompleted"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://n7p6g3nlbym"]
+[gd_scene load_steps=9 format=3 uid="uid://n7p6g3nlbym"]
 
 [ext_resource type="Script" path="res://addons/pingod-resources/Resources.cs" id="1_t058t"]
 [ext_resource type="PackedScene" uid="uid://cm3hf1m8bn1nl" path="res://addons/pingod-modes/bonus/Bonus.tscn" id="2_6780c"]
@@ -7,10 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://b46rdcwxkw0gu" path="res://addons/pingod-modes/scoreentry/ScoreEntry.tscn" id="5_6varn"]
 [ext_resource type="PackedScene" uid="uid://dlcv2a2q12prb" path="res://addons/pingod-modes/attract/Attract.tscn" id="6_nihil"]
 [ext_resource type="PackedScene" uid="uid://cb4x3a7dim2jk" path="res://addons/pingod-modes/ballsave/BallSave.tscn" id="7_o8su4"]
+[ext_resource type="PackedScene" uid="uid://qr0feoeg1mb1" path="res://addons/pingod-misc/display-plugins/Messages/DisplayMessageControl.tscn" id="8_txh7y"]
 
 [node name="Resources" type="ResourcePreloader"]
 script = ExtResource("1_t058t")
-_packScenes = [ExtResource("2_6780c"), ExtResource("3_aqcwg"), ExtResource("4_kfdx3"), ExtResource("5_6varn"), ExtResource("6_nihil"), ExtResource("7_o8su4")]
+_packScenes = [ExtResource("2_6780c"), ExtResource("3_aqcwg"), ExtResource("4_kfdx3"), ExtResource("5_6varn"), ExtResource("6_nihil"), ExtResource("7_o8su4"), ExtResource("8_txh7y")]
 
 [node name="LoadingControl" type="Control" parent="."]
 layout_mode = 3
