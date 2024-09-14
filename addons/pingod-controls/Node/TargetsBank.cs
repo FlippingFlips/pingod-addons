@@ -1,5 +1,4 @@
 ﻿using Godot;
-using PinGod.Core;
 using PinGod.Core.Service;
 
 namespace PinGod.EditorPlugins
@@ -9,7 +8,7 @@ namespace PinGod.EditorPlugins
     /// Handles a bank of targets, the light states and watches for completion <para/>
     /// TODO: check this class is good after changing everything
     /// </summary>
-    public partial class TargetsBank : Node
+    public partial class TargetsBank : PinGodGameNode
     {
         #region Exports
         /// <summary>Inverse the booleans?</summary>
@@ -26,6 +25,8 @@ namespace PinGod.EditorPlugins
 
         /// <summary>Switch Names</summary>
         [Export] protected string[] _target_switches;
+
+        [Export] protected Color _ledColor = Colors.Green;
         #endregion
 
         #region Signals
@@ -65,6 +66,8 @@ namespace PinGod.EditorPlugins
                 }
                 else
                 {
+                    base._EnterTree();
+
                     _targetValues = new bool[_target_switches.Length];
                     if (HasNode(Paths.ROOT_MACHINE))
                     {
@@ -138,6 +141,7 @@ namespace PinGod.EditorPlugins
                 {
                     Logger.Debug(nameof(TargetsBank), ":targets complete, resetting");
                     ResetTargets();
+                    UpdateLamps();
                 }
                 else
                 {
@@ -146,14 +150,21 @@ namespace PinGod.EditorPlugins
             }
         }
 
-        /// <summary>
-        /// Updates the lamps with matched to the same length as the switches
-        /// </summary>
+        /// <summary>Updates the lamps with matched to the same length as the switches</summary>
         public virtual void UpdateLamps()
         {
-            //todo: this is using pingodgame to do lamps
-            /*
-            if (_target_lamps?.Length > 0)
+            if (_target_leds?.Length > 0)
+            {
+                for (int i = 0; i < _target_leds?.Length; i++)
+                {
+                    byte state = 1;
+                    if(_inverse_lamps) state = 0;
+
+                    if (_targetValues[i]) pinGod.SetLedState(_target_leds[i], state, _ledColor);
+                    else pinGod.SetLedState(_target_leds[i], state, 0);
+                }
+            }
+            else if (_target_lamps?.Length > 0)
             {
                 for (int i = 0; i < _target_switches?.Length; i++)
                 {
@@ -161,15 +172,6 @@ namespace PinGod.EditorPlugins
                     else pinGod.SetLampState(_target_lamps[i], _inverse_lamps ? (byte)1 : (byte)0);
                 }
             }
-            if (_target_leds?.Length > 0)
-            {
-                for (int i = 0; i < _target_leds?.Length; i++)
-                {
-                    if (_targetValues[i]) pinGod.SetLedState(_target_leds[i], _inverse_lamps ? (byte)0 : (byte)1, 0);
-                    else pinGod.SetLedState(_target_leds[i], _inverse_lamps ? (byte)1 : (byte)0, 0);
-                }
-            }
-            */
         }
 
         /// <summary>
