@@ -85,7 +85,7 @@ public static class Machine
         {
             var led = Leds[name];
             led.State = state;
-            led.Color = color > 0 ? color : led.Color;
+            led.Color = color > 0 ? color : 0;
             return led;
         }
 
