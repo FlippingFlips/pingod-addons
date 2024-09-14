@@ -36,7 +36,7 @@ End Sub
 ' ----------------------------------------------------------------------------------------
 Const UseSolenoids = 1 ' Check for solenoid states?
 Const UsePdbLeds = 1  ' use led (color)
-Const PdbOffColor = 3815994 ' Led off state color 
+Const PdbOffColor = 3815994 ' Led off state color , transparent?
 Const UseLamps = 0  ' Check for lamp states?
 ' ----------------------------------------------------------------------------------------
 ' TABLE OBJECT SWITCH LINKING

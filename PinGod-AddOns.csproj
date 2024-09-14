@@ -13,6 +13,7 @@
     <None Include="demo\game\DemoGame.tscn" />
     <None Include="demo\MainScene.tscn" />
     <None Include="demo\modes\BaseMode.tscn" />
+    <None Include="demo\DEV-Notes.md" />
     <None Include="demo\README.md" />
     <None Include="PinGod-AddOns.cfg" />
     <None Include="README.md" />
@@ -51,7 +52,9 @@
     <None Include="simulators\visual-pinball\_scripts\vp\PinGodNetProcGame.vbs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include=".img\" />
     <Folder Include="addons\pingod-core\BallStacks\" />
+    <Folder Include="addons\pingod-misc\machine-plugins\lanes\" />
     <Folder Include="addons\pingod-windows\switch_panel\" />
   </ItemGroup>
 </Project>
