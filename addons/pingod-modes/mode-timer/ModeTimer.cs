@@ -2,9 +2,8 @@ using Godot;
 
 namespace PinGod.Core.addons.ModeTimer
 {
-    /// <summary>
-    /// A scene timer to display time left. Set mode name and mode title in scene file and initial time
-    /// </summary>
+    /// <summary>A scene timer to display time left. <para/>
+    /// Set mode name and mode title in scene file and initial time</summary>
     public partial class ModeTimer : Timer
     {
         private Label titleLabel;
@@ -16,9 +15,7 @@ namespace PinGod.Core.addons.ModeTimer
         [Export] string _ModeTitle = "Mode Title";
         [Export] bool _isVisible = true;
 
-        /// <summary>
-        /// Emitted signal when a mode times out
-        /// </summary>
+        /// <summary>Emitted signal when a mode times out</summary>
         [Signal] public delegate void ModeTimedOutEventHandler(string title);
 
         /// <summary>
@@ -40,13 +37,20 @@ namespace PinGod.Core.addons.ModeTimer
 
             return visible;
         }
+
+        /// <summary>adds on seconds</summary>
+        /// <param name="secs"></param>
+        public void IncrementTime(int secs) => _ModeTime += secs;
         public void UpdateName(string name) => nameLabel.Text = name;
+
+        /// <summary>sets the time</summary>
+        /// <param name="secs"></param>
         public void UpdateTime(int secs) => _ModeTime = secs;
+
         public void UpdateTitle(string title) => titleLabel.Text = title;
 
-        /// <summary>
-        /// Updates time left text. When time runs out a ModeTimedOut signal with the mode name is emitted
-        /// </summary>
+        /// <summary>Updates time left text.<para/>
+        /// When time runs out a ModeTimedOut signal with the mode name is emitted</summary>
         private void _on_ModeTimer_timeout()
         {
             titleLabel.Visible = _isVisible;
@@ -57,7 +61,7 @@ namespace PinGod.Core.addons.ModeTimer
             if (_ModeTime <= 0)
             {
                 this.Stop();
-                Logger.Debug(nameof(ModeTimer), $": {_ModeName}-{_ModeTitle} timed out");
+                Logger.Debug(nameof(ModeTimer), $": {_ModeName}-{_ModeTitle} mode timed out");
                 EmitSignal(nameof(ModeTimedOut), _ModeName);
             }
         }

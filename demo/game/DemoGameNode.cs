@@ -1,6 +1,7 @@
 using PinGod.Base;
 
-public partial class DemoGame : Game
+/// <summary>This game class is a Godot Node with scenes and a modes layer</summary>
+public partial class DemoGameNode : Game
 {
     /// <summary> Add 100 extra points to bonus </summary>
     /// <param name="points"></param>
@@ -10,9 +11,9 @@ public partial class DemoGame : Game
 
     /// <summary> Just logs </summary>
     public void OnBallSaveDisabled() => Logger
-        .Log(LogLevel.Info, Logger.BBColor.green, nameof(DemoGame), ":" + nameof(OnBallSaveDisabled));
+        .Log(LogLevel.Info, Logger.BBColor.green, nameof(DemoGameNode), ":" + nameof(OnBallSaveDisabled));
 
     /// <summary> Just logs </summary>
 	public void OnBallSaveEnabled() => Logger
-        .Log(LogLevel.Info, Logger.BBColor.green, nameof(DemoGame), ":" + nameof(OnBallSaveEnabled));
+        .Log(LogLevel.Info, Logger.BBColor.green, nameof(DemoGameNode), ":" + nameof(OnBallSaveEnabled));
 }

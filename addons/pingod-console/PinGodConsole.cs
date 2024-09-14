@@ -34,11 +34,18 @@ public partial class PinGodConsole : Node
         }
 
         Window = _consoleWindowScene?.InstantiateOrNull<WindowPinGod>();
+        Window.CloseRequested += Window_CloseRequested;
         var root = this.GetTree().Root;
         root.CallDeferred("add_child", Window);
         Window?.Show();
 
         Logger.LoggedMessage += Logger_LoggedMessage;
+    }
+
+    private void Window_CloseRequested()
+    {
+        if(_label != null) 
+            _label.Text = null;
     }
 
     /// <summary>Console window with the ` quote left key</summary>

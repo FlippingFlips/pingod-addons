@@ -430,3 +430,5 @@ FodyWeavers.xsd
 /addons/pingod-assets/Localization/pingod_default_lang.en.translation
 /.movies
 /_link_addons.bat
+/simulators/visual-pinball/crash.txt
+/simulators/visual-pinball/crash.dmp

@@ -1,0 +1,10 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://hboaree43vj8"]
+
+[ext_resource type="FontFile" uid="uid://ciofwob416hd1" path="res://addons/pingod-assets/fonts/BebasNeue.ttf" id="1_e2flp"]
+
+[resource]
+line_spacing = 2.0
+font = ExtResource("1_e2flp")
+font_size = 128
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)

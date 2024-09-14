@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://bcbhvghnhmgd7" path="res://addons/pingod-windows/playfield/scene/playfield_button_theme.tres" id="1_1atur"]
 [ext_resource type="Script" path="res://addons/pingod-windows/playfield/scene/PlayfieldControl.cs" id="2_q55or"]
-[ext_resource type="Texture2D" uid="uid://bpc1yms62oy32" path="res://addons/pingod-assets/img/pingodaddons-demo-blueprint.png" id="4_2ex5s"]
+[ext_resource type="PackedScene" uid="uid://hp86svll4ipx" path="res://PlayfieldTextureRect.tscn" id="3_3efh6"]
 
 [node name="Control" type="Control"]
 custom_minimum_size = Vector2(400, 908)
@@ -19,17 +19,15 @@ size_flags_vertical = 3
 theme = ExtResource("1_1atur")
 script = ExtResource("2_q55or")
 
-[node name="PlayfieldTextureRect" type="TextureRect" parent="."]
-texture_repeat = 1
-layout_direction = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_2ex5s")
-expand_mode = 1
+[node name="PlayfieldTextureRect" parent="." instance=ExtResource("3_3efh6")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 400.0
+offset_bottom = 908.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="Buttons" type="Control" parent="."]
 editor_description = "Most buttons are toggles, but some you want not to toggle, like targets, coin + start buttons. Duplicate a button give it a name that matches your switch."

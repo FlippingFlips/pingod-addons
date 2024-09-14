@@ -1,14 +1,13 @@
 ﻿using Godot;
-using PinGod.Base;
-using PinGod.Core;
 using PinGod.Core.Service;
 
 namespace PinGod.EditorPlugins
 {
-    /// <summary>
+    [Tool]
+    /// <summary> Pinball lanes for handling top rollovers with matching lights or lower lane rotated with flippers <para/>
     /// Set the exports in the scene from Godot or tscn. <see cref="_lane_switches"/> <see cref="_lane_lamps"/> and other options.
     /// </summary>
-    public partial class PinballLanesNode : PinGodGameMode
+    public partial class PinballLanes : PinGodGameMode
     {
         bool[] _lanesCompleted;
         private uint[] _laneSwitchNums;
@@ -172,7 +171,7 @@ namespace PinGod.EditorPlugins
             if (!_lanesCompleted[i])
             {
                 _lanesCompleted[i] = true;
-                Logger.Debug(nameof(PinballLanesNode), $":lane {i} complete");
+                Logger.Debug(nameof(PinballLanes), $":lane {i} complete");
 
                 result = true;
             }
@@ -209,7 +208,7 @@ namespace PinGod.EditorPlugins
             _lanesCompleted[_lanesCompleted.Length - 1] = firstNum;
 
             UpdateLamps();
-            Logger.Debug(nameof(PinballLanesNode), ":rot left: ", string.Join(",", _lanesCompleted));
+            Logger.Debug(nameof(PinballLanes), ":rot left: ", string.Join(",", _lanesCompleted));
         }
 
         /// <summary>
@@ -225,7 +224,7 @@ namespace PinGod.EditorPlugins
             _lanesCompleted[0] = lastNum;
 
             UpdateLamps();
-            Logger.Debug(nameof(PinballLanesNode), ":rot right: ", string.Join(",", _lanesCompleted));
+            Logger.Debug(nameof(PinballLanes), ":rot right: ", string.Join(",", _lanesCompleted));
         }
 
         /// <summary>
@@ -237,7 +236,21 @@ namespace PinGod.EditorPlugins
 
             if (_lanesCompleted != null)
             {
-                if (_lane_lamps?.Length > 0)
+                if (_led_lamps?.Length > 0)
+                {
+                    for (int i = 0; i < _lanesCompleted.Length; i++)
+                    {
+                        if (_lanesCompleted[i])
+                        {
+                            pinGod.SetLedState(_led_lamps[i], 1, _led_color);
+                        }
+                        else
+                        {
+                            pinGod.SetLedState(_led_lamps[i], 0, 0);
+                        }
+                    }
+                }
+                else if (_lane_lamps?.Length > 0)
                 {
                     for (int i = 0; i < _lanesCompleted.Length; i++)
                     {
@@ -250,22 +263,7 @@ namespace PinGod.EditorPlugins
                             pinGod.SetLampState(_lane_lamps[i], 0);
                         }
                     }
-                }
-
-                if (_led_lamps?.Length > 0)
-                {
-                    for (int i = 0; i < _lanesCompleted.Length; i++)
-                    {
-                        if (_lanesCompleted[i])
-                        {
-                            pinGod.SetLedState(_led_lamps[i], 1, _led_color);
-                        }
-                        else
-                        {
-                            pinGod.SetLedState(_led_lamps[i], 0, _led_color);
-                        }
-                    }
-                }
+                }                
             }
         }
     }

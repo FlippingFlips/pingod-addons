@@ -59,12 +59,12 @@ namespace PinGod.Core
             {
                 AspectOption = (int)ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.ASPECT),
                 AlwaysOnTop = (bool)ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.ALWAYS_ON_TOP),
-                Width = (int)ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.WIDTH),
-                Height = (int)ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.HEIGHT),
+                Width = (int)ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.WIDTH_OVERRIDE),
+                Height = (int)ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.HEIGHT_OVERRIDE),
                 WidthDefault = (int)ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.WIDTH),
                 HeightDefault = (int)ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.HEIGHT),
                 Vsync = (bool)ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.USE_VSYNC),
-                FPS = (int)ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.FORCE_FPS),
+                FPS = (int)ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.MAX_FPS),
                 ContentScaleMode = ((int)ProjectSettings.GetSetting(SettingPaths.DisplaySetPaths.CONTENT_SCALE)),
             };
             return displaySettings;

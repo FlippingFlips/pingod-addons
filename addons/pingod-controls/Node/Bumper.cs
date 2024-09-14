@@ -1,10 +1,9 @@
 using Godot;
-using PinGod;
 using PinGod.Core.Service;
 
 /// <summary> Sends BumperHit signal, plays sound and coil if given</summary>
 [Tool]
-public partial class Bumper : Node
+public partial class Bumper : PinGodGameNode
 {
     private MachineNode _machine;
 
@@ -33,17 +32,12 @@ public partial class Bumper : Node
     /// </summary>
     public override void _EnterTree()
     {
-        base._EnterTree();
-
         if (!Engine.IsEditorHint())
         {
+            base._EnterTree();
+
             //add the audio stream player
             AddChild(player);
-
-            if (HasNode(Paths.ROOT_PINGODGAME))
-            {
-                _pinGod = GetNode<IPinGodGame>(Paths.ROOT_PINGODGAME);
-            }
 
             //disable processing?
             if (_pinGod == null) this.SetProcessInput(false);
@@ -93,7 +87,7 @@ public partial class Bumper : Node
                 //play sound for bumper
                 if (_AudioStream != null) { player.Play(); }
 
-                //don't bother to pulse coil
+                //don't bother to pulse coil, VP does this
                 //if (!string.IsNullOrWhiteSpace(_CoilName)) { _machine?.CoilPulse(_CoilName); }
 
                 //publish hit event

@@ -1,7 +1,5 @@
 #if TOOLS
 using Godot;
-using PinGod;
-using PinGod.Core;
 using PinGod.Core.addons.Video;
 using PinGod.EditorPlugins;
 
@@ -28,6 +26,8 @@ public partial class PinGodControlsPlugin : EditorPlugin
         using var texture = GD.Load<Texture2D>($"{Paths.PINGOD_ASSETS}img/pinball.png");
         LoadBlinkingLabel(texture);
         LoadBumper(texture);
+        LoadSpinner(texture);
+        LoadPinballLanes(texture);
         LoadTargetsBank(texture);
         LoadSaucerTimer(texture);
         LoadVideoPlayerPinball(texture);
@@ -47,6 +47,23 @@ public partial class PinGodControlsPlugin : EditorPlugin
         AddCustomType(nameof(Bumper), nameof(Node), script, texture);
         Logger.Debug(nameof(PinGodControlsPlugin),
             $":{nameof(Bumper)}. ADDED");
+    }
+
+    private void LoadPinballLanes(Texture2D texture)
+    {
+        var script = GD.Load<Script>(ROOT_DIR + $"Node/{nameof(PinballLanes)}.cs");
+        AddCustomType(nameof(PinballLanes), nameof(Node), script, texture);
+        Logger.Debug(nameof(PinGodControlsPlugin),
+            $":{nameof(PinballLanes)}. ADDED");
+    }
+
+
+    private void LoadSpinner(Texture2D texture)
+    {
+        var script = GD.Load<Script>(ROOT_DIR + $"Node/{nameof(Spinner)}.cs");
+        AddCustomType(nameof(Spinner), nameof(Node), script, texture);
+        Logger.Debug(nameof(PinGodControlsPlugin),
+            $":{nameof(Spinner)}. ADDED");
     }
 
     private void LoadSaucerTimer(Texture2D texture)

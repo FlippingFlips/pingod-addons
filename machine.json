@@ -61,8 +61,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 339.5956115722656,
-	  "YPos": 175.4376983642578,
+	  "XPos": 415.59466552734375,
+	  "YPos": 889.8287353515625,
 	  "ItemType": null
 	},
 	{
@@ -80,8 +80,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 366.9552917480469,
-	  "YPos": 324.39581298828125,
+	  "XPos": 272.71649169921875,
+	  "YPos": 877.6688842773438,
 	  "ItemType": "flipper"
 	},
 	{
@@ -99,8 +99,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 336.5556945800781,
-	  "YPos": 245.35679626464844,
+	  "XPos": 272.71649169921875,
+	  "YPos": 908.0684814453125,
 	  "ItemType": "flipper"
 	},
 	{
@@ -118,8 +118,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 272.71649169921875,
-	  "YPos": 81.19886016845703,
+	  "XPos": 190.6375274658203,
+	  "YPos": 917.1883544921875,
 	  "ItemType": "flipper"
 	},
 	{
@@ -137,8 +137,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 75.11892700195312,
-	  "YPos": 105.51860046386719,
+	  "XPos": 154.157958984375,
+	  "YPos": 901.9886474609375,
 	  "ItemType": "flipper"
 	},
 	{
@@ -156,8 +156,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 245.35679626464844,
-	  "YPos": 129.8383026123047,
+	  "XPos": 90.31873321533203,
+	  "YPos": 719.5909423828125,
 	  "ItemType": "bumper"
 	},
 	{
@@ -175,8 +175,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 148.0780029296875,
-	  "YPos": 214.9571990966797,
+	  "XPos": 342.63555908203125,
+	  "YPos": 731.750732421875,
 	  "ItemType": "bumper"
 	},
 	{
@@ -194,8 +194,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 157.19790649414062,
-	  "YPos": 35.599430084228516,
+	  "XPos": 221.037109375,
+	  "YPos": 187.5975341796875,
 	  "ItemType": "bumper"
 	},
 	{
@@ -213,8 +213,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 172.397705078125,
-	  "YPos": 135.91819763183594,
+	  "XPos": 287.916259765625,
+	  "YPos": 187.59754943847656,
 	  "ItemType": "bumper"
 	},
 	{
@@ -232,8 +232,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 266.6365051269531,
-	  "YPos": 415.5946960449219,
+	  "XPos": 254.47665405273438,
+	  "YPos": 272.71649169921875,
 	  "ItemType": "bumper"
 	},
 	{
@@ -251,8 +251,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 166.3177947998047,
-	  "YPos": 406.47479248046875,
+	  "XPos": 26.47954559326172,
+	  "YPos": 403.4348449707031,
 	  "ItemType": null
 	},
 	{
@@ -270,8 +270,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 132.87820434570312,
-	  "YPos": 312.2359924316406,
+	  "XPos": 479.4338684082031,
+	  "YPos": 892.8687133789062,
 	  "ItemType": null
 	},
 	{
@@ -289,8 +289,27 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 61.61039733886719,
-	  "YPos": 175.99630737304688,
+	  "XPos": 137.6094512939453,
+	  "YPos": 939.0267333984375,
+	  "ItemType": null
+	},
+	{
+	  "Number": "A0-B0-13",
+	  "NumberPROC": 13,
+	  "PulseTime": 30,
+	  "Bus": null,
+	  "Polarity": true,
+	  "Tags": null,
+	  "Search": 0,
+	  "ReturnWire": "BLK",
+	  "VoltageWire": "BLU VIO",
+	  "Voltage": 48,
+	  "Name": "mballSaucer",
+	  "DisplayName": null,
+	  "Conn": null,
+	  "Location": null,
+	  "XPos": null,
+	  "YPos": null,
 	  "ItemType": null
 	}
   ],
@@ -318,22 +337,22 @@
 	  "Number": "A0-R0-G1-B2",
 	  "NumberPROC": 0,
 	  "Bus": "0",
-	  "Tags": "start",
-	  "Polarity": true,
+	  "Tags": "square19mm",
+	  "Polarity": false,
 	  "Name": "start",
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 245,
-	  "YPos": 677,
+	  "XPos": 488.19696044921875,
+	  "YPos": 1002.27587890625,
 	  "ItemType": null
 	},
 	{
 	  "Number": "A0-R3-G4-B5",
 	  "NumberPROC": 1,
 	  "Bus": "0",
-	  "Tags": "",
-	  "Polarity": true,
+	  "Tags": "square19mm",
+	  "Polarity": false,
 	  "Name": "LED22",
 	  "DisplayName": null,
 	  "Conn": null,
@@ -346,23 +365,23 @@
 	  "Number": "A0-R6-G7-B8",
 	  "NumberPROC": 2,
 	  "Bus": "0",
-	  "Tags": "shootAgain",
-	  "Polarity": true,
+	  "Tags": "square19mm",
+	  "Polarity": false,
 	  "Name": "shootAgain",
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 243.38009643554688,
-	  "YPos": 930.8206787109375,
+	  "XPos": 240.3401336669922,
+	  "YPos": 964.26025390625,
 	  "ItemType": null
 	},
 	{
 	  "Number": "A0-R9-G10-B11",
 	  "NumberPROC": 3,
 	  "Bus": "0",
-	  "Tags": "targetBank",
-	  "Polarity": true,
-	  "Name": "LED4",
+	  "Tags": "square19mm",
+	  "Polarity": false,
+	  "Name": "outlaneL",
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
@@ -374,23 +393,23 @@
 	  "Number": "A0-R12-G13-B14",
 	  "NumberPROC": 4,
 	  "Bus": "0",
-	  "Tags": "targetBank",
-	  "Polarity": true,
-	  "Name": "LED5",
+	  "Tags": "square19mm",
+	  "Polarity": false,
+	  "Name": "inlaneL",
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 379.99530029296875,
-	  "YPos": 571.5128784179688,
+	  "XPos": 267.5166931152344,
+	  "YPos": 580.6327514648438,
 	  "ItemType": null
 	},
 	{
 	  "Number": "A0-R15-G16-B17",
 	  "NumberPROC": 5,
 	  "Bus": "0",
-	  "Tags": "targetBank",
-	  "Polarity": true,
-	  "Name": "LED6",
+	  "Tags": "square19mm",
+	  "Polarity": false,
+	  "Name": "inlaneR",
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
@@ -402,14 +421,70 @@
 	  "Number": "A0-R18-G19-B20",
 	  "NumberPROC": 6,
 	  "Bus": "0",
-	  "Tags": "targetBank",
-	  "Polarity": true,
-	  "Name": "LED7",
+	  "Tags": "square19mm",
+	  "Polarity": false,
+	  "Name": "outlaneR",
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
 	  "XPos": 260,
 	  "YPos": 310.0000915527344,
+	  "ItemType": null
+	},
+	{
+	  "Number": "A0-R21-G22-B23",
+	  "NumberPROC": 7,
+	  "Bus": null,
+	  "Tags": null,
+	  "Polarity": false,
+	  "Name": "target0",
+	  "DisplayName": null,
+	  "Conn": null,
+	  "Location": null,
+	  "XPos": null,
+	  "YPos": null,
+	  "ItemType": null
+	},
+	{
+	  "Number": "A0-R24-G25-B26",
+	  "NumberPROC": 8,
+	  "Bus": null,
+	  "Tags": null,
+	  "Polarity": false,
+	  "Name": "target1",
+	  "DisplayName": null,
+	  "Conn": null,
+	  "Location": null,
+	  "XPos": null,
+	  "YPos": null,
+	  "ItemType": null
+	},
+	{
+	  "Number": "A0-R27-G28-B29",
+	  "NumberPROC": 9,
+	  "Bus": null,
+	  "Tags": null,
+	  "Polarity": false,
+	  "Name": "target2",
+	  "DisplayName": null,
+	  "Conn": null,
+	  "Location": null,
+	  "XPos": null,
+	  "YPos": null,
+	  "ItemType": null
+	},
+	{
+	  "Number": "A0-R30-G31-B32",
+	  "NumberPROC": 10,
+	  "Bus": null,
+	  "Tags": null,
+	  "Polarity": false,
+	  "Name": "target3",
+	  "DisplayName": null,
+	  "Conn": null,
+	  "Location": null,
+	  "XPos": null,
+	  "YPos": null,
 	  "ItemType": null
 	}
   ],
@@ -426,8 +501,8 @@
 	  "DisplayName": "Coin 1",
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 175.51266479492188,
-	  "YPos": 1028.6923828125,
+	  "XPos": 175.5126953125,
+	  "YPos": 1028.6920166015625,
 	  "ItemType": ""
 	},
 	{
@@ -442,7 +517,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 200.5173797607422,
+	  "XPos": 200.51739501953125,
 	  "YPos": 1028.6920166015625,
 	  "ItemType": ""
 	},
@@ -458,7 +533,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 225.41265869140625,
+	  "XPos": 225.41270446777344,
 	  "YPos": 1028.6920166015625,
 	  "ItemType": ""
 	},
@@ -490,7 +565,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 413.79315185546875,
+	  "XPos": 413.793212890625,
 	  "YPos": 1028.6920166015625,
 	  "ItemType": ""
 	},
@@ -522,7 +597,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 386.9234313964844,
+	  "XPos": 386.92340087890625,
 	  "YPos": 1028.6920166015625,
 	  "ItemType": ""
 	},
@@ -538,7 +613,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 328.7204284667969,
+	  "XPos": 328.72039794921875,
 	  "YPos": 1028.6920166015625,
 	  "ItemType": ""
 	},
@@ -554,8 +629,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 260.09832763671875,
-	  "YPos": 997.5084228515625,
+	  "XPos": 463.7757568359375,
+	  "YPos": 1006.6279296875,
 	  "ItemType": ""
 	},
 	{
@@ -570,7 +645,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 26.748016357421875,
+	  "XPos": 26.74802017211914,
 	  "YPos": 943.9216918945312,
 	  "ItemType": ""
 	},
@@ -586,7 +661,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 25.794353485107422,
+	  "XPos": 25.794349670410156,
 	  "YPos": 915.8244018554688,
 	  "ItemType": ""
 	},
@@ -602,7 +677,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -60.3790283203125,
+	  "XPos": -10,
 	  "YPos": -47.96297836303711,
 	  "ItemType": ""
 	},
@@ -618,7 +693,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -30,
+	  "XPos": -10,
 	  "YPos": -19.999935150146484,
 	  "ItemType": ""
 	},
@@ -634,7 +709,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -30,
+	  "XPos": -10,
 	  "YPos": -19.999935150146484,
 	  "ItemType": ""
 	},
@@ -650,7 +725,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -30,
+	  "XPos": -10,
 	  "YPos": -19.999935150146484,
 	  "ItemType": ""
 	},
@@ -666,7 +741,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -30,
+	  "XPos": -10,
 	  "YPos": -19.999935150146484,
 	  "ItemType": ""
 	},
@@ -682,8 +757,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 131.88339233398438,
-	  "YPos": 881.89453125,
+	  "XPos": 131.88340759277344,
+	  "YPos": 881.8944702148438,
 	  "ItemType": "flipper"
 	},
 	{
@@ -698,8 +773,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -60.094085693359375,
-	  "YPos": 22.991634368896484,
+	  "XPos": -10,
+	  "YPos": 22.99163055419922,
 	  "ItemType": ""
 	},
 	{
@@ -714,8 +789,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 300.4634704589844,
-	  "YPos": 881.89404296875,
+	  "XPos": 300.4635009765625,
+	  "YPos": 881.8939819335938,
 	  "ItemType": "flipper"
 	},
 	{
@@ -730,8 +805,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -130.9315185546875,
-	  "YPos": -21.76126480102539,
+	  "XPos": -10,
+	  "YPos": -21.761260986328125,
 	  "ItemType": ""
 	},
 	{
@@ -746,7 +821,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 4.298575401306152,
+	  "XPos": 4.298580169677734,
 	  "YPos": 752.4564208984375,
 	  "ItemType": ""
 	},
@@ -762,7 +837,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 51.58928680419922,
+	  "XPos": 51.589290618896484,
 	  "YPos": 752.4564208984375,
 	  "ItemType": ""
 	},
@@ -778,8 +853,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 100.92154693603516,
-	  "YPos": 730.960693359375,
+	  "XPos": 100.92150115966797,
+	  "YPos": 752.2404174804688,
 	  "ItemType": "bumper"
 	},
 	{
@@ -795,7 +870,7 @@
 	  "Conn": null,
 	  "Location": null,
 	  "XPos": 378.3251037597656,
-	  "YPos": 752.4560546875,
+	  "YPos": 752.4561157226562,
 	  "ItemType": ""
 	},
 	{
@@ -810,8 +885,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 334.2587585449219,
-	  "YPos": 730.9610595703125,
+	  "XPos": 334.2587890625,
+	  "YPos": 755.2808227539062,
 	  "ItemType": "bumper"
 	},
 	{
@@ -826,8 +901,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 423.35821533203125,
-	  "YPos": 752.4563598632812,
+	  "XPos": 423.3581848144531,
+	  "YPos": 752.4564208984375,
 	  "ItemType": ""
 	},
 	{
@@ -842,7 +917,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 466.5728759765625,
+	  "XPos": 466.5729064941406,
 	  "YPos": 929.0701904296875,
 	  "ItemType": ""
 	},
@@ -859,7 +934,7 @@
 	  "Conn": null,
 	  "Location": null,
 	  "XPos": 360.1076965332031,
-	  "YPos": 962.4468383789062,
+	  "YPos": 962.44677734375,
 	  "ItemType": ""
 	},
 	{
@@ -874,7 +949,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 384.1982421875,
+	  "XPos": 384.1982116699219,
 	  "YPos": 944.55126953125,
 	  "ItemType": ""
 	},
@@ -906,7 +981,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 434.1794738769531,
+	  "XPos": 434.17950439453125,
 	  "YPos": 900.7139282226562,
 	  "ItemType": ""
 	},
@@ -922,8 +997,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 9.335348129272461,
-	  "YPos": 423.2546691894531,
+	  "XPos": 12.375312805175781,
+	  "YPos": 423.25469970703125,
 	  "ItemType": ""
 	},
 	{
@@ -938,8 +1013,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 308.4136657714844,
-	  "YPos": 184.66238403320312,
+	  "XPos": 308.4136962890625,
+	  "YPos": 184.6623992919922,
 	  "ItemType": "bumper"
 	},
 	{
@@ -954,7 +1029,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 191.54644775390625,
+	  "XPos": 191.54640197753906,
 	  "YPos": 181.40640258789062,
 	  "ItemType": "bumper"
 	},
@@ -971,7 +1046,7 @@
 	  "Conn": null,
 	  "Location": null,
 	  "XPos": 232.4145965576172,
-	  "YPos": 271.1300354003906,
+	  "YPos": 271.1300048828125,
 	  "ItemType": "bumper"
 	},
 	{
@@ -986,8 +1061,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 8.292198181152344,
-	  "YPos": 366.35955810546875,
+	  "XPos": 8.292200088500977,
+	  "YPos": 366.3595886230469,
 	  "ItemType": ""
 	},
 	{
@@ -1002,8 +1077,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 7.243656158447266,
-	  "YPos": 486.8254089355469,
+	  "XPos": 43.78647994995117,
+	  "YPos": 431.8267517089844,
 	  "ItemType": ""
 	},
 	{
@@ -1018,8 +1093,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 7.243654251098633,
-	  "YPos": 525.517822265625,
+	  "XPos": 104.4961929321289,
+	  "YPos": 395.283935546875,
 	  "ItemType": ""
 	},
 	{
@@ -1034,8 +1109,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 7.243663787841797,
-	  "YPos": 559.9110717773438,
+	  "XPos": 167.72434997558594,
+	  "YPos": 377.1969909667969,
 	  "ItemType": ""
 	},
 	{
@@ -1050,8 +1125,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": 7.2436676025390625,
-	  "YPos": 602.9027099609375,
+	  "XPos": 417.2914123535156,
+	  "YPos": 511.20843505859375,
 	  "ItemType": ""
 	},
 	{
@@ -1062,12 +1137,12 @@
 	  "SearchStop": "",
 	  "InputWire": null,
 	  "GroundWire": null,
-	  "Name": "not_used_40",
+	  "Name": "spinner",
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -87.93997192382812,
-	  "YPos": -43.25706100463867,
+	  "XPos": 68.16650390625,
+	  "YPos": 390.083740234375,
 	  "ItemType": ""
 	},
 	{
@@ -1082,7 +1157,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -50,
+	  "XPos": -10,
 	  "YPos": -19.999935150146484,
 	  "ItemType": ""
 	},
@@ -1098,7 +1173,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -50,
+	  "XPos": -10,
 	  "YPos": -19.999935150146484,
 	  "ItemType": ""
 	},
@@ -1114,7 +1189,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -50,
+	  "XPos": -10,
 	  "YPos": -19.999935150146484,
 	  "ItemType": ""
 	},
@@ -1130,7 +1205,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -50,
+	  "XPos": -10,
 	  "YPos": -19.999935150146484,
 	  "ItemType": ""
 	},
@@ -1146,7 +1221,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -50,
+	  "XPos": -10,
 	  "YPos": -19.999935150146484,
 	  "ItemType": ""
 	},
@@ -1162,7 +1237,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -50,
+	  "XPos": -10,
 	  "YPos": -19.999935150146484,
 	  "ItemType": ""
 	},
@@ -1178,7 +1253,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -161.02560424804688,
+	  "XPos": -10,
 	  "YPos": -13.162920951843262,
 	  "ItemType": ""
 	},
@@ -1194,7 +1269,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -55.794921875,
+	  "XPos": -10,
 	  "YPos": -19.99995231628418,
 	  "ItemType": ""
 	},
@@ -1210,7 +1285,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -150.3763427734375,
+	  "XPos": -10,
 	  "YPos": -7.102476119995117,
 	  "ItemType": ""
 	},
@@ -1226,7 +1301,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -50,
+	  "XPos": -10,
 	  "YPos": -19.999935150146484,
 	  "ItemType": ""
 	},
@@ -1242,8 +1317,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -30,
-	  "YPos": -62.99150466918945,
+	  "XPos": -10,
+	  "YPos": -62.99150085449219,
 	  "ItemType": ""
 	},
 	{
@@ -1258,7 +1333,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -75.04251098632812,
+	  "XPos": -10,
 	  "YPos": -0.2654714584350586,
 	  "ItemType": ""
 	},
@@ -1274,7 +1349,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -53.546722412109375,
+	  "XPos": -10,
 	  "YPos": -21.761260986328125,
 	  "ItemType": ""
 	},
@@ -1290,7 +1365,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -30,
+	  "XPos": -10,
 	  "YPos": -41.603790283203125,
 	  "ItemType": ""
 	},
@@ -1306,8 +1381,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -140.19049072265625,
-	  "YPos": -29.656583786010742,
+	  "XPos": -10,
+	  "YPos": -29.656579971313477,
 	  "ItemType": ""
 	},
 	{
@@ -1322,8 +1397,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -94.48733520507812,
-	  "YPos": -32.897396087646484,
+	  "XPos": -10,
+	  "YPos": -32.89739990234375,
 	  "ItemType": ""
 	},
 	{
@@ -1338,7 +1413,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -30,
+	  "XPos": -10,
 	  "YPos": -28.598270416259766,
 	  "ItemType": ""
 	},
@@ -1354,7 +1429,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -195.41885375976562,
+	  "XPos": -10,
 	  "YPos": -17.46212387084961,
 	  "ItemType": ""
 	},
@@ -1370,7 +1445,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -50,
+	  "XPos": -10,
 	  "YPos": -19.999935150146484,
 	  "ItemType": ""
 	},
@@ -1386,7 +1461,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -50,
+	  "XPos": -10,
 	  "YPos": -19.999935150146484,
 	  "ItemType": ""
 	},
@@ -1402,8 +1477,8 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -50,
-	  "YPos": 7.963106155395508,
+	  "XPos": -10,
+	  "YPos": 7.963109970092773,
 	  "ItemType": ""
 	},
 	{
@@ -1418,7 +1493,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -50,
+	  "XPos": -10,
 	  "YPos": -19.999935150146484,
 	  "ItemType": ""
 	},
@@ -1434,8 +1509,8 @@
 	  "DisplayName": "seeeee",
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -61.837799072265625,
-	  "YPos": -21.274452209472656,
+	  "XPos": -10,
+	  "YPos": -21.274450302124023,
 	  "ItemType": null
 	},
 	{
@@ -1450,7 +1525,7 @@
 	  "DisplayName": null,
 	  "Conn": null,
 	  "Location": null,
-	  "XPos": -30,
+	  "XPos": -10,
 	  "YPos": -10,
 	  "ItemType": null
 	}

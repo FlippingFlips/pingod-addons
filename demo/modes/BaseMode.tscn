@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://bruj6rfwiylw1"]
+[gd_scene load_steps=7 format=3 uid="uid://bruj6rfwiylw1"]
 
 [ext_resource type="Script" path="res://demo/modes/BaseMode.cs" id="1_c6i7f"]
+[ext_resource type="Script" path="res://addons/pingod-controls/Timer/Saucer.cs" id="2_s0cvt"]
+[ext_resource type="Script" path="res://addons/pingod-controls/Node/TargetsBank.cs" id="3_him8f"]
+[ext_resource type="Script" path="res://addons/pingod-controls/Node/Spinner.cs" id="4_ocmy4"]
+[ext_resource type="AudioStream" uid="uid://xyfaxl5vdcod" path="res://addons/pingod-assets/audio/sfx/credit.wav" id="5_32on7"]
+[ext_resource type="Script" path="res://addons/pingod-controls/Node/PinballLanes.cs" id="6_u8pnn"]
 
 [node name="BaseMode" type="Control" groups=["Mode"]]
 layout_mode = 3
@@ -13,3 +18,34 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_c6i7f")
 BALL_SAVE_SCENE = "res://addons/pingod-modes/ballsave/BallSave.tscn"
+DISPLAY_MSG_SCENE = "res://addons/pingod-misc/display-plugins/Messages/DisplayMessageControl.tscn"
+
+[node name="Saucer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+script = ExtResource("2_s0cvt")
+_coil = "mballSaucer"
+_switch = "mballSaucer"
+
+[node name="TargetsBank" type="Node" parent="."]
+script = ExtResource("3_him8f")
+_target_leds = PackedStringArray("target0", "target1", "target2", "target3")
+_target_switches = PackedStringArray("target0", "target1", "target2", "target3")
+
+[node name="Spinner" type="Node" parent="."]
+script = ExtResource("4_ocmy4")
+SwitchName = "spinner"
+playsound = true
+_AudioStream = ExtResource("5_32on7")
+
+[node name="PinballLanes" type="Node" parent="."]
+script = ExtResource("6_u8pnn")
+_led_lamps = PackedStringArray("outlaneL", "inlaneL", "inlaneR", "outlaneR")
+_lane_switches = PackedStringArray("outlaneL", "inlaneL", "inlaneR", "outlaneR")
+_led_color = Color(0, 0.717647, 1, 1)
+
+[connection signal="SwitchActive" from="Saucer" to="." method="OnSaucerSwitchActive"]
+[connection signal="timeout" from="Saucer" to="." method="OnSaucerTimeOut"]
+[connection signal="OnTargetActivated" from="TargetsBank" to="." method="OnTargetSwitchActive"]
+[connection signal="OnTargetsCompleted" from="TargetsBank" to="." method="OnTargetsBankCompleted"]
+[connection signal="OnSpinnerActive" from="Spinner" to="." method="OnSpinnerActive"]

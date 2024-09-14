@@ -65,9 +65,14 @@ namespace PinGod.Modes
             {
                 pinGod = GetNode(Paths.ROOT_PINGODGAME) as IPinGodGame;
                 //signals
-                pinGod.Connect("GameStarted", new Callable(this, nameof(OnScoresUpdated)));
-                pinGod.Connect("ScoresUpdated", new Callable(this, nameof(OnScoresUpdated)));
-                pinGod.Connect("PlayerAdded", new Callable(this, nameof(OnScoresUpdated)));
+                pinGod.Connect(nameof(PinGodBase.GameStarted),
+                    new Callable(this, nameof(OnScoresUpdated)));
+
+                pinGod.Connect(nameof(PinGodBase.ScoresUpdated),
+                    new Callable(this, nameof(OnScoresUpdated)));
+
+                pinGod.Connect(nameof(PinGodBase.PlayerAdded),
+                    new Callable(this, nameof(OnScoresUpdated)));
 
                 (pinGod as PinGodBase).CreditAdded += UpdateCredits;
                 UpdateCredits(pinGod?.Audits?.Credits ?? 0);

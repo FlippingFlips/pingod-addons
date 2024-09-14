@@ -7,7 +7,7 @@
 process_mode = 3
 script = ExtResource("1_vjjsc")
 _attract_scene_path = "res://addons/pingod-modes/attract/Attract.tscn"
-_game_scene_path = "res://demo/Game.tscn"
+_game_scene_path = "res://demo/game/DemoGame.tscn"
 _service_menu_scene_path = "res://addons/pingod-modes/servicemenu/ServiceMenu.tscn"
 
 [node name="Modes" type="Control" parent="."]

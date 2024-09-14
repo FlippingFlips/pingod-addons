@@ -2,23 +2,6 @@
 ![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=c-sharp&logoColor=white) ![.Net](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white) ![Godot Engine](https://img.shields.io/badge/GODOT-%23FFFFFF.svg?style=for-the-badge&logo=godot-engine) 
 `Godot 4.3-Mono` engine addons, framework for creating a pinball display with logic. 
 
-### AddOns
-_* Autoload_ = plugin has an Autoload singleton. You can access these singletons from any script from the root. The main scenes can be overrided by duplicating the main scene for the Autoload and place into `res://autoload`, eg: `res://autoload/Resources.tscn`.
-
-| Name | Autoload *  | Description | Link 
-| --- | --- | --- |---|
-| pingod-core  | no | Base classes for the modules   | [link](./addons/pingod-core) 
-| pingod-assets  | no | Assets used by the modules. Localization for your game | [link](./addons/pingod-assets) 
-| pingod-controls  | no | Godot addin controls  | [link](./addons/pingod-controls) 
-| pingod-misc | no | Others scenes and layers | [link](./addons/pingod-misc) 
-| pingod-modes | no | Scenes and game modes, overlays | [link](./addons/pingod-modes) 
-| pingod-audio  | yes | audio manager / player   | [link](./addons/pingod-audio) 
-| pingod-game  | yes | PinGodGame, Game and Main scenes. Demo uses the Main scene, which also uses the game and modes module  | [link](./addons/pingod-game) 
-| pingod-machine | yes | Machine manager for pinball machine items, events | [link](./addons/pingod-machine) 
-| pingod-memorymap-win | yes |Sharing machine states over memory mapping (**windows only**)    | [link](./addons/pingod-memorymap-win) 
-| pingod-resources | yes | Resource loader, pre load scenes and `pck` files| [link](./addons/pingod-resources) 
-| pingod-windows | yes | Input handling and switch windows + custom windows| [link](./addons/pingod-windows) 
-
 ### Quick Start - Players Test Game Build (Windows)
 1. Download a `pingod-addons-gamebuild.zip` from [releases](https://github.com/FlippingFlips/pingod-addons/releases)
 2. Extract files and run the `win.exe`
@@ -30,6 +13,29 @@ _* Autoload_ = plugin has an Autoload singleton. You can access these singletons
 6. This demo will run in visual pinball providing you have the `pingod-controller`
 ![](.img/default_windows_3.jpg)
 See the demo files and readme > [simulators/visual-pinball](simulators/visual-pinball)
+
+* Game logic in C#
+* Scenes with Godot / Gd script or C#
+* Trigger VP light shows
+
+### AddOns
+_* Autoload_ = plugin has an Autoload singleton. You can access these singletons from any script from the root. The main scenes can be overrided by duplicating the main scene for the Autoload and place into `res://autoload`, eg: `res://autoload/Resources.tscn`.
+
+| Name | Autoload *  | Description | Link 
+| --- | --- | --- |---|
+| pingod-adjustments  | no | Save game data and settings `F1` for menu | [link](./addons/pingod-adjustments) 
+| pingod-assets  | no | Assets used by the modules. Localization for your game | [link](./addons/pingod-assets) 
+| pingod-audio  | yes | audio manager / player   | [link](./addons/pingod-audio) 
+| pingod-console  | no | Logging and console window (toggle with ``)  | [link](./addons/pingod-console) 
+| pingod-controls  | no | Godot addin controls  | [link](./addons/pingod-controls) 
+| pingod-core  | no | Base classes for the modules   | [link](./addons/pingod-core) 
+| pingod-game  | yes | PinGodGame, Game and Main scenes. Demo uses the Main scene, which also uses the game and modes module  | [link](./addons/pingod-game) 
+| pingod-machine | yes | Machine manager for pinball machine items, events | [link](./addons/pingod-machine) 
+| pingod-memorymap-win | yes |Sharing machine states over memory mapping (**windows only**)    | [link](./addons/pingod-memorymap-win) 
+| pingod-misc | no | Others scenes and layers | [link](./addons/pingod-misc) 
+| pingod-modes | no | Scenes and game modes, overlays | [link](./addons/pingod-modes) 
+| pingod-resources | yes | Resource loader, pre load scenes and `pck` files| [link](./addons/pingod-resources) 
+| pingod-windows | yes | Input handling and switch windows + custom windows| [link](./addons/pingod-windows) 
 
 ### Godot install
 * [Godot 4.3](https://godotengine.org/): `choco install godot-mono`

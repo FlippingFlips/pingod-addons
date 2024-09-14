@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=3 uid="uid://qr0feoeg1mb1"]
+
+[ext_resource type="Script" path="res://addons/pingod-misc/display-plugins/Messages/DisplayMessageControl.cs" id="1_552il"]
+[ext_resource type="FontFile" uid="uid://ciofwob416hd1" path="res://addons/pingod-assets/fonts/BebasNeue.ttf" id="2_v2hil"]
+
+
+[node name="DisplayMessageControl" type="Control"]
+editor_description = "- Access the label with %Label"
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_552il")
+
+[node name="MsgColorRect" type="ColorRect" parent="."]
+editor_description = "Use this to show a message over the whole attract"
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.10748, 0.10748, 0.10748, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MsgColorRect" type="ColorRect" parent="CenterContainer"]
+editor_description = "Use this to show a message over the whole attract"
+custom_minimum_size = Vector2(640, 480)
+layout_mode = 2
+size_flags_stretch_ratio = 6.15
+color = Color(0.153153, 0.421422, 0.619396, 1)
+
+[node name="Label" type="Label" parent="CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_v2hil")
+theme_override_font_sizes/font_size = 64
+text = "TEXT
+TO
+DISPLAY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true

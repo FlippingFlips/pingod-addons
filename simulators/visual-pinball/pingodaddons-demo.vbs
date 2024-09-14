@@ -36,7 +36,7 @@ End Sub
 ' ----------------------------------------------------------------------------------------
 Const UseSolenoids = 1 ' Check for solenoid states?
 Const UsePdbLeds = 1  ' use led (color)
-Const PdbOffColor = 3815994 ' Led off state color 
+Const PdbOffColor = 3815994 ' Led off state color , transparent?
 Const UseLamps = 0  ' Check for lamp states?
 ' ----------------------------------------------------------------------------------------
 ' TABLE OBJECT SWITCH LINKING
@@ -180,7 +180,7 @@ End Sub
 ' Solenoids / Coils / Callbacks
 ' ----------------------------------------------------------------------------------------
 SolCallback(0)  = "bsTrough.solOut" ' Trough Eject Coil
-SolCallback(10) = "bsSaucer.solOut" ' Saucer Eject Coil
+SolCallback(13) = "bsSaucer.solOut" ' Saucer Eject Coil
 SolCallback(11) = "AutoPlunger" '	' Auto plunger ball saves
 SolCallback(12) = "FlippersEnabled" ' Flipper Relay (Hack) to enable flippers
 

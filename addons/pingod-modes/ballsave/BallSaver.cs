@@ -194,9 +194,9 @@ namespace PinGod.Core
         private void UpdateLamps(LightState state)
         {
             if (!string.IsNullOrWhiteSpace(_ball_save_lamp))
-                Machine.SetLamp(_ball_save_lamp, (byte)state);
+                _ = Machine.SetLamp(_ball_save_lamp, (byte)state);
             else if (!string.IsNullOrWhiteSpace(_ball_save_led))
-                Machine.SetLed(_ball_save_led, (byte)state, ColorTranslator.ToOle(System.Drawing.Color.Green));
+                _ = Machine.SetLed(_ball_save_led, (byte)state, ColorTranslator.ToOle(System.Drawing.Color.Green));
         }
 
         public override string ToString() =>

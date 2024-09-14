@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://hp86svll4ipx"]
+
+[ext_resource type="Texture2D" uid="uid://bpc1yms62oy32" path="res://addons/pingod-assets/img/pingodaddons-demo-blueprint.png" id="1_vla8h"]
+
+[node name="PlayfieldTextureRect" type="TextureRect"]
+texture_repeat = 1
+custom_minimum_size = Vector2(400, 908)
+layout_direction = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1520.0
+offset_bottom = -172.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_vla8h")
+expand_mode = 1
