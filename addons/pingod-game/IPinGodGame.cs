@@ -312,14 +312,14 @@ public interface IPinGodGame
     /// Sets lamp state and state inside the <see cref="_lampMatrixOverlay"/>
     /// </summary>
     /// <param name="name"></param>
-    /// <param name="state"></param>
+    /// <param name="state">state could be 2 for simulator blinking</param>
     void SetLampState(string name, byte state);
 
     /// <summary>
     /// Sets state of led
     /// </summary>
     /// <param name="name"></param>
-    /// <param name="state"></param>
+    /// <param name="state">state could be 2 for simulator blinking</param>
     /// <param name="color"></param>
     void SetLedState(string name, byte state, System.Drawing.Color? colour = null);
 
@@ -327,15 +327,13 @@ public interface IPinGodGame
     /// Sets led states from System.Drawing Color
     /// </summary>
     /// <param name="name"></param>
-    /// <param name="state"></param>
+    /// <param name="state">state could be 2 for simulator blinking</param>
     /// <param name="colour"></param>
     void SetLedState(string name, byte state, Color? colour = null);
 
-    /// <summary>
-    /// Sets led state from godot color
-    /// </summary>
+    /// <summary>Sets led state from godot color</summary>
     /// <param name="name"></param>
-    /// <param name="state"></param>
+    /// <param name="state">state could be 2 for simulator blinking</param>
     /// <param name="colour"></param>
     void SetLedState(string name, byte state, int color = 0);
 
@@ -343,7 +341,7 @@ public interface IPinGodGame
     /// Sets led from RGB
     /// </summary>
     /// <param name="name"></param>
-    /// <param name="state"></param>
+    /// <param name="state">state could be 2 for simulator blinking</param>
     /// <param name="r"></param>
     /// <param name="g"></param>
     /// <param name="b"></param>
