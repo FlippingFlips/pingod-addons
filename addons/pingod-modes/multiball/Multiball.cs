@@ -18,6 +18,7 @@ namespace PinGod.Modes
         [Export] byte _ball_save_time_seconds = 12;
 
         [Export] bool _showModeTimer = true;
+
         private Label _scoreLabel;
 
         public override void _EnterTree()
@@ -73,7 +74,7 @@ namespace PinGod.Modes
         public virtual void EndMultiball(string g)
         {
             Logger.Debug(nameof(Multiball), ":", nameof(EndMultiball));
-            _pinGod.IsMultiballRunning = false;
+
             this.QueueFree();
         }
     }
