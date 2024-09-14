@@ -1,5 +1,6 @@
 using Godot;
 using PinGod.Base;
+using PinGod.EditorPlugins;
 
 /// <summary>A Base mode that handles displaying a ball save when triggered</summary>
 public partial class BaseMode : PinGodGameModeControl
@@ -14,6 +15,8 @@ public partial class BaseMode : PinGodGameModeControl
     private PackedScene _ballSaveScene;
     private IGame _demoGame;
     private Saucer _ballSaucer;
+    private Spinner _spinner;
+    private TargetsBank _targets;
     private PackedScene _displayMsgScene;
     #endregion
 
@@ -66,6 +69,11 @@ public partial class BaseMode : PinGodGameModeControl
 
         //get the ball saucer from the scene
         _ballSaucer = GetNodeOrNull<Saucer>(nameof(Saucer));
+        //get the spinner from the scene
+        _spinner = GetNodeOrNull<Spinner>(nameof(Spinner));
+        //get the targets from the scene
+        _targets = GetNodeOrNull<TargetsBank>(nameof(TargetsBank));
+        _targets.UpdateLamps();
     }
 
     #endregion
@@ -125,7 +133,7 @@ public partial class BaseMode : PinGodGameModeControl
             _pinGod.AddBonus(500);
 
             //start the timer on the saucer to kick the ball
-            _ballSaucer?.Start();
+            _ballSaucer?.Start(2);
 
             Logger.Log(LogLevel.Warning, Logger.BBColor.green,
             nameof(OnSaucerSwitchActive), ": starting multi-ball");
@@ -183,5 +191,10 @@ public partial class BaseMode : PinGodGameModeControl
             _pinGod.AddPoints(150);
             _pinGod.AddBonus(50);
         }        
+    }
+
+    void OnSpinnerActive(int state)
+    {
+        if (state > 0) { _pinGod.AddPoints(250); }
     }
 }
